@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iPSC-Derived Cardiomyocytes — Armin Bayati, PhD</title>
+<meta name="description" content="iPSC-derived cardiomyocyte generation, characterization, and functional assays for disease modeling, drug screening, and cardiotoxicity assessment.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════
+   ARMIN BAYATI — DESIGN SYSTEM
+   Matching iPSC-Cardiomyocyte page aesthetic
+   ══════════════════════════════════════════════ */
+
+:root {
+  --ink: #0f1419;
+  --paper: #fafaf7;
+  --mid: #6b7280;
+  --accent: #c0392b;
+  --accent-soft: #e74c3c15;
+  --rule: #d4d0c8;
+  --card: #ffffff;
+  --section-bg: #f4f3ef;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+  --mono: 'IBM Plex Mono', 'Menlo', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAVIGATION ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 250, 247, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+  padding: 0 24px;
+}
+
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  gap: 16px;
+}
+
+.nav-brand {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--mid);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-brand:hover { color: var(--ink); }
+
+.nav-links {
+  display: flex;
+  gap: 1px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.nav-links::-webkit-scrollbar { display: none; }
+
+.nav-links a {
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  padding: 6px 8px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.nav-links a:hover { color: var(--ink); background: rgba(0,0,0,0.04); }
+.nav-links a.active { color: var(--accent); }
+
+/* Mobile nav toggle */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--mid);
+}
+.nav-toggle svg { display: block; }
+
+/* ── HERO ── */
+.hero {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 80px 32px 64px;
+}
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1.5px;
+  background: var(--accent);
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+  max-width: 780px;
+  margin-bottom: 28px;
+}
+
+.hero-description {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--mid);
+  max-width: 640px;
+  margin-bottom: 36px;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  padding: 5px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  color: var(--mid);
+  background: var(--card);
+}
+
+/* ── SECTIONS ── */
+.section {
+  border-top: 1px solid var(--rule);
+}
+
+.section-header {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 64px 32px 0;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.section-index {
+  position: sticky;
+  top: 80px;
+  padding-top: 4px;
+}
+
+.section-number {
+  font-family: var(--serif);
+  font-size: 4rem;
+  color: var(--rule);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.section-content {
+  padding-bottom: 20px;
+}
+
+.section-content h2 {
+  font-family: var(--serif);
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+
+.section-content h3 {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 32px;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+
+.section-content p {
+  font-size: 15.5px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #444;
+  max-width: 640px;
+  margin-bottom: 16px;
+}
+
+.section-content p strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.section-content a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.section-content a:hover {
+  border-bottom-color: var(--accent);
+}
+
+/* ── SUB-SECTION DIVIDER ── */
+.subsection {
+  margin-top: 48px;
+  padding-top: 36px;
+  border-top: 1px dashed var(--rule);
+}
+
+.subsection:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.subsection-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.subsection-label::before {
+  content: '→';
+  font-size: 13px;
+}
+
+/* ── FINDINGS STRIP ── */
+.findings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 28px 0 32px;
+  max-width: 640px;
+}
+
+.finding {
+  background: var(--card);
+  padding: 18px 20px;
+}
+
+.finding-value {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.finding-label {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--mid);
+  line-height: 1.4;
+}
+
+/* ── TIMELINE ── */
+.timeline {
+  margin: 32px 0;
+  max-width: 640px;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 28px;
+  padding-bottom: 32px;
+  border-left: 1.5px solid var(--rule);
+}
+.timeline-item:last-child { padding-bottom: 0; }
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--accent);
+}
+
+.timeline-year {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.timeline-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.timeline-desc {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--mid);
+}
+
+/* ── WORKFLOW STRIP ── */
+.workflow-strip {
+  background: var(--ink);
+  color: #fff;
+  padding: 48px 32px;
+}
+
+.workflow-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.workflow-inner h3 {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 28px;
+  color: rgba(255,255,255,0.9);
+}
+
+.workflow-steps {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+}
+
+.workflow-step {
+  flex: 1;
+  padding: 20px 24px;
+  border-left: 1px solid rgba(255,255,255,0.12);
+  position: relative;
+}
+.workflow-step:first-child { border-left: none; }
+
+.step-number {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.step-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: rgba(255,255,255,0.95);
+}
+
+.step-detail {
+  font-size: 12.5px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.55;
+}
+
+/* ── CARD GRID ── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 28px 0 32px;
+  max-width: 640px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 24px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+a.card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.card-desc {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.6;
+}
+
+/* ── IMAGE PLACEHOLDER ── */
+.image-placeholder {
+  background: var(--section-bg);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 48px 24px;
+  text-align: center;
+  margin: 20px 0 24px;
+  max-width: 640px;
+}
+
+.image-placeholder .ph-icon {
+  font-size: 28px;
+  color: var(--rule);
+  margin-bottom: 8px;
+}
+
+.image-placeholder .ph-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--mid);
+  letter-spacing: 0.5px;
+}
+
+/* ── INLINE LIST ── */
+.inline-list {
+  list-style: none;
+  margin: 16px 0;
+  max-width: 640px;
+}
+
+.inline-list li {
+  font-size: 14px;
+  font-weight: 300;
+  color: #444;
+  line-height: 1.7;
+  padding: 6px 0;
+  padding-left: 20px;
+  position: relative;
+}
+.inline-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 14px;
+  width: 6px;
+  height: 1.5px;
+  background: var(--accent);
+}
+
+/* ── PUBLICATION LIST ── */
+.pub-list {
+  margin: 20px 0;
+  max-width: 640px;
+}
+
+.pub-item {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.pub-item:last-child { border-bottom: none; }
+
+.pub-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.pub-authors {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.5;
+}
+
+.pub-journal {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: 0.3px;
+  margin-top: 4px;
+}
+
+/* ── CONTACT LINKS ── */
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 24px 0;
+  max-width: 400px;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.contact-link:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.contact-link .cl-icon {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  min-width: 60px;
+}
+
+/* ── FIGURE CONTAINER ── */
+.figure-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 12px 32px 64px;
+}
+
+.figure-frame {
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.03);
+}
+
+.figure-caption-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: var(--section-bg);
+  border-top: 1px solid var(--rule);
+  font-size: 12.5px;
+  color: var(--mid);
+}
+
+.figure-caption-bar .fig-label {
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── FOOTER ── */
+.page-footer {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 48px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--rule);
+}
+
+.footer-left {
+  font-size: 13px;
+  color: var(--mid);
+}
+
+.footer-left a {
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 500;
+}
+.footer-left a:hover { text-decoration: underline; }
+
+.footer-right {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-right a {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--mid);
+  text-decoration: none;
+  letter-spacing: 0.3px;
+}
+.footer-right a:hover { color: var(--ink); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow, .hero h1, .hero-description, .hero-tags {
+  animation: fadeUp 0.6s ease both;
+}
+.hero h1 { animation-delay: 0.1s; }
+.hero-description { animation-delay: 0.2s; }
+.hero-tags { animation-delay: 0.3s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    padding: 12px 20px;
+    gap: 4px;
+  }
+  .nav-toggle { display: block; }
+  .section-header {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 40px 20px 0;
+  }
+  .section-index {
+    position: static;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-number { font-size: 2rem; margin-bottom: 0; }
+  .hero { padding: 48px 20px 40px; }
+  .figure-container { padding: 12px 20px 48px; }
+  .workflow-steps { flex-direction: column; }
+  .workflow-step { border-left: none; border-top: 1px solid rgba(255,255,255,0.12); padding: 16px 0; }
+  .workflow-step:first-child { border-top: none; }
+  .findings { grid-template-columns: 1fr 1fr; }
+  .card-grid { grid-template-columns: 1fr; }
+  .page-footer { flex-direction: column; gap: 16px; text-align: center; }
+}
+
+
+/* ── GALLERY ── */
+.gallery {
+  margin: 20px 0 28px;
+  max-width: 640px;
+}
+.gallery-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--mid);
+  margin-bottom: 10px;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 6px;
+}
+.gallery-thumb {
+  aspect-ratio: 4/3;
+  border-radius: 4px;
+  border: 1px solid var(--rule);
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  background: var(--section-bg);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.gallery-thumb:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.gallery-thumb .thumb-index {
+  position: absolute;
+  bottom: 4px;
+  left: 6px;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: #fff;
+  background: rgba(0,0,0,0.55);
+  padding: 1px 5px;
+  border-radius: 2px;
+  letter-spacing: 0.3px;
+}
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(15,20,25,0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.lightbox.open { display: flex; }
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 78vh;
+  border-radius: 6px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+  object-fit: contain;
+}
+.lightbox-caption {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.7);
+  margin-top: 14px;
+  text-align: center;
+  max-width: 600px;
+}
+.lightbox-counter {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.5px;
+  margin-top: 6px;
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.6);
+  font-size: 28px;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+  font-family: var(--sans);
+}
+.lightbox-close:hover { color: #fff; background: rgba(255,255,255,0.1); }
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.5);
+  font-size: 36px;
+  cursor: pointer;
+  padding: 12px 16px;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+  font-family: var(--sans);
+}
+.lightbox-nav:hover { color: #fff; background: rgba(255,255,255,0.08); }
+.lightbox-prev { left: 16px; }
+.lightbox-next { right: 16px; }
+@media (max-width: 768px) {
+  .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+  .lightbox-nav { font-size: 24px; padding: 8px 12px; }
+}
+
+
+/* ── CHARTS ── */
+.chart-container {
+  max-width: 640px;
+  margin: 24px 0 32px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.chart-container canvas { width: 100% !important; }
+.chart-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.chart-subtitle {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--mid);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.chart-note {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--mid);
+  margin-top: 12px;
+  font-style: italic;
+}
+.code-block {
+  background: var(--ink);
+  color: #e6e6e6;
+  border-radius: 6px;
+  padding: 20px 24px;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.7;
+  margin: 20px 0 24px;
+  max-width: 640px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.code-block .comment { color: #6a9955; }
+.code-block .keyword { color: #569cd6; }
+.code-block .string { color: #ce9178; }
+.code-block .func { color: #dcdcaa; }
+.code-block .num { color: #b5cea8; }
+
+
+/* ── HIGH-TECH OVERLAY ── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(rgba(15,20,25,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15,20,25,0.015) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero-eyebrow::after {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+  margin-left: 4px;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(192,57,43,0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(192,57,43,0); }
+}
+
+.tag {
+  background: rgba(15,20,25,0.03);
+  border-color: rgba(15,20,25,0.12);
+  transition: all 0.25s ease;
+}
+.tag:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+.section-number {
+  background: linear-gradient(135deg, var(--rule) 0%, rgba(192,57,43,0.15) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.chart-container {
+  border-color: rgba(15,20,25,0.08);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.02);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.chart-container:hover {
+  border-color: rgba(192,57,43,0.2);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04);
+}
+
+.findings {
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.finding {
+  transition: background 0.2s ease;
+}
+.finding:hover {
+  background: rgba(192,57,43,0.02);
+}
+
+nav {
+  background: rgba(250, 250, 247, 0.88);
+  border-bottom-color: rgba(15,20,25,0.08);
+}
+
+.workflow-strip {
+  background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #0f1419 100%);
+  position: relative;
+  overflow: hidden;
+}
+.workflow-strip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+
+.gallery-thumb {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+.gallery-thumb:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.page-footer {
+  border-top-color: rgba(15,20,25,0.06);
+}
+
+.nav-links a {
+  transition: all 0.2s ease;
+  position: relative;
+}
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 10px;
+  right: 10px;
+  height: 1.5px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">arminbayati.com</a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="17" y2="6"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14" x2="17" y2="14"/></svg>
+    </button>
+    <div class="nav-links">
+      <a href="index.html" >Home</a>
+      <a href="ipscs.html" >iPSCs</a>
+      <a href="cardiomyocytes.html" class="active">Cardio</a>
+      <a href="cancer-immunology.html" >Cancer</a>
+      <a href="cellular-assays.html" >Assays</a>
+      <a href="genetics.html" >Genetics</a>
+      <a href="drug-discovery.html" >Drug Disc.</a>
+      <a href="microscopy.html" >Imaging</a>
+      <a href="flow-cytometry.html" >Flow Cyt.</a>
+      <a href="proteomics.html" >Proteomics</a>
+      <a href="coding.html" >Coding</a>
+      <a href="skills.html" >Skills</a>
+      <a href="publications.html" >Pubs</a>
+      <a href="contact.html" >Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">Cardiac Biology</div>
+  <h1>iPSC-Derived Cardiomyocytes</h1>
+  <p class="hero-description">
+    I generate and characterize iPSC-derived cardiomyocytes for disease modeling, drug screening, and cardiotoxicity assessment. By differentiating patient-derived and isogenic iPSCs into functional cardiomyocytes, I establish human cellular models for inherited arrhythmias, dilated and hypertrophic cardiomyopathies, and compound cardiotoxicity profiling.
+  </p>
+  <div class="hero-tags">
+    <span class="tag">iPSC-CM</span>
+    <span class="tag">Calcium Imaging</span>
+    <span class="tag">MEA</span>
+    <span class="tag">Contractility</span>
+    <span class="tag">Cardiotoxicity</span>
+    <span class="tag">Action Potential</span>
+    <span class="tag">Drug Screening</span>
+    <span class="tag">High-Content</span>
+  </div>
+</div>
+
+<div class="section" id="differentiation">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">01</div>
+      <div class="section-label">Differentiation &amp; Maturation</div>
+    </div>
+    <div class="section-content">
+      <h2>Wnt-Modulated Cardiac Differentiation &amp; Metabolic Selection</h2>
+      <p>I employ <strong>Wnt-modulated cardiac differentiation</strong> protocols (GiWi method) to direct iPSCs through mesoderm and into cardiomyogenic lineages with high efficiency. The protocol leverages temporal Wnt activation and inhibition to gate mesodermal specification, achieving homogenous cardiomyocyte populations. Post-differentiation, I apply <strong>metabolic selection</strong> using lactate-containing media to eliminate residual non-contractile cells and enrich beating cardiomyocytes.</p>
+      <p>Maturation is accelerated through <strong>mechanical stimulation</strong> (electrical pacing), <strong>substrate stiffness tuning</strong>, and <strong>prolonged culture</strong> (60+ days), yielding adult-like sarcomeric organization, gap junction maturity, and electrophysiological properties. These iPSC-CMs are compatible with <strong>96- and 384-well screening formats</strong> for high-throughput drug discovery and toxicity profiling.</p>
+
+      <div class="findings">
+        <div class="finding">
+          <div class="finding-value">>90%</div>
+          <div class="finding-label">cTnT+ cardiomyocytes</div>
+        </div>
+        <div class="finding">
+          <div class="finding-value">60+ days</div>
+          <div class="finding-label">maturation period</div>
+        </div>
+        <div class="finding">
+          <div class="finding-value">96/384 compatible</div>
+          <div class="finding-label">well formats</div>
+        </div>
+        <div class="finding">
+          <div class="finding-value">5+ disease lines</div>
+          <div class="finding-label">banked for modeling</div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-label">Characterization &amp; QC</div>
+        <p>Following differentiation, I characterize cardiomyocyte identity via <strong>flow cytometry</strong> (cTnT, cTnI, α-actinin, TNNT2), <strong>immunofluorescence</strong> (sarcomeric proteins, gap junctions), and <strong>qPCR</strong> (cardiac gene panels). Contractile function is confirmed by <strong>impedance-based readouts</strong> (xCELLigence) and <strong>video-based contractility analysis</strong>, capturing beating rate, amplitude, and arrhythmia signatures. <strong>Lactate assay</strong> and <strong>glucose consumption</strong> quantify metabolic maturation.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="electrophysiology">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">02</div>
+      <div class="section-label">Electrophysiology &amp; Function</div>
+    </div>
+    <div class="section-content">
+      <h2>MEA, Calcium Imaging &amp; Contractility Analysis</h2>
+      <p>I assess cardiomyocyte electrophysiology using <strong>microelectrode array (MEA)</strong> recordings, measuring beat rate, action potential duration, field potential duration (FPD), and arrhythmia liability. <strong>Calcium transient imaging</strong> (Fluo-4 or GCaMP) reveals spontaneous calcium cycling, kinetics, and drug-induced QT prolongation effects. <strong>Video-based contractility analysis</strong> (impedance xCELLigence or edge-detection algorithms) quantifies beating frequency, force, and relaxation kinetics across multiwell formats.</p>
+
+      <div class="chart-container">
+        <div class="chart-title">Fig. A — MEA: Beat Rate Response to HERG Blockade &amp; Beta Stimulation</div>
+        <div class="chart-subtitle">Mean beat rate (BPM) in iPSC-CMs exposed to vehicle control, hERG blockers (Dofetilide, E-4031), and sympathomimetic (Isoproterenol)</div>
+        <canvas id="meaChart" height="300"></canvas>
+        <div class="chart-note">Axion Maestro MEA. 30-min recording per condition. n=12 wells per drug. Dofetilide and E-4031 induce QT prolongation and negative chronotropic effects; Isoproterenol increases beat rate via β1-adrenergic stimulation.</div>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-title">Fig. B — Calcium Transient Imaging: ΔF/F₀ Traces Under Drug Exposure</div>
+        <div class="chart-subtitle">Real-time calcium dynamics (ΔF/F₀) in iPSC-CMs: vehicle (normal ~1 Hz pacing), hERG blocker (prolonged transients, reduced frequency), and β-agonist (faster, higher-amplitude beats)</div>
+        <canvas id="calciumChart" height="280"></canvas>
+        <div class="chart-note">Fluo-4 AM, high-speed confocal imaging. Field-stimulated cardiomyocytes at 1 Hz. Traces represent 4-second windows. Dofetilide induces early afterdepolarization-like prolongation; Isoproterenol increases transient amplitude and frequency.</div>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-title">Fig. C — Field Potential Duration (FPD): Dose-Dependent QT Prolongation</div>
+        <div class="chart-subtitle">FPD (ms) in iPSC-CMs treated with increasing concentrations of a hERG blocker (E-4031)</div>
+        <canvas id="fpdChart" height="280"></canvas>
+        <div class="chart-note">MEA-based FPD measurement. Vehicle baseline ~320 ms; dose-dependent prolongation to >450 ms at 100 nM. Linear dose-response indicating hERG IC₅₀ ~30 nM. Arrhythmia onset observed >400 ms FPD.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="cardiotoxicity">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">03</div>
+      <div class="section-label">Cardiotoxicity Screening</div>
+    </div>
+    <div class="section-content">
+      <h2>High-Content Screening &amp; Viability Assays</h2>
+      <p>I perform <strong>high-content screening</strong> for structural and functional cardiotoxicity, quantifying sarcomeric disarray, mitochondrial dysfunction, and cell viability. <strong>CellTiter-Glo</strong> luminescence viability assays measure ATP-dependent metabolic activity across dose ranges. <strong>Impedance-based monitoring</strong> (xCELLigence Real-Time Cell Analyzer) tracks cell index changes reflecting contractile dysfunction and cardiomyocyte death. These readouts enable <strong>IC₅₀ determination</strong>, <strong>safety margin assessment</strong>, and <strong>compound rank-ordering</strong> for cardiotoxicity liability.</p>
+
+      <div class="chart-container">
+        <div class="chart-title">Fig. D — Dose-Response Viability: CellTiter-Glo Cardiotoxicity Profiling</div>
+        <div class="chart-subtitle">% viability (ATP levels normalized to vehicle) in iPSC-CMs exposed to chemotherapy (Doxorubicin), targeted kinase inhibitor (Sunitinib), vehicle, and positive control across log-scaled concentrations</div>
+        <canvas id="viabilityChart" height="300"></canvas>
+        <div class="chart-note">CellTiter-Glo assay at 72 h. Doxorubicin: IC₅₀ ~0.5 μM (high cardiotoxicity); Sunitinib: IC₅₀ ~8 μM (moderate toxicity); Vehicle/Ctrl: no toxicity. n=6 replicates per dose.</div>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-title">Fig. E — Impedance Monitoring: Real-Time Contractile Dysfunction</div>
+        <div class="chart-subtitle">Cell Index over 72 hours in iPSC-CMs treated with vehicle, low-dose, and high-dose cardiotoxicant</div>
+        <canvas id="impedanceChart" height="280"></canvas>
+        <div class="chart-note">xCELLigence RTCA. Vehicle stable (CI ~1.0); low dose shows modest decline (~0.8); high dose shows progressive loss of contractile function (CI drops to ~0.4 by 72 h). Data reflects loss of impedance from cardiomyocyte contraction and viability.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="disease-modeling">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">04</div>
+      <div class="section-label">Disease Modeling</div>
+    </div>
+    <div class="section-content">
+      <h2>HCM, DCM &amp; Arrhythmia Models</h2>
+      <p>I generate <strong>patient-derived iPSC-cardiomyocytes</strong> from individuals with hypertrophic cardiomyopathy (HCM), dilated cardiomyopathy (DCM), and long-QT syndrome (LQTS). Using <strong>CRISPR-Cas9 gene editing</strong>, I create isogenic lines carrying disease mutations (MYH7, TTN, LMNA, KCNH2) to isolate genetic effects. These models recapitulate disease phenotypes including <strong>abnormal sarcomere organization</strong>, <strong>impaired calcium handling</strong>, <strong>action potential prolongation</strong>, and <strong>spontaneous arrhythmia</strong> signatures. Rescue experiments and small-molecule screening identify therapeutic candidates.</p>
+
+      <div class="chart-container">
+        <div class="chart-title">Fig. F — Sarcomere Organization: Disease-Associated Disarray</div>
+        <div class="chart-subtitle">Quantified sarcomere organization score (0–100 scale; higher = more organized) in isogenic iPSC-CMs: wild-type control, HCM-MYH7 mutation, DCM-TTN truncation, and LMNA-p.R349W</div>
+        <canvas id="sarcomereChart" height="280"></canvas>
+        <div class="chart-note">α-actinin immunofluorescence with automated image analysis (ImageJ, Orca). WT: 82±5 (organized Z-disc spacing, sarcomere length 1.9–2.1 μm); HCM-MYH7: 48±8 (disarray, hypertrophy); DCM-TTN: 35±7 (severe disarray, Z-disc fragmentation); LMNA: 42±6 (nuclear abnormality, secondary sarcomeric disarray). n=100 cells per line.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="workflow-strip">
+  <div class="workflow-inner">
+    <h3>iPSC-Cardiomyocyte Pipeline</h3>
+    <div class="workflow-steps">
+      <div class="workflow-step">
+        <div class="step-number">01</div>
+        <div class="step-title">Differentiation &amp; Maturation</div>
+        <div class="step-detail">Wnt-GiWi protocol, metabolic selection, 60+ day maturation, mechanical conditioning.</div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-number">02</div>
+        <div class="step-title">Electrophysiology Profiling</div>
+        <div class="step-detail">MEA beat rate, calcium transients, FPD, action potential characterization.</div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-number">03</div>
+        <div class="step-title">Cardiotoxicity &amp; Drug Screening</div>
+        <div class="step-detail">CellTiter-Glo viability, impedance monitoring, high-content imaging.</div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-number">04</div>
+        <div class="step-title">Disease &amp; Target Validation</div>
+        <div class="step-detail">Patient iPSC-CMs, CRISPR isogenic lines, rescue and mechanism studies.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-footer">
+  <div class="footer-left">
+    <a href="index.html">Armin Bayati, PhD</a> · Research Fellow, Harvard Medical School
+  </div>
+  <div class="footer-right">
+    <a href="mailto:a.bayati.brain@gmail.com">Email</a>
+    <a href="https://linkedin.com/in/arminbayati" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://scholar.google.com/citations?user=MIW8P2MAAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  const lb = document.createElement('div');
+  lb.className = 'lightbox';
+  lb.innerHTML = '<button class="lightbox-close" onclick="closeLB()">&times;</button>'
+    + '<button class="lightbox-nav lightbox-prev" onclick="navLB(-1)">&#8249;</button>'
+    + '<img class="lightbox-img" src="" alt="">'
+    + '<div class="lightbox-caption"></div>'
+    + '<div class="lightbox-counter"></div>'
+    + '<button class="lightbox-nav lightbox-next" onclick="navLB(1)">&#8250;</button>';
+  document.body.appendChild(lb);
+
+  let imgs=[], idx=0, gid='';
+
+  window.openLB = function(galleryId, i){
+    gid = galleryId;
+    const gallery = document.querySelector('[data-gallery="'+galleryId+'"]');
+    imgs = Array.from(gallery.querySelectorAll('.gallery-thumb'));
+    idx = i;
+    showLB();
+    lb.classList.add('open');
+    document.body.style.overflow='hidden';
+  };
+
+  function showLB(){
+    const t = imgs[idx];
+    const src = t.querySelector('img').src;
+    const cap = t.getAttribute('data-caption')||'';
+    lb.querySelector('.lightbox-img').src = src;
+    lb.querySelector('.lightbox-caption').textContent = cap;
+    lb.querySelector('.lightbox-counter').textContent = (idx+1)+' / '+imgs.length;
+  }
+
+  window.closeLB = function(){
+    lb.classList.remove('open');
+    document.body.style.overflow='';
+  };
+
+  window.navLB = function(d){
+    idx = (idx+d+imgs.length)%imgs.length;
+    showLB();
+  };
+
+  lb.addEventListener('click',function(e){
+    if(e.target===lb) closeLB();
+  });
+
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('open')) return;
+    if(e.key==='Escape') closeLB();
+    if(e.key==='ArrowRight') navLB(1);
+    if(e.key==='ArrowLeft') navLB(-1);
+  });
+})();
+</script>
+
+<script>
+// Chart 1: MEA Beat Rate Response
+(function(){
+  new Chart(document.getElementById('meaChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Vehicle', '10nM\nDofetilide', '100nM\nDofetilide', '30nM\nE-4031', 'Isoproterenol'],
+      datasets: [{
+        label: 'Beat Rate (BPM)',
+        data: [68, 54, 42, 48, 92],
+        backgroundColor: [
+          'rgba(192,57,43,0.75)',
+          'rgba(192,57,43,0.85)',
+          'rgba(192,57,43,0.95)',
+          'rgba(192,57,43,0.88)',
+          'rgba(46,134,193,0.75)'
+        ],
+        borderColor: 'rgba(192,57,43,1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11, family: "'IBM Plex Sans'" }, padding: 16 }}},
+      scales: {
+        y: { beginAtZero: true, max: 110, title: { display: true, text: 'Beat Rate (BPM)', font: { size: 11, family: "'IBM Plex Sans'" }}, grid: { color: 'rgba(0,0,0,0.05)' }},
+        x: { grid: { display: false } }
+      }
+    }
+  });
+})();
+
+// Chart 2: Calcium Transient Traces
+(function(){
+  var t=[], vehicle=[], dofet=[], iso=[];
+  for(var i=0; i<=4000; i+=10){
+    t.push((i/1000).toFixed(2));
+    var tSec = i/1000;
+
+    // Vehicle: normal 1 Hz beating, small oscillations
+    var vehicleVal = 0.02 + 0.35*Math.exp(-Math.pow((tSec % 1 - 0.3), 2) / 0.15) + 0.02*Math.sin(tSec*20);
+
+    // Dofetilide: prolonged transients, slower rate (~0.6 Hz), larger baseline
+    var dofetVal = 0.03 + 0.48*Math.exp(-Math.pow((tSec % 1.67 - 0.4), 2) / 0.25) + 0.015*Math.sin(tSec*12);
+
+    // Isoproterenol: faster beats (~1.5 Hz), higher amplitude
+    var isoVal = 0.015 + 0.52*Math.exp(-Math.pow((tSec % 0.67 - 0.25), 2) / 0.12) + 0.025*Math.sin(tSec*28);
+
+    vehicle.push(Math.max(0, vehicleVal));
+    dofet.push(Math.max(0, dofetVal));
+    iso.push(Math.max(0, isoVal));
+  }
+
+  new Chart(document.getElementById('calciumChart'), {
+    type: 'line',
+    data: {
+      labels: t,
+      datasets: [
+        { label: 'Vehicle (normal)', data: vehicle, borderColor: 'rgba(192,57,43,0.9)', pointRadius: 0, borderWidth: 2, tension: 0.3 },
+        { label: 'Dofetilide (prolonged)', data: dofet, borderColor: 'rgba(107,114,128,0.85)', pointRadius: 0, borderWidth: 2, tension: 0.3 },
+        { label: 'Isoproterenol (accelerated)', data: iso, borderColor: 'rgba(46,134,193,0.9)', pointRadius: 0, borderWidth: 2, tension: 0.3 }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 11, family: "'IBM Plex Sans'" }, padding: 16 }}
+      },
+      scales: {
+        y: { title: { display: true, text: 'ΔF/F₀', font: { size: 11, family: "'IBM Plex Sans'" }}, grid: { color: 'rgba(0,0,0,0.05)' }, beginAtZero: true, max: 1.0 },
+        x: { title: { display: true, text: 'Time (seconds)', font: { size: 11, family: "'IBM Plex Sans'" }}, grid: { color: 'rgba(0,0,0,0.03)' }, ticks: { maxTicksLimit: 8 }}
+      }
+    }
+  });
+})();
+
+// Chart 3: FPD Dose Response
+(function(){
+  new Chart(document.getElementById('fpdChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Vehicle', '10nM\nE-4031', '30nM\nE-4031', '100nM\nE-4031'],
+      datasets: [{
+        label: 'FPD (ms)',
+        data: [322, 365, 412, 468],
+        backgroundColor: [
+          'rgba(192,57,43,0.7)',
+          'rgba(192,57,43,0.8)',
+          'rgba(192,57,43,0.9)',
+          'rgba(192,57,43,1)'
+        ],
+        borderColor: 'rgba(192,57,43,1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11, family: "'IBM Plex Sans'" }, padding: 16 }}},
+      scales: {
+        y: { beginAtZero: true, max: 500, title: { display: true, text: 'FPD (ms)', font: { size: 11, family: "'IBM Plex Sans'" }}, grid: { color: 'rgba(0,0,0,0.05)' }},
+        x: { grid: { display: false } }
+      }
+    }
+  });
+})();
+
+// Chart 4: Viability Dose-Response
+(function(){
+  // Log scale dose points: 0.01, 0.1, 1, 10, 100 μM
+  var doxData = [98, 92, 65, 18, 2];
+  var sunitData = [99, 97, 88, 52, 12];
+  var ctrlData = [100, 100, 100, 100, 100];
+
+  new Chart(document.getElementById('viabilityChart'), {
+    type: 'line',
+    data: {
+      labels: ['0.01 μM', '0.1 μM', '1 μM', '10 μM', '100 μM'],
+      datasets: [
+        { label: 'Doxorubicin', data: doxData, borderColor: 'rgba(192,57,43,0.9)', pointBackgroundColor: 'rgba(192,57,43,0.9)', pointRadius: 5, borderWidth: 2.5, tension: 0.3 },
+        { label: 'Sunitinib', data: sunitData, borderColor: 'rgba(107,114,128,0.85)', pointBackgroundColor: 'rgba(107,114,128,0.85)', pointRadius: 5, borderWidth: 2.5, tension: 0.3 },
+        { label: 'Vehicle Control', data: ctrlData, borderColor: 'rgba(46,134,193,0.7)', pointBackgroundColor: 'rgba(46,134,193,0.7)', pointRadius: 5, borderWidth: 2, tension: 0.3, borderDash: [5,3] }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 11, family: "'IBM Plex Sans'" }, padding: 16 }}
+      },
+      scales: {
+        y: { beginAtZero: true, max: 110, title: { display: true, text: '% Viability (ATP)', font: { size: 11, family: "'IBM Plex Sans'" }}, grid: { color: 'rgba(0,0,0,0.05)' }},
+        x: { title: { display: true, text: 'Log Concentration (μM)', font: { size: 11, family: "'IBM Plex Sans'" }}, grid: { display: false } }
+      }
+    }
+  });
+})();
+
+// Chart 5: Impedance Over Time
+(function(){
+  var timepoints = [];
+  var vehicle = [];
+  var lowDose = [];
+  var highDose = [];
+
+  for(var h=0; h<=72; h+=4){
+    timepoints.push(h+'h');
+    // Vehicle: stable
+    vehicle.push(1.0 + 0.02*Math.random());
+    // Low dose: modest decline
+    lowDose.push(1.0 - 0.0025*h + 0.02*Math.random());
+    // High dose: progressive decline
+    highDose.push(1.0 - 0.008*h + 0.01*Math.random());
+  }
+
+  new Chart(document.getElementById('impedanceChart'), {
+    type: 'line',
+    data: {
+      labels: timepoints,
+      datasets: [
+        { label: 'Vehicle', data: vehicle, borderColor: 'rgba(46,134,193,0.9)', pointRadius: 4, borderWidth: 2.5, tension: 0.2 },
+        { label: 'Low Dose', data: lowDose, borderColor: 'rgba(107,114,128,0.85)', pointRadius: 4, borderWidth: 2.5, tension: 0.2 },
+        { label: 'High Dose', data: highDose, borderColor: 'rgba(192,57,43,0.9)', pointRadius: 4, borderWidth: 2.5, tension: 0.2 }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 11, family: "'IBM Plex Sans'" }, padding: 16 }}
+      },
+      scales: {
+        y: { beginAtZero: true, max: 1.3, title: { display: true, text: 'Cell Index', font: { size: 11, family: "'IBM Plex Sans'" }}, grid: { color: 'rgba(0,0,0,0.05)' }},
+        x: { title: { display: true, text: 'Time', font: { size: 11, family: "'IBM Plex Sans'" }}, grid: { display: false } }
+      }
+    }
+  });
+})();
+
+// Chart 6: Sarcomere Organization Score
+(function(){
+  new Chart(document.getElementById('sarcomereChart'), {
+    type: 'bar',
+    data: {
+      labels: ['WT', 'HCM-MYH7', 'DCM-TTN', 'LMNA-R349W'],
+      datasets: [{
+        label: 'Sarcomere Organization Score',
+        data: [82, 48, 35, 42],
+        backgroundColor: [
+          'rgba(46,134,193,0.8)',
+          'rgba(192,57,43,0.8)',
+          'rgba(192,57,43,0.95)',
+          'rgba(192,57,43,0.85)'
+        ],
+        borderColor: 'rgba(0,0,0,0.1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11, family: "'IBM Plex Sans'" }, padding: 16 }}},
+      scales: {
+        y: { beginAtZero: true, max: 100, title: { display: true, text: 'Organization Score (0–100)', font: { size: 11, family: "'IBM Plex Sans'" }}, grid: { color: 'rgba(0,0,0,0.05)' }},
+        x: { grid: { display: false } }
+      }
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

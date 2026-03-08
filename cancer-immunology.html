@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cancer Immunology &amp; Immune Cell Engineering — Armin Bayati, PhD</title>
+<meta name="description" content="Cancer immunology, immune cell engineering, T-cell killing assays, checkpoint biology, CAR-T characterization, and cytokine profiling.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════
+   ARMIN BAYATI — DESIGN SYSTEM
+   Matching iPSC-Cardiomyocyte page aesthetic
+   ══════════════════════════════════════════════ */
+
+:root {
+  --ink: #0f1419;
+  --paper: #fafaf7;
+  --mid: #6b7280;
+  --accent: #c0392b;
+  --accent-soft: #e74c3c15;
+  --rule: #d4d0c8;
+  --card: #ffffff;
+  --section-bg: #f4f3ef;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+  --mono: 'IBM Plex Mono', 'Menlo', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAVIGATION ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 250, 247, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+  padding: 0 24px;
+}
+
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  gap: 16px;
+}
+
+.nav-brand {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--mid);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-brand:hover { color: var(--ink); }
+
+.nav-links {
+  display: flex;
+  gap: 1px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.nav-links::-webkit-scrollbar { display: none; }
+
+.nav-links a {
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  padding: 6px 8px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.nav-links a:hover { color: var(--ink); background: rgba(0,0,0,0.04); }
+.nav-links a.active { color: var(--accent); }
+
+/* Mobile nav toggle */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--mid);
+}
+.nav-toggle svg { display: block; }
+
+/* ── HERO ── */
+.hero {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 80px 32px 64px;
+}
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1.5px;
+  background: var(--accent);
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+  max-width: 780px;
+  margin-bottom: 28px;
+}
+
+.hero-description {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--mid);
+  max-width: 640px;
+  margin-bottom: 36px;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  padding: 5px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  color: var(--mid);
+  background: var(--card);
+}
+
+/* ── SECTIONS ── */
+.section {
+  border-top: 1px solid var(--rule);
+}
+
+.section-header {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 64px 32px 0;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.section-index {
+  position: sticky;
+  top: 80px;
+  padding-top: 4px;
+}
+
+.section-number {
+  font-family: var(--serif);
+  font-size: 4rem;
+  color: var(--rule);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.section-content {
+  padding-bottom: 20px;
+}
+
+.section-content h2 {
+  font-family: var(--serif);
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+
+.section-content h3 {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 32px;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+
+.section-content p {
+  font-size: 15.5px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #444;
+  max-width: 640px;
+  margin-bottom: 16px;
+}
+
+.section-content p strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.section-content a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.section-content a:hover {
+  border-bottom-color: var(--accent);
+}
+
+/* ── SUB-SECTION DIVIDER ── */
+.subsection {
+  margin-top: 48px;
+  padding-top: 36px;
+  border-top: 1px dashed var(--rule);
+}
+
+.subsection:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.subsection-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.subsection-label::before {
+  content: '→';
+  font-size: 13px;
+}
+
+/* ── FINDINGS STRIP ── */
+.findings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 28px 0 32px;
+  max-width: 640px;
+}
+
+.finding {
+  background: var(--card);
+  padding: 18px 20px;
+}
+
+.finding-value {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.finding-label {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--mid);
+  line-height: 1.4;
+}
+
+/* ── TIMELINE ── */
+.timeline {
+  margin: 32px 0;
+  max-width: 640px;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 28px;
+  padding-bottom: 32px;
+  border-left: 1.5px solid var(--rule);
+}
+.timeline-item:last-child { padding-bottom: 0; }
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--accent);
+}
+
+.timeline-year {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.timeline-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.timeline-desc {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--mid);
+}
+
+/* ── WORKFLOW STRIP ── */
+.workflow-strip {
+  background: var(--ink);
+  color: #fff;
+  padding: 48px 32px;
+}
+
+.workflow-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.workflow-inner h3 {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 28px;
+  color: rgba(255,255,255,0.9);
+}
+
+.workflow-steps {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+}
+
+.workflow-step {
+  flex: 1;
+  padding: 20px 24px;
+  border-left: 1px solid rgba(255,255,255,0.12);
+  position: relative;
+}
+.workflow-step:first-child { border-left: none; }
+
+.step-number {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.step-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: rgba(255,255,255,0.95);
+}
+
+.step-detail {
+  font-size: 12.5px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.55;
+}
+
+/* ── CARD GRID ── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 28px 0 32px;
+  max-width: 640px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 24px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+a.card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.card-desc {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.6;
+}
+
+/* ── IMAGE PLACEHOLDER ── */
+.image-placeholder {
+  background: var(--section-bg);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 48px 24px;
+  text-align: center;
+  margin: 20px 0 24px;
+  max-width: 640px;
+}
+
+.image-placeholder .ph-icon {
+  font-size: 28px;
+  color: var(--rule);
+  margin-bottom: 8px;
+}
+
+.image-placeholder .ph-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--mid);
+  letter-spacing: 0.5px;
+}
+
+/* ── INLINE LIST ── */
+.inline-list {
+  list-style: none;
+  margin: 16px 0;
+  max-width: 640px;
+}
+
+.inline-list li {
+  font-size: 14px;
+  font-weight: 300;
+  color: #444;
+  line-height: 1.7;
+  padding: 6px 0;
+  padding-left: 20px;
+  position: relative;
+}
+.inline-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 14px;
+  width: 6px;
+  height: 1.5px;
+  background: var(--accent);
+}
+
+/* ── PUBLICATION LIST ── */
+.pub-list {
+  margin: 20px 0;
+  max-width: 640px;
+}
+
+.pub-item {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.pub-item:last-child { border-bottom: none; }
+
+.pub-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.pub-authors {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.5;
+}
+
+.pub-journal {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: 0.3px;
+  margin-top: 4px;
+}
+
+/* ── CONTACT LINKS ── */
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 24px 0;
+  max-width: 400px;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.contact-link:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.contact-link .cl-icon {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  min-width: 60px;
+}
+
+/* ── FIGURE CONTAINER ── */
+.figure-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 12px 32px 64px;
+}
+
+.figure-frame {
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.03);
+}
+
+.figure-caption-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: var(--section-bg);
+  border-top: 1px solid var(--rule);
+  font-size: 12.5px;
+  color: var(--mid);
+}
+
+.figure-caption-bar .fig-label {
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── FOOTER ── */
+.page-footer {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 48px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--rule);
+}
+
+.footer-left {
+  font-size: 13px;
+  color: var(--mid);
+}
+
+.footer-left a {
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 500;
+}
+.footer-left a:hover { text-decoration: underline; }
+
+.footer-right {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-right a {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--mid);
+  text-decoration: none;
+  letter-spacing: 0.3px;
+}
+.footer-right a:hover { color: var(--ink); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow, .hero h1, .hero-description, .hero-tags {
+  animation: fadeUp 0.6s ease both;
+}
+.hero h1 { animation-delay: 0.1s; }
+.hero-description { animation-delay: 0.2s; }
+.hero-tags { animation-delay: 0.3s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    padding: 12px 20px;
+    gap: 4px;
+  }
+  .nav-toggle { display: block; }
+  .section-header {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 40px 20px 0;
+  }
+  .section-index {
+    position: static;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-number { font-size: 2rem; margin-bottom: 0; }
+  .hero { padding: 48px 20px 40px; }
+  .figure-container { padding: 12px 20px 48px; }
+  .workflow-steps { flex-direction: column; }
+  .workflow-step { border-left: none; border-top: 1px solid rgba(255,255,255,0.12); padding: 16px 0; }
+  .workflow-step:first-child { border-top: none; }
+  .findings { grid-template-columns: 1fr 1fr; }
+  .card-grid { grid-template-columns: 1fr; }
+  .page-footer { flex-direction: column; gap: 16px; text-align: center; }
+}
+
+/* ── CHARTS ── */
+.chart-container {
+  max-width: 640px;
+  margin: 24px 0 32px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.chart-container canvas { width: 100% !important; }
+.chart-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.chart-subtitle {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--mid);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.chart-note {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--mid);
+  margin-top: 12px;
+  font-style: italic;
+}
+
+
+/* ── HIGH-TECH OVERLAY ── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(rgba(15,20,25,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15,20,25,0.015) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero-eyebrow::after {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+  margin-left: 4px;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(192,57,43,0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(192,57,43,0); }
+}
+
+.tag {
+  background: rgba(15,20,25,0.03);
+  border-color: rgba(15,20,25,0.12);
+  transition: all 0.25s ease;
+}
+.tag:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+.section-number {
+  background: linear-gradient(135deg, var(--rule) 0%, rgba(192,57,43,0.15) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.chart-container {
+  border-color: rgba(15,20,25,0.08);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.02);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.chart-container:hover {
+  border-color: rgba(192,57,43,0.2);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04);
+}
+
+.findings {
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.finding {
+  transition: background 0.2s ease;
+}
+.finding:hover {
+  background: rgba(192,57,43,0.02);
+}
+
+nav {
+  background: rgba(250, 250, 247, 0.88);
+  border-bottom-color: rgba(15,20,25,0.08);
+}
+
+.workflow-strip {
+  background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #0f1419 100%);
+  position: relative;
+  overflow: hidden;
+}
+.workflow-strip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+
+.gallery-thumb {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+.gallery-thumb:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.page-footer {
+  border-top-color: rgba(15,20,25,0.06);
+}
+
+.nav-links a {
+  transition: all 0.2s ease;
+  position: relative;
+}
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 10px;
+  right: 10px;
+  height: 1.5px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">arminbayati.com</a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="17" y2="6"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14" x2="17" y2="14"/></svg>
+    </button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="ipscs.html">iPSCs</a>
+      <a href="cardiomyocytes.html">Cardio</a>
+      <a href="cancer-immunology.html" class="active">Cancer</a>
+      <a href="cellular-assays.html">Assays</a>
+      <a href="genetics.html">Genetics</a>
+      <a href="drug-discovery.html">Drug Disc.</a>
+      <a href="microscopy.html">Imaging</a>
+      <a href="flow-cytometry.html">Flow Cyt.</a>
+      <a href="proteomics.html">Proteomics</a>
+      <a href="coding.html">Coding</a>
+      <a href="skills.html">Skills</a>
+      <a href="publications.html">Pubs</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">Immuno-Oncology</div>
+  <h1>Cancer Immunology &amp; Immune Cell Engineering</h1>
+  <p class="hero-description">
+    I develop and deploy immunological assays that characterize tumor-immune interactions, checkpoint biology, CAR-T and NK cell function, and immune cell co-culture systems. My work integrates flow cytometry, multiplex cytokine quantification, and functional killing assays to enable mechanistic understanding and translational readouts.
+  </p>
+  <div class="hero-tags">
+    <span class="tag">T-Cell Killing</span>
+    <span class="tag">ADCC</span>
+    <span class="tag">CDC</span>
+    <span class="tag">Checkpoint</span>
+    <span class="tag">CAR-T</span>
+    <span class="tag">NK Cells</span>
+    <span class="tag">Cytokine Profiling</span>
+    <span class="tag">PBMC</span>
+    <span class="tag">Flow Cytometry</span>
+    <span class="tag">Immune Co-Culture</span>
+  </div>
+</div>
+
+<div class="section" id="immune-killing">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">01</div>
+      <div class="section-label">Immune Killing</div>
+    </div>
+    <div class="section-content">
+      <h2>Immune Cell Killing Assays</h2>
+      <p>I design and execute T-cell mediated killing, antibody-dependent cellular cytotoxicity (ADCC), complement-dependent cytotoxicity (CDC), and optimize effector-to-target ratios to profile immune potency and mechanistic dependencies. Assays employ primary human T-cells, NK cells, and macrophages in co-culture with fluorescently-labeled or viability-dye-stained target cells, with quantification by flow cytometry or luciferase-based readouts.</p>
+
+      <div class="subsection">
+        <div class="subsection-label">T-Cell Killing Dose-Response</div>
+        <div class="chart-container">
+          <div class="chart-title">Fig. 1A — T-Cell Mediated Cytotoxicity</div>
+          <div class="chart-subtitle">Dose-dependent lysis of target cells by anti-PD-L1-enhanced T-cells across effector-to-target ratios</div>
+          <canvas id="tCellKillingChart" height="280"></canvas>
+          <div class="chart-note">Primary human T-cells co-cultured 4h with labeled target cells. Anti-PD-L1 shows checkpoint-dependent enhanced killing. Specific lysis calculated as (experimental release − spontaneous release) / (maximum release − spontaneous release) × 100%.</div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-label">ADCC Activity Profile</div>
+        <div class="chart-container">
+          <div class="chart-title">Fig. 1B — Antibody-Dependent Cellular Cytotoxicity</div>
+          <div class="chart-subtitle">Comparative ADCC activity of therapeutic antibodies at E:T 10:1</div>
+          <canvas id="adccChart" height="280"></canvas>
+          <div class="chart-note">Freshly isolated PBMCs (effector) co-cultured with antibody-opsonized target cells. Trastuzumab and Rituximab show superior ADCC compared to Cetuximab. Isotype control minimal background.</div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-label">CDC Kinetics</div>
+        <div class="chart-container">
+          <div class="chart-title">Fig. 1C — Complement-Dependent Cytotoxicity Over Time</div>
+          <div class="chart-subtitle">Kinetic profile of complement-mediated target cell lysis</div>
+          <canvas id="cdcChart" height="280"></canvas>
+          <div class="chart-note">Target cells opsonized with anti-target antibody ± human complement serum. Maximal lysis achieved by 2h. Antibody or complement alone show minimal activity.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="checkpoint">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">02</div>
+      <div class="section-label">Checkpoints</div>
+    </div>
+    <div class="section-content">
+      <h2>Checkpoint Biology &amp; Immune Modulation</h2>
+      <p>I characterize the expression and functional role of inhibitory checkpoint receptors (PD-1, CTLA-4, LAG-3, TIM-3, TIGIT) on tumor-infiltrating and circulating T-cells. Checkpoint blockade assays measure rescue of exhausted T-cell function, IFN-γ secretion, and proliferation using anti-checkpoint monoclonal antibodies and ligand-blocking strategies.</p>
+
+      <div class="subsection">
+        <div class="subsection-label">Checkpoint Expression Profile</div>
+        <div class="chart-container">
+          <div class="chart-title">Fig. 2A — Checkpoint Receptor Expression</div>
+          <div class="chart-subtitle">Mean fluorescence intensity (MFI) fold-change on tumor-infiltrating T-cells vs peripheral blood T-cells</div>
+          <canvas id="checkpointExprChart" height="300"></canvas>
+          <div class="chart-note">Multicolor flow cytometry. TILs show elevated checkpoint expression consistent with T-cell exhaustion. PB = peripheral blood T-cells; TIL = tumor-infiltrating lymphocytes.</div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-label">Blockade Functional Assay</div>
+        <div class="chart-container">
+          <div class="chart-title">Fig. 2B — Checkpoint Blockade Rescues T-Cell Function</div>
+          <div class="chart-subtitle">IFN-γ secretion by exhausted T-cells ± anti-checkpoint antibodies</div>
+          <canvas id="blockadeChart" height="280"></canvas>
+          <div class="chart-note">Exhausted T-cells (PD-1 high) stimulated with anti-CD3/CD28 ± anti-PD-1, anti-CTLA-4, or combination. Dual blockade shows superior functional rescue. Quantified by multiplex bead assay (Luminex).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="cytokine">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">03</div>
+      <div class="section-label">Cytokines</div>
+    </div>
+    <div class="section-content">
+      <h2>Cytokine Profiling &amp; Biomarker Discovery</h2>
+      <p>I employ multiplex immunoassays including Luminex, MSD V-PLEX, and AlphaLISA to quantify immune-relevant cytokines (IL-2, IL-6, IL-10, IFN-γ, TNF-α, IL-17A, Granzyme B) from T-cell co-cultures and immune-oncology screens. Dose-response profiling identifies optimal pathway modulation and therapeutic windows.</p>
+
+      <div class="subsection">
+        <div class="subsection-label">Cytokine Panel Heatmap</div>
+        <div class="chart-container">
+          <div class="chart-title">Fig. 3A — Comprehensive Cytokine Panel</div>
+          <div class="chart-subtitle">Multiplex quantification of immune activation markers across conditions</div>
+          <canvas id="cytokineHeatmapChart" height="300"></canvas>
+          <div class="chart-note">Supernatants from T-cell co-cultures collected at 48h. Unstim = resting; Stim = anti-CD3/CD28; Stim+Drug = stimulated + checkpoint inhibitor. Values normalized to unstimulated baseline.</div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-label">Dose-Response Cytokine</div>
+        <div class="chart-container">
+          <div class="chart-title">Fig. 3B — Dose-Dependent Cytokine Secretion</div>
+          <div class="chart-subtitle">IL-2 and IFN-γ titration profiles across drug concentrations</div>
+          <canvas id="doseResponseChart" height="280"></canvas>
+          <div class="chart-note">T-cells stimulated with checkpoint inhibitor at increasing concentrations (0.01–100 nM). Both cytokines show dose-dependent increase with plateau at higher concentrations. EC50 determination informs optimal dosing.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="car-t">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">04</div>
+      <div class="section-label">CAR-T</div>
+    </div>
+    <div class="section-content">
+      <h2>CAR-T &amp; Engineered Immune Cells</h2>
+      <p>I characterize CAR-T cell transduction efficiency, expansion kinetics, phenotype stability, and in vitro potency. Assays measure transduction rates by flow cytometry (CAR expression via tag-specific antibodies), expansion capacity over 14–21 days, exhaustion markers, and target-cell killing across CAR-T designs and target lineages.</p>
+
+      <div class="subsection">
+        <div class="subsection-label">CAR-T Expansion Kinetics</div>
+        <div class="chart-container">
+          <div class="chart-title">Fig. 4A — CAR-T Expansion Over Culture Period</div>
+          <div class="chart-subtitle">Fold-expansion of transduced vs untransduced T-cells over 14 days in culture</div>
+          <canvas id="carTExpansionChart" height="280"></canvas>
+          <div class="chart-note">CAR-T cells show enhanced proliferation kinetics and reach higher peak expansion (~80-fold by day 12). Untransduced T-cells plateau earlier (~20-fold). Both cultured with IL-2 supplementation and anti-CD3/CD28 stimulation.</div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-label">CAR-T Potency Assay</div>
+        <div class="chart-container">
+          <div class="chart-title">Fig. 4B — CAR-T-Mediated Target Cell Killing</div>
+          <div class="chart-subtitle">Specific lysis of CD19+ and CD19− target cells by CAR-T vs untransduced T-cells</div>
+          <canvas id="carTPotencyChart" height="280"></canvas>
+          <div class="chart-note">CAR-T (anti-CD19) co-cultured with Raji, Nalm-6 (CD19+), or K562 (CD19−) target cells at E:T 5:1. CAR-T shows antigen-specific killing; minimal off-target activity against K562. Untransduced T-cells show background killing.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="workflow-strip">
+  <div class="workflow-inner">
+    <h3>Workflow</h3>
+    <div class="workflow-steps">
+      <div class="workflow-step">
+        <div class="step-number">Step 1</div>
+        <div class="step-title">Target Discovery</div>
+        <div class="step-detail">Identify tumor-immune interaction targets and checkpoint dependencies through functional screening and gene expression profiling</div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-number">Step 2</div>
+        <div class="step-title">Assay Development</div>
+        <div class="step-detail">Optimize co-culture conditions, readout modality (flow, cytokine), and control reagents for robustness</div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-number">Step 3</div>
+        <div class="step-title">Screening</div>
+        <div class="step-detail">Execute dose-response studies, multi-condition profiling, and mechanism-of-action experiments with candidate therapeutics</div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-number">Step 4</div>
+        <div class="step-title">Biomarker Readout</div>
+        <div class="step-detail">Identify and validate predictive biomarkers, correlate assay output with clinical outcomes and in vivo efficacy</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-footer">
+  <div class="footer-left">
+    <a href="index.html">Armin Bayati, PhD</a> · Research Fellow, Harvard Medical School
+  </div>
+  <div class="footer-right">
+    <a href="mailto:a.bayati.brain@gmail.com">Email</a>
+    <a href="https://linkedin.com/in/arminbayati" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://scholar.google.com/citations?user=MIW8P2MAAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
+  </div>
+</div>
+
+<script>
+// T-Cell Killing Dose-Response
+new Chart(document.getElementById('tCellKillingChart'), {
+  type: 'line',
+  data: {
+    labels: ['1:1', '5:1', '10:1', '20:1', '50:1'],
+    datasets: [{
+      label: 'Anti-PD-L1 Ab',
+      data: [18.2, 38.4, 52.6, 61.8, 64.5],
+      borderColor: 'rgba(192,57,43,0.9)',
+      backgroundColor: 'rgba(192,57,43,0.08)',
+      fill: true,
+      tension: 0.3,
+      pointRadius: 5,
+      pointHoverRadius: 7,
+      borderWidth: 2.5
+    }, {
+      label: 'Isotype Control',
+      data: [3.1, 6.8, 10.2, 12.4, 14.1],
+      borderColor: 'rgba(107,114,128,0.5)',
+      backgroundColor: 'rgba(107,114,128,0.04)',
+      fill: true,
+      tension: 0.3,
+      pointRadius: 4,
+      pointHoverRadius: 6,
+      borderWidth: 1.5
+    }, {
+      label: 'No Ab',
+      data: [1.2, 4.3, 8.1, 11.6, 13.8],
+      borderColor: 'rgba(180,180,180,0.6)',
+      backgroundColor: 'transparent',
+      tension: 0.3,
+      pointRadius: 3,
+      pointHoverRadius: 5,
+      borderWidth: 1.5,
+      borderDash: [4, 2]
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom', labels: { font: { size: 11, family: "'IBM Plex Sans'" }, padding: 16 }}
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 80,
+        title: { display: true, text: '% Specific Lysis', font: { size: 11, family: "'IBM Plex Sans'" }},
+        grid: { color: 'rgba(0,0,0,0.05)' }
+      },
+      x: {
+        title: { display: true, text: 'Effector : Target Ratio', font: { size: 11, family: "'IBM Plex Sans'" }},
+        grid: { display: false }
+      }
+    }
+  }
+});
+
+// ADCC Activity
+new Chart(document.getElementById('adccChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Trastuzumab', 'Rituximab', 'Cetuximab', 'Isotype'],
+    datasets: [{
+      label: '% Specific Lysis (E:T 10:1)',
+      data: [54.8, 45.2, 34.9, 8.1],
+      backgroundColor: ['rgba(192,57,43,0.65)', 'rgba(46,134,193,0.65)', 'rgba(107,114,128,0.5)', 'rgba(200,200,200,0.4)'],
+      borderColor: ['rgba(192,57,43,1)', 'rgba(46,134,193,0.9)', 'rgba(107,114,128,0.8)', 'rgba(150,150,150,0.6)'],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 70,
+        title: { display: true, text: '% Specific Lysis', font: { size: 11, family: "'IBM Plex Sans'" }},
+        grid: { color: 'rgba(0,0,0,0.05)' }
+      },
+      x: { grid: { display: false }}
+    }
+  }
+});
+
+// CDC Kinetics
+new Chart(document.getElementById('cdcChart'), {
+  type: 'line',
+  data: {
+    labels: ['0h', '0.5h', '1h', '2h', '4h'],
+    datasets: [{
+      label: 'Target Ab + Complement',
+      data: [0, 18.4, 42.6, 68.2, 71.4],
+      borderColor: 'rgba(192,57,43,0.9)',
+      backgroundColor: 'rgba(192,57,43,0.1)',
+      fill: true,
+      tension: 0.3,
+      pointRadius: 5,
+      pointHoverRadius: 7,
+      borderWidth: 2.5
+    }, {
+      label: 'Ab Only',
+      data: [0, 2.1, 4.3, 6.8, 7.2],
+      borderColor: 'rgba(107,114,128,0.6)',
+      backgroundColor: 'rgba(107,114,128,0.04)',
+      fill: true,
+      tension: 0.3,
+      pointRadius: 4,
+      pointHoverRadius: 6,
+      borderWidth: 1.5
+    }, {
+      label: 'Complement Only',
+      data: [0, 1.2, 2.8, 3.9, 4.1],
+      borderColor: 'rgba(180,180,180,0.6)',
+      backgroundColor: 'transparent',
+      tension: 0.3,
+      pointRadius: 3,
+      pointHoverRadius: 5,
+      borderWidth: 1.5,
+      borderDash: [4, 2]
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom', labels: { font: { size: 11, family: "'IBM Plex Sans'" }, padding: 16 }}
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 90,
+        title: { display: true, text: '% Cytotoxicity', font: { size: 11, family: "'IBM Plex Sans'" }},
+        grid: { color: 'rgba(0,0,0,0.05)' }
+      },
+      x: {
+        title: { display: true, text: 'Time (hours)', font: { size: 11, family: "'IBM Plex Sans'" }},
+        grid: { display: false }
+      }
+    }
+  }
+});
+
+// Checkpoint Expression
+new Chart(document.getElementById('checkpointExprChart'), {
+  type: 'bar',
+  data: {
+    labels: ['PD-1', 'PD-L1', 'CTLA-4', 'LAG-3', 'TIM-3', 'TIGIT'],
+    datasets: [{
+      label: 'TIL vs PB MFI Fold-Change',
+      data: [5.8, 4.2, 3.6, 4.1, 3.9, 2.4],
+      backgroundColor: ['rgba(192,57,43,0.65)', 'rgba(192,57,43,0.65)', 'rgba(192,57,43,0.65)', 'rgba(192,57,43,0.65)', 'rgba(192,57,43,0.65)', 'rgba(192,57,43,0.65)'],
+      borderColor: 'rgba(192,57,43,0.9)',
+      borderWidth: 1
+    }]
+  },
+  options: {
+    responsive: true,
+    indexAxis: 'y',
+    plugins: {
+      legend: { display: false }
+    },
+    scales: {
+      x: {
+        beginAtZero: true,
+        max: 8,
+        title: { display: true, text: 'MFI Fold-Change (TIL / PB)', font: { size: 11, family: "'IBM Plex Sans'" }},
+        grid: { color: 'rgba(0,0,0,0.05)' }
+      },
+      y: { grid: { display: false }}
+    }
+  }
+});
+
+// Blockade Functional Assay
+new Chart(document.getElementById('blockadeChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Unstimulated', 'Anti-CD3/CD28', '+ Anti-PD-1', '+ Anti-CTLA-4', '+ Combo'],
+    datasets: [{
+      label: 'IFN-γ (pg/mL)',
+      data: [24.6, 186.2, 324.8, 268.4, 412.6],
+      backgroundColor: ['rgba(200,200,200,0.4)', 'rgba(107,114,128,0.5)', 'rgba(46,134,193,0.65)', 'rgba(107,114,128,0.65)', 'rgba(192,57,43,0.75)'],
+      borderColor: ['rgba(150,150,150,0.6)', 'rgba(107,114,128,0.8)', 'rgba(46,134,193,0.9)', 'rgba(107,114,128,0.9)', 'rgba(192,57,43,1)'],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: { display: true, text: 'IFN-γ Secretion (pg/mL)', font: { size: 11, family: "'IBM Plex Sans'" }},
+        grid: { color: 'rgba(0,0,0,0.05)' }
+      },
+      x: { grid: { display: false }}
+    }
+  }
+});
+
+// Cytokine Heatmap (stacked bar representation)
+new Chart(document.getElementById('cytokineHeatmapChart'), {
+  type: 'bar',
+  data: {
+    labels: ['IL-2', 'IL-6', 'IL-10', 'IFN-γ', 'TNF-α', 'IL-17A', 'Granzyme B'],
+    datasets: [{
+      label: 'Unstim',
+      data: [12.4, 8.2, 15.6, 18.3, 22.1, 2.8, 4.1],
+      backgroundColor: 'rgba(107,114,128,0.5)',
+      borderColor: 'rgba(107,114,128,0.8)',
+      borderWidth: 0.5
+    }, {
+      label: 'Stim',
+      data: [284.6, 156.8, 89.4, 428.2, 312.6, 64.2, 186.4],
+      backgroundColor: 'rgba(46,134,193,0.65)',
+      borderColor: 'rgba(46,134,193,0.9)',
+      borderWidth: 0.5
+    }, {
+      label: 'Stim + Drug',
+      data: [468.2, 124.3, 52.1, 612.8, 284.6, 28.4, 342.6],
+      backgroundColor: 'rgba(192,57,43,0.75)',
+      borderColor: 'rgba(192,57,43,1)',
+      borderWidth: 0.5
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom', labels: { font: { size: 11, family: "'IBM Plex Sans'" }, padding: 16 }}
+    },
+    scales: {
+      y: {
+        stacked: false,
+        beginAtZero: true,
+        title: { display: true, text: 'Cytokine Level (pg/mL)', font: { size: 11, family: "'IBM Plex Sans'" }},
+        grid: { color: 'rgba(0,0,0,0.05)' }
+      },
+      x: { grid: { display: false }}
+    }
+  }
+});
+
+// Dose-Response Cytokine
+new Chart(document.getElementById('doseResponseChart'), {
+  type: 'line',
+  data: {
+    labels: ['0.01 nM', '0.1 nM', '1 nM', '10 nM', '100 nM'],
+    datasets: [{
+      label: 'IL-2',
+      data: [28.4, 62.8, 184.6, 268.2, 312.4],
+      borderColor: 'rgba(192,57,43,0.9)',
+      backgroundColor: 'rgba(192,57,43,0.1)',
+      fill: true,
+      tension: 0.3,
+      pointRadius: 5,
+      pointHoverRadius: 7,
+      borderWidth: 2.5
+    }, {
+      label: 'IFN-γ',
+      data: [42.6, 126.8, 284.2, 386.4, 428.6],
+      borderColor: 'rgba(46,134,193,0.85)',
+      backgroundColor: 'rgba(46,134,193,0.1)',
+      fill: true,
+      tension: 0.3,
+      pointRadius: 5,
+      pointHoverRadius: 7,
+      borderWidth: 2.5
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom', labels: { font: { size: 11, family: "'IBM Plex Sans'" }, padding: 16 }}
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: { display: true, text: 'Cytokine Level (pg/mL)', font: { size: 11, family: "'IBM Plex Sans'" }},
+        grid: { color: 'rgba(0,0,0,0.05)' }
+      },
+      x: {
+        title: { display: true, text: 'Drug Concentration', font: { size: 11, family: "'IBM Plex Sans'" }},
+        grid: { display: false }
+      }
+    }
+  }
+});
+
+// CAR-T Expansion
+new Chart(document.getElementById('carTExpansionChart'), {
+  type: 'line',
+  data: {
+    labels: ['Day 0', 'Day 2', 'Day 4', 'Day 6', 'Day 8', 'Day 10', 'Day 12', 'Day 14'],
+    datasets: [{
+      label: 'CAR-T (anti-CD19)',
+      data: [1, 2.4, 4.8, 12.6, 28.4, 52.8, 76.2, 72.4],
+      borderColor: 'rgba(192,57,43,0.9)',
+      backgroundColor: 'rgba(192,57,43,0.1)',
+      fill: true,
+      tension: 0.3,
+      pointRadius: 5,
+      pointHoverRadius: 7,
+      borderWidth: 2.5
+    }, {
+      label: 'Untransduced T-cells',
+      data: [1, 1.8, 2.8, 6.2, 12.4, 18.6, 20.8, 19.4],
+      borderColor: 'rgba(107,114,128,0.6)',
+      backgroundColor: 'rgba(107,114,128,0.05)',
+      fill: true,
+      tension: 0.3,
+      pointRadius: 4,
+      pointHoverRadius: 6,
+      borderWidth: 1.5
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom', labels: { font: { size: 11, family: "'IBM Plex Sans'" }, padding: 16 }}
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: { display: true, text: 'Fold-Expansion', font: { size: 11, family: "'IBM Plex Sans'" }},
+        grid: { color: 'rgba(0,0,0,0.05)' }
+      },
+      x: {
+        title: { display: true, text: 'Culture Day', font: { size: 11, family: "'IBM Plex Sans'" }},
+        grid: { display: false }
+      }
+    }
+  }
+});
+
+// CAR-T Potency
+new Chart(document.getElementById('carTPotencyChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Raji (CD19+)', 'Nalm-6 (CD19+)', 'K562 (CD19−)'],
+    datasets: [{
+      label: 'CAR-T (anti-CD19)',
+      data: [84.6, 78.2, 12.4],
+      backgroundColor: ['rgba(192,57,43,0.75)', 'rgba(192,57,43,0.65)', 'rgba(192,57,43,0.4)'],
+      borderColor: ['rgba(192,57,43,1)', 'rgba(192,57,43,0.9)', 'rgba(192,57,43,0.7)'],
+      borderWidth: 1
+    }, {
+      label: 'Untransduced T-cells',
+      data: [8.2, 6.8, 4.1],
+      backgroundColor: ['rgba(107,114,128,0.5)', 'rgba(107,114,128,0.5)', 'rgba(107,114,128,0.5)'],
+      borderColor: ['rgba(107,114,128,0.8)', 'rgba(107,114,128,0.8)', 'rgba(107,114,128,0.8)'],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom', labels: { font: { size: 11, family: "'IBM Plex Sans'" }, padding: 16 }}
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 100,
+        title: { display: true, text: '% Specific Lysis (E:T 5:1)', font: { size: 11, family: "'IBM Plex Sans'" }},
+        grid: { color: 'rgba(0,0,0,0.05)' }
+      },
+      x: { grid: { display: false }}
+    }
+  }
+});
+</script>
+
+</body>
+</html>

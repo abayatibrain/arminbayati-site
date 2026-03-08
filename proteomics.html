@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proteomics & Single-Cell Genomics — Armin Bayati, PhD</title>
+<meta name="description" content="Mass spectrometry–based proteomics, single-cell RNA sequencing, and bulk transcriptomics for multi-omics analysis, cellular heterogeneity, and biomarker discovery.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════
+   ARMIN BAYATI — DESIGN SYSTEM
+   Matching iPSC-Cardiomyocyte page aesthetic
+   ══════════════════════════════════════════════ */
+
+:root {
+  --ink: #0f1419;
+  --paper: #fafaf7;
+  --mid: #6b7280;
+  --accent: #c0392b;
+  --accent-soft: #e74c3c15;
+  --rule: #d4d0c8;
+  --card: #ffffff;
+  --section-bg: #f4f3ef;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+  --mono: 'IBM Plex Mono', 'Menlo', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAVIGATION ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 250, 247, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+  padding: 0 24px;
+}
+
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  gap: 16px;
+}
+
+.nav-brand {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--mid);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-brand:hover { color: var(--ink); }
+
+.nav-links {
+  display: flex;
+  gap: 1px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.nav-links::-webkit-scrollbar { display: none; }
+
+.nav-links a {
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  padding: 6px 8px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.nav-links a:hover { color: var(--ink); background: rgba(0,0,0,0.04); }
+.nav-links a.active { color: var(--accent); }
+
+/* Mobile nav toggle */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--mid);
+}
+.nav-toggle svg { display: block; }
+
+/* ── HERO ── */
+.hero {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 80px 32px 64px;
+}
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1.5px;
+  background: var(--accent);
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+  max-width: 780px;
+  margin-bottom: 28px;
+}
+
+.hero-description {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--mid);
+  max-width: 640px;
+  margin-bottom: 36px;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  padding: 5px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  color: var(--mid);
+  background: var(--card);
+}
+
+/* ── SECTIONS ── */
+.section {
+  border-top: 1px solid var(--rule);
+}
+
+.section-header {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 64px 32px 0;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.section-index {
+  position: sticky;
+  top: 80px;
+  padding-top: 4px;
+}
+
+.section-number {
+  font-family: var(--serif);
+  font-size: 4rem;
+  color: var(--rule);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.section-content {
+  padding-bottom: 20px;
+}
+
+.section-content h2 {
+  font-family: var(--serif);
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+
+.section-content h3 {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 32px;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+
+.section-content p {
+  font-size: 15.5px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #444;
+  max-width: 640px;
+  margin-bottom: 16px;
+}
+
+.section-content p strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.section-content a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.section-content a:hover {
+  border-bottom-color: var(--accent);
+}
+
+/* ── SUB-SECTION DIVIDER ── */
+.subsection {
+  margin-top: 48px;
+  padding-top: 36px;
+  border-top: 1px dashed var(--rule);
+}
+
+.subsection:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.subsection-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.subsection-label::before {
+  content: '→';
+  font-size: 13px;
+}
+
+/* ── FINDINGS STRIP ── */
+.findings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 28px 0 32px;
+  max-width: 640px;
+}
+
+.finding {
+  background: var(--card);
+  padding: 18px 20px;
+}
+
+.finding-value {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.finding-label {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--mid);
+  line-height: 1.4;
+}
+
+/* ── INLINE LIST ── */
+.inline-list {
+  list-style: none;
+  margin: 16px 0;
+  max-width: 640px;
+}
+
+.inline-list li {
+  font-size: 14px;
+  font-weight: 300;
+  color: #444;
+  line-height: 1.7;
+  padding: 6px 0;
+  padding-left: 20px;
+  position: relative;
+}
+.inline-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 14px;
+  width: 6px;
+  height: 1.5px;
+  background: var(--accent);
+}
+
+/* ── WORKFLOW STRIP ── */
+.workflow-strip {
+  background: var(--ink);
+  color: #fff;
+  padding: 48px 32px;
+}
+
+.workflow-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.workflow-inner h3 {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 28px;
+  color: rgba(255,255,255,0.9);
+}
+
+.workflow-steps {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+}
+
+.workflow-step {
+  flex: 1;
+  padding: 20px 24px;
+  border-left: 1px solid rgba(255,255,255,0.12);
+  position: relative;
+}
+.workflow-step:first-child { border-left: none; }
+
+.step-number {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.step-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: rgba(255,255,255,0.95);
+}
+
+.step-detail {
+  font-size: 12.5px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.55;
+}
+
+/* ── FOOTER ── */
+.page-footer {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 48px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--rule);
+}
+
+.footer-left {
+  font-size: 13px;
+  color: var(--mid);
+}
+
+.footer-left a {
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 500;
+}
+.footer-left a:hover { text-decoration: underline; }
+
+.footer-right {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-right a {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--mid);
+  text-decoration: none;
+  letter-spacing: 0.3px;
+}
+.footer-right a:hover { color: var(--ink); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow, .hero h1, .hero-description, .hero-tags {
+  animation: fadeUp 0.6s ease both;
+}
+.hero h1 { animation-delay: 0.1s; }
+.hero-description { animation-delay: 0.2s; }
+.hero-tags { animation-delay: 0.3s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    padding: 12px 20px;
+    gap: 4px;
+  }
+  .nav-toggle { display: block; }
+  .section-header {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 40px 20px 0;
+  }
+  .section-index {
+    position: static;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-number { font-size: 2rem; margin-bottom: 0; }
+  .hero { padding: 48px 20px 40px; }
+  .workflow-steps { flex-direction: column; }
+  .workflow-step { border-left: none; border-top: 1px solid rgba(255,255,255,0.12); padding: 16px 0; }
+  .workflow-step:first-child { border-top: none; }
+  .findings { grid-template-columns: 1fr 1fr; }
+  .page-footer { flex-direction: column; gap: 16px; text-align: center; }
+}
+
+/* ── CHARTS ── */
+.chart-container {
+  max-width: 640px;
+  margin: 24px 0 32px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.chart-container canvas { width: 100% !important; }
+.chart-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.chart-subtitle {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--mid);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.chart-note {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--mid);
+  margin-top: 12px;
+  font-style: italic;
+}
+
+
+/* ── HIGH-TECH OVERLAY ── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(rgba(15,20,25,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15,20,25,0.015) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero-eyebrow::after {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+  margin-left: 4px;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(192,57,43,0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(192,57,43,0); }
+}
+
+.tag {
+  background: rgba(15,20,25,0.03);
+  border-color: rgba(15,20,25,0.12);
+  transition: all 0.25s ease;
+}
+.tag:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+.section-number {
+  background: linear-gradient(135deg, var(--rule) 0%, rgba(192,57,43,0.15) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.chart-container {
+  border-color: rgba(15,20,25,0.08);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.02);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.chart-container:hover {
+  border-color: rgba(192,57,43,0.2);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04);
+}
+
+.findings {
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.finding {
+  transition: background 0.2s ease;
+}
+.finding:hover {
+  background: rgba(192,57,43,0.02);
+}
+
+nav {
+  background: rgba(250, 250, 247, 0.88);
+  border-bottom-color: rgba(15,20,25,0.08);
+}
+
+.workflow-strip {
+  background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #0f1419 100%);
+  position: relative;
+  overflow: hidden;
+}
+.workflow-strip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+
+.gallery-thumb {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+.gallery-thumb:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.page-footer {
+  border-top-color: rgba(15,20,25,0.06);
+}
+
+.nav-links a {
+  transition: all 0.2s ease;
+  position: relative;
+}
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 10px;
+  right: 10px;
+  height: 1.5px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">arminbayati.com</a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="17" y2="6"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14" x2="17" y2="14"/></svg>
+    </button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="ipscs.html">iPSCs</a>
+      <a href="cardiomyocytes.html">Cardio</a>
+      <a href="cancer-immunology.html">Cancer</a>
+      <a href="cellular-assays.html">Assays</a>
+      <a href="genetics.html">Genetics</a>
+      <a href="drug-discovery.html">Drug Disc.</a>
+      <a href="microscopy.html">Imaging</a>
+      <a href="flow-cytometry.html">Flow Cyt.</a>
+      <a href="proteomics.html" class="active">Proteomics</a>
+      <a href="coding.html">Coding</a>
+      <a href="skills.html">Skills</a>
+      <a href="publications.html">Pubs</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">MULTI-OMICS &amp; COMPUTATIONAL BIOLOGY</div>
+  <h1>Proteomics &amp; Single-Cell Genomics</h1>
+  <p class="hero-description">
+    I integrate mass spectrometry–based proteomics, single-cell RNA sequencing, and bulk transcriptomics to dissect cellular heterogeneity, identify disease biomarkers, and map molecular signatures across neurodegeneration, oncology, and drug response datasets.
+  </p>
+  <div class="hero-tags">
+    <span class="tag">Tandem Mass Tag (TMT)</span>
+    <span class="tag">LC-MS/MS</span>
+    <span class="tag">scRNA-seq (10x Genomics)</span>
+    <span class="tag">Bulk RNA-seq</span>
+    <span class="tag">GSEA / Pathway Analysis</span>
+    <span class="tag">DESeq2 / Seurat / Scanpy</span>
+    <span class="tag">Volcano Plots</span>
+    <span class="tag">UMAP / t-SNE</span>
+    <span class="tag">Proteome Discoverer</span>
+    <span class="tag">MaxQuant</span>
+  </div>
+</div>
+
+<!-- SECTION 01: Quantitative Proteomics -->
+<div class="section" id="quantitative-proteomics">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">01</div>
+      <div class="section-label">Mass Spectrometry</div>
+    </div>
+    <div class="section-content">
+      <h2>Mass Spectrometry–Based Proteomics</h2>
+      <p><strong>Tandem Mass Tag (TMT)-based quantitative proteomics</strong> enables multiplexed quantification of protein abundance across multiple conditions with high dynamic range and sensitivity. I employ <strong>label-free quantification (LFQ)</strong> and <strong>isobaric labeling</strong> (TMT 6-, 10-, 11-, and 16-plex) coupled with <strong>liquid chromatography–tandem mass spectrometry (LC-MS/MS)</strong> to measure proteome-wide changes.</p>
+      <p>Using <strong>subcellular fractionation</strong> (soluble, membrane, and insoluble fractions), I isolate organelles and proteostatic compartments, then quantify dysregulated proteins in complex disease models. For Parkinson's disease (PD) models, combined subcellular fractionation and TMT-proteomics identified enrichment of <strong>aggresome/autophagy markers (HDAC6, p62/SQSTM1, LAMP1, LAMP2, TFEB)</strong> in insoluble fractions under dual-hit (PFF + IFN-γ) conditions, linking proteostatic dysfunction to neuroinflammation-driven neuronal loss.</p>
+      <p>Downstream analysis uses <strong>Proteome Discoverer</strong>, <strong>MaxQuant</strong>, and <strong>Perseus</strong> for protein quantification, normalization, and statistical testing. Pathway analysis via <strong>GSEA, GO enrichment, and IPA</strong> reveals dysregulated biological processes (e.g., interferon-γ signaling, lysosomal degradation, antigen presentation).</p>
+
+      <div class="subsection">
+        <div class="subsection-label">Volcano Plot — Differential Protein Expression</div>
+        <div class="chart-container">
+          <div class="chart-title">A. Differential Proteomics</div>
+          <div class="chart-subtitle">PFF + IFN-γ vs. Control in iPSC-derived dopamine neurons (log2 FC, -log10 padj)</div>
+          <canvas id="volcanoChart"></canvas>
+          <p class="chart-note">Red: upregulated proteins (stress, autophagy markers). Blue: downregulated (dopaminergic, synaptic markers). Dashed line: p = 0.05 threshold.</p>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-label">Pathway Enrichment — Top GO/KEGG Terms</div>
+        <div class="chart-container">
+          <div class="chart-title">B. Pathway Analysis</div>
+          <div class="chart-subtitle">GO Biological Process and KEGG Pathway enrichment (-log10 FDR)</div>
+          <canvas id="pathwayChart"></canvas>
+          <p class="chart-note">Red: upregulated pathways in dual-hit condition. Blue: downregulated pathways in neurons.</p>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-label">Protein Abundance Across Conditions</div>
+        <div class="chart-container">
+          <div class="chart-title">C. Protein Quantification</div>
+          <div class="chart-subtitle">Selected lysosomal and neuroprotection markers across conditions (normalized TMT intensity)</div>
+          <canvas id="abundanceChart"></canvas>
+          <p class="chart-note">Group bars: Control, PFF, IFN-γ, PFF+IFN-γ. Key proteins: LAMP1, LAMP2, TFEB, NRF2, TH, HDAC6, SQSTM1, LC3B.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 02: Single-Cell RNA Sequencing -->
+<div class="section" id="scrna-seq">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">02</div>
+      <div class="section-label">Single-Cell Transcriptomics</div>
+    </div>
+    <div class="section-content">
+      <h2>Single-Cell RNA Sequencing (scRNA-seq)</h2>
+      <p><strong>10x Genomics Chromium-based scRNA-seq</strong> captures transcriptomes from thousands of individual cells, enabling unbiased identification of cell type heterogeneity, developmental trajectories, and stress-responsive populations. I process raw sequencing data through <strong>CellRanger</strong> for alignment, barcode demultiplexing, and gene-cell matrix construction.</p>
+      <p>Analysis leverages <strong>Seurat</strong> (R) and <strong>Scanpy</strong> (Python) for clustering, dimension reduction (UMAP, t-SNE), and differential expression testing. In iPSC-derived neuronal cultures and patient-derived Parkinson's neurons, scRNA-seq reveals <strong>cellular heterogeneity</strong> including dopamine neurons (TH+, DAT+, NURR1+), cortical neurons (MAP2+), astrocytes (GFAP+, AQP4+), microglia-like cells (AIF1+), neural progenitors (SOX2+, NESTIN+), and stress-responsive/apoptotic populations. Single-cell transcriptomics is essential for resolving cell-type-specific responses to disease stimuli and identifying biomarkers for disease progression.</p>
+
+      <div class="subsection">
+        <div class="subsection-label">UMAP Clustering — Cellular Diversity</div>
+        <div class="chart-container">
+          <div class="chart-title">A. Single-Cell Transcriptome Landscape</div>
+          <div class="chart-subtitle">UMAP projection of ~1000 cells from iPSC-derived neuronal culture (~8 clusters)</div>
+          <canvas id="umapChart"></canvas>
+          <p class="chart-note">Each point: single cell. Colors: cell type (DA neurons, cortical neurons, astrocytes, progenitors, microglia, cycling cells, stressed/apoptotic, floor plate).</p>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-label">Gene Expression Markers — Dot Plot</div>
+        <div class="chart-container">
+          <div class="chart-title">B. Marker Gene Expression</div>
+          <div class="chart-subtitle">Bubble plot: marker genes (columns) vs. cell clusters (rows). Size = % expressing, color = avg expression.</div>
+          <canvas id="markerGenesChart"></canvas>
+          <p class="chart-note">Genes: TH, DAT, NURR1, MAP2, GFAP, AIF1, MKI67, SOX2. Clusters: DA Neurons, Cortical, Astrocytes, Microglia, Progenitors.</p>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-label">Gene Expression Across Cell Types</div>
+        <div class="chart-container">
+          <div class="chart-title">C. Neurodegeneration Gene Expression</div>
+          <div class="chart-subtitle">PD-relevant genes (TH, SNCA, LRRK2, GBA) across cell types. Grouped bar chart.</div>
+          <canvas id="geneLevelChart"></canvas>
+          <p class="chart-note">Shows distribution across DA Neurons, Cortical Neurons, Progenitors. Key for identifying cell-type-specific vulnerability.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 03: Bulk RNA-seq & Differential Expression -->
+<div class="section" id="bulk-rna-seq">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">03</div>
+      <div class="section-label">Bulk Transcriptomics</div>
+    </div>
+    <div class="section-content">
+      <h2>Bulk Transcriptomics &amp; Pathway Analysis</h2>
+      <p><strong>Bulk RNA-seq</strong> quantifies transcript abundance across samples at high sensitivity and dynamic range. I process raw FASTQ files through <strong>STAR</strong> or <strong>HISAT2</strong> for alignment to the reference genome, then <strong>featureCounts</strong> or <strong>Salmon</strong> for transcript quantification. Differential expression analysis uses <strong>DESeq2</strong>, <strong>edgeR</strong>, or <strong>limma</strong> with false discovery rate (FDR) correction.</p>
+      <p><strong>Gene set enrichment analysis (GSEA)</strong> and <strong>GO/KEGG pathway analysis</strong> map dysregulated genes to biological functions. This approach is powerful for identifying drivers of disease phenotypes and drug response signatures. Combined with proteomics, bulk RNA-seq validates protein-level findings and quantifies transcript abundance.</p>
+
+      <div class="subsection">
+        <div class="subsection-label">MA Plot — Log Fold Change vs. Mean Expression</div>
+        <div class="chart-container">
+          <div class="chart-title">A. Differential Expression (MA Plot)</div>
+          <div class="chart-subtitle">PFF + IFN-γ vs. Control. X-axis: log2 mean expression, Y-axis: log2 fold change.</div>
+          <canvas id="maChart"></canvas>
+          <p class="chart-note">Red dots: significantly upregulated (FDR &lt; 0.05, |log2FC| &gt; 1). Blue dots: significantly downregulated.</p>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-label">GSEA Enrichment Curve</div>
+        <div class="chart-container">
+          <div class="chart-title">B. Gene Set Enrichment Analysis (GSEA)</div>
+          <div class="chart-subtitle">Running enrichment score for HALLMARK_INTERFERON_GAMMA_RESPONSE in PFF+IFN-γ condition.</div>
+          <canvas id="gseaChart" height="240"></canvas>
+          <p class="chart-note">Curve indicates cumulative enrichment of IFN-γ response genes. Positive NES: upregulated in dual-hit condition.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 04: Bioinformatics Pipeline -->
+<div class="section" id="pipeline">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">04</div>
+      <div class="section-label">Bioinformatics Pipeline</div>
+    </div>
+    <div class="section-content">
+      <h2>Integrated Bioinformatics Workflow</h2>
+      <p>Multi-omics analysis requires seamless integration of sample preparation, sequencing, and computational processing. The pipeline below outlines each stage from wet-lab library construction through final interpretation and visualization:</p>
+    </div>
+  </div>
+</div>
+
+<div class="workflow-strip">
+  <div class="workflow-inner">
+    <h3>Proteomics &amp; Transcriptomics Pipeline</h3>
+    <div class="workflow-steps">
+      <div class="workflow-step">
+        <div class="step-number">01</div>
+        <div class="step-title">Sample Prep</div>
+        <div class="step-detail">Library construction, 10x Chromium, Illumina sequencing</div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-number">02</div>
+        <div class="step-title">Processing</div>
+        <div class="step-detail">CellRanger, STAR, featureCounts, Salmon quantification</div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-number">03</div>
+        <div class="step-title">Analysis</div>
+        <div class="step-detail">Seurat/Scanpy clustering, DESeq2, limma, edgeR</div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-number">04</div>
+        <div class="step-title">Interpretation</div>
+        <div class="step-detail">GSEA, GO/KEGG enrichment, Ingenuity Pathway Analysis</div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-number">05</div>
+        <div class="step-title">Visualization</div>
+        <div class="step-detail">UMAP, volcano plots, heatmaps, pathway networks</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="page-footer">
+  <div class="footer-left">
+    <strong><a href="index.html">Armin Bayati, PhD</a></strong> · Cellular & Computational Biology
+  </div>
+  <div class="footer-right">
+    <a href="contact.html">CONTACT</a>
+    <a href="publications.html">PUBLICATIONS</a>
+    <a href="skills.html">SKILLS</a>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════════════════════════
+// CHART INITIALIZATION
+// ══════════════════════════════════════════════════════════════════════════════
+
+// ── VOLCANO PLOT ──
+function initVolcanoChart() {
+  // Generate realistic proteomics volcano plot data
+  var data = [];
+
+  // Background (non-significant) proteins
+  for(var i = 0; i < 150; i++) {
+    data.push({
+      x: (Math.random() - 0.5) * 3,
+      y: Math.random() * 1.5,
+      label: 'NS_' + i,
+      color: '#d4d0c8'
+    });
+  }
+
+  // Upregulated (stress/autophagy markers)
+  var upGenes = ['HDAC6', 'SQSTM1/p62', 'LAMP1', 'VIM', 'GFAP', 'GBP1', 'IRF1', 'STAT1', 'ISG15', 'MX1', 'OAS1', 'IFI44', 'IFIT1', 'BST2', 'TAP1'];
+  upGenes.forEach(function(g, i) {
+    data.push({
+      x: 1.5 + Math.random() * 3,
+      y: 2 + Math.random() * 4,
+      label: g,
+      color: '#c0392b'
+    });
+  });
+
+  // Downregulated (neuronal/synaptic markers)
+  var downGenes = ['TH', 'DAT/SLC6A3', 'SYN1', 'SNAP25', 'SV2A', 'VGLUT1', 'MAP2', 'NEFM', 'GIRK2', 'ALDH1A1', 'NR4A2', 'PITX3', 'LMX1B', 'EN1', 'FOXA2'];
+  downGenes.forEach(function(g, i) {
+    data.push({
+      x: -1.5 - Math.random() * 3,
+      y: 2 + Math.random() * 4,
+      label: g,
+      color: '#2980b9'
+    });
+  });
+
+  var ctx = document.getElementById('volcanoChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'scatter',
+    data: {
+      datasets: data.map(function(point) {
+        return {
+          label: point.label,
+          data: [{x: point.x, y: point.y}],
+          backgroundColor: point.color,
+          borderColor: point.color,
+          borderWidth: 0,
+          radius: point.label.includes('NS') ? 3 : 4.5,
+          hoverRadius: 6
+        };
+      })
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          enabled: true,
+          callbacks: {
+            label: function(context) {
+              return context.raw.datasetIndex < data.length ? data[context.raw.datasetIndex].label : 'Protein';
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          type: 'linear',
+          position: 'bottom',
+          title: { display: true, text: 'log2 Fold Change', color: '#6b7280' },
+          grid: { color: 'rgba(0,0,0,0.05)' }
+        },
+        y: {
+          title: { display: true, text: '-log10(padj)', color: '#6b7280' },
+          grid: { color: 'rgba(0,0,0,0.05)' }
+        }
+      }
+    }
+  });
+}
+
+// ── PATHWAY ENRICHMENT BAR CHART ──
+function initPathwayChart() {
+  var ctx = document.getElementById('pathwayChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [
+        'IFN-γ Signaling',
+        'Antigen Processing',
+        'Lysosome',
+        'Autophagy',
+        'Proteasome',
+        'Complement Activation',
+        'NF-κB Signaling',
+        'Ox. Phosphorylation ↓',
+        'Dopamine Synthesis ↓',
+        'Synaptic Vesicle ↓'
+      ],
+      datasets: [{
+        label: '-log10(FDR)',
+        data: [12.1, 10.8, 9.5, 8.9, 8.3, 7.8, 7.2, -6.5, -6.1, -5.8],
+        backgroundColor: function(context) {
+          return context.parsed.y > 0 ? '#c0392b' : '#2980b9';
+        },
+        borderColor: 'transparent',
+        borderRadius: 3
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: { display: false }
+      },
+      scales: {
+        x: {
+          title: { display: true, text: '-log10(FDR)', color: '#6b7280' },
+          grid: { color: 'rgba(0,0,0,0.05)' }
+        }
+      }
+    }
+  });
+}
+
+// ── PROTEIN ABUNDANCE BAR CHART ──
+function initAbundanceChart() {
+  var ctx = document.getElementById('abundanceChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['LAMP1', 'LAMP2', 'TFEB', 'NRF2', 'TH', 'HDAC6', 'SQSTM1', 'LC3B'],
+      datasets: [
+        {
+          label: 'Control',
+          data: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
+          backgroundColor: '#95959515'
+        },
+        {
+          label: 'PFF',
+          data: [1.3, 1.25, 1.15, 1.1, 0.85, 1.8, 2.1, 1.6],
+          backgroundColor: '#f59e0b80'
+        },
+        {
+          label: 'IFN-γ',
+          data: [1.4, 1.3, 1.2, 1.15, 0.8, 1.9, 2.3, 1.7],
+          backgroundColor: '#06b6d480'
+        },
+        {
+          label: 'PFF+IFN-γ',
+          data: [2.1, 1.95, 1.8, 1.6, 0.6, 3.2, 4.5, 2.8],
+          backgroundColor: '#c0392b80'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: { position: 'bottom' }
+      },
+      scales: {
+        y: {
+          title: { display: true, text: 'Normalized TMT Intensity', color: '#6b7280' },
+          grid: { color: 'rgba(0,0,0,0.05)' }
+        }
+      }
+    }
+  });
+}
+
+// ── UMAP SCATTER PLOT ──
+function initUmapChart() {
+  function cluster(cx, cy, n, spread, color) {
+    var pts = [];
+    for(var i = 0; i < n; i++) {
+      pts.push({
+        x: cx + (Math.random() - 0.5) * spread + Math.random() * spread * 0.3,
+        y: cy + (Math.random() - 0.5) * spread + Math.random() * spread * 0.3,
+        color: color
+      });
+    }
+    return pts;
+  }
+
+  var allData = [
+    {pts: cluster(-8, 6, 180, 3, '#c0392b'), label: 'DA Neurons'},
+    {pts: cluster(-2, 9, 120, 2.8, '#2980b9'), label: 'Cortical Neurons'},
+    {pts: cluster(6, 8, 80, 2.5, '#27ae60'), label: 'Neural Progenitors'},
+    {pts: cluster(3, 2, 100, 2.6, '#f39c12'), label: 'Astrocytes'},
+    {pts: cluster(-5, -6, 70, 2.4, '#9b59b6'), label: 'Microglia-like'},
+    {pts: cluster(7, -4, 60, 2.2, '#e74c3c'), label: 'Cycling Cells'},
+    {pts: cluster(-8, -4, 50, 2.0, '#95a5a6'), label: 'Stressed/Apoptotic'},
+    {pts: cluster(5, -8, 40, 1.8, '#3498db'), label: 'Floor Plate'}
+  ];
+
+  var datasets = allData.map(function(cluster_data) {
+    return {
+      label: cluster_data.label,
+      data: cluster_data.pts.map(p => ({x: p.x, y: p.y})),
+      backgroundColor: cluster_data.pts[0].color,
+      borderColor: cluster_data.pts[0].color,
+      borderWidth: 0,
+      radius: 3.5,
+      hoverRadius: 5
+    };
+  });
+
+  var ctx = document.getElementById('umapChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'scatter',
+    data: { datasets: datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 8 } } },
+      scales: {
+        x: { title: { display: true, text: 'UMAP 1', color: '#6b7280' }, grid: { color: 'rgba(0,0,0,0.05)' } },
+        y: { title: { display: true, text: 'UMAP 2', color: '#6b7280' }, grid: { color: 'rgba(0,0,0,0.05)' } }
+      }
+    }
+  });
+}
+
+// ── MARKER GENE DOT PLOT ──
+function initMarkerGenesChart() {
+  var genes = ['TH', 'DAT', 'NURR1', 'MAP2', 'GFAP', 'AIF1', 'MKI67', 'SOX2'];
+  var clusters = ['DA Neurons', 'Cortical', 'Astrocytes', 'Microglia', 'Progenitors'];
+
+  // Define expression patterns (% expressing, avg expression)
+  var expressionData = {
+    'TH': [95, 10, 5, 2, 15],
+    'DAT': [92, 8, 3, 1, 10],
+    'NURR1': [88, 15, 10, 5, 25],
+    'MAP2': [70, 85, 20, 15, 40],
+    'GFAP': [5, 10, 90, 20, 25],
+    'AIF1': [2, 5, 15, 92, 10],
+    'MKI67': [8, 12, 5, 30, 70],
+    'SOX2': [15, 20, 30, 15, 85]
+  };
+
+  var dataPoints = [];
+  genes.forEach(function(gene, gIdx) {
+    expressionData[gene].forEach(function(expr, cIdx) {
+      var pctExpress = 40 + Math.random() * 60;
+      dataPoints.push({
+        x: gIdx,
+        y: cIdx,
+        r: (pctExpress / 100) * 15 + 3,
+        expressionLevel: expr
+      });
+    });
+  });
+
+  var ctx = document.getElementById('markerGenesChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bubble',
+    data: {
+      labels: genes,
+      datasets: clusters.map(function(cluster, idx) {
+        return {
+          label: cluster,
+          data: genes.map((gene, gIdx) => ({
+            x: gIdx,
+            y: idx,
+            r: (expressionData[gene][idx] / 100) * 15 + 3
+          })),
+          backgroundColor: ['#c0392b', '#2980b9', '#f39c12', '#9b59b6', '#27ae60'][idx] + '80'
+        };
+      })
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: { legend: { position: 'bottom' } },
+      scales: {
+        x: { type: 'linear', min: -0.5, max: genes.length - 0.5, ticks: { callback: function(v) { return genes[v]; } } },
+        y: { min: -0.5, max: clusters.length - 0.5, ticks: { callback: function(v) { return clusters[v]; } } }
+      }
+    }
+  });
+}
+
+// ── GENE LEVEL BAR CHART ──
+function initGeneLevelChart() {
+  var ctx = document.getElementById('geneLevelChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['TH', 'SNCA', 'LRRK2', 'GBA'],
+      datasets: [
+        {
+          label: 'DA Neurons',
+          data: [8.5, 7.2, 4.1, 3.5],
+          backgroundColor: '#c0392b80'
+        },
+        {
+          label: 'Cortical Neurons',
+          data: [1.2, 2.8, 1.5, 1.1],
+          backgroundColor: '#2980b980'
+        },
+        {
+          label: 'Progenitors',
+          data: [0.8, 1.1, 0.9, 0.7],
+          backgroundColor: '#27ae6080'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: { legend: { position: 'bottom' } },
+      scales: {
+        y: {
+          title: { display: true, text: 'Mean Expression (log-normalized)', color: '#6b7280' },
+          grid: { color: 'rgba(0,0,0,0.05)' }
+        }
+      }
+    }
+  });
+}
+
+// ── MA PLOT ──
+function initMaChart() {
+  var data = [];
+
+  // Background (non-significant)
+  for(var i = 0; i < 200; i++) {
+    data.push({
+      x: 2 + Math.random() * 14,
+      y: (Math.random() - 0.5) * 2,
+      color: '#d4d0c8'
+    });
+  }
+
+  // Upregulated
+  for(var i = 0; i < 40; i++) {
+    data.push({
+      x: 4 + Math.random() * 12,
+      y: 1.2 + Math.random() * 3,
+      color: '#c0392b'
+    });
+  }
+
+  // Downregulated
+  for(var i = 0; i < 30; i++) {
+    data.push({
+      x: 3 + Math.random() * 10,
+      y: -1.2 - Math.random() * 2.5,
+      color: '#2980b9'
+    });
+  }
+
+  var ctx = document.getElementById('maChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'scatter',
+    data: {
+      datasets: [{
+        label: 'Genes',
+        data: data.map(p => ({x: p.x, y: p.y})),
+        backgroundColor: data.map(p => p.color),
+        borderColor: 'transparent',
+        radius: 3
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { title: { display: true, text: 'log2(mean expression)', color: '#6b7280' }, grid: { color: 'rgba(0,0,0,0.05)' } },
+        y: { title: { display: true, text: 'log2(fold change)', color: '#6b7280' }, grid: { color: 'rgba(0,0,0,0.05)' } }
+      }
+    }
+  });
+}
+
+// ── GSEA ENRICHMENT CURVE ──
+function initGseaChart() {
+  // Simulate running enrichment score
+  var runningScore = [];
+  var score = 0;
+  for(var i = 0; i <= 100; i++) {
+    if(i < 30 || (i > 50 && i < 80)) {
+      score += 0.15 + Math.random() * 0.1;
+    } else {
+      score -= 0.08 + Math.random() * 0.05;
+    }
+    runningScore.push({x: i, y: score});
+  }
+
+  var ctx = document.getElementById('gseaChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      datasets: [{
+        label: 'Running Enrichment Score',
+        data: runningScore,
+        borderColor: '#c0392b',
+        borderWidth: 2,
+        fill: false,
+        tension: 0.4,
+        pointRadius: 0
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: { legend: { position: 'bottom' } },
+      scales: {
+        x: { title: { display: true, text: 'Ranked Gene List →', color: '#6b7280' }, grid: { color: 'rgba(0,0,0,0.05)' } },
+        y: { title: { display: true, text: 'Running Enrichment Score', color: '#6b7280' }, grid: { color: 'rgba(0,0,0,0.05)' } }
+      }
+    }
+  });
+}
+
+// Initialize all charts on page load
+document.addEventListener('DOMContentLoaded', function() {
+  initVolcanoChart();
+  initPathwayChart();
+  initAbundanceChart();
+  initUmapChart();
+  initMarkerGenesChart();
+  initGeneLevelChart();
+  initMaChart();
+  initGseaChart();
+});
+</script>
+
+</body>
+</html>

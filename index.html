@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Armin Bayati, PhD — Neuroscience · Cell Biology · Drug Discovery</title>
+<meta name="description" content="Scientist with a PhD in Neuroscience and Cell Biology. Research Fellow at Harvard Medical School.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════
+   ARMIN BAYATI — DESIGN SYSTEM
+   Matching iPSC-Cardiomyocyte page aesthetic
+   ══════════════════════════════════════════════ */
+
+:root {
+  --ink: #0f1419;
+  --paper: #fafaf7;
+  --mid: #6b7280;
+  --accent: #c0392b;
+  --accent-soft: #e74c3c15;
+  --rule: #d4d0c8;
+  --card: #ffffff;
+  --section-bg: #f4f3ef;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+  --mono: 'IBM Plex Mono', 'Menlo', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAVIGATION ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 250, 247, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+  padding: 0 24px;
+}
+
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  gap: 16px;
+}
+
+.nav-brand {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--mid);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-brand:hover { color: var(--ink); }
+
+.nav-links {
+  display: flex;
+  gap: 1px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.nav-links::-webkit-scrollbar { display: none; }
+
+.nav-links a {
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  padding: 6px 8px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.nav-links a:hover { color: var(--ink); background: rgba(0,0,0,0.04); }
+.nav-links a.active { color: var(--accent); }
+
+/* Mobile nav toggle */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--mid);
+}
+.nav-toggle svg { display: block; }
+
+/* ── HERO ── */
+.hero {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 80px 32px 64px;
+  display: flex;
+  align-items: flex-start;
+  gap: 48px;
+}
+
+.hero-text { flex: 1; }
+
+.hero-photo {
+  flex-shrink: 0;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--rule);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10), 0 0 0 6px rgba(192,57,43,0.06);
+  margin-top: 12px;
+}
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(10%);
+  transition: filter 0.4s ease;
+}
+.hero-photo:hover img { filter: grayscale(0%); }
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1.5px;
+  background: var(--accent);
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+  max-width: 780px;
+  margin-bottom: 28px;
+}
+
+.hero-description {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--mid);
+  max-width: 640px;
+  margin-bottom: 36px;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  padding: 5px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  color: var(--mid);
+  background: var(--card);
+}
+
+/* ── SECTIONS ── */
+.section {
+  border-top: 1px solid var(--rule);
+}
+
+.section-header {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 64px 32px 0;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.section-index {
+  position: sticky;
+  top: 80px;
+  padding-top: 4px;
+}
+
+.section-number {
+  font-family: var(--serif);
+  font-size: 4rem;
+  color: var(--rule);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.section-content {
+  padding-bottom: 20px;
+}
+
+.section-content h2 {
+  font-family: var(--serif);
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+
+.section-content h3 {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 32px;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+
+.section-content p {
+  font-size: 15.5px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #444;
+  max-width: 640px;
+  margin-bottom: 16px;
+}
+
+.section-content p strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.section-content a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.section-content a:hover {
+  border-bottom-color: var(--accent);
+}
+
+/* ── SUB-SECTION DIVIDER ── */
+.subsection {
+  margin-top: 48px;
+  padding-top: 36px;
+  border-top: 1px dashed var(--rule);
+}
+
+.subsection:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.subsection-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.subsection-label::before {
+  content: '→';
+  font-size: 13px;
+}
+
+/* ── FINDINGS STRIP ── */
+.findings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 28px 0 32px;
+  max-width: 640px;
+}
+
+.finding {
+  background: var(--card);
+  padding: 18px 20px;
+}
+
+.finding-value {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.finding-label {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--mid);
+  line-height: 1.4;
+}
+
+/* ── TIMELINE ── */
+.timeline {
+  margin: 32px 0;
+  max-width: 640px;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 28px;
+  padding-bottom: 32px;
+  border-left: 1.5px solid var(--rule);
+}
+.timeline-item:last-child { padding-bottom: 0; }
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--accent);
+}
+
+.timeline-year {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.timeline-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.timeline-desc {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--mid);
+}
+
+/* ── WORKFLOW STRIP ── */
+.workflow-strip {
+  background: var(--ink);
+  color: #fff;
+  padding: 48px 32px;
+}
+
+.workflow-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.workflow-inner h3 {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 28px;
+  color: rgba(255,255,255,0.9);
+}
+
+.workflow-steps {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+}
+
+.workflow-step {
+  flex: 1;
+  padding: 20px 24px;
+  border-left: 1px solid rgba(255,255,255,0.12);
+  position: relative;
+}
+.workflow-step:first-child { border-left: none; }
+
+.step-number {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.step-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: rgba(255,255,255,0.95);
+}
+
+.step-detail {
+  font-size: 12.5px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.55;
+}
+
+/* ── CARD GRID ── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 28px 0 32px;
+  max-width: 640px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 24px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+a.card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.card-desc {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.6;
+}
+
+/* ── IMAGE PLACEHOLDER ── */
+.image-placeholder {
+  background: var(--section-bg);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 48px 24px;
+  text-align: center;
+  margin: 20px 0 24px;
+  max-width: 640px;
+}
+
+.image-placeholder .ph-icon {
+  font-size: 28px;
+  color: var(--rule);
+  margin-bottom: 8px;
+}
+
+.image-placeholder .ph-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--mid);
+  letter-spacing: 0.5px;
+}
+
+/* ── INLINE LIST ── */
+.inline-list {
+  list-style: none;
+  margin: 16px 0;
+  max-width: 640px;
+}
+
+.inline-list li {
+  font-size: 14px;
+  font-weight: 300;
+  color: #444;
+  line-height: 1.7;
+  padding: 6px 0;
+  padding-left: 20px;
+  position: relative;
+}
+.inline-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 14px;
+  width: 6px;
+  height: 1.5px;
+  background: var(--accent);
+}
+
+/* ── PUBLICATION LIST ── */
+.pub-list {
+  margin: 20px 0;
+  max-width: 640px;
+}
+
+.pub-item {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.pub-item:last-child { border-bottom: none; }
+
+.pub-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.pub-authors {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.5;
+}
+
+.pub-journal {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: 0.3px;
+  margin-top: 4px;
+}
+
+/* ── CONTACT LINKS ── */
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 24px 0;
+  max-width: 400px;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.contact-link:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.contact-link .cl-icon {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  min-width: 60px;
+}
+
+/* ── FIGURE CONTAINER ── */
+.figure-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 12px 32px 64px;
+}
+
+.figure-frame {
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.03);
+}
+
+.figure-caption-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: var(--section-bg);
+  border-top: 1px solid var(--rule);
+  font-size: 12.5px;
+  color: var(--mid);
+}
+
+.figure-caption-bar .fig-label {
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── FOOTER ── */
+.page-footer {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 48px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--rule);
+}
+
+.footer-left {
+  font-size: 13px;
+  color: var(--mid);
+}
+
+.footer-left a {
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 500;
+}
+.footer-left a:hover { text-decoration: underline; }
+
+.footer-right {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-right a {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--mid);
+  text-decoration: none;
+  letter-spacing: 0.3px;
+}
+.footer-right a:hover { color: var(--ink); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow, .hero h1, .hero-description, .hero-tags {
+  animation: fadeUp 0.6s ease both;
+}
+.hero h1 { animation-delay: 0.1s; }
+.hero-description { animation-delay: 0.2s; }
+.hero-tags { animation-delay: 0.3s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    padding: 12px 20px;
+    gap: 4px;
+  }
+  .nav-toggle { display: block; }
+  .section-header {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 40px 20px 0;
+  }
+  .section-index {
+    position: static;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-number { font-size: 2rem; margin-bottom: 0; }
+  .hero { padding: 48px 20px 40px; flex-direction: column-reverse; align-items: center; text-align: center; }
+  .hero-photo { width: 160px; height: 160px; margin-top: 0; margin-bottom: 8px; }
+  .hero-tags { justify-content: center; }
+  .hero-description { margin-left: auto; margin-right: auto; }
+  .figure-container { padding: 12px 20px 48px; }
+  .workflow-steps { flex-direction: column; }
+  .workflow-step { border-left: none; border-top: 1px solid rgba(255,255,255,0.12); padding: 16px 0; }
+  .workflow-step:first-child { border-top: none; }
+  .findings { grid-template-columns: 1fr 1fr; }
+  .card-grid { grid-template-columns: 1fr; }
+  .page-footer { flex-direction: column; gap: 16px; text-align: center; }
+}
+
+
+/* ── HIGH-TECH OVERLAY ── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(rgba(15,20,25,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15,20,25,0.015) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero-eyebrow::after {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+  margin-left: 4px;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(192,57,43,0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(192,57,43,0); }
+}
+
+.tag {
+  background: rgba(15,20,25,0.03);
+  border-color: rgba(15,20,25,0.12);
+  transition: all 0.25s ease;
+}
+.tag:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+.section-number {
+  background: linear-gradient(135deg, var(--rule) 0%, rgba(192,57,43,0.15) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.chart-container {
+  border-color: rgba(15,20,25,0.08);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.02);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.chart-container:hover {
+  border-color: rgba(192,57,43,0.2);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04);
+}
+
+.findings {
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.finding {
+  transition: background 0.2s ease;
+}
+.finding:hover {
+  background: rgba(192,57,43,0.02);
+}
+
+nav {
+  background: rgba(250, 250, 247, 0.88);
+  border-bottom-color: rgba(15,20,25,0.08);
+}
+
+.workflow-strip {
+  background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #0f1419 100%);
+  position: relative;
+  overflow: hidden;
+}
+.workflow-strip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+
+.gallery-thumb {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+.gallery-thumb:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.page-footer {
+  border-top-color: rgba(15,20,25,0.06);
+}
+
+.nav-links a {
+  transition: all 0.2s ease;
+  position: relative;
+}
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 10px;
+  right: 10px;
+  height: 1.5px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">arminbayati.com</a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="17" y2="6"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14" x2="17" y2="14"/></svg>
+    </button>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="ipscs.html" >iPSCs</a>
+      <a href="cardiomyocytes.html" >Cardio</a>
+      <a href="cancer-immunology.html" >Cancer</a>
+      <a href="cellular-assays.html" >Assays</a>
+      <a href="genetics.html" >Genetics</a>
+      <a href="drug-discovery.html" >Drug Disc.</a>
+      <a href="microscopy.html" >Imaging</a>
+      <a href="flow-cytometry.html" >Flow Cyt.</a>
+      <a href="proteomics.html" >Proteomics</a>
+      <a href="coding.html" >Coding</a>
+      <a href="skills.html" >Skills</a>
+      <a href="publications.html" >Pubs</a>
+      <a href="contact.html" >Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Armin Bayati, PhD</div>
+    <h1>Neuroscience, Cell Biology &amp; Translational Drug Discovery</h1>
+    <p class="hero-description">
+      Research Fellow at Harvard Medical School and Massachusetts General Hospital. My work spans neuroscience, cancer immunology, infectious disease, and cardiovascular biology — using iPSC-derived cell models, high-content imaging, flow cytometry, proteomics, and computational tools to dissect disease mechanisms and advance preclinical drug discovery.
+    </p>
+    <div class="hero-tags">
+      <span class="tag">iPSC Disease Modeling</span>
+      <span class="tag">Parkinson's Disease</span>
+      <span class="tag">α-Synuclein Biology</span>
+      <span class="tag">Live-Cell Imaging</span>
+      <span class="tag">Electron Microscopy</span>
+      <span class="tag">CRISPR</span>
+      <span class="tag">Cancer Immunology</span>
+      <span class="tag">Cardiomyocytes</span>
+      <span class="tag">Drug Discovery</span>
+      <span class="tag">Biomarker Development</span>
+      <span class="tag">Flow Cytometry</span>
+      <span class="tag">RNA Therapeutics</span>
+      <span class="tag">Automation (BRAVO/Tecan)</span>
+      <span class="tag">Python / AutoMorphoTrack</span>
+    </div>
+  </div>
+  <div class="hero-photo">
+    <img src="images/headshot.jpg" alt="Armin Bayati, PhD" loading="eager">
+  </div>
+</div>
+
+<div class="section" id="about">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">01</div>
+      <div class="section-label">About</div>
+    </div>
+    <div class="section-content">
+      <h2>Background</h2>
+      <p>
+        I am a scientist with a Ph.D. in Neuroscience and Cell Biology from McGill University and 10+ years of hands-on research experience. My work centers on modeling neurodegenerative and infectious diseases using iPSC-derived neurons, molecular and cellular techniques, and advanced imaging to uncover disease pathophysiology and test preclinical compounds designed to reverse degeneration.
+      </p>
+      <p>
+        I have led projects that identified how pathogenic proteins enter and infect cells, uncovered mechanisms involved in neuronal degeneration, developed Python-based tools to analyze live-cell imaging, and helped advance novel small-molecule therapeutics targeting mitochondrial health, viral entry, and cellular aging.
+      </p>
+      <div class="findings">
+        <div class="finding">
+          <div class="finding-value">25+</div>
+          <div class="finding-label">Peer-reviewed publications</div>
+        </div>
+        <div class="finding">
+          <div class="finding-value">1,300+</div>
+          <div class="finding-label">Citations</div>
+        </div>
+
+        <div class="finding">
+          <div class="finding-value">500K+</div>
+          <div class="finding-label">Paper downloads</div>
+        </div>
+      </div>
+      <p>
+        With first-author studies in <strong>Nature Neuroscience</strong>, <strong>Cell Reports</strong>, and <strong>Journal of Biological Chemistry</strong>, my research bridges fundamental discovery with translational drug development across neuroscience, immunology, infectious disease, and oncology.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="experience">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">02</div>
+      <div class="section-label">Experience</div>
+    </div>
+    <div class="section-content">
+      <h2>Work Experience &amp; Education</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">2024 – Present</div>
+          <div class="timeline-title">Harvard Medical School &amp; Mass General Brigham — Research Fellow / Research Instructor</div>
+          <div class="timeline-desc">Led preclinical testing of novel drug candidates targeting neurodegeneration, cellular aging, and cancer. Designed high-throughput imaging assays for cytotoxicity, mitophagy, and protein aggregation. Established iPSC differentiation protocols across neuronal and endodermal lineages. Created Python-based pipelines (AutoMorphoTrack) for automated live-cell imaging analysis. Mentored and supervised junior scientists.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2023 – 2024</div>
+          <div class="timeline-title">Montreal Neurological Institute &amp; McGill University — Research Associate</div>
+          <div class="timeline-desc">Led multi-year Parkinson's disease program culminating in first- and corresponding-author Nature Neuroscience publication. Advanced iPSC-based disease modeling to dissect mechanisms of apoptosis, autophagy, and protein aggregation. Developed high-resolution electron microscopy workflows. Applied CRISPR/siRNA editing to identify therapeutic targets. Designed EV/exosome transfer assays using CD63/CD9 reporter systems. Integrated mass spectrometry–based proteomics for biomarker discovery. Trained and supervised junior team members.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2018 – 2023</div>
+          <div class="timeline-title">McGill University — Ph.D. in Neuroscience, Cell Biology</div>
+          <div class="timeline-desc">PhD research at the Montreal Neurological Institute focused on modeling neurodegenerative and infectious diseases using human cancer cell lines and iPSC-derived neurons. Uncovered molecular mechanisms of protein aggregation, mitochondrial dysfunction, and neuronal vulnerability. Published the first paper on the internalization of SARS-CoV-2. Work with BSL-2 and BSL-3 environments.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2018</div>
+          <div class="timeline-title">University of Victoria — Undergraduate Researcher (USRA)</div>
+          <div class="timeline-desc">Tissue processing, sectioning, and sample preparation for electron microscopy in the Nahirney lab.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2013 – 2018</div>
+          <div class="timeline-title">University of Victoria — B.Sc. (Honours) with Distinction</div>
+          <div class="timeline-desc">Honours work exploring the neurodegenerative effects of stroke in mice using electron microscopy.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="research">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">03</div>
+      <div class="section-label">Research</div>
+    </div>
+    <div class="section-content">
+      <h2>Explore My Work</h2>
+      <p>My research spans iPSC-based disease modeling, cellular and molecular assays, advanced microscopy, drug discovery, automation, and computational image analysis.</p>
+      <div class="card-grid" style="max-width:100%;">
+        <a href="ipscs.html" class="card" style="border-left: 3px solid var(--accent);">
+          <div class="card-title">iPSC-Derived Neurons</div>
+          <div class="card-desc">Dopaminergic, cortical, and glial differentiation. Lewy body disease modeling. MEA electrophysiology, calcium imaging, HPLC dopamine quantification.</div>
+        </a>
+        <a href="cardiomyocytes.html" class="card" style="border-left: 3px solid var(--accent);">
+          <div class="card-title">iPSC-Derived Cardiomyocytes</div>
+          <div class="card-desc">Cardiac differentiation, MEA beat-rate analysis, calcium transient profiling, cardiotoxicity screening, and disease modeling (HCM, DCM).</div>
+        </a>
+        <a href="cancer-immunology.html" class="card" style="border-left: 3px solid var(--accent);">
+          <div class="card-title">Cancer Immunology</div>
+          <div class="card-desc">T-cell killing, ADCC/CDC, checkpoint blockade, cytokine profiling, CAR-T characterization, and immune co-culture systems.</div>
+        </a>
+        <a href="cellular-assays.html" class="card">
+          <div class="card-title">Cellular &amp; Functional Assays</div>
+          <div class="card-desc">Endocytosis, exosomal biology, autophagy, flow cytometry, PBMC/immune assays, plate-based readouts, and immunocytochemistry.</div>
+        </a>
+        <a href="genetics.html" class="card">
+          <div class="card-title">Genetics &amp; Molecular Biology</div>
+          <div class="card-desc">CRISPR, siRNA/shRNA/ASO, molecular cloning, viral constructs, protein conjugation, and lysosomal biology.</div>
+        </a>
+        <a href="drug-discovery.html" class="card">
+          <div class="card-title">Drug Discovery &amp; Translation</div>
+          <div class="card-desc">Parkin agonists, TAC evaluation, lysosomal rescue, antivirals, and biomarker strategy.</div>
+        </a>
+        <a href="microscopy.html" class="card">
+          <div class="card-title">Microscopy &amp; Imaging</div>
+          <div class="card-desc">Confocal, STED super-resolution, TEM, live-cell imaging, high-content screening, and IHC/histology.</div>
+        </a>
+        <a href="proteomics.html" class="card" style="border-left: 3px solid var(--accent);">
+          <div class="card-title">Proteomics &amp; Single-Cell Genomics</div>
+          <div class="card-desc">TMT quantitative proteomics, scRNA-seq (10x Genomics), bulk RNA-seq, GSEA/pathway analysis, UMAP visualization, DESeq2/Seurat pipelines.</div>
+        </a>
+        <a href="coding.html" class="card">
+          <div class="card-title">Coding, Automation &amp; Data</div>
+          <div class="card-desc">AutoMorphoTrack, Python pipelines, BRAVO/Tecan liquid handling, 96/384-well miniaturization, and machine learning.</div>
+        </a>
+        <a href="skills.html" class="card">
+          <div class="card-title">Full Technical Skills</div>
+          <div class="card-desc">Comprehensive categorized listing of all techniques, instruments, software, and capabilities.</div>
+        </a>
+        <a href="publications.html" class="card">
+          <div class="card-title">Publications</div>
+          <div class="card-desc">25+ peer-reviewed papers with 1,300+ citations.</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="workflow-strip">
+  <div class="workflow-inner">
+    <h3>Core Expertise</h3>
+    <div class="workflow-steps">
+      <div class="workflow-step">
+        <div class="step-number">01</div>
+        <div class="step-title">iPSC Disease Modeling</div>
+        <div class="step-detail">Patient-derived iPSCs into dopaminergic neurons, cortical neurons, endodermal lineages, and glia for in vitro disease recreation.</div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-number">02</div>
+        <div class="step-title">Mechanistic Discovery</div>
+        <div class="step-detail">Protein aggregation, lysosomal dysfunction, mitochondrial stress, immune signaling, and receptor-ligand biology.</div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-number">03</div>
+        <div class="step-title">Translational Biomarkers</div>
+        <div class="step-detail">TE/PD biomarker panels, imaging-based biomarkers, multiplex immunoassays (MSD/Luminex), and proteomics.</div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-number">04</div>
+        <div class="step-title">Therapeutic Translation</div>
+        <div class="step-detail">Preclinical compound testing, from discovery through decision-enabling datasets.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-footer">
+  <div class="footer-left">
+    <a href="index.html">Armin Bayati, PhD</a> · Research Fellow, Harvard Medical School
+  </div>
+  <div class="footer-right">
+    <a href="mailto:a.bayati.brain@gmail.com">Email</a>
+    <a href="https://linkedin.com/in/arminbayati" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://scholar.google.com/citations?user=MIW8P2MAAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
+  </div>
+</div>
+
+</body>
+</html>

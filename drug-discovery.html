@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drug Discovery &amp; Translational Research — Armin Bayati, PhD</title>
+<meta name="description" content="Preclinical drug development, biomarker strategy, and translational therapeutics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════
+   ARMIN BAYATI — DESIGN SYSTEM
+   Matching iPSC-Cardiomyocyte page aesthetic
+   ══════════════════════════════════════════════ */
+
+:root {
+  --ink: #0f1419;
+  --paper: #fafaf7;
+  --mid: #6b7280;
+  --accent: #c0392b;
+  --accent-soft: #e74c3c15;
+  --rule: #d4d0c8;
+  --card: #ffffff;
+  --section-bg: #f4f3ef;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+  --mono: 'IBM Plex Mono', 'Menlo', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAVIGATION ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 250, 247, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+  padding: 0 24px;
+}
+
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  gap: 16px;
+}
+
+.nav-brand {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--mid);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-brand:hover { color: var(--ink); }
+
+.nav-links {
+  display: flex;
+  gap: 1px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.nav-links::-webkit-scrollbar { display: none; }
+
+.nav-links a {
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  padding: 6px 8px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.nav-links a:hover { color: var(--ink); background: rgba(0,0,0,0.04); }
+.nav-links a.active { color: var(--accent); }
+
+/* Mobile nav toggle */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--mid);
+}
+.nav-toggle svg { display: block; }
+
+/* ── HERO ── */
+.hero {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 80px 32px 64px;
+}
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1.5px;
+  background: var(--accent);
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+  max-width: 780px;
+  margin-bottom: 28px;
+}
+
+.hero-description {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--mid);
+  max-width: 640px;
+  margin-bottom: 36px;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  padding: 5px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  color: var(--mid);
+  background: var(--card);
+}
+
+/* ── SECTIONS ── */
+.section {
+  border-top: 1px solid var(--rule);
+}
+
+.section-header {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 64px 32px 0;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.section-index {
+  position: sticky;
+  top: 80px;
+  padding-top: 4px;
+}
+
+.section-number {
+  font-family: var(--serif);
+  font-size: 4rem;
+  color: var(--rule);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.section-content {
+  padding-bottom: 20px;
+}
+
+.section-content h2 {
+  font-family: var(--serif);
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+
+.section-content h3 {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 32px;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+
+.section-content p {
+  font-size: 15.5px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #444;
+  max-width: 640px;
+  margin-bottom: 16px;
+}
+
+.section-content p strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.section-content a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.section-content a:hover {
+  border-bottom-color: var(--accent);
+}
+
+/* ── SUB-SECTION DIVIDER ── */
+.subsection {
+  margin-top: 48px;
+  padding-top: 36px;
+  border-top: 1px dashed var(--rule);
+}
+
+.subsection:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.subsection-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.subsection-label::before {
+  content: '→';
+  font-size: 13px;
+}
+
+/* ── FINDINGS STRIP ── */
+.findings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 28px 0 32px;
+  max-width: 640px;
+}
+
+.finding {
+  background: var(--card);
+  padding: 18px 20px;
+}
+
+.finding-value {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.finding-label {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--mid);
+  line-height: 1.4;
+}
+
+/* ── TIMELINE ── */
+.timeline {
+  margin: 32px 0;
+  max-width: 640px;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 28px;
+  padding-bottom: 32px;
+  border-left: 1.5px solid var(--rule);
+}
+.timeline-item:last-child { padding-bottom: 0; }
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--accent);
+}
+
+.timeline-year {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.timeline-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.timeline-desc {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--mid);
+}
+
+/* ── WORKFLOW STRIP ── */
+.workflow-strip {
+  background: var(--ink);
+  color: #fff;
+  padding: 48px 32px;
+}
+
+.workflow-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.workflow-inner h3 {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 28px;
+  color: rgba(255,255,255,0.9);
+}
+
+.workflow-steps {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+}
+
+.workflow-step {
+  flex: 1;
+  padding: 20px 24px;
+  border-left: 1px solid rgba(255,255,255,0.12);
+  position: relative;
+}
+.workflow-step:first-child { border-left: none; }
+
+.step-number {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.step-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: rgba(255,255,255,0.95);
+}
+
+.step-detail {
+  font-size: 12.5px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.55;
+}
+
+/* ── CARD GRID ── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 28px 0 32px;
+  max-width: 640px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 24px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+a.card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.card-desc {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.6;
+}
+
+/* ── IMAGE PLACEHOLDER ── */
+.image-placeholder {
+  background: var(--section-bg);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 48px 24px;
+  text-align: center;
+  margin: 20px 0 24px;
+  max-width: 640px;
+}
+
+.image-placeholder .ph-icon {
+  font-size: 28px;
+  color: var(--rule);
+  margin-bottom: 8px;
+}
+
+.image-placeholder .ph-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--mid);
+  letter-spacing: 0.5px;
+}
+
+/* ── INLINE LIST ── */
+.inline-list {
+  list-style: none;
+  margin: 16px 0;
+  max-width: 640px;
+}
+
+.inline-list li {
+  font-size: 14px;
+  font-weight: 300;
+  color: #444;
+  line-height: 1.7;
+  padding: 6px 0;
+  padding-left: 20px;
+  position: relative;
+}
+.inline-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 14px;
+  width: 6px;
+  height: 1.5px;
+  background: var(--accent);
+}
+
+/* ── PUBLICATION LIST ── */
+.pub-list {
+  margin: 20px 0;
+  max-width: 640px;
+}
+
+.pub-item {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.pub-item:last-child { border-bottom: none; }
+
+.pub-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.pub-authors {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.5;
+}
+
+.pub-journal {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: 0.3px;
+  margin-top: 4px;
+}
+
+/* ── CONTACT LINKS ── */
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 24px 0;
+  max-width: 400px;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.contact-link:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.contact-link .cl-icon {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  min-width: 60px;
+}
+
+/* ── FIGURE CONTAINER ── */
+.figure-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 12px 32px 64px;
+}
+
+.figure-frame {
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.03);
+}
+
+.figure-caption-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: var(--section-bg);
+  border-top: 1px solid var(--rule);
+  font-size: 12.5px;
+  color: var(--mid);
+}
+
+.figure-caption-bar .fig-label {
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── FOOTER ── */
+.page-footer {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 48px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--rule);
+}
+
+.footer-left {
+  font-size: 13px;
+  color: var(--mid);
+}
+
+.footer-left a {
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 500;
+}
+.footer-left a:hover { text-decoration: underline; }
+
+.footer-right {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-right a {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--mid);
+  text-decoration: none;
+  letter-spacing: 0.3px;
+}
+.footer-right a:hover { color: var(--ink); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow, .hero h1, .hero-description, .hero-tags {
+  animation: fadeUp 0.6s ease both;
+}
+.hero h1 { animation-delay: 0.1s; }
+.hero-description { animation-delay: 0.2s; }
+.hero-tags { animation-delay: 0.3s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    padding: 12px 20px;
+    gap: 4px;
+  }
+  .nav-toggle { display: block; }
+  .section-header {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 40px 20px 0;
+  }
+  .section-index {
+    position: static;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-number { font-size: 2rem; margin-bottom: 0; }
+  .hero { padding: 48px 20px 40px; }
+  .figure-container { padding: 12px 20px 48px; }
+  .workflow-steps { flex-direction: column; }
+  .workflow-step { border-left: none; border-top: 1px solid rgba(255,255,255,0.12); padding: 16px 0; }
+  .workflow-step:first-child { border-top: none; }
+  .findings { grid-template-columns: 1fr 1fr; }
+  .card-grid { grid-template-columns: 1fr; }
+  .page-footer { flex-direction: column; gap: 16px; text-align: center; }
+}
+
+
+/* ── CHARTS ── */
+.chart-container {
+  max-width: 640px;
+  margin: 24px 0 32px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.chart-container canvas { width: 100% !important; }
+.chart-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.chart-subtitle {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--mid);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.chart-note {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--mid);
+  margin-top: 12px;
+  font-style: italic;
+}
+.code-block {
+  background: var(--ink);
+  color: #e6e6e6;
+  border-radius: 6px;
+  padding: 20px 24px;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.7;
+  margin: 20px 0 24px;
+  max-width: 640px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.code-block .comment { color: #6a9955; }
+.code-block .keyword { color: #569cd6; }
+.code-block .string { color: #ce9178; }
+.code-block .func { color: #dcdcaa; }
+.code-block .num { color: #b5cea8; }
+
+
+/* ── HIGH-TECH OVERLAY ── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(rgba(15,20,25,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15,20,25,0.015) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero-eyebrow::after {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+  margin-left: 4px;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(192,57,43,0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(192,57,43,0); }
+}
+
+.tag {
+  background: rgba(15,20,25,0.03);
+  border-color: rgba(15,20,25,0.12);
+  transition: all 0.25s ease;
+}
+.tag:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+.section-number {
+  background: linear-gradient(135deg, var(--rule) 0%, rgba(192,57,43,0.15) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.chart-container {
+  border-color: rgba(15,20,25,0.08);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.02);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.chart-container:hover {
+  border-color: rgba(192,57,43,0.2);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04);
+}
+
+.findings {
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.finding {
+  transition: background 0.2s ease;
+}
+.finding:hover {
+  background: rgba(192,57,43,0.02);
+}
+
+nav {
+  background: rgba(250, 250, 247, 0.88);
+  border-bottom-color: rgba(15,20,25,0.08);
+}
+
+.workflow-strip {
+  background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #0f1419 100%);
+  position: relative;
+  overflow: hidden;
+}
+.workflow-strip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+
+.gallery-thumb {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+.gallery-thumb:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.page-footer {
+  border-top-color: rgba(15,20,25,0.06);
+}
+
+.nav-links a {
+  transition: all 0.2s ease;
+  position: relative;
+}
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 10px;
+  right: 10px;
+  height: 1.5px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">arminbayati.com</a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="17" y2="6"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14" x2="17" y2="14"/></svg>
+    </button>
+    <div class="nav-links">
+      <a href="index.html" >Home</a>
+      <a href="ipscs.html" >iPSCs</a>
+      <a href="cardiomyocytes.html" >Cardio</a>
+      <a href="cancer-immunology.html" >Cancer</a>
+      <a href="cellular-assays.html" >Assays</a>
+      <a href="genetics.html" >Genetics</a>
+      <a href="drug-discovery.html" class="active">Drug Disc.</a>
+      <a href="microscopy.html" >Imaging</a>
+      <a href="flow-cytometry.html" >Flow Cyt.</a>
+      <a href="proteomics.html" >Proteomics</a>
+      <a href="coding.html" >Coding</a>
+      <a href="skills.html" >Skills</a>
+      <a href="publications.html" >Pubs</a>
+      <a href="contact.html" >Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">Therapeutics &amp; Translation</div>
+  <h1>Drug Discovery &amp; Translational Research</h1>
+  <p class="hero-description">
+    I connect mechanistic insights to therapeutic development by testing small molecules, building biomarker strategies, and advancing preclinical programs from discovery through decision-enabling datasets.
+  </p>
+  <div class="hero-tags">
+    <span class="tag">Parkin Agonists</span>
+    <span class="tag">Telomerase Activating Compound</span>
+    <span class="tag">Lysosomal Rescue</span>
+    <span class="tag">Antiviral Targets</span>
+    <span class="tag">TE/PD Biomarkers</span>
+    <span class="tag">Oncology</span>
+  </div>
+</div>
+
+<div class="section" id="parkin">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">01</div>
+      <div class="section-label">Parkin</div>
+    </div>
+    <div class="section-content">
+      <h2>Parkin Agonist Development</h2>
+      <p>I collaborated with chemical biologists to identify small-molecule activators of <strong>Parkin</strong>. In dopaminergic neurons, Parkin agonists enhanced mitophagy, improved survival, and protected against α-synuclein–induced degeneration. I also demonstrated that Parkin loss shifts cell fate toward glial lineages, linking target perturbation to lineage-state biomarkers for translational stratification.</p>
+      <p>I generated <strong>oncology-facing rationale</strong> integrating observations that PARK2 downregulation is common across cancers with cell-based efficacy readouts. <em>Manuscript under review, Nature Aging.</em></p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="tac">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">02</div>
+      <div class="section-label">TAC &amp; PAH</div>
+    </div>
+    <div class="section-content">
+      <h2>TAC &amp; Lysosomal Rescue</h2>
+      <p>I evaluated a <strong>Telomerase Activating Compound (TAC)</strong> designed to enhance neuronal resilience by targeting mitochondrial and lysosomal biology. In iPSC-derived neurons, TAC reduced α-synuclein pathology, restored integrated stress response markers (ATF4/ATF3), and decreased senescence-associated phenotypes.</p>
+      <p>In parallel, I demonstrated that <strong>Perillaldehyde (PAH)</strong> rescues lysosomal function in the dual-hit model, restoring LAMP1, LAMP2, NRF2, and TFEB protein levels while progressively clearing α-synuclein inclusions over 8 days. Western blot pharmacodynamic profiling confirmed reduction of both total and phosphorylated α-synuclein, decreased HDAC6 (aggresome marker), and normalized autophagy-lysosomal pathway proteins — providing a multi-readout therapeutic validation dataset. Published in Bayati et al., <em>Nature Neuroscience</em> 2024.</p>
+      <img src="images/drugdiscovery-PAH-inclusion-reduction.jpg" alt="Treatment timeline and confocal microscopy: PAH reducing alpha-synuclein inclusions over 1, 4, and 8 days versus untreated" style="width:100%; max-width:640px; border-radius:6px; border:1px solid var(--rule); margin:20px 0 16px;">
+      <p style="font-size:13px; color:var(--mid); font-style:italic; margin-top:-8px;">Perillaldehyde (PAH) treatment timeline and confocal time course. PAH rescues lysosomal function and progressively reduces α-synuclein inclusion burden over 8 days in iPSC-derived DA neurons treated with the dual-hit protocol. Left panels show treatment scheme; right panels show confocal imaging at Day 1, 4, and 8 demonstrating inclusion clearance versus no-treatment control. Bayati et al., <em>Nature Neuroscience</em> 2024.</p>
+      <img src="images/drugdiscovery-PAH-inclusion-reduction-westernblot.jpg" alt="Western blots showing PAH treatment effects on alpha-synuclein, phospho-alpha-synuclein, TFEB, NRF2, LAMP1, LAMP2, and HDAC6" style="width:100%; max-width:640px; border-radius:6px; border:1px solid var(--rule); margin:20px 0 16px;">
+      <p style="font-size:13px; color:var(--mid); font-style:italic; margin-top:-8px;">Western blot pharmacodynamic panel: PAH treatment restores LAMP1, LAMP2, TFEB, and NRF2 protein levels while reducing α-synuclein and phospho-α-synuclein (S129) in dual-hit DA neurons. HDAC6 (aggresome marker) decreases with treatment, confirming dissolution of insoluble aggregates. Multi-readout biomarker validation of lysosomal rescue as therapeutic mechanism. Bayati et al., <em>Nature Neuroscience</em> 2024.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="antivirals">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">03</div>
+      <div class="section-label">Antivirals</div>
+    </div>
+    <div class="section-content">
+      <h2>Host-Directed Antiviral Strategies</h2>
+      <p>My first-author <em>JBC</em> 2021 paper (Editors' Pick) was the first to demonstrate that <strong>SARS-CoV-2 enters cells via clathrin-mediated endocytosis</strong> — Spike protein binds ACE2 and is rapidly internalized through CME. Building on this, I contributed to two drug-discovery programs: a <strong>PIKfyve chemical probe</strong> (IC50 = 0.82 nM) that blocks viral trafficking and replication (<em>J. Med. Chem.</em> 2022), and <strong>CSNK2 inhibitors</strong> that prevent Spike endocytosis across human, bat, and murine β-coronaviruses (<em>ACS Chem. Biol.</em> 2022). I translated these mechanisms into scalable screening platforms using Spike pseudovirus/GFP quantification on the Opera Phenix HCS system.</p>
+      <img src="images/drugdiscovery-sars-antiviral-entry.jpg" alt="Schematic: CSNK2 inhibitor blocking SARS-CoV-2 entry at ACE2 binding, clathrin-mediated endocytosis, replication, and transmission stages" style="width:100%; max-width:640px; border-radius:6px; border:1px solid var(--rule); margin:20px 0 16px;">
+      <p style="font-size:13px; color:var(--mid); font-style:italic; margin-top:-8px;">Mechanism of host-directed antiviral strategy: CSNK2 (Casein Kinase 2) inhibition blocks multiple stages of SARS-CoV-2 lifecycle — from Spike/ACE2 binding and clathrin-mediated endocytic entry, through viral replication, to cell-to-cell transmission. This host-kinase targeting approach provides broad-spectrum activity against β-coronaviruses (SARS-CoV-2, SARS-CoV, MERS-CoV). Published in Yang, Dickmander, Bayati et al., <em>ACS Chemical Biology</em> 2022.</p>
+      <img src="images/drugdiscovery-sars-inhibition-entry.jpg" alt="Structure-activity relationship: CSNK2A inhibitor potency (pIC50) vs beta-coronavirus inhibition (pIC50), R-squared 0.68" style="width:100%; max-width:640px; border-radius:6px; border:1px solid var(--rule); margin:20px 0 16px;">
+      <p style="font-size:13px; color:var(--mid); font-style:italic; margin-top:-8px;">Structure-activity relationship (SAR) correlation between CSNK2A kinase inhibition potency and antiviral activity against β-coronaviruses. The strong correlation (R² = 0.68) across the pyrazolopyrimidine series validates CSNK2 as the mechanistic target for antiviral activity. 30 inhibitors were profiled using nanoBRET target engagement assays and MIV-nLuc reporter viral assays. Yang, Dickmander, Bayati et al., <em>ACS Chemical Biology</em> 2022.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="biomarkers">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">04</div>
+      <div class="section-label">Biomarkers</div>
+    </div>
+    <div class="section-content">
+      <h2>Biomarker Strategy &amp; Translational Execution</h2>
+      <p>I develop and execute <strong>target engagement (TE) and pharmacodynamic (PD) biomarker strategies</strong> across iPSC-derived neuronal and epithelial systems. This integrates imaging biomarkers (protein aggregation burden, lysosomal stress, mitophagy flux), protein biomarkers (Western blot, ELISA/MSD/Luminex), nucleic acid readouts (RT-qPCR, ddPCR, RNA-seq), and mass spectrometry–guided proteomics from whole-cell and subcellular fractions.</p>
+      <div class="chart-container">
+        <div class="chart-title">Fig. — Target Engagement / Pharmacodynamic Biomarker Panel</div>
+        <div class="chart-subtitle">Multi-readout TE/PD panel for Parkin agonist (compound FB231) in iPSC-derived DA neurons — dose-response</div>
+        <canvas id="tepdChart" height="300"></canvas>
+        <div class="chart-note">72h treatment. Readouts: pUb (phospho-ubiquitin), TOM20 (mitochondrial mass), LC3-II (autophagy), LAMP1 (lysosomal), TH (neuronal health).</div>
+      </div>
+      <div class="chart-container">
+        <div class="chart-title">Fig. — LC-MS/MS: Compound Quantification</div>
+        <div class="chart-subtitle">Intracellular and media compound levels over time in iPSC-derived DA neurons</div>
+        <canvas id="lcmsChart" height="260"></canvas>
+        <div class="chart-note">LC-MS/MS quantification of FB231. Calibration range 0.5–500 ng/mL. QC CV &lt; 15%.</div>
+      </div>
+      <p>I have applied <strong>LC-MS/MS workflows</strong> for small-molecule PK quantification (including FB231) and used proteomic discovery to prioritize candidate biomarkers, guiding downstream validation with orthogonal assays.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- NEW: SARS-CoV-2 SCREENING -->
+<div class="section" id="screening">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">05</div>
+      <div class="section-label">Screening</div>
+    </div>
+    <div class="section-content">
+      <h2>High-Content Screening &amp; Hit Discovery</h2>
+      <p>I translated the SARS-CoV-2 cellular entry mechanism into scalable cell-based screening assays using Spike pseudovirus and GFP quantification on <strong>Opera Phenix HCS</strong>. These platforms enabled hit discovery and validation of viral-entry inhibitors across dose-response and time-course designs in Caco-2, Calu-3, and Vero E6 cells.</p>
+
+      <img src="images/drug-pseudovirus-gfp.jpg" alt="SARS-CoV-2 pseudovirus GFP expression: untreated vs inhibitor-treated cells" style="width:100%; max-width:640px; border-radius:6px; border:1px solid var(--rule); margin:20px 0 24px;">
+
+      <img src="images/drug-spike-tilescan.jpg" alt="Lightning tile scan: Spike-His488 and Phalloidin-647 binding across epithelial cell monolayer" style="width:100%; max-width:640px; border-radius:6px; border:1px solid var(--rule); margin:20px 0 24px;">
+
+      <div class="chart-container">
+        <div class="chart-title">Fig. — Pseudovirus Entry Inhibition Dose-Response</div>
+        <div class="chart-subtitle">GFP+ cell percentage in Caco-2 cells treated with PIKfyve and CSNK2 inhibitors — Spike pseudovirus assay</div>
+        <canvas id="pseudovirusChart" height="280"></canvas>
+        <div class="chart-note">Spike-pseudotyped lentivirus, 48h infection. GFP quantified by Opera Phenix HCS. n=3.</div>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-title">Fig. — CellTiter-Glo Cytotoxicity Panel</div>
+        <div class="chart-subtitle">Cell viability across 5 cell lines at therapeutic concentrations of PIKfyve inhibitor</div>
+        <canvas id="ctgChart" height="260"></canvas>
+        <div class="chart-note">CellTiter-Glo luminescence, 72h treatment. Normalized to DMSO. 384-well format.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NEW: INFLAMMATORY SIGNALING -->
+<div class="section" id="inflammation">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">06</div>
+      <div class="section-label">Inflammation</div>
+    </div>
+    <div class="section-content">
+      <h2>Cytokine Profiling &amp; Inflammatory Signaling</h2>
+      <p>I profile neuroinflammatory cytokine signaling at RNA and protein levels using <strong>MSD/Luminex multiplex panels</strong> to quantify immune responses and link cytokine stress to aggregation, viability, and biomarker outputs. I also design cytokine-stimulated assay platforms to interrogate <strong>TYK2-mediated JAK/STAT signaling</strong> and neuroinflammation in iPSC-derived neurons and microglia.</p>
+
+      <div class="chart-container">
+        <div class="chart-title">Fig. — Multiplex Cytokine Panel (MSD/Luminex)</div>
+        <div class="chart-subtitle">Secreted cytokine concentrations from iPSC-derived neuron–microglia co-cultures under stress</div>
+        <canvas id="cytokineChart" height="300"></canvas>
+        <div class="chart-note">MSD V-PLEX panel. Conditioned media collected 48h post-treatment. pg/mL.</div>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-title">Fig. — ISR / ATF4 Pathway Activation</div>
+        <div class="chart-subtitle">Integrated stress response markers in DA neurons — ATF4/ATF3 protein quantification by Western blot</div>
+        <canvas id="isrChart" height="260"></canvas>
+        <div class="chart-note">Western blot densitometry, normalized to β-actin. ATF4/ATF3 axis as pharmacology output for TERT pathway.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- NEW: SENESCENCE & ROS -->
+<div class="section" id="senescence">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">07</div>
+      <div class="section-label">Cellular Aging</div>
+    </div>
+    <div class="section-content">
+      <h2>Senescence, ROS &amp; Mitochondrial Bioenergetics</h2>
+      <p>I evaluate compounds targeting cellular aging by measuring <strong>reactive oxygen species (ROS/MitoSOX)</strong>, senescence markers, and mitochondrial function. Assays include plate-based ROS quantification, mitochondrial membrane potential, and integration with TERT biology to assess long-term cellular fitness under stress conditions.</p>
+
+      <div class="chart-container">
+        <div class="chart-title">Fig. — ROS / MitoSOX: Oxidative Stress Quantification</div>
+        <div class="chart-subtitle">MitoSOX Red fluorescence in DA neurons — mitochondrial superoxide across treatment conditions</div>
+        <canvas id="rosChart" height="260"></canvas>
+        <div class="chart-note">MitoSOX Red, plate-reader (BMG FLUOstar Omega). Normalized to Hoechst cell count.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-footer">
+
+  <div class="footer-left">
+    <a href="index.html">Armin Bayati, PhD</a> · Research Fellow, Harvard Medical School
+  </div>
+  <div class="footer-right">
+    <a href="mailto:a.bayati.brain@gmail.com">Email</a>
+    <a href="https://linkedin.com/in/arminbayati" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://scholar.google.com/citations?user=MIW8P2MAAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
+  </div>
+</div>
+
+<script>
+new Chart(document.getElementById('tepdChart'), {
+  type: 'line',
+  data: {
+    labels: ['DMSO', '0.1 μM', '0.3 μM', '1 μM', '3 μM', '10 μM'],
+    datasets: [
+      {label:'pUb (fold)',data:[1.0,1.2,1.8,3.4,5.1,6.8],borderColor:'#c0392b',pointRadius:5,pointHoverRadius:7,tension:0.3,borderWidth:2},
+      {label:'TOM20 (fold)',data:[1.0,0.95,0.82,0.64,0.48,0.38],borderColor:'#2e86c1',pointRadius:5,pointHoverRadius:7,tension:0.3,borderWidth:2},
+      {label:'LC3-II (fold)',data:[1.0,1.1,1.4,2.1,2.8,3.2],borderColor:'#27ae60',pointRadius:5,pointHoverRadius:7,tension:0.3,borderWidth:2},
+      {label:'LAMP1 (fold)',data:[1.0,1.05,1.12,1.28,1.41,1.52],borderColor:'#8e44ad',pointRadius:5,pointHoverRadius:7,tension:0.3,borderWidth:2},
+      {label:'TH+ Neurons (%)',data:[100,98,96,94,88,72],borderColor:'#f39c12',pointRadius:5,pointHoverRadius:7,tension:0.3,borderWidth:2,borderDash:[5,5]}
+    ]
+  },
+  options: { responsive: true,
+    plugins: { legend: { position: 'bottom', labels: { font: { size: 10, family: "'IBM Plex Sans'" }, padding: 12, usePointStyle: true }}},
+    scales: { y: { title: { display: true, text: 'Fold Change / % Viability', font: { size: 11, family: "'IBM Plex Sans'" }}, grid: { color: 'rgba(0,0,0,0.05)' }},
+      x: { title: { display: true, text: 'Compound Concentration', font: { size: 11, family: "'IBM Plex Sans'" }}, grid: { color: 'rgba(0,0,0,0.03)' }}}
+  }
+});
+new Chart(document.getElementById('lcmsChart'), {
+  type: 'line',
+  data: {
+    labels: ['0h', '2h', '6h', '12h', '24h', '48h', '72h'],
+    datasets: [{
+      label: 'Intracellular (ng/mg protein)',
+      data: [0, 284, 412, 368, 246, 142, 84],
+      borderColor: 'rgba(192,57,43,0.9)', backgroundColor: 'rgba(192,57,43,0.08)',
+      fill: true, tension: 0.3, pointRadius: 5, pointHoverRadius: 7
+    },{
+      label: 'Media (ng/mL)',
+      data: [500, 342, 218, 164, 98, 52, 28],
+      borderColor: 'rgba(46,134,193,0.9)', backgroundColor: 'rgba(46,134,193,0.08)',
+      fill: true, tension: 0.3, pointRadius: 5, pointHoverRadius: 7
+    }]
+  },
+  options: { responsive: true,
+    plugins: { legend: { position: 'bottom', labels: { font: { size: 11, family: "'IBM Plex Sans'" }, padding: 16 }}},
+    scales: { y: { beginAtZero: true, title: { display: true, text: 'Concentration', font: { size: 11, family: "'IBM Plex Sans'" }}, grid: { color: 'rgba(0,0,0,0.05)' }},
+      x: { title: { display: true, text: 'Time Post-Treatment', font: { size: 11, family: "'IBM Plex Sans'" }}, grid: { color: 'rgba(0,0,0,0.03)' }}}
+  }
+});
+</script>
+<script>
+// Pseudovirus dose-response
+(function(){
+  var doses = ['DMSO','0.1','0.3','1','3','10','30'];
+  function sigmoid(x,ic50,hill){return 100/(1+Math.pow(x/ic50,hill));}
+  var pikfyve=[],csnk2=[];
+  [0,0.1,0.3,1,3,10,30].forEach(function(d){
+    pikfyve.push(d===0?100:sigmoid(d,1.2,1.8)+3*Math.random());
+    csnk2.push(d===0?100:sigmoid(d,4.5,1.4)+3*Math.random());
+  });
+  new Chart(document.getElementById('pseudovirusChart'),{type:'line',
+    data:{labels:doses,datasets:[
+      {label:'PIKfyve Inh (IC50 ~1.2 μM)',data:pikfyve,borderColor:'#c0392b',pointRadius:5,tension:0.4,borderWidth:2,fill:false},
+      {label:'CSNK2 Inh (IC50 ~4.5 μM)',data:csnk2,borderColor:'#2e86c1',pointRadius:5,tension:0.4,borderWidth:2,fill:false}
+    ]},
+    options:{responsive:true,plugins:{legend:{position:'bottom',labels:{font:{size:11,family:"'IBM Plex Sans'"},padding:16}}},
+      scales:{y:{min:0,max:110,title:{display:true,text:'GFP+ Cells (% of DMSO)',font:{size:11,family:"'IBM Plex Sans'"}},grid:{color:'rgba(0,0,0,0.05)'}},
+        x:{title:{display:true,text:'Concentration (μM)',font:{size:11,family:"'IBM Plex Sans'"}},grid:{color:'rgba(0,0,0,0.03)'}}}}
+  });
+})();
+
+// CellTiter-Glo cytotoxicity
+new Chart(document.getElementById('ctgChart'),{type:'bar',
+  data:{labels:['Caco-2','Calu-3','Vero E6','HEK293','iPSC-DA'],datasets:[
+    {label:'1 μM',data:[96,98,94,99,97],backgroundColor:'rgba(107,114,128,0.4)',borderColor:'rgba(107,114,128,0.7)',borderWidth:1},
+    {label:'3 μM',data:[92,95,88,96,91],backgroundColor:'rgba(192,57,43,0.35)',borderColor:'rgba(192,57,43,0.6)',borderWidth:1},
+    {label:'10 μM',data:[84,89,72,92,78],backgroundColor:'rgba(192,57,43,0.6)',borderColor:'rgba(192,57,43,0.9)',borderWidth:1},
+    {label:'30 μM',data:[58,64,42,82,52],backgroundColor:'rgba(192,57,43,0.85)',borderColor:'rgba(192,57,43,1)',borderWidth:1}
+  ]},
+  options:{responsive:true,plugins:{legend:{position:'bottom',labels:{font:{size:11,family:"'IBM Plex Sans'"},padding:12}}},
+    scales:{y:{min:0,max:110,title:{display:true,text:'Viability (% of DMSO)',font:{size:11,family:"'IBM Plex Sans'"}},grid:{color:'rgba(0,0,0,0.05)'}},x:{grid:{display:false}}}}
+});
+
+// Cytokine multiplex
+new Chart(document.getElementById('cytokineChart'),{type:'radar',
+  data:{labels:['TNF-α','IL-1β','IL-6','IL-8','IFN-γ','IL-10','MCP-1','IP-10'],datasets:[
+    {label:'Control',data:[12,8,24,180,4,6,45,22],borderColor:'rgba(107,114,128,0.7)',backgroundColor:'rgba(107,114,128,0.08)',pointRadius:4},
+    {label:'PFF Only',data:[28,16,42,240,8,12,86,48],borderColor:'rgba(46,134,193,0.8)',backgroundColor:'rgba(46,134,193,0.08)',pointRadius:4},
+    {label:'PFF + IFN-γ',data:[186,124,380,890,420,42,640,1240],borderColor:'rgba(192,57,43,0.9)',backgroundColor:'rgba(192,57,43,0.08)',pointRadius:4}
+  ]},
+  options:{responsive:true,plugins:{legend:{position:'bottom',labels:{font:{size:11,family:"'IBM Plex Sans'"},padding:16}}},
+    scales:{r:{beginAtZero:true,ticks:{font:{size:9}},pointLabels:{font:{size:11,family:"'IBM Plex Sans'"}}}}}
+});
+
+// ISR / ATF4 pathway
+new Chart(document.getElementById('isrChart'),{type:'bar',
+  data:{labels:['Control','PFF','IFN-γ','PFF+IFN-γ','PFF+IFN-γ+TAC'],datasets:[
+    {label:'ATF4 (fold)',data:[1.0,1.3,2.1,4.8,2.2],backgroundColor:'rgba(192,57,43,0.6)',borderColor:'rgba(192,57,43,0.9)',borderWidth:1},
+    {label:'ATF3 (fold)',data:[1.0,1.1,1.8,3.6,1.6],backgroundColor:'rgba(46,134,193,0.55)',borderColor:'rgba(46,134,193,0.85)',borderWidth:1}
+  ]},
+  options:{responsive:true,plugins:{legend:{position:'bottom',labels:{font:{size:11,family:"'IBM Plex Sans'"},padding:16}}},
+    scales:{y:{beginAtZero:true,title:{display:true,text:'Fold Change (vs Control)',font:{size:11,family:"'IBM Plex Sans'"}},grid:{color:'rgba(0,0,0,0.05)'}},x:{grid:{display:false}}}}
+});
+
+// ROS/MitoSOX
+new Chart(document.getElementById('rosChart'),{type:'bar',
+  data:{labels:['Control','PFF','IFN-γ','PFF+IFN-γ','PFF+IFN-γ+TAC','Rotenone (pos ctrl)'],datasets:[{
+    label:'MitoSOX RFU (normalized)',data:[1.0,1.4,1.8,3.2,1.6,5.8],
+    backgroundColor:['rgba(107,114,128,0.5)','rgba(107,114,128,0.5)','rgba(231,76,60,0.4)','rgba(231,76,60,0.7)','rgba(46,134,193,0.55)','rgba(142,68,173,0.6)'],
+    borderColor:['rgba(107,114,128,0.8)','rgba(107,114,128,0.8)','rgba(231,76,60,0.7)','rgba(231,76,60,1)','rgba(46,134,193,0.9)','rgba(142,68,173,0.9)'],
+    borderWidth:1
+  }]},
+  options:{responsive:true,plugins:{legend:{display:false}},
+    scales:{y:{beginAtZero:true,title:{display:true,text:'MitoSOX RFU (fold of control)',font:{size:11,family:"'IBM Plex Sans'"}},grid:{color:'rgba(0,0,0,0.05)'}},x:{grid:{display:false}}}}
+});
+</script>
+</body>
+</html>
