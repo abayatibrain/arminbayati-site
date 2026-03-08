@@ -698,7 +698,7 @@ nav {
   a.tag:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--ink); }
 
   /* ── SCROLL ANIMATIONS ── */
-  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal { opacity: 0.35; transform: translateY(0); transition: opacity 0.7s ease, transform 0.5s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
   .page-footer { background: var(--ink); color: rgba(255,255,255,0.7); padding: 0; border-top: none; display: block; }
   .footer-inner { max-width: 1120px; margin: 0 auto; padding: 56px 32px 40px; display: flex; justify-content: space-between; gap: 48px; }
@@ -713,6 +713,172 @@ nav {
   .footer-bottom { max-width: 1120px; margin: 0 auto; padding: 20px 32px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: rgba(255,255,255,0.3); text-align: center; }
   @media (max-width: 768px) { .footer-inner { flex-direction: column; gap: 32px; } .footer-links-grid { flex-direction: column; gap: 24px; } }
 
+
+
+/* ── SITE SEARCH ── */
+.search-toggle {
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--mid);
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+  margin-right: 4px;
+}
+.search-toggle:hover { border-color: var(--accent); color: var(--ink); }
+.search-toggle svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(15,20,25,0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: min(18vh, 160px);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.search-overlay.active { display: flex; opacity: 1; }
+.search-overlay.fade-in { opacity: 1; }
+
+.search-modal {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  width: 92%;
+  max-width: 580px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.25), 0 0 0 1px rgba(0,0,0,0.04);
+  overflow: hidden;
+  transform: translateY(12px) scale(0.98);
+  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1);
+}
+.search-overlay.fade-in .search-modal {
+  transform: translateY(0) scale(1);
+}
+
+.search-input-wrap {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--rule);
+  gap: 12px;
+}
+.search-input-wrap svg { width: 18px; height: 18px; stroke: var(--mid); fill: none; stroke-width: 2; flex-shrink: 0; }
+.search-input {
+  flex: 1;
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 400;
+  border: none;
+  background: transparent;
+  color: var(--ink);
+  padding: 16px 0;
+  outline: none;
+}
+.search-input::placeholder { color: var(--mid); opacity: 0.7; }
+.search-kbd {
+  font-family: var(--mono);
+  font-size: 10px;
+  background: var(--section-bg);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 2px 6px;
+  color: var(--mid);
+  flex-shrink: 0;
+}
+
+.search-results {
+  max-height: 420px;
+  overflow-y: auto;
+  padding: 8px 0;
+  scrollbar-width: thin;
+}
+.search-results::-webkit-scrollbar { width: 4px; }
+.search-results::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 2px; }
+
+.search-result {
+  display: block;
+  padding: 12px 20px;
+  text-decoration: none;
+  transition: background 0.12s ease;
+  border-left: 3px solid transparent;
+}
+.search-result:hover, .search-result.active {
+  background: var(--accent-soft);
+  border-left-color: var(--accent);
+}
+.search-result-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+.search-result-page {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.search-result-desc {
+  font-size: 12.5px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.5;
+}
+.search-result mark {
+  background: rgba(192,57,43,0.15);
+  color: var(--ink);
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+.search-empty {
+  padding: 32px 20px;
+  text-align: center;
+  color: var(--mid);
+  font-size: 14px;
+  font-weight: 300;
+}
+.search-empty span { display: block; font-size: 28px; margin-bottom: 8px; }
+
+.search-footer {
+  border-top: 1px solid var(--rule);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--mid);
+  letter-spacing: 0.3px;
+}
+.search-footer-keys { display: flex; gap: 8px; align-items: center; }
+.search-footer-keys kbd {
+  font-family: var(--mono);
+  font-size: 10px;
+  background: var(--section-bg);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 1px 5px;
+  color: var(--mid);
+}
+
+html.dark .search-overlay { background: rgba(0,0,0,0.65); }
+html.dark .search-modal { background: var(--card); }
+html.dark .search-result mark { background: rgba(192,57,43,0.3); }
 
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
@@ -741,10 +907,30 @@ nav {
       <a href="skills.html">Skills</a>
       <a href="publications.html">Pubs</a>
       <a href="contact.html">Contact</a>
-    </div><button class="dark-toggle" onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light')" aria-label="Toggle dark mode" title="Toggle dark mode">☀</button>
+    </div><button class="search-toggle" aria-label="Search site" title="Search (⌘K)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button><button class="dark-toggle" onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light')" aria-label="Toggle dark mode" title="Toggle dark mode">☀</button>
 
   </div>
 </nav>
+
+<!-- SITE SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-modal">
+    <div class="search-input-wrap">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search pages, topics, techniques..." autocomplete="off" spellcheck="false">
+      <span class="search-kbd">ESC</span>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+    <div class="search-footer">
+      <div class="search-footer-keys">
+        <kbd>&uarr;</kbd><kbd>&darr;</kbd> navigate &nbsp;
+        <kbd>&crarr;</kbd> open
+      </div>
+      <span>Site Search</span>
+    </div>
+  </div>
+</div>
+
 
 <div class="hero">
   <div class="hero-eyebrow">MULTI-OMICS &amp; COMPUTATIONAL BIOLOGY</div>
@@ -959,11 +1145,11 @@ nav {
           <a href="https://scholar.google.com/citations?user=MIW8P2MAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
           <a href="https://linkedin.com/in/arminbayati" target="_blank" rel="noopener">LinkedIn</a>
           <a href="https://github.com/abayatibrain" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://orcid.org/0000-0002-2780-1737" target="_blank" rel="noopener">ORCID</a>
+          <a href="https://orcid.org/0000-0002-5960-0479" target="_blank" rel="noopener">ORCID</a>
         </div>
         <div class="footer-col">
           <div class="footer-col-title">Contact</div>
-          <a href="mailto:a.bayati.brain@gmail.com">Email</a>
+          <a href="/cdn-cgi/l/email-protection#e485ca86859d85908dca8696858d8aa48389858d88ca878b89">Email</a>
           <a href="contact.html">Contact Page</a>
           <a href="publications.html">Publications</a>
         </div>
@@ -971,7 +1157,7 @@ nav {
     </div>
     <div class="footer-bottom">&copy; 2026 Armin Bayati. All rights reserved.</div>
   </div>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ══════════════════════════════════════════════════════════════════════════════
 // CHART INITIALIZATION
 // ══════════════════════════════════════════════════════════════════════════════
@@ -1411,9 +1597,165 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <script>
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
+<script>
+(function(){
+  var searchIndex = [
+    {page:'index.html', title:'Home \u2014 Overview', category:'Main',
+     keywords:'armin bayati phd neuroscience cell biology drug discovery harvard medical school mass general brigham research fellow ipsc dopaminergic neurons parkinson disease lewy body nature neuroscience publications citations'},
+    {page:'ipscs.html', title:'iPSC-Derived Neurons', category:'Research',
+     keywords:'ipsc induced pluripotent stem cells dopaminergic cortical neurons glial differentiation lewy body disease modeling mea electrophysiology calcium imaging hplc dopamine quantification parkinson disease alpha synuclein preformed fibrils pff neurodegeneration apoptosis autophagy protein aggregation mitochondrial dysfunction'},
+    {page:'cardiomyocytes.html', title:'iPSC-Derived Cardiomyocytes', category:'Research',
+     keywords:'cardiac differentiation mea beat rate analysis calcium transient profiling cardiotoxicity screening disease modeling hcm dcm hypertrophic cardiomyopathy dilated cardiomyopathy cardiac safety pharmacology ipsc cardiomyocytes contractility sarcomere'},
+    {page:'cancer-immunology.html', title:'Cancer Immunology', category:'Research',
+     keywords:'t cell killing adcc cdc checkpoint blockade cytokine profiling car-t characterization immune co-culture systems tumor microenvironment immunotherapy pd-1 pd-l1 nk cells antibody dependent cellular cytotoxicity complement dependent cytotoxicity'},
+    {page:'cellular-assays.html', title:'Cellular & Functional Assays', category:'Research',
+     keywords:'endocytosis exosomal biology autophagy flow cytometry pbmc immune assays plate-based readouts immunocytochemistry clathrin cd63 cd9 reporter exosome transfer assay mitophagy lysosomal stress viability cytotoxicity celltiter-glo'},
+    {page:'genetics.html', title:'Genetics & Molecular Biology', category:'Research',
+     keywords:'crispr cas9 sirna shrna aso antisense oligonucleotide molecular cloning viral constructs protein conjugation lysosomal biology gene editing lentivirus aav adenovirus transfection plasmid dna rna'},
+    {page:'drug-discovery.html', title:'Drug Discovery & Translation', category:'Research',
+     keywords:'parkin agonist tac lysosomal rescue antivirals biomarker strategy preclinical compound testing small molecule screening sar dose response pseudovirus sars-cov-2 pikfyve csnk2 hplc compound purity analytical characterization dls dynamic light scattering particle size nanoparticle formulation lc-ms pharmacokinetics target engagement pharmacodynamic'},
+    {page:'microscopy.html', title:'Microscopy & Imaging', category:'Research',
+     keywords:'confocal sted super-resolution tem transmission electron microscopy live-cell imaging high-content screening ihc histology immunohistochemistry fluorescence opera phenix hcs image analysis'},
+    {page:'flow-cytometry.html', title:'Flow Cytometry', category:'Research',
+     keywords:'flow cytometry multicolor immunophenotyping intracellular staining facs sorting gating strategy surface marker t cell b cell nk cell monocyte macrophage pbmc viability dye compensation'},
+    {page:'proteomics.html', title:'Proteomics & Single-Cell Genomics', category:'Research',
+     keywords:'tmt quantitative proteomics scrna-seq 10x genomics bulk rna-seq gsea pathway analysis umap deseq2 seurat mass spectrometry protein biomarker volcano plot gene ontology single cell transcriptomics'},
+    {page:'coding.html', title:'Coding, Automation & Data', category:'Technical',
+     keywords:'python automorphotrack pipelines bravo tecan liquid handling 96 384 well miniaturization machine learning automation data analysis github programming r matlab imageJ fiji cellprofiler'},
+    {page:'skills.html', title:'Full Technical Skills', category:'Technical',
+     keywords:'techniques instruments software capabilities laboratory skills comprehensive listing assays methods platforms tools equipment'},
+    {page:'publications.html', title:'Publications', category:'Academic',
+     keywords:'peer-reviewed papers citations journal articles nature neuroscience lancet science translational medicine acs chemical biology first author corresponding author pubmed google scholar'},
+    {page:'contact.html', title:'Contact', category:'Connect',
+     keywords:'email linkedin github orcid google scholar contact collaboration'}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('searchInput');
+  var resultsEl = document.getElementById('searchResults');
+  var activeIdx = -1;
+
+  function openSearch() {
+    overlay.classList.add('active');
+    requestAnimationFrame(function(){ overlay.classList.add('fade-in'); });
+    input.value = '';
+    input.focus();
+    renderResults('');
+    activeIdx = -1;
+  }
+
+  function closeSearch() {
+    overlay.classList.remove('fade-in');
+    setTimeout(function(){ overlay.classList.remove('active'); }, 200);
+  }
+
+  function escapeRegex(s) {
+    return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function highlight(text, terms) {
+    if (!terms.length) return text;
+    var pattern = terms.map(escapeRegex).join('|');
+    var regex = new RegExp('(' + pattern + ')', 'gi');
+    return text.replace(regex, '<mark>$1</mark>');
+  }
+
+  function renderResults(query) {
+    var terms = query.toLowerCase().trim().split(/\s+/).filter(function(t){ return t.length > 1; });
+    var scored = [];
+
+    searchIndex.forEach(function(item) {
+      if (!terms.length) { scored.push({item: item, score: 0}); return; }
+      var score = 0;
+      var titleLow = item.title.toLowerCase();
+      var kwLow = item.keywords;
+      terms.forEach(function(t) {
+        if (titleLow.indexOf(t) !== -1) score += 10;
+        if (kwLow.indexOf(t) !== -1) score += 3;
+      });
+      if (score > 0) scored.push({item: item, score: score});
+    });
+
+    scored.sort(function(a, b){ return b.score - a.score; });
+
+    if (terms.length && !scored.length) {
+      resultsEl.innerHTML = '<div class="search-empty"><span>&#128269;</span>No results for &ldquo;' + query.replace(/</g, '&lt;') + '&rdquo;</div>';
+      return;
+    }
+
+    var html = '';
+    scored.forEach(function(s, i) {
+      var item = s.item;
+      var title = terms.length ? highlight(item.title, terms) : item.title;
+      var kwArr = item.keywords.split(' ');
+      var matchedKw = [];
+      if (terms.length) {
+        kwArr.forEach(function(kw) {
+          terms.forEach(function(t) {
+            if (kw.indexOf(t) !== -1 && matchedKw.indexOf(kw) === -1) matchedKw.push(kw);
+          });
+        });
+      }
+      var desc = matchedKw.length ? matchedKw.slice(0, 6).join(' &middot; ') : kwArr.slice(0, 5).join(' &middot; ');
+      if (terms.length) desc = highlight(desc, terms);
+
+      html += '<a class="search-result' + (i === 0 && terms.length ? ' active' : '') + '" href="' + item.page + '">';
+      html += '<div class="search-result-page">' + item.category + '</div>';
+      html += '<div class="search-result-title">' + title + '</div>';
+      html += '<div class="search-result-desc">' + desc + '</div></a>';
+    });
+
+    resultsEl.innerHTML = html;
+    activeIdx = terms.length ? 0 : -1;
+  }
+
+  function setActive(idx) {
+    var items = resultsEl.querySelectorAll('.search-result');
+    if (!items.length) return;
+    items.forEach(function(el){ el.classList.remove('active'); });
+    if (idx < 0) idx = items.length - 1;
+    if (idx >= items.length) idx = 0;
+    activeIdx = idx;
+    items[idx].classList.add('active');
+    items[idx].scrollIntoView({block: 'nearest'});
+  }
+
+  if (input) {
+    input.addEventListener('input', function(){ renderResults(this.value); });
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowDown') { e.preventDefault(); setActive(activeIdx + 1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(activeIdx - 1); }
+      else if (e.key === 'Enter') {
+        e.preventDefault();
+        var active = resultsEl.querySelector('.search-result.active');
+        if (active) window.location.href = active.href;
+      }
+    });
+  }
+
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeSearch();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
+    if (e.key === 'Escape' && overlay.classList.contains('active')) closeSearch();
+    if (e.key === '/' && !overlay.classList.contains('active') && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+      e.preventDefault(); openSearch();
+    }
+  });
+
+  document.querySelectorAll('.search-toggle').forEach(function(btn){ btn.addEventListener('click', openSearch); });
+})();
+</script>
+
 </body>
 </html>

@@ -202,16 +202,18 @@ nav {
 /* ── SECTIONS ── */
 .section {
   border-top: 1px solid var(--rule);
+  overflow: visible;
 }
 
 .section-header {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 64px 32px 0;
+  padding: 64px 32px 32px;
   display: grid;
   grid-template-columns: 200px 1fr;
   gap: 48px;
   align-items: start;
+  overflow: visible;
 }
 
 .section-index {
@@ -238,7 +240,8 @@ nav {
 }
 
 .section-content {
-  padding-bottom: 20px;
+  padding-bottom: 48px;
+  overflow: visible;
 }
 
 .section-content h2 {
@@ -451,42 +454,102 @@ nav {
   line-height: 1.55;
 }
 
-/* ── CARD GRID ── */
-.card-grid {
+/* ── RESEARCH GRID (standalone, not inside section-header grid) ── */
+.research-grid {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 32px 64px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
-  margin: 28px 0 32px;
-  max-width: 640px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
 }
 
-.card {
+.research-tile {
   background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: 6px;
-  padding: 24px;
-  transition: box-shadow 0.2s, border-color 0.2s;
+  border-radius: 10px;
+  padding: 28px 28px 24px;
   text-decoration: none;
   color: inherit;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,0.08),
+    0 4px 12px rgba(0,0,0,0.05);
 }
-a.card:hover {
-  border-color: var(--accent);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+.research-tile:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 1px var(--accent),
+    0 8px 24px rgba(0,0,0,0.10);
+}
+.research-tile::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 3px;
+  border-radius: 0 0 3px 3px;
+  background: var(--rule);
+  transition: background 0.2s ease;
+}
+.research-tile:hover::before {
+  background: var(--accent);
+}
+.research-tile.featured::before {
+  background: var(--accent);
 }
 
-.card-title {
+.tile-icon {
+  font-size: 22px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.tile-title {
   font-size: 15px;
   font-weight: 600;
   color: var(--ink);
-  margin-bottom: 6px;
 }
-
-.card-desc {
+.tile-desc {
   font-size: 13px;
   font-weight: 300;
   color: var(--mid);
   line-height: 1.6;
+}
+.tile-arrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent);
+  margin-top: auto;
+  padding-top: 8px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.research-tile:hover .tile-arrow {
+  opacity: 1;
+}
+
+html.dark .research-tile {
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.08),
+    0 4px 12px rgba(0,0,0,0.2);
+}
+html.dark .research-tile:hover {
+  box-shadow:
+    0 0 0 1px var(--accent),
+    0 8px 24px rgba(0,0,0,0.3);
+}
+
+@media (max-width: 768px) {
+  .research-grid {
+    grid-template-columns: 1fr;
+    padding: 0 20px 40px;
+    gap: 14px;
+  }
+  .research-tile { padding: 20px 20px 18px; }
 }
 
 /* ── IMAGE PLACEHOLDER ── */
@@ -737,9 +800,9 @@ a.tag:hover { border-color: var(--accent); background: var(--accent-soft); color
 
 /* ── SCROLL ANIMATIONS ── */
 .reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  opacity: 0.35;
+  transform: translateY(0);
+  transition: opacity 0.7s ease, transform 0.5s ease;
 }
 .reveal.visible {
   opacity: 1;
@@ -860,10 +923,6 @@ html.dark .news-body,
 html.dark .timeline-desc {
   color: rgba(232,230,225,0.6);
 }
-html.dark .card {
-  background: var(--card);
-  border-color: var(--rule);
-}
 html.dark .finding {
   background: var(--card);
 }
@@ -941,7 +1000,6 @@ html.dark .highlights-strip {
   .workflow-step { border-left: none; border-top: 1px solid rgba(255,255,255,0.12); padding: 16px 0; }
   .workflow-step:first-child { border-top: none; }
   .findings { grid-template-columns: 1fr 1fr; }
-  .card-grid { grid-template-columns: 1fr; }
   .highlights-inner { grid-template-columns: 1fr 1fr; gap: 20px; }
 }
 
@@ -1062,6 +1120,172 @@ nav {
   border-radius: 1px;
 }
 
+
+/* ── SITE SEARCH ── */
+.search-toggle {
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--mid);
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+  margin-right: 4px;
+}
+.search-toggle:hover { border-color: var(--accent); color: var(--ink); }
+.search-toggle svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(15,20,25,0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: min(18vh, 160px);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.search-overlay.active { display: flex; opacity: 1; }
+.search-overlay.fade-in { opacity: 1; }
+
+.search-modal {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  width: 92%;
+  max-width: 580px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.25), 0 0 0 1px rgba(0,0,0,0.04);
+  overflow: hidden;
+  transform: translateY(12px) scale(0.98);
+  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1);
+}
+.search-overlay.fade-in .search-modal {
+  transform: translateY(0) scale(1);
+}
+
+.search-input-wrap {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--rule);
+  gap: 12px;
+}
+.search-input-wrap svg { width: 18px; height: 18px; stroke: var(--mid); fill: none; stroke-width: 2; flex-shrink: 0; }
+.search-input {
+  flex: 1;
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 400;
+  border: none;
+  background: transparent;
+  color: var(--ink);
+  padding: 16px 0;
+  outline: none;
+}
+.search-input::placeholder { color: var(--mid); opacity: 0.7; }
+.search-kbd {
+  font-family: var(--mono);
+  font-size: 10px;
+  background: var(--section-bg);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 2px 6px;
+  color: var(--mid);
+  flex-shrink: 0;
+}
+
+.search-results {
+  max-height: 420px;
+  overflow-y: auto;
+  padding: 8px 0;
+  scrollbar-width: thin;
+}
+.search-results::-webkit-scrollbar { width: 4px; }
+.search-results::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 2px; }
+
+.search-result {
+  display: block;
+  padding: 12px 20px;
+  text-decoration: none;
+  transition: background 0.12s ease;
+  border-left: 3px solid transparent;
+}
+.search-result:hover, .search-result.active {
+  background: var(--accent-soft);
+  border-left-color: var(--accent);
+}
+.search-result-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+.search-result-page {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.search-result-desc {
+  font-size: 12.5px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.5;
+}
+.search-result mark {
+  background: rgba(192,57,43,0.15);
+  color: var(--ink);
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+.search-empty {
+  padding: 32px 20px;
+  text-align: center;
+  color: var(--mid);
+  font-size: 14px;
+  font-weight: 300;
+}
+.search-empty span { display: block; font-size: 28px; margin-bottom: 8px; }
+
+.search-footer {
+  border-top: 1px solid var(--rule);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--mid);
+  letter-spacing: 0.3px;
+}
+.search-footer-keys { display: flex; gap: 8px; align-items: center; }
+.search-footer-keys kbd {
+  font-family: var(--mono);
+  font-size: 10px;
+  background: var(--section-bg);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 1px 5px;
+  color: var(--mid);
+}
+
+html.dark .search-overlay { background: rgba(0,0,0,0.65); }
+html.dark .search-modal { background: var(--card); }
+html.dark .search-result mark { background: rgba(192,57,43,0.3); }
+
 </style>
 </head>
 <body>
@@ -1089,9 +1313,29 @@ nav {
       <a href="publications.html" >Pubs</a>
       <a href="contact.html" >Contact</a>
     </div>
-    <button class="dark-toggle" onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light')" aria-label="Toggle dark mode" title="Toggle dark mode">☀</button>
+    <button class="search-toggle" aria-label="Search site" title="Search (⌘K)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button><button class="dark-toggle" onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light')" aria-label="Toggle dark mode" title="Toggle dark mode">☀</button>
   </div>
 </nav>
+
+<!-- SITE SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-modal">
+    <div class="search-input-wrap">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search pages, topics, techniques..." autocomplete="off" spellcheck="false">
+      <span class="search-kbd">ESC</span>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+    <div class="search-footer">
+      <div class="search-footer-keys">
+        <kbd>&uarr;</kbd><kbd>&darr;</kbd> navigate &nbsp;
+        <kbd>&crarr;</kbd> open
+      </div>
+      <span>Site Search</span>
+    </div>
+  </div>
+</div>
+
 
 <div class="hero">
   <div class="hero-text">
@@ -1245,64 +1489,75 @@ nav {
     <div class="section-content">
       <h2>Explore My Work</h2>
       <p>My research spans iPSC-based disease modeling, cellular and molecular assays, advanced microscopy, drug discovery, automation, and computational image analysis.</p>
-      <div class="card-grid" style="max-width:100%;">
-        <a href="ipscs.html" class="card" style="border-left: 3px solid var(--accent);">
-          <div class="card-icon">🧠</div>
-          <div class="card-title">iPSC-Derived Neurons</div>
-          <div class="card-desc">Dopaminergic, cortical, and glial differentiation. Lewy body disease modeling. MEA electrophysiology, calcium imaging, HPLC dopamine quantification.</div>
-        </a>
-        <a href="cardiomyocytes.html" class="card" style="border-left: 3px solid var(--accent);">
-          <div class="card-icon">❤️</div>
-          <div class="card-title">iPSC-Derived Cardiomyocytes</div>
-          <div class="card-desc">Cardiac differentiation, MEA beat-rate analysis, calcium transient profiling, cardiotoxicity screening, and disease modeling (HCM, DCM).</div>
-        </a>
-        <a href="cancer-immunology.html" class="card" style="border-left: 3px solid var(--accent);">
-          <div class="card-icon">🎯</div>
-          <div class="card-title">Cancer Immunology</div>
-          <div class="card-desc">T-cell killing, ADCC/CDC, checkpoint blockade, cytokine profiling, CAR-T characterization, and immune co-culture systems.</div>
-        </a>
-        <a href="cellular-assays.html" class="card">
-          <div class="card-icon">🔬</div>
-          <div class="card-title">Cellular &amp; Functional Assays</div>
-          <div class="card-desc">Endocytosis, exosomal biology, autophagy, flow cytometry, PBMC/immune assays, plate-based readouts, and immunocytochemistry.</div>
-        </a>
-        <a href="genetics.html" class="card">
-          <div class="card-icon">🧬</div>
-          <div class="card-title">Genetics &amp; Molecular Biology</div>
-          <div class="card-desc">CRISPR, siRNA/shRNA/ASO, molecular cloning, viral constructs, protein conjugation, and lysosomal biology.</div>
-        </a>
-        <a href="drug-discovery.html" class="card">
-          <div class="card-icon">💊</div>
-          <div class="card-title">Drug Discovery &amp; Translation</div>
-          <div class="card-desc">Parkin agonists, TAC evaluation, lysosomal rescue, antivirals, and biomarker strategy.</div>
-        </a>
-        <a href="microscopy.html" class="card">
-          <div class="card-icon">📷</div>
-          <div class="card-title">Microscopy &amp; Imaging</div>
-          <div class="card-desc">Confocal, STED super-resolution, TEM, live-cell imaging, high-content screening, and IHC/histology.</div>
-        </a>
-        <a href="proteomics.html" class="card" style="border-left: 3px solid var(--accent);">
-          <div class="card-icon">📊</div>
-          <div class="card-title">Proteomics &amp; Single-Cell Genomics</div>
-          <div class="card-desc">TMT quantitative proteomics, scRNA-seq (10x Genomics), bulk RNA-seq, GSEA/pathway analysis, UMAP visualization, DESeq2/Seurat pipelines.</div>
-        </a>
-        <a href="coding.html" class="card">
-          <div class="card-icon">💻</div>
-          <div class="card-title">Coding, Automation &amp; Data</div>
-          <div class="card-desc">AutoMorphoTrack, Python pipelines, BRAVO/Tecan liquid handling, 96/384-well miniaturization, and machine learning.</div>
-        </a>
-        <a href="skills.html" class="card">
-          <div class="card-icon">⚙️</div>
-          <div class="card-title">Full Technical Skills</div>
-          <div class="card-desc">Comprehensive categorized listing of all techniques, instruments, software, and capabilities.</div>
-        </a>
-        <a href="publications.html" class="card">
-          <div class="card-icon">📄</div>
-          <div class="card-title">Publications</div>
-          <div class="card-desc">25+ peer-reviewed papers with 1,300+ citations.</div>
-        </a>
-      </div>
     </div>
+  </div>
+  <div class="research-grid">
+    <a href="ipscs.html" class="research-tile featured">
+      <div class="tile-icon">🧠</div>
+      <div class="tile-title">iPSC-Derived Neurons</div>
+      <div class="tile-desc">Dopaminergic, cortical, and glial differentiation. Lewy body disease modeling. MEA electrophysiology, calcium imaging, HPLC dopamine quantification.</div>
+      <div class="tile-arrow">Explore →</div>
+    </a>
+    <a href="cardiomyocytes.html" class="research-tile featured">
+      <div class="tile-icon">❤️</div>
+      <div class="tile-title">iPSC-Derived Cardiomyocytes</div>
+      <div class="tile-desc">Cardiac differentiation, MEA beat-rate analysis, calcium transient profiling, cardiotoxicity screening, and disease modeling (HCM, DCM).</div>
+      <div class="tile-arrow">Explore →</div>
+    </a>
+    <a href="cancer-immunology.html" class="research-tile featured">
+      <div class="tile-icon">🎯</div>
+      <div class="tile-title">Cancer Immunology</div>
+      <div class="tile-desc">T-cell killing, ADCC/CDC, checkpoint blockade, cytokine profiling, CAR-T characterization, and immune co-culture systems.</div>
+      <div class="tile-arrow">Explore →</div>
+    </a>
+    <a href="cellular-assays.html" class="research-tile">
+      <div class="tile-icon">🔬</div>
+      <div class="tile-title">Cellular &amp; Functional Assays</div>
+      <div class="tile-desc">Endocytosis, exosomal biology, autophagy, flow cytometry, PBMC/immune assays, plate-based readouts, and immunocytochemistry.</div>
+      <div class="tile-arrow">Explore →</div>
+    </a>
+    <a href="genetics.html" class="research-tile">
+      <div class="tile-icon">🧬</div>
+      <div class="tile-title">Genetics &amp; Molecular Biology</div>
+      <div class="tile-desc">CRISPR, siRNA/shRNA/ASO, molecular cloning, viral constructs, protein conjugation, and lysosomal biology.</div>
+      <div class="tile-arrow">Explore →</div>
+    </a>
+    <a href="drug-discovery.html" class="research-tile">
+      <div class="tile-icon">💊</div>
+      <div class="tile-title">Drug Discovery &amp; Translation</div>
+      <div class="tile-desc">Parkin agonists, TAC evaluation, lysosomal rescue, antivirals, and biomarker strategy.</div>
+      <div class="tile-arrow">Explore →</div>
+    </a>
+    <a href="microscopy.html" class="research-tile">
+      <div class="tile-icon">📷</div>
+      <div class="tile-title">Microscopy &amp; Imaging</div>
+      <div class="tile-desc">Confocal, STED super-resolution, TEM, live-cell imaging, high-content screening, and IHC/histology.</div>
+      <div class="tile-arrow">Explore →</div>
+    </a>
+    <a href="proteomics.html" class="research-tile featured">
+      <div class="tile-icon">📊</div>
+      <div class="tile-title">Proteomics &amp; Single-Cell Genomics</div>
+      <div class="tile-desc">TMT quantitative proteomics, scRNA-seq (10x Genomics), bulk RNA-seq, GSEA/pathway analysis, UMAP visualization, DESeq2/Seurat pipelines.</div>
+      <div class="tile-arrow">Explore →</div>
+    </a>
+    <a href="coding.html" class="research-tile">
+      <div class="tile-icon">💻</div>
+      <div class="tile-title">Coding, Automation &amp; Data</div>
+      <div class="tile-desc">AutoMorphoTrack, Python pipelines, BRAVO/Tecan liquid handling, 96/384-well miniaturization, and machine learning.</div>
+      <div class="tile-arrow">Explore →</div>
+    </a>
+    <a href="skills.html" class="research-tile">
+      <div class="tile-icon">⚙️</div>
+      <div class="tile-title">Full Technical Skills</div>
+      <div class="tile-desc">Comprehensive categorized listing of all techniques, instruments, software, and capabilities.</div>
+      <div class="tile-arrow">Explore →</div>
+    </a>
+    <a href="publications.html" class="research-tile">
+      <div class="tile-icon">📄</div>
+      <div class="tile-title">Publications</div>
+      <div class="tile-desc">25+ peer-reviewed papers with 1,300+ citations.</div>
+      <div class="tile-arrow">Explore →</div>
+    </a>
   </div>
 </div>
 
@@ -1316,20 +1571,24 @@ nav {
       <h2>Recent Activity</h2>
       <div class="news-list">
         <div class="news-item">
-          <div class="news-date">2026</div>
-          <div class="news-body"><strong>Science Translational Medicine</strong> — Preprint on PINK1-dependent mtDNA release and cGAS/STING signaling in Parkinson's disease myeloid cells.</div>
+          <div class="news-date">Feb 2026</div>
+          <div class="news-body"><strong>Science Advances</strong> (Under Review) — Neural cell state modulation by PARK2 and dopaminergic neuroprotection by small molecule Parkin agonism.</div>
         </div>
         <div class="news-item">
-          <div class="news-date">2025</div>
-          <div class="news-body"><strong>The Lancet</strong> — α-Synuclein seed amplification assay (SAA) for PD progression tracking in the PPMI cohort.</div>
+          <div class="news-date">Feb 2026</div>
+          <div class="news-body"><strong>Translational Neurodegeneration</strong> (Under Review) — Axonal and Synaptic Dysfunction as the Convergent Driver of Neurodegenerative Cascades.</div>
         </div>
         <div class="news-item">
-          <div class="news-date">2024</div>
-          <div class="news-body"><strong>Nature Neuroscience</strong> — First-author publication: iPSC-based dual-hit Lewy body model for Parkinson's disease.</div>
+          <div class="news-date">Feb 2026</div>
+          <div class="news-body"><strong>eLife</strong> — AutoMorphoTrack: A Platform for Quantitative Organelle Analysis.</div>
         </div>
         <div class="news-item">
-          <div class="news-date">2024</div>
-          <div class="news-body">Joined <strong>Harvard Medical School &amp; Mass General Brigham</strong> as Research Fellow / Research Instructor.</div>
+          <div class="news-date">Feb 2026</div>
+          <div class="news-body"><strong>YouTube Interview</strong> — AutoMorphoTrack: A Platform for Quantitative Organelle Analysis. <a href="https://www.youtube.com/watch?v=3lEFf3rxdoU" target="_blank" rel="noopener" style="color:var(--accent); border-bottom:1px solid var(--accent);">Watch &rarr;</a></div>
+        </div>
+        <div class="news-item">
+          <div class="news-date">Jan 2026</div>
+          <div class="news-body"><strong>Nature Immunology</strong> (Under Review) — Myeloid PINK1 represses mtDNA release and immune signaling that impacts neuronal pathology in patient-derived idiopathic PD models.</div>
         </div>
       </div>
     </div>
@@ -1343,22 +1602,22 @@ nav {
       <div class="workflow-step">
         <div class="step-number">01</div>
         <div class="step-title">iPSC Disease Modeling</div>
-        <div class="step-detail">Patient-derived iPSCs into dopaminergic neurons, cortical neurons, endodermal lineages, and glia for in vitro disease recreation.</div>
+        <div class="step-detail">Patient-derived iPSCs differentiated into dopaminergic neurons, cortical neurons, cardiomyocytes, endodermal lineages, and glia for in vitro disease recreation and drug screening.</div>
       </div>
       <div class="workflow-step">
         <div class="step-number">02</div>
-        <div class="step-title">Mechanistic Discovery</div>
-        <div class="step-detail">Protein aggregation, lysosomal dysfunction, mitochondrial stress, immune signaling, and receptor-ligand biology.</div>
+        <div class="step-title">Parkinson's Disease</div>
+        <div class="step-detail">Deep expertise in iPSC-derived dopaminergic neuron biology, including &alpha;-synuclein aggregation, Lewy body modeling, mitophagy, lysosomal dysfunction, and PINK1/Parkin pathway dissection.</div>
       </div>
       <div class="workflow-step">
         <div class="step-number">03</div>
-        <div class="step-title">Translational Biomarkers</div>
-        <div class="step-detail">TE/PD biomarker panels, imaging-based biomarkers, multiplex immunoassays (MSD/Luminex), and proteomics.</div>
+        <div class="step-title">Cardiac &amp; Metabolic Biology</div>
+        <div class="step-detail">iPSC-derived cardiomyocyte differentiation, cardiotoxicity screening, MEA electrophysiology, calcium transient profiling, and Seahorse XF metabolic flux analysis for mitochondrial bioenergetics.</div>
       </div>
       <div class="workflow-step">
         <div class="step-number">04</div>
-        <div class="step-title">Therapeutic Translation</div>
-        <div class="step-detail">Preclinical compound testing, from discovery through decision-enabling datasets.</div>
+        <div class="step-title">Cancer Biology</div>
+        <div class="step-detail">Immune co-culture systems, T-cell killing assays, ADCC/CDC, checkpoint blockade evaluation, CAR-T characterization, and cytokine profiling across tumor microenvironment models.</div>
       </div>
     </div>
   </div>
@@ -1383,7 +1642,7 @@ nav {
         <a href="https://scholar.google.com/citations?user=MIW8P2MAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
         <a href="https://linkedin.com/in/arminbayati" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://github.com/abayatibrain" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://orcid.org/0000-0002-2780-1737" target="_blank" rel="noopener">ORCID</a>
+        <a href="https://orcid.org/0000-0002-5960-0479" target="_blank" rel="noopener">ORCID</a>
       </div>
       <div class="footer-col">
         <div class="footer-col-title">Contact</div>
@@ -1409,5 +1668,157 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
+<script>
+(function(){
+  var searchIndex = [
+    {page:'index.html', title:'Home \u2014 Overview', category:'Main',
+     keywords:'armin bayati phd neuroscience cell biology drug discovery harvard medical school mass general brigham research fellow ipsc dopaminergic neurons parkinson disease lewy body nature neuroscience publications citations'},
+    {page:'ipscs.html', title:'iPSC-Derived Neurons', category:'Research',
+     keywords:'ipsc induced pluripotent stem cells dopaminergic cortical neurons glial differentiation lewy body disease modeling mea electrophysiology calcium imaging hplc dopamine quantification parkinson disease alpha synuclein preformed fibrils pff neurodegeneration apoptosis autophagy protein aggregation mitochondrial dysfunction'},
+    {page:'cardiomyocytes.html', title:'iPSC-Derived Cardiomyocytes', category:'Research',
+     keywords:'cardiac differentiation mea beat rate analysis calcium transient profiling cardiotoxicity screening disease modeling hcm dcm hypertrophic cardiomyopathy dilated cardiomyopathy cardiac safety pharmacology ipsc cardiomyocytes contractility sarcomere'},
+    {page:'cancer-immunology.html', title:'Cancer Immunology', category:'Research',
+     keywords:'t cell killing adcc cdc checkpoint blockade cytokine profiling car-t characterization immune co-culture systems tumor microenvironment immunotherapy pd-1 pd-l1 nk cells antibody dependent cellular cytotoxicity complement dependent cytotoxicity'},
+    {page:'cellular-assays.html', title:'Cellular & Functional Assays', category:'Research',
+     keywords:'endocytosis exosomal biology autophagy flow cytometry pbmc immune assays plate-based readouts immunocytochemistry clathrin cd63 cd9 reporter exosome transfer assay mitophagy lysosomal stress viability cytotoxicity celltiter-glo'},
+    {page:'genetics.html', title:'Genetics & Molecular Biology', category:'Research',
+     keywords:'crispr cas9 sirna shrna aso antisense oligonucleotide molecular cloning viral constructs protein conjugation lysosomal biology gene editing lentivirus aav adenovirus transfection plasmid dna rna'},
+    {page:'drug-discovery.html', title:'Drug Discovery & Translation', category:'Research',
+     keywords:'parkin agonist tac lysosomal rescue antivirals biomarker strategy preclinical compound testing small molecule screening sar dose response pseudovirus sars-cov-2 pikfyve csnk2 hplc compound purity analytical characterization dls dynamic light scattering particle size nanoparticle formulation lc-ms pharmacokinetics target engagement pharmacodynamic'},
+    {page:'microscopy.html', title:'Microscopy & Imaging', category:'Research',
+     keywords:'confocal sted super-resolution tem transmission electron microscopy live-cell imaging high-content screening ihc histology immunohistochemistry fluorescence opera phenix hcs image analysis'},
+    {page:'flow-cytometry.html', title:'Flow Cytometry', category:'Research',
+     keywords:'flow cytometry multicolor immunophenotyping intracellular staining facs sorting gating strategy surface marker t cell b cell nk cell monocyte macrophage pbmc viability dye compensation'},
+    {page:'proteomics.html', title:'Proteomics & Single-Cell Genomics', category:'Research',
+     keywords:'tmt quantitative proteomics scrna-seq 10x genomics bulk rna-seq gsea pathway analysis umap deseq2 seurat mass spectrometry protein biomarker volcano plot gene ontology single cell transcriptomics'},
+    {page:'coding.html', title:'Coding, Automation & Data', category:'Technical',
+     keywords:'python automorphotrack pipelines bravo tecan liquid handling 96 384 well miniaturization machine learning automation data analysis github programming r matlab imageJ fiji cellprofiler'},
+    {page:'skills.html', title:'Full Technical Skills', category:'Technical',
+     keywords:'techniques instruments software capabilities laboratory skills comprehensive listing assays methods platforms tools equipment'},
+    {page:'publications.html', title:'Publications', category:'Academic',
+     keywords:'peer-reviewed papers citations journal articles nature neuroscience lancet science translational medicine acs chemical biology first author corresponding author pubmed google scholar'},
+    {page:'contact.html', title:'Contact', category:'Connect',
+     keywords:'email linkedin github orcid google scholar contact collaboration'}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('searchInput');
+  var resultsEl = document.getElementById('searchResults');
+  var activeIdx = -1;
+
+  function openSearch() {
+    overlay.classList.add('active');
+    requestAnimationFrame(function(){ overlay.classList.add('fade-in'); });
+    input.value = '';
+    input.focus();
+    renderResults('');
+    activeIdx = -1;
+  }
+
+  function closeSearch() {
+    overlay.classList.remove('fade-in');
+    setTimeout(function(){ overlay.classList.remove('active'); }, 200);
+  }
+
+  function escapeRegex(s) {
+    return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function highlight(text, terms) {
+    if (!terms.length) return text;
+    var pattern = terms.map(escapeRegex).join('|');
+    var regex = new RegExp('(' + pattern + ')', 'gi');
+    return text.replace(regex, '<mark>$1</mark>');
+  }
+
+  function renderResults(query) {
+    var terms = query.toLowerCase().trim().split(/\s+/).filter(function(t){ return t.length > 1; });
+    var scored = [];
+
+    searchIndex.forEach(function(item) {
+      if (!terms.length) { scored.push({item: item, score: 0}); return; }
+      var score = 0;
+      var titleLow = item.title.toLowerCase();
+      var kwLow = item.keywords;
+      terms.forEach(function(t) {
+        if (titleLow.indexOf(t) !== -1) score += 10;
+        if (kwLow.indexOf(t) !== -1) score += 3;
+      });
+      if (score > 0) scored.push({item: item, score: score});
+    });
+
+    scored.sort(function(a, b){ return b.score - a.score; });
+
+    if (terms.length && !scored.length) {
+      resultsEl.innerHTML = '<div class="search-empty"><span>&#128269;</span>No results for &ldquo;' + query.replace(/</g, '&lt;') + '&rdquo;</div>';
+      return;
+    }
+
+    var html = '';
+    scored.forEach(function(s, i) {
+      var item = s.item;
+      var title = terms.length ? highlight(item.title, terms) : item.title;
+      var kwArr = item.keywords.split(' ');
+      var matchedKw = [];
+      if (terms.length) {
+        kwArr.forEach(function(kw) {
+          terms.forEach(function(t) {
+            if (kw.indexOf(t) !== -1 && matchedKw.indexOf(kw) === -1) matchedKw.push(kw);
+          });
+        });
+      }
+      var desc = matchedKw.length ? matchedKw.slice(0, 6).join(' &middot; ') : kwArr.slice(0, 5).join(' &middot; ');
+      if (terms.length) desc = highlight(desc, terms);
+
+      html += '<a class="search-result' + (i === 0 && terms.length ? ' active' : '') + '" href="' + item.page + '">';
+      html += '<div class="search-result-page">' + item.category + '</div>';
+      html += '<div class="search-result-title">' + title + '</div>';
+      html += '<div class="search-result-desc">' + desc + '</div></a>';
+    });
+
+    resultsEl.innerHTML = html;
+    activeIdx = terms.length ? 0 : -1;
+  }
+
+  function setActive(idx) {
+    var items = resultsEl.querySelectorAll('.search-result');
+    if (!items.length) return;
+    items.forEach(function(el){ el.classList.remove('active'); });
+    if (idx < 0) idx = items.length - 1;
+    if (idx >= items.length) idx = 0;
+    activeIdx = idx;
+    items[idx].classList.add('active');
+    items[idx].scrollIntoView({block: 'nearest'});
+  }
+
+  if (input) {
+    input.addEventListener('input', function(){ renderResults(this.value); });
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowDown') { e.preventDefault(); setActive(activeIdx + 1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(activeIdx - 1); }
+      else if (e.key === 'Enter') {
+        e.preventDefault();
+        var active = resultsEl.querySelector('.search-result.active');
+        if (active) window.location.href = active.href;
+      }
+    });
+  }
+
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeSearch();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
+    if (e.key === 'Escape' && overlay.classList.contains('active')) closeSearch();
+    if (e.key === '/' && !overlay.classList.contains('active') && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+      e.preventDefault(); openSearch();
+    }
+  });
+
+  document.querySelectorAll('.search-toggle').forEach(function(btn){ btn.addEventListener('click', openSearch); });
+})();
+</script>
+
 </body>
 </html>
