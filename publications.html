@@ -625,15 +625,20 @@ a.card:hover {
 }
 
 /* ── FOOTER ── */
-.page-footer {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 48px 32px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid var(--rule);
-}
+
+
+  .footer-inner { max-width: 1120px; margin: 0 auto; padding: 56px 32px 40px; display: flex; justify-content: space-between; gap: 48px; }
+  .footer-brand { max-width: 320px; }
+  .footer-name { font-family: var(--serif); font-size: 1.3rem; color: #fff; margin-bottom: 8px; }
+  .footer-role { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.6; }
+  .footer-links-grid { display: flex; gap: 56px; }
+  .footer-col { display: flex; flex-direction: column; gap: 8px; }
+  .footer-col-title { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .footer-col a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .footer-col a:hover { color: #fff; }
+  .footer-bottom { max-width: 1120px; margin: 0 auto; padding: 20px 32px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: rgba(255,255,255,0.3); text-align: center; }
+  @media (max-width: 768px) { .footer-inner { flex-direction: column; gap: 32px; } .footer-links-grid { flex-direction: column; gap: 24px; } }
+
 
 .footer-left {
   font-size: 13px;
@@ -709,7 +714,20 @@ a.card:hover {
   .workflow-step:first-child { border-top: none; }
   .findings { grid-template-columns: 1fr 1fr; }
   .card-grid { grid-template-columns: 1fr; }
-  .page-footer { flex-direction: column; gap: 16px; text-align: center; }
+  
+
+  .footer-inner { max-width: 1120px; margin: 0 auto; padding: 56px 32px 40px; display: flex; justify-content: space-between; gap: 48px; }
+  .footer-brand { max-width: 320px; }
+  .footer-name { font-family: var(--serif); font-size: 1.3rem; color: #fff; margin-bottom: 8px; }
+  .footer-role { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.6; }
+  .footer-links-grid { display: flex; gap: 56px; }
+  .footer-col { display: flex; flex-direction: column; gap: 8px; }
+  .footer-col-title { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .footer-col a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .footer-col a:hover { color: #fff; }
+  .footer-bottom { max-width: 1120px; margin: 0 auto; padding: 20px 32px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: rgba(255,255,255,0.3); text-align: center; }
+  @media (max-width: 768px) { .footer-inner { flex-direction: column; gap: 32px; } .footer-links-grid { flex-direction: column; gap: 24px; } }
+
 }
 
 
@@ -810,9 +828,20 @@ nav {
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.page-footer {
-  border-top-color: rgba(15,20,25,0.06);
-}
+
+
+  .footer-inner { max-width: 1120px; margin: 0 auto; padding: 56px 32px 40px; display: flex; justify-content: space-between; gap: 48px; }
+  .footer-brand { max-width: 320px; }
+  .footer-name { font-family: var(--serif); font-size: 1.3rem; color: #fff; margin-bottom: 8px; }
+  .footer-role { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.6; }
+  .footer-links-grid { display: flex; gap: 56px; }
+  .footer-col { display: flex; flex-direction: column; gap: 8px; }
+  .footer-col-title { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .footer-col a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .footer-col a:hover { color: #fff; }
+  .footer-bottom { max-width: 1120px; margin: 0 auto; padding: 20px 32px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: rgba(255,255,255,0.3); text-align: center; }
+  @media (max-width: 768px) { .footer-inner { flex-direction: column; gap: 32px; } .footer-links-grid { flex-direction: column; gap: 24px; } }
+
 
 .nav-links a {
   transition: all 0.2s ease;
@@ -829,9 +858,52 @@ nav {
   border-radius: 1px;
 }
 
-</style>
+
+  /* ── DARK MODE ── */
+  .dark-toggle {
+    background: none; border: 1px solid var(--rule); border-radius: 50%;
+    width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 14px; color: var(--mid); transition: all 0.25s ease; flex-shrink: 0;
+  }
+  .dark-toggle:hover { border-color: var(--accent); color: var(--ink); }
+  html.dark {
+    --ink: #e8e6e1; --paper: #111318; --mid: #9ca3af; --rule: #2a2d35;
+    --card: #1a1d24; --section-bg: #15171d; --accent-soft: rgba(192,57,43,0.15);
+  }
+  html.dark body::before {
+    background: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  }
+  html.dark nav { background: rgba(17,19,24,0.92); }
+  html.dark .section-content p, html.dark .timeline-desc { color: rgba(232,230,225,0.6); }
+  html.dark .card, html.dark .finding { background: var(--card); border-color: var(--rule); }
+  html.dark .hero-photo { border-color: var(--rule); }
+  html.dark img { filter: brightness(0.92); }
+  html.dark .gallery-thumb { border-color: var(--rule); }
+  html.dark .chart-container { background: var(--card); border-color: var(--rule); }
+  a.tag { text-decoration: none; cursor: pointer; }
+  a.tag:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--ink); }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .page-footer { background: var(--ink); color: rgba(255,255,255,0.7); padding: 0; border-top: none; display: block; }
+  .footer-inner { max-width: 1120px; margin: 0 auto; padding: 56px 32px 40px; display: flex; justify-content: space-between; gap: 48px; }
+  .footer-brand { max-width: 320px; }
+  .footer-name { font-family: var(--serif); font-size: 1.3rem; color: #fff; margin-bottom: 8px; }
+  .footer-role { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.6; }
+  .footer-links-grid { display: flex; gap: 56px; }
+  .footer-col { display: flex; flex-direction: column; gap: 8px; }
+  .footer-col-title { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .footer-col a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .footer-col a:hover { color: #fff; }
+  .footer-bottom { max-width: 1120px; margin: 0 auto; padding: 20px 32px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: rgba(255,255,255,0.3); text-align: center; }
+  @media (max-width: 768px) { .footer-inner { flex-direction: column; gap: 32px; } .footer-links-grid { flex-direction: column; gap: 24px; } }
+
+
 </head>
-<body>
+<body><script>if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark');</script>
+
 
 <nav>
   <div class="nav-inner">
@@ -854,7 +926,8 @@ nav {
       <a href="skills.html" >Skills</a>
       <a href="publications.html" class="active">Pubs</a>
       <a href="contact.html" >Contact</a>
-    </div>
+    </div><button class="dark-toggle" onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light')" aria-label="Toggle dark mode" title="Toggle dark mode">☀</button>
+
   </div>
 </nav>
 
@@ -870,7 +943,7 @@ nav {
   </div>
 </div>
 
-<div class="section" id="key-achievements">
+<div class="section reveal" id="key-achievements">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">01</div>
@@ -900,7 +973,7 @@ nav {
   </div>
 </div>
 
-<div class="section" id="selected-pubs">
+<div class="section reveal" id="selected-pubs">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">02</div>
@@ -961,15 +1034,41 @@ nav {
 </div>
 
 <div class="page-footer">
-  <div class="footer-left">
-    <a href="index.html">Armin Bayati, PhD</a> · Research Fellow, Harvard Medical School
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-name">Armin Bayati, PhD</div>
+        <div class="footer-role">Research Fellow · Harvard Medical School &amp; Massachusetts General Hospital</div>
+      </div>
+      <div class="footer-links-grid">
+        <div class="footer-col">
+          <div class="footer-col-title">Research</div>
+          <a href="ipscs.html">iPSC Models</a>
+          <a href="cancer-immunology.html">Cancer Immunology</a>
+          <a href="drug-discovery.html">Drug Discovery</a>
+          <a href="proteomics.html">Proteomics</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Connect</div>
+          <a href="https://scholar.google.com/citations?user=MIW8P2MAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+          <a href="https://linkedin.com/in/arminbayati" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/abayatibrain" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://orcid.org/0000-0002-2780-1737" target="_blank" rel="noopener">ORCID</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Contact</div>
+          <a href="mailto:a.bayati.brain@gmail.com">Email</a>
+          <a href="contact.html">Contact Page</a>
+          <a href="publications.html">Publications</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Armin Bayati. All rights reserved.</div>
   </div>
-  <div class="footer-right">
-    <a href="mailto:a.bayati.brain@gmail.com">Email</a>
-    <a href="https://linkedin.com/in/arminbayati" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://scholar.google.com/citations?user=MIW8P2MAAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
-  </div>
-</div>
-
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>

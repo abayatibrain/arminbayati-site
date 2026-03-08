@@ -648,42 +648,235 @@ a.card:hover {
   white-space: nowrap;
 }
 
-/* ── FOOTER ── */
-.page-footer {
+/* ── CTA BUTTONS ── */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.8px; text-transform: uppercase;
+  padding: 12px 28px; border-radius: 4px;
+  background: var(--accent); color: #fff;
+  text-decoration: none; transition: all 0.25s ease;
+  border: 1.5px solid var(--accent);
+}
+.btn-primary:hover { background: #a93226; border-color: #a93226; }
+
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.8px; text-transform: uppercase;
+  padding: 12px 28px; border-radius: 4px;
+  background: transparent; color: var(--ink);
+  text-decoration: none; transition: all 0.25s ease;
+  border: 1.5px solid var(--rule);
+}
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+a.tag { text-decoration: none; cursor: pointer; }
+a.tag:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--ink); }
+
+/* ── HIGHLIGHTS STRIP ── */
+.highlights-strip {
+  background: var(--ink);
+  padding: 36px 32px;
+  border-top: 3px solid var(--accent);
+}
+.highlights-inner {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 48px 32px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.highlight-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.highlight-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.highlight-title {
+  font-family: var(--sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+.highlight-desc {
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.5;
+}
+@media (max-width: 768px) {
+  .highlights-inner { grid-template-columns: 1fr 1fr; gap: 20px; }
+}
+@media (max-width: 480px) {
+  .highlights-inner { grid-template-columns: 1fr; }
+}
+
+/* ── NEWS LIST ── */
+.news-list { margin: 20px 0; max-width: 640px; }
+.news-item {
+  display: flex; gap: 20px; padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.news-item:last-child { border-bottom: none; }
+.news-date {
+  font-family: var(--mono); font-size: 12px; font-weight: 500;
+  color: var(--accent); letter-spacing: 0.5px;
+  min-width: 48px; padding-top: 2px;
+}
+.news-body {
+  font-size: 14.5px; font-weight: 300; color: #444; line-height: 1.7;
+}
+.news-body strong { font-weight: 600; color: var(--ink); }
+
+/* ── SCROLL ANIMATIONS ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── CARD ICONS ── */
+.card-icon {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* ── FOOTER ── */
+.page-footer {
+  background: var(--ink);
+  color: rgba(255,255,255,0.7);
+  padding: 0;
+  border-top: none;
+  display: block;
+}
+.footer-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 56px 32px 40px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid var(--rule);
+  gap: 48px;
 }
-
-.footer-left {
+.footer-brand { max-width: 320px; }
+.footer-name {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.footer-role {
   font-size: 13px;
-  color: var(--mid);
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.6;
 }
-
-.footer-left a {
-  color: var(--ink);
-  text-decoration: none;
-  font-weight: 500;
-}
-.footer-left a:hover { text-decoration: underline; }
-
-.footer-right {
+.footer-links-grid {
   display: flex;
-  gap: 20px;
+  gap: 56px;
+}
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.footer-col-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.footer-col a {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: #fff; }
+.footer-bottom {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 20px 32px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .footer-inner { flex-direction: column; gap: 32px; }
+  .footer-links-grid { flex-direction: column; gap: 24px; }
 }
 
-.footer-right a {
-  font-family: var(--mono);
-  font-size: 12px;
+/* ── DARK MODE ── */
+.dark-toggle {
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
   color: var(--mid);
-  text-decoration: none;
-  letter-spacing: 0.3px;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
 }
-.footer-right a:hover { color: var(--ink); }
+.dark-toggle:hover { border-color: var(--accent); color: var(--ink); }
+
+html.dark {
+  --ink: #e8e6e1;
+  --paper: #111318;
+  --mid: #9ca3af;
+  --rule: #2a2d35;
+  --card: #1a1d24;
+  --section-bg: #15171d;
+  --accent-soft: rgba(192,57,43,0.15);
+}
+html.dark body::before {
+  background:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+}
+html.dark nav {
+  background: rgba(17,19,24,0.92);
+}
+html.dark .section-content p,
+html.dark .news-body,
+html.dark .timeline-desc {
+  color: rgba(232,230,225,0.6);
+}
+html.dark .card {
+  background: var(--card);
+  border-color: var(--rule);
+}
+html.dark .finding {
+  background: var(--card);
+}
+html.dark .hero-photo {
+  border-color: var(--rule);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 0 6px rgba(192,57,43,0.1);
+}
+html.dark img {
+  filter: brightness(0.92);
+}
+html.dark .highlights-strip {
+  background: #0a0c10;
+}
 
 /* ── ANIMATIONS ── */
 @keyframes fadeUp {
@@ -696,6 +889,7 @@ a.card:hover {
 .hero h1 { animation-delay: 0.1s; }
 .hero-description { animation-delay: 0.2s; }
 .hero-tags { animation-delay: 0.3s; }
+.hero-photo { animation: fadeUp 0.6s ease 0.4s both; }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
@@ -729,6 +923,7 @@ a.card:hover {
   .hero { padding: 48px 20px 40px; flex-direction: column-reverse; align-items: center; text-align: center; }
   .hero-photo { width: 160px; height: 160px; margin-top: 0; margin-bottom: 8px; }
   .hero-tags { justify-content: center; }
+  .hero-cta { justify-content: center; }
   .hero-description { margin-left: auto; margin-right: auto; }
   .figure-container { padding: 12px 20px 48px; }
   .workflow-steps { flex-direction: column; }
@@ -736,7 +931,7 @@ a.card:hover {
   .workflow-step:first-child { border-top: none; }
   .findings { grid-template-columns: 1fr 1fr; }
   .card-grid { grid-template-columns: 1fr; }
-  .page-footer { flex-direction: column; gap: 16px; text-align: center; }
+  .highlights-inner { grid-template-columns: 1fr 1fr; gap: 20px; }
 }
 
 
@@ -859,6 +1054,7 @@ nav {
 </style>
 </head>
 <body>
+<script>if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark');</script>
 
 <nav>
   <div class="nav-inner">
@@ -882,6 +1078,7 @@ nav {
       <a href="publications.html" >Pubs</a>
       <a href="contact.html" >Contact</a>
     </div>
+    <button class="dark-toggle" onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light')" aria-label="Toggle dark mode" title="Toggle dark mode">☀</button>
   </div>
 </nav>
 
@@ -893,20 +1090,24 @@ nav {
       Research Fellow at Harvard Medical School and Massachusetts General Hospital. My work spans neuroscience, cancer immunology, infectious disease, and cardiovascular biology — using iPSC-derived cell models, high-content imaging, flow cytometry, proteomics, and computational tools to dissect disease mechanisms and advance preclinical drug discovery.
     </p>
     <div class="hero-tags">
-      <span class="tag">iPSC Disease Modeling</span>
-      <span class="tag">Parkinson's Disease</span>
-      <span class="tag">α-Synuclein Biology</span>
-      <span class="tag">Live-Cell Imaging</span>
-      <span class="tag">Electron Microscopy</span>
-      <span class="tag">CRISPR</span>
-      <span class="tag">Cancer Immunology</span>
-      <span class="tag">Cardiomyocytes</span>
-      <span class="tag">Drug Discovery</span>
-      <span class="tag">Biomarker Development</span>
-      <span class="tag">Flow Cytometry</span>
-      <span class="tag">RNA Therapeutics</span>
-      <span class="tag">Automation (BRAVO/Tecan)</span>
-      <span class="tag">Python / AutoMorphoTrack</span>
+      <a href="ipscs.html" class="tag">iPSC Disease Modeling</a>
+      <a href="ipscs.html" class="tag">Parkinson's Disease</a>
+      <a href="genetics.html" class="tag">α-Synuclein Biology</a>
+      <a href="microscopy.html" class="tag">Live-Cell Imaging</a>
+      <a href="microscopy.html" class="tag">Electron Microscopy</a>
+      <a href="genetics.html" class="tag">CRISPR</a>
+      <a href="cancer-immunology.html" class="tag">Cancer Immunology</a>
+      <a href="cardiomyocytes.html" class="tag">Cardiomyocytes</a>
+      <a href="drug-discovery.html" class="tag">Drug Discovery</a>
+      <a href="drug-discovery.html" class="tag">Biomarker Development</a>
+      <a href="flow-cytometry.html" class="tag">Flow Cytometry</a>
+      <a href="genetics.html" class="tag">RNA Therapeutics</a>
+      <a href="coding.html" class="tag">Automation (BRAVO/Tecan)</a>
+      <a href="coding.html" class="tag">Python / AutoMorphoTrack</a>
+    </div>
+    <div class="hero-cta" style="margin-top:28px; display:flex; gap:12px; flex-wrap:wrap;">
+      <a href="contact.html" class="btn-primary">Get in Touch</a>
+      <a href="publications.html" class="btn-secondary">View Publications</a>
     </div>
   </div>
   <div class="hero-photo">
@@ -914,7 +1115,40 @@ nav {
   </div>
 </div>
 
-<div class="section" id="about">
+<div class="highlights-strip reveal">
+  <div class="highlights-inner">
+    <div class="highlight-item">
+      <div class="highlight-icon">📄</div>
+      <div class="highlight-text">
+        <div class="highlight-title">First-author, Nature Neuroscience</div>
+        <div class="highlight-desc">Developed novel iPSC-based Lewy body model for Parkinson's disease</div>
+      </div>
+    </div>
+    <div class="highlight-item">
+      <div class="highlight-icon">🧬</div>
+      <div class="highlight-text">
+        <div class="highlight-title">First to characterize SARS-CoV-2 cell entry</div>
+        <div class="highlight-desc">JBC Editors' Pick — clathrin-mediated endocytosis mechanism</div>
+      </div>
+    </div>
+    <div class="highlight-item">
+      <div class="highlight-icon">💊</div>
+      <div class="highlight-text">
+        <div class="highlight-title">Led preclinical drug discovery programs</div>
+        <div class="highlight-desc">Novel therapeutics targeting neurodegeneration, viral entry &amp; cancer</div>
+      </div>
+    </div>
+    <div class="highlight-item">
+      <div class="highlight-icon">🔬</div>
+      <div class="highlight-text">
+        <div class="highlight-title">25+ publications · 1,300+ citations</div>
+        <div class="highlight-desc">Harvard, McGill, Nature Neuroscience, Cell Reports, JBC, Lancet</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section reveal" id="about">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">01</div>
@@ -950,7 +1184,7 @@ nav {
   </div>
 </div>
 
-<div class="section" id="experience">
+<div class="section reveal" id="experience">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">02</div>
@@ -989,7 +1223,7 @@ nav {
   </div>
 </div>
 
-<div class="section" id="research">
+<div class="section reveal" id="research">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">03</div>
@@ -1000,46 +1234,57 @@ nav {
       <p>My research spans iPSC-based disease modeling, cellular and molecular assays, advanced microscopy, drug discovery, automation, and computational image analysis.</p>
       <div class="card-grid" style="max-width:100%;">
         <a href="ipscs.html" class="card" style="border-left: 3px solid var(--accent);">
+          <div class="card-icon">🧠</div>
           <div class="card-title">iPSC-Derived Neurons</div>
           <div class="card-desc">Dopaminergic, cortical, and glial differentiation. Lewy body disease modeling. MEA electrophysiology, calcium imaging, HPLC dopamine quantification.</div>
         </a>
         <a href="cardiomyocytes.html" class="card" style="border-left: 3px solid var(--accent);">
+          <div class="card-icon">❤️</div>
           <div class="card-title">iPSC-Derived Cardiomyocytes</div>
           <div class="card-desc">Cardiac differentiation, MEA beat-rate analysis, calcium transient profiling, cardiotoxicity screening, and disease modeling (HCM, DCM).</div>
         </a>
         <a href="cancer-immunology.html" class="card" style="border-left: 3px solid var(--accent);">
+          <div class="card-icon">🎯</div>
           <div class="card-title">Cancer Immunology</div>
           <div class="card-desc">T-cell killing, ADCC/CDC, checkpoint blockade, cytokine profiling, CAR-T characterization, and immune co-culture systems.</div>
         </a>
         <a href="cellular-assays.html" class="card">
+          <div class="card-icon">🔬</div>
           <div class="card-title">Cellular &amp; Functional Assays</div>
           <div class="card-desc">Endocytosis, exosomal biology, autophagy, flow cytometry, PBMC/immune assays, plate-based readouts, and immunocytochemistry.</div>
         </a>
         <a href="genetics.html" class="card">
+          <div class="card-icon">🧬</div>
           <div class="card-title">Genetics &amp; Molecular Biology</div>
           <div class="card-desc">CRISPR, siRNA/shRNA/ASO, molecular cloning, viral constructs, protein conjugation, and lysosomal biology.</div>
         </a>
         <a href="drug-discovery.html" class="card">
+          <div class="card-icon">💊</div>
           <div class="card-title">Drug Discovery &amp; Translation</div>
           <div class="card-desc">Parkin agonists, TAC evaluation, lysosomal rescue, antivirals, and biomarker strategy.</div>
         </a>
         <a href="microscopy.html" class="card">
+          <div class="card-icon">📷</div>
           <div class="card-title">Microscopy &amp; Imaging</div>
           <div class="card-desc">Confocal, STED super-resolution, TEM, live-cell imaging, high-content screening, and IHC/histology.</div>
         </a>
         <a href="proteomics.html" class="card" style="border-left: 3px solid var(--accent);">
+          <div class="card-icon">📊</div>
           <div class="card-title">Proteomics &amp; Single-Cell Genomics</div>
           <div class="card-desc">TMT quantitative proteomics, scRNA-seq (10x Genomics), bulk RNA-seq, GSEA/pathway analysis, UMAP visualization, DESeq2/Seurat pipelines.</div>
         </a>
         <a href="coding.html" class="card">
+          <div class="card-icon">💻</div>
           <div class="card-title">Coding, Automation &amp; Data</div>
           <div class="card-desc">AutoMorphoTrack, Python pipelines, BRAVO/Tecan liquid handling, 96/384-well miniaturization, and machine learning.</div>
         </a>
         <a href="skills.html" class="card">
+          <div class="card-icon">⚙️</div>
           <div class="card-title">Full Technical Skills</div>
           <div class="card-desc">Comprehensive categorized listing of all techniques, instruments, software, and capabilities.</div>
         </a>
         <a href="publications.html" class="card">
+          <div class="card-icon">📄</div>
           <div class="card-title">Publications</div>
           <div class="card-desc">25+ peer-reviewed papers with 1,300+ citations.</div>
         </a>
@@ -1048,7 +1293,37 @@ nav {
   </div>
 </div>
 
-<div class="workflow-strip">
+<div class="section reveal" id="news">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">04</div>
+      <div class="section-label">News</div>
+    </div>
+    <div class="section-content">
+      <h2>Recent Activity</h2>
+      <div class="news-list">
+        <div class="news-item">
+          <div class="news-date">2026</div>
+          <div class="news-body"><strong>Science Translational Medicine</strong> — Preprint on PINK1-dependent mtDNA release and cGAS/STING signaling in Parkinson's disease myeloid cells.</div>
+        </div>
+        <div class="news-item">
+          <div class="news-date">2025</div>
+          <div class="news-body"><strong>The Lancet</strong> — α-Synuclein seed amplification assay (SAA) for PD progression tracking in the PPMI cohort.</div>
+        </div>
+        <div class="news-item">
+          <div class="news-date">2024</div>
+          <div class="news-body"><strong>Nature Neuroscience</strong> — First-author publication: iPSC-based dual-hit Lewy body model for Parkinson's disease.</div>
+        </div>
+        <div class="news-item">
+          <div class="news-date">2024</div>
+          <div class="news-body">Joined <strong>Harvard Medical School &amp; Mass General Brigham</strong> as Research Fellow / Research Instructor.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="workflow-strip reveal">
   <div class="workflow-inner">
     <h3>Core Expertise</h3>
     <div class="workflow-steps">
@@ -1077,15 +1352,50 @@ nav {
 </div>
 
 <div class="page-footer">
-  <div class="footer-left">
-    <a href="index.html">Armin Bayati, PhD</a> · Research Fellow, Harvard Medical School
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-name">Armin Bayati, PhD</div>
+      <div class="footer-role">Research Fellow · Harvard Medical School &amp; Massachusetts General Hospital</div>
+    </div>
+    <div class="footer-links-grid">
+      <div class="footer-col">
+        <div class="footer-col-title">Research</div>
+        <a href="ipscs.html">iPSC Models</a>
+        <a href="cancer-immunology.html">Cancer Immunology</a>
+        <a href="drug-discovery.html">Drug Discovery</a>
+        <a href="proteomics.html">Proteomics</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Connect</div>
+        <a href="https://scholar.google.com/citations?user=MIW8P2MAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="https://linkedin.com/in/arminbayati" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/abayatibrain" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://orcid.org/0000-0002-2780-1737" target="_blank" rel="noopener">ORCID</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Contact</div>
+        <a href="mailto:a.bayati.brain@gmail.com">Email</a>
+        <a href="contact.html">Contact Page</a>
+        <a href="publications.html">Publications</a>
+      </div>
+    </div>
   </div>
-  <div class="footer-right">
-    <a href="mailto:a.bayati.brain@gmail.com">Email</a>
-    <a href="https://linkedin.com/in/arminbayati" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://scholar.google.com/citations?user=MIW8P2MAAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
+  <div class="footer-bottom">
+    &copy; 2026 Armin Bayati. All rights reserved.
   </div>
 </div>
+
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
