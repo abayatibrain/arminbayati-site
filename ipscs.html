@@ -114,7 +114,7 @@ nav {
 .hero {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 80px 32px 64px;
+  padding: 64px 32px 32px;
 }
 
 .hero-eyebrow {
@@ -678,6 +678,23 @@ a.card:hover {
 .hero-description { animation-delay: 0.2s; }
 .hero-tags { animation-delay: 0.3s; }
 
+/* ── SCROLL HINT ── */
+.scroll-hint {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  color: var(--mid);
+  text-decoration: none;
+  animation: bounce 2s ease infinite 1.5s;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+.scroll-hint:hover { opacity: 1; color: var(--accent); }
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   nav { padding: 0 20px; }
@@ -1129,9 +1146,12 @@ nav {
     <a class="tag" href="cardiomyocytes.html">MEA Electrophysiology</a>
     <a class="tag" href="flow-cytometry.html">Primary Cells &amp; PBMCs</a>
   </div>
+  <a href="#culturing" class="scroll-hint" aria-label="Scroll down">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 8 10 13 15 8"/></svg>
+  </a>
 </div>
 
-<div class="section reveal" id="culturing">
+<div class="section" id="culturing">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">01</div>
@@ -1145,8 +1165,8 @@ nav {
       <img src="images/ipscs-da-neuron-characterization.jpg" alt="ICC characterization panel: DAT, GIRK2, Neurofilament 160kD, TH with Hoechst, MAP2, and composite overlays in iPSC-derived DA neurons" style="width:100%; max-width:640px; border-radius:6px; border:1px solid var(--rule); margin:20px 0 16px;">
       <p style="font-size:13px; color:var(--mid); font-style:italic; margin-top:-8px;">Immunocytochemistry panel confirming dopaminergic identity in iPSC-derived neurons. Top to bottom: DAT (dopamine transporter), GIRK2 (A9-subtype marker), Neurofilament 160kD, TH (tyrosine hydroxylase). Columns show individual markers, Hoechst nuclear stain, MAP2 dendritic marker, and composite overlay. Published in Bayati et al., <em>Nature Neuroscience</em> 2024.</p>
 
-      <div class="subsection">
-        <div class="subsection-label">Characterization &amp; QC</div>
+      <div class="subsection" id="dopaminergic">
+        <div class="subsection-label">Dopaminergic Neuron Characterization &amp; QC</div>
         <p>Following differentiation, I characterize neuronal identity via antibody profiling (ICC), qPCR, and flow cytometry. Electrical activity is confirmed using <strong>microelectrode arrays (MEAs)</strong> for spontaneous firing patterns and waveform analysis. I have also performed <strong>HPLC-based quantification</strong> of dopamine and metabolites from culture media to link biochemical outputs to functional phenotypes.</p>
 
       <div class="subsection">
@@ -1326,7 +1346,7 @@ nav {
         </div>
         <div class="footer-col">
           <div class="footer-col-title">Contact</div>
-          <a href="mailto:a.bayati.brain@gmail.com">Email</a>
+          <a href="/cdn-cgi/l/email-protection#0e6f206c6f776f7a67206c7c6f67604e69636f6762206d6163">Email</a>
           <a href="contact.html">Contact Page</a>
           <a href="publications.html">Publications</a>
         </div>
@@ -1334,7 +1354,7 @@ nav {
     </div>
     <div class="footer-bottom">&copy; 2026 Armin Bayati. All rights reserved.</div>
   </div>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function(){
   const lb = document.createElement('div');
   lb.className = 'lightbox';

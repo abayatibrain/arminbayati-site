@@ -891,6 +891,17 @@ html.dark .highlights-strip {
 .hero-tags { animation-delay: 0.3s; }
 .hero-photo { animation: fadeUp 0.6s ease 0.4s both; }
 
+/* ── QUICK LINKS LABEL ── */
+.quick-links-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 10px;
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   nav { padding: 0 20px; }
@@ -1089,8 +1100,10 @@ nav {
     <p class="hero-description">
       Research Fellow at Harvard Medical School and Massachusetts General Hospital. My work spans neuroscience, cancer immunology, infectious disease, and cardiovascular biology — using iPSC-derived cell models, high-content imaging, flow cytometry, proteomics, and computational tools to dissect disease mechanisms and advance preclinical drug discovery.
     </p>
+    <div class="quick-links-label">Quick Links</div>
     <div class="hero-tags">
       <a href="ipscs.html" class="tag">iPSC Disease Modeling</a>
+      <a href="ipscs.html#dopaminergic" class="tag">Dopaminergic Neurons</a>
       <a href="ipscs.html" class="tag">Parkinson's Disease</a>
       <a href="genetics.html" class="tag">α-Synuclein Biology</a>
       <a href="microscopy.html" class="tag">Live-Cell Imaging</a>
@@ -1374,7 +1387,7 @@ nav {
       </div>
       <div class="footer-col">
         <div class="footer-col-title">Contact</div>
-        <a href="mailto:a.bayati.brain@gmail.com">Email</a>
+        <a href="/cdn-cgi/l/email-protection#9effb0fcffe7ffeaf7b0fcecfff7f0def9f3fff7f2b0fdf1f3">Email</a>
         <a href="contact.html">Contact Page</a>
         <a href="publications.html">Publications</a>
       </div>
@@ -1396,6 +1409,5 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
-
 </body>
 </html>
