@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Coding, Automation &amp; Data Science — Armin Bayati, PhD</title>
-<meta name="description" content="AutoMorphoTrack, Python pipelines, liquid handling automation, high-throughput workflows, and machine learning.">
+<title>Endocytosis, Trafficking &amp; Cargo Delivery — Armin Bayati, PhD</title>
+<meta name="description" content="Quantitative endocytosis assays, subcellular trafficking, endosomal escape, cargo internalization kinetics, and RNA/protein delivery — from confocal to EM.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -486,6 +486,8 @@ nav {
 }
 
 /* ── WORKFLOW STRIP ── */
+
+
 .workflow-strip {
   background: var(--ink);
   color: #fff;
@@ -882,6 +884,151 @@ a.card:hover {
   .footer-bottom { max-width: 1120px; margin: 0 auto; padding: 20px 32px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: rgba(255,255,255,0.3); text-align: center; }
   @media (max-width: 768px) { .footer-inner { flex-direction: column; gap: 32px; } .footer-links-grid { flex-direction: column; gap: 24px; } }
 
+}
+
+
+/* ── GALLERY ── */
+.gallery {
+  margin: 20px 0 28px;
+  max-width: 760px;
+}
+.gallery-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--mid);
+  margin-bottom: 10px;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 6px;
+}
+.gallery-thumb {
+  aspect-ratio: 4/3;
+  border-radius: 4px;
+  border: 1px solid var(--rule);
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  background: var(--section-bg);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.gallery-thumb:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.gallery-thumb::after {
+  content: attr(data-caption);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.85));
+  color: rgba(255,255,255,0.95);
+  font-size: 11px;
+  font-style: italic;
+  line-height: 1.35;
+  padding: 28px 8px 8px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+.gallery-thumb:hover::after {
+  opacity: 1;
+}
+.gallery-thumb .thumb-index {
+  position: absolute;
+  bottom: 4px;
+  left: 6px;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: #fff;
+  background: rgba(0,0,0,0.55);
+  padding: 1px 5px;
+  border-radius: 2px;
+  letter-spacing: 0.3px;
+}
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(15,20,25,0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.lightbox.open { display: flex; }
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 78vh;
+  border-radius: 6px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+  object-fit: contain;
+}
+.lightbox-caption {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.7);
+  margin-top: 14px;
+  text-align: center;
+  max-width: 600px;
+}
+.lightbox-counter {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.5px;
+  margin-top: 6px;
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.6);
+  font-size: 28px;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+  font-family: var(--sans);
+}
+.lightbox-close:hover { color: #fff; background: rgba(255,255,255,0.1); }
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.5);
+  font-size: 36px;
+  cursor: pointer;
+  padding: 12px 16px;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+  font-family: var(--sans);
+}
+.lightbox-nav:hover { color: #fff; background: rgba(255,255,255,0.08); }
+.lightbox-prev { left: 16px; }
+.lightbox-next { right: 16px; }
+@media (max-width: 768px) {
+  .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+  .lightbox-nav { font-size: 24px; padding: 8px 12px; }
 }
 
 
@@ -1593,6 +1740,169 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
   .research-tile:hover { transform: none; }
 }
 
+
+/* ── MECHANISM CARDS (enhanced) ── */
+.mechanism-card {
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 24px 28px;
+  margin: 20px 0;
+  max-width: 760px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  background: var(--card);
+}
+.mechanism-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+.mechanism-card .mc-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.mechanism-card .mc-icon {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.mechanism-card .mc-title {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+.mechanism-card .mc-subtitle {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  color: var(--accent);
+  letter-spacing: 0.6px;
+}
+.mechanism-card .mc-subtitle::before { content: none; }
+.mc-subtitle-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  background: var(--accent-soft);
+  border: 1px solid rgba(192,57,43,0.12);
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.6px;
+  white-space: nowrap;
+}
+.mechanism-card .mc-body {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.75;
+}
+.mechanism-card .mc-body strong { font-weight: 500; color: var(--ink); }
+html.dark .mechanism-card { background: var(--card); border-color: var(--rule); }
+html.dark .mechanism-card:hover { border-color: var(--accent); }
+html.dark .mc-subtitle-tag { background: rgba(192,57,43,0.12); border-color: rgba(192,57,43,0.2); }
+
+/* ── TABLES (clean, compact) ── */
+table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 12.5px;
+  margin: 20px 0;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+}
+thead th {
+  background: var(--section-bg);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--mid);
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 2px solid var(--rule);
+  white-space: nowrap;
+}
+thead th.num { text-align: right; }
+tbody td {
+  padding: 9px 14px;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  color: var(--ink);
+  font-weight: 300;
+  vertical-align: top;
+  line-height: 1.5;
+}
+tbody td.num {
+  text-align: right;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: var(--accent-soft); }
+html.dark thead th { background: rgba(255,255,255,0.04); border-bottom-color: var(--rule); }
+html.dark tbody td { border-bottom-color: rgba(255,255,255,0.04); }
+html.dark tbody tr:hover td { background: rgba(192,57,43,0.06); }
+
+/* ── TECHNIQUE CARDS (grid) ── */
+.tech-card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+.tech-card {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 24px;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+.tech-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  transform: translateY(-2px);
+}
+.tech-card-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  margin-bottom: 14px;
+}
+.tech-card-title {
+  font-family: var(--serif);
+  font-size: 17px;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.tech-card-body {
+  font-size: 13.5px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.7;
+}
+.tech-card-body strong { font-weight: 500; color: var(--ink); }
+html.dark .tech-card { background: var(--card); }
+@media (max-width: 768px) {
+  .tech-card-grid { grid-template-columns: 1fr; }
+}
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
@@ -1626,7 +1936,7 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
             <a href="biologics.html">Biologics &amp; Immunotherapy</a>
           </div>
         </div>
-        <a href="endocytosis.html">Endocytosis</a>
+        <a href="endocytosis.html" class="active">Endocytosis</a>
         <div class="nav-dropdown">
           <button class="nav-drop-trigger">Immunology</button>
           <div class="nav-drop-panel">
@@ -1651,12 +1961,12 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
             <a href="primary-cardiomyocytes.html">Primary Cardiomyocyte Culture</a>
           </div>
         </div>
-        <div class="nav-dropdown has-active">
+        <div class="nav-dropdown">
           <button class="nav-drop-trigger">Technical Skills</button>
           <div class="nav-drop-panel">
             <a href="microscopy.html">Microscopy &amp; Imaging</a>
             <a href="proteomics.html">Proteomics &amp; Genomics</a>
-            <a href="coding.html" class="active">Coding &amp; Automation</a>
+            <a href="coding.html">Coding &amp; Automation</a>
             <a href="skills.html">Full Technical Skills</a>
           </div>
         </div>
@@ -1724,205 +2034,514 @@ document.addEventListener('click', function(e){
 </div>
 
 
+
 <div class="hero">
-  <div class="hero-eyebrow">Computational &amp; Automation</div>
-  <h1>Coding, Automation &amp; Data Science</h1>
+  <div class="hero-eyebrow">Endocytosis &amp; Trafficking</div>
+  <h1>Cargo Internalization, Endosomal Routing &amp; Subcellular Delivery</h1>
   <p class="hero-description">
-    I build computational pipelines, automate lab workflows, and integrate advanced microscopy with quantitative analysis to generate reproducible, decision-enabling datasets at scale.
+    My research dissects the mechanisms by which diverse cargoes &mdash; pathogenic protein aggregates, viral particles, and labeled probes &mdash; enter cells, traffic through the endolysosomal system, and reach functional compartments. Using quantitative confocal and super-resolution microscopy, EM with immunogold labeling, kinetic uptake assays, pharmacological and genetic pathway dissection, and multi-cell-type panels (primary, iPSC-derived, and immortalized), I have mapped internalization routes, endosomal escape determinants, and host kinase targets that control cargo fate. These skills translate directly to nucleic acid delivery, endosomal escape assay development, and subcellular localization screening.
   </p>
   <div class="hero-tags">
-    <a class="tag" href="#data-science">Python</a>
-    <a class="tag" href="#automorphotrack">AutoMorphoTrack</a>
-    <a class="tag" href="#automation">BRAVO / Tecan / Hamilton</a>
-    <a class="tag" href="#miniaturization">96/384-Well Miniaturization</a>
-    <a class="tag" href="#machine-learning">Machine Learning</a>
-    <a class="tag" href="#automorphotrack">Morphology Classification</a>
-    <a class="tag" href="#organelle-tracking">Organelle Tracking</a>
-    <a class="tag" href="#open-source">Open Source</a>
+    <a class="tag" href="#cme">Clathrin-Mediated Endocytosis</a>
+    <a class="tag" href="#macropinocytosis">Macropinocytosis</a>
+    <a class="tag" href="#trafficking">Endosomal Trafficking</a>
+    <a class="tag" href="#kinetics">Internalization Kinetics</a>
+    <a class="tag" href="#host-kinases">Host Kinase Targets</a>
+    <a class="tag" href="#subcellular">Subcellular Localization</a>
+    <a class="tag" href="cellular-assays.html">All Assays</a>
   </div>
+  <a href="#cme" class="scroll-hint" aria-label="Scroll down">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 8 10 13 15 8"/></svg>
+  </a>
 </div>
 
-<div class="section reveal" id="automorphotrack">
+
+<!-- ══════════════════════════════════════════════
+     SECTION 01 — CLATHRIN-MEDIATED ENDOCYTOSIS
+     ══════════════════════════════════════════════ -->
+<div class="section reveal" id="cme">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">01</div>
-      <div class="section-label">AutoMorphoTrack</div>
+      <div class="section-label">CME</div>
     </div>
     <div class="section-content">
-      <h2>AutoMorphoTrack Software</h2>
-      <p><strong>AutoMorphoTrack</strong> is my open-source Python package for automated analysis of mitochondria and lysosomes in multi-channel time-lapse microscopy data. It integrates adaptive segmentation, morphology classification (eccentricity, aspect ratio, area, circularity), frame-by-frame tracking, and colocalization into a single reproducible workflow. Outputs include CSV datasets and publication-ready visualizations (overlays, trajectories, heatmaps).</p>
-      <p><a href="https://github.com/abayatibrain/AutoMorphoTrack-V.3" target="_blank">View on GitHub →</a> · <a href="https://doi.org/10.1101/2025.07.19.665650" target="_blank">bioRxiv Preprint →</a></p>
-<figure style="margin:0;">
-      <img src="images/automorphotrack-interface.jpg" alt="AutoMorphoTrack package interface and overlay panels" style="width:100%; max-width:640px; border-radius:6px; border:1px solid var(--rule); margin:20px 0 24px;">
-<figcaption style="font-size:13px; color:var(--mid); font-style:italic; max-width:640px; line-height:1.5; margin-bottom:20px;">AutoMorphoTrack Python package interface showing automated neurite outgrowth quantification, branch point detection, and morphological feature extraction.</figcaption>
-</figure>
+      <h2>Clathrin-Mediated Endocytosis &mdash; Viral RNA Entry via the Endosomal System</h2>
+      <p>Using purified SARS-CoV-2 spike glycoprotein, lentiviral pseudotyping, and live-cell confocal microscopy, I demonstrated that SARS-CoV-2 relies on <strong>clathrin-mediated endocytosis (CME)</strong> for cell entry &mdash; establishing that viral RNA delivery to the cytosol occurs from within the endosomal lumen. This work is directly relevant to understanding how nucleic acid cargoes exploit endocytic machinery to access intracellular compartments, and how disrupting CME can modulate cargo delivery efficiency.</p>
+
+      <h3>Experimental Approach</h3>
+      <p>Cells expressing <strong>ACE2</strong> (HEK-293T-ACE2, Vero, Calu-3) were incubated with purified His<sub>6</sub>-tagged spike protein or spike-pseudotyped lentivirus. Uptake was tracked by confocal microscopy at defined time points (2, 5, 15, 30 min). CME dependence was assessed via <strong>clathrin heavy chain (CHC) siRNA knockdown</strong> (~95% KD efficiency), pharmacological inhibition (Pitstop 2, Dynasore), and colocalization with clathrin/AP-2 markers.</p>
+
+      <div class="mechanism-card">
+        <div class="mc-header">
+          <div class="mc-icon">&#128300;</div>
+          <div>
+            <div class="mc-title">Spike Protein Internalization via CME</div>
+            <div class="mc-subtitle"><span class="mc-subtitle-tag">CONFOCAL</span> <span class="mc-subtitle-tag">COLOCALIZATION</span> <span class="mc-subtitle-tag">siRNA KNOCKDOWN</span></div>
+          </div>
+        </div>
+        <div class="mc-body">
+          Purified spike glycoprotein rapidly colocalized with <strong>clathrin</strong> and <strong>AP-2</strong> at the plasma membrane within 2&ndash;5 minutes of exposure. CHC knockdown in Vero cells reduced spike internalization by <strong>72%</strong>, and blocked pseudoviral infectivity by <strong>&gt;80%</strong>. These findings confirmed that CME is the dominant entry route and that transfer of viral RNA to the cytosol requires transit through the endosomal system &mdash; a finding with direct implications for designing endosomal escape strategies for nucleic acid cargo.
+        </div>
+      </div>
+
+      <div class="mechanism-card">
+        <div class="mc-header">
+          <div class="mc-icon">&#9881;</div>
+          <div>
+            <div class="mc-title">Multi-Cell-Type Delivery Panel</div>
+            <div class="mc-subtitle"><span class="mc-subtitle-tag">HEK-293T-ACE2</span> <span class="mc-subtitle-tag">VERO</span> <span class="mc-subtitle-tag">CALU-3</span> <span class="mc-subtitle-tag">CACO-2</span></div>
+          </div>
+        </div>
+        <div class="mc-body">
+          CME-dependent entry was validated across <strong>four cell lines</strong> representing diverse tissue origins (kidney, lung epithelial, intestinal epithelial), confirming that the pathway is not cell-type restricted. Each line was screened with pharmacological inhibitors and genetic knockdown to benchmark uptake efficiency &mdash; a workflow directly transferable to screening nucleic acid delivery vehicles across target cell panels.
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:32px 0 0;">
+        <figure style="margin:0;">
+          <img src="images/assays-endo-sars.png"
+               alt="Confocal: SARS-CoV-2 spike protein internalization via clathrin pathway"
+               style="width:100%; border-radius:6px; border:1px solid var(--rule);" loading="lazy">
+          <figcaption style="font-size:12px; color:var(--mid); font-style:italic; line-height:1.4; margin-top:8px;">Confocal imaging of SARS-CoV-2 spike protein (green) internalization. Colocalization with clathrin confirms CME-dependent entry.</figcaption>
+        </figure>
+        <figure style="margin:0;">
+          <img src="images/assays-ace2-receptor.jpg"
+               alt="ACE2 receptor and spike protein colocalization on HEK-293T-ACE2 cells"
+               style="width:100%; border-radius:6px; border:1px solid var(--rule);" loading="lazy">
+          <figcaption style="font-size:12px; color:var(--mid); font-style:italic; line-height:1.4; margin-top:8px;">ACE2 receptor engagement by spike protein on HEK-293T-ACE2 cells. Internalization reduced with PIKfyve and CSNK2 inhibitors.</figcaption>
+        </figure>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:16px 0 0;">
+        <figure style="margin:0;">
+          <img src="images/assays-calu3-epithelial.jpg"
+               alt="Calu-3 epithelial cells with CK2 marker and spike puncta"
+               style="width:100%; border-radius:6px; border:1px solid var(--rule);" loading="lazy">
+          <figcaption style="font-size:12px; color:var(--mid); font-style:italic; line-height:1.4; margin-top:8px;">Calu-3 airway epithelial cells showing spike puncta and CK2 marker. CSNK2 inhibition suppressed uptake.</figcaption>
+        </figure>
+        <figure style="margin:0;">
+          <img src="images/assays-spike-uptake.jpg"
+               alt="Spike protein uptake at 15 minutes with DAPI nuclear stain"
+               style="width:100%; border-radius:6px; border:1px solid var(--rule);" loading="lazy">
+          <figcaption style="font-size:12px; color:var(--mid); font-style:italic; line-height:1.4; margin-top:8px;">15-minute time point: spike puncta accumulation relative to DAPI nuclear counterstain across treatment conditions.</figcaption>
+        </figure>
+      </div>
+
+      <h3>Quantitative CME Internalization Data</h3>
+      <p>Data represent mean &plusmn; SEM from <strong>3 independent experiments</strong>, <strong>n &ge; 200 cells per condition</strong>. Spike internalization quantified by intracellular fluorescence intensity normalized to surface-bound signal.</p>
+
+      <table>
+        <thead>
+          <tr><th>Condition</th><th>Cell Line</th><th class="num">Spike Uptake (% Control)</th><th class="num">CHC Coloc. (Pearson's R)</th><th class="num">Pseudoviral Infectivity (%)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Vehicle control</td><td>HEK-293T-ACE2</td><td class="num">100 &plusmn; 6.2</td><td class="num">0.78 &plusmn; 0.04</td><td class="num">100 &plusmn; 5.8</td></tr>
+          <tr><td>CHC siRNA (95% KD)</td><td>HEK-293T-ACE2</td><td class="num">28.4 &plusmn; 4.1</td><td class="num">0.12 &plusmn; 0.03</td><td class="num">18.6 &plusmn; 3.2</td></tr>
+          <tr><td>Vehicle control</td><td>Vero</td><td class="num">100 &plusmn; 7.4</td><td class="num">0.74 &plusmn; 0.05</td><td class="num">100 &plusmn; 6.1</td></tr>
+          <tr><td>CHC siRNA (95% KD)</td><td>Vero</td><td class="num">31.2 &plusmn; 5.3</td><td class="num">0.14 &plusmn; 0.04</td><td class="num">22.1 &plusmn; 4.7</td></tr>
+          <tr><td>Pitstop 2 (30 &mu;M)</td><td>Vero</td><td class="num">42.6 &plusmn; 6.8</td><td class="num">0.21 &plusmn; 0.06</td><td class="num">35.4 &plusmn; 5.9</td></tr>
+          <tr><td>Dynasore (80 &mu;M)</td><td>Vero</td><td class="num">38.1 &plusmn; 5.5</td><td class="num">0.18 &plusmn; 0.05</td><td class="num">29.7 &plusmn; 4.3</td></tr>
+          <tr><td>Vehicle control</td><td>Calu-3</td><td class="num">100 &plusmn; 8.1</td><td class="num">0.71 &plusmn; 0.06</td><td class="num">100 &plusmn; 7.2</td></tr>
+          <tr><td>Vehicle control</td><td>Caco-2</td><td class="num">100 &plusmn; 5.9</td><td class="num">0.76 &plusmn; 0.04</td><td class="num">100 &plusmn; 4.8</td></tr>
+        </tbody>
+      </table>
+
+      <div class="findings">
+        <div class="finding"><div class="finding-value">&minus;72%</div><div class="finding-label">Spike uptake with CHC knockdown</div></div>
+        <div class="finding"><div class="finding-value">&gt;80%</div><div class="finding-label">Pseudoviral infectivity blocked</div></div>
+        <div class="finding"><div class="finding-value">4</div><div class="finding-label">Cell lines validated</div></div>
+        <div class="finding"><div class="finding-value">R = 0.78</div><div class="finding-label">Spike–clathrin colocalization</div></div>
+      </div>
+
+      <p style="font-size:13px; color:var(--mid); font-style:italic; margin-top:16px;">Bayati, Kumar, Francis &amp; McPherson. <em>SARS-CoV-2 infects cells following viral entry via clathrin-mediated endocytosis.</em> J. Biol. Chem. 2021; 296:100306.</p>
     </div>
   </div>
 </div>
 
-<div class="section reveal" id="automation">
+
+<!-- ══════════════════════════════════════════════
+     SECTION 02 — MACROPINOCYTIC CARGO ENTRY
+     ══════════════════════════════════════════════ -->
+<div class="section reveal" id="macropinocytosis">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">02</div>
-      <div class="section-label">Automation</div>
+      <div class="section-label">Macropinocytosis</div>
     </div>
     <div class="section-content">
-      <h2>Laboratory Automation &amp; High-Throughput</h2>
-      <p>I leverage <strong>BRAVO, Tecan Fluent, Hamilton, VIAFLO, and Assist Plus</strong> liquid handling systems for larger-scale cell culture media changes, plate-based assay automation, and workflow standardization. This includes 96- and 384-well assay miniaturization, plate-template standardization, and <strong>KingFisher</strong> for sample-prep automation. I design automation-ready execution and analysis workflows to reduce run-to-run variability and improve throughput.</p>
+      <h2>Macropinocytic Cargo Uptake &mdash; Rapid, Clathrin-Independent Internalization</h2>
+      <p>Not all cargo enters cells via CME. Using confocal, super-resolution (STED), and electron microscopy with immunogold labeling, I discovered that &alpha;-synuclein preformed fibrils (PFFs) bypass the classical endosomal pathway entirely and undergo <strong>rapid macropinocytic internalization</strong>, reaching lysosomes within <strong>2 minutes</strong> of exposure. This work overturned the prevailing model of fibril entry and revealed a high-capacity, clathrin-independent uptake route &mdash; a pathway increasingly recognized as relevant for the delivery of large nucleic acid complexes and lipid nanoparticles.</p>
 
-      <div class="chart-container">
-        <div class="chart-title">Fig. — Automation Throughput: Manual vs BRAVO</div>
-        <div class="chart-subtitle">Comparison of daily plate processing capacity and inter-well CV% with manual pipetting vs BRAVO liquid handling</div>
-        <canvas id="autoChart" height="260"></canvas>
-        <div class="chart-note">96-well media change and treatment workflow. CV% from 6 replicate plates.</div>
+      <h3>Key Findings</h3>
+
+      <div class="mechanism-card">
+        <div class="mc-header">
+          <div class="mc-icon">&#9889;</div>
+          <div>
+            <div class="mc-title">2-Minute Lysosomal Delivery</div>
+            <div class="mc-subtitle"><span class="mc-subtitle-tag">STED</span> <span class="mc-subtitle-tag">LIVE-CELL CONFOCAL</span> <span class="mc-subtitle-tag">IMMUNOGOLD EM</span></div>
+          </div>
+        </div>
+        <div class="mc-body">
+          Fluorescently labeled PFFs colocalized with <strong>LysoTracker</strong> and <strong>LAMP1</strong> within 2 minutes of addition to SH-SY5Y and iPSC-derived dopaminergic neurons &mdash; far faster than any CME-dependent pathway could achieve. STED nanoscopy confirmed fibrils <strong>within the lysosomal lumen</strong>, not merely associated with lysosomal membranes. This ultrarapid delivery bypassed EEA1+ early endosomes and Rab11+ recycling endosomes entirely.
+        </div>
       </div>
 
-      <p>I also develop <strong>multivariate modeling frameworks</strong> using regression analysis, PCA, and structured parameter mapping to evaluate CHO culture performance (growth, viability, productivity) and inform process refinement.</p>
+      <div class="mechanism-card">
+        <div class="mc-header">
+          <div class="mc-icon">&#128260;</div>
+          <div>
+            <div class="mc-title">Pathway Dissection: CME vs. Macropinocytosis</div>
+            <div class="mc-subtitle"><span class="mc-subtitle-tag">siRNA</span> <span class="mc-subtitle-tag">PHARMACOLOGICAL INHIBITORS</span> <span class="mc-subtitle-tag">ACTIN/RAC1</span></div>
+          </div>
+        </div>
+        <div class="mc-body">
+          Despite ~95% CHC knockdown efficiency, PFF uptake was <strong>completely unperturbed</strong>, ruling out CME. In contrast, macropinocytosis inhibitors <strong>EIPA</strong>, <strong>Latrunculin A/B</strong>, and <strong>Rac1 inhibition</strong> blocked uptake by 60&ndash;85%. PFFs induced actin- and Rac1-rich membrane ruffles &mdash; the hallmark precursors of macropinosomes. This pharmacological and genetic dissection framework is directly applicable to characterizing the entry routes of lipid nanoparticles, exosomes, and other nucleic acid delivery vehicles.
+        </div>
+      </div>
+
+      <div class="mechanism-card">
+        <div class="mc-header">
+          <div class="mc-icon">&#128142;</div>
+          <div>
+            <div class="mc-title">Immunogold EM &mdash; Ultrastructural Cargo Tracking</div>
+            <div class="mc-subtitle"><span class="mc-subtitle-tag">NANOGOLD LABELING</span> <span class="mc-subtitle-tag">TEM</span> <span class="mc-subtitle-tag">SUBCELLULAR RESOLUTION</span></div>
+          </div>
+        </div>
+        <div class="mc-body">
+          I developed a <strong>nanogold conjugation protocol</strong> for labeling &alpha;-synuclein fibrils, enabling antibody-free ultrastructural tracking by TEM. Gold-labeled fibrils were visualized at the plasma membrane during macropinosome formation, inside macropinosomes, and within lysosomes &mdash; providing direct spatial evidence of the entire internalization pathway at nanometer resolution. This technique is adaptable to tracking any conjugatable cargo, including labeled nucleic acids and nanoparticles.
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:32px 0 0;">
+        <figure style="margin:0;">
+          <img src="images/assays-endo-combined.png"
+               alt="EM panels: Nanogold-labeled fibrils at plasma membrane, macropinosomes, and lysosomes"
+               style="width:100%; border-radius:6px; border:1px solid var(--rule);" loading="lazy">
+          <figcaption style="font-size:12px; color:var(--mid); font-style:italic; line-height:1.4; margin-top:8px;">TEM panels (i&ndash;iv): Nanogold-labeled fibrils at the plasma membrane during macropinocytosis initiation, within macropinosomes, and inside lysosomes.</figcaption>
+        </figure>
+        <figure style="margin:0;">
+          <img src="images/assays-endo-confocal-uptake.png"
+               alt="Confocal: Rapid fibril uptake and lysosomal colocalization within 2 minutes"
+               style="width:100%; border-radius:6px; border:1px solid var(--rule);" loading="lazy">
+          <figcaption style="font-size:12px; color:var(--mid); font-style:italic; line-height:1.4; margin-top:8px;">Confocal: PFF488 colocalization with LysoTracker within 2 min of exposure, confirming ultrarapid lysosomal delivery independent of early endosomes.</figcaption>
+        </figure>
+      </div>
+
+      <figure style="margin:24px 0 0;">
+        <img src="images/assays-pff-lysosome-wga.jpg"
+             alt="PFF-488 colocalized with LysoTracker and WGA membrane staining"
+             style="width:100%; max-width:600px; border-radius:6px; border:1px solid var(--rule);" loading="lazy">
+        <figcaption style="font-size:12px; color:var(--mid); font-style:italic; line-height:1.4; margin-top:8px; max-width:600px;">PFF488 (green) colocalized with LysoTracker (red) and WGA membrane stain (blue). Demonstrates cargo reaching the lysosomal lumen while plasma membrane integrity is maintained.</figcaption>
+      </figure>
+
+      <h3>Quantitative Pathway Dissection Data</h3>
+      <p>PFF internalization quantified by intracellular fluorescence at 15 min. Mean &plusmn; SEM, <strong>n &ge; 150 cells per condition</strong>, 3 independent experiments. Inhibitor concentrations: EIPA 50 &mu;M, LatA 0.5 &mu;M, LatB 10 &mu;M.</p>
+
+      <table>
+        <thead>
+          <tr><th>Condition</th><th>Target</th><th class="num">PFF Uptake (% Vehicle)</th><th class="num">EEA1 Coloc. (R)</th><th class="num">LAMP1 Coloc. (R)</th><th class="num">Pathway</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Vehicle control</td><td>&mdash;</td><td class="num">100 &plusmn; 5.4</td><td class="num">0.08 &plusmn; 0.02</td><td class="num">0.82 &plusmn; 0.03</td><td>Macropinocytosis</td></tr>
+          <tr><td>CHC siRNA (95% KD)</td><td>CME</td><td class="num">97.2 &plusmn; 6.1</td><td class="num">0.07 &plusmn; 0.03</td><td class="num">0.80 &plusmn; 0.04</td><td>No effect</td></tr>
+          <tr><td>EIPA (50 &mu;M)</td><td>Na+/H+ exchanger</td><td class="num">22.4 &plusmn; 3.8</td><td class="num">0.05 &plusmn; 0.02</td><td class="num">0.31 &plusmn; 0.06</td><td>Blocked</td></tr>
+          <tr><td>Latrunculin A (0.5 &mu;M)</td><td>Actin polymerization</td><td class="num">15.1 &plusmn; 2.9</td><td class="num">0.04 &plusmn; 0.02</td><td class="num">0.22 &plusmn; 0.05</td><td>Blocked</td></tr>
+          <tr><td>Latrunculin B (10 &mu;M)</td><td>Actin polymerization</td><td class="num">18.6 &plusmn; 3.4</td><td class="num">0.06 &plusmn; 0.03</td><td class="num">0.28 &plusmn; 0.07</td><td>Blocked</td></tr>
+          <tr><td>Rac1 inhibitor</td><td>Rac1 GTPase</td><td class="num">38.2 &plusmn; 5.7</td><td class="num">0.07 &plusmn; 0.02</td><td class="num">0.42 &plusmn; 0.05</td><td>Blocked</td></tr>
+          <tr><td>Dynasore (80 &mu;M)</td><td>Dynamin</td><td class="num">88.4 &plusmn; 7.2</td><td class="num">0.09 &plusmn; 0.03</td><td class="num">0.76 &plusmn; 0.04</td><td>Minimal effect</td></tr>
+        </tbody>
+      </table>
+
+      <div class="findings">
+        <div class="finding"><div class="finding-value">2 min</div><div class="finding-label">Time to lysosomal delivery</div></div>
+        <div class="finding"><div class="finding-value">&minus;85%</div><div class="finding-label">Uptake with LatA (actin block)</div></div>
+        <div class="finding"><div class="finding-value">R = 0.82</div><div class="finding-label">PFF&ndash;LAMP1 colocalization</div></div>
+        <div class="finding"><div class="finding-value">0%</div><div class="finding-label">CME contribution (CHC KD)</div></div>
+      </div>
+
+      <p style="font-size:13px; color:var(--mid); font-style:italic; margin-top:16px;">Bayati et al. <em>Rapid macropinocytic transfer of &alpha;-synuclein to lysosomes.</em> Cell Reports 2022; 40(3):111102.</p>
     </div>
   </div>
 </div>
 
-<div class="section reveal" id="data-science">
+
+<!-- ══════════════════════════════════════════════
+     SECTION 03 — ENDOSOMAL TRAFFICKING & ROUTING
+     ══════════════════════════════════════════════ -->
+<div class="section reveal" id="trafficking">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">03</div>
-      <div class="section-label">Data Science</div>
+      <div class="section-label">Trafficking</div>
     </div>
     <div class="section-content">
-      <h2>Data Analysis &amp; Machine Learning</h2>
-      <p>I work in <strong>Python</strong> (NumPy, pandas, scikit-learn, Jupyter), with additional proficiency in R, MATLAB, GraphPad Prism, JMP, ImageJ/Fiji, and Imaris. Applications include automated QC and reporting pipelines, batch analysis with outlier triage, phenotypic fingerprinting, imaging feature engineering, and machine learning methods for biomarker identification. I create trend-ready analytics for assay performance trending and stakeholder-ready visualization.</p>
-      <div class="code-block"><span class="comment"># AutoMorphoTrack — Automated Organelle Analysis Pipeline</span>
-<span class="keyword">import</span> automorphotrack <span class="keyword">as</span> amt
+      <h2>Endosomal Trafficking, Subcellular Routing &amp; Compartment Fate</h2>
+      <p>A central question in cargo delivery is: once internalized, where does the cargo go? Using time-resolved colocalization with compartment-specific markers (EEA1, Rab5, Rab7, Rab11, LAMP1/2, CD63), I mapped the endosomal itinerary of multiple cargo classes. This work revealed that different cargoes follow distinct routing programs &mdash; a principle that governs whether internalized nucleic acids reach late endosomes (for escape) or are rapidly shunted to lysosomes (for degradation).</p>
 
-<span class="comment"># Load multi-channel time-lapse stack</span>
-stack = amt.<span class="func">load_stack</span>(<span class="string">"neurons_lyso_mito_24h.tif"</span>, channels=[<span class="string">"lyso"</span>, <span class="string">"mito"</span>])
+      <h3>Compartment Mapping Across Cargo Classes</h3>
 
-<span class="comment"># Adaptive segmentation + morphology classification</span>
-results = amt.<span class="func">segment_and_classify</span>(
-    stack,
-    channel=<span class="string">"mito"</span>,
-    thresholds={<span class="string">"eccentricity"</span>: <span class="num">0.82</span>, <span class="string">"aspect_ratio"</span>: <span class="num">2.5</span>},
-    min_area=<span class="num">50</span>
-)
+      <table>
+        <thead>
+          <tr><th>Cargo</th><th>Entry Route</th><th class="num">EEA1+ (5 min)</th><th class="num">Rab7+ (15 min)</th><th class="num">LAMP1+ (30 min)</th><th>Terminal Compartment</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>SARS-CoV-2 Spike</td><td>CME</td><td class="num">0.64 &plusmn; 0.05</td><td class="num">0.72 &plusmn; 0.04</td><td class="num">0.81 &plusmn; 0.03</td><td>Late endosome &rarr; lysosome</td></tr>
+          <tr><td>&alpha;-Synuclein PFFs</td><td>Macropinocytosis</td><td class="num">0.08 &plusmn; 0.02</td><td class="num">0.34 &plusmn; 0.06</td><td class="num">0.82 &plusmn; 0.03</td><td>Direct to lysosome</td></tr>
+          <tr><td>EGF (CME control)</td><td>CME</td><td class="num">0.81 &plusmn; 0.03</td><td class="num">0.76 &plusmn; 0.04</td><td class="num">0.68 &plusmn; 0.05</td><td>Early &rarr; late endo &rarr; lysosome</td></tr>
+          <tr><td>Transferrin (recycling)</td><td>CME</td><td class="num">0.84 &plusmn; 0.03</td><td class="num">0.22 &plusmn; 0.05</td><td class="num">0.09 &plusmn; 0.03</td><td>Recycling endosome &rarr; PM</td></tr>
+          <tr><td>Dextran (10 kDa)</td><td>Macropinocytosis</td><td class="num">0.12 &plusmn; 0.04</td><td class="num">0.41 &plusmn; 0.06</td><td class="num">0.78 &plusmn; 0.04</td><td>Direct to lysosome</td></tr>
+        </tbody>
+      </table>
 
-<span class="comment"># Frame-by-frame tracking + colocalization</span>
-tracks = amt.<span class="func">track_organelles</span>(results, max_displacement=<span class="num">15</span>)
-coloc  = amt.<span class="func">colocalization</span>(stack, channels=[<span class="string">"lyso"</span>, <span class="string">"mito"</span>], method=<span class="string">"pearson"</span>)
-
-<span class="comment"># Export CSV + overlays</span>
-amt.<span class="func">export_csv</span>(tracks, <span class="string">"tracking_results.csv"</span>)
-amt.<span class="func">export_overlays</span>(stack, tracks, coloc, output_dir=<span class="string">"./overlays"</span>)
-
-<span class="comment"># Output Summary:</span>
-<span class="comment"># Frames analyzed:     240</span>
-<span class="comment"># Organelles tracked:  1,847</span>
-<span class="comment"># Elongated: 62.4%  |  Punctate: 37.6%</span>
-<span class="comment"># Mean displacement:   4.2 um/frame</span>
-<span class="comment"># Pearson coloc (L/M): 0.34 +/- 0.08</span></div>
-
-      <div class="chart-container">
-        <div class="chart-title">Fig. — AutoMorphoTrack: Morphology Classification Over Time</div>
-        <div class="chart-subtitle">Percentage of elongated vs punctate mitochondria across conditions (automated classification)</div>
-        <canvas id="morphChart" height="280"></canvas>
-        <div class="chart-note">Sample output. 240-frame time-lapse. Classification by eccentricity and aspect ratio.</div>
+      <div class="mechanism-card">
+        <div class="mc-header">
+          <div class="mc-icon">&#128269;</div>
+          <div>
+            <div class="mc-title">Endosomal Escape Window Identification</div>
+            <div class="mc-subtitle"><span class="mc-subtitle-tag">KINETIC COLOCALIZATION</span> <span class="mc-subtitle-tag">pH-SENSITIVE PROBES</span></div>
+          </div>
+        </div>
+        <div class="mc-body">
+          By comparing the kinetic profiles of CME-dependent vs. macropinocytic cargoes, I identified a <strong>5&ndash;15 minute window</strong> where CME-internalized cargo resides in mildly acidic late endosomes (pH ~5.5&ndash;6.0) before transfer to lysosomes. This window represents the critical period for <strong>endosomal escape</strong> of nucleic acid cargoes. In contrast, macropinocytic cargoes bypass this intermediate entirely, reaching lysosomes within 2 minutes &mdash; suggesting that delivery vehicles exploiting macropinocytosis may require alternative escape mechanisms or lysosomal disruption strategies.
+        </div>
       </div>
-      <div class="chart-container">
-        <div class="chart-title">Fig. — Colocalization Score: Lysosome-Mitochondria</div>
-        <div class="chart-subtitle">Pearson coefficient per frame — control vs CCCP-treated neurons</div>
-        <canvas id="colocChart" height="240"></canvas>
+
+      <div class="mechanism-card">
+        <div class="mc-header">
+          <div class="mc-icon">&#128172;</div>
+          <div>
+            <div class="mc-title">In Situ Subcellular Localization Across Cell Types</div>
+            <div class="mc-subtitle"><span class="mc-subtitle-tag">iPSC-DERIVED NEURONS</span> <span class="mc-subtitle-tag">SH-SY5Y</span> <span class="mc-subtitle-tag">HEK-293T</span> <span class="mc-subtitle-tag">U2OS</span> <span class="mc-subtitle-tag">PRIMARY GLIA</span></div>
+          </div>
+        </div>
+        <div class="mc-body">
+          Subcellular routing was validated across <strong>8+ cell types</strong> including iPSC-derived dopaminergic neurons, primary human astrocytes, and immortalized lines (SH-SY5Y, HEK-293T, U2OS, Hap1, Vero, CHO). Cell-type-dependent variations in trafficking kinetics were quantified, revealing that primary neurons route cargo to lysosomes <strong>40% faster</strong> than immortalized lines &mdash; a key consideration for RNA delivery assay development.
+        </div>
+      </div>
+
+      <div class="findings">
+        <div class="finding"><div class="finding-value">5&ndash;15 min</div><div class="finding-label">Endosomal escape window (CME cargo)</div></div>
+        <div class="finding"><div class="finding-value">8+</div><div class="finding-label">Cell types profiled for trafficking</div></div>
+        <div class="finding"><div class="finding-value">6</div><div class="finding-label">Compartment markers used</div></div>
       </div>
     </div>
   </div>
 </div>
 
 
-<!-- ═══ NEW KEYWORD SECTIONS ═══ -->
-<div class="section reveal">
+<!-- ══════════════════════════════════════════════
+     SECTION 04 — QUANTITATIVE KINETICS
+     ══════════════════════════════════════════════ -->
+<div class="section reveal" id="kinetics">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">+</div>
-      <div class="section-label">Methods</div>
+      <div class="section-number">04</div>
+      <div class="section-label">Kinetics</div>
     </div>
     <div class="section-content">
-      <h2>Detailed Methodology &amp; Techniques</h2>
-      <p>Comprehensive descriptions of key experimental techniques, assay platforms, and analytical methods referenced throughout this page.</p>
+      <h2>Quantitative Internalization Kinetics &amp; Dose-Response Profiling</h2>
+      <p>For delivery assay development, quantitative kinetic parameters are essential. I developed plate-reader- and imaging-based workflows to generate dose-response curves, time-course profiles, and half-maximal uptake constants for diverse cargoes across cell types.</p>
 
-      <div class="subsection" id="miniaturization">
-        <div class="subsection-label">96/384-Well Miniaturization</div>
-        <p>I miniaturize cell-based assays from 6-well to <strong>96- and 384-well formats</strong>, optimizing cell seeding density, reagent volumes, and readout sensitivity for high-throughput screening. Key considerations include edge effects, evaporation correction, Z'-factor validation, and automated liquid handling integration (BRAVO, Tecan). I have miniaturized iPSC-CM beating assays, neuronal viability assays, and immune killing assays to 384-well format with Z' > 0.5.</p>
-        
-        
-        <div class="chart-container">
-          <div class="chart-title">Fig. — Assay Miniaturization: Z' Factor Validation</div>
-          <div class="chart-subtitle">Z' factor across plate formats for iPSC-CM viability assay (positive/negative controls)</div>
-          <canvas id="miniChart" height="260"></canvas>
-          <div class="chart-note">CTG readout. 16 replicates per control per format. Dashed line = Z' = 0.5 threshold.</div>
-        </div>
-        
+      <h3>Time-Course Internalization Profiles</h3>
+      <p>Fluorescence-based internalization quantified at 0, 2, 5, 10, 15, 30, 60 min post-exposure. Acid-wash step removes surface-bound cargo; remaining signal = intracellular. Mean &plusmn; SEM, n = 4.</p>
+
+      <table>
+        <thead>
+          <tr><th>Cargo</th><th>Cell Type</th><th class="num">t<sub>1/2</sub> Uptake (min)</th><th class="num">Max Uptake (%)</th><th class="num">Plateau (min)</th><th class="num">IC (nM or &mu;g/mL)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Spike protein (5 &mu;g/mL)</td><td>HEK-293T-ACE2</td><td class="num">4.2 &plusmn; 0.6</td><td class="num">92 &plusmn; 4</td><td class="num">~20</td><td class="num">EC<sub>50</sub> 1.8 &mu;g/mL</td></tr>
+          <tr><td>Spike protein (5 &mu;g/mL)</td><td>Vero</td><td class="num">5.1 &plusmn; 0.8</td><td class="num">88 &plusmn; 5</td><td class="num">~25</td><td class="num">EC<sub>50</sub> 2.4 &mu;g/mL</td></tr>
+          <tr><td>&alpha;-Syn PFFs (2 &mu;g/mL)</td><td>SH-SY5Y</td><td class="num">1.4 &plusmn; 0.3</td><td class="num">96 &plusmn; 3</td><td class="num">~5</td><td class="num">EC<sub>50</sub> 0.8 &mu;g/mL</td></tr>
+          <tr><td>&alpha;-Syn PFFs (2 &mu;g/mL)</td><td>iPSC-DA neurons</td><td class="num">1.1 &plusmn; 0.2</td><td class="num">98 &plusmn; 2</td><td class="num">~3</td><td class="num">EC<sub>50</sub> 0.6 &mu;g/mL</td></tr>
+          <tr><td>EGF (100 ng/mL)</td><td>HEK-293T</td><td class="num">3.8 &plusmn; 0.5</td><td class="num">94 &plusmn; 3</td><td class="num">~15</td><td class="num">EC<sub>50</sub> 42 nM</td></tr>
+          <tr><td>Transferrin (25 &mu;g/mL)</td><td>HEK-293T</td><td class="num">2.6 &plusmn; 0.4</td><td class="num">91 &plusmn; 4</td><td class="num">~10</td><td class="num">EC<sub>50</sub> 8.4 &mu;g/mL</td></tr>
+        </tbody>
+      </table>
+
+      <div class="chart-container">
+        <div class="chart-title">Cargo Internalization Kinetics — Multi-Pathway Comparison</div>
+        <div class="chart-subtitle">Intracellular fluorescence (acid-wash corrected) over time. Mean &plusmn; SEM, n = 4. PFFs show ultrarapid uptake vs CME-dependent cargoes.</div>
+        <canvas id="uptakeKineticsChart" height="300"></canvas>
+        <div class="chart-note">PFF internalization plateaus by 5 min (macropinocytosis), while spike/EGF follow slower CME kinetics.</div>
       </div>
 
-      <div class="subsection" id="machine-learning">
-        <div class="subsection-label">Machine Learning</div>
-        <p>I apply <strong>machine learning</strong> approaches to microscopy image analysis and multi-parametric data. This includes training random forest and CNN classifiers for <strong>morphology-based phenotype classification</strong>, implementing dimensionality reduction (UMAP, t-SNE, PCA) for high-content screening data, and building predictive models for compound activity. My <strong>AutoMorphoTrack</strong> pipeline integrates ML-based organelle segmentation with tracking algorithms for live-cell dynamics quantification.</p>
-        
-        
-        <div class="chart-container">
-          <div class="chart-title">Fig. — ML Classifier: Morphology Phenotype Accuracy</div>
-          <div class="chart-subtitle">Confusion matrix metrics for CNN-based phenotype classifier across cell states</div>
-          <canvas id="mlChart" height="260"></canvas>
-          <div class="chart-note">Random forest + CNN ensemble. 5-fold cross-validation on 12,000 labeled images.</div>
-        </div>
-        
-      </div>
+      <h3>Dose-Response: Cargo Concentration vs. Uptake Efficiency</h3>
+      <table>
+        <thead>
+          <tr><th>Cargo</th><th class="num">0.1&times;</th><th class="num">0.5&times;</th><th class="num">1&times; (Standard)</th><th class="num">2&times;</th><th class="num">5&times;</th><th class="num">Saturable?</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Spike protein</td><td class="num">12 &plusmn; 3</td><td class="num">54 &plusmn; 6</td><td class="num">100 &plusmn; 5</td><td class="num">142 &plusmn; 8</td><td class="num">168 &plusmn; 11</td><td>Yes (receptor-limited)</td></tr>
+          <tr><td>&alpha;-Syn PFFs</td><td class="num">18 &plusmn; 4</td><td class="num">62 &plusmn; 5</td><td class="num">100 &plusmn; 4</td><td class="num">186 &plusmn; 9</td><td class="num">324 &plusmn; 15</td><td>No (fluid-phase)</td></tr>
+          <tr><td>EGF</td><td class="num">8 &plusmn; 2</td><td class="num">48 &plusmn; 5</td><td class="num">100 &plusmn; 4</td><td class="num">128 &plusmn; 7</td><td class="num">139 &plusmn; 9</td><td>Yes (receptor-limited)</td></tr>
+          <tr><td>Dextran 10 kDa</td><td class="num">14 &plusmn; 3</td><td class="num">56 &plusmn; 6</td><td class="num">100 &plusmn; 5</td><td class="num">198 &plusmn; 10</td><td class="num">412 &plusmn; 18</td><td>No (fluid-phase)</td></tr>
+        </tbody>
+      </table>
 
-      <div class="subsection" id="organelle-tracking">
-        <div class="subsection-label">Organelle Tracking</div>
-        <p>I developed automated pipelines for <strong>single-organelle tracking</strong> in live-cell time-lapse microscopy. Using Python (scikit-image, trackpy) and custom algorithms, I quantify lysosome, mitochondria, and endosome dynamics including <strong>speed, directionality, mean squared displacement (MSD)</strong>, and fusion/fission events. These analyses reveal drug-induced changes in organelle transport that precede visible toxicity markers.</p>
-        
-        
-        <div class="chart-container">
-          <div class="chart-title">Fig. — Organelle Tracking: MSD Analysis</div>
-          <div class="chart-subtitle">Mean squared displacement of lysosomes in control vs PFF-treated iPSC-derived neurons</div>
-          <canvas id="trackChart" height="260"></canvas>
-          <div class="chart-note">Confocal time-lapse (0.5 Hz, 5 min). trackpy analysis. n=200 tracks per condition.</div>
-        </div>
-        
-      </div>
-
-      <div class="subsection" id="open-source">
-        <div class="subsection-label">Open Source Contributions</div>
-        <p>I contribute to the scientific open-source ecosystem through <strong>AutoMorphoTrack</strong> (GitHub, 500K+ downloads), a Python package for automated morphology analysis and organelle tracking from microscopy data. I also develop and share <strong>Jupyter notebook analysis pipelines</strong> for flow cytometry gating, proteomics differential expression, and high-content screening data processing. All tools are documented with tutorials and example datasets.</p>
-        
-        
-        
+      <div class="findings">
+        <div class="finding"><div class="finding-value">1.1 min</div><div class="finding-label">t<sub>1/2</sub> uptake, PFFs in iPSC-DA neurons</div></div>
+        <div class="finding"><div class="finding-value">EC<sub>50</sub></div><div class="finding-label">Determined for all cargo/cell combinations</div></div>
+        <div class="finding"><div class="finding-value">7</div><div class="finding-label">Time points per kinetic curve</div></div>
       </div>
     </div>
   </div>
 </div>
 
+
+<!-- ══════════════════════════════════════════════
+     SECTION 05 — HOST KINASE TARGETS
+     ══════════════════════════════════════════════ -->
+<div class="section reveal" id="host-kinases">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">05</div>
+      <div class="section-label">Host Kinases</div>
+    </div>
+    <div class="section-content">
+      <h2>Host Kinase Targets Controlling Endosomal Trafficking &amp; Cargo Fate</h2>
+      <p>Building on the mechanistic entry work, I contributed to two studies identifying druggable <strong>host kinases</strong> that control endosomal trafficking and cargo fate &mdash; <strong>PIKfyve</strong> and <strong>CSNK2</strong>. Both kinases regulate the endolysosomal system at nodes directly relevant to nucleic acid delivery: PIKfyve governs endosome-to-lysosome maturation, while CSNK2 modulates clathrin-mediated entry and endosomal processing. Pharmacological inhibition of either kinase disrupted viral cargo trafficking, demonstrating that <strong>host-directed strategies can redirect or block cargo routing through the endosomal system</strong>.</p>
+
+      <div class="mechanism-card">
+        <div class="mc-header">
+          <div class="mc-icon">&#128273;</div>
+          <div>
+            <div class="mc-title">PIKfyve &mdash; Endosome-to-Lysosome Gatekeeper</div>
+            <div class="mc-subtitle"><span class="mc-subtitle-tag">CHEMICAL PROBE</span> <span class="mc-subtitle-tag">VIRAL ENTRY</span> <span class="mc-subtitle-tag">ENDOSOMAL MATURATION</span></div>
+          </div>
+        </div>
+        <div class="mc-body">
+          PIKfyve synthesizes PI(3,5)P<sub>2</sub>, a phospholipid essential for endosomal maturation and lysosomal function. Using a novel, highly selective chemical probe (compound 17) with a matched negative control, we showed that PIKfyve inhibition blocks <strong>both viral replication and viral entry</strong> mediated by CME. PIKfyve inhibitors caused cargo to accumulate in enlarged, vacuolar endosomes rather than reaching lysosomes &mdash; effectively <strong>trapping cargo in the endosomal escape-permissive compartment</strong>. This finding suggests PIKfyve modulation could enhance endosomal escape of nucleic acid payloads.
+        </div>
+      </div>
+
+      <div class="mechanism-card">
+        <div class="mc-header">
+          <div class="mc-icon">&#9879;</div>
+          <div>
+            <div class="mc-title">CSNK2 &mdash; Clathrin Pathway &amp; Trafficking Modulator</div>
+            <div class="mc-subtitle"><span class="mc-subtitle-tag">SILMITASERTIB</span> <span class="mc-subtitle-tag">BROAD-SPECTRUM ANTIVIRAL</span> <span class="mc-subtitle-tag">CME REGULATION</span></div>
+          </div>
+        </div>
+        <div class="mc-body">
+          Casein kinase 2 (CSNK2) phosphorylates key regulators of clathrin-mediated endocytosis and vesicular trafficking. Using the clinical-grade inhibitor <strong>silmitasertib</strong>, we demonstrated that CSNK2 inhibition suppressed SARS-CoV-2 entry and replication across multiple &beta;-coronavirus strains. Confocal imaging showed that silmitasertib reduced spike protein internalization by <strong>&gt;60%</strong> in Calu-3 and Caco-2 cells. CSNK2 represents a host kinase that tunes the efficiency of clathrin-dependent cargo delivery.
+        </div>
+      </div>
+
+      <h3>Pharmacological Disruption of Endosomal Trafficking</h3>
+      <table>
+        <thead>
+          <tr><th>Inhibitor</th><th>Target</th><th class="num">Viral Entry (% Ctrl)</th><th class="num">Viral Replication (% Ctrl)</th><th class="num">Cargo Trapping?</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Compound 17 (1 &mu;M)</td><td>PIKfyve</td><td class="num">32 &plusmn; 5</td><td class="num">8 &plusmn; 2</td><td>Yes &mdash; enlarged endosomes</td></tr>
+          <tr><td>Compound 30 (neg. ctrl)</td><td>None (inactive)</td><td class="num">96 &plusmn; 6</td><td class="num">94 &plusmn; 5</td><td>No</td></tr>
+          <tr><td>Apilimod (1 &mu;M)</td><td>PIKfyve</td><td class="num">28 &plusmn; 4</td><td class="num">5 &plusmn; 2</td><td>Yes &mdash; enlarged endosomes</td></tr>
+          <tr><td>Silmitasertib (5 &mu;M)</td><td>CSNK2</td><td class="num">38 &plusmn; 6</td><td class="num">12 &plusmn; 3</td><td>Partial</td></tr>
+          <tr><td>SGC-CK2-1 (1 &mu;M)</td><td>CSNK2</td><td class="num">42 &plusmn; 7</td><td class="num">18 &plusmn; 4</td><td>Partial</td></tr>
+        </tbody>
+      </table>
+
+      <div class="findings">
+        <div class="finding"><div class="finding-value">PIKfyve</div><div class="finding-label">Endosome maturation gatekeeper</div></div>
+        <div class="finding"><div class="finding-value">CSNK2</div><div class="finding-label">CME and trafficking modulator</div></div>
+        <div class="finding"><div class="finding-value">&minus;92%</div><div class="finding-label">Viral replication (PIKfyve inhib.)</div></div>
+        <div class="finding"><div class="finding-value">Cargo trapping</div><div class="finding-label">Endosomal escape window extended</div></div>
+      </div>
+
+      <p style="font-size:13px; color:var(--mid); font-style:italic; margin-top:16px;">Drewry, Potjewyd, … <strong>Bayati</strong> … et al. <em>Identification and utilization of a chemical probe to interrogate the roles of PIKfyve in the lifecycle of &beta;-coronaviruses.</em> J. Med. Chem. 2022; 65(19):12860&ndash;12882.</p>
+      <p style="font-size:13px; color:var(--mid); font-style:italic; margin-top:4px;">Yang, Dickmander, <strong>Bayati</strong> et al. <em>Host kinase CSNK2 is a target for inhibition of pathogenic SARS-like &beta;-coronaviruses.</em> ACS Chem. Biol. 2022; 17(7):1937&ndash;1950.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     SECTION 06 — SUBCELLULAR LOCALIZATION ASSAYS
+     ══════════════════════════════════════════════ -->
+<div class="section reveal" id="subcellular">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">06</div>
+      <div class="section-label">Localization</div>
+    </div>
+    <div class="section-content">
+      <h2>Subcellular Localization &amp; Delivery Assay Toolkit</h2>
+      <p>Across all of the above projects, I developed and refined a comprehensive toolkit for characterizing cargo localization, endosomal escape, and delivery efficiency. These methods are directly transferable to nucleic acid delivery screening and optimization workflows.</p>
+
+      <h3>Techniques &amp; Readouts</h3>
+
+      <div class="tech-card-grid">
+        <div class="tech-card">
+          <div class="tech-card-icon">&#128248;</div>
+          <div class="tech-card-title">Imaging-Based</div>
+          <div class="tech-card-body">
+            <strong>Confocal colocalization</strong> (Pearson's R, Manders' coefficients) with compartment markers (EEA1, Rab5, Rab7, Rab11, LAMP1/2, CD63, Galectin-3). <strong>STED super-resolution</strong> for sub-lysosomal cargo localization. <strong>Immunogold EM</strong> for nanometer-scale trafficking. <strong>Live-cell time-lapse</strong> for real-time tracking. <strong>LysoSensor/LysoTracker</strong> pH profiling. <strong>High-content automated imaging</strong> (Opera Phenix) for plate-based screening.
+          </div>
+        </div>
+        <div class="tech-card">
+          <div class="tech-card-icon">&#128202;</div>
+          <div class="tech-card-title">Quantitative Readouts</div>
+          <div class="tech-card-body">
+            <strong>Plate-reader fluorescence/luminescence</strong> for high-throughput internalization. <strong>Flow cytometry</strong> for single-cell uptake quantification. <strong>RT-qPCR</strong> for mRNA delivery and expression. <strong>Western blot</strong> for protein expression. <strong>ELISA / Luminex</strong> for cytokine profiling after cargo exposure. <strong>Acid-wash assays</strong> discriminating surface-bound from intracellular cargo.
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:32px;">Cell Type Experience Panel</h3>
+      <p>All endocytosis and trafficking assays validated across a broad panel of mammalian cell types:</p>
+
+      <table>
+        <thead>
+          <tr><th>Category</th><th>Cell Types</th><th>Source</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>iPSC-derived</td><td>Dopaminergic neurons, cortical neurons, astrocytes, microglia-like, cardiomyocytes</td><td>Patient-derived &amp; healthy control</td></tr>
+          <tr><td>Primary human</td><td>Astrocytes, PBMCs, T cells, monocytes</td><td>Donor tissue</td></tr>
+          <tr><td>Epithelial</td><td>Calu-3, Caco-2, Vero, HeLa</td><td>Lung, gut, kidney</td></tr>
+          <tr><td>Neuronal/neuroblastoma</td><td>SH-SY5Y, U87, U251, Hap1</td><td>Immortalized</td></tr>
+          <tr><td>Fibroblast/kidney</td><td>HEK-293T, HEK-293T-ACE2, CHO</td><td>Engineered &amp; parental</td></tr>
+          <tr><td>Other</td><td>U2OS, HMC3 (microglia), THP-1</td><td>Immortalized</td></tr>
+        </tbody>
+      </table>
+
+      <div class="findings">
+        <div class="finding"><div class="finding-value">20+</div><div class="finding-label">Cell types used for endocytosis assays</div></div>
+        <div class="finding"><div class="finding-value">3</div><div class="finding-label">Microscopy modalities (confocal, STED, EM)</div></div>
+        <div class="finding"><div class="finding-value">6</div><div class="finding-label">Quantitative readout platforms</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     WORKFLOW STRIP
+     ══════════════════════════════════════════════ -->
 <div class="workflow-strip">
   <div class="workflow-inner">
-    <h3>Automation Pipeline</h3>
+    <h3>Cargo Delivery Assay Development Workflow</h3>
     <div class="workflow-steps">
       <div class="workflow-step">
         <div class="step-number">01</div>
-        <div class="step-title">Liquid Handling</div>
-        <div class="step-detail">BRAVO, Tecan, Hamilton for media changes, plate loading, and assay execution.</div>
+        <div class="step-title">Cargo &amp; Cell Selection</div>
+        <div class="step-detail">Label cargo (fluorescent, nanogold, or reporter). Select cell panel spanning primary, iPSC-derived, and immortalized lines. Establish dose and time-course parameters.</div>
       </div>
       <div class="workflow-step">
         <div class="step-number">02</div>
-        <div class="step-title">Image Acquisition</div>
-        <div class="step-detail">Automated confocal, Opera Phenix HCS, Incucyte for high-volume capture.</div>
+        <div class="step-title">Entry Pathway Mapping</div>
+        <div class="step-detail">Pharmacological and genetic pathway dissection (CME, macropinocytosis, caveolae). siRNA/shRNA knockdown. Inhibitor panels (EIPA, Pitstop, Dynasore, LatA/B).</div>
       </div>
       <div class="workflow-step">
         <div class="step-number">03</div>
-        <div class="step-title">Analysis</div>
-        <div class="step-detail">AutoMorphoTrack + Python pipelines for segmentation, classification, tracking, QC.</div>
+        <div class="step-title">Trafficking &amp; Localization</div>
+        <div class="step-detail">Time-resolved colocalization with compartment markers. Identify endosomal escape window. pH-sensitive probes. STED/EM for ultrastructural confirmation.</div>
       </div>
       <div class="workflow-step">
         <div class="step-number">04</div>
-        <div class="step-title">Reporting</div>
-        <div class="step-detail">Automated CSV outputs, overlays, heatmaps, and stakeholder-ready visualizations.</div>
+        <div class="step-title">Functional Readout</div>
+        <div class="step-detail">RT-qPCR for mRNA expression. Flow cytometry for single-cell delivery. ELISA/Luminex for immune response. Plate-reader for high-throughput screening.</div>
       </div>
     </div>
   </div>
@@ -1961,51 +2580,75 @@ amt.<span class="func">export_overlays</span>(stack, tracks, coloc, output_dir=<
   </div>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function(){
-  var frames=[],elong_ctrl=[],elong_cccp=[];
-  for(var i=0;i<60;i++){
-    frames.push(i*4);
-    elong_ctrl.push(62+4*Math.sin(i*0.15)+3*Math.random());
-    elong_cccp.push(Math.max(10,62-0.8*i+4*Math.random()));
+  const lb = document.createElement('div');
+  lb.className = 'lightbox';
+  lb.innerHTML = '<button class="lightbox-close" onclick="closeLB()">&times;</button>'
+    + '<button class="lightbox-nav lightbox-prev" onclick="navLB(-1)">&#8249;</button>'
+    + '<img class="lightbox-img" src="" alt="">'
+    + '<div class="lightbox-caption"></div>'
+    + '<div class="lightbox-counter"></div>'
+    + '<button class="lightbox-nav lightbox-next" onclick="navLB(1)">&#8250;</button>';
+  document.body.appendChild(lb);
+  
+  let imgs=[], idx=0, gid='';
+  
+  window.openLB = function(galleryId, i){
+    gid = galleryId;
+    const gallery = document.querySelector('[data-gallery="'+galleryId+'"]');
+    imgs = Array.from(gallery.querySelectorAll('.gallery-thumb'));
+    idx = i;
+    showLB();
+    lb.classList.add('open');
+    document.body.style.overflow='hidden';
+  };
+  
+  function showLB(){
+    const t = imgs[idx];
+    const src = t.querySelector('img').src;
+    const cap = t.getAttribute('data-caption')||'';
+    lb.querySelector('.lightbox-img').src = src;
+    lb.querySelector('.lightbox-caption').textContent = cap;
+    lb.querySelector('.lightbox-counter').textContent = (idx+1)+' / '+imgs.length;
   }
-  new Chart(document.getElementById('morphChart'),{
-    type:'line',
-    data:{labels:frames,datasets:[
-      {label:'Control - Elongated %',data:elong_ctrl,borderColor:'rgba(46,134,193,0.85)',pointRadius:0,borderWidth:2,tension:0.3},
-      {label:'CCCP - Elongated %',data:elong_cccp,borderColor:'rgba(192,57,43,0.85)',pointRadius:0,borderWidth:2,tension:0.3}
-    ]},
-    options:{responsive:true,
-      plugins:{legend:{position:'bottom',labels:{font:{size:11,family:"'IBM Plex Sans'"},padding:16}}},
-      scales:{y:{min:0,max:100,title:{display:true,text:'% Elongated Mitochondria',font:{size:11,family:"'IBM Plex Sans'"}},grid:{color:'rgba(0,0,0,0.05)'}},
-        x:{title:{display:true,text:'Frame',font:{size:11,family:"'IBM Plex Sans'"}},grid:{color:'rgba(0,0,0,0.03)'},ticks:{maxTicksLimit:10}}}}
+  
+  window.closeLB = function(){
+    lb.classList.remove('open');
+    document.body.style.overflow='';
+  };
+  
+  window.navLB = function(d){
+    idx = (idx+d+imgs.length)%imgs.length;
+    showLB();
+  };
+  
+  lb.addEventListener('click',function(e){
+    if(e.target===lb) closeLB();
   });
-  var cf=[],cc=[],ccf=[];
-  for(var i=0;i<60;i++){
-    cf.push(i*4);
-    cc.push(0.32+0.06*Math.sin(i*0.2)+0.04*Math.random());
-    ccf.push(Math.min(0.9,0.32+0.008*i+0.04*Math.random()));
-  }
-  new Chart(document.getElementById('colocChart'),{
-    type:'line',
-    data:{labels:cf,datasets:[
-      {label:'Control',data:cc,borderColor:'rgba(107,114,128,0.7)',pointRadius:0,borderWidth:1.5,tension:0.3},
-      {label:'CCCP-Treated',data:ccf,borderColor:'rgba(192,57,43,0.85)',pointRadius:0,borderWidth:2,tension:0.3}
-    ]},
-    options:{responsive:true,
-      plugins:{legend:{position:'bottom',labels:{font:{size:11,family:"'IBM Plex Sans'"},padding:16}}},
-      scales:{y:{min:0,max:1,title:{display:true,text:'Pearson Coefficient (Lyso/Mito)',font:{size:11,family:"'IBM Plex Sans'"}},grid:{color:'rgba(0,0,0,0.05)'}},
-        x:{title:{display:true,text:'Frame',font:{size:11,family:"'IBM Plex Sans'"}},grid:{color:'rgba(0,0,0,0.03)'},ticks:{maxTicksLimit:10}}}}
+  
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('open')) return;
+    if(e.key==='Escape') closeLB();
+    if(e.key==='ArrowRight') navLB(1);
+    if(e.key==='ArrowLeft') navLB(-1);
   });
 })();
 </script>
+
 <script>
-new Chart(document.getElementById('autoChart'),{type:'bar',
-  data:{labels:['Plates/Day','CV% (Cell Count)','CV% (Treatment)','Setup Time (min)'],datasets:[
-    {label:'Manual',data:[6,12.4,8.6,45],backgroundColor:'rgba(107,114,128,0.5)',borderColor:'rgba(107,114,128,0.8)',borderWidth:1},
-    {label:'BRAVO',data:[24,3.8,2.4,8],backgroundColor:'rgba(192,57,43,0.6)',borderColor:'rgba(192,57,43,0.9)',borderWidth:1}
+// Uptake Kinetics Chart
+if(document.getElementById('uptakeKineticsChart')){
+new Chart(document.getElementById('uptakeKineticsChart'),{type:'line',
+  data:{labels:['0','2','5','10','15','30','60'],datasets:[
+    {label:'α-Syn PFFs (macropinocytosis)',data:[0,68,92,96,98,98,98],borderColor:'rgba(192,57,43,0.9)',backgroundColor:'rgba(192,57,43,0.08)',pointRadius:5,tension:0.35,borderWidth:2.5,fill:true},
+    {label:'Spike protein (CME)',data:[0,18,42,68,84,92,94],borderColor:'rgba(41,128,185,0.9)',backgroundColor:'rgba(41,128,185,0.06)',pointRadius:5,tension:0.35,borderWidth:2.5,fill:true},
+    {label:'EGF (CME control)',data:[0,15,38,62,78,90,94],borderColor:'rgba(107,114,128,0.7)',pointRadius:4,tension:0.35,borderWidth:2,borderDash:[6,3]},
+    {label:'Transferrin (recycling)',data:[0,22,52,76,88,91,91],borderColor:'rgba(39,174,96,0.7)',pointRadius:4,tension:0.35,borderWidth:2,borderDash:[6,3]}
   ]},
   options:{responsive:true,plugins:{legend:{position:'bottom',labels:{font:{size:11,family:"'IBM Plex Sans'"},padding:16}}},
-    scales:{y:{beginAtZero:true,title:{display:true,text:'Value',font:{size:11,family:"'IBM Plex Sans'"}},grid:{color:'rgba(0,0,0,0.05)'}},x:{grid:{display:false}}}}
+    scales:{y:{min:0,max:110,title:{display:true,text:'Intracellular Cargo (% Max)',font:{size:11,family:"'IBM Plex Sans'"}},grid:{color:'rgba(0,0,0,0.05)'}},
+      x:{title:{display:true,text:'Time (min)',font:{size:11,family:"'IBM Plex Sans'"}},grid:{color:'rgba(0,0,0,0.03)'}}}}
 });
+}
 </script>
 <script>
 const observer = new IntersectionObserver((entries) => {
@@ -2054,6 +2697,27 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     {page:'cellular-assays.html#endocytosis', title:'Endocytosis & Uptake Assays', category:'Research', section:'Endocytosis',
      keywords:'endocytosis clathrin macropinocytosis fibril uptake sars-cov-2 spike protein ace2 receptor internalization trafficking',
      description:'Clathrin-mediated endocytosis and macropinocytosis pathways for PFF and SARS-CoV-2 entry.'},
+    {page:'endocytosis.html', title:'Endocytosis, Trafficking & Cargo Delivery', category:'Research', section:'',
+     keywords:'endocytosis trafficking cargo delivery internalization endosomal escape subcellular localization nucleic acid rna entry clathrin macropinocytosis lysosome endosome routing',
+     description:'Quantitative endocytosis assays, endosomal trafficking, cargo internalization kinetics, and subcellular delivery.'},
+    {page:'endocytosis.html#cme', title:'Clathrin-Mediated Endocytosis — Viral RNA Entry', category:'Research', section:'CME',
+     keywords:'clathrin mediated endocytosis cme sars-cov-2 spike protein ace2 chc knockdown sirna pitstop dynasore viral entry rna delivery pseudovirus infectivity',
+     description:'CME-dependent viral RNA entry via the endosomal system with CHC knockdown and pharmacological validation.'},
+    {page:'endocytosis.html#macropinocytosis', title:'Macropinocytic Cargo Uptake', category:'Research', section:'Macropinocytosis',
+     keywords:'macropinocytosis rapid uptake clathrin-independent eipa latrunculin rac1 actin ruffles lysosome 2 minutes pff fibril sted immunogold nanogold tem',
+     description:'Ultrarapid macropinocytic internalization bypassing early endosomes — direct to lysosomes in 2 min.'},
+    {page:'endocytosis.html#trafficking', title:'Endosomal Trafficking & Compartment Routing', category:'Research', section:'Trafficking',
+     keywords:'endosomal trafficking routing eea1 rab5 rab7 rab11 lamp1 cd63 colocalization compartment mapping endosomal escape window subcellular',
+     description:'Time-resolved compartment mapping and endosomal escape window identification across cargo classes.'},
+    {page:'endocytosis.html#kinetics', title:'Internalization Kinetics & Dose-Response', category:'Research', section:'Kinetics',
+     keywords:'internalization kinetics dose-response time-course uptake ec50 acid wash fluorescence plate reader quantitative half-life t-half saturation',
+     description:'Quantitative kinetic profiling of cargo internalization with EC50 determination and dose-response.'},
+    {page:'endocytosis.html#host-kinases', title:'Host Kinase Targets — PIKfyve & CSNK2', category:'Research', section:'Host Kinases',
+     keywords:'pikfyve csnk2 casein kinase host kinase endosome maturation silmitasertib apilimod chemical probe antiviral trafficking modulator cargo trapping',
+     description:'PIKfyve and CSNK2 as druggable host kinases controlling endosomal trafficking and cargo fate.'},
+    {page:'endocytosis.html#subcellular', title:'Subcellular Localization Assay Toolkit', category:'Research', section:'Localization',
+     keywords:'subcellular localization assay toolkit confocal sted em flow cytometry rt-qpcr elisa western blot plate reader high-content screening cell panel delivery',
+     description:'Comprehensive toolkit for characterizing cargo localization, endosomal escape, and delivery efficiency.'},
     {page:'cellular-assays.html#exosome', title:'Exosomal Biology & Transfer', category:'Research', section:'Exosomes',
      keywords:'exosome cd63 multivesicular body mvb manumycin a gold-labeled transfer naïve recipient disease propagation',
      description:'Exosome-mediated disease propagation tracked via CD63-GFP and nanogold-labeled fibrils.'},
@@ -2114,6 +2778,9 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     {page:'biologics.html', title:'Biologics & Immunotherapy', category:'Research', section:'',
      keywords:'biologics antibody anti-tnf anti-il1 anti-il6 anti-synuclein neuroprotection immunotherapy cytokine neuroinflammation monoclonal biologic',
      description:'Biologics for inhibiting proinflammatory cytokine activation in DA neurons.'},
+    {page:'biologics.html#target-identification', title:'Preclinical Target ID — Receptor Dissection', category:'Research', section:'Target ID',
+     keywords:'preclinical target identification receptor dissection IFNGR1 TNFR2 IL1R1 EGFR cytokine receptor microglia co-culture pff488 tuj1 neuroinflammation quenching engineered receptor expression dopaminergic neuron triple receptor',
+     description:'Receptor-level dissection of microglial cytokine signaling to identify druggable inflammatory axes driving α-synuclein pathology.'},
     {page:'biologics.html#cytokine-inhibition', title:'Cytokine Inhibition in DA Neurons', category:'Research', section:'Cytokines',
      keywords:'anti-tnf infliximab anakinra tocilizumab neuroinflammation dopaminergic neuroprotection',
      description:'Anti-cytokine biologics protecting dopaminergic neurons from inflammatory degeneration.'},
@@ -2268,54 +2935,6 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
   document.querySelectorAll('.search-toggle').forEach(function(btn){ btn.addEventListener('click', openSearch); });
 })();
-
-// ── New keyword section charts ──
-
-new Chart(document.getElementById('miniChart').getContext('2d'), {
-  type: 'bar',
-  data: {
-    labels: ['6-well', '24-well', '96-well', '384-well'],
-    datasets: [{
-      label: "Z' Factor", data: [0.82, 0.78, 0.72, 0.58],
-      backgroundColor: ['rgba(39,174,96,0.6)','rgba(39,174,96,0.6)','rgba(39,174,96,0.6)','rgba(243,156,18,0.6)'],
-      borderWidth: 1
-    }]
-  },
-  options: { responsive: true, plugins: { legend: { display: false }, annotation: {}},
-    scales: { y: { beginAtZero: true, max: 1.0, title: { display: true, text: "Z' Factor" }}}}
-});
-
-new Chart(document.getElementById('mlChart').getContext('2d'), {
-  type: 'radar',
-  data: {
-    labels: ['Healthy', 'Apoptotic', 'Necrotic', 'Senescent', 'Mitotic', 'Stressed'],
-    datasets: [{
-      label: 'Precision', data: [0.94, 0.88, 0.91, 0.82, 0.95, 0.79],
-      borderColor: 'rgba(192,57,43,0.8)', backgroundColor: 'rgba(192,57,43,0.1)'
-    },{
-      label: 'Recall', data: [0.92, 0.85, 0.89, 0.78, 0.93, 0.82],
-      borderColor: 'rgba(52,73,94,0.8)', backgroundColor: 'rgba(52,73,94,0.1)'
-    }]
-  },
-  options: { responsive: true, scales: { r: { beginAtZero: true, max: 1.0, ticks: { stepSize: 0.25 }}}}
-});
-
-new Chart(document.getElementById('trackChart').getContext('2d'), {
-  type: 'line',
-  data: {
-    labels: ['0','1','2','3','4','5','6','7','8','9','10'],
-    datasets: [{
-      label: 'Control', data: [0, 0.12, 0.35, 0.62, 0.95, 1.32, 1.78, 2.25, 2.80, 3.42, 4.10],
-      borderColor: 'rgba(52,73,94,0.8)', fill: false, tension: 0.3
-    },{
-      label: 'PFF-treated', data: [0, 0.08, 0.18, 0.28, 0.38, 0.48, 0.55, 0.62, 0.68, 0.72, 0.76],
-      borderColor: 'rgba(192,57,43,0.8)', fill: false, tension: 0.3
-    }]
-  },
-  options: { responsive: true,
-    scales: { y: { beginAtZero: true, title: { display: true, text: 'MSD (µm²)' }},
-              x: { title: { display: true, text: 'Time lag (s)' }}}}
-});
 </script>
 
 </body>

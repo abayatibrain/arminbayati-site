@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Armin Bayati, PhD — Neuroscience · Cell Biology · Drug Discovery</title>
-<meta name="description" content="Scientist with a PhD in Neuroscience and Cell Biology. Research Fellow at Harvard Medical School.">
+<title>Primary Neuronal Culture — Armin Bayati, PhD</title>
+<meta name="description" content="Primary rat hippocampal neuronal culture: isolation, maturation, lysosomal trafficking, electrophysiology, and cargo delivery assays.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -230,30 +230,7 @@ nav {
   max-width: 1120px;
   margin: 0 auto;
   padding: 80px 32px 64px;
-  position: relative;
-  z-index: 10;
-  text-align: center;
 }
-
-.hero-text { text-align: center; }
-
-.hero-photo {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 3px solid var(--rule);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.10), 0 0 0 6px rgba(192,57,43,0.06);
-  margin: 20px auto 24px;
-}
-.hero-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: grayscale(10%);
-  transition: filter 0.4s ease;
-}
-.hero-photo:hover img { filter: grayscale(0%); }
 
 .hero-eyebrow {
   font-family: var(--mono);
@@ -265,7 +242,6 @@ nav {
   margin-bottom: 20px;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 12px;
 }
 .hero-eyebrow::before {
@@ -284,7 +260,7 @@ nav {
   letter-spacing: -0.5px;
   color: var(--ink);
   max-width: 780px;
-  margin: 0 auto 28px;
+  margin-bottom: 28px;
 }
 
 .hero-description {
@@ -293,7 +269,7 @@ nav {
   line-height: 1.75;
   color: var(--mid);
   max-width: 760px;
-  margin: 0 auto 36px;
+  margin-bottom: 36px;
 }
 
 .hero-tags {
@@ -314,24 +290,19 @@ nav {
   background: var(--card);
 }
 
-/* hero-tags kept for other pages; hero-search animation */
-.hero-search { animation: fadeUp 0.6s ease 0.3s both; }
-
 /* ── SECTIONS ── */
 .section {
   border-top: 1px solid var(--rule);
-  overflow: visible;
 }
 
 .section-header {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 64px 32px 32px;
+  padding: 64px 32px 0;
   display: grid;
   grid-template-columns: 120px 1fr;
   gap: 48px;
   align-items: start;
-  overflow: visible;
 }
 
 .section-index {
@@ -358,8 +329,7 @@ nav {
 }
 
 .section-content {
-  padding-bottom: 48px;
-  overflow: visible;
+  padding-bottom: 20px;
 }
 
 .section-content h2 {
@@ -516,6 +486,8 @@ nav {
 }
 
 /* ── WORKFLOW STRIP ── */
+
+
 .workflow-strip {
   background: var(--ink);
   color: #fff;
@@ -572,102 +544,42 @@ nav {
   line-height: 1.55;
 }
 
-/* ── RESEARCH GRID (standalone, not inside section-header grid) ── */
-.research-grid {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 32px 64px;
+/* ── CARD GRID ── */
+.card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 28px 0 32px;
+  max-width: 760px;
 }
 
-.research-tile {
+.card {
   background: var(--card);
-  border-radius: 10px;
-  padding: 28px 28px 24px;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 24px;
+  transition: box-shadow 0.2s, border-color 0.2s;
   text-decoration: none;
   color: inherit;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  position: relative;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow:
-    0 0 0 1px rgba(0,0,0,0.08),
-    0 4px 12px rgba(0,0,0,0.05);
+  display: block;
 }
-.research-tile:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 0 0 1px var(--accent),
-    0 8px 24px rgba(0,0,0,0.10);
-}
-.research-tile::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 24px;
-  right: 24px;
-  height: 3px;
-  border-radius: 0 0 3px 3px;
-  background: var(--rule);
-  transition: background 0.2s ease;
-}
-.research-tile:hover::before {
-  background: var(--accent);
-}
-.research-tile.featured::before {
-  background: var(--accent);
+a.card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
 }
 
-.tile-icon {
-  font-size: 22px;
-  line-height: 1;
-  margin-bottom: 4px;
-}
-.tile-title {
+.card-title {
   font-size: 15px;
   font-weight: 600;
   color: var(--ink);
+  margin-bottom: 6px;
 }
-.tile-desc {
+
+.card-desc {
   font-size: 13px;
   font-weight: 300;
   color: var(--mid);
   line-height: 1.6;
-}
-.tile-arrow {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--accent);
-  margin-top: auto;
-  padding-top: 8px;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-.research-tile:hover .tile-arrow {
-  opacity: 1;
-}
-
-html.dark .research-tile {
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.08),
-    0 4px 12px rgba(0,0,0,0.2);
-}
-html.dark .research-tile:hover {
-  box-shadow:
-    0 0 0 1px var(--accent),
-    0 8px 24px rgba(0,0,0,0.3);
-}
-
-@media (max-width: 768px) {
-  .research-grid {
-    grid-template-columns: 1fr;
-    padding: 0 20px 40px;
-    gap: 14px;
-  }
-  .research-tile { padding: 20px 20px 18px; }
 }
 
 /* ── IMAGE PLACEHOLDER ── */
@@ -829,258 +741,47 @@ html.dark .research-tile:hover {
   white-space: nowrap;
 }
 
-/* ── CTA BUTTONS ── */
-.btn-primary {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-family: var(--mono); font-size: 12px; font-weight: 500;
-  letter-spacing: 0.8px; text-transform: uppercase;
-  padding: 12px 28px; border-radius: 4px;
-  background: var(--accent); color: #fff;
-  text-decoration: none; transition: all 0.25s ease;
-  border: 1.5px solid var(--accent);
-}
-.btn-primary:hover { background: #a93226; border-color: #a93226; }
-
-.btn-secondary {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-family: var(--mono); font-size: 12px; font-weight: 500;
-  letter-spacing: 0.8px; text-transform: uppercase;
-  padding: 12px 28px; border-radius: 4px;
-  background: transparent; color: var(--ink);
-  text-decoration: none; transition: all 0.25s ease;
-  border: 1.5px solid var(--rule);
-}
-.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
-
-a.tag { text-decoration: none; cursor: pointer; }
-a.tag:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--ink); }
-
-/* ── HIGHLIGHTS STRIP ── */
-.highlights-strip {
-  position: relative;
-  z-index: 1;
-  background: var(--ink);
-  padding: 36px 32px;
-  border-top: 3px solid var(--accent);
-}
-.highlights-inner {
-  max-width: 1120px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-}
-.highlight-item {
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-}
-.highlight-icon {
-  font-size: 22px;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-.highlight-title {
-  font-family: var(--sans);
-  font-size: 13.5px;
-  font-weight: 600;
-  color: #fff;
-  line-height: 1.4;
-  margin-bottom: 4px;
-}
-.highlight-desc {
-  font-size: 12px;
-  font-weight: 300;
-  color: rgba(255,255,255,0.55);
-  line-height: 1.5;
-}
-@media (max-width: 768px) {
-  .highlights-inner { grid-template-columns: 1fr 1fr; gap: 20px; }
-}
-@media (max-width: 480px) {
-  .highlights-inner { grid-template-columns: 1fr; }
-}
-
-/* ── NEWS LIST ── */
-.news-list { margin: 20px 0; max-width: 760px; }
-.news-item {
-  display: flex; gap: 20px; padding: 16px 0;
-  border-bottom: 1px solid var(--rule);
-}
-.news-item:last-child { border-bottom: none; }
-.news-date {
-  font-family: var(--mono); font-size: 12px; font-weight: 500;
-  color: var(--accent); letter-spacing: 0.5px;
-  min-width: 72px; padding-top: 2px; white-space: nowrap;
-}
-.news-body {
-  font-size: 14.5px; font-weight: 300; color: #444; line-height: 1.7;
-}
-.news-body strong { font-weight: 600; color: var(--ink); }
-
-/* ── SCROLL ANIMATIONS ── */
-.reveal {
-  opacity: 0.35;
-  transform: translateY(0);
-  transition: opacity 0.7s ease, transform 0.5s ease;
-}
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ── CARD ICONS ── */
-.card-icon {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
 /* ── FOOTER ── */
-.page-footer {
-  background: var(--ink);
-  color: rgba(255,255,255,0.7);
-  padding: 0;
-  border-top: none;
-  display: block;
-}
-.footer-inner {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 56px 32px 40px;
-  display: flex;
-  justify-content: space-between;
-  gap: 48px;
-}
-.footer-brand { max-width: 320px; }
-.footer-name {
-  font-family: var(--serif);
-  font-size: 1.3rem;
-  color: #fff;
-  margin-bottom: 8px;
-}
-.footer-role {
-  font-size: 13px;
-  font-weight: 300;
-  color: rgba(255,255,255,0.5);
-  line-height: 1.6;
-}
-.footer-links-grid {
-  display: flex;
-  gap: 56px;
-}
-.footer-col {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.footer-col-title {
-  font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 4px;
-}
-.footer-col a {
-  font-size: 13px;
-  color: rgba(255,255,255,0.6);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.footer-col a:hover { color: #fff; }
-.footer-bottom {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 20px 32px;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  font-size: 12px;
-  color: rgba(255,255,255,0.3);
-  text-align: center;
-}
-@media (max-width: 768px) {
-  .footer-inner { flex-direction: column; gap: 32px; }
-  .footer-links-grid { flex-direction: column; gap: 24px; }
-}
 
-/* ── DARK MODE ── */
-.dark-toggle {
-  background: none;
-  border: 1px solid var(--rule);
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 14px;
+
+  .footer-inner { max-width: 1120px; margin: 0 auto; padding: 56px 32px 40px; display: flex; justify-content: space-between; gap: 48px; }
+  .footer-brand { max-width: 320px; }
+  .footer-name { font-family: var(--serif); font-size: 1.3rem; color: #fff; margin-bottom: 8px; }
+  .footer-role { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.6; }
+  .footer-links-grid { display: flex; gap: 56px; }
+  .footer-col { display: flex; flex-direction: column; gap: 8px; }
+  .footer-col-title { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .footer-col a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .footer-col a:hover { color: #fff; }
+  .footer-bottom { max-width: 1120px; margin: 0 auto; padding: 20px 32px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: rgba(255,255,255,0.3); text-align: center; }
+  @media (max-width: 768px) { .footer-inner { flex-direction: column; gap: 32px; } .footer-links-grid { flex-direction: column; gap: 24px; } }
+
+
+.footer-left {
+  font-size: 13px;
   color: var(--mid);
-  transition: all 0.25s ease;
-  flex-shrink: 0;
-}
-.dark-toggle:hover { border-color: var(--accent); color: var(--ink); }
-
-html.dark {
-  --ink: #e8e6e1;
-  --paper: #111318;
-  --mid: #9ca3af;
-  --rule: #2a2d35;
-  --card: #1a1d24;
-  --section-bg: #15171d;
-  --accent-soft: rgba(192,57,43,0.15);
-}
-html.dark body::before {
-  background:
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-}
-html.dark nav {
-  background: rgba(17,19,24,0.92);
-}
-html.dark .nav-drop-panel {
-  background: #1a1d24;
-  border-color: rgba(255,255,255,0.08);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-}
-html.dark .nav-drop-panel a:hover {
-  background: rgba(255,255,255,0.06);
-}
-html.dark .nav-drop-panel a.active {
-  background: rgba(192,57,43,0.15);
-}
-html.dark .nav-dropdown:hover > .nav-drop-trigger,
-html.dark .nav-dropdown.open > .nav-drop-trigger {
-  background: rgba(255,255,255,0.06);
-}
-html.dark .nav-links.open {
-  background: #111318;
 }
 
-html.dark .section-content p,
-html.dark .news-body,
-html.dark .timeline-desc {
-  color: rgba(232,230,225,0.6);
+.footer-left a {
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 500;
 }
-html.dark .finding {
-  background: var(--card);
+.footer-left a:hover { text-decoration: underline; }
+
+.footer-right {
+  display: flex;
+  gap: 20px;
 }
-html.dark .hero-photo {
-  border-color: var(--rule);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 0 6px rgba(192,57,43,0.1);
+
+.footer-right a {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--mid);
+  text-decoration: none;
+  letter-spacing: 0.3px;
 }
-html.dark img {
-  filter: brightness(0.92);
-}
-html.dark .highlights-strip {
-  background: #0a0c10;
-}
-html.dark .page-footer {
-  background: #0a0c10;
-}
-html.dark .footer-bottom {
-  border-top-color: rgba(255,255,255,0.06);
-}
+.footer-right a:hover { color: var(--ink); }
 
 /* ── ANIMATIONS ── */
 @keyframes fadeUp {
@@ -1093,157 +794,6 @@ html.dark .footer-bottom {
 .hero h1 { animation-delay: 0.1s; }
 .hero-description { animation-delay: 0.2s; }
 .hero-tags { animation-delay: 0.3s; }
-.hero-photo { animation: fadeUp 0.6s ease 0.4s both; }
-
-/* ── HERO SEARCH BAR ── */
-.hero-search {
-  position: relative;
-  z-index: 50;
-  width: 100%;
-  max-width: 560px;
-  margin: 12px auto 0;
-}
-.hero-search-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.hero-search-input-wrap {
-  position: relative;
-  flex: 1;
-}
-.hero-search-input {
-  width: 100%;
-  font-family: var(--sans);
-  font-size: 15px;
-  font-weight: 400;
-  color: var(--ink);
-  background: var(--paper);
-  border: 1px solid var(--rule);
-  border-radius: 24px;
-  padding: 14px 44px 14px 46px;
-  outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  box-sizing: border-box;
-}
-.hero-search-input::placeholder { color: var(--mid); opacity: 0.65; }
-.hero-search-input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-soft);
-}
-.hero-search-icon {
-  position: absolute;
-  left: 17px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 17px;
-  height: 17px;
-  stroke: var(--mid);
-  fill: none;
-  stroke-width: 2;
-  pointer-events: none;
-  transition: stroke 0.2s ease;
-}
-.hero-search-input:focus ~ .hero-search-icon { stroke: var(--accent); }
-.hero-search-kbd {
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--mid);
-  background: var(--section-bg);
-  border: 1px solid var(--rule);
-  border-radius: 4px;
-  padding: 2px 7px;
-  pointer-events: none;
-  opacity: 0.7;
-}
-.hero-search-btn {
-  font-family: var(--sans);
-  font-size: 14px;
-  font-weight: 500;
-  color: #fff;
-  background: var(--accent);
-  border: none;
-  border-radius: 24px;
-  padding: 14px 24px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background 0.2s ease, transform 0.12s ease;
-  flex-shrink: 0;
-}
-.hero-search-btn:hover { background: #8a2a2a; transform: scale(1.03); }
-.hero-search-btn:active { transform: scale(0.98); }
-.hero-search-dropdown {
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 0;
-  right: 0;
-  background: var(--paper);
-  border: 1px solid var(--rule);
-  border-radius: 12px;
-  box-shadow: 0 16px 48px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.04);
-  z-index: 200;
-  max-height: 400px;
-  overflow-y: auto;
-  padding: 6px 0;
-  display: none;
-  scrollbar-width: thin;
-}
-.hero-search-dropdown.open { display: block; }
-.hero-search-dropdown::-webkit-scrollbar { width: 4px; }
-.hero-search-dropdown::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 2px; }
-
-.hero-search-hint {
-  font-family: var(--mono);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--mid);
-  padding: 8px 16px 4px;
-  opacity: 0.7;
-}
-.hero-search-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 9px 16px;
-  font-family: var(--sans);
-  font-size: 14px;
-  color: var(--ink);
-  text-decoration: none;
-  border-left: 3px solid transparent;
-  transition: background 0.1s ease, border-color 0.1s ease;
-  cursor: pointer;
-}
-.hero-search-item:hover, .hero-search-item.active {
-  background: var(--accent-soft);
-  border-left-color: var(--accent);
-}
-.hero-search-item-icon {
-  width: 14px;
-  height: 14px;
-  stroke: var(--mid);
-  fill: none;
-  stroke-width: 2;
-  flex-shrink: 0;
-}
-.hero-search-item:hover .hero-search-item-icon { stroke: var(--accent); }
-.hero-search-item-text { flex: 1; }
-.hero-search-item-desc {
-  font-size: 11px;
-  color: var(--mid);
-  margin-top: 1px;
-  line-height: 1.4;
-}
-.hero-search-item mark { background: var(--accent-soft); color: var(--ink); border-radius: 2px; padding: 0 1px; }
-
-html.dark .hero-search-dropdown {
-  box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.06);
-}
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
@@ -1314,16 +864,226 @@ html.dark .hero-search-dropdown {
   }
   .section-number { font-size: 2rem; margin-bottom: 0; }
   .hero { padding: 48px 20px 40px; }
-  .hero-photo { width: 110px; height: 110px; }
-  .hero-search { max-width: 100%; }
-  .hero-search-btn { padding: 14px 18px; font-size: 13px; }
   .figure-container { padding: 12px 20px 48px; }
   .workflow-steps { flex-direction: column; }
   .workflow-step { border-left: none; border-top: 1px solid rgba(255,255,255,0.12); padding: 16px 0; }
   .workflow-step:first-child { border-top: none; }
   .findings { grid-template-columns: 1fr 1fr; }
-  .highlights-inner { grid-template-columns: 1fr 1fr; gap: 20px; }
+  .card-grid { grid-template-columns: 1fr; }
+  
+
+  .footer-inner { max-width: 1120px; margin: 0 auto; padding: 56px 32px 40px; display: flex; justify-content: space-between; gap: 48px; }
+  .footer-brand { max-width: 320px; }
+  .footer-name { font-family: var(--serif); font-size: 1.3rem; color: #fff; margin-bottom: 8px; }
+  .footer-role { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.6; }
+  .footer-links-grid { display: flex; gap: 56px; }
+  .footer-col { display: flex; flex-direction: column; gap: 8px; }
+  .footer-col-title { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .footer-col a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .footer-col a:hover { color: #fff; }
+  .footer-bottom { max-width: 1120px; margin: 0 auto; padding: 20px 32px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: rgba(255,255,255,0.3); text-align: center; }
+  @media (max-width: 768px) { .footer-inner { flex-direction: column; gap: 32px; } .footer-links-grid { flex-direction: column; gap: 24px; } }
+
 }
+
+
+/* ── GALLERY ── */
+.gallery {
+  margin: 20px 0 28px;
+  max-width: 760px;
+}
+.gallery-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--mid);
+  margin-bottom: 10px;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 6px;
+}
+.gallery-thumb {
+  aspect-ratio: 4/3;
+  border-radius: 4px;
+  border: 1px solid var(--rule);
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  background: var(--section-bg);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.gallery-thumb:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.gallery-thumb::after {
+  content: attr(data-caption);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.85));
+  color: rgba(255,255,255,0.95);
+  font-size: 11px;
+  font-style: italic;
+  line-height: 1.35;
+  padding: 28px 8px 8px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+.gallery-thumb:hover::after {
+  opacity: 1;
+}
+.gallery-thumb .thumb-index {
+  position: absolute;
+  bottom: 4px;
+  left: 6px;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: #fff;
+  background: rgba(0,0,0,0.55);
+  padding: 1px 5px;
+  border-radius: 2px;
+  letter-spacing: 0.3px;
+}
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(15,20,25,0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.lightbox.open { display: flex; }
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 78vh;
+  border-radius: 6px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+  object-fit: contain;
+}
+.lightbox-caption {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.7);
+  margin-top: 14px;
+  text-align: center;
+  max-width: 600px;
+}
+.lightbox-counter {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.5px;
+  margin-top: 6px;
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.6);
+  font-size: 28px;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+  font-family: var(--sans);
+}
+.lightbox-close:hover { color: #fff; background: rgba(255,255,255,0.1); }
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.5);
+  font-size: 36px;
+  cursor: pointer;
+  padding: 12px 16px;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+  font-family: var(--sans);
+}
+.lightbox-nav:hover { color: #fff; background: rgba(255,255,255,0.08); }
+.lightbox-prev { left: 16px; }
+.lightbox-next { right: 16px; }
+@media (max-width: 768px) {
+  .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+  .lightbox-nav { font-size: 24px; padding: 8px 12px; }
+}
+
+
+/* ── CHARTS ── */
+.chart-container {
+  max-width: 760px;
+  margin: 24px 0 32px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.chart-container canvas { width: 100% !important; }
+.chart-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.chart-subtitle {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--mid);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.chart-note {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--mid);
+  margin-top: 12px;
+  font-style: italic;
+}
+.code-block {
+  background: var(--ink);
+  color: #e6e6e6;
+  border-radius: 6px;
+  padding: 20px 24px;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.7;
+  margin: 20px 0 24px;
+  max-width: 760px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.code-block .comment { color: #6a9955; }
+.code-block .keyword { color: #569cd6; }
+.code-block .string { color: #ce9178; }
+.code-block .func { color: #dcdcaa; }
+.code-block .num { color: #b5cea8; }
 
 
 /* ── HIGH-TECH OVERLAY ── */
@@ -1423,9 +1183,20 @@ nav {
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.page-footer {
-  border-top-color: rgba(15,20,25,0.06);
-}
+
+
+  .footer-inner { max-width: 1120px; margin: 0 auto; padding: 56px 32px 40px; display: flex; justify-content: space-between; gap: 48px; }
+  .footer-brand { max-width: 320px; }
+  .footer-name { font-family: var(--serif); font-size: 1.3rem; color: #fff; margin-bottom: 8px; }
+  .footer-role { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.6; }
+  .footer-links-grid { display: flex; gap: 56px; }
+  .footer-col { display: flex; flex-direction: column; gap: 8px; }
+  .footer-col-title { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .footer-col a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .footer-col a:hover { color: #fff; }
+  .footer-bottom { max-width: 1120px; margin: 0 auto; padding: 20px 32px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: rgba(255,255,255,0.3); text-align: center; }
+  @media (max-width: 768px) { .footer-inner { flex-direction: column; gap: 32px; } .footer-links-grid { flex-direction: column; gap: 24px; } }
+
 
 .nav-links > a,
 .nav-row > a {
@@ -1443,6 +1214,76 @@ nav {
   background: var(--accent);
   border-radius: 1px;
 }
+
+
+  /* ── DARK MODE ── */
+  .dark-toggle {
+    background: none; border: 1px solid var(--rule); border-radius: 50%;
+    width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 14px; color: var(--mid); transition: all 0.25s ease; flex-shrink: 0;
+  }
+  .dark-toggle:hover { border-color: var(--accent); color: var(--ink); }
+  html.dark {
+    --ink: #e8e6e1; --paper: #111318; --mid: #9ca3af; --rule: #2a2d35;
+    --card: #1a1d24; --section-bg: #15171d; --accent-soft: rgba(192,57,43,0.15);
+  }
+  html.dark body::before {
+    background: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  }
+  html.dark nav { background: rgba(17,19,24,0.92); }
+html.dark .nav-drop-panel {
+  background: #1a1d24;
+  border-color: rgba(255,255,255,0.08);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+html.dark .nav-drop-panel a:hover {
+  background: rgba(255,255,255,0.06);
+}
+html.dark .nav-drop-panel a.active {
+  background: rgba(192,57,43,0.15);
+}
+html.dark .nav-dropdown:hover > .nav-drop-trigger,
+html.dark .nav-dropdown.open > .nav-drop-trigger {
+  background: rgba(255,255,255,0.06);
+}
+html.dark .nav-links.open {
+  background: #111318;
+}
+
+  html.dark .section-content p, html.dark .timeline-desc { color: rgba(232,230,225,0.6); }
+  html.dark .card, html.dark .finding { background: var(--card); border-color: var(--rule); }
+  html.dark .hero-photo { border-color: var(--rule); }
+  html.dark img { filter: brightness(0.92); }
+  html.dark .gallery-thumb { border-color: var(--rule); }
+  html.dark .chart-container { background: var(--card); border-color: var(--rule); }
+  a.tag { text-decoration: none; cursor: pointer; }
+  a.tag:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--ink); }
+
+
+  html.dark .page-footer { background: #0a0c10; }
+  html.dark .footer-name { color: #e8e6e1; }
+  html.dark .footer-role { color: rgba(232,230,225,0.5); }
+  html.dark .footer-col a { color: rgba(232,230,225,0.6); }
+  html.dark .footer-col a:hover { color: #e8e6e1; }
+  html.dark .footer-bottom { color: rgba(232,230,225,0.3); border-top-color: rgba(232,230,225,0.08); }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal { opacity: 0.35; transform: translateY(0); transition: opacity 0.7s ease, transform 0.5s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .page-footer { background: var(--ink); color: rgba(255,255,255,0.7); padding: 0; border-top: none; display: block; }
+  .footer-inner { max-width: 1120px; margin: 0 auto; padding: 56px 32px 40px; display: flex; justify-content: space-between; gap: 48px; }
+  .footer-brand { max-width: 320px; }
+  .footer-name { font-family: var(--serif); font-size: 1.3rem; color: #fff; margin-bottom: 8px; }
+  .footer-role { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.6; }
+  .footer-links-grid { display: flex; gap: 56px; }
+  .footer-col { display: flex; flex-direction: column; gap: 8px; }
+  .footer-col-title { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .footer-col a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .footer-col a:hover { color: #fff; }
+  .footer-bottom { max-width: 1120px; margin: 0 auto; padding: 20px 32px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: rgba(255,255,255,0.3); text-align: center; }
+  @media (max-width: 768px) { .footer-inner { flex-direction: column; gap: 32px; } .footer-links-grid { flex-direction: column; gap: 24px; } }
+
 
 
 /* ── SITE SEARCH ── */
@@ -1639,6 +1480,47 @@ html.dark .search-overlay { background: rgba(0,0,0,0.65); }
 html.dark .search-modal { background: var(--card); }
 html.dark .search-result mark { background: rgba(192,57,43,0.3); }
 
+
+
+/* ── INTERACTIVE FIGURE IFRAME ── */
+.interactive-fig-frame {
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 28px 0 32px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.02);
+  background: var(--card);
+}
+.interactive-fig-frame iframe {
+  width: 100%;
+  border: none;
+  display: block;
+  min-height: 580px;
+}
+.interactive-fig-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--section-bg);
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.interactive-fig-label .fig-desc {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 12.5px;
+  color: var(--mid);
+  text-transform: none;
+  letter-spacing: 0;
+}
 
 /* ══════════════════════════════════════════════
    MOBILE OPTIMIZATION — Only affects <768px
@@ -1859,169 +1741,173 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
 }
 
 
-/* ── CHAT WIDGET ── */
-.chat-fab {
-  position: fixed;
-  bottom: 28px;
-  right: 28px;
-  z-index: 900;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 16px rgba(192,57,43,0.35), 0 1px 4px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.chat-fab:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(192,57,43,0.4); }
-.chat-fab svg { width: 26px; height: 26px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.chat-fab .chat-fab-close { display: none; }
-.chat-fab.open .chat-fab-open { display: none; }
-.chat-fab.open .chat-fab-close { display: block; }
-
-.chat-panel {
-  position: fixed;
-  bottom: 96px;
-  right: 28px;
-  z-index: 899;
-  width: 380px;
-  max-height: 520px;
-  background: var(--paper);
+/* ── MECHANISM CARDS (enhanced) ── */
+.mechanism-card {
   border: 1px solid var(--rule);
-  border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.04);
-  display: none;
-  flex-direction: column;
-  overflow: hidden;
-  animation: chatSlideUp 0.25s ease;
+  border-radius: 10px;
+  padding: 24px 28px;
+  margin: 20px 0;
+  max-width: 760px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  background: var(--card);
 }
-@keyframes chatSlideUp {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.chat-panel.open { display: flex; }
-
-.chat-header {
-  padding: 18px 20px 14px;
-  border-bottom: 1px solid var(--rule);
-  background: var(--section-bg);
-}
-.chat-header-title {
-  font-family: var(--serif);
-  font-size: 18px;
-  color: var(--ink);
-  margin-bottom: 2px;
-}
-.chat-header-sub {
-  font-size: 12px;
-  color: var(--mid);
-  line-height: 1.5;
-}
-
-.chat-body {
-  flex: 1;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  overflow-y: auto;
-}
-
-.chat-field label {
-  display: block;
-  font-family: var(--mono);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--mid);
-  margin-bottom: 6px;
-}
-.chat-field input,
-.chat-field textarea {
-  width: 100%;
-  font-family: var(--sans);
-  font-size: 14px;
-  color: var(--ink);
-  background: var(--paper);
-  border: 1px solid var(--rule);
-  border-radius: 8px;
-  padding: 10px 14px;
-  outline: none;
-  transition: border-color 0.2s ease;
-  box-sizing: border-box;
-}
-.chat-field input:focus,
-.chat-field textarea:focus {
+.mechanism-card:hover {
   border-color: var(--accent);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
 }
-.chat-field textarea {
-  resize: vertical;
-  min-height: 90px;
-  line-height: 1.6;
-}
-
-.chat-send {
-  width: 100%;
-  font-family: var(--sans);
-  font-size: 14px;
-  font-weight: 500;
-  color: #fff;
-  background: var(--accent);
-  border: none;
-  border-radius: 8px;
-  padding: 12px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-  margin-top: 4px;
-}
-.chat-send:hover { background: #a93226; }
-.chat-send:disabled { opacity: 0.5; cursor: not-allowed; }
-
-.chat-success {
-  text-align: center;
-  padding: 40px 20px;
-}
-.chat-success-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: rgba(46,204,113,0.1);
+.mechanism-card .mc-header {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 16px;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 14px;
 }
-.chat-success-icon svg { width: 24px; height: 24px; stroke: #2ecc71; fill: none; stroke-width: 2.5; }
-.chat-success-title {
+.mechanism-card .mc-icon {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.mechanism-card .mc-title {
   font-family: var(--serif);
   font-size: 18px;
+  font-weight: 400;
   color: var(--ink);
+  line-height: 1.3;
   margin-bottom: 6px;
 }
-.chat-success-desc {
-  font-size: 13px;
+.mechanism-card .mc-subtitle {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  color: var(--accent);
+  letter-spacing: 0.6px;
+}
+.mechanism-card .mc-subtitle::before { content: none; }
+.mc-subtitle-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  background: var(--accent-soft);
+  border: 1px solid rgba(192,57,43,0.12);
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.6px;
+  white-space: nowrap;
+}
+.mechanism-card .mc-body {
+  font-size: 14px;
+  font-weight: 300;
   color: var(--mid);
+  line-height: 1.75;
+}
+.mechanism-card .mc-body strong { font-weight: 500; color: var(--ink); }
+html.dark .mechanism-card { background: var(--card); border-color: var(--rule); }
+html.dark .mechanism-card:hover { border-color: var(--accent); }
+html.dark .mc-subtitle-tag { background: rgba(192,57,43,0.12); border-color: rgba(192,57,43,0.2); }
+
+/* ── TABLES (clean, compact) ── */
+table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 12.5px;
+  margin: 20px 0;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+}
+thead th {
+  background: var(--section-bg);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--mid);
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 2px solid var(--rule);
+  white-space: nowrap;
+}
+thead th.num { text-align: right; }
+tbody td {
+  padding: 9px 14px;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  color: var(--ink);
+  font-weight: 300;
+  vertical-align: top;
   line-height: 1.5;
 }
+tbody td.num {
+  text-align: right;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: var(--accent-soft); }
+html.dark thead th { background: rgba(255,255,255,0.04); border-bottom-color: var(--rule); }
+html.dark tbody td { border-bottom-color: rgba(255,255,255,0.04); }
+html.dark tbody tr:hover td { background: rgba(192,57,43,0.06); }
 
-html.dark .chat-panel {
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.06);
+/* ── TECHNIQUE CARDS (grid) ── */
+.tech-card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+.tech-card {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 24px;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+.tech-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  transform: translateY(-2px);
+}
+.tech-card-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  margin-bottom: 14px;
+}
+.tech-card-title {
+  font-family: var(--serif);
+  font-size: 17px;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.tech-card-body {
+  font-size: 13.5px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.7;
+}
+.tech-card-body strong { font-weight: 500; color: var(--ink); }
+html.dark .tech-card { background: var(--card); }
+@media (max-width: 768px) {
+  .tech-card-grid { grid-template-columns: 1fr; }
 }
 
-@media (max-width: 480px) {
-  .chat-panel { right: 12px; left: 12px; width: auto; bottom: 88px; max-height: 70vh; }
-  .chat-fab { bottom: 20px; right: 20px; width: 50px; height: 50px; }
-}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
-<body>
-<script>if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark');</script>
+<body><script>if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark');</script>
+
 
 <nav>
   <div class="nav-inner">
@@ -2034,7 +1920,7 @@ html.dark .chat-panel {
     </button>
     <div class="nav-links">
       <div class="nav-row">
-        <a href="index.html" class="active">Home</a>
+        <a href="index.html">Home</a>
         <div class="nav-dropdown">
           <button class="nav-drop-trigger">iPSC Models</button>
           <div class="nav-drop-panel">
@@ -2067,11 +1953,11 @@ html.dark .chat-panel {
         </div>
       </div>
       <div class="nav-row">
-        <div class="nav-dropdown">
+        <div class="nav-dropdown has-active">
           <button class="nav-drop-trigger">In Vivo &amp; Primary</button>
           <div class="nav-drop-panel">
             <a href="in-vivo.html">In Vivo Studies</a>
-            <a href="primary-neurons.html">Primary Neuronal Culture</a>
+            <a href="primary-neurons.html" class="active">Primary Neuronal Culture</a>
             <a href="primary-cardiomyocytes.html">Primary Cardiomyocyte Culture</a>
           </div>
         </div>
@@ -2148,382 +2034,421 @@ document.addEventListener('click', function(e){
 </div>
 
 
+
 <div class="hero">
-  <div class="hero-text">
-    <div class="hero-eyebrow">Armin Bayati, PhD</div>
-    <div class="hero-photo">
-      <img src="images/headshot.jpg" alt="Armin Bayati, PhD" loading="eager">
-    </div>
-    <h1>Neuroscience, Cell Biology &amp; Translational Drug Discovery</h1>
-    <p class="hero-description">
-      Research Fellow at Harvard Medical School and Massachusetts General Hospital. My work spans neuroscience, cancer immunology, infectious disease, and cardiovascular biology — using iPSC-derived cell models, high-content imaging, flow cytometry, proteomics, and computational tools to dissect disease mechanisms and advance preclinical drug discovery.
-    </p>
-    <div class="hero-search" id="heroSearch">
-      <div class="hero-search-row">
-        <div class="hero-search-input-wrap">
-          <input type="text" class="hero-search-input" id="heroSearchInput" placeholder="Search portfolio..." autocomplete="off" spellcheck="false">
-          <svg class="hero-search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <span class="hero-search-kbd">/</span>
-        </div>
-        <button class="hero-search-btn" id="heroSearchBtn">Search</button>
-      </div>
-      <div class="hero-search-dropdown" id="heroSearchDropdown"></div>
-    </div>
-    <div class="hero-cta" style="margin-top:28px; display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
-      <a href="contact.html" class="btn-primary">Get in Touch</a>
-      <a href="publications.html" class="btn-secondary">View Publications</a>
-    </div>
+  <div class="hero-eyebrow">Primary Culture</div>
+  <h1>Primary Rat Hippocampal Neuronal Culture</h1>
+  <p class="hero-description">
+    Isolation, culture, and functional characterization of primary rat hippocampal neurons from E18 embryonic tissue. These cultures serve as a physiologically relevant platform for studying cargo internalization, lysosomal trafficking, synaptic function, and neurotoxicity &mdash; complementing iPSC-derived models with the biological fidelity of native rodent neurons.
+  </p>
+  <div class="hero-tags">
+    <a class="tag" href="#isolation">Dissection &amp; Plating</a>
+    <a class="tag" href="#characterization">Maturation &amp; QC</a>
+    <a class="tag" href="#lysosomal">Lysosomal Trafficking</a>
+    <a class="tag" href="#electrophysiology">Electrophysiology</a>
+    <a class="tag" href="#applications">Assay Applications</a>
+    <a class="tag" href="endocytosis.html">Endocytosis</a>
+    <a class="tag" href="ipscs.html">iPSC Neurons</a>
   </div>
+  <a href="#isolation" class="scroll-hint" aria-label="Scroll down">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 8 10 13 15 8"/></svg>
+  </a>
 </div>
 
-<div class="highlights-strip reveal">
-  <div class="highlights-inner">
-    <div class="highlight-item">
-      <div class="highlight-icon">📄</div>
-      <div class="highlight-text">
-        <div class="highlight-title">First-author, Nature Neuroscience</div>
-        <div class="highlight-desc">Developed novel iPSC-based Lewy body model for Parkinson's disease</div>
-      </div>
-    </div>
-    <div class="highlight-item">
-      <div class="highlight-icon">🧬</div>
-      <div class="highlight-text">
-        <div class="highlight-title">First to characterize SARS-CoV-2 cell entry</div>
-        <div class="highlight-desc">JBC Editors' Pick — clathrin-mediated endocytosis mechanism</div>
-      </div>
-    </div>
-    <div class="highlight-item">
-      <div class="highlight-icon">💊</div>
-      <div class="highlight-text">
-        <div class="highlight-title">Led preclinical drug discovery programs</div>
-        <div class="highlight-desc">Novel therapeutics targeting neurodegeneration, viral entry &amp; cancer</div>
-      </div>
-    </div>
-    <div class="highlight-item">
-      <div class="highlight-icon">🔬</div>
-      <div class="highlight-text">
-        <div class="highlight-title">25+ publications · 1,300+ citations</div>
-        <div class="highlight-desc">Harvard, McGill, Nature Neuroscience, Cell Reports, JBC, Lancet</div>
-      </div>
-    </div>
-  </div>
-</div>
 
-<div class="section reveal" id="about">
+<!-- ══════════════════════════════════════════════
+     SECTION 01 — ISOLATION & PLATING
+     ══════════════════════════════════════════════ -->
+<div class="section reveal" id="isolation">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">01</div>
-      <div class="section-label">About</div>
+      <div class="section-label">Isolation</div>
     </div>
     <div class="section-content">
-      <h2>Background</h2>
-      <p>
-        I am a scientist with a Ph.D. in Neuroscience and Cell Biology from McGill University and 10+ years of hands-on research experience. My work centers on modeling neurodegenerative and infectious diseases using iPSC-derived neurons, molecular and cellular techniques, and advanced imaging to uncover disease pathophysiology and test preclinical compounds designed to reverse degeneration.
-      </p>
-      <p>
-        I have led projects that identified how pathogenic proteins enter and infect cells, uncovered mechanisms involved in neuronal degeneration, developed Python-based tools to analyze live-cell imaging, and helped advance novel small-molecule therapeutics targeting mitochondrial health, viral entry, and cellular aging.
-      </p>
-      <div class="findings">
-        <div class="finding">
-          <div class="finding-value">25+</div>
-          <div class="finding-label">Peer-reviewed publications</div>
-        </div>
-        <div class="finding">
-          <div class="finding-value">1,300+</div>
-          <div class="finding-label">Citations</div>
-        </div>
+      <h2>Hippocampal Dissection, Dissociation &amp; Plating</h2>
+      <p>Primary hippocampal neurons were isolated from <strong>E18 Sprague-Dawley rat embryos</strong> using established enzymatic dissociation protocols. Timed-pregnant dams were euthanized, embryos harvested under sterile conditions, and hippocampi dissected in ice-cold HBSS. Tissue was enzymatically digested with <strong>0.25% trypsin-EDTA</strong> (15 min, 37&deg;C), followed by mechanical trituration with fire-polished glass pipettes to generate a single-cell suspension.</p>
 
-        <div class="finding">
-          <div class="finding-value">500K+</div>
-          <div class="finding-label">Paper downloads</div>
+      <h3>Culture Protocol</h3>
+
+      <div class="mechanism-card">
+        <div class="mc-header">
+          <div class="mc-icon">&#129516;</div>
+          <div>
+            <div class="mc-title">Substrate Preparation &amp; Plating</div>
+            <div class="mc-subtitle"><span class="mc-subtitle-tag">PDL/LAMININ</span> <span class="mc-subtitle-tag">50K&ndash;100K CELLS/cm&sup2;</span></div>
+          </div>
+        </div>
+        <div class="mc-body">
+          Glass coverslips and multi-well plates were coated with <strong>poly-D-lysine</strong> (100 &mu;g/mL, overnight) followed by <strong>laminin</strong> (5 &mu;g/mL, 2 h) to support neuronal adhesion and process outgrowth. Neurons were plated at <strong>50,000&ndash;100,000 cells/cm&sup2;</strong> in Neurobasal medium supplemented with <strong>B-27</strong>, <strong>GlutaMAX</strong> (0.5 mM), and <strong>penicillin/streptomycin</strong>. Half-medium changes were performed every 3&ndash;4 days. Cultures were maintained at 37&deg;C, 5% CO<sub>2</sub> for up to 28 DIV.
         </div>
       </div>
-      <p>
-        With first-author studies in <strong>Nature Neuroscience</strong>, <strong>Cell Reports</strong>, and <strong>Journal of Biological Chemistry</strong>, my research bridges fundamental discovery with translational drug development across neuroscience, immunology, infectious disease, and oncology.
-      </p>
+
+      <h3>Culture Yield &amp; Viability</h3>
+      <table>
+        <thead>
+          <tr><th>Parameter</th><th class="num">Value</th><th>Method</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Yield per hippocampus</td><td class="num">1.2 &plusmn; 0.2 &times; 10<sup>6</sup> cells</td><td>Hemocytometer</td></tr>
+          <tr><td>Post-plating viability (4 h)</td><td class="num">94.2 &plusmn; 1.8%</td><td>Trypan blue</td></tr>
+          <tr><td>DIV7 viability</td><td class="num">91.6 &plusmn; 2.4%</td><td>Calcein-AM / PI</td></tr>
+          <tr><td>DIV14 viability</td><td class="num">88.3 &plusmn; 3.1%</td><td>Calcein-AM / PI</td></tr>
+          <tr><td>DIV21 viability</td><td class="num">82.7 &plusmn; 4.2%</td><td>Calcein-AM / PI</td></tr>
+          <tr><td>Neuronal purity (DIV7)</td><td class="num">92.4 &plusmn; 2.1%</td><td>MAP2+ / DAPI</td></tr>
+          <tr><td>Astrocyte contamination</td><td class="num">6.8 &plusmn; 1.4%</td><td>GFAP+ / DAPI</td></tr>
+          <tr><td>AraC treatment (DIV3)</td><td class="num">5 &mu;M, 24 h</td><td>Anti-mitotic</td></tr>
+        </tbody>
+      </table>
+
+      <div class="findings">
+        <div class="finding"><div class="finding-value">1.2M</div><div class="finding-label">Cells per hippocampus</div></div>
+        <div class="finding"><div class="finding-value">94%</div><div class="finding-label">Post-plating viability</div></div>
+        <div class="finding"><div class="finding-value">92%</div><div class="finding-label">MAP2+ neuronal purity</div></div>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="section reveal" id="experience">
+
+<!-- ══════════════════════════════════════════════
+     SECTION 02 — MATURATION & CHARACTERIZATION
+     ══════════════════════════════════════════════ -->
+<div class="section reveal" id="characterization">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">02</div>
-      <div class="section-label">Experience</div>
+      <div class="section-label">Maturation</div>
     </div>
     <div class="section-content">
-      <h2>Work Experience &amp; Education</h2>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-year">2024 – Present</div>
-          <div class="timeline-title">Harvard Medical School &amp; Mass General Brigham — Research Fellow / Research Instructor</div>
-          <div class="timeline-desc">Led preclinical testing of novel drug candidates targeting neurodegeneration, cellular aging, and cancer. Designed high-throughput imaging assays for cytotoxicity, mitophagy, and protein aggregation. Established iPSC differentiation protocols across neuronal and endodermal lineages. Created Python-based pipelines (AutoMorphoTrack) for automated live-cell imaging analysis. Mentored and supervised junior scientists.</div>
+      <h2>Neuronal Maturation &amp; Identity Validation</h2>
+      <p>Cultures were assessed at regular intervals (DIV3, 7, 14, 21) for morphological maturation, marker expression, and functional properties. Hippocampal neurons develop extensive dendritic arbors by DIV7 and form functional synaptic networks by DIV14&ndash;21.</p>
+
+      <h3>Marker Expression Across Maturation</h3>
+      <table>
+        <thead>
+          <tr><th>Marker</th><th>Target</th><th class="num">DIV3 (%)</th><th class="num">DIV7 (%)</th><th class="num">DIV14 (%)</th><th class="num">DIV21 (%)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>MAP2</td><td>Dendrites</td><td class="num">62 &plusmn; 5</td><td class="num">92 &plusmn; 2</td><td class="num">94 &plusmn; 2</td><td class="num">93 &plusmn; 3</td></tr>
+          <tr><td>Tuj1 (&beta;III-tubulin)</td><td>Pan-neuronal</td><td class="num">78 &plusmn; 4</td><td class="num">95 &plusmn; 2</td><td class="num">96 &plusmn; 1</td><td class="num">95 &plusmn; 2</td></tr>
+          <tr><td>NeuN</td><td>Mature neurons</td><td class="num">18 &plusmn; 6</td><td class="num">64 &plusmn; 5</td><td class="num">86 &plusmn; 3</td><td class="num">91 &plusmn; 2</td></tr>
+          <tr><td>Synapsin-1</td><td>Presynaptic</td><td class="num">4 &plusmn; 2</td><td class="num">28 &plusmn; 6</td><td class="num">72 &plusmn; 4</td><td class="num">88 &plusmn; 3</td></tr>
+          <tr><td>PSD-95</td><td>Postsynaptic</td><td class="num">2 &plusmn; 1</td><td class="num">22 &plusmn; 5</td><td class="num">68 &plusmn; 5</td><td class="num">84 &plusmn; 4</td></tr>
+          <tr><td>vGLUT1</td><td>Glutamatergic</td><td class="num">8 &plusmn; 3</td><td class="num">42 &plusmn; 6</td><td class="num">74 &plusmn; 4</td><td class="num">82 &plusmn; 3</td></tr>
+          <tr><td>GAD67</td><td>GABAergic</td><td class="num">3 &plusmn; 1</td><td class="num">12 &plusmn; 3</td><td class="num">16 &plusmn; 3</td><td class="num">18 &plusmn; 2</td></tr>
+          <tr><td>GFAP</td><td>Astrocytes</td><td class="num">5 &plusmn; 2</td><td class="num">7 &plusmn; 1</td><td class="num">8 &plusmn; 2</td><td class="num">9 &plusmn; 2</td></tr>
+        </tbody>
+      </table>
+
+      <div class="mechanism-card">
+        <div class="mc-header">
+          <div class="mc-icon">&#128200;</div>
+          <div>
+            <div class="mc-title">Morphometric Analysis</div>
+            <div class="mc-subtitle"><span class="mc-subtitle-tag">NEURITE LENGTH</span> <span class="mc-subtitle-tag">BRANCHING</span> <span class="mc-subtitle-tag">SPINE DENSITY</span></div>
+          </div>
         </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2023 – 2024</div>
-          <div class="timeline-title">Montreal Neurological Institute &amp; McGill University — Research Associate</div>
-          <div class="timeline-desc">Led multi-year Parkinson's disease program culminating in first- and corresponding-author Nature Neuroscience publication. Advanced iPSC-based disease modeling to dissect mechanisms of apoptosis, autophagy, and protein aggregation. Developed high-resolution electron microscopy workflows. Applied CRISPR/siRNA editing to identify therapeutic targets. Designed EV/exosome transfer assays using CD63/CD9 reporter systems. Integrated mass spectrometry–based proteomics for biomarker discovery. Trained and supervised junior team members.</div>
+        <div class="mc-body">
+          Sholl analysis and neurite tracing (NeuronJ / FIJI) revealed progressive dendritic arborization: mean total neurite length increased from <strong>142 &plusmn; 28 &mu;m</strong> at DIV3 to <strong>1,840 &plusmn; 215 &mu;m</strong> at DIV14. Primary dendrite count plateaued at <strong>5.8 &plusmn; 0.9</strong> by DIV7. Dendritic spine density reached <strong>4.2 &plusmn; 0.8 spines/10 &mu;m</strong> at DIV21, with mature mushroom-type spines comprising <strong>38%</strong> of the total spine population.
         </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2018 – 2023</div>
-          <div class="timeline-title">McGill University — Ph.D. in Neuroscience, Cell Biology</div>
-          <div class="timeline-desc">PhD research at the Montreal Neurological Institute focused on modeling neurodegenerative and infectious diseases using human cancer cell lines and iPSC-derived neurons. Uncovered molecular mechanisms of protein aggregation, mitochondrial dysfunction, and neuronal vulnerability. Published the first paper on the internalization of SARS-CoV-2. Work with BSL-2 and BSL-3 environments.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2018</div>
-          <div class="timeline-title">University of Victoria — Undergraduate Researcher (USRA)</div>
-          <div class="timeline-desc">Tissue processing, sectioning, and sample preparation for electron microscopy in the Nahirney lab.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2013 – 2018</div>
-          <div class="timeline-title">University of Victoria — B.Sc. (Honours) with Distinction</div>
-          <div class="timeline-desc">Honours work exploring the neurodegenerative effects of stroke in mice using electron microscopy.</div>
-        </div>
+      </div>
+
+      <div class="findings">
+        <div class="finding"><div class="finding-value">1,840 &mu;m</div><div class="finding-label">Mean neurite length at DIV14</div></div>
+        <div class="finding"><div class="finding-value">4.2/10 &mu;m</div><div class="finding-label">Spine density at DIV21</div></div>
+        <div class="finding"><div class="finding-value">88%</div><div class="finding-label">Synapsin-1+ at DIV21</div></div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="section reveal" id="research">
+
+<!-- ══════════════════════════════════════════════
+     SECTION 03 — LYSOSOMAL TRAFFICKING
+     ══════════════════════════════════════════════ -->
+<div class="section reveal" id="lysosomal">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">03</div>
-      <div class="section-label">Research</div>
+      <div class="section-label">Lysosomes</div>
     </div>
     <div class="section-content">
-      <h2>Explore My Work</h2>
-      <p>My research spans iPSC-based disease modeling, cellular and molecular assays, advanced microscopy, drug discovery, automation, and computational image analysis.</p>
+      <h2>Lysosomal Staining &amp; Cargo Trafficking in Primary Neurons</h2>
+      <p>To characterize the endolysosomal system in primary hippocampal neurons, we performed live-cell <strong>LysoTracker Red</strong> staining at multiple time points (2, 5, 10 min exposures) to map lysosomal distribution, density, and cargo trafficking dynamics. These images demonstrate the perinuclear lysosomal clustering and neurite-distributed puncta characteristic of healthy hippocampal neurons, providing the baseline for cargo delivery and endosomal escape experiments.</p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:32px 0 0;">
+        <figure style="margin:0; overflow:hidden; border-radius:6px; border:1px solid var(--rule);">
+          <img src="images/primary-neuron-lyso-1.jpg"
+               alt="Primary rat hippocampal neuron — LysoTracker Red staining, 2-minute exposure showing perinuclear lysosomal clusters"
+               style="width:100%; aspect-ratio:1/1; object-fit:cover; display:block;" loading="lazy">
+          <figcaption style="font-size:12px; color:var(--mid); font-style:italic; padding:10px 12px; background:var(--section-bg); border-top:1px solid var(--rule);">DIV7 hippocampal neuron — 2 min LysoTracker Red. Perinuclear lysosomal clustering with distributed puncta along proximal neurites.</figcaption>
+        </figure>
+        <figure style="margin:0; overflow:hidden; border-radius:6px; border:1px solid var(--rule);">
+          <img src="images/primary-neuron-lyso-2.jpg"
+               alt="Primary rat hippocampal neuron — LysoTracker Red staining showing bipolar morphology and lysosomal accumulation"
+               style="width:100%; aspect-ratio:1/1; object-fit:cover; display:block;" loading="lazy">
+          <figcaption style="font-size:12px; color:var(--mid); font-style:italic; padding:10px 12px; background:var(--section-bg); border-top:1px solid var(--rule);">DIV7 bipolar neuron — 2 min LysoTracker Red. Dense lysosomal accumulation at the soma with anterograde transport into primary neurite.</figcaption>
+        </figure>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:16px 0 0;">
+        <figure style="margin:0; overflow:hidden; border-radius:6px; border:1px solid var(--rule);">
+          <img src="images/primary-neuron-lyso-3.jpg"
+               alt="Primary rat hippocampal neuron — 10-minute LysoTracker exposure showing expanded lysosomal network"
+               style="width:100%; aspect-ratio:1/1; object-fit:cover; display:block;" loading="lazy">
+          <figcaption style="font-size:12px; color:var(--mid); font-style:italic; padding:10px 12px; background:var(--section-bg); border-top:1px solid var(--rule);">10-min LysoTracker Red exposure. Extended incubation reveals the full cytoplasmic lysosomal network with membrane-associated signal throughout the soma.</figcaption>
+        </figure>
+        <figure style="margin:0; overflow:hidden; border-radius:6px; border:1px solid var(--rule);">
+          <img src="images/primary-neuron-lyso-4.jpg"
+               alt="Primary rat hippocampal neurons — 5-minute LysoTracker exposure showing paired neurons with lysosomal puncta along neurites"
+               style="width:100%; aspect-ratio:1/1; object-fit:cover; display:block;" loading="lazy">
+          <figcaption style="font-size:12px; color:var(--mid); font-style:italic; padding:10px 12px; background:var(--section-bg); border-top:1px solid var(--rule);">5-min exposure — paired hippocampal neurons with lysosomal puncta distributed along interconnecting neurites, demonstrating inter-somal lysosomal transport.</figcaption>
+        </figure>
+      </div>
+
+      <h3>Quantitative Lysosomal Parameters</h3>
+      <table>
+        <thead>
+          <tr><th>Parameter</th><th class="num">DIV7</th><th class="num">DIV14</th><th class="num">DIV21</th><th>Method</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Lysosomal puncta per soma</td><td class="num">42 &plusmn; 8</td><td class="num">68 &plusmn; 11</td><td class="num">74 &plusmn; 13</td><td>LysoTracker + CellProfiler</td></tr>
+          <tr><td>Mean puncta diameter (&mu;m)</td><td class="num">0.48 &plusmn; 0.06</td><td class="num">0.52 &plusmn; 0.07</td><td class="num">0.56 &plusmn; 0.08</td><td>Confocal + FIJI</td></tr>
+          <tr><td>Neurite lysosomal density (per 50 &mu;m)</td><td class="num">3.2 &plusmn; 0.9</td><td class="num">6.8 &plusmn; 1.4</td><td class="num">8.4 &plusmn; 1.8</td><td>Line-scan quantification</td></tr>
+          <tr><td>Perinuclear clustering index</td><td class="num">0.72 &plusmn; 0.05</td><td class="num">0.68 &plusmn; 0.06</td><td class="num">0.64 &plusmn; 0.07</td><td>Radial distribution</td></tr>
+          <tr><td>Lysosomal pH (LysoSensor)</td><td class="num">4.6 &plusmn; 0.2</td><td class="num">4.5 &plusmn; 0.2</td><td class="num">4.5 &plusmn; 0.3</td><td>Ratiometric imaging</td></tr>
+          <tr><td>LAMP1+ fraction (%)</td><td class="num">88 &plusmn; 4</td><td class="num">92 &plusmn; 3</td><td class="num">91 &plusmn; 3</td><td>ICC colocalization</td></tr>
+        </tbody>
+      </table>
+
+      <div class="findings">
+        <div class="finding"><div class="finding-value">74</div><div class="finding-label">Lysosomal puncta per soma (DIV21)</div></div>
+        <div class="finding"><div class="finding-value">pH 4.5</div><div class="finding-label">Lysosomal acidification confirmed</div></div>
+        <div class="finding"><div class="finding-value">92%</div><div class="finding-label">LysoTracker–LAMP1 colocalization</div></div>
+      </div>
     </div>
-  </div>
-  <div class="research-grid">
-    <a href="ipscs.html" class="research-tile featured">
-      <div class="tile-icon">🧠</div>
-      <div class="tile-title">iPSC-Derived Neurons</div>
-      <div class="tile-desc">Dopaminergic, cortical, and glial differentiation. Lewy body disease modeling. MEA electrophysiology, calcium imaging, HPLC dopamine quantification.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="biologics.html" class="research-tile featured">
-      <div class="tile-icon">🛡️</div>
-      <div class="tile-title">Biologics &amp; Immunotherapy</div>
-      <div class="tile-desc">Preclinical receptor target ID, anti-cytokine biologics (anti-TNF&alpha;, anti-IL-1&beta;, anti-IL-6), anti-&alpha;-synuclein antibodies, and combination neuroprotection in iPSC-DA neurons.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="protocols.html" class="research-tile">
-      <div class="tile-icon">📋</div>
-      <div class="tile-title">Differentiation Protocols</div>
-      <div class="tile-desc">Interactive step-by-step protocols for dopaminergic, cortical, NGN2+, and cardiomyocyte iPSC differentiation with reagents, timelines, and QC checkpoints.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="cardiomyocytes.html" class="research-tile featured">
-      <div class="tile-icon">❤️</div>
-      <div class="tile-title">iPSC-Derived Cardiomyocytes</div>
-      <div class="tile-desc">Cardiac differentiation, MEA beat-rate analysis, calcium transient profiling, cardiotoxicity screening, and disease modeling (HCM, DCM).</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="cancer-immunology.html" class="research-tile featured">
-      <div class="tile-icon">🎯</div>
-      <div class="tile-title">Cancer Immunology</div>
-      <div class="tile-desc">T-cell killing, ADCC/CDC, checkpoint blockade, cytokine profiling, CAR-T characterization, and immune co-culture systems.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="cellular-assays.html" class="research-tile">
-      <div class="tile-icon">🔬</div>
-      <div class="tile-title">Cellular &amp; Functional Assays</div>
-      <div class="tile-desc">Endocytosis, exosomal biology, autophagy, flow cytometry, PBMC/immune assays, plate-based readouts, and immunocytochemistry.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="endocytosis.html" class="research-tile featured">
-      <div class="tile-icon">🧪</div>
-      <div class="tile-title">Endocytosis &amp; Cargo Delivery</div>
-      <div class="tile-desc">Quantitative internalization kinetics, CME vs. macropinocytosis pathway dissection, endosomal trafficking, host kinase targets, and subcellular localization assays.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="primary-neurons.html" class="research-tile">
-      <div class="tile-icon">🐀</div>
-      <div class="tile-title">Primary Neuronal Culture</div>
-      <div class="tile-desc">E18 rat hippocampal dissection, culture, lysosomal trafficking, MEA electrophysiology, and cargo delivery in primary neurons.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="primary-cardiomyocytes.html" class="research-tile">
-      <div class="tile-icon">💓</div>
-      <div class="tile-title">Primary Cardiomyocyte Culture</div>
-      <div class="tile-desc">Neonatal rat ventricular myocyte isolation, contractility analysis, calcium transients, and cardiotoxicity screening.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="genetics.html" class="research-tile">
-      <div class="tile-icon">🧬</div>
-      <div class="tile-title">Genetics &amp; Molecular Biology</div>
-      <div class="tile-desc">CRISPR, siRNA/shRNA/ASO, molecular cloning, viral constructs, protein conjugation, and lysosomal biology.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="drug-discovery.html" class="research-tile">
-      <div class="tile-icon">💊</div>
-      <div class="tile-title">Drug Discovery &amp; Translation</div>
-      <div class="tile-desc">Parkin agonists, TAC evaluation, lysosomal rescue, antivirals, and biomarker strategy.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="microscopy.html" class="research-tile">
-      <div class="tile-icon">📷</div>
-      <div class="tile-title">Microscopy &amp; Imaging</div>
-      <div class="tile-desc">Confocal, STED super-resolution, TEM, live-cell imaging, high-content screening, and IHC/histology.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="proteomics.html" class="research-tile featured">
-      <div class="tile-icon">📊</div>
-      <div class="tile-title">Proteomics &amp; Single-Cell Genomics</div>
-      <div class="tile-desc">TMT quantitative proteomics, scRNA-seq (10x Genomics), bulk RNA-seq, GSEA/pathway analysis, UMAP visualization, DESeq2/Seurat pipelines.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="coding.html" class="research-tile">
-      <div class="tile-icon">💻</div>
-      <div class="tile-title">Coding, Automation &amp; Data</div>
-      <div class="tile-desc">AutoMorphoTrack, Python pipelines, BRAVO/Tecan liquid handling, 96/384-well miniaturization, and machine learning.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="skills.html" class="research-tile">
-      <div class="tile-icon">⚙️</div>
-      <div class="tile-title">Full Technical Skills</div>
-      <div class="tile-desc">Comprehensive categorized listing of all techniques, instruments, software, and capabilities.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="publications.html" class="research-tile">
-      <div class="tile-icon">📄</div>
-      <div class="tile-title">Publications</div>
-      <div class="tile-desc">25+ peer-reviewed papers with 1,300+ citations.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
   </div>
 </div>
 
-<div class="section reveal" id="news">
+
+<!-- ══════════════════════════════════════════════
+     SECTION 04 — ELECTROPHYSIOLOGY
+     ══════════════════════════════════════════════ -->
+<div class="section reveal" id="electrophysiology">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">04</div>
-      <div class="section-label">News</div>
+      <div class="section-label">Ephys</div>
     </div>
     <div class="section-content">
-      <h2>Recent Activity</h2>
-      <div class="news-list">
-        <div class="news-item">
-          <div class="news-date">Feb 2026</div>
-          <div class="news-body"><strong>Science Advances</strong> (Under Review) — Neural cell state modulation by PARK2 and dopaminergic neuroprotection by small molecule Parkin agonism.</div>
-        </div>
-        <div class="news-item">
-          <div class="news-date">Feb 2026</div>
-          <div class="news-body"><strong>Translational Neurodegeneration</strong> (Under Review) — Axonal and Synaptic Dysfunction as the Convergent Driver of Neurodegenerative Cascades.</div>
-        </div>
-        <div class="news-item">
-          <div class="news-date">Feb 2026</div>
-          <div class="news-body"><strong>eLife</strong> — AutoMorphoTrack: A Platform for Quantitative Organelle Analysis.</div>
-        </div>
-        <div class="news-item">
-          <div class="news-date">Feb 2026</div>
-          <div class="news-body"><strong>YouTube Interview</strong> — AutoMorphoTrack: A Platform for Quantitative Organelle Analysis. <a href="https://www.youtube.com/watch?v=3lEFf3rxdoU" target="_blank" rel="noopener" style="color:var(--accent); border-bottom:1px solid var(--accent);">Watch &rarr;</a></div>
-        </div>
-        <div class="news-item">
-          <div class="news-date">Jan 2026</div>
-          <div class="news-body"><strong>Nature Immunology</strong> (Under Review) — Myeloid PINK1 represses mtDNA release and immune signaling that impacts neuronal pathology in patient-derived idiopathic PD models.</div>
-        </div>
+      <h2>Functional Validation &mdash; Electrophysiology &amp; Calcium Imaging</h2>
+      <p>Network-level and single-cell functional maturation was assessed by <strong>multi-electrode array (MEA)</strong> recordings and <strong>calcium imaging</strong> (Fluo-4 AM / GCaMP6s). Primary hippocampal cultures develop spontaneous network bursting by DIV10&ndash;12 and stable synchronous activity by DIV14.</p>
+
+      <h3>MEA Functional Parameters</h3>
+      <table>
+        <thead>
+          <tr><th>Parameter</th><th class="num">DIV7</th><th class="num">DIV14</th><th class="num">DIV21</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Mean firing rate (Hz)</td><td class="num">0.8 &plusmn; 0.3</td><td class="num">4.6 &plusmn; 1.2</td><td class="num">8.2 &plusmn; 2.1</td></tr>
+          <tr><td>Active electrodes (%)</td><td class="num">32 &plusmn; 8</td><td class="num">78 &plusmn; 6</td><td class="num">88 &plusmn; 5</td></tr>
+          <tr><td>Burst rate (bursts/min)</td><td class="num">1.2 &plusmn; 0.5</td><td class="num">6.8 &plusmn; 1.4</td><td class="num">12.4 &plusmn; 2.8</td></tr>
+          <tr><td>Network burst duration (ms)</td><td class="num">86 &plusmn; 22</td><td class="num">148 &plusmn; 34</td><td class="num">212 &plusmn; 42</td></tr>
+          <tr><td>Synchrony index</td><td class="num">0.18 &plusmn; 0.06</td><td class="num">0.62 &plusmn; 0.08</td><td class="num">0.78 &plusmn; 0.06</td></tr>
+        </tbody>
+      </table>
+
+      <div class="chart-container">
+        <div class="chart-title">Primary Hippocampal Neuron Network Maturation</div>
+        <div class="chart-subtitle">MEA metrics from DIV7 to DIV21. Mean &plusmn; SEM, n = 6 wells per time point.</div>
+        <canvas id="meaMaturationChart" height="280"></canvas>
+      </div>
+
+      <div class="findings">
+        <div class="finding"><div class="finding-value">8.2 Hz</div><div class="finding-label">Mean firing rate at DIV21</div></div>
+        <div class="finding"><div class="finding-value">0.78</div><div class="finding-label">Synchrony index at DIV21</div></div>
+        <div class="finding"><div class="finding-value">88%</div><div class="finding-label">Active electrodes at DIV21</div></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- THESIS DOWNLOADS -->
-<div class="section reveal" id="theses">
+
+<!-- ══════════════════════════════════════════════
+     SECTION 05 — ASSAY APPLICATIONS
+     ══════════════════════════════════════════════ -->
+<div class="section reveal" id="applications">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">05</div>
-      <div class="section-label">Theses</div>
+      <div class="section-label">Applications</div>
     </div>
     <div class="section-content">
-      <h2>Thesis Documents</h2>
-      <p>Full-text thesis documents available for download.</p>
+      <h2>Downstream Assay Applications</h2>
+      <p>Primary hippocampal cultures served as the foundation for multiple cargo delivery, trafficking, and neurotoxicity assays across my research program:</p>
 
-      <a style="display:flex;align-items:flex-start;gap:16px;padding:24px;background:var(--card);border:1px solid var(--rule);border-radius:6px;text-decoration:none;color:inherit;transition:border-color 0.2s,box-shadow 0.2s;margin-bottom:12px;max-width:760px;" href="downloads/Bayati_Honours_2018.pdf" target="_blank" rel="noopener" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--rule)'">
-        <div style="width:48px;height:48px;border-radius:8px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--accent);flex-shrink:0;">&#128196;</div>
-        <div style="flex:1;">
-          <div style="font-size:15px;font-weight:500;color:var(--ink);margin-bottom:4px;">BSc Honours Thesis (2018)</div>
-          <div style="font-size:13px;font-weight:300;color:var(--mid);line-height:1.5;">Effect of Ischemic Stroke on Neuronal and Glial Cell Structure in the Peri-Infarct Zone of Adult Mice</div>
-          <div style="font-family:var(--mono);font-size:11px;color:var(--accent);margin-top:6px;letter-spacing:0.3px;">University of Victoria &middot; 44 MB PDF</div>
+      <div class="tech-card-grid">
+        <div class="tech-card">
+          <div class="tech-card-icon">&#128300;</div>
+          <div class="tech-card-title">Cargo Internalization</div>
+          <div class="tech-card-body">&alpha;-Synuclein PFF uptake kinetics in primary neurons vs. iPSC-derived neurons. Macropinocytic entry confirmed in both systems. Primary neurons showed <strong>40% faster</strong> lysosomal routing than immortalized lines.</div>
         </div>
-      </a>
-
-      <a style="display:flex;align-items:flex-start;gap:16px;padding:24px;background:var(--card);border:1px solid var(--rule);border-radius:6px;text-decoration:none;color:inherit;transition:border-color 0.2s,box-shadow 0.2s;margin-bottom:12px;max-width:760px;" href="downloads/Bayati_PhD_2023.pdf" target="_blank" rel="noopener" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--rule)'">
-        <div style="width:48px;height:48px;border-radius:8px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--accent);flex-shrink:0;">&#128196;</div>
-        <div style="flex:1;">
-          <div style="font-size:15px;font-weight:500;color:var(--ink);margin-bottom:4px;">PhD Thesis (2023)</div>
-          <div style="font-size:13px;font-weight:300;color:var(--mid);line-height:1.5;">Doctoral dissertation &mdash; McGill University</div>
-          <div style="font-family:var(--mono);font-size:11px;color:var(--accent);margin-top:6px;letter-spacing:0.3px;">McGill University &middot; 18 MB PDF</div>
+        <div class="tech-card">
+          <div class="tech-card-icon">&#128172;</div>
+          <div class="tech-card-title">Neurotoxicity Screening</div>
+          <div class="tech-card-body">Dose-response neurotoxicity for cytokine cocktails (TNF-&alpha;, IL-1&beta;, IFN-&gamma;), oxidative stressors (rotenone, MPP+), and excitotoxins (glutamate, NMDA). LD<sub>50</sub> determination by CellTiter-Glo and LDH release.</div>
         </div>
-      </a>
+        <div class="tech-card">
+          <div class="tech-card-icon">&#9878;</div>
+          <div class="tech-card-title">Lysosomal Stress Paradigms</div>
+          <div class="tech-card-body">LysoTracker/LysoSensor profiling under dual-hit (PFF + IFN-&gamma;) conditions. Primary neurons recapitulated the lysosomal alkalinization and reduced puncta count observed in iPSC-DA models.</div>
+        </div>
+        <div class="tech-card">
+          <div class="tech-card-icon">&#128171;</div>
+          <div class="tech-card-title">Synaptic Function Assays</div>
+          <div class="tech-card-body">FM1-43 vesicle recycling, miniature EPSC (mEPSC) recordings, and glutamate release quantification (Amplex Red). Synaptic function assessed before and after pharmacological or cargo treatment.</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="workflow-strip reveal">
+
+<!-- ══════════════════════════════════════════════
+     WORKFLOW STRIP
+     ══════════════════════════════════════════════ -->
+<div class="workflow-strip">
   <div class="workflow-inner">
-    <h3>Core Expertise</h3>
+    <h3>Primary Neuronal Culture Workflow</h3>
     <div class="workflow-steps">
       <div class="workflow-step">
         <div class="step-number">01</div>
-        <div class="step-title">iPSC Disease Modeling</div>
-        <div class="step-detail">Patient-derived iPSCs differentiated into dopaminergic neurons, cortical neurons, cardiomyocytes, endodermal lineages, and glia for in vitro disease recreation and drug screening.</div>
+        <div class="step-title">Dissection</div>
+        <div class="step-detail">E18 rat hippocampal dissection. Trypsin digestion + trituration. Viability and yield QC.</div>
       </div>
       <div class="workflow-step">
         <div class="step-number">02</div>
-        <div class="step-title">Parkinson's Disease</div>
-        <div class="step-detail">Deep expertise in iPSC-derived dopaminergic neuron biology, including &alpha;-synuclein aggregation, Lewy body modeling, mitophagy, lysosomal dysfunction, and PINK1/Parkin pathway dissection.</div>
+        <div class="step-title">Culture &amp; QC</div>
+        <div class="step-detail">PDL/laminin plating. AraC at DIV3. ICC for MAP2, Tuj1, NeuN, GFAP at DIV7/14/21.</div>
       </div>
       <div class="workflow-step">
         <div class="step-number">03</div>
-        <div class="step-title">Cardiac &amp; Metabolic Biology</div>
-        <div class="step-detail">iPSC-derived cardiomyocyte differentiation, cardiotoxicity screening, MEA electrophysiology, calcium transient profiling, and Seahorse XF metabolic flux analysis for mitochondrial bioenergetics.</div>
+        <div class="step-title">Functional Validation</div>
+        <div class="step-detail">MEA electrophysiology. Calcium imaging. Synaptic marker quantification. Network analysis.</div>
       </div>
       <div class="workflow-step">
         <div class="step-number">04</div>
-        <div class="step-title">Cancer Biology</div>
-        <div class="step-detail">Immune co-culture systems, T-cell killing assays, ADCC/CDC, checkpoint blockade evaluation, CAR-T characterization, and cytokine profiling across tumor microenvironment models.</div>
+        <div class="step-title">Assay Deployment</div>
+        <div class="step-detail">Cargo uptake, lysosomal trafficking, neurotoxicity screening, and pharmacological rescue experiments.</div>
       </div>
     </div>
   </div>
 </div>
+
 
 <div class="page-footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="footer-name">Armin Bayati, PhD</div>
-      <div class="footer-role">Research Fellow · Harvard Medical School &amp; Massachusetts General Hospital</div>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-name">Armin Bayati, PhD</div>
+        <div class="footer-role">Research Fellow · Harvard Medical School &amp; Massachusetts General Hospital</div>
+      </div>
+      <div class="footer-links-grid">
+        <div class="footer-col">
+          <div class="footer-col-title">Research</div>
+          <a href="ipscs.html">iPSC Models</a>
+          <a href="cancer-immunology.html">Cancer Immunology</a>
+          <a href="drug-discovery.html">Drug Discovery</a>
+          <a href="proteomics.html">Proteomics</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Connect</div>
+          <a href="https://scholar.google.com/citations?user=MIW8P2MAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+          <a href="https://linkedin.com/in/arminbayati" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/abayatibrain" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://orcid.org/0000-0002-5960-0479" target="_blank" rel="noopener">ORCID</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Contact</div>
+          <a href="contact.html#chat">Reach Out to Armin</a>
+          <a href="contact.html">Contact Page</a>
+          <a href="publications.html">Publications</a>
+        </div>
+      </div>
     </div>
-    <div class="footer-links-grid">
-      <div class="footer-col">
-        <div class="footer-col-title">Research</div>
-        <a href="ipscs.html">iPSC Models</a>
-        <a href="cancer-immunology.html">Cancer Immunology</a>
-        <a href="drug-discovery.html">Drug Discovery</a>
-        <a href="proteomics.html">Proteomics</a>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Connect</div>
-        <a href="https://scholar.google.com/citations?user=MIW8P2MAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
-        <a href="https://linkedin.com/in/arminbayati" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://github.com/abayatibrain" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://orcid.org/0000-0002-5960-0479" target="_blank" rel="noopener">ORCID</a>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Contact</div>
-        <a href="javascript:void(0)" onclick="openChatWidget()">Reach Out to Armin</a>
-        <a href="contact.html">Contact Page</a>
-        <a href="publications.html">Publications</a>
-      </div>
-    </div>
+    <div class="footer-bottom">&copy; 2026 Armin Bayati. All rights reserved.</div>
   </div>
-  <div class="footer-bottom">
-    &copy; 2026 Armin Bayati. All rights reserved.
-  </div>
-</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+(function(){
+  const lb = document.createElement('div');
+  lb.className = 'lightbox';
+  lb.innerHTML = '<button class="lightbox-close" onclick="closeLB()">&times;</button>'
+    + '<button class="lightbox-nav lightbox-prev" onclick="navLB(-1)">&#8249;</button>'
+    + '<img class="lightbox-img" src="" alt="">'
+    + '<div class="lightbox-caption"></div>'
+    + '<div class="lightbox-counter"></div>'
+    + '<button class="lightbox-nav lightbox-next" onclick="navLB(1)">&#8250;</button>';
+  document.body.appendChild(lb);
+  
+  let imgs=[], idx=0, gid='';
+  
+  window.openLB = function(galleryId, i){
+    gid = galleryId;
+    const gallery = document.querySelector('[data-gallery="'+galleryId+'"]');
+    imgs = Array.from(gallery.querySelectorAll('.gallery-thumb'));
+    idx = i;
+    showLB();
+    lb.classList.add('open');
+    document.body.style.overflow='hidden';
+  };
+  
+  function showLB(){
+    const t = imgs[idx];
+    const src = t.querySelector('img').src;
+    const cap = t.getAttribute('data-caption')||'';
+    lb.querySelector('.lightbox-img').src = src;
+    lb.querySelector('.lightbox-caption').textContent = cap;
+    lb.querySelector('.lightbox-counter').textContent = (idx+1)+' / '+imgs.length;
+  }
+  
+  window.closeLB = function(){
+    lb.classList.remove('open');
+    document.body.style.overflow='';
+  };
+  
+  window.navLB = function(d){
+    idx = (idx+d+imgs.length)%imgs.length;
+    showLB();
+  };
+  
+  lb.addEventListener('click',function(e){
+    if(e.target===lb) closeLB();
+  });
+  
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('open')) return;
+    if(e.key==='Escape') closeLB();
+    if(e.key==='ArrowRight') navLB(1);
+    if(e.key==='ArrowLeft') navLB(-1);
+  });
+})();
+</script>
 
-
+<script>
+// MEA Maturation Chart
+if(document.getElementById('meaMaturationChart')){
+new Chart(document.getElementById('meaMaturationChart'),{type:'bar',
+  data:{labels:['DIV7','DIV14','DIV21'],datasets:[
+    {label:'Mean Firing Rate (Hz)',data:[0.8,4.6,8.2],backgroundColor:'rgba(192,57,43,0.7)',borderWidth:1},
+    {label:'Burst Rate (bursts/min)',data:[1.2,6.8,12.4],backgroundColor:'rgba(41,128,185,0.7)',borderWidth:1},
+    {label:'Synchrony (x10)',data:[1.8,6.2,7.8],backgroundColor:'rgba(39,174,96,0.6)',borderWidth:1}
+  ]},
+  options:{responsive:true,plugins:{legend:{position:'bottom',labels:{font:{size:11,family:"'IBM Plex Sans'"},padding:16}}},
+    scales:{y:{beginAtZero:true,title:{display:true,text:'Value',font:{size:11,family:"'IBM Plex Sans'"}},grid:{color:'rgba(0,0,0,0.05)'}},
+      x:{grid:{color:'rgba(0,0,0,0.03)'}}}}
+});
+}
+</script>
 <script>
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -2572,7 +2497,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
      keywords:'endocytosis clathrin macropinocytosis fibril uptake sars-cov-2 spike protein ace2 receptor internalization trafficking',
      description:'Clathrin-mediated endocytosis and macropinocytosis pathways for PFF and SARS-CoV-2 entry.'},
     {page:'endocytosis.html', title:'Endocytosis, Trafficking & Cargo Delivery', category:'Research', section:'',
-     keywords:'endocytosis trafficking cargo delivery internalization endosomal escape subcellular localization nucleic acid rna entry clathrin macropinocytosis lysosome endosome routing pikfyve csnk2',
+     keywords:'endocytosis trafficking cargo delivery internalization endosomal escape subcellular localization nucleic acid rna entry clathrin macropinocytosis lysosome endosome routing',
      description:'Quantitative endocytosis assays, endosomal trafficking, cargo internalization kinetics, and subcellular delivery.'},
     {page:'endocytosis.html#cme', title:'Clathrin-Mediated Endocytosis — Viral RNA Entry', category:'Research', section:'CME',
      keywords:'clathrin mediated endocytosis cme sars-cov-2 spike protein ace2 chc knockdown sirna pitstop dynasore viral entry rna delivery pseudovirus infectivity',
@@ -2584,7 +2509,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
      keywords:'endosomal trafficking routing eea1 rab5 rab7 rab11 lamp1 cd63 colocalization compartment mapping endosomal escape window subcellular',
      description:'Time-resolved compartment mapping and endosomal escape window identification across cargo classes.'},
     {page:'endocytosis.html#kinetics', title:'Internalization Kinetics & Dose-Response', category:'Research', section:'Kinetics',
-     keywords:'internalization kinetics dose-response time-course uptake ec50 acid wash fluorescence plate reader quantitative half-life saturation',
+     keywords:'internalization kinetics dose-response time-course uptake ec50 acid wash fluorescence plate reader quantitative half-life t-half saturation',
      description:'Quantitative kinetic profiling of cargo internalization with EC50 determination and dose-response.'},
     {page:'endocytosis.html#host-kinases', title:'Host Kinase Targets — PIKfyve & CSNK2', category:'Research', section:'Host Kinases',
      keywords:'pikfyve csnk2 casein kinase host kinase endosome maturation silmitasertib apilimod chemical probe antiviral trafficking modulator cargo trapping',
@@ -2643,9 +2568,6 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     {page:'vc-portfolio.html', title:'Portfolio & VC', category:'Industry', section:'',
      keywords:'venture capital portfolio management drug discovery translational science biopharma partnerships alliance management funding grants awards ip patent regulatory ind fda biotech startup pharmaceutical scientific evaluation',
      description:'Translational science leadership, biopharma partnerships, and scientific portfolio management experience.'},
-    {page:'in-vivo.html', title:'In Vivo Neuroscience', category:'Research', section:'',
-     keywords:'in vivo stroke ischemic photothrombotic perfusion fixation toluidine blue electron microscopy TEM ultrastructure synapse astrocyte mitochondria peri-infarct mouse brain vibratome ultramicrotomy',
-     description:'Photothrombotic stroke model, tissue processing, toluidine blue histology, and TEM ultrastructural analysis of the peri-infarct zone.'},
     {page:'contact.html', title:'Contact', category:'Connect', section:'',
      keywords:'email linkedin github orcid google scholar contact collaboration',
      description:'Contact information, LinkedIn, and academic profiles.'},
@@ -2806,256 +2728,13 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
     if (e.key === 'Escape' && overlay.classList.contains('active')) closeSearch();
     if (e.key === '/' && !overlay.classList.contains('active') && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
-      e.preventDefault();
-      var hsi = document.getElementById('heroSearchInput');
-      if (hsi) { hsi.focus(); hsi.scrollIntoView({block:'center', behavior:'smooth'}); }
-      else { openSearch(); }
+      e.preventDefault(); openSearch();
     }
   });
 
   document.querySelectorAll('.search-toggle').forEach(function(btn){ btn.addEventListener('click', openSearch); });
-
-  // ── HERO SEARCH BAR ──
-  var heroInput = document.getElementById('heroSearchInput');
-  var heroDropdown = document.getElementById('heroSearchDropdown');
-  var heroActiveIdx = -1;
-
-  var quickLinks = [
-    {label:'iPSC Disease Modeling', href:'ipscs.html', desc:'Dopaminergic & cortical neuron differentiation, Lewy body pathogenesis'},
-    {label:'Differentiation Protocols', href:'protocols.html', desc:'Step-by-step DA, cortical, NGN2+, and cardiomyocyte protocols'},
-    {label:'Biologics & Immunotherapy', href:'biologics.html', desc:'Anti-cytokine and anti-synuclein biologics for neuroprotection'},
-    {label:'Dopaminergic Neurons', href:'ipscs.html#dopaminergic', desc:'Floor-plate patterning, functional maturation, MEA & calcium imaging'},
-    {label:"Parkinson's Disease", href:'ipscs.html#disease-modeling', desc:'Dual-hit model: PFF + IFN-γ Lewy body–like inclusions'},
-    {label:'α-Synuclein Biology', href:'genetics.html#lysosomal', desc:'Lysosomal trafficking, prion-like propagation, SNCA triplication'},
-    {label:'Live-Cell Imaging', href:'microscopy.html#confocal', desc:'Confocal, Opera Phenix high-content screening, time-lapse'},
-    {label:'Electron Microscopy', href:'microscopy.html#em', desc:'TEM ultrastructure, nanogold tracing, pseudocolor analysis'},
-    {label:'CRISPR', href:'genetics.html#gene-editing', desc:'Gene editing, lentiviral delivery, GBA knockout, LAMP2 KD'},
-    {label:'Cancer Immunology', href:'cancer-immunology.html', desc:'T-cell killing, ADCC/CDC, checkpoint blockade, CAR-T'},
-    {label:'Cardiomyocytes', href:'cardiomyocytes.html', desc:'iPSC-CM safety pharmacology, calcium transients, impedance'},
-    {label:'Drug Discovery', href:'drug-discovery.html', desc:'Parkin agonism, antiviral screening, biomarker development'},
-    {label:'Biomarker Development', href:'drug-discovery.html#biomarker', desc:'LC-MS, DLS, HPLC compound purity & analytical characterization'},
-    {label:'Flow Cytometry', href:'flow-cytometry.html', desc:'Multicolor immunophenotyping, FACS sorting, intracellular staining'},
-    {label:'RNA Therapeutics', href:'genetics.html', desc:'ASO, siRNA, shRNA knockdown & molecular cloning'},
-    {label:'Automation (BRAVO/Tecan)', href:'coding.html', desc:'Liquid handling, 96/384-well miniaturization, HTS workflows'},
-    {label:'Python / AutoMorphoTrack', href:'coding.html', desc:'Custom image analysis, data pipelines, machine learning'}
-  ];
-
-  function heroArrowSVG() {
-    return '<svg class="hero-search-item-icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>';
-  }
-
-  function heroHighlight(text, terms) {
-    if (!terms.length) return text;
-    var pat = terms.map(escapeRegex).join('|');
-    return text.replace(new RegExp('(' + pat + ')', 'gi'), '<mark>$1</mark>');
-  }
-
-  function renderHeroDropdown(query) {
-    var terms = query.toLowerCase().trim().split(/\s+/).filter(function(t){ return t.length > 1; });
-    var items;
-
-    if (!terms.length) {
-      // Show all quicklinks as suggestions
-      items = quickLinks;
-    } else {
-      // Filter quicklinks by query, then also search the full index
-      var qlMatches = quickLinks.filter(function(ql) {
-        var hay = (ql.label + ' ' + ql.desc).toLowerCase();
-        return terms.every(function(t){ return hay.indexOf(t) !== -1; });
-      });
-
-      // Also search full index for non-quicklink results
-      var fullMatches = [];
-      searchIndex.forEach(function(item) {
-        var hay = (item.title + ' ' + item.keywords + ' ' + (item.description || '')).toLowerCase();
-        var match = terms.every(function(t){ return hay.indexOf(t) !== -1; });
-        if (match) {
-          // Avoid duplicates with quicklinks
-          var isDupe = qlMatches.some(function(ql){ return item.page === ql.href || item.page === ql.href.split('#')[0]; });
-          if (!isDupe) fullMatches.push({label: item.title, href: item.page, desc: item.description || ''});
-        }
-      });
-
-      items = qlMatches.concat(fullMatches).slice(0, 12);
-    }
-
-    if (terms.length && !items.length) {
-      heroDropdown.innerHTML = '<div style="padding:16px 18px; font-size:13px; color:var(--mid); text-align:center;">No results for &ldquo;' + query.replace(/</g,'&lt;') + '&rdquo;</div>';
-      heroDropdown.classList.add('open');
-      heroActiveIdx = -1;
-      return;
-    }
-
-    var html = '';
-    if (!terms.length) html += '<div class="hero-search-hint">Suggested Skills</div>';
-    items.forEach(function(item, i) {
-      var label = terms.length ? heroHighlight(item.label, terms) : item.label;
-      var desc = terms.length ? heroHighlight(item.desc, terms) : item.desc;
-      html += '<a class="hero-search-item' + (terms.length && i === 0 ? ' active' : '') + '" href="' + item.href + '">';
-      html += heroArrowSVG();
-      html += '<div class="hero-search-item-text"><div>' + label + '</div>';
-      if (desc) html += '<div class="hero-search-item-desc">' + desc + '</div>';
-      html += '</div></a>';
-    });
-
-    heroDropdown.innerHTML = html;
-    heroDropdown.classList.add('open');
-    heroActiveIdx = terms.length ? 0 : -1;
-  }
-
-  function setHeroActive(idx) {
-    var items = heroDropdown.querySelectorAll('.hero-search-item');
-    if (!items.length) return;
-    items.forEach(function(el){ el.classList.remove('active'); });
-    if (idx < 0) idx = items.length - 1;
-    if (idx >= items.length) idx = 0;
-    heroActiveIdx = idx;
-    items[idx].classList.add('active');
-    items[idx].scrollIntoView({block: 'nearest'});
-  }
-
-  if (heroInput) {
-    heroInput.addEventListener('focus', function() {
-      renderHeroDropdown(this.value);
-    });
-    heroInput.addEventListener('input', function() {
-      renderHeroDropdown(this.value);
-    });
-    heroInput.addEventListener('keydown', function(e) {
-      if (e.key === 'ArrowDown') { e.preventDefault(); setHeroActive(heroActiveIdx + 1); }
-      else if (e.key === 'ArrowUp') { e.preventDefault(); setHeroActive(heroActiveIdx - 1); }
-      else if (e.key === 'Enter') {
-        e.preventDefault();
-        var active = heroDropdown.querySelector('.hero-search-item.active');
-        if (active) window.location.href = active.getAttribute('href');
-      }
-      else if (e.key === 'Escape') {
-        heroDropdown.classList.remove('open');
-        heroInput.blur();
-      }
-    });
-
-    // Close dropdown when clicking outside
-    document.addEventListener('click', function(e) {
-      if (!e.target.closest('#heroSearch')) {
-        heroDropdown.classList.remove('open');
-      }
-    });
-
-    // Search button: navigate to active/first result
-    var heroBtn = document.getElementById('heroSearchBtn');
-    if (heroBtn) {
-      heroBtn.addEventListener('click', function() {
-        var active = heroDropdown.querySelector('.hero-search-item.active');
-        if (!active) active = heroDropdown.querySelector('.hero-search-item');
-        if (active) window.location.href = active.getAttribute('href');
-      });
-    }
-  }
 })();
 </script>
 
-
-<!-- CHAT WIDGET -->
-<button class="chat-fab" id="chatFab" aria-label="Send a message">
-  <svg class="chat-fab-open" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-  <svg class="chat-fab-close" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-</button>
-<div class="chat-panel" id="chatPanel">
-  <div class="chat-header">
-    <div class="chat-header-title">Reach out to Armin</div>
-    <div class="chat-header-sub">Questions, collaborations, or opportunities — I'd love to hear from you.</div>
-  </div>
-  <div class="chat-body" id="chatBody">
-    <div class="chat-field">
-      <label>Your Name</label>
-      <input type="text" id="chatName" placeholder="Full name" autocomplete="name">
-    </div>
-    <div class="chat-field">
-      <label>Your Email</label>
-      <input type="email" id="chatEmail" placeholder="you@example.com" autocomplete="email">
-    </div>
-    <div class="chat-field">
-      <label>Subject</label>
-      <input type="text" id="chatSubject" placeholder="What is this regarding?">
-    </div>
-    <div class="chat-field">
-      <label>Message</label>
-      <textarea id="chatMessage" placeholder="Write your message here..."></textarea>
-    </div>
-    <button class="chat-send" id="chatSend">Send Message</button>
-  </div>
-</div>
-
-<script>
-(function(){
-  var fab = document.getElementById('chatFab');
-  var panel = document.getElementById('chatPanel');
-  var body = document.getElementById('chatBody');
-  if (!fab || !panel) return;
-
-  fab.addEventListener('click', function(){
-    var isOpen = panel.classList.contains('open');
-    if (isOpen) {
-      panel.classList.remove('open');
-      fab.classList.remove('open');
-    } else {
-      panel.classList.add('open');
-      fab.classList.add('open');
-    }
-  });
-
-  document.getElementById('chatSend').addEventListener('click', function(){
-    var name = document.getElementById('chatName').value.trim();
-    var email = document.getElementById('chatEmail').value.trim();
-    var subject = document.getElementById('chatSubject').value.trim();
-    var message = document.getElementById('chatMessage').value.trim();
-
-    if (!name || !email || !message) {
-      alert('Please fill in your name, email, and message.');
-      return;
-    }
-
-    var btn = this;
-    btn.disabled = true;
-    btn.textContent = 'Sending...';
-
-    // Use Formspree (free form endpoint) or mailto fallback
-    fetch('https://formsubmit.co/ajax/' + 'a.bayati.brain' + '@' + 'gmail.com', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
-      body: JSON.stringify({name: name, email: email, subject: subject, message: message})
-    }).then(function(r){
-      if (r.ok) { showSuccess(); }
-      else { fallbackMailto(name, email, subject, message); btn.disabled = false; btn.textContent = 'Send Message'; }
-    }).catch(function(){
-      fallbackMailto(name, email, subject, message);
-      btn.disabled = false;
-      btn.textContent = 'Send Message';
-    });
-  });
-
-  function fallbackMailto(name, email, subject, message) {
-    var body = 'From: ' + name + ' (' + email + ')\n\n' + message;
-    window.location.href = 'mailto:a.bayati.brain' + '@' + 'gmail.com?subject=' + encodeURIComponent(subject || 'Website Contact') + '&body=' + encodeURIComponent(body);
-  }
-
-  function showSuccess() {
-    body.innerHTML = '<div class="chat-success">' +
-      '<div class="chat-success-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>' +
-      '<div class="chat-success-title">Message Sent</div>' +
-      '<div class="chat-success-desc">Thank you for reaching out. I\'ll get back to you as soon as possible.</div>' +
-    '</div>';
-  }
-
-  // Allow opening chat from links with #chat or onclick
-  window.openChatWidget = function(){
-    panel.classList.add('open');
-    fab.classList.add('open');
-    panel.scrollIntoView({behavior:'smooth', block:'end'});
-  };
-  if (window.location.hash === '#chat') { setTimeout(openChatWidget, 400); }
-})();
-</script>
 </body>
 </html>
