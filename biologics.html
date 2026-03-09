@@ -1999,6 +1999,7 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
     Investigating the use of biologic agents &mdash; anti-cytokine antibodies and anti-&alpha;-synuclein immunotherapies &mdash; to protect iPSC-derived dopaminergic neurons from neuroinflammation-driven degeneration and pathological protein aggregation. All data presented are from iPSC-derived DA neuron models using our established dual-hit paradigm.
   </p>
   <div class="hero-tags">
+    <a class="tag" href="#target-identification">Preclinical Target ID</a>
     <a class="tag" href="#cytokine-inhibition">Anti-Cytokine Biologics</a>
     <a class="tag" href="#anti-synuclein">Anti-&alpha;-Synuclein Abs</a>
     <a class="tag" href="#dose-response">Dose-Response Data</a>
@@ -2006,18 +2007,94 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
     <a class="tag" href="protocols.html">Protocols</a>
     <a class="tag" href="drug-discovery.html">Drug Discovery</a>
   </div>
-  <a href="#cytokine-inhibition" class="scroll-hint" aria-label="Scroll down">
+  <a href="#target-identification" class="scroll-hint" aria-label="Scroll down">
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 8 10 13 15 8"/></svg>
   </a>
 </div>
 
 <!-- ══════════════════════════════════════════════
-     SECTION 01 — CYTOKINE INHIBITION
+     SECTION 01 — PRECLINICAL TARGET IDENTIFICATION
+     ══════════════════════════════════════════════ -->
+<div class="section reveal" id="target-identification">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">01</div>
+      <div class="section-label">Target ID</div>
+    </div>
+    <div class="section-content">
+      <h2>Preclinical Target Identification &mdash; Receptor-Level Dissection of Microglial Cytokine Signaling</h2>
+      <p>Before testing biologic interventions, we needed to identify <em>which</em> cytokine&ndash;receptor axes on neurons are responsible for microglia-driven &alpha;-synuclein pathology. To do this, we engineered iPSC-derived dopaminergic neurons expressing defined cytokine receptors &mdash; <strong>IFNGR1</strong>, <strong>TNFR2</strong>, or <strong>IL1R1</strong> individually, all three simultaneously, or <strong>EGFR</strong> as a growth-factor control &mdash; and co-cultured them with activated microglia in the presence of fluorescently labeled &alpha;-synuclein PFFs (PFF488). This receptor-defined platform allowed us to map the contribution of each inflammatory axis to fibril retention and neuronal vulnerability, directly informing which pathways to target with biologic agents.</p>
+
+      <h3>Experimental Design</h3>
+      <p>iPSC-derived DA neurons were transduced to express individual or combined cytokine receptors, then plated in co-culture with activated microglia-like cells. PFF488 was added to model the dual-hit paradigm (fibril exposure + microglial inflammatory milieu). Confocal imaging was used to track microglia (white), PFF488 (green), and Tuj1+ neuronal processes (blue) across all receptor conditions.</p>
+
+      <div class="mechanism-card">
+        <div class="mc-header">
+          <div class="mc-icon">&#128300;</div>
+          <div>
+            <div class="mc-title">Individual Receptor Expression</div>
+            <div class="mc-subtitle">IFNGR1 &middot; TNFR2 &middot; IL1R1</div>
+          </div>
+        </div>
+        <div class="mc-body">
+          Neurons expressing <strong>IFNGR1</strong>, <strong>TNFR2</strong>, or <strong>IL1R1</strong> each showed enhanced PFF accumulation relative to the no-receptor control, confirming that each cytokine axis independently amplifies fibril retention in the presence of activated microglia. Arrowheads in inset panels mark PFF aggregates at neuronal processes. These results established TNF-&alpha;, IFN-&gamma;, and IL-1&beta; signaling as independently druggable nodes &mdash; providing the rationale for the biologic inhibitor panel tested in the sections below.
+        </div>
+      </div>
+
+      <div class="mechanism-card">
+        <div class="mc-header">
+          <div class="mc-icon">&#128260;</div>
+          <div>
+            <div class="mc-title">Triple-Receptor Co-expression</div>
+            <div class="mc-subtitle">IFNGR1 + TNFR2 + IL1R1</div>
+          </div>
+        </div>
+        <div class="mc-body">
+          Simultaneous expression of all three cytokine receptors showed <strong>reduced PFF load</strong> compared to individual receptor conditions, suggesting that receptor co-expression engages compensatory or cross-inhibitory feedback mechanisms. This finding informed the combination biologic strategy explored downstream &mdash; if cross-talk between axes is already partially self-limiting, combination blockade may achieve synergistic neuroprotection beyond single-target inhibition.
+        </div>
+      </div>
+
+      <div class="mechanism-card">
+        <div class="mc-header">
+          <div class="mc-icon">&#9878;</div>
+          <div>
+            <div class="mc-title">EGFR &mdash; Growth-Factor Receptor Control</div>
+            <div class="mc-subtitle">NON-CYTOKINE COMPARATOR</div>
+          </div>
+        </div>
+        <div class="mc-body">
+          <strong>EGFR-expressing neurons</strong> displayed prominent PFF clustering and robust microglial co-localization, implicating growth-factor receptor signaling as an additional node in neuroinflammatory fibril retention. This was initially included as a negative control but unexpectedly revealed that EGFR engagement may facilitate fibril&ndash;microglia interactions, warranting further investigation as a potential off-axis target.
+        </div>
+      </div>
+
+      <figure style="margin:32px 0 0;">
+        <img src="images/biologics-receptor-quenching-microglia.png"
+             alt="Confocal panels showing microglia (white), PFF488 (green), and Tuj1 composite (blue) across receptor conditions: No receptors control, IFNGR1, TNFR2, IL1R1, triple receptor, and EGFR. Arrowheads mark PFF aggregates near neuronal processes."
+             style="width:100%; max-width:800px; border-radius:6px; border:1px solid var(--rule);"
+             loading="lazy">
+        <figcaption style="font-size:13px; color:var(--mid); font-style:italic; max-width:800px; line-height:1.5; margin-top:12px;">
+          Confocal imaging of iPSC-derived dopaminergic neurons co-cultured with activated microglia across receptor conditions. Columns: microglia (white), PFF488 (green), composite with Tuj1 neuronal marker (blue), and magnified insets. Arrowheads indicate PFF aggregates at or near neuronal processes. Rows: no-receptor control, IFNGR1, TNFR2, IL1R1, triple-receptor, and EGFR. This receptor-mapping experiment directly informed the biologic inhibitor panel below.
+        </figcaption>
+      </figure>
+
+      <div class="findings" style="margin-top:24px;">
+        <div class="finding"><div class="finding-value">6</div><div class="finding-label">Receptor conditions tested</div></div>
+        <div class="finding"><div class="finding-value">3</div><div class="finding-label">Independently druggable cytokine axes identified</div></div>
+        <div class="finding"><div class="finding-value">EGFR</div><div class="finding-label">Unexpected off-axis hit</div></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     SECTION 02 — CYTOKINE INHIBITION
      ══════════════════════════════════════════════ -->
 <div class="section reveal" id="cytokine-inhibition">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">01</div>
+      <div class="section-number">02</div>
       <div class="section-label">Cytokines</div>
     </div>
     <div class="section-content">
@@ -2108,18 +2185,19 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
         <div class="chart-note">* p &lt; 0.001, ** p &lt; 0.005, *** p &lt; 0.0001 vs dual-hit vehicle (Dunnett's test)</div>
       </div>
 
+
     </div>
   </div>
 </div>
 
 
 <!-- ══════════════════════════════════════════════
-     SECTION 02 — ANTI-SYNUCLEIN ANTIBODIES
+     SECTION 03 — ANTI-SYNUCLEIN ANTIBODIES
      ══════════════════════════════════════════════ -->
 <div class="section reveal" id="anti-synuclein">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">02</div>
+      <div class="section-number">03</div>
       <div class="section-label">Anti-Syn</div>
     </div>
     <div class="section-content">
@@ -2210,12 +2288,12 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
 
 
 <!-- ══════════════════════════════════════════════
-     SECTION 03 — DOSE-RESPONSE & COMBINATION
+     SECTION 04 — DOSE-RESPONSE & COMBINATION
      ══════════════════════════════════════════════ -->
 <div class="section reveal" id="dose-response">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">03</div>
+      <div class="section-number">04</div>
       <div class="section-label">Dose-Response</div>
     </div>
     <div class="section-content">
@@ -2612,6 +2690,9 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     {page:'biologics.html', title:'Biologics & Immunotherapy', category:'Research', section:'',
      keywords:'biologics antibody anti-tnf anti-il1 anti-il6 anti-synuclein neuroprotection immunotherapy cytokine neuroinflammation monoclonal biologic',
      description:'Biologics for inhibiting proinflammatory cytokine activation and preventing α-synuclein aggregation in DA neurons.'},
+    {page:'biologics.html#target-identification', title:'Preclinical Target ID — Receptor Dissection', category:'Research', section:'Target ID',
+     keywords:'preclinical target identification receptor dissection IFNGR1 TNFR2 IL1R1 EGFR cytokine receptor microglia co-culture pff488 tuj1 neuroinflammation quenching engineered receptor expression dopaminergic neuron triple receptor',
+     description:'Receptor-level dissection of microglial cytokine signaling to identify druggable inflammatory axes driving α-synuclein pathology.'},
     {page:'biologics.html#cytokine-inhibition', title:'Cytokine Inhibition in DA Neurons', category:'Research', section:'Cytokines',
      keywords:'anti-tnf infliximab etanercept anti-il1 anakinra anti-il6 tocilizumab neuroinflammation dopaminergic neuroprotection cytokine storm jak stat nfkb',
      description:'Anti-TNFα, anti-IL-1β, and anti-IL-6 biologics protecting dopaminergic neurons from cytokine-driven degeneration.'},
