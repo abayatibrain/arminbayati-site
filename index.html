@@ -1895,6 +1895,8 @@ html.dark .chat-panel {
       <div class="nav-row">
         <a href="index.html" class="active">Home</a>
         <a href="ipscs.html">iPSC Neurons</a>
+        <a href="protocols.html">Protocols</a>
+        <a href="biologics.html">Biologics</a>
         <a href="cardiomyocytes.html">Cardiomyocytes</a>
         <a href="cancer-immunology.html">Cancer Immunology</a>
         <a href="cellular-assays.html">Cellular Assays</a>
@@ -2386,7 +2388,19 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
      description:'Photothrombotic stroke model, tissue processing, toluidine blue histology, and TEM ultrastructural analysis of the peri-infarct zone.'},
     {page:'contact.html', title:'Contact', category:'Connect', section:'',
      keywords:'email linkedin github orcid google scholar contact collaboration',
-     description:'Contact information, LinkedIn, and academic profiles.'}
+     description:'Contact information, LinkedIn, and academic profiles.'},
+    {page:'protocols.html', title:'iPSC Differentiation Protocols', category:'Research', section:'',
+     keywords:'protocols differentiation dopaminergic cortical ngn2 cardiomyocyte ipsc step-by-step methods procedure reagents timeline maturation',
+     description:'Interactive step-by-step protocols for dopaminergic, cortical, NGN2+, and cardiomyocyte iPSC differentiation.'},
+    {page:'biologics.html', title:'Biologics & Immunotherapy', category:'Research', section:'',
+     keywords:'biologics antibody anti-tnf anti-il1 anti-il6 anti-synuclein neuroprotection immunotherapy cytokine neuroinflammation monoclonal biologic',
+     description:'Biologics for inhibiting proinflammatory cytokine activation in DA neurons.'},
+    {page:'biologics.html#cytokine-inhibition', title:'Cytokine Inhibition in DA Neurons', category:'Research', section:'Cytokines',
+     keywords:'anti-tnf infliximab anakinra tocilizumab neuroinflammation dopaminergic neuroprotection',
+     description:'Anti-cytokine biologics protecting dopaminergic neurons from inflammatory degeneration.'},
+    {page:'biologics.html#anti-synuclein', title:'Anti-Synuclein Antibodies', category:'Research', section:'Anti-Synuclein',
+     keywords:'anti-synuclein antibody prasinezumab cinpanemab immunotherapy aggregation fibril lewy body',
+     description:'Anti-synuclein antibodies preventing intracellular aggregation in iPSC neurons.'}
   ];
 
   var overlay = document.getElementById('searchOverlay');
@@ -2545,6 +2559,8 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
   var quickLinks = [
     {label:'iPSC Disease Modeling', href:'ipscs.html', desc:'Dopaminergic & cortical neuron differentiation, Lewy body pathogenesis'},
+    {label:'Differentiation Protocols', href:'protocols.html', desc:'Step-by-step DA, cortical, NGN2+, and cardiomyocyte protocols'},
+    {label:'Biologics & Immunotherapy', href:'biologics.html', desc:'Anti-cytokine and anti-synuclein biologics for neuroprotection'},
     {label:'Dopaminergic Neurons', href:'ipscs.html#dopaminergic', desc:'Floor-plate patterning, functional maturation, MEA & calcium imaging'},
     {label:"Parkinson's Disease", href:'ipscs.html#disease-modeling', desc:'Dual-hit model: PFF + IFN-γ Lewy body–like inclusions'},
     {label:'α-Synuclein Biology', href:'genetics.html#lysosomal', desc:'Lysosomal trafficking, prion-like propagation, SNCA triplication'},
