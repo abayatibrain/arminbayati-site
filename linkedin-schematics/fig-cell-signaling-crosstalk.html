@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inflammatory Signaling Crosstalk</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f1419; --paper: #fafaf7; --mid: #6b7280; --accent: #c0392b;
+    --accent-soft: #e74c3c15; --rule: #d4d0c8; --card: #ffffff; --section-bg: #f4f3ef;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+    --mono: 'IBM Plex Mono', 'Menlo', monospace;
+    --ifn-color: #06b6d4; --tnf-color: #f59e0b; --tlr-color: #8b5cf6; --mtor-color: #10b981;
+  }
+  html.dark {
+    --ink: #e8e6e1; --paper: #111318; --mid: #9ca3af; --rule: #2a2d35;
+    --card: #1a1d24; --section-bg: #15171d; --accent-soft: rgba(192,57,43,0.15);
+    --ifn-color: #22d3ee; --tnf-color: #fbbf24; --tlr-color: #c4b5fd; --mtor-color: #6ee7b7;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--sans); background: var(--paper); color: var(--ink);
+    display: flex; flex-direction: column; align-items: center;
+    padding: 40px 20px 48px; min-height: 100vh;
+  }
+  .fig-label {
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+    color: var(--accent); letter-spacing: 1.2px; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .fig-title {
+    font-family: var(--serif); font-size: 1.5rem; font-weight: 400;
+    color: var(--ink); margin-bottom: 6px; text-align: center;
+  }
+  .fig-subtitle {
+    font-size: 13px; font-weight: 300; color: var(--mid);
+    margin-bottom: 32px; text-align: center; max-width: 720px; line-height: 1.6;
+  }
+  .diagram-container {
+    width: 100%; max-width: 1060px; overflow-x: auto; padding: 8px 0;
+  }
+  svg { display: block; margin: 0 auto; }
+  svg text { font-family: var(--sans); }
+  .legend {
+    display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;
+    margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--rule);
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: var(--mid); font-weight: 400;
+  }
+  .legend-dot {
+    width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+  }
+  /* Tooltip */
+  .tooltip-box {
+    position: fixed; pointer-events: none; z-index: 100;
+    background: var(--ink); color: var(--paper); padding: 8px 14px;
+    border-radius: 6px; font-size: 12px; font-weight: 400;
+    line-height: 1.5; max-width: 300px; opacity: 0;
+    transition: opacity 0.15s; box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  }
+  .tooltip-box.show { opacity: 1; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .fig-label, .fig-title, .fig-subtitle { animation: fadeIn 0.5s ease both; }
+  .fig-title { animation-delay: 0.05s; }
+  .fig-subtitle { animation-delay: 0.1s; }
+</style>
+</head>
+<body>
+
+<div class="fig-label">Figure 6</div>
+<div class="fig-title">Inflammatory Signaling Crosstalk</div>
+<div class="fig-subtitle">
+  Multiple innate immune pathways converge through JAK-STAT, NF-κB, and inflammasome signaling.
+  Pathological amplification leads to neuronal death via caspase-3-mediated apoptosis.
+</div>
+
+<div class="diagram-container">
+<svg viewBox="0 0 1060 680" width="1060" height="680" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow-ifn" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#06b6d4" opacity="0.7"/>
+    </marker>
+    <marker id="arrow-tnf" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#f59e0b" opacity="0.7"/>
+    </marker>
+    <marker id="arrow-tlr" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#8b5cf6" opacity="0.7"/>
+    </marker>
+    <marker id="arrow-nfkb" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ef4444" opacity="0.7"/>
+    </marker>
+    <marker id="arrow-death" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7c2d12" opacity="0.8"/>
+    </marker>
+    <filter id="shadow-sm">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+
+  <!-- ════ STIMULI (TOP) ════ -->
+  <!-- IFN-γ -->
+  <g class="interactive-node" data-tip="Interferon gamma: Th1 cytokine. Activates JAK-STAT1 signaling. Promotes M1 macrophage polarization and MHC-II upregulation.">
+    <circle cx="120" cy="60" r="38" fill="#fff" stroke="#06b6d4" stroke-width="2" filter="url(#shadow-sm)"/>
+    <text x="120" y="60" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="600" fill="#0f1419">IFN-γ</text>
+    <text x="120" y="75" text-anchor="middle" dominant-baseline="middle" font-size="9" fill="#6b7280" font-weight="300">Th1 Cytokine</text>
+  </g>
+
+  <!-- TNF-α -->
+  <g class="interactive-node" data-tip="Tumor necrosis factor alpha: Pleiotropic cytokine. Binds TNFR1 → caspase-8 activation. Cross-talks with NF-κB pathway.">
+    <circle cx="520" cy="60" r="38" fill="#fff" stroke="#f59e0b" stroke-width="2" filter="url(#shadow-sm)"/>
+    <text x="520" y="60" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="600" fill="#0f1419">TNF-α</text>
+    <text x="520" y="75" text-anchor="middle" dominant-baseline="middle" font-size="9" fill="#6b7280" font-weight="300">Death Signal</text>
+  </g>
+
+  <!-- PFF / α-Syn Fibril -->
+  <g class="interactive-node" data-tip="Preformed α-synuclein fibrils: Pattern-associated molecular pattern (PAMP). Recognized by TLR2/4 and intracellular sensors.">
+    <circle cx="920" cy="60" r="38" fill="#fff" stroke="#8b5cf6" stroke-width="2" filter="url(#shadow-sm)"/>
+    <text x="920" y="60" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="600" fill="#0f1419">PFF</text>
+    <text x="920" y="75" text-anchor="middle" dominant-baseline="middle" font-size="9" fill="#6b7280" font-weight="300">α-Syn Fibrils</text>
+  </g>
+
+  <!-- ════ PATHWAY 1: IFN-γ → JAK-STAT1 ════ -->
+  <path d="M120,98 L120,160" fill="none" stroke="#06b6d4" stroke-width="2" marker-end="url(#arrow-ifn)" opacity="0.6"/>
+
+  <g class="interactive-node" data-tip="Janus kinase: Receptor-associated tyrosine kinase. Phosphorylates STAT1 on Y701 for nuclear translocation.">
+    <rect x="70" y="160" width="100" height="50" rx="6" fill="#fff" stroke="#06b6d4" stroke-width="1.5" filter="url(#shadow-sm)"/>
+    <text x="120" y="176" text-anchor="middle" font-size="10" font-weight="500" fill="#0f1419">JAK1/2</text>
+    <text x="120" y="190" text-anchor="middle" font-size="9" fill="#6b7280" font-weight="300">pY701</text>
+    <text x="120" y="202" text-anchor="middle" font-size="8" fill="#6b7280" font-weight="300">Kinase</text>
+  </g>
+
+  <path d="M120,210 L120,270" fill="none" stroke="#06b6d4" stroke-width="2" marker-end="url(#arrow-ifn)" opacity="0.6"/>
+
+  <g class="interactive-node" data-tip="Signal transducer and activator of transcription 1: Dimerizes, enters nucleus. Drives IRF1, IFIT genes for antiviral/anti-tumor response.">
+    <rect x="70" y="270" width="100" height="50" rx="6" fill="#fff" stroke="#06b6d4" stroke-width="1.5" filter="url(#shadow-sm)"/>
+    <text x="120" y="286" text-anchor="middle" font-size="10" font-weight="500" fill="#0f1419">STAT1</text>
+    <text x="120" y="300" text-anchor="middle" font-size="9" fill="#6b7280" font-weight="300">→ Nucleus</text>
+    <text x="120" y="312" text-anchor="middle" font-size="8" fill="#6b7280" font-weight="300">IRF1 genes</text>
+  </g>
+
+  <!-- ════ PATHWAY 2: TNF-α → NF-κB ════ -->
+  <path d="M520,98 L520,160" fill="none" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow-tnf)" opacity="0.6"/>
+
+  <g class="interactive-node" data-tip="TNF receptor 1: Adaptor signaling. Recruits TRADD, RIPK1, FADD. Activates both caspase-8 (apoptosis) and NF-κB (survival).">
+    <rect x="470" y="160" width="100" height="50" rx="6" fill="#fff" stroke="#f59e0b" stroke-width="1.5" filter="url(#shadow-sm)"/>
+    <text x="520" y="176" text-anchor="middle" font-size="10" font-weight="500" fill="#0f1419">TNFR1</text>
+    <text x="520" y="190" text-anchor="middle" font-size="9" fill="#6b7280" font-weight="300">TRADD/RIPK</text>
+    <text x="520" y="202" text-anchor="middle" font-size="8" fill="#6b7280" font-weight="300">Signalosome</text>
+  </g>
+
+  <path d="M520,210 L520,270" fill="none" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow-tnf)" opacity="0.6"/>
+
+  <g class="interactive-node" data-tip="NF-κB: Master pro-inflammatory TF. Canonical pathway: IκBα phosphorylation → proteasome degradation → p65/p50 nuclear entry.">
+    <rect x="470" y="270" width="100" height="50" rx="6" fill="#fff" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow-sm)"/>
+    <text x="520" y="286" text-anchor="middle" font-size="10" font-weight="500" fill="#ef4444">NF-κB</text>
+    <text x="520" y="300" text-anchor="middle" font-size="9" fill="#0f1419" font-weight="400">p65/p50</text>
+    <text x="520" y="312" text-anchor="middle" font-size="8" fill="#6b7280" font-weight="300">→ Nucleus</text>
+  </g>
+
+  <!-- ════ PATHWAY 3: PFF → TLR2/4 → MyD88 → NF-κB ════ -->
+  <path d="M920,98 L920,160" fill="none" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arrow-tlr)" opacity="0.6"/>
+
+  <g class="interactive-node" data-tip="Toll-like receptors 2 & 4: Pattern recognition receptors (PRRs). TLR2 homodimer or heterodimerizes with TLR1/6. Recognizes PAMPs.">
+    <rect x="870" y="160" width="100" height="50" rx="6" fill="#fff" stroke="#8b5cf6" stroke-width="1.5" filter="url(#shadow-sm)"/>
+    <text x="920" y="176" text-anchor="middle" font-size="10" font-weight="500" fill="#0f1419">TLR2/4</text>
+    <text x="920" y="190" text-anchor="middle" font-size="9" fill="#6b7280" font-weight="300">PAMP Recognition</text>
+    <text x="920" y="202" text-anchor="middle" font-size="8" fill="#6b7280" font-weight="300">Homodimer</text>
+  </g>
+
+  <path d="M920,210 L920,270" fill="none" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arrow-tlr)" opacity="0.6"/>
+
+  <g class="interactive-node" data-tip="Myeloid differentiation primary response 88: TIR domain adaptor. Recruits IRAK → TRAF6 → TAB complex → IKK activation.">
+    <rect x="870" y="270" width="100" height="50" rx="6" fill="#fff" stroke="#8b5cf6" stroke-width="1.5" filter="url(#shadow-sm)"/>
+    <text x="920" y="286" text-anchor="middle" font-size="10" font-weight="500" fill="#0f1419">MyD88</text>
+    <text x="920" y="300" text-anchor="middle" font-size="9" fill="#6b7280" font-weight="300">→ IRAK</text>
+    <text x="920" y="312" text-anchor="middle" font-size="8" fill="#6b7280" font-weight="300">TRAF6 Cascade</text>
+  </g>
+
+  <!-- Convergence to NF-κB from MyD88 -->
+  <path d="M870,295 Q700,295 570,295" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#arrow-nfkb)" opacity="0.5"/>
+
+  <!-- ════ HUB: mTORC1 ════ -->
+  <g class="interactive-node" data-tip="Mechanistic target of rapamycin complex 1: Nutrient/stress sensor. Downstream effector of all pathways. Promotes translation, inhibits autophagy.">
+    <circle cx="520" cy="420" r="50" fill="#fff" stroke="#10b981" stroke-width="2" filter="url(#shadow-sm)"/>
+    <text x="520" y="415" text-anchor="middle" font-size="11" font-weight="600" fill="#0f1419">mTORC1</text>
+    <text x="520" y="432" text-anchor="middle" font-size="9" fill="#6b7280" font-weight="300">HUB</text>
+  </g>
+
+  <!-- Pathways converge to mTORC1 -->
+  <path d="M120,320 Q200,370 470,420" fill="none" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.4"/>
+  <path d="M520,320 L520,370" fill="none" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.4"/>
+  <path d="M920,320 Q840,370 570,420" fill="none" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.4"/>
+
+  <!-- ════ INFLAMMASOME PATHWAY ════ -->
+  <g class="interactive-node" data-tip="NLRP3 inflammasome: Multi-protein complex (NLRP3, ASC, pro-caspase-1). Activated by danger signals. Cleaves pro-IL-1β and pro-IL-18.">
+    <rect x="280" y="440" width="120" height="55" rx="6" fill="#fff" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow-sm)"/>
+    <text x="340" y="460" text-anchor="middle" font-size="10" font-weight="500" fill="#ef4444">NLRP3</text>
+    <text x="340" y="473" text-anchor="middle" font-size="10" font-weight="500" fill="#ef4444">Inflammasome</text>
+    <text x="340" y="487" text-anchor="middle" font-size="8" fill="#6b7280" font-weight="300">Caspase-1 Activation</text>
+  </g>
+
+  <!-- Link from NF-κB to inflammasome -->
+  <path d="M520,320 Q430,380 340,440" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.5"/>
+
+  <!-- ════ CONVERGENCE: CASPASE-3 & NEURONAL DEATH ════ -->
+  <g class="interactive-node" data-tip="Caspase-3: Executioner caspase. Common substrate for apoptosis pathways (extrinsic and intrinsic). Cleaves PARP, lamin A/C, DFF45. Cell death.">
+    <circle cx="520" cy="580" r="45" fill="#fff" stroke="#7c2d12" stroke-width="2.5" filter="url(#shadow-sm)"/>
+    <text x="520" y="575" text-anchor="middle" font-size="11" font-weight="600" fill="#7c2d12">Caspase-3</text>
+    <text x="520" y="592" text-anchor="middle" font-size="9" fill="#0f1419" font-weight="400">Activated</text>
+  </g>
+
+  <!-- TNF-α → Caspase-8 → Caspase-3 -->
+  <path d="M520,320 L520,535" fill="none" stroke="#7c2d12" stroke-width="1.5" marker-end="url(#arrow-death)" opacity="0.6"/>
+
+  <!-- Inflammasome → Caspase-3 -->
+  <path d="M340,495 Q430,540 475,570" fill="none" stroke="#7c2d12" stroke-width="1.5" marker-end="url(#arrow-death)" opacity="0.6"/>
+
+  <!-- ════ OUTCOME ════ -->
+  <g class="interactive-node" data-tip="Neuronal apoptosis: PARP cleavage, chromatin condensation, membrane blebbing, apoptotic body formation. Loss of neuronal function in PD, neuroinflammation.">
+    <rect x="720" y="550" width="150" height="60" rx="8" fill="#fff" stroke="#7c2d12" stroke-width="1.5" filter="url(#shadow-sm)"/>
+    <text x="795" y="573" text-anchor="middle" font-size="11" font-weight="600" fill="#7c2d12">Neuronal Death</text>
+    <text x="795" y="589" text-anchor="middle" font-size="9" fill="#0f1419" font-weight="400">Apoptosis Cascade</text>
+    <text x="795" y="603" text-anchor="middle" font-size="8" fill="#6b7280" font-weight="300">↑ LDH, ↑ Cytochrome c</text>
+  </g>
+
+  <path d="M565,580 L720,580" fill="none" stroke="#7c2d12" stroke-width="2" marker-end="url(#arrow-death)" opacity="0.7"/>
+
+</svg>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#06b6d4"></div>IFN-γ / JAK-STAT1</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div>TNF-α / TNFR1</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6"></div>PFF / TLR2/4</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div>NF-κB Convergence</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#10b981"></div>mTORC1 Hub</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#7c2d12"></div>Apoptosis / Death</div>
+</div>
+
+<div class="tooltip-box" id="tooltip"></div>
+
+<script>
+  const tooltip = document.getElementById('tooltip');
+  document.querySelectorAll('.interactive-node').forEach(node => {
+    node.style.cursor = 'pointer';
+    node.addEventListener('mouseenter', e => {
+      const tip = node.getAttribute('data-tip');
+      if (!tip) return;
+      tooltip.textContent = tip;
+      tooltip.classList.add('show');
+    });
+    node.addEventListener('mousemove', e => {
+      tooltip.style.left = (e.clientX + 14) + 'px';
+      tooltip.style.top = (e.clientY - 10) + 'px';
+    });
+    node.addEventListener('mouseleave', () => tooltip.classList.remove('show'));
+  });
+
+  // Dark mode support
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.classList.add('dark');
+  }
+
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+    if (e.matches) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  });
+</script>
+
+<style>
+  .attribution {
+    position: fixed;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(15, 20, 25, 0.85);
+    color: #fff;
+    font-family: 'IBM Plex Mono', 'Menlo', monospace;
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    letter-spacing: 0.3px;
+    z-index: 999;
+  }
+
+  html.dark .attribution {
+    background: rgba(232, 230, 225, 0.85);
+    color: #111;
+  }
+</style>
+
+<div class="attribution">Armin Bayati · arminbayati.com</div>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phenotypic Drug Screening Cascade | Armin Bayati</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0f1419;
+      --paper: #fafaf7;
+      --mid: #6b7280;
+      --accent: #c0392b;
+      --rule: #d4d0c8;
+      --card: #ffffff;
+      --section-bg: #f4f3ef;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+      --mono: 'IBM Plex Mono', 'Menlo', monospace;
+    }
+    html.dark {
+      --ink: #e8e6e1;
+      --paper: #111318;
+      --mid: #9ca3af;
+      --rule: #2a2d35;
+      --card: #1a1d24;
+      --section-bg: #15171d;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      padding: 40px 20px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .header {
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    h1 {
+      font-family: var(--serif);
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+      font-weight: 400;
+    }
+    .subtitle {
+      font-size: 1rem;
+      color: var(--mid);
+      font-weight: 300;
+    }
+    .card-wrapper {
+      background-color: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+    svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .legend {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--rule);
+      font-size: 0.85rem;
+      color: var(--mid);
+    }
+    .legend-item {
+      display: inline-block;
+      margin-right: 20px;
+      margin-bottom: 8px;
+    }
+    .legend-color {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+    .attribution {
+      position: fixed;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(15, 20, 25, 0.85);
+      color: #fff;
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      letter-spacing: 0.3px;
+      z-index: 999;
+    }
+    html.dark .attribution {
+      background: rgba(232, 230, 225, 0.15);
+      color: var(--ink);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Phenotypic Drug Screening Cascade</h1>
+      <p class="subtitle">From chemical library to lead optimization: systematic compound narrowing through progressive validation</p>
+    </div>
+
+    <div class="card-wrapper">
+      <svg viewBox="0 0 1000 1400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <style>
+            .stage-box { cursor: pointer; transition: opacity 0.2s ease; }
+            .stage-box:hover { opacity: 0.85; }
+            .stage-title { font-family: 'DM Serif Display', Georgia, serif; font-weight: 500; }
+            .stage-text { font-family: 'IBM Plex Sans', sans-serif; font-size: 11px; }
+            .arrow { fill: none; stroke: #6b7280; stroke-width: 2; marker-end: url(#arrowhead); }
+            .gate-line { stroke: #0f1419; stroke-width: 2; stroke-dasharray: 5,5; opacity: 0.5; }
+          </style>
+          <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="#6b7280"/>
+          </marker>
+        </defs>
+
+        <!-- Stage 1: Chemical Library -->
+        <polygon class="stage-box" points="150,80 850,80 900,180 100,180" fill="#3b82f6" opacity="0.2" stroke="#3b82f6" stroke-width="2"/>
+        <text class="stage-title" x="500" y="120" text-anchor="middle" font-size="20" fill="currentColor">Chemical Library</text>
+        <text class="stage-text" x="500" y="145" text-anchor="middle" fill="#6b7280">10,000+ compounds  |  Diverse chemical space</text>
+        <text class="stage-text" x="500" y="162" text-anchor="middle" fill="#6b7280" font-weight="600">Target: Broad coverage &amp; diversity</text>
+
+        <!-- Arrow down -->
+        <path class="arrow" d="M 500 180 L 500 240"/>
+
+        <!-- Decision gate 1 -->
+        <line class="gate-line" x1="300" y1="240" x2="700" y2="240"/>
+        <text x="720" y="245" font-family="var(--sans)" font-size="11" fill="#6b7280" font-style="italic">Go/No-go: Library diversity</text>
+
+        <!-- Stage 2: Primary Screen -->
+        <polygon class="stage-box" points="180,260 820,260 870,360 130,360" fill="#06b6d4" opacity="0.2" stroke="#06b6d4" stroke-width="2"/>
+        <text class="stage-title" x="500" y="300" text-anchor="middle" font-size="20" fill="currentColor">Primary Screen</text>
+        <text class="stage-text" x="500" y="325" text-anchor="middle" fill="#6b7280">High-content imaging in iPSC neurons  •  Inclusion reduction readout</text>
+        <text class="stage-text" x="500" y="342" text-anchor="middle" fill="#6b7280" font-weight="600">Compounds surviving: 2,500-5,000 (initial hits)</text>
+
+        <!-- Arrow down -->
+        <path class="arrow" d="M 500 360 L 500 420"/>
+
+        <!-- Decision gate 2 -->
+        <line class="gate-line" x1="300" y1="420" x2="700" y2="420"/>
+        <text x="720" y="425" font-family="var(--sans)" font-size="11" fill="#6b7280" font-style="italic">Z'-factor ≥ 0.5</text>
+
+        <!-- Stage 3: Hit Confirmation -->
+        <polygon class="stage-box" points="210,440 790,440 840,540 160,540" fill="#10b981" opacity="0.2" stroke="#10b981" stroke-width="2"/>
+        <text class="stage-title" x="500" y="480" text-anchor="middle" font-size="20" fill="currentColor">Hit Confirmation</text>
+        <text class="stage-text" x="500" y="505" text-anchor="middle" fill="#6b7280">Triplicate revalidation  •  Z'-factor assessment  •  Dose-response curves</text>
+        <text class="stage-text" x="500" y="522" text-anchor="middle" fill="#6b7280" font-weight="600">Confirmed hits: 100-200</text>
+
+        <!-- Arrow down -->
+        <path class="arrow" d="M 500 540 L 500 600"/>
+
+        <!-- Decision gate 3 -->
+        <line class="gate-line" x1="300" y1="600" x2="700" y2="600"/>
+        <text x="720" y="605" font-family="var(--sans)" font-size="11" fill="#6b7280" font-style="italic">Z' ≥ 0.7 in replicates</text>
+
+        <!-- Stage 4: Dose-Response -->
+        <polygon class="stage-box" points="240,620 760,620 810,720 190,720" fill="#8b5cf6" opacity="0.2" stroke="#8b5cf6" stroke-width="2"/>
+        <text class="stage-title" x="500" y="660" text-anchor="middle" font-size="20" fill="currentColor">Dose-Response Analysis</text>
+        <text class="stage-text" x="500" y="685" text-anchor="middle" fill="#6b7280">8-point curves  •  EC₅₀ determination  •  Curve fitting</text>
+        <text class="stage-text" x="500" y="702" text-anchor="middle" fill="#6b7280" font-weight="600">Active compounds: 50-80</text>
+
+        <!-- Arrow down -->
+        <path class="arrow" d="M 500 720 L 500 780"/>
+
+        <!-- Decision gate 4 -->
+        <line class="gate-line" x1="300" y1="780" x2="700" y2="780"/>
+        <text x="720" y="785" font-family="var(--sans)" font-size="11" fill="#6b7280" font-style="italic">R² ≥ 0.95 fit quality</text>
+
+        <!-- Stage 5: Counter-Screens -->
+        <polygon class="stage-box" points="270,800 730,800 780,900 220,900" fill="#ec4899" opacity="0.2" stroke="#ec4899" stroke-width="2"/>
+        <text class="stage-title" x="500" y="840" text-anchor="middle" font-size="20" fill="currentColor">Counter-Screens</text>
+        <text class="stage-text" x="500" y="865" text-anchor="middle" fill="#6b7280">Cytotoxicity (LDH)  •  Autofluorescence  •  Off-target effects</text>
+        <text class="stage-text" x="500" y="882" text-anchor="middle" fill="#6b7280" font-weight="600">Validated compounds: 20-30</text>
+
+        <!-- Arrow down -->
+        <path class="arrow" d="M 500 900 L 500 960"/>
+
+        <!-- Decision gate 5 -->
+        <line class="gate-line" x1="300" y1="960" x2="700" y2="960"/>
+        <text x="720" y="965" font-family="var(--sans)" font-size="11" fill="#6b7280" font-style="italic">No cytotoxicity, clean assay</text>
+
+        <!-- Stage 6: Mechanism of Action -->
+        <polygon class="stage-box" points="300,980 700,980 750,1080 250,1080" fill="#f59e0b" opacity="0.2" stroke="#f59e0b" stroke-width="2"/>
+        <text class="stage-title" x="500" y="1020" text-anchor="middle" font-size="20" fill="currentColor">Mechanism of Action</text>
+        <text class="stage-text" x="500" y="1045" text-anchor="middle" fill="#6b7280">Target ID  •  Pathway analysis  •  CRISPR validation</text>
+        <text class="stage-text" x="500" y="1062" text-anchor="middle" fill="#6b7280" font-weight="600">Lead compounds: 5-8</text>
+
+        <!-- Arrow down -->
+        <path class="arrow" d="M 500 1080 L 500 1140"/>
+
+        <!-- Decision gate 6 -->
+        <line class="gate-line" x1="300" y1="1140" x2="700" y2="1140"/>
+        <text x="720" y="1145" font-family="var(--sans)" font-size="11" fill="#6b7280" font-style="italic">Mechanism confirmed</text>
+
+        <!-- Stage 7: Lead Optimization -->
+        <polygon class="stage-box" points="330,1160 670,1160 720,1260 280,1260" fill="#f97316" opacity="0.2" stroke="#f97316" stroke-width="2"/>
+        <text class="stage-title" x="500" y="1200" text-anchor="middle" font-size="20" fill="currentColor">Lead Optimization</text>
+        <text class="stage-text" x="500" y="1225" text-anchor="middle" fill="#6b7280">SAR studies  •  ADME profiling  •  Selectivity optimization</text>
+        <text class="stage-text" x="500" y="1242" text-anchor="middle" fill="#6b7280" font-weight="600">Final leads: 2-3</text>
+
+        <!-- Timeline annotation -->
+        <text x="50" y="1340" font-family="var(--sans)" font-size="12" fill="#6b7280" font-weight="600">Timeline:</text>
+        <text x="50" y="1360" font-family="var(--mono)" font-size="11" fill="#6b7280">Primary: 1-2 months  |  HTS to MOA: 6-8 months  |  Optimization: 12+ months</text>
+      </svg>
+
+      <div class="legend">
+        <div class="legend-item"><span class="legend-color" style="background-color: #3b82f6;"></span> Discovery</div>
+        <div class="legend-item"><span class="legend-color" style="background-color: #06b6d4;"></span> Screening</div>
+        <div class="legend-item"><span class="legend-color" style="background-color: #10b981;"></span> Validation</div>
+        <div class="legend-item"><span class="legend-color" style="background-color: #8b5cf6;"></span> Characterization</div>
+        <div class="legend-item"><span class="legend-color" style="background-color: #ec4899;"></span> Filtering</div>
+        <div class="legend-item"><span class="legend-color" style="background-color: #f59e0b;"></span> Development</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="attribution">Armin Bayati · arminbayati.com</div>
+
+  <script>
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (prefersDark) {
+      document.documentElement.classList.add('dark');
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (e.matches) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRISPR Gene Editing Workflow</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f1419; --paper: #fafaf7; --mid: #6b7280; --accent: #c0392b;
+    --rule: #d4d0c8; --card: #ffffff; --section-bg: #f4f3ef;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+    --mono: 'IBM Plex Mono', 'Menlo', monospace;
+  }
+  html.dark {
+    --ink: #e8e6e1; --paper: #111318; --mid: #9ca3af; --rule: #2a2d35;
+    --card: #1a1d24; --section-bg: #15171d;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--sans); background: var(--paper); color: var(--ink);
+    display: flex; flex-direction: column; align-items: center;
+    padding: 40px 20px 48px;
+  }
+  .fig-label { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--accent); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 8px; }
+  .fig-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; color: var(--ink); margin-bottom: 6px; text-align: center; }
+  .fig-subtitle { font-size: 13px; font-weight: 300; color: var(--mid); margin-bottom: 36px; text-align: center; max-width: 700px; line-height: 1.6; }
+
+  .wrapper { width: 100%; max-width: 1060px; overflow-x: auto; }
+
+  /* Chevron pipeline */
+  .chevron-pipeline { display: flex; min-width: 920px; gap: 2px; margin-bottom: 28px; }
+  .chevron {
+    flex: 1; position: relative; padding: 18px 18px 18px 30px;
+    background: var(--card); clip-path: polygon(0% 0%, calc(100% - 16px) 0%, 100% 50%, calc(100% - 16px) 100%, 0% 100%, 16px 50%);
+    border: none;
+  }
+  .chevron:first-child { clip-path: polygon(0% 0%, calc(100% - 16px) 0%, 100% 50%, calc(100% - 16px) 100%, 0% 100%); padding-left: 18px; border-radius: 8px 0 0 8px; }
+  .chevron:last-child { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 16px 50%); border-radius: 0 8px 8px 0; }
+  .chevron-num { font-family: var(--mono); font-size: 10px; font-weight: 500; color: var(--accent); letter-spacing: 0.8px; }
+  .chevron-title { font-size: 12px; font-weight: 600; color: var(--ink); margin-top: 2px; }
+  .chevron-sub { font-size: 10px; font-weight: 300; color: var(--mid); margin-top: 1px; }
+
+  /* Two-column layout */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; min-width: 920px; }
+
+  /* CRISPR flow (left) */
+  .flow-card {
+    background: var(--card); border: 1px solid var(--rule); border-radius: 10px;
+    padding: 24px; overflow: hidden;
+  }
+  .flow-title {
+    font-family: var(--serif); font-size: 1.1rem; color: var(--ink);
+    margin-bottom: 20px; font-weight: 400;
+  }
+  .flow-steps { display: flex; flex-direction: column; gap: 0; }
+  .flow-step {
+    display: flex; gap: 16px; padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .flow-step:last-child { border-bottom: none; }
+  .flow-icon {
+    width: 36px; height: 36px; border-radius: 8px; display: flex;
+    align-items: center; justify-content: center; font-family: var(--mono);
+    font-size: 11px; font-weight: 500; flex-shrink: 0;
+    background: var(--section-bg); color: var(--accent);
+  }
+  .flow-step-title { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+  .flow-step-desc { font-size: 11px; font-weight: 300; color: var(--mid); line-height: 1.55; }
+
+  /* KO Lines (right) */
+  .ko-grid { display: flex; flex-direction: column; gap: 10px; }
+  .ko-card {
+    background: var(--card); border: 1px solid var(--rule); border-radius: 8px;
+    padding: 16px 18px; display: flex; gap: 14px; align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+  .ko-card:hover { border-color: var(--accent); }
+  .ko-gene {
+    font-family: var(--mono); font-size: 13px; font-weight: 500;
+    color: var(--ink); background: var(--section-bg); padding: 6px 10px;
+    border-radius: 6px; min-width: 80px; text-align: center; flex-shrink: 0;
+  }
+  .ko-name { font-size: 12px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+  .ko-phenotype { font-size: 11px; font-weight: 300; color: var(--mid); line-height: 1.5; }
+
+  /* Perturbation toolkit */
+  .toolkit-label {
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    color: var(--accent); letter-spacing: 1px; margin: 24px 0 12px; text-transform: uppercase;
+  }
+  .toolkit-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 8px; min-width: 920px;
+  }
+  .tool-chip {
+    background: var(--card); border: 1px solid var(--rule); border-radius: 8px;
+    padding: 12px 14px; text-align: center; transition: border-color 0.2s;
+  }
+  .tool-chip:hover { border-color: var(--accent); }
+  .tool-type { font-family: var(--mono); font-size: 10px; font-weight: 500; color: var(--accent); letter-spacing: 0.5px; margin-bottom: 3px; }
+  .tool-name { font-size: 12px; font-weight: 500; color: var(--ink); }
+  .tool-detail { font-size: 10px; font-weight: 300; color: var(--mid); margin-top: 2px; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .fig-label, .fig-title, .fig-subtitle { animation: fadeIn 0.5s ease both; }
+  .fig-title { animation-delay: 0.05s; } .fig-subtitle { animation-delay: 0.1s; }
+</style>
+</head>
+<body>
+<div class="fig-label">Figure 5</div>
+<div class="fig-title">CRISPR Gene Editing & Genetic Perturbation Workflow</div>
+<div class="fig-subtitle">
+  End-to-end gene editing pipeline from guide RNA design through validated knockout iPSC lines,
+  alongside complementary RNAi, viral, and oligonucleotide perturbation approaches.
+</div>
+
+<div class="wrapper">
+
+<!-- Chevron pipeline -->
+<div class="chevron-pipeline">
+  <div class="chevron">
+    <div class="chevron-num">01</div>
+    <div class="chevron-title">Guide Design</div>
+    <div class="chevron-sub">sgRNA selection & off-target analysis</div>
+  </div>
+  <div class="chevron">
+    <div class="chevron-num">02</div>
+    <div class="chevron-title">RNP Delivery</div>
+    <div class="chevron-sub">Cas9 nucleofection into iPSCs</div>
+  </div>
+  <div class="chevron">
+    <div class="chevron-num">03</div>
+    <div class="chevron-title">Clonal Isolation</div>
+    <div class="chevron-sub">Single-cell sorting & expansion</div>
+  </div>
+  <div class="chevron">
+    <div class="chevron-num">04</div>
+    <div class="chevron-title">Genotype QC</div>
+    <div class="chevron-sub">PCR, Sanger, WB validation</div>
+  </div>
+  <div class="chevron">
+    <div class="chevron-num">05</div>
+    <div class="chevron-title">Pluripotency QC</div>
+    <div class="chevron-sub">Oct4, Sox2, karyotype</div>
+  </div>
+  <div class="chevron">
+    <div class="chevron-num">06</div>
+    <div class="chevron-title">Differentiation</div>
+    <div class="chevron-sub">DA neurons, cortical, cardio</div>
+  </div>
+  <div class="chevron">
+    <div class="chevron-num">07</div>
+    <div class="chevron-title">Phenotyping</div>
+    <div class="chevron-sub">Disease-relevant functional assays</div>
+  </div>
+</div>
+
+<!-- Two columns -->
+<div class="two-col">
+  <!-- Left: CRISPR detailed flow -->
+  <div class="flow-card">
+    <div class="flow-title">CRISPR/Cas9 Workflow Detail</div>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-icon">gR</div>
+        <div>
+          <div class="flow-step-title">Guide RNA Design & Synthesis</div>
+          <div class="flow-step-desc">Computational design targeting exonic regions. Off-target scoring via Benchling/CRISPOR. Synthetic sgRNAs or U6-driven expression vectors.</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-icon">RNP</div>
+        <div>
+          <div class="flow-step-title">Cas9-RNP Assembly & Nucleofection</div>
+          <div class="flow-step-desc">Pre-complexed Cas9 + sgRNA ribonucleoprotein. Lonza 4D nucleofection into iPSCs. Minimizes off-target via transient delivery.</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-icon">QC</div>
+        <div>
+          <div class="flow-step-title">Clone Selection & Validation</div>
+          <div class="flow-step-desc">Single-cell expansion → PCR genotyping → Sanger sequencing. Western blot confirms protein loss. Karyotype + pluripotency ICC (Oct4, Sox2, Nanog, TRA-1-60).</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-icon">Δ</div>
+        <div>
+          <div class="flow-step-title">Functional Characterization</div>
+          <div class="flow-step-desc">Differentiate to disease-relevant lineage. Assess phenotype vs. isogenic controls. Multi-readout comparison: ICC, WB, live-cell, proteomics.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: KO cell lines -->
+  <div>
+    <div class="flow-title" style="font-family: var(--serif); font-size: 1.1rem; color: var(--ink); margin-bottom: 14px;">Validated CRISPR Knockout iPSC Lines</div>
+    <div class="ko-grid">
+      <div class="ko-card">
+        <div class="ko-gene">PRKN<br><span style="font-size:9px;color:var(--mid)">KO</span></div>
+        <div>
+          <div class="ko-name">Parkin Knockout</div>
+          <div class="ko-phenotype">Impaired mitophagy. Shifts cell fate toward glial lineages. Target for Parkin agonist validation.</div>
+        </div>
+      </div>
+      <div class="ko-card">
+        <div class="ko-gene">SNCA<br><span style="font-size:9px;color:var(--mid)">KO</span></div>
+        <div>
+          <div class="ko-name">α-Synuclein Knockout</div>
+          <div class="ko-phenotype">Abolishes PFF-seeded inclusion formation entirely. Proves endogenous α-syn is required for propagation.</div>
+        </div>
+      </div>
+      <div class="ko-card">
+        <div class="ko-gene">GBA<br><span style="font-size:9px;color:var(--mid)">KO</span></div>
+        <div>
+          <div class="ko-name">GBA Knockout</div>
+          <div class="ko-phenotype">Heightened vulnerability to fibril-induced inclusions. Lysosomal dysfunction phenotype. Gaucher disease model.</div>
+        </div>
+      </div>
+      <div class="ko-card">
+        <div class="ko-gene">LRRK2<br><span style="font-size:9px;color:var(--mid)">KO</span></div>
+        <div>
+          <div class="ko-name">LRRK2 Knockout</div>
+          <div class="ko-phenotype">Altered endolysosomal trafficking. Key genetic PD risk factor. Used for kinase inhibitor studies.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Perturbation toolkit -->
+<div class="toolkit-label">Complementary Genetic Perturbation Toolkit</div>
+<div class="toolkit-grid">
+  <div class="tool-chip">
+    <div class="tool-type">RNAi</div>
+    <div class="tool-name">siRNA</div>
+    <div class="tool-detail">Transient KD · 72h · Lipofection</div>
+  </div>
+  <div class="tool-chip">
+    <div class="tool-type">RNAi</div>
+    <div class="tool-name">shRNA</div>
+    <div class="tool-detail">Stable KD · Lentiviral · Puro selection</div>
+  </div>
+  <div class="tool-chip">
+    <div class="tool-type">Oligo</div>
+    <div class="tool-name">ASO / SSO</div>
+    <div class="tool-detail">SNCA modulation · Gymnotic</div>
+  </div>
+  <div class="tool-chip">
+    <div class="tool-type">Viral</div>
+    <div class="tool-name">Lentivirus</div>
+    <div class="tool-detail">Overexpression · shRNA · GFP</div>
+  </div>
+  <div class="tool-chip">
+    <div class="tool-type">Viral</div>
+    <div class="tool-name">AAV</div>
+    <div class="tool-detail">Neuron-tropic · Low immunogenicity</div>
+  </div>
+  <div class="tool-chip">
+    <div class="tool-type">Viral</div>
+    <div class="tool-name">Adenovirus</div>
+    <div class="tool-detail">High titer · Transient expression</div>
+  </div>
+  <div class="tool-chip">
+    <div class="tool-type">Cloning</div>
+    <div class="tool-name">Gibson / Golden Gate</div>
+    <div class="tool-detail">Construct design & assembly</div>
+  </div>
+</div>
+
+</div>
+
+<script>
+</script>
+</body>
+</html>

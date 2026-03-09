@@ -57,13 +57,14 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 48px;
+  height: auto;
+  padding: 10px 0;
   gap: 16px;
 }
 
 .nav-brand {
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.5px;
   color: var(--mid);
@@ -72,26 +73,54 @@ nav {
   flex-shrink: 0;
 }
 .nav-brand:hover { color: var(--ink); }
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-logo {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+.nav-brand-text {
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  color: var(--ink);
+}
+.nav-brand:hover .nav-logo { color: var(--ink); }
+
 
 .nav-links {
   display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+  min-width: 0;
+}
+.nav-row {
+  display: flex;
   gap: 1px;
+  justify-content: center;
   flex-wrap: nowrap;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-.nav-links::-webkit-scrollbar { display: none; }
+.nav-row::-webkit-scrollbar { display: none; }
 
 .nav-links a {
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.4px;
   text-transform: uppercase;
   color: var(--mid);
   text-decoration: none;
-  padding: 6px 8px;
+  padding: 8px 11px;
   border-radius: 3px;
   transition: all 0.2s ease;
   white-space: nowrap;
@@ -115,22 +144,21 @@ nav {
   max-width: 1120px;
   margin: 0 auto;
   padding: 80px 32px 64px;
-  display: flex;
-  align-items: flex-start;
-  gap: 48px;
+  position: relative;
+  z-index: 10;
+  text-align: center;
 }
 
-.hero-text { flex: 1; }
+.hero-text { text-align: center; }
 
 .hero-photo {
-  flex-shrink: 0;
-  width: 220px;
-  height: 220px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   overflow: hidden;
   border: 3px solid var(--rule);
   box-shadow: 0 8px 32px rgba(0,0,0,0.10), 0 0 0 6px rgba(192,57,43,0.06);
-  margin-top: 12px;
+  margin: 20px auto 24px;
 }
 .hero-photo img {
   width: 100%;
@@ -151,6 +179,7 @@ nav {
   margin-bottom: 20px;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
 }
 .hero-eyebrow::before {
@@ -169,7 +198,7 @@ nav {
   letter-spacing: -0.5px;
   color: var(--ink);
   max-width: 780px;
-  margin-bottom: 28px;
+  margin: 0 auto 28px;
 }
 
 .hero-description {
@@ -177,8 +206,8 @@ nav {
   font-weight: 300;
   line-height: 1.75;
   color: var(--mid);
-  max-width: 640px;
-  margin-bottom: 36px;
+  max-width: 760px;
+  margin: 0 auto 36px;
 }
 
 .hero-tags {
@@ -199,6 +228,9 @@ nav {
   background: var(--card);
 }
 
+/* hero-tags kept for other pages; hero-search animation */
+.hero-search { animation: fadeUp 0.6s ease 0.3s both; }
+
 /* ── SECTIONS ── */
 .section {
   border-top: 1px solid var(--rule);
@@ -210,7 +242,7 @@ nav {
   margin: 0 auto;
   padding: 64px 32px 32px;
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 120px 1fr;
   gap: 48px;
   align-items: start;
   overflow: visible;
@@ -267,7 +299,7 @@ nav {
   font-weight: 300;
   line-height: 1.8;
   color: #444;
-  max-width: 640px;
+  max-width: 760px;
   margin-bottom: 16px;
 }
 
@@ -326,7 +358,7 @@ nav {
   border-radius: 6px;
   overflow: hidden;
   margin: 28px 0 32px;
-  max-width: 640px;
+  max-width: 760px;
 }
 
 .finding {
@@ -351,7 +383,7 @@ nav {
 /* ── TIMELINE ── */
 .timeline {
   margin: 32px 0;
-  max-width: 640px;
+  max-width: 760px;
 }
 
 .timeline-item {
@@ -560,7 +592,7 @@ html.dark .research-tile:hover {
   padding: 48px 24px;
   text-align: center;
   margin: 20px 0 24px;
-  max-width: 640px;
+  max-width: 760px;
 }
 
 .image-placeholder .ph-icon {
@@ -580,7 +612,7 @@ html.dark .research-tile:hover {
 .inline-list {
   list-style: none;
   margin: 16px 0;
-  max-width: 640px;
+  max-width: 760px;
 }
 
 .inline-list li {
@@ -605,7 +637,7 @@ html.dark .research-tile:hover {
 /* ── PUBLICATION LIST ── */
 .pub-list {
   margin: 20px 0;
-  max-width: 640px;
+  max-width: 760px;
 }
 
 .pub-item {
@@ -739,6 +771,8 @@ a.tag:hover { border-color: var(--accent); background: var(--accent-soft); color
 
 /* ── HIGHLIGHTS STRIP ── */
 .highlights-strip {
+  position: relative;
+  z-index: 1;
   background: var(--ink);
   padding: 36px 32px;
   border-top: 3px solid var(--accent);
@@ -782,7 +816,7 @@ a.tag:hover { border-color: var(--accent); background: var(--accent-soft); color
 }
 
 /* ── NEWS LIST ── */
-.news-list { margin: 20px 0; max-width: 640px; }
+.news-list { margin: 20px 0; max-width: 760px; }
 .news-item {
   display: flex; gap: 20px; padding: 16px 0;
   border-bottom: 1px solid var(--rule);
@@ -791,7 +825,7 @@ a.tag:hover { border-color: var(--accent); background: var(--accent-soft); color
 .news-date {
   font-family: var(--mono); font-size: 12px; font-weight: 500;
   color: var(--accent); letter-spacing: 0.5px;
-  min-width: 48px; padding-top: 2px;
+  min-width: 72px; padding-top: 2px; white-space: nowrap;
 }
 .news-body {
   font-size: 14.5px; font-weight: 300; color: #444; line-height: 1.7;
@@ -936,6 +970,12 @@ html.dark img {
 html.dark .highlights-strip {
   background: #0a0c10;
 }
+html.dark .page-footer {
+  background: #0a0c10;
+}
+html.dark .footer-bottom {
+  border-top-color: rgba(255,255,255,0.06);
+}
 
 /* ── ANIMATIONS ── */
 @keyframes fadeUp {
@@ -950,15 +990,154 @@ html.dark .highlights-strip {
 .hero-tags { animation-delay: 0.3s; }
 .hero-photo { animation: fadeUp 0.6s ease 0.4s both; }
 
-/* ── QUICK LINKS LABEL ── */
-.quick-links-label {
+/* ── HERO SEARCH BAR ── */
+.hero-search {
+  position: relative;
+  z-index: 50;
+  width: 100%;
+  max-width: 560px;
+  margin: 12px auto 0;
+}
+.hero-search-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hero-search-input-wrap {
+  position: relative;
+  flex: 1;
+}
+.hero-search-input {
+  width: 100%;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 24px;
+  padding: 14px 44px 14px 46px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+.hero-search-input::placeholder { color: var(--mid); opacity: 0.65; }
+.hero-search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.hero-search-icon {
+  position: absolute;
+  left: 17px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 17px;
+  height: 17px;
+  stroke: var(--mid);
+  fill: none;
+  stroke-width: 2;
+  pointer-events: none;
+  transition: stroke 0.2s ease;
+}
+.hero-search-input:focus ~ .hero-search-icon { stroke: var(--accent); }
+.hero-search-kbd {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 10px;
+  color: var(--mid);
+  background: var(--section-bg);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 2px 7px;
+  pointer-events: none;
+  opacity: 0.7;
+}
+.hero-search-btn {
+  font-family: var(--sans);
+  font-size: 14px;
   font-weight: 500;
-  letter-spacing: 1.5px;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: 24px;
+  padding: 14px 24px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease, transform 0.12s ease;
+  flex-shrink: 0;
+}
+.hero-search-btn:hover { background: #8a2a2a; transform: scale(1.03); }
+.hero-search-btn:active { transform: scale(0.98); }
+.hero-search-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.04);
+  z-index: 200;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 6px 0;
+  display: none;
+  scrollbar-width: thin;
+}
+.hero-search-dropdown.open { display: block; }
+.hero-search-dropdown::-webkit-scrollbar { width: 4px; }
+.hero-search-dropdown::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 2px; }
+
+.hero-search-hint {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--mid);
-  margin-bottom: 10px;
+  padding: 8px 16px 4px;
+  opacity: 0.7;
+}
+.hero-search-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 16px;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink);
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: background 0.1s ease, border-color 0.1s ease;
+  cursor: pointer;
+}
+.hero-search-item:hover, .hero-search-item.active {
+  background: var(--accent-soft);
+  border-left-color: var(--accent);
+}
+.hero-search-item-icon {
+  width: 14px;
+  height: 14px;
+  stroke: var(--mid);
+  fill: none;
+  stroke-width: 2;
+  flex-shrink: 0;
+}
+.hero-search-item:hover .hero-search-item-icon { stroke: var(--accent); }
+.hero-search-item-text { flex: 1; }
+.hero-search-item-desc {
+  font-size: 11px;
+  color: var(--mid);
+  margin-top: 1px;
+  line-height: 1.4;
+}
+.hero-search-item mark { background: var(--accent-soft); color: var(--ink); border-radius: 2px; padding: 0 1px; }
+
+html.dark .hero-search-dropdown {
+  box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.06);
 }
 
 /* ── RESPONSIVE ── */
@@ -977,6 +1156,11 @@ html.dark .highlights-strip {
     padding: 12px 20px;
     gap: 4px;
   }
+  .nav-links.open .nav-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
   .nav-toggle { display: block; }
   .section-header {
     grid-template-columns: 1fr;
@@ -990,11 +1174,10 @@ html.dark .highlights-strip {
     gap: 12px;
   }
   .section-number { font-size: 2rem; margin-bottom: 0; }
-  .hero { padding: 48px 20px 40px; flex-direction: column-reverse; align-items: center; text-align: center; }
-  .hero-photo { width: 160px; height: 160px; margin-top: 0; margin-bottom: 8px; }
-  .hero-tags { justify-content: center; }
-  .hero-cta { justify-content: center; }
-  .hero-description { margin-left: auto; margin-right: auto; }
+  .hero { padding: 48px 20px 40px; }
+  .hero-photo { width: 110px; height: 110px; }
+  .hero-search { max-width: 100%; }
+  .hero-search-btn { padding: 14px 18px; font-size: 13px; }
   .figure-container { padding: 12px 20px 48px; }
   .workflow-steps { flex-direction: column; }
   .workflow-step { border-left: none; border-top: 1px solid rgba(255,255,255,0.12); padding: 16px 0; }
@@ -1139,6 +1322,35 @@ nav {
   margin-right: 4px;
 }
 .search-toggle:hover { border-color: var(--accent); color: var(--ink); }
+
+.search-result-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+.search-section-badge {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+.search-suggestion {
+  font-size: 12px;
+  color: var(--mid);
+  margin-top: 6px;
+}
+.search-result-desc {
+  font-size: 12px;
+  color: var(--mid);
+  line-height: 1.5;
+  margin-top: 2px;
+}
 .search-toggle svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; }
 
 .search-overlay {
@@ -1286,6 +1498,385 @@ html.dark .search-overlay { background: rgba(0,0,0,0.65); }
 html.dark .search-modal { background: var(--card); }
 html.dark .search-result mark { background: rgba(192,57,43,0.3); }
 
+
+/* ══════════════════════════════════════════════
+   MOBILE OPTIMIZATION — Only affects <768px
+   Desktop layout is completely unchanged.
+   ══════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  /* ── Typography scaling ── */
+  body { font-size: 15px; }
+  .hero h1, h1 { font-size: clamp(1.6rem, 7vw, 2.2rem) !important; }
+  .section-content h2 { font-size: 1.35rem; }
+  .section-content h3 { font-size: 0.95rem; margin-top: 24px; }
+  .section-content p { font-size: 14.5px; line-height: 1.7; }
+  .hero-description { font-size: 15px !important; line-height: 1.65 !important; }
+
+  /* ── Hero section ── */
+  .hero {
+    padding: 36px 16px 32px !important;
+    flex-direction: column-reverse !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 20px !important;
+  }
+  .hero-photo {
+    width: 140px !important;
+    height: 140px !important;
+    margin: 0 auto 4px !important;
+  }
+  .hero-eyebrow { justify-content: center; font-size: 11px; }
+  .hero-tags { justify-content: center; gap: 6px; }
+  .hero-cta { justify-content: center !important; }
+  .hero-description {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 100% !important;
+  }
+  .tag { font-size: 10px; padding: 4px 10px; }
+  .btn-primary, .btn-secondary { font-size: 11px; padding: 10px 20px; }
+
+  /* ── Navigation ── */
+  nav { padding: 0 12px !important; }
+  .nav-inner { padding: 8px 0 !important; gap: 8px !important; }
+  .nav-brand { font-size: 11px; }
+  .search-toggle, .dark-toggle { width: 28px; height: 28px; }
+  .search-toggle svg { width: 13px; height: 13px; }
+
+  /* ── Sections ── */
+  .section-header {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    padding: 32px 16px 0 !important;
+  }
+  .section-index {
+    position: static !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+  .section-number { font-size: 1.8rem !important; margin-bottom: 0 !important; }
+  .section-label { font-size: 10px; }
+  .section-content { padding-bottom: 32px; }
+  .section-content p { max-width: 100%; }
+
+  /* ── Figures & images ── */
+  .figure-container { padding: 8px 16px 36px !important; }
+  figure { margin: 0 !important; }
+  figure img, .section-content img {
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 12px 0 8px !important;
+  }
+  figcaption {
+    font-size: 12px !important;
+    max-width: 100% !important;
+    padding: 0 4px !important;
+  }
+
+  /* ── Gallery grid — 2 columns on mobile ── */
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 4px !important;
+  }
+  .gallery-thumb::after {
+    font-size: 9px !important;
+    padding: 20px 6px 6px !important;
+  }
+  .gallery-label { font-size: 11px; padding: 8px 12px; }
+
+  /* ── Findings grid ── */
+  .findings {
+    grid-template-columns: 1fr 1fr !important;
+    margin: 16px 0 20px !important;
+    max-width: 100% !important;
+  }
+  .finding { padding: 14px 16px; }
+  .finding-value { font-size: 1.2rem; }
+  .finding-label { font-size: 11px; }
+
+  /* ── Workflow strip ── */
+  .workflow-strip { padding: 32px 16px !important; }
+  .workflow-steps { flex-direction: column !important; }
+  .workflow-step {
+    border-left: none !important;
+    border-top: 1px solid rgba(255,255,255,0.12) !important;
+    padding: 14px 0 !important;
+  }
+  .workflow-step:first-child { border-top: none !important; }
+  .step-title { font-size: 13px; }
+  .step-detail { font-size: 12px; }
+
+  /* ── Highlights strip ── */
+  .highlights-strip { padding: 28px 16px; }
+  .highlights-inner {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .highlight-title { font-size: 12.5px; }
+  .highlight-desc { font-size: 11px; }
+  .highlight-icon { font-size: 18px; }
+
+  /* ── News items ── */
+  .news-item { flex-direction: column; gap: 4px; padding: 12px 0; }
+  .news-date { min-width: auto; }
+  .news-body { font-size: 13.5px; }
+
+  /* ── Timeline ── */
+  .timeline { margin: 20px 0; }
+  .timeline-item { padding-left: 20px; padding-bottom: 24px; }
+  .timeline-title { font-size: 14px; }
+  .timeline-desc { font-size: 13px; }
+
+  /* ── Publication list ── */
+  .pub-item { padding: 12px 0; }
+  .pub-title { font-size: 14px; }
+  .pub-authors { font-size: 12px; }
+  .pub-journal { font-size: 10px; }
+
+  /* ── Contact links ── */
+  .contact-links { max-width: 100%; }
+  .contact-link { padding: 12px 14px; font-size: 13px; }
+
+  /* ── Footer ── */
+  .page-footer { margin-top: 0; }
+  .footer-inner {
+    flex-direction: column !important;
+    gap: 28px !important;
+    padding: 36px 16px 28px !important;
+  }
+  .footer-brand { max-width: 100%; }
+  .footer-name { font-size: 1.1rem; }
+  .footer-links-grid {
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+  .footer-bottom { padding: 16px; font-size: 11px; }
+
+  /* ── Search overlay ── */
+  .search-modal { width: 96%; max-width: none; border-radius: 8px; }
+  .search-overlay { padding-top: 10vh; }
+  .search-input { font-size: 15px; }
+  .search-result { padding: 10px 16px; }
+  .search-result-title { font-size: 13px; }
+  .search-result-desc { font-size: 11px; }
+
+  /* ── Inline grids with style attributes (VC page etc) ── */
+  [style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Card grids ── */
+  .card-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+  .research-grid {
+    grid-template-columns: 1fr !important;
+    padding: 0 16px 32px !important;
+    gap: 12px !important;
+  }
+  .research-tile { padding: 18px 16px 14px; }
+  .tile-desc { font-size: 12px; }
+
+  /* ── Lightbox ── */
+  .lightbox-img { max-width: 98vw !important; max-height: 80vh !important; }
+  .lightbox-caption { font-size: 12px !important; padding: 8px 16px !important; }
+}
+
+/* ── Extra small screens (≤ 480px) ── */
+@media (max-width: 480px) {
+  .hero h1, h1 { font-size: clamp(1.4rem, 6vw, 1.8rem) !important; }
+  .hero-description { font-size: 14px !important; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .findings { grid-template-columns: 1fr !important; }
+  .tag { font-size: 9.5px; padding: 3px 8px; }
+  .hero-tags { gap: 5px; }
+  .section-header { padding: 24px 12px 0 !important; }
+  .section-content { padding-bottom: 24px; }
+  .figure-container { padding: 8px 12px 28px !important; }
+  .workflow-strip { padding: 24px 12px !important; }
+  .footer-inner { padding: 28px 12px 20px !important; }
+}
+
+/* ── Touch-friendly improvements ── */
+@media (hover: none) and (pointer: coarse) {
+  /* Show gallery captions always on touch (no hover) */
+  .gallery-thumb::after {
+    opacity: 1 !important;
+    background: linear-gradient(transparent 30%, rgba(0,0,0,0.7)) !important;
+    font-size: 9px !important;
+  }
+  /* Bigger tap targets */
+  .nav-links a { padding: 10px 12px !important; min-height: 44px; display: flex; align-items: center; }
+  .nav-toggle { min-width: 44px; min-height: 44px; }
+  .search-toggle, .dark-toggle { min-width: 36px; min-height: 36px; }
+  .contact-link { min-height: 48px; }
+  .tag { min-height: 36px; display: inline-flex; align-items: center; }
+  .btn-primary, .btn-secondary { min-height: 44px; }
+  /* Remove hover effects on touch */
+  .gallery-thumb:hover { transform: none; box-shadow: none; }
+  .research-tile:hover { transform: none; }
+}
+
+
+/* ── CHAT WIDGET ── */
+.chat-fab {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 900;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(192,57,43,0.35), 0 1px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.chat-fab:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(192,57,43,0.4); }
+.chat-fab svg { width: 26px; height: 26px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.chat-fab .chat-fab-close { display: none; }
+.chat-fab.open .chat-fab-open { display: none; }
+.chat-fab.open .chat-fab-close { display: block; }
+
+.chat-panel {
+  position: fixed;
+  bottom: 96px;
+  right: 28px;
+  z-index: 899;
+  width: 380px;
+  max-height: 520px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.04);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  animation: chatSlideUp 0.25s ease;
+}
+@keyframes chatSlideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.chat-panel.open { display: flex; }
+
+.chat-header {
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--rule);
+  background: var(--section-bg);
+}
+.chat-header-title {
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+.chat-header-sub {
+  font-size: 12px;
+  color: var(--mid);
+  line-height: 1.5;
+}
+
+.chat-body {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+}
+
+.chat-field label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 6px;
+}
+.chat-field input,
+.chat-field textarea {
+  width: 100%;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+.chat-field input:focus,
+.chat-field textarea:focus {
+  border-color: var(--accent);
+}
+.chat-field textarea {
+  resize: vertical;
+  min-height: 90px;
+  line-height: 1.6;
+}
+
+.chat-send {
+  width: 100%;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  margin-top: 4px;
+}
+.chat-send:hover { background: #a93226; }
+.chat-send:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.chat-success {
+  text-align: center;
+  padding: 40px 20px;
+}
+.chat-success-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(46,204,113,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+.chat-success-icon svg { width: 24px; height: 24px; stroke: #2ecc71; fill: none; stroke-width: 2.5; }
+.chat-success-title {
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.chat-success-desc {
+  font-size: 13px;
+  color: var(--mid);
+  line-height: 1.5;
+}
+
+html.dark .chat-panel {
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.06);
+}
+
+@media (max-width: 480px) {
+  .chat-panel { right: 12px; left: 12px; width: auto; bottom: 88px; max-height: 70vh; }
+  .chat-fab { bottom: 20px; right: 20px; width: 50px; height: 50px; }
+}
 </style>
 </head>
 <body>
@@ -1293,25 +1884,34 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
 
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="nav-brand">arminbayati.com</a>
+    <a href="index.html" class="nav-brand"><svg class="nav-logo" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1" y="1" width="26" height="26" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="14" y="19.5" text-anchor="middle" font-family="'DM Serif Display',Georgia,serif" font-size="15" font-weight="400" fill="currentColor">AB</text>
+</svg><span class="nav-brand-text">Armin Bayati</span></a>
     <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="17" y2="6"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14" x2="17" y2="14"/></svg>
     </button>
     <div class="nav-links">
-      <a href="index.html" class="active">Home</a>
-      <a href="ipscs.html" >iPSCs</a>
-      <a href="cardiomyocytes.html" >Cardio</a>
-      <a href="cancer-immunology.html" >Cancer</a>
-      <a href="cellular-assays.html" >Assays</a>
-      <a href="genetics.html" >Genetics</a>
-      <a href="drug-discovery.html" >Drug Disc.</a>
-      <a href="microscopy.html" >Imaging</a>
-      <a href="flow-cytometry.html" >Flow Cyt.</a>
-      <a href="proteomics.html" >Proteomics</a>
-      <a href="coding.html" >Coding</a>
-      <a href="skills.html" >Skills</a>
-      <a href="publications.html" >Pubs</a>
-      <a href="contact.html" >Contact</a>
+      <div class="nav-row">
+        <a href="index.html" class="active">Home</a>
+        <a href="ipscs.html">iPSC Neurons</a>
+        <a href="cardiomyocytes.html">Cardiomyocytes</a>
+        <a href="cancer-immunology.html">Cancer Immunology</a>
+        <a href="cellular-assays.html">Cellular Assays</a>
+        <a href="genetics.html">Genetics</a>
+        <a href="drug-discovery.html">Drug Discovery</a>
+      </div>
+      <div class="nav-row">
+        <a href="microscopy.html">Microscopy</a>
+        <a href="flow-cytometry.html">Flow Cytometry</a>
+        <a href="proteomics.html">Proteomics</a>
+        <a href="in-vivo.html">In Vivo</a>
+        <a href="coding.html">Coding &amp; Data</a>
+        <a href="skills.html">Technical Skills</a>
+        <a href="publications.html">Publications</a>
+        <a href="vc-portfolio.html">Portfolio &amp; VC</a>
+        <a href="contact.html">Contact</a>
+      </div>
     </div>
     <button class="search-toggle" aria-label="Search site" title="Search (⌘K)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button><button class="dark-toggle" onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light')" aria-label="Toggle dark mode" title="Toggle dark mode">☀</button>
   </div>
@@ -1340,35 +1940,28 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
 <div class="hero">
   <div class="hero-text">
     <div class="hero-eyebrow">Armin Bayati, PhD</div>
+    <div class="hero-photo">
+      <img src="images/headshot.jpg" alt="Armin Bayati, PhD" loading="eager">
+    </div>
     <h1>Neuroscience, Cell Biology &amp; Translational Drug Discovery</h1>
     <p class="hero-description">
       Research Fellow at Harvard Medical School and Massachusetts General Hospital. My work spans neuroscience, cancer immunology, infectious disease, and cardiovascular biology — using iPSC-derived cell models, high-content imaging, flow cytometry, proteomics, and computational tools to dissect disease mechanisms and advance preclinical drug discovery.
     </p>
-    <div class="quick-links-label">Quick Links</div>
-    <div class="hero-tags">
-      <a href="ipscs.html" class="tag">iPSC Disease Modeling</a>
-      <a href="ipscs.html#dopaminergic" class="tag">Dopaminergic Neurons</a>
-      <a href="ipscs.html" class="tag">Parkinson's Disease</a>
-      <a href="genetics.html" class="tag">α-Synuclein Biology</a>
-      <a href="microscopy.html" class="tag">Live-Cell Imaging</a>
-      <a href="microscopy.html" class="tag">Electron Microscopy</a>
-      <a href="genetics.html" class="tag">CRISPR</a>
-      <a href="cancer-immunology.html" class="tag">Cancer Immunology</a>
-      <a href="cardiomyocytes.html" class="tag">Cardiomyocytes</a>
-      <a href="drug-discovery.html" class="tag">Drug Discovery</a>
-      <a href="drug-discovery.html" class="tag">Biomarker Development</a>
-      <a href="flow-cytometry.html" class="tag">Flow Cytometry</a>
-      <a href="genetics.html" class="tag">RNA Therapeutics</a>
-      <a href="coding.html" class="tag">Automation (BRAVO/Tecan)</a>
-      <a href="coding.html" class="tag">Python / AutoMorphoTrack</a>
+    <div class="hero-search" id="heroSearch">
+      <div class="hero-search-row">
+        <div class="hero-search-input-wrap">
+          <input type="text" class="hero-search-input" id="heroSearchInput" placeholder="Search portfolio..." autocomplete="off" spellcheck="false">
+          <svg class="hero-search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <span class="hero-search-kbd">/</span>
+        </div>
+        <button class="hero-search-btn" id="heroSearchBtn">Search</button>
+      </div>
+      <div class="hero-search-dropdown" id="heroSearchDropdown"></div>
     </div>
-    <div class="hero-cta" style="margin-top:28px; display:flex; gap:12px; flex-wrap:wrap;">
+    <div class="hero-cta" style="margin-top:28px; display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
       <a href="contact.html" class="btn-primary">Get in Touch</a>
       <a href="publications.html" class="btn-secondary">View Publications</a>
     </div>
-  </div>
-  <div class="hero-photo">
-    <img src="images/headshot.jpg" alt="Armin Bayati, PhD" loading="eager">
   </div>
 </div>
 
@@ -1595,6 +2188,38 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
   </div>
 </div>
 
+<!-- THESIS DOWNLOADS -->
+<div class="section reveal" id="theses">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">05</div>
+      <div class="section-label">Theses</div>
+    </div>
+    <div class="section-content">
+      <h2>Thesis Documents</h2>
+      <p>Full-text thesis documents available for download.</p>
+
+      <a style="display:flex;align-items:flex-start;gap:16px;padding:24px;background:var(--card);border:1px solid var(--rule);border-radius:6px;text-decoration:none;color:inherit;transition:border-color 0.2s,box-shadow 0.2s;margin-bottom:12px;max-width:760px;" href="downloads/Bayati_Honours_2018.pdf" target="_blank" rel="noopener" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--rule)'">
+        <div style="width:48px;height:48px;border-radius:8px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--accent);flex-shrink:0;">&#128196;</div>
+        <div style="flex:1;">
+          <div style="font-size:15px;font-weight:500;color:var(--ink);margin-bottom:4px;">BSc Honours Thesis (2018)</div>
+          <div style="font-size:13px;font-weight:300;color:var(--mid);line-height:1.5;">Effect of Ischemic Stroke on Neuronal and Glial Cell Structure in the Peri-Infarct Zone of Adult Mice</div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--accent);margin-top:6px;letter-spacing:0.3px;">University of Victoria &middot; 44 MB PDF</div>
+        </div>
+      </a>
+
+      <a style="display:flex;align-items:flex-start;gap:16px;padding:24px;background:var(--card);border:1px solid var(--rule);border-radius:6px;text-decoration:none;color:inherit;transition:border-color 0.2s,box-shadow 0.2s;margin-bottom:12px;max-width:760px;" href="downloads/Bayati_PhD_2023.pdf" target="_blank" rel="noopener" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--rule)'">
+        <div style="width:48px;height:48px;border-radius:8px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--accent);flex-shrink:0;">&#128196;</div>
+        <div style="flex:1;">
+          <div style="font-size:15px;font-weight:500;color:var(--ink);margin-bottom:4px;">PhD Thesis (2023)</div>
+          <div style="font-size:13px;font-weight:300;color:var(--mid);line-height:1.5;">Doctoral dissertation &mdash; McGill University</div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--accent);margin-top:6px;letter-spacing:0.3px;">McGill University &middot; 18 MB PDF</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
 <div class="workflow-strip reveal">
   <div class="workflow-inner">
     <h3>Core Expertise</h3>
@@ -1646,7 +2271,7 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
       </div>
       <div class="footer-col">
         <div class="footer-col-title">Contact</div>
-        <a href="/cdn-cgi/l/email-protection#9effb0fcffe7ffeaf7b0fcecfff7f0def9f3fff7f2b0fdf1f3">Email</a>
+        <a href="javascript:void(0)" onclick="openChatWidget()">Reach Out to Armin</a>
         <a href="contact.html">Contact Page</a>
         <a href="publications.html">Publications</a>
       </div>
@@ -1669,36 +2294,99 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 <script>
-(function(){
+(function() {
   var searchIndex = [
-    {page:'index.html', title:'Home \u2014 Overview', category:'Main',
-     keywords:'armin bayati phd neuroscience cell biology drug discovery harvard medical school mass general brigham research fellow ipsc dopaminergic neurons parkinson disease lewy body nature neuroscience publications citations'},
-    {page:'ipscs.html', title:'iPSC-Derived Neurons', category:'Research',
-     keywords:'ipsc induced pluripotent stem cells dopaminergic cortical neurons glial differentiation lewy body disease modeling mea electrophysiology calcium imaging hplc dopamine quantification parkinson disease alpha synuclein preformed fibrils pff neurodegeneration apoptosis autophagy protein aggregation mitochondrial dysfunction'},
-    {page:'cardiomyocytes.html', title:'iPSC-Derived Cardiomyocytes', category:'Research',
-     keywords:'cardiac differentiation mea beat rate analysis calcium transient profiling cardiotoxicity screening disease modeling hcm dcm hypertrophic cardiomyopathy dilated cardiomyopathy cardiac safety pharmacology ipsc cardiomyocytes contractility sarcomere'},
-    {page:'cancer-immunology.html', title:'Cancer Immunology', category:'Research',
-     keywords:'t cell killing adcc cdc checkpoint blockade cytokine profiling car-t characterization immune co-culture systems tumor microenvironment immunotherapy pd-1 pd-l1 nk cells antibody dependent cellular cytotoxicity complement dependent cytotoxicity'},
-    {page:'cellular-assays.html', title:'Cellular & Functional Assays', category:'Research',
-     keywords:'endocytosis exosomal biology autophagy flow cytometry pbmc immune assays plate-based readouts immunocytochemistry clathrin cd63 cd9 reporter exosome transfer assay mitophagy lysosomal stress viability cytotoxicity celltiter-glo'},
-    {page:'genetics.html', title:'Genetics & Molecular Biology', category:'Research',
-     keywords:'crispr cas9 sirna shrna aso antisense oligonucleotide molecular cloning viral constructs protein conjugation lysosomal biology gene editing lentivirus aav adenovirus transfection plasmid dna rna'},
-    {page:'drug-discovery.html', title:'Drug Discovery & Translation', category:'Research',
-     keywords:'parkin agonist tac lysosomal rescue antivirals biomarker strategy preclinical compound testing small molecule screening sar dose response pseudovirus sars-cov-2 pikfyve csnk2 hplc compound purity analytical characterization dls dynamic light scattering particle size nanoparticle formulation lc-ms pharmacokinetics target engagement pharmacodynamic'},
-    {page:'microscopy.html', title:'Microscopy & Imaging', category:'Research',
-     keywords:'confocal sted super-resolution tem transmission electron microscopy live-cell imaging high-content screening ihc histology immunohistochemistry fluorescence opera phenix hcs image analysis'},
-    {page:'flow-cytometry.html', title:'Flow Cytometry', category:'Research',
-     keywords:'flow cytometry multicolor immunophenotyping intracellular staining facs sorting gating strategy surface marker t cell b cell nk cell monocyte macrophage pbmc viability dye compensation'},
-    {page:'proteomics.html', title:'Proteomics & Single-Cell Genomics', category:'Research',
-     keywords:'tmt quantitative proteomics scrna-seq 10x genomics bulk rna-seq gsea pathway analysis umap deseq2 seurat mass spectrometry protein biomarker volcano plot gene ontology single cell transcriptomics'},
-    {page:'coding.html', title:'Coding, Automation & Data', category:'Technical',
-     keywords:'python automorphotrack pipelines bravo tecan liquid handling 96 384 well miniaturization machine learning automation data analysis github programming r matlab imageJ fiji cellprofiler'},
-    {page:'skills.html', title:'Full Technical Skills', category:'Technical',
-     keywords:'techniques instruments software capabilities laboratory skills comprehensive listing assays methods platforms tools equipment'},
-    {page:'publications.html', title:'Publications', category:'Academic',
-     keywords:'peer-reviewed papers citations journal articles nature neuroscience lancet science translational medicine acs chemical biology first author corresponding author pubmed google scholar'},
-    {page:'contact.html', title:'Contact', category:'Connect',
-     keywords:'email linkedin github orcid google scholar contact collaboration'}
+    // Page-level entries
+    {page:'index.html', title:'Home — Overview', category:'Main', section:'',
+     keywords:'armin bayati phd neuroscience cell biology drug discovery harvard medical school mass general brigham research fellow translational science',
+     description:'Overview of research portfolio spanning neurodegeneration, drug discovery, and translational science.'},
+    {page:'ipscs.html', title:'iPSC-Derived Neurons', category:'Research', section:'',
+     keywords:'ipsc induced pluripotent stem cells dopaminergic neurons cortical neurons differentiation disease modeling parkinson lewy body dual-hit mea calcium imaging electrophysiology co-culture microglia astrocyte',
+     description:'iPSC differentiation protocols for dopaminergic and cortical neurons, disease modeling, and co-culture systems.'},
+    {page:'ipscs.html#differentiation', title:'iPSC Differentiation Protocol', category:'Research', section:'Differentiation',
+     keywords:'differentiation protocol dopaminergic cortical neurons small molecule patterning smadis floor plate midbrain astrocyte microglia',
+     description:'Dual SMAD inhibition to floor-plate patterning for midbrain dopaminergic neuron generation.'},
+    {page:'ipscs.html#electrophysiology', title:'Electrophysiology & Calcium Imaging', category:'Research', section:'Functional',
+     keywords:'mea multielectrode array calcium imaging fluo-4 spontaneous activity spike raster neuronal maturation electrophysiology functional',
+     description:'MEA recordings and calcium imaging confirming functional maturity of iPSC-derived neurons.'},
+    {page:'ipscs.html#disease-modeling', title:'Disease Modeling (Dual-Hit)', category:'Research', section:'Disease Modeling',
+     keywords:'dual-hit model lewy body inclusion pff preformed fibrils ifn-gamma cytokine parkinson synuclein neurodegeneration inflammation neuroinflammation',
+     description:'Sequential PFF + IFN-gamma exposure producing Lewy body-like inclusions in human dopaminergic neurons.'},
+    {page:'ipscs.html#co-culture', title:'Neuron-Glia Co-Culture', category:'Research', section:'Co-Culture',
+     keywords:'co-culture microglia astrocyte neuron-glia neuroinflammation phagocytosis neuroprotection alpha-synuclein inclusion formation',
+     description:'Microglia accelerate inclusion formation while astrocytes provide neuroprotection in co-culture systems.'},
+    {page:'cardiomyocytes.html', title:'iPSC-Derived Cardiomyocytes', category:'Research', section:'',
+     keywords:'cardiomyocyte cardiac ipsc beating heart safety pharmacology calcium transients field potential duration impedance sarcomere contractility cardiotoxicity herg',
+     description:'iPSC-cardiomyocyte assays for cardiac safety pharmacology and cardiotoxicity screening.'},
+    {page:'cancer-immunology.html', title:'Cancer Immunology', category:'Research', section:'',
+     keywords:'t cell killing adcc cdc checkpoint blockade cytokine profiling car-t characterization immune co-culture systems tumor microenvironment immunotherapy pd-1 pd-l1 nk cells antibody dependent cellular cytotoxicity complement dependent cytotoxicity',
+     description:'Immune cell-mediated killing assays, checkpoint blockade, and tumor microenvironment modeling.'},
+    {page:'cellular-assays.html', title:'Cellular & Functional Assays', category:'Research', section:'',
+     keywords:'endocytosis exosomal biology autophagy flow cytometry pbmc immune assays plate-based readouts immunocytochemistry clathrin cd63 cd9 reporter exosome transfer assay mitophagy lysosomal stress viability cytotoxicity celltiter-glo',
+     description:'Endocytosis, exosomal biology, autophagy/mitophagy, and lysosomal stress assay platforms.'},
+    {page:'cellular-assays.html#autophagy', title:'Autophagy & Mitophagy Assays', category:'Research', section:'Autophagy',
+     keywords:'autophagy mitophagy lc3b lysotracker lysosensor lysosomal ph stress dual-hit impairment',
+     description:'LysoSensor, LysoTracker, and LC3B-based assays for autophagy and mitophagy quantification.'},
+    {page:'cellular-assays.html#endocytosis', title:'Endocytosis & Uptake Assays', category:'Research', section:'Endocytosis',
+     keywords:'endocytosis clathrin macropinocytosis fibril uptake sars-cov-2 spike protein ace2 receptor internalization trafficking',
+     description:'Clathrin-mediated endocytosis and macropinocytosis pathways for PFF and SARS-CoV-2 entry.'},
+    {page:'cellular-assays.html#exosome', title:'Exosomal Biology & Transfer', category:'Research', section:'Exosomes',
+     keywords:'exosome cd63 multivesicular body mvb manumycin a gold-labeled transfer naïve recipient disease propagation',
+     description:'Exosome-mediated disease propagation tracked via CD63-GFP and nanogold-labeled fibrils.'},
+    {page:'genetics.html', title:'Genetics & Molecular Biology', category:'Research', section:'',
+     keywords:'crispr cas9 sirna shrna aso antisense oligonucleotide molecular cloning viral constructs protein conjugation lysosomal biology gene editing lentivirus aav adenovirus transfection plasmid dna rna gba knockout snca triplication',
+     description:'CRISPR gene editing, viral vector delivery, and molecular biology for disease modeling.'},
+    {page:'genetics.html#lysosomal', title:'Lysosomal Biology', category:'Research', section:'Lysosomal',
+     keywords:'lysosome lamp1 lamp2 tfeb nrf2 galectin-3 membrane permeabilization rab7 cd63 lyso-ip nanogold fibril trafficking dysfunction',
+     description:'Lysosomal dysfunction, membrane rupture, and fibril trafficking in neurodegeneration.'},
+    {page:'genetics.html#gene-editing', title:'Gene Editing & Viral Delivery', category:'Research', section:'Gene Editing',
+     keywords:'lentivirus adenovirus shrna knockdown overexpression crispr gba lamp2 alpha-synuclein ha western blot fractionation',
+     description:'Lentiviral knockdown, adenoviral overexpression, and CRISPR editing in iPSC neurons.'},
+    {page:'drug-discovery.html', title:'Drug Discovery & Translation', category:'Research', section:'',
+     keywords:'parkin agonist tac lysosomal rescue antivirals biomarker strategy preclinical compound testing small molecule screening sar dose response pseudovirus sars-cov-2 pikfyve csnk2 hplc compound purity analytical characterization dls dynamic light scattering particle size nanoparticle formulation lc-ms pharmacokinetics target engagement pharmacodynamic',
+     description:'Small-molecule drug discovery for Parkinson\'s disease and antiviral target validation.'},
+    {page:'drug-discovery.html#parkin', title:'Parkin Agonism & Neuroprotection', category:'Research', section:'Parkin',
+     keywords:'parkin fb231 agonist alpha-synuclein inclusion reduction western blot tfeb nrf2 hdac6 neuroprotection dopaminergic',
+     description:'Small-molecule Parkin agonist reducing alpha-synuclein inclusions in iPSC dopaminergic neurons.'},
+    {page:'drug-discovery.html#antiviral', title:'Antiviral Drug Discovery', category:'Research', section:'Antiviral',
+     keywords:'csnk2 pikfyve sars-cov-2 beta-coronavirus pseudovirus gfp spike inhibitor entry clathrin endocytosis host-directed antiviral',
+     description:'CSNK2 and PIKfyve inhibitors blocking SARS-CoV-2 entry via host-directed antiviral strategies.'},
+    {page:'microscopy.html', title:'Microscopy & Imaging', category:'Research', section:'',
+     keywords:'confocal sted super-resolution tem transmission electron microscopy live-cell imaging high-content screening ihc histology immunohistochemistry fluorescence opera phenix hcs image analysis',
+     description:'Multi-modal imaging from confocal and STED super-resolution to TEM ultrastructural analysis.'},
+    {page:'microscopy.html#confocal', title:'Confocal Microscopy', category:'Research', section:'Confocal',
+     keywords:'confocal laser scanning multichannel z-stack maximum intensity projection pff inclusion sars spike lysosomal stress co-culture colocalization',
+     description:'High-resolution confocal imaging of protein aggregation, viral entry, and co-culture systems.'},
+    {page:'microscopy.html#em', title:'Electron Microscopy', category:'Research', section:'EM',
+     keywords:'tem transmission electron microscopy nanogold lewy body inclusion ultrastructure multivesicular body neurite 49000x 98000x',
+     description:'TEM ultrastructural analysis of Lewy body-like inclusions and nanogold-labeled fibril trafficking.'},
+    {page:'microscopy.html#sted', title:'STED Super-Resolution', category:'Research', section:'STED',
+     keywords:'sted stimulated emission depletion super-resolution sub-lysosomal fibril localization nanoscale',
+     description:'STED nanoscopy resolving sub-lysosomal fibril localization beyond confocal limits.'},
+    {page:'flow-cytometry.html', title:'Flow Cytometry', category:'Research', section:'',
+     keywords:'flow cytometry multicolor immunophenotyping intracellular staining facs sorting gating strategy surface marker t cell b cell nk cell monocyte macrophage pbmc viability dye compensation tregs ki67 cd4 cd8',
+     description:'Multicolor immunophenotyping, intracellular staining, and FACS sorting for immune cell analysis.'},
+    {page:'proteomics.html', title:'Proteomics & Single-Cell Genomics', category:'Research', section:'',
+     keywords:'tmt quantitative proteomics scrna-seq 10x genomics bulk rna-seq gsea pathway analysis umap deseq2 seurat mass spectrometry protein biomarker volcano plot gene ontology single cell transcriptomics',
+     description:'TMT proteomics, scRNA-seq, and multi-omics data analysis pipelines.'},
+    {page:'coding.html', title:'Coding, Automation & Data', category:'Technical', section:'',
+     keywords:'python automorphotrack pipelines bravo tecan liquid handling 96 384 well miniaturization machine learning automation data analysis github programming r matlab imageJ fiji cellprofiler',
+     description:'Python-based automation, liquid handling, and custom image analysis tools.'},
+    {page:'skills.html', title:'Full Technical Skills', category:'Technical', section:'',
+     keywords:'techniques instruments software capabilities laboratory skills comprehensive listing assays methods platforms tools equipment',
+     description:'Comprehensive listing of laboratory techniques, instruments, and software capabilities.'},
+    {page:'publications.html', title:'Publications', category:'Academic', section:'',
+     keywords:'peer-reviewed papers citations journal articles nature neuroscience lancet science translational medicine acs chemical biology first author corresponding author pubmed google scholar 25 publications 1300 citations',
+     description:'25+ peer-reviewed publications with 1,300+ citations across neuroscience, virology, and cell biology.'},
+    {page:'vc-portfolio.html', title:'Portfolio & VC', category:'Industry', section:'',
+     keywords:'venture capital portfolio management drug discovery translational science biopharma partnerships alliance management funding grants awards ip patent regulatory ind fda biotech startup pharmaceutical scientific evaluation',
+     description:'Translational science leadership, biopharma partnerships, and scientific portfolio management experience.'},
+    {page:'in-vivo.html', title:'In Vivo Neuroscience', category:'Research', section:'',
+     keywords:'in vivo stroke ischemic photothrombotic perfusion fixation toluidine blue electron microscopy TEM ultrastructure synapse astrocyte mitochondria peri-infarct mouse brain vibratome ultramicrotomy',
+     description:'Photothrombotic stroke model, tissue processing, toluidine blue histology, and TEM ultrastructural analysis of the peri-infarct zone.'},
+    {page:'contact.html', title:'Contact', category:'Connect', section:'',
+     keywords:'email linkedin github orcid google scholar contact collaboration',
+     description:'Contact information, LinkedIn, and academic profiles.'}
   ];
 
   var overlay = document.getElementById('searchOverlay');
@@ -1731,6 +2419,24 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     return text.replace(regex, '<mark>$1</mark>');
   }
 
+  // Fuzzy substring match: returns true if all chars of query appear in order in str
+  function fuzzyMatch(str, query) {
+    var strIdx = 0;
+    for (var i = 0; i < query.length; i++) {
+      var found = false;
+      while (strIdx < str.length) {
+        if (str[strIdx].toLowerCase() === query[i].toLowerCase()) {
+          strIdx++;
+          found = true;
+          break;
+        }
+        strIdx++;
+      }
+      if (!found) return false;
+    }
+    return true;
+  }
+
   function renderResults(query) {
     var terms = query.toLowerCase().trim().split(/\s+/).filter(function(t){ return t.length > 1; });
     var scored = [];
@@ -1740,17 +2446,35 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
       var score = 0;
       var titleLow = item.title.toLowerCase();
       var kwLow = item.keywords;
+      var descLow = (item.description || '').toLowerCase();
+      var sectionLow = (item.section || '').toLowerCase();
+
       terms.forEach(function(t) {
-        if (titleLow.indexOf(t) !== -1) score += 10;
+        // Exact matches
+        if (titleLow.indexOf(t) !== -1) score += 15;
+        if (sectionLow.indexOf(t) !== -1) score += 8;
+        if (descLow.indexOf(t) !== -1) score += 5;
         if (kwLow.indexOf(t) !== -1) score += 3;
+        // Fuzzy match on title if no exact match
+        if (score === 0 && t.length > 2 && fuzzyMatch(titleLow, t)) score += 2;
       });
+
+      // Bonus for matching all terms
+      var allMatch = terms.every(function(t) {
+        return titleLow.indexOf(t) !== -1 || kwLow.indexOf(t) !== -1 || descLow.indexOf(t) !== -1;
+      });
+      if (allMatch && terms.length > 1) score += 10;
+
       if (score > 0) scored.push({item: item, score: score});
     });
 
     scored.sort(function(a, b){ return b.score - a.score; });
 
+    // Deduplicate: if a page-level and section-level entry have similar scores, keep both but cap at 12
+    scored = scored.slice(0, 12);
+
     if (terms.length && !scored.length) {
-      resultsEl.innerHTML = '<div class="search-empty"><span>&#128269;</span>No results for &ldquo;' + query.replace(/</g, '&lt;') + '&rdquo;</div>';
+      resultsEl.innerHTML = '<div class="search-empty"><span>&#128269;</span>No results for &ldquo;' + query.replace(/</g, '&lt;') + '&rdquo;<div class="search-suggestion">Try broader terms or check spelling</div></div>';
       return;
     }
 
@@ -1758,20 +2482,13 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     scored.forEach(function(s, i) {
       var item = s.item;
       var title = terms.length ? highlight(item.title, terms) : item.title;
-      var kwArr = item.keywords.split(' ');
-      var matchedKw = [];
-      if (terms.length) {
-        kwArr.forEach(function(kw) {
-          terms.forEach(function(t) {
-            if (kw.indexOf(t) !== -1 && matchedKw.indexOf(kw) === -1) matchedKw.push(kw);
-          });
-        });
-      }
-      var desc = matchedKw.length ? matchedKw.slice(0, 6).join(' &middot; ') : kwArr.slice(0, 5).join(' &middot; ');
-      if (terms.length) desc = highlight(desc, terms);
+      var desc = item.description || '';
+      if (terms.length && desc) desc = highlight(desc, terms);
+
+      var sectionBadge = item.section ? '<span class="search-section-badge">' + item.section + '</span>' : '';
 
       html += '<a class="search-result' + (i === 0 && terms.length ? ' active' : '') + '" href="' + item.page + '">';
-      html += '<div class="search-result-page">' + item.category + '</div>';
+      html += '<div class="search-result-meta"><span class="search-result-page">' + item.category + '</span>' + sectionBadge + '</div>';
       html += '<div class="search-result-title">' + title + '</div>';
       html += '<div class="search-result-desc">' + desc + '</div></a>';
     });
@@ -1812,13 +2529,254 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
     if (e.key === 'Escape' && overlay.classList.contains('active')) closeSearch();
     if (e.key === '/' && !overlay.classList.contains('active') && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
-      e.preventDefault(); openSearch();
+      e.preventDefault();
+      var hsi = document.getElementById('heroSearchInput');
+      if (hsi) { hsi.focus(); hsi.scrollIntoView({block:'center', behavior:'smooth'}); }
+      else { openSearch(); }
     }
   });
 
   document.querySelectorAll('.search-toggle').forEach(function(btn){ btn.addEventListener('click', openSearch); });
+
+  // ── HERO SEARCH BAR ──
+  var heroInput = document.getElementById('heroSearchInput');
+  var heroDropdown = document.getElementById('heroSearchDropdown');
+  var heroActiveIdx = -1;
+
+  var quickLinks = [
+    {label:'iPSC Disease Modeling', href:'ipscs.html', desc:'Dopaminergic & cortical neuron differentiation, Lewy body pathogenesis'},
+    {label:'Dopaminergic Neurons', href:'ipscs.html#dopaminergic', desc:'Floor-plate patterning, functional maturation, MEA & calcium imaging'},
+    {label:"Parkinson's Disease", href:'ipscs.html#disease-modeling', desc:'Dual-hit model: PFF + IFN-γ Lewy body–like inclusions'},
+    {label:'α-Synuclein Biology', href:'genetics.html#lysosomal', desc:'Lysosomal trafficking, prion-like propagation, SNCA triplication'},
+    {label:'Live-Cell Imaging', href:'microscopy.html#confocal', desc:'Confocal, Opera Phenix high-content screening, time-lapse'},
+    {label:'Electron Microscopy', href:'microscopy.html#em', desc:'TEM ultrastructure, nanogold tracing, pseudocolor analysis'},
+    {label:'CRISPR', href:'genetics.html#gene-editing', desc:'Gene editing, lentiviral delivery, GBA knockout, LAMP2 KD'},
+    {label:'Cancer Immunology', href:'cancer-immunology.html', desc:'T-cell killing, ADCC/CDC, checkpoint blockade, CAR-T'},
+    {label:'Cardiomyocytes', href:'cardiomyocytes.html', desc:'iPSC-CM safety pharmacology, calcium transients, impedance'},
+    {label:'Drug Discovery', href:'drug-discovery.html', desc:'Parkin agonism, antiviral screening, biomarker development'},
+    {label:'Biomarker Development', href:'drug-discovery.html#biomarker', desc:'LC-MS, DLS, HPLC compound purity & analytical characterization'},
+    {label:'Flow Cytometry', href:'flow-cytometry.html', desc:'Multicolor immunophenotyping, FACS sorting, intracellular staining'},
+    {label:'RNA Therapeutics', href:'genetics.html', desc:'ASO, siRNA, shRNA knockdown & molecular cloning'},
+    {label:'Automation (BRAVO/Tecan)', href:'coding.html', desc:'Liquid handling, 96/384-well miniaturization, HTS workflows'},
+    {label:'Python / AutoMorphoTrack', href:'coding.html', desc:'Custom image analysis, data pipelines, machine learning'}
+  ];
+
+  function heroArrowSVG() {
+    return '<svg class="hero-search-item-icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>';
+  }
+
+  function heroHighlight(text, terms) {
+    if (!terms.length) return text;
+    var pat = terms.map(escapeRegex).join('|');
+    return text.replace(new RegExp('(' + pat + ')', 'gi'), '<mark>$1</mark>');
+  }
+
+  function renderHeroDropdown(query) {
+    var terms = query.toLowerCase().trim().split(/\s+/).filter(function(t){ return t.length > 1; });
+    var items;
+
+    if (!terms.length) {
+      // Show all quicklinks as suggestions
+      items = quickLinks;
+    } else {
+      // Filter quicklinks by query, then also search the full index
+      var qlMatches = quickLinks.filter(function(ql) {
+        var hay = (ql.label + ' ' + ql.desc).toLowerCase();
+        return terms.every(function(t){ return hay.indexOf(t) !== -1; });
+      });
+
+      // Also search full index for non-quicklink results
+      var fullMatches = [];
+      searchIndex.forEach(function(item) {
+        var hay = (item.title + ' ' + item.keywords + ' ' + (item.description || '')).toLowerCase();
+        var match = terms.every(function(t){ return hay.indexOf(t) !== -1; });
+        if (match) {
+          // Avoid duplicates with quicklinks
+          var isDupe = qlMatches.some(function(ql){ return item.page === ql.href || item.page === ql.href.split('#')[0]; });
+          if (!isDupe) fullMatches.push({label: item.title, href: item.page, desc: item.description || ''});
+        }
+      });
+
+      items = qlMatches.concat(fullMatches).slice(0, 12);
+    }
+
+    if (terms.length && !items.length) {
+      heroDropdown.innerHTML = '<div style="padding:16px 18px; font-size:13px; color:var(--mid); text-align:center;">No results for &ldquo;' + query.replace(/</g,'&lt;') + '&rdquo;</div>';
+      heroDropdown.classList.add('open');
+      heroActiveIdx = -1;
+      return;
+    }
+
+    var html = '';
+    if (!terms.length) html += '<div class="hero-search-hint">Suggested Skills</div>';
+    items.forEach(function(item, i) {
+      var label = terms.length ? heroHighlight(item.label, terms) : item.label;
+      var desc = terms.length ? heroHighlight(item.desc, terms) : item.desc;
+      html += '<a class="hero-search-item' + (terms.length && i === 0 ? ' active' : '') + '" href="' + item.href + '">';
+      html += heroArrowSVG();
+      html += '<div class="hero-search-item-text"><div>' + label + '</div>';
+      if (desc) html += '<div class="hero-search-item-desc">' + desc + '</div>';
+      html += '</div></a>';
+    });
+
+    heroDropdown.innerHTML = html;
+    heroDropdown.classList.add('open');
+    heroActiveIdx = terms.length ? 0 : -1;
+  }
+
+  function setHeroActive(idx) {
+    var items = heroDropdown.querySelectorAll('.hero-search-item');
+    if (!items.length) return;
+    items.forEach(function(el){ el.classList.remove('active'); });
+    if (idx < 0) idx = items.length - 1;
+    if (idx >= items.length) idx = 0;
+    heroActiveIdx = idx;
+    items[idx].classList.add('active');
+    items[idx].scrollIntoView({block: 'nearest'});
+  }
+
+  if (heroInput) {
+    heroInput.addEventListener('focus', function() {
+      renderHeroDropdown(this.value);
+    });
+    heroInput.addEventListener('input', function() {
+      renderHeroDropdown(this.value);
+    });
+    heroInput.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowDown') { e.preventDefault(); setHeroActive(heroActiveIdx + 1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); setHeroActive(heroActiveIdx - 1); }
+      else if (e.key === 'Enter') {
+        e.preventDefault();
+        var active = heroDropdown.querySelector('.hero-search-item.active');
+        if (active) window.location.href = active.getAttribute('href');
+      }
+      else if (e.key === 'Escape') {
+        heroDropdown.classList.remove('open');
+        heroInput.blur();
+      }
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('#heroSearch')) {
+        heroDropdown.classList.remove('open');
+      }
+    });
+
+    // Search button: navigate to active/first result
+    var heroBtn = document.getElementById('heroSearchBtn');
+    if (heroBtn) {
+      heroBtn.addEventListener('click', function() {
+        var active = heroDropdown.querySelector('.hero-search-item.active');
+        if (!active) active = heroDropdown.querySelector('.hero-search-item');
+        if (active) window.location.href = active.getAttribute('href');
+      });
+    }
+  }
 })();
 </script>
 
+
+<!-- CHAT WIDGET -->
+<button class="chat-fab" id="chatFab" aria-label="Send a message">
+  <svg class="chat-fab-open" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  <svg class="chat-fab-close" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+</button>
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-header">
+    <div class="chat-header-title">Reach out to Armin</div>
+    <div class="chat-header-sub">Questions, collaborations, or opportunities — I'd love to hear from you.</div>
+  </div>
+  <div class="chat-body" id="chatBody">
+    <div class="chat-field">
+      <label>Your Name</label>
+      <input type="text" id="chatName" placeholder="Full name" autocomplete="name">
+    </div>
+    <div class="chat-field">
+      <label>Your Email</label>
+      <input type="email" id="chatEmail" placeholder="you@example.com" autocomplete="email">
+    </div>
+    <div class="chat-field">
+      <label>Subject</label>
+      <input type="text" id="chatSubject" placeholder="What is this regarding?">
+    </div>
+    <div class="chat-field">
+      <label>Message</label>
+      <textarea id="chatMessage" placeholder="Write your message here..."></textarea>
+    </div>
+    <button class="chat-send" id="chatSend">Send Message</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var fab = document.getElementById('chatFab');
+  var panel = document.getElementById('chatPanel');
+  var body = document.getElementById('chatBody');
+  if (!fab || !panel) return;
+
+  fab.addEventListener('click', function(){
+    var isOpen = panel.classList.contains('open');
+    if (isOpen) {
+      panel.classList.remove('open');
+      fab.classList.remove('open');
+    } else {
+      panel.classList.add('open');
+      fab.classList.add('open');
+    }
+  });
+
+  document.getElementById('chatSend').addEventListener('click', function(){
+    var name = document.getElementById('chatName').value.trim();
+    var email = document.getElementById('chatEmail').value.trim();
+    var subject = document.getElementById('chatSubject').value.trim();
+    var message = document.getElementById('chatMessage').value.trim();
+
+    if (!name || !email || !message) {
+      alert('Please fill in your name, email, and message.');
+      return;
+    }
+
+    var btn = this;
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    // Use Formspree (free form endpoint) or mailto fallback
+    fetch('https://formsubmit.co/ajax/' + 'a.bayati.brain' + '@' + 'gmail.com', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+      body: JSON.stringify({name: name, email: email, subject: subject, message: message})
+    }).then(function(r){
+      if (r.ok) { showSuccess(); }
+      else { fallbackMailto(name, email, subject, message); btn.disabled = false; btn.textContent = 'Send Message'; }
+    }).catch(function(){
+      fallbackMailto(name, email, subject, message);
+      btn.disabled = false;
+      btn.textContent = 'Send Message';
+    });
+  });
+
+  function fallbackMailto(name, email, subject, message) {
+    var body = 'From: ' + name + ' (' + email + ')\n\n' + message;
+    window.location.href = 'mailto:a.bayati.brain' + '@' + 'gmail.com?subject=' + encodeURIComponent(subject || 'Website Contact') + '&body=' + encodeURIComponent(body);
+  }
+
+  function showSuccess() {
+    body.innerHTML = '<div class="chat-success">' +
+      '<div class="chat-success-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>' +
+      '<div class="chat-success-title">Message Sent</div>' +
+      '<div class="chat-success-desc">Thank you for reaching out. I\'ll get back to you as soon as possible.</div>' +
+    '</div>';
+  }
+
+  // Allow opening chat from links with #chat or onclick
+  window.openChatWidget = function(){
+    panel.classList.add('open');
+    fab.classList.add('open');
+    panel.scrollIntoView({behavior:'smooth', block:'end'});
+  };
+  if (window.location.hash === '#chat') { setTimeout(openChatWidget, 400); }
+})();
+</script>
 </body>
 </html>

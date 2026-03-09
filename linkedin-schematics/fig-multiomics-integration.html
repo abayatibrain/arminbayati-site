@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Omics Data Integration | Armin Bayati</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0f1419;
+      --paper: #fafaf7;
+      --mid: #6b7280;
+      --accent: #c0392b;
+      --rule: #d4d0c8;
+      --card: #ffffff;
+      --section-bg: #f4f3ef;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+      --mono: 'IBM Plex Mono', 'Menlo', monospace;
+    }
+    html.dark {
+      --ink: #e8e6e1;
+      --paper: #111318;
+      --mid: #9ca3af;
+      --rule: #2a2d35;
+      --card: #1a1d24;
+      --section-bg: #15171d;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      padding: 40px 20px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .header {
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    h1 {
+      font-family: var(--serif);
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+      font-weight: 400;
+    }
+    .subtitle {
+      font-size: 1rem;
+      color: var(--mid);
+      font-weight: 300;
+    }
+    .card-wrapper {
+      background-color: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+    svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .legend {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--rule);
+      font-size: 0.85rem;
+      color: var(--mid);
+    }
+    .legend-item {
+      display: inline-block;
+      margin-right: 24px;
+      margin-bottom: 8px;
+    }
+    .legend-color {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+    .attribution {
+      position: fixed;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(15, 20, 25, 0.85);
+      color: #fff;
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      letter-spacing: 0.3px;
+      z-index: 999;
+    }
+    html.dark .attribution {
+      background: rgba(232, 230, 225, 0.15);
+      color: var(--ink);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Multi-Omics Data Integration</h1>
+      <p class="subtitle">Convergent systems approach: proteomics, transcriptomics, and functional assays unified for mechanistic insight</p>
+    </div>
+
+    <div class="card-wrapper">
+      <svg viewBox="0 0 1400 1100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <style>
+            .process-box { cursor: pointer; transition: opacity 0.2s ease; }
+            .process-box:hover { opacity: 0.85; }
+            .label-title { font-family: 'DM Serif Display', Georgia, serif; font-weight: 500; }
+            .label-text { font-family: 'IBM Plex Sans', sans-serif; font-size: 11px; }
+            .process-label { font-family: 'IBM Plex Sans', sans-serif; font-size: 10px; }
+            .arrow { fill: none; stroke: #6b7280; stroke-width: 2.5; marker-end: url(#arrowhead); }
+            .data-flow { fill: none; stroke-width: 2.5; }
+            .qc-point { fill: none; stroke: #f59e0b; stroke-width: 1.5; stroke-dasharray: 3,3; }
+          </style>
+          <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="#6b7280"/>
+          </marker>
+        </defs>
+
+        <!-- LEFT PANEL: DATA GENERATION (3 parallel tracks) -->
+        
+        <!-- TRACK 1: PROTEOMICS (Blue) -->
+        <g id="proteomics">
+          <!-- Sample -->
+          <rect class="process-box" x="20" y="40" width="100" height="60" fill="#3b82f6" opacity="0.15" stroke="#3b82f6" stroke-width="2" rx="4"/>
+          <text class="label-title" x="70" y="68" text-anchor="middle" font-size="13" fill="#0f1419">Sample</text>
+          <text class="process-label" x="70" y="88" text-anchor="middle" fill="#6b7280">tissue/cells</text>
+
+          <!-- Arrow -->
+          <path class="data-flow" stroke="#3b82f6" d="M 130 70 L 170 70"/>
+
+          <!-- Lysis -->
+          <rect class="process-box" x="170" y="40" width="100" height="60" fill="#3b82f6" opacity="0.15" stroke="#3b82f6" stroke-width="2" rx="4"/>
+          <text class="label-title" x="220" y="68" text-anchor="middle" font-size="13" fill="#0f1419">Lysis</text>
+          <text class="process-label" x="220" y="88" text-anchor="middle" fill="#6b7280">RIPA buffer</text>
+
+          <!-- Arrow -->
+          <path class="data-flow" stroke="#3b82f6" d="M 280 70 L 320 70"/>
+
+          <!-- Digestion -->
+          <rect class="process-box" x="320" y="40" width="100" height="60" fill="#3b82f6" opacity="0.15" stroke="#3b82f6" stroke-width="2" rx="4"/>
+          <text class="label-title" x="370" y="68" text-anchor="middle" font-size="13" fill="#0f1419">Digestion</text>
+          <text class="process-label" x="370" y="88" text-anchor="middle" fill="#6b7280">trypsin</text>
+
+          <!-- Arrow -->
+          <path class="data-flow" stroke="#3b82f6" d="M 430 70 L 470 70"/>
+
+          <!-- TMT Labeling -->
+          <rect class="process-box" x="470" y="40" width="100" height="60" fill="#3b82f6" opacity="0.15" stroke="#3b82f6" stroke-width="2" rx="4"/>
+          <text class="label-title" x="520" y="68" text-anchor="middle" font-size="13" fill="#0f1419">TMT Label</text>
+          <text class="process-label" x="520" y="88" text-anchor="middle" fill="#6b7280">multiplex</text>
+
+          <!-- Arrow -->
+          <path class="data-flow" stroke="#3b82f6" d="M 580 70 L 620 70"/>
+
+          <!-- LC-MS/MS -->
+          <rect class="process-box" x="620" y="40" width="100" height="60" fill="#3b82f6" opacity="0.15" stroke="#3b82f6" stroke-width="2" rx="4"/>
+          <text class="label-title" x="670" y="68" text-anchor="middle" font-size="13" fill="#0f1419">LC-MS/MS</text>
+          <text class="process-label" x="670" y="88" text-anchor="middle" fill="#6b7280">mass spec</text>
+
+          <!-- QC checkpoint -->
+          <rect class="qc-point" x="620" y="115" width="100" height="20" rx="3"/>
+          <text class="process-label" x="670" y="128" text-anchor="middle" fill="#f59e0b" font-weight="600">QC: MS/MS metrics</text>
+
+          <!-- Data processing -->
+          <path class="arrow" d="M 670 135 L 670 180"/>
+          <rect class="process-box" x="620" y="180" width="100" height="60" fill="#3b82f6" opacity="0.15" stroke="#3b82f6" stroke-width="2" rx="4"/>
+          <text class="label-title" x="670" y="208" text-anchor="middle" font-size="12" fill="#0f1419">MaxQuant</text>
+          <text class="process-label" x="670" y="225" text-anchor="middle" fill="#6b7280">quantification</text>
+
+          <!-- Output -->
+          <path class="arrow" d="M 670 250 L 670 290"/>
+          <rect x="620" y="290" width="100" height="45" fill="#3b82f6" opacity="0.2" stroke="#3b82f6" stroke-width="2" rx="4"/>
+          <text class="label-title" x="670" y="312" text-anchor="middle" font-size="12" fill="#0f1419" font-weight="600">Protein</text>
+          <text class="label-title" x="670" y="328" text-anchor="middle" font-size="12" fill="#0f1419" font-weight="600">Abundance</text>
+
+          <!-- Label -->
+          <text class="label-title" x="70" y="380" text-anchor="middle" font-size="14" fill="#3b82f6" font-weight="600">PROTEOMICS</text>
+        </g>
+
+        <!-- TRACK 2: TRANSCRIPTOMICS (Green) -->
+        <g id="transcriptomics">
+          <!-- Sample -->
+          <rect class="process-box" x="20" y="440" width="100" height="60" fill="#10b981" opacity="0.15" stroke="#10b981" stroke-width="2" rx="4"/>
+          <text class="label-title" x="70" y="468" text-anchor="middle" font-size="13" fill="#0f1419">Sample</text>
+          <text class="process-label" x="70" y="488" text-anchor="middle" fill="#6b7280">tissue/cells</text>
+
+          <!-- Arrow -->
+          <path class="data-flow" stroke="#10b981" d="M 130 470 L 170 470"/>
+
+          <!-- RNA extraction -->
+          <rect class="process-box" x="170" y="440" width="100" height="60" fill="#10b981" opacity="0.15" stroke="#10b981" stroke-width="2" rx="4"/>
+          <text class="label-title" x="220" y="468" text-anchor="middle" font-size="13" fill="#0f1419">RNA Extract</text>
+          <text class="process-label" x="220" y="488" text-anchor="middle" fill="#6b7280">Trizol</text>
+
+          <!-- Arrow -->
+          <path class="data-flow" stroke="#10b981" d="M 280 470 L 320 470"/>
+
+          <!-- Library prep -->
+          <rect class="process-box" x="320" y="440" width="100" height="60" fill="#10b981" opacity="0.15" stroke="#10b981" stroke-width="2" rx="4"/>
+          <text class="label-title" x="370" y="468" text-anchor="middle" font-size="13" fill="#0f1419">Library</text>
+          <text class="process-label" x="370" y="488" text-anchor="middle" fill="#6b7280">bulk + scRNA</text>
+
+          <!-- Arrow -->
+          <path class="data-flow" stroke="#10b981" d="M 430 470 L 470 470"/>
+
+          <!-- Sequencing -->
+          <rect class="process-box" x="470" y="440" width="100" height="60" fill="#10b981" opacity="0.15" stroke="#10b981" stroke-width="2" rx="4"/>
+          <text class="label-title" x="520" y="468" text-anchor="middle" font-size="13" fill="#0f1419">Sequencing</text>
+          <text class="process-label" x="520" y="488" text-anchor="middle" fill="#6b7280">NGS</text>
+
+          <!-- Arrow -->
+          <path class="data-flow" stroke="#10b981" d="M 580 470 L 620 470"/>
+
+          <!-- FASTQ -->
+          <rect class="process-box" x="620" y="440" width="100" height="60" fill="#10b981" opacity="0.15" stroke="#10b981" stroke-width="2" rx="4"/>
+          <text class="label-title" x="670" y="468" text-anchor="middle" font-size="13" fill="#0f1419">FASTQ</text>
+          <text class="process-label" x="670" y="488" text-anchor="middle" fill="#6b7280">raw reads</text>
+
+          <!-- QC checkpoint -->
+          <rect class="qc-point" x="620" y="515" width="100" height="20" rx="3"/>
+          <text class="process-label" x="670" y="528" text-anchor="middle" fill="#f59e0b" font-weight="600">QC: read quality</text>
+
+          <!-- Data processing -->
+          <path class="arrow" d="M 670 535 L 670 580"/>
+          <rect class="process-box" x="620" y="580" width="100" height="60" fill="#10b981" opacity="0.15" stroke="#10b981" stroke-width="2" rx="4"/>
+          <text class="label-title" x="670" y="608" text-anchor="middle" font-size="12" fill="#0f1419">STAR/CellRanger</text>
+          <text class="process-label" x="670" y="625" text-anchor="middle" fill="#6b7280">alignment</text>
+
+          <!-- Output -->
+          <path class="arrow" d="M 670 650 L 670 690"/>
+          <rect x="620" y="690" width="100" height="45" fill="#10b981" opacity="0.2" stroke="#10b981" stroke-width="2" rx="4"/>
+          <text class="label-title" x="670" y="712" text-anchor="middle" font-size="12" fill="#0f1419" font-weight="600">Gene</text>
+          <text class="label-title" x="670" y="728" text-anchor="middle" font-size="12" fill="#0f1419" font-weight="600">Expression</text>
+
+          <!-- Label -->
+          <text class="label-title" x="70" y="780" text-anchor="middle" font-size="14" fill="#10b981" font-weight="600">TRANSCRIPTOMICS</text>
+        </g>
+
+        <!-- TRACK 3: FUNCTIONAL ASSAYS (Orange) -->
+        <g id="functional">
+          <!-- Sample -->
+          <rect class="process-box" x="20" y="840" width="100" height="60" fill="#f97316" opacity="0.15" stroke="#f97316" stroke-width="2" rx="4"/>
+          <text class="label-title" x="70" y="868" text-anchor="middle" font-size="13" fill="#0f1419">Sample</text>
+          <text class="process-label" x="70" y="888" text-anchor="middle" fill="#6b7280">tissue/cells</text>
+
+          <!-- Arrow -->
+          <path class="data-flow" stroke="#f97316" d="M 130 870 L 170 870"/>
+
+          <!-- HCI -->
+          <rect class="process-box" x="170" y="840" width="100" height="60" fill="#f97316" opacity="0.15" stroke="#f97316" stroke-width="2" rx="4"/>
+          <text class="label-title" x="220" y="868" text-anchor="middle" font-size="13" fill="#0f1419">High-Content</text>
+          <text class="process-label" x="220" y="888" text-anchor="middle" fill="#6b7280">imaging</text>
+
+          <!-- Arrow -->
+          <path class="data-flow" stroke="#f97316" d="M 280 870 L 320 870"/>
+
+          <!-- Flow Cytometry -->
+          <rect class="process-box" x="320" y="840" width="100" height="60" fill="#f97316" opacity="0.15" stroke="#f97316" stroke-width="2" rx="4"/>
+          <text class="label-title" x="370" y="868" text-anchor="middle" font-size="13" fill="#0f1419">Flow Cyto.</text>
+          <text class="process-label" x="370" y="888" text-anchor="middle" fill="#6b7280">sorting</text>
+
+          <!-- Arrow -->
+          <path class="data-flow" stroke="#f97316" d="M 430 870 L 470 870"/>
+
+          <!-- Electrophysiology -->
+          <rect class="process-box" x="470" y="840" width="100" height="60" fill="#f97316" opacity="0.15" stroke="#f97316" stroke-width="2" rx="4"/>
+          <text class="label-title" x="520" y="868" text-anchor="middle" font-size="13" fill="#0f1419">Electro-</text>
+          <text class="label-title" x="520" y="883" text-anchor="middle" font-size="13" fill="#0f1419">physiology</text>
+
+          <!-- Arrow -->
+          <path class="data-flow" stroke="#f97316" d="M 580 870 L 620 870"/>
+
+          <!-- Phenotypic Data -->
+          <rect class="process-box" x="620" y="840" width="100" height="60" fill="#f97316" opacity="0.15" stroke="#f97316" stroke-width="2" rx="4"/>
+          <text class="label-title" x="670" y="868" text-anchor="middle" font-size="13" fill="#0f1419">Readouts</text>
+          <text class="process-label" x="670" y="888" text-anchor="middle" fill="#6b7280">multi-modal</text>
+
+          <!-- QC checkpoint -->
+          <rect class="qc-point" x="620" y="915" width="100" height="20" rx="3"/>
+          <text class="process-label" x="670" y="928" text-anchor="middle" fill="#f59e0b" font-weight="600">QC: replicate CV</text>
+
+          <!-- Output -->
+          <path class="arrow" d="M 670 945 L 670 985"/>
+          <rect x="620" y="985" width="100" height="45" fill="#f97316" opacity="0.2" stroke="#f97316" stroke-width="2" rx="4"/>
+          <text class="label-title" x="670" y="1007" text-anchor="middle" font-size="12" fill="#0f1419" font-weight="600">Phenotypic</text>
+          <text class="label-title" x="670" y="1023" text-anchor="middle" font-size="12" fill="#0f1419" font-weight="600">Traits</text>
+
+          <!-- Label -->
+          <text class="label-title" x="70" y="1080" text-anchor="middle" font-size="14" fill="#f97316" font-weight="600">FUNCTIONAL ASSAYS</text>
+        </g>
+
+        <!-- CENTER PANEL: INTEGRATION LAYER -->
+        <g id="integration">
+          <!-- Convergence area -->
+          <rect x="800" y="200" width="350" height="650" fill="#8b5cf6" opacity="0.05" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="5,5" rx="4"/>
+          
+          <!-- Integration box 1: Pathway Enrichment -->
+          <rect class="process-box" x="820" y="220" width="310" height="100" fill="#8b5cf6" opacity="0.15" stroke="#8b5cf6" stroke-width="2" rx="4"/>
+          <text class="label-title" x="975" y="255" text-anchor="middle" font-size="13" fill="#0f1419" font-weight="600">Pathway Enrichment Analysis</text>
+          <text class="process-label" x="975" y="275" text-anchor="middle" fill="#6b7280">GSEA, IPA, Reactome</text>
+          <text class="process-label" x="975" y="290" text-anchor="middle" fill="#6b7280">functional annotation across omics</text>
+          <text class="process-label" x="975" y="305" text-anchor="middle" fill="#6b7280">co-dysregulated pathways</text>
+
+          <!-- Integration box 2: Network Analysis -->
+          <rect class="process-box" x="820" y="350" width="310" height="100" fill="#8b5cf6" opacity="0.15" stroke="#8b5cf6" stroke-width="2" rx="4"/>
+          <text class="label-title" x="975" y="385" text-anchor="middle" font-size="13" fill="#0f1419" font-weight="600">Network & Correlation Analysis</text>
+          <text class="process-label" x="975" y="405" text-anchor="middle" fill="#6b7280">protein-protein interactions</text>
+          <text class="process-label" x="975" y="420" text-anchor="middle" fill="#6b7280">eQTL mapping, PPI validation</text>
+          <text class="process-label" x="975" y="435" text-anchor="middle" fill="#6b7280">consensus modules</text>
+
+          <!-- Integration box 3: Dimensionality Reduction -->
+          <rect class="process-box" x="820" y="480" width="310" height="100" fill="#8b5cf6" opacity="0.15" stroke="#8b5cf6" stroke-width="2" rx="4"/>
+          <text class="label-title" x="975" y="515" text-anchor="middle" font-size="13" fill="#0f1419" font-weight="600">Dimensionality Reduction</text>
+          <text class="process-label" x="975" y="535" text-anchor="middle" fill="#6b7280">PCA, t-SNE, UMAP for integrated view</text>
+          <text class="process-label" x="975" y="550" text-anchor="middle" fill="#6b7280">batch correction, cross-platform alignment</text>
+
+          <!-- Integration box 4: Correlation -->
+          <rect class="process-box" x="820" y="610" width="310" height="100" fill="#8b5cf6" opacity="0.15" stroke="#8b5cf6" stroke-width="2" rx="4"/>
+          <text class="label-title" x="975" y="645" text-anchor="middle" font-size="13" fill="#0f1419" font-weight="600">Multi-Modal Correlation</text>
+          <text class="process-label" x="975" y="665" text-anchor="middle" fill="#6b7280">protein ↔ transcript correlation</text>
+          <text class="process-label" x="975" y="680" text-anchor="middle" fill="#6b7280">phenotype predictor models (LASSO, RF)</text>
+
+          <!-- Integration label -->
+          <text class="label-title" x="975" y="755" text-anchor="middle" font-size="14" fill="#8b5cf6" font-weight="600">INTEGRATION LAYER</text>
+        </g>
+
+        <!-- RIGHT PANEL: OUTPUTS -->
+        <g id="outputs">
+          <!-- Box 1: Biomarkers -->
+          <rect class="process-box" x="1220" y="240" width="140" height="120" fill="#06b6d4" opacity="0.15" stroke="#06b6d4" stroke-width="2" rx="4"/>
+          <text class="label-title" x="1290" y="280" text-anchor="middle" font-size="12" fill="#0f1419" font-weight="600">Biomarker</text>
+          <text class="label-title" x="1290" y="295" text-anchor="middle" font-size="12" fill="#0f1419" font-weight="600">Candidates</text>
+          <text class="process-label" x="1290" y="315" text-anchor="middle" fill="#6b7280" font-size="9">Cross-omics</text>
+          <text class="process-label" x="1290" y="328" text-anchor="middle" fill="#6b7280" font-size="9">validation</text>
+
+          <!-- Arrow from integration -->
+          <path class="arrow" d="M 1130 340 L 1220 320"/>
+
+          <!-- Box 2: Therapeutic Targets -->
+          <rect class="process-box" x="1220" y="410" width="140" height="120" fill="#10b981" opacity="0.15" stroke="#10b981" stroke-width="2" rx="4"/>
+          <text class="label-title" x="1290" y="450" text-anchor="middle" font-size="12" fill="#0f1419" font-weight="600">Therapeutic</text>
+          <text class="label-title" x="1290" y="465" text-anchor="middle" font-size="12" fill="#0f1419" font-weight="600">Targets</text>
+          <text class="process-label" x="1290" y="485" text-anchor="middle" fill="#6b7280" font-size="9">druggability,</text>
+          <text class="process-label" x="1290" y="498" text-anchor="middle" fill="#6b7280" font-size="9">selectivity</text>
+
+          <!-- Arrow -->
+          <path class="arrow" d="M 1130 450 L 1220 470"/>
+
+          <!-- Box 3: Disease Mechanisms -->
+          <rect class="process-box" x="1220" y="580" width="140" height="120" fill="#ec4899" opacity="0.15" stroke="#ec4899" stroke-width="2" rx="4"/>
+          <text class="label-title" x="1290" y="620" text-anchor="middle" font-size="12" fill="#0f1419" font-weight="600">Disease</text>
+          <text class="label-title" x="1290" y="635" text-anchor="middle" font-size="12" fill="#0f1419" font-weight="600">Mechanisms</text>
+          <text class="process-label" x="1290" y="655" text-anchor="middle" fill="#6b7280" font-size="9">integrated</text>
+          <text class="process-label" x="1290" y="668" text-anchor="middle" fill="#6b7280" font-size="9">pathway maps</text>
+
+          <!-- Arrow -->
+          <path class="arrow" d="M 1130 600 L 1220 640"/>
+
+          <!-- Box 4: Publication Figures -->
+          <rect class="process-box" x="1220" y="750" width="140" height="120" fill="#f59e0b" opacity="0.15" stroke="#f59e0b" stroke-width="2" rx="4"/>
+          <text class="label-title" x="1290" y="790" text-anchor="middle" font-size="12" fill="#0f1419" font-weight="600">Publication</text>
+          <text class="label-title" x="1290" y="805" text-anchor="middle" font-size="12" fill="#0f1419" font-weight="600">Figures</text>
+          <text class="process-label" x="1290" y="825" text-anchor="middle" fill="#6b7280" font-size="9">integrated</text>
+          <text class="process-label" x="1290" y="838" text-anchor="middle" fill="#6b7280" font-size="9">visualizations</text>
+
+          <!-- Arrow -->
+          <path class="arrow" d="M 1130 750 L 1220 810"/>
+
+          <!-- Output label -->
+          <text class="label-title" x="1290" y="920" text-anchor="middle" font-size="14" fill="#6b7280" font-weight="600">OUTPUTS</text>
+        </g>
+
+        <!-- QC checkpoints legend -->
+        <g id="qc-legend">
+          <text class="process-label" x="20" y="1050" font-size="11" fill="#f59e0b" font-weight="600">QC Checkpoints:</text>
+          <text class="process-label" x="20" y="1070" font-size="10" fill="#6b7280">• Proteomics: MS/MS metrics (precursor mass accuracy, peptide length)  • Transcriptomics: read quality (Q-scores), alignment rate</text>
+          <text class="process-label" x="20" y="1088" font-size="10" fill="#6b7280">• Functional: replicate CV &lt; 15%, assay window &gt; 3-fold</text>
+        </g>
+      </svg>
+
+      <div class="legend">
+        <div class="legend-item"><span class="legend-color" style="background-color: #3b82f6;"></span> Proteomics</div>
+        <div class="legend-item"><span class="legend-color" style="background-color: #10b981;"></span> Transcriptomics</div>
+        <div class="legend-item"><span class="legend-color" style="background-color: #f97316;"></span> Functional Assays</div>
+        <div class="legend-item"><span class="legend-color" style="background-color: #8b5cf6;"></span> Integration Layer</div>
+        <div class="legend-item"><span class="legend-color" style="background-color: #06b6d4;"></span> Outputs</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="attribution">Armin Bayati · arminbayati.com</div>
+
+  <script>
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (prefersDark) {
+      document.documentElement.classList.add('dark');
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (e.matches) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    });
+  </script>
+</body>
+</html>

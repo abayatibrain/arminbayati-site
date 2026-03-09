@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drug Discovery & Translational Pipeline</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f1419; --paper: #fafaf7; --mid: #6b7280; --accent: #c0392b;
+    --rule: #d4d0c8; --card: #ffffff; --section-bg: #f4f3ef;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+    --mono: 'IBM Plex Mono', 'Menlo', monospace;
+  }
+  html.dark {
+    --ink: #e8e6e1; --paper: #111318; --mid: #9ca3af; --rule: #2a2d35;
+    --card: #1a1d24; --section-bg: #15171d;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--sans); background: var(--paper); color: var(--ink);
+    display: flex; flex-direction: column; align-items: center;
+    padding: 40px 20px 48px;
+  }
+  .fig-label { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--accent); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 8px; }
+  .fig-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; color: var(--ink); margin-bottom: 6px; text-align: center; }
+  .fig-subtitle { font-size: 13px; font-weight: 300; color: var(--mid); margin-bottom: 36px; text-align: center; max-width: 700px; line-height: 1.6; }
+
+  .pipeline-wrapper { width: 100%; max-width: 1080px; overflow-x: auto; }
+
+  /* Phase row */
+  .phase-row {
+    display: flex; gap: 0; min-width: 1000px;
+    background: var(--ink); border-radius: 10px; overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .phase {
+    flex: 1; padding: 16px 20px; border-right: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+  }
+  .phase:last-child { border-right: none; }
+  .phase-num {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 1px;
+    color: var(--accent); font-weight: 500; margin-bottom: 4px;
+  }
+  .phase-name {
+    font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.95); margin-bottom: 2px;
+  }
+  .phase-sub {
+    font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.45);
+  }
+
+  /* Content grid */
+  .content-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+    min-width: 1000px;
+  }
+  .col { display: flex; flex-direction: column; gap: 10px; }
+
+  .item {
+    background: var(--card); border: 1px solid var(--rule); border-radius: 8px;
+    padding: 14px 14px 12px; transition: border-color 0.2s;
+  }
+  .item:hover { border-color: var(--accent); }
+  .item-tag {
+    font-family: var(--mono); font-size: 9px; font-weight: 500;
+    letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 5px;
+    padding: 2px 6px; border-radius: 3px; display: inline-block;
+  }
+  .item-tag.neuro { background: #2563eb12; color: #2563eb; }
+  .item-tag.cardiac { background: #d9770612; color: #d97706; }
+  .item-tag.antiviral { background: #05966912; color: #059669; }
+  .item-tag.onco { background: #7c3aed12; color: #7c3aed; }
+  .item-tag.method { background: #0f141908; color: var(--mid); }
+  .item-title { font-size: 12.5px; font-weight: 500; color: var(--ink); margin-bottom: 3px; line-height: 1.35; }
+  .item-desc { font-size: 11px; font-weight: 300; color: var(--mid); line-height: 1.55; }
+
+  /* Compounds strip */
+  .compounds-strip {
+    margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--rule);
+    max-width: 1080px; width: 100%;
+  }
+  .compounds-label {
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    color: var(--accent); letter-spacing: 1px; margin-bottom: 12px; text-transform: uppercase;
+  }
+  .compounds-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;
+  }
+  .compound {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--section-bg); border-radius: 8px; padding: 12px 14px;
+  }
+  .compound-icon {
+    width: 36px; height: 36px; border-radius: 8px; display: flex;
+    align-items: center; justify-content: center; font-size: 14px; font-weight: 600;
+    flex-shrink: 0;
+  }
+  .compound-icon.pa { background: #2563eb15; color: #2563eb; }
+  .compound-icon.tac { background: #d9770615; color: #d97706; }
+  .compound-icon.pah { background: #05966915; color: #059669; }
+  .compound-icon.av { background: #7c3aed15; color: #7c3aed; }
+  .compound-name { font-size: 12px; font-weight: 500; color: var(--ink); }
+  .compound-target { font-size: 10px; font-weight: 300; color: var(--mid); }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .fig-label, .fig-title, .fig-subtitle { animation: fadeIn 0.5s ease both; }
+  .fig-title { animation-delay: 0.05s; } .fig-subtitle { animation-delay: 0.1s; }
+</style>
+</head>
+<body>
+<div class="fig-label">Figure 3</div>
+<div class="fig-title">Drug Discovery & Translational Pipeline</div>
+<div class="fig-subtitle">
+  End-to-end preclinical workflow — from target biology and cell model development through
+  hit identification, mechanism validation, and biomarker-enabled decision-making.
+</div>
+
+<div class="pipeline-wrapper">
+
+<!-- Phase header -->
+<div class="phase-row">
+  <div class="phase"><div class="phase-num">PHASE 1</div><div class="phase-name">Target Biology</div><div class="phase-sub">Disease mechanism & rationale</div></div>
+  <div class="phase"><div class="phase-num">PHASE 2</div><div class="phase-name">Model Development</div><div class="phase-sub">iPSC & cell-based systems</div></div>
+  <div class="phase"><div class="phase-num">PHASE 3</div><div class="phase-name">Assay & Screening</div><div class="phase-sub">HCS, FLIPR, functional readouts</div></div>
+  <div class="phase"><div class="phase-num">PHASE 4</div><div class="phase-name">MoA Validation</div><div class="phase-sub">Mechanistic & PD confirmation</div></div>
+  <div class="phase"><div class="phase-num">PHASE 5</div><div class="phase-name">Translation</div><div class="phase-sub">Biomarkers & decision data</div></div>
+</div>
+
+<!-- Content columns -->
+<div class="content-grid">
+  <!-- Phase 1 -->
+  <div class="col">
+    <div class="item">
+      <div class="item-tag neuro">Neuro</div>
+      <div class="item-title">Parkin / Mitophagy</div>
+      <div class="item-desc">Mitochondrial QC failure in PD. Parkin E3 ubiquitin ligase as druggable target for agonism.</div>
+    </div>
+    <div class="item">
+      <div class="item-tag neuro">Neuro</div>
+      <div class="item-title">Lysosomal Dysfunction</div>
+      <div class="item-desc">GBA loss, LAMP1/2 depletion, TFEB downregulation in synucleinopathy.</div>
+    </div>
+    <div class="item">
+      <div class="item-tag antiviral">Antiviral</div>
+      <div class="item-title">Endocytic Entry</div>
+      <div class="item-desc">SARS-CoV-2 Spike–ACE2 clathrin-mediated entry as host-directed antiviral target.</div>
+    </div>
+    <div class="item">
+      <div class="item-tag onco">Oncology</div>
+      <div class="item-title">PARK2 in Cancer</div>
+      <div class="item-desc">PARK2 downregulation across multiple tumor types links Parkin biology to oncology.</div>
+    </div>
+  </div>
+
+  <!-- Phase 2 -->
+  <div class="col">
+    <div class="item">
+      <div class="item-tag method">Model</div>
+      <div class="item-title">iPSC-DA Neurons</div>
+      <div class="item-desc">9 donor lines. TH⁺/GIRK2⁺ dopaminergic identity. 4–6 wk maturation. MEA-validated.</div>
+    </div>
+    <div class="item">
+      <div class="item-tag method">Model</div>
+      <div class="item-title">Dual-Hit Protocol</div>
+      <div class="item-desc">PFF + IFN-γ to model neuroinflammatory Lewy body pathology. 21-day time course.</div>
+    </div>
+    <div class="item">
+      <div class="item-tag method">Model</div>
+      <div class="item-title">CRISPR KO Lines</div>
+      <div class="item-desc">Parkin KO, GBA KO, α-syn KO, LRRK2 KO iPSCs for genetic disease modeling.</div>
+    </div>
+    <div class="item">
+      <div class="item-tag cardiac">Cardiac</div>
+      <div class="item-title">iPSC-Cardiomyocytes</div>
+      <div class="item-desc">GiWi differentiation. >90% cTnT⁺. Cardiotoxicity & safety pharmacology.</div>
+    </div>
+  </div>
+
+  <!-- Phase 3 -->
+  <div class="col">
+    <div class="item">
+      <div class="item-tag method">Screening</div>
+      <div class="item-title">High-Content Imaging</div>
+      <div class="item-desc">96/384-well confocal with automated segmentation. Inclusion count, mitophagy, viability.</div>
+    </div>
+    <div class="item">
+      <div class="item-tag method">Screening</div>
+      <div class="item-title">FLIPR & Incucyte</div>
+      <div class="item-desc">Kinetic calcium flux and real-time proliferation / cytotoxicity monitoring.</div>
+    </div>
+    <div class="item">
+      <div class="item-tag method">Screening</div>
+      <div class="item-title">Plate-Based Readouts</div>
+      <div class="item-desc">CellTiter-Glo, LDH, caspase-3/7, ROS (CellROX), SA-β-gal for senescence.</div>
+    </div>
+  </div>
+
+  <!-- Phase 4 -->
+  <div class="col">
+    <div class="item">
+      <div class="item-tag neuro">MoA</div>
+      <div class="item-title">Western Blot PD Panel</div>
+      <div class="item-desc">pS129 α-syn, LAMP1/2, TFEB, NRF2, HDAC6, LC3B, p62 — multi-readout PD confirmation.</div>
+    </div>
+    <div class="item">
+      <div class="item-tag antiviral">MoA</div>
+      <div class="item-title">Pseudovirus Neutralization</div>
+      <div class="item-desc">GFP-pseudotyped virus entry assay. Dose-response inhibition of Spike-mediated entry.</div>
+    </div>
+    <div class="item">
+      <div class="item-tag method">MoA</div>
+      <div class="item-title">TMT Proteomics</div>
+      <div class="item-desc">Subcellular fractionation + TMT-MS to map drug-induced proteome shifts.</div>
+    </div>
+  </div>
+
+  <!-- Phase 5 -->
+  <div class="col">
+    <div class="item">
+      <div class="item-tag neuro">Biomarker</div>
+      <div class="item-title">TE/PD Decision Matrix</div>
+      <div class="item-desc">Target engagement (Parkin activity) + pharmacodynamic (inclusion clearance) biomarker panel.</div>
+    </div>
+    <div class="item">
+      <div class="item-tag method">Biomarker</div>
+      <div class="item-title">Cytokine Profiling</div>
+      <div class="item-desc">MSD V-PLEX multiplex for IL-6, TNF-α, IFN-γ, IL-1β — inflammatory response readouts.</div>
+    </div>
+    <div class="item">
+      <div class="item-tag method">Output</div>
+      <div class="item-title">Go/No-Go Data Package</div>
+      <div class="item-desc">Integrated efficacy, safety, and biomarker dataset enabling translational decision-making.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Active Compounds -->
+<div class="compounds-strip">
+  <div class="compounds-label">Active Therapeutic Programs</div>
+  <div class="compounds-grid">
+    <div class="compound">
+      <div class="compound-icon pa">PA</div>
+      <div><div class="compound-name">Parkin Agonists</div><div class="compound-target">Mitophagy · E3 ligase activation</div></div>
+    </div>
+    <div class="compound">
+      <div class="compound-icon tac">TC</div>
+      <div><div class="compound-name">TAC (Telomerase Activating)</div><div class="compound-target">Cellular aging · ISR rescue</div></div>
+    </div>
+    <div class="compound">
+      <div class="compound-icon pah">PH</div>
+      <div><div class="compound-name">Perillaldehyde (PAH)</div><div class="compound-target">Lysosomal rescue · Inclusion clearance</div></div>
+    </div>
+    <div class="compound">
+      <div class="compound-icon av">AV</div>
+      <div><div class="compound-name">Host-Directed Antivirals</div><div class="compound-target">Endocytic entry blockade</div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+</script>
+</body>
+</html>

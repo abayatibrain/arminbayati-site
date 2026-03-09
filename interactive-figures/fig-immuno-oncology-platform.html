@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Immuno-Oncology Assay Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f1419; --paper: #fafaf7; --mid: #6b7280; --accent: #c0392b;
+    --rule: #d4d0c8; --card: #ffffff; --section-bg: #f4f3ef;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+    --mono: 'IBM Plex Mono', 'Menlo', monospace;
+    --effector: #2563eb; --target: #dc2626; --readout: #059669; --checkpoint: #7c3aed;
+  }
+  html.dark {
+    --ink: #e8e6e1; --paper: #111318; --mid: #9ca3af; --rule: #2a2d35;
+    --card: #1a1d24; --section-bg: #15171d;
+    --effector: #60a5fa; --target: #f87171; --readout: #34d399; --checkpoint: #a78bfa;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--sans); background: var(--paper); color: var(--ink);
+    display: flex; flex-direction: column; align-items: center;
+    padding: 40px 20px 48px;
+  }
+  .fig-label { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--accent); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 8px; }
+  .fig-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; color: var(--ink); margin-bottom: 6px; text-align: center; }
+  .fig-subtitle { font-size: 13px; font-weight: 300; color: var(--mid); margin-bottom: 36px; text-align: center; max-width: 700px; line-height: 1.6; }
+
+  .wrapper { width: 100%; max-width: 1060px; overflow-x: auto; }
+
+  /* Central hub diagram */
+  .hub-layout {
+    display: grid; grid-template-columns: 1fr 260px 1fr; gap: 20px;
+    min-width: 900px; align-items: start; margin-bottom: 24px;
+  }
+
+  /* Side columns */
+  .side-col { display: flex; flex-direction: column; gap: 10px; }
+  .side-card {
+    background: var(--card); border: 1px solid var(--rule); border-radius: 8px;
+    padding: 16px; transition: border-color 0.2s;
+  }
+  .side-card:hover { border-color: var(--accent); }
+  .side-tag {
+    font-family: var(--mono); font-size: 9px; font-weight: 500;
+    letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 5px;
+    padding: 2px 7px; border-radius: 3px; display: inline-block;
+  }
+  .side-tag.eff { background: color-mix(in srgb, var(--effector) 10%, transparent); color: var(--effector); }
+  .side-tag.tgt { background: color-mix(in srgb, var(--target) 10%, transparent); color: var(--target); }
+  .side-tag.chk { background: color-mix(in srgb, var(--checkpoint) 10%, transparent); color: var(--checkpoint); }
+  .side-tag.rd { background: color-mix(in srgb, var(--readout) 10%, transparent); color: var(--readout); }
+  .side-title { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 3px; }
+  .side-desc { font-size: 11px; font-weight: 300; color: var(--mid); line-height: 1.55; }
+
+  /* Center hub */
+  .hub-center {
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    padding-top: 20px;
+  }
+  .hub-ring {
+    width: 200px; height: 200px; border-radius: 50%;
+    border: 2px solid var(--accent); display: flex; align-items: center;
+    justify-content: center; flex-direction: column; text-align: center;
+    background: color-mix(in srgb, var(--accent) 3%, var(--card));
+    position: relative;
+  }
+  .hub-ring::before {
+    content: ''; position: absolute; inset: -12px; border-radius: 50%;
+    border: 1px dashed var(--rule);
+  }
+  .hub-label {
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    color: var(--accent); letter-spacing: 1px; margin-bottom: 4px;
+  }
+  .hub-title {
+    font-family: var(--serif); font-size: 1.1rem; color: var(--ink); font-weight: 400;
+  }
+  .hub-sub { font-size: 11px; font-weight: 300; color: var(--mid); margin-top: 4px; }
+
+  .hub-metrics {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%;
+  }
+  .hub-metric {
+    background: var(--section-bg); border-radius: 6px; padding: 10px;
+    text-align: center;
+  }
+  .hub-metric-val { font-family: var(--serif); font-size: 1.1rem; color: var(--ink); }
+  .hub-metric-lbl { font-size: 10px; color: var(--mid); font-weight: 300; }
+
+  /* Assay type grid at bottom */
+  .assay-label {
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    color: var(--accent); letter-spacing: 1px; margin-bottom: 12px; text-transform: uppercase;
+  }
+  .assay-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+    min-width: 900px;
+  }
+  .assay-card {
+    background: var(--ink); color: rgba(255,255,255,0.95); border-radius: 8px;
+    padding: 18px 16px; position: relative; overflow: hidden;
+  }
+  .assay-card::after {
+    content: ''; position: absolute; top: 0; right: 0; width: 60px; height: 60px;
+    border-radius: 0 0 0 60px; opacity: 0.06;
+  }
+  .assay-card:nth-child(1)::after { background: var(--effector); }
+  .assay-card:nth-child(2)::after { background: var(--target); }
+  .assay-card:nth-child(3)::after { background: var(--checkpoint); }
+  .assay-card:nth-child(4)::after { background: var(--readout); }
+  .assay-type {
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    letter-spacing: 0.8px; margin-bottom: 6px;
+  }
+  .assay-card:nth-child(1) .assay-type { color: var(--effector); }
+  .assay-card:nth-child(2) .assay-type { color: var(--target); }
+  .assay-card:nth-child(3) .assay-type { color: var(--checkpoint); }
+  .assay-card:nth-child(4) .assay-type { color: var(--readout); }
+  .assay-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .assay-desc { font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.55; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .fig-label, .fig-title, .fig-subtitle { animation: fadeIn 0.5s ease both; }
+  .fig-title { animation-delay: 0.05s; } .fig-subtitle { animation-delay: 0.1s; }
+</style>
+</head>
+<body>
+<div class="fig-label">Figure 6</div>
+<div class="fig-title">Cancer Immunology & Immune Cell Assay Platform</div>
+<div class="fig-subtitle">
+  An integrated assay framework for characterizing tumor–immune interactions across T-cell killing,
+  ADCC/CDC, checkpoint biology, CAR-T, NK cell function, and multiplex cytokine profiling.
+</div>
+
+<div class="wrapper">
+
+<div class="hub-layout">
+  <!-- Left: Effector & Checkpoint -->
+  <div class="side-col">
+    <div class="side-card">
+      <div class="side-tag eff">Effector Cells</div>
+      <div class="side-title">Primary Human T-Cells</div>
+      <div class="side-desc">CD3⁺/CD8⁺ cytotoxic T lymphocytes. Anti-PD-L1 enhanced killing. Dose-response across E:T ratios (1:1 → 50:1).</div>
+    </div>
+    <div class="side-card">
+      <div class="side-tag eff">Effector Cells</div>
+      <div class="side-title">NK Cells</div>
+      <div class="side-desc">Freshly isolated or expanded NK cells. CD16-dependent ADCC. K562 and primary tumor target killing.</div>
+    </div>
+    <div class="side-card">
+      <div class="side-tag chk">Checkpoint</div>
+      <div class="side-title">Exhaustion Profiling</div>
+      <div class="side-desc">PD-1, CTLA-4, LAG-3, TIM-3, TIGIT MFI on TILs vs. PBMCs. Blockade rescue of IFN-γ secretion and proliferation.</div>
+    </div>
+    <div class="side-card">
+      <div class="side-tag eff">Engineered</div>
+      <div class="side-title">CAR-T & CAR-NK</div>
+      <div class="side-desc">Lentiviral CAR construct transduction. Antigen-specific killing, cytokine release, and exhaustion kinetics.</div>
+    </div>
+  </div>
+
+  <!-- Center hub -->
+  <div class="hub-center">
+    <div class="hub-ring">
+      <div class="hub-label">CENTRAL ASSAY</div>
+      <div class="hub-title">Immune–Tumor<br>Co-Culture</div>
+      <div class="hub-sub">Effector + Target<br>4–72 h incubation</div>
+    </div>
+    <div class="hub-metrics">
+      <div class="hub-metric"><div class="hub-metric-val">4 h</div><div class="hub-metric-lbl">Acute killing</div></div>
+      <div class="hub-metric"><div class="hub-metric-val">72 h</div><div class="hub-metric-lbl">Extended co-culture</div></div>
+      <div class="hub-metric"><div class="hub-metric-val">E:T scan</div><div class="hub-metric-lbl">Ratio optimization</div></div>
+      <div class="hub-metric"><div class="hub-metric-val">Multi-Ab</div><div class="hub-metric-lbl">Antibody profiling</div></div>
+    </div>
+  </div>
+
+  <!-- Right: Target & Readout -->
+  <div class="side-col">
+    <div class="side-card">
+      <div class="side-tag tgt">Target Cells</div>
+      <div class="side-title">Tumor Cell Lines</div>
+      <div class="side-desc">Fluorescently labeled or viability-dye stained. Surface antigen expression validated by flow cytometry.</div>
+    </div>
+    <div class="side-card">
+      <div class="side-tag rd">Readout</div>
+      <div class="side-title">Flow Cytometry</div>
+      <div class="side-desc">Multicolor panels: CD3, CD4, CD8, CD56, PD-1, PD-L1, Ki-67. Live/dead discrimination. Intracellular cytokines.</div>
+    </div>
+    <div class="side-card">
+      <div class="side-tag rd">Readout</div>
+      <div class="side-title">Cytokine Quantification</div>
+      <div class="side-desc">MSD V-PLEX 10-plex: IFN-γ, TNF-α, IL-2, IL-6, IL-10, Granzyme B. Supernatant & intracellular staining.</div>
+    </div>
+    <div class="side-card">
+      <div class="side-tag rd">Readout</div>
+      <div class="side-title">Killing Quantification</div>
+      <div class="side-desc">Luciferase release, LDH, Annexin V, PI, CellTiter-Glo. Real-time impedance (xCELLigence) for kinetics.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Assay type grid -->
+<div class="assay-label">Functional Assay Modalities</div>
+<div class="assay-grid">
+  <div class="assay-card">
+    <div class="assay-type">T-CELL KILLING</div>
+    <div class="assay-name">CTL Cytotoxicity</div>
+    <div class="assay-desc">Anti-PD-L1 enhanced. Dose-response across E:T ratios. Specific lysis calculation.</div>
+  </div>
+  <div class="assay-card">
+    <div class="assay-type">ADCC</div>
+    <div class="assay-name">Antibody-Dependent</div>
+    <div class="assay-desc">Trastuzumab, Rituximab, Cetuximab profiling. PBMC effectors at 10:1 E:T.</div>
+  </div>
+  <div class="assay-card">
+    <div class="assay-type">CDC</div>
+    <div class="assay-name">Complement-Dependent</div>
+    <div class="assay-desc">Human complement serum. Time-course kinetics. Maximal lysis at 2 hours.</div>
+  </div>
+  <div class="assay-card">
+    <div class="assay-type">CHECKPOINT BLOCKADE</div>
+    <div class="assay-name">Exhaustion Rescue</div>
+    <div class="assay-desc">Anti-PD-1, anti-CTLA-4, anti-LAG-3 monoclonal antibodies. Functional IFN-γ rescue.</div>
+  </div>
+</div>
+
+</div>
+
+<script>
+</script>
+</body>
+</html>

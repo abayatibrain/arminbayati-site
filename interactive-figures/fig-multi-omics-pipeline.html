@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multi-Omics Integration Pipeline</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f1419; --paper: #fafaf7; --mid: #6b7280; --accent: #c0392b;
+    --rule: #d4d0c8; --card: #ffffff; --section-bg: #f4f3ef;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+    --mono: 'IBM Plex Mono', 'Menlo', monospace;
+    --prot: #2563eb; --sc: #7c3aed; --bulk: #059669;
+  }
+  html.dark {
+    --ink: #e8e6e1; --paper: #111318; --mid: #9ca3af; --rule: #2a2d35;
+    --card: #1a1d24; --section-bg: #15171d;
+    --prot: #60a5fa; --sc: #a78bfa; --bulk: #34d399;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--sans); background: var(--paper); color: var(--ink);
+    display: flex; flex-direction: column; align-items: center;
+    padding: 40px 20px 48px;
+  }
+  .fig-label { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--accent); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 8px; }
+  .fig-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; color: var(--ink); margin-bottom: 6px; text-align: center; }
+  .fig-subtitle { font-size: 13px; font-weight: 300; color: var(--mid); margin-bottom: 36px; text-align: center; max-width: 700px; line-height: 1.6; }
+
+  .wrapper { width: 100%; max-width: 1060px; overflow-x: auto; }
+
+  /* Three-lane layout */
+  .lanes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; min-width: 900px; }
+  .lane { display: flex; flex-direction: column; gap: 0; }
+  .lane-header {
+    padding: 16px 18px; border-radius: 10px 10px 0 0; color: #fff;
+  }
+  .lane-header.prot { background: var(--prot); }
+  .lane-header.sc { background: var(--sc); }
+  .lane-header.bulk { background: var(--bulk); }
+  .lane-num { font-family: var(--mono); font-size: 10px; letter-spacing: 1px; opacity: 0.7; margin-bottom: 3px; }
+  .lane-title { font-size: 15px; font-weight: 600; }
+  .lane-sub { font-size: 11px; font-weight: 300; opacity: 0.7; margin-top: 2px; }
+
+  .lane-body {
+    background: var(--card); border: 1px solid var(--rule); border-top: none;
+    border-radius: 0 0 10px 10px; padding: 0; flex: 1;
+  }
+  .lane-step {
+    padding: 14px 18px; border-bottom: 1px solid var(--rule);
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .lane-step:last-child { border-bottom: none; }
+  .step-dot {
+    width: 8px; height: 8px; border-radius: 50%; margin-top: 4px; flex-shrink: 0;
+  }
+  .prot .step-dot, .lane-header.prot ~ .lane-body .step-dot { background: var(--prot); }
+  .sc .step-dot, .lane-header.sc ~ .lane-body .step-dot { background: var(--sc); }
+  .bulk .step-dot, .lane-header.bulk ~ .lane-body .step-dot { background: var(--bulk); }
+  /* Simpler approach */
+  .lane:nth-child(1) .step-dot { background: var(--prot); }
+  .lane:nth-child(2) .step-dot { background: var(--sc); }
+  .lane:nth-child(3) .step-dot { background: var(--bulk); }
+  .step-label { font-size: 12px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+  .step-detail { font-size: 11px; font-weight: 300; color: var(--mid); line-height: 1.5; }
+
+  /* Integration hub */
+  .integration {
+    margin-top: 20px; min-width: 900px;
+    background: var(--ink); border-radius: 10px; padding: 24px 28px;
+    display: grid; grid-template-columns: 200px 1fr; gap: 24px; align-items: center;
+  }
+  .int-left { text-align: center; }
+  .int-icon {
+    width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 10px;
+    border: 2px solid var(--accent); display: flex; align-items: center;
+    justify-content: center; background: rgba(192,57,43,0.08);
+  }
+  .int-icon svg { width: 28px; height: 28px; }
+  .int-label {
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    color: var(--accent); letter-spacing: 1px;
+  }
+  .int-title {
+    font-family: var(--serif); font-size: 1.1rem; color: rgba(255,255,255,0.95);
+    margin-top: 4px;
+  }
+
+  .int-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  }
+  .int-item {
+    background: rgba(255,255,255,0.05); border-radius: 8px; padding: 14px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .int-item-name { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.9); margin-bottom: 3px; }
+  .int-item-desc { font-size: 10px; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.5; }
+
+  /* Software tools strip */
+  .tools-label {
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    color: var(--accent); letter-spacing: 1px; margin: 20px 0 10px; text-transform: uppercase;
+  }
+  .tools-row {
+    display: flex; flex-wrap: wrap; gap: 8px; min-width: 900px;
+  }
+  .tool-pill {
+    padding: 6px 12px; border-radius: 20px; font-family: var(--mono);
+    font-size: 11px; font-weight: 400; border: 1px solid var(--rule);
+    background: var(--card); color: var(--ink); white-space: nowrap;
+  }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .fig-label, .fig-title, .fig-subtitle { animation: fadeIn 0.5s ease both; }
+  .fig-title { animation-delay: 0.05s; } .fig-subtitle { animation-delay: 0.1s; }
+</style>
+</head>
+<body>
+<div class="fig-label">Figure 7</div>
+<div class="fig-title">Multi-Omics Integration Pipeline</div>
+<div class="fig-subtitle">
+  Parallel proteomics, single-cell transcriptomics, and bulk RNA-seq workflows converging
+  into an integrated bioinformatics analysis for disease biomarker discovery and drug response mapping.
+</div>
+
+<div class="wrapper">
+
+<div class="lanes">
+  <!-- Proteomics Lane -->
+  <div class="lane">
+    <div class="lane-header prot">
+      <div class="lane-num">LANE 01</div>
+      <div class="lane-title">TMT Proteomics</div>
+      <div class="lane-sub">LC-MS/MS · Quantitative Protein</div>
+    </div>
+    <div class="lane-body">
+      <div class="lane-step"><div class="step-dot"></div><div><div class="step-label">Sample Preparation</div><div class="step-detail">Cell lysis, reduction, alkylation, trypsin digest. Subcellular fractionation (soluble, membrane, insoluble).</div></div></div>
+      <div class="lane-step"><div class="step-dot"></div><div><div class="step-label">TMT Labeling</div><div class="step-detail">Isobaric TMT 10/11/16-plex labeling. Multiplexed quantification across conditions.</div></div></div>
+      <div class="lane-step"><div class="step-dot"></div><div><div class="step-label">LC-MS/MS Acquisition</div><div class="step-detail">High-resolution Orbitrap mass spectrometry. DDA or DIA acquisition modes.</div></div></div>
+      <div class="lane-step"><div class="step-dot"></div><div><div class="step-label">Database Search</div><div class="step-detail">Proteome Discoverer / MaxQuant / Perseus. FDR correction, normalization, imputation.</div></div></div>
+      <div class="lane-step"><div class="step-dot"></div><div><div class="step-label">Differential Expression</div><div class="step-detail">Volcano plots (log₂FC vs. −log₁₀ padj). Subcellular compartment–resolved analysis.</div></div></div>
+    </div>
+  </div>
+
+  <!-- scRNA-seq Lane -->
+  <div class="lane">
+    <div class="lane-header sc">
+      <div class="lane-num">LANE 02</div>
+      <div class="lane-title">scRNA-seq</div>
+      <div class="lane-sub">10x Genomics Chromium</div>
+    </div>
+    <div class="lane-body">
+      <div class="lane-step"><div class="step-dot"></div><div><div class="step-label">Cell Capture</div><div class="step-detail">10x Chromium microfluidic capture. GEM generation & barcoding. >5,000 cells per condition.</div></div></div>
+      <div class="lane-step"><div class="step-dot"></div><div><div class="step-label">Library Prep & Sequencing</div><div class="step-detail">cDNA amplification, library construction. Illumina NovaSeq / NextSeq. ~50k reads per cell.</div></div></div>
+      <div class="lane-step"><div class="step-dot"></div><div><div class="step-label">Alignment & QC</div><div class="step-detail">Cell Ranger pipeline. Doublet removal, mitochondrial QC. Count matrix generation.</div></div></div>
+      <div class="lane-step"><div class="step-dot"></div><div><div class="step-label">Clustering & Annotation</div><div class="step-detail">Seurat / Scanpy. UMAP/t-SNE visualization. Automated cell-type annotation + manual curation.</div></div></div>
+      <div class="lane-step"><div class="step-dot"></div><div><div class="step-label">Trajectory & DEG</div><div class="step-detail">Pseudotime analysis (Monocle). Differential gene expression per cluster. Ligand–receptor mapping.</div></div></div>
+    </div>
+  </div>
+
+  <!-- Bulk RNA-seq Lane -->
+  <div class="lane">
+    <div class="lane-header bulk">
+      <div class="lane-num">LANE 03</div>
+      <div class="lane-title">Bulk Transcriptomics</div>
+      <div class="lane-sub">RNA-seq · RT-qPCR</div>
+    </div>
+    <div class="lane-body">
+      <div class="lane-step"><div class="step-dot"></div><div><div class="step-label">RNA Extraction</div><div class="step-detail">TRIzol or column-based. RIN > 8.0 QC. Poly-A selection or ribo-depletion.</div></div></div>
+      <div class="lane-step"><div class="step-dot"></div><div><div class="step-label">Library & Sequencing</div><div class="step-detail">Stranded mRNA library prep. Illumina paired-end sequencing. ≥30M reads per sample.</div></div></div>
+      <div class="lane-step"><div class="step-dot"></div><div><div class="step-label">Alignment & Counts</div><div class="step-detail">STAR / HISAT2 alignment. featureCounts gene quantification. Batch correction.</div></div></div>
+      <div class="lane-step"><div class="step-dot"></div><div><div class="step-label">DESeq2 Analysis</div><div class="step-detail">Differential expression (Wald test). MA plots, heatmaps, PCA. Shrinkage estimators.</div></div></div>
+      <div class="lane-step"><div class="step-dot"></div><div><div class="step-label">Pathway Enrichment</div><div class="step-detail">GSEA, GO (BP/MF/CC), KEGG. IFN-γ signaling, lysosomal degradation, antigen presentation.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Integration hub -->
+<div class="integration">
+  <div class="int-left">
+    <div class="int-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#c0392b" stroke-width="1.5" stroke-linecap="round">
+        <circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/>
+      </svg>
+    </div>
+    <div class="int-label">CONVERGENCE</div>
+    <div class="int-title">Integrated Analysis</div>
+  </div>
+  <div class="int-grid">
+    <div class="int-item">
+      <div class="int-item-name">Cross-Omics Correlation</div>
+      <div class="int-item-desc">Protein–mRNA concordance analysis. Identify post-transcriptionally regulated targets.</div>
+    </div>
+    <div class="int-item">
+      <div class="int-item-name">Pathway Consensus</div>
+      <div class="int-item-desc">Overlay GSEA results across proteomics and transcriptomics for robust pathway calls.</div>
+    </div>
+    <div class="int-item">
+      <div class="int-item-name">Biomarker Nomination</div>
+      <div class="int-item-desc">Multi-omics concordant hits for target engagement and pharmacodynamic biomarkers.</div>
+    </div>
+    <div class="int-item">
+      <div class="int-item-name">Cell-Type Deconvolution</div>
+      <div class="int-item-desc">Map single-cell signatures onto bulk data to resolve cellular composition shifts.</div>
+    </div>
+    <div class="int-item">
+      <div class="int-item-name">Network Analysis</div>
+      <div class="int-item-desc">Protein–protein interaction networks layered with transcriptional regulation data.</div>
+    </div>
+    <div class="int-item">
+      <div class="int-item-name">Therapeutic Prioritization</div>
+      <div class="int-item-desc">Druggable target identification from convergent dysregulated nodes across datasets.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Software tools -->
+<div class="tools-label">Software & Analysis Ecosystem</div>
+<div class="tools-row">
+  <span class="tool-pill">Proteome Discoverer</span>
+  <span class="tool-pill">MaxQuant</span>
+  <span class="tool-pill">Perseus</span>
+  <span class="tool-pill">Seurat</span>
+  <span class="tool-pill">Scanpy</span>
+  <span class="tool-pill">DESeq2</span>
+  <span class="tool-pill">Cell Ranger</span>
+  <span class="tool-pill">STAR</span>
+  <span class="tool-pill">GSEA</span>
+  <span class="tool-pill">IPA</span>
+  <span class="tool-pill">Monocle</span>
+  <span class="tool-pill">Python</span>
+  <span class="tool-pill">R / Bioconductor</span>
+  <span class="tool-pill">Plotly</span>
+</div>
+
+</div>
+
+<script>
+</script>
+</body>
+</html>

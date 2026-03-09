@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endolysosomal Trafficking Pathway</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #0f1419;
+            --paper: #fafaf7;
+            --mid: #6b7280;
+            --accent: #c0392b;
+            --rule: #d4d0c8;
+            --card: #ffffff;
+            --section-bg: #f4f3ef;
+            --serif: 'DM Serif Display', Georgia, serif;
+            --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+            --mono: 'IBM Plex Mono', 'Menlo', monospace;
+        }
+
+        html.dark {
+            --ink: #e8e6e1;
+            --paper: #111318;
+            --mid: #9ca3af;
+            --rule: #2a2d35;
+            --card: #1a1d24;
+            --section-bg: #15171d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            background: var(--paper);
+            color: var(--ink);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: var(--sans);
+            padding: 40px 20px;
+            background: var(--paper);
+            color: var(--ink);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: var(--serif);
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: var(--mid);
+            font-weight: 300;
+            letter-spacing: 0.3px;
+        }
+
+        .diagram-container {
+            background: var(--card);
+            border: 1px solid var(--rule);
+            border-radius: 8px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(15, 20, 25, 0.06);
+        }
+
+        svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .compartment {
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+
+        .compartment:hover {
+            opacity: 0.8;
+        }
+
+        .compartment-label {
+            font-family: var(--sans);
+            font-size: 12px;
+            font-weight: 500;
+            text-anchor: middle;
+            pointer-events: none;
+        }
+
+        .marker-text {
+            font-family: var(--mono);
+            font-size: 10px;
+            font-weight: 400;
+            text-anchor: middle;
+            pointer-events: none;
+        }
+
+        .pathway-label {
+            font-family: var(--sans);
+            font-size: 11px;
+            font-weight: 400;
+            text-anchor: middle;
+            pointer-events: none;
+            fill: var(--ink);
+        }
+
+        .tooltip {
+            position: absolute;
+            background: rgba(15, 20, 25, 0.95);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            pointer-events: none;
+            z-index: 1000;
+            white-space: nowrap;
+            font-family: var(--sans);
+            display: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .tooltip.active {
+            display: block;
+        }
+
+        .legend {
+            background: var(--section-bg);
+            border: 1px solid var(--rule);
+            border-radius: 6px;
+            padding: 24px;
+            margin-top: 30px;
+        }
+
+        .legend-title {
+            font-family: var(--serif);
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            font-weight: 400;
+        }
+
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .legend-swatch {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            flex-shrink: 0;
+            border: 1px solid rgba(15, 20, 25, 0.1);
+        }
+
+        .rab-panel {
+            background: var(--section-bg);
+            border: 1px solid var(--rule);
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .rab-title {
+            font-family: var(--serif);
+            font-size: 1rem;
+            margin-bottom: 12px;
+            font-weight: 400;
+        }
+
+        .rab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            font-size: 0.9rem;
+        }
+
+        .rab-item {
+            padding: 8px;
+            background: var(--card);
+            border: 1px solid var(--rule);
+            border-radius: 4px;
+            font-family: var(--mono);
+        }
+
+        .attribution {
+            position: fixed;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(15, 20, 25, 0.85);
+            color: #fff;
+            font-family: var(--mono);
+            font-size: 10px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            letter-spacing: 0.3px;
+            z-index: 999;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            html {
+                color-scheme: dark;
+            }
+
+            html:not(.dark) {
+                --ink: #e8e6e1;
+                --paper: #111318;
+                --mid: #9ca3af;
+                --rule: #2a2d35;
+                --card: #1a1d24;
+                --section-bg: #15171d;
+            }
+
+            .attribution {
+                background: rgba(232, 230, 225, 0.15);
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 12px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .diagram-container {
+                padding: 20px;
+            }
+
+            .legend-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .rab-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Endolysosomal Trafficking Pathway</h1>
+            <p class="subtitle">Cargo sorting, recycling, and degradation through sequential endosomal maturation</p>
+        </header>
+
+        <div class="diagram-container">
+            <svg viewBox="0 0 1200 750" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                    <linearGradient id="grad-early" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.8" />
+                        <stop offset="100%" style="stop-color:#60a5fa;stop-opacity:0.8" />
+                    </linearGradient>
+                    <linearGradient id="grad-sorting" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#a855f7;stop-opacity:0.8" />
+                        <stop offset="100%" style="stop-color:#d946ef;stop-opacity:0.8" />
+                    </linearGradient>
+                    <linearGradient id="grad-late" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#ec4899;stop-opacity:0.8" />
+                        <stop offset="100%" style="stop-color:#f43f5e;stop-opacity:0.8" />
+                    </linearGradient>
+                    <linearGradient id="grad-lyso" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#dc2626;stop-opacity:0.8" />
+                        <stop offset="100%" style="stop-color:#b91c1c;stop-opacity:0.8" />
+                    </linearGradient>
+                    <linearGradient id="grad-recycling" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#16a34a;stop-opacity:0.8" />
+                        <stop offset="100%" style="stop-color:#22c55e;stop-opacity:0.8" />
+                    </linearGradient>
+                    <linearGradient id="grad-exosome" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:0.8" />
+                        <stop offset="100%" style="stop-color:#fbbf24;stop-opacity:0.8" />
+                    </linearGradient>
+
+                    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                        <polygon points="0 0, 10 3, 0 6" fill="#0f1419" opacity="0.6" />
+                    </marker>
+                </defs>
+
+                <!-- pH Gradient Bar -->
+                <text x="50" y="30" class="compartment-label" style="font-weight: 600; font-size: 13px;">pH Gradient</text>
+                <rect x="40" y="40" width="20" height="220" fill="url(#grad-early)" stroke="#0f1419" stroke-width="1.5" opacity="0.9"/>
+                <text x="65" y="155" class="marker-text" style="fill: #0f1419; font-weight: 500;">6.0 → 4.5</text>
+
+                <!-- Plasma Membrane & Entry -->
+                <rect x="150" y="20" width="200" height="80" fill="#e0f2fe" stroke="#0c4a6e" stroke-width="2" rx="8" class="compartment" data-tooltip="Plasma Membrane: Cargo entry via CME"/>
+                <text x="250" y="50" class="compartment-label" style="font-weight: 600;">Cargo Entry</text>
+                <text x="250" y="68" class="marker-text" style="font-size: 10px;">CME, Macropinocytosis</text>
+
+                <!-- Early Endosome -->
+                <ellipse cx="250" cy="200" rx="90" ry="70" fill="url(#grad-early)" stroke="#0c4a6e" stroke-width="2" class="compartment" data-tooltip="Early Endosome: Rab5+, EEA1+, pH 6.0"/>
+                <text x="250" y="190" class="compartment-label" style="font-weight: 600; font-size: 13px;">Early</text>
+                <text x="250" y="208" class="compartment-label" style="font-weight: 600; font-size: 13px;">Endosome</text>
+                <text x="250" y="235" class="marker-text">Rab5, EEA1</text>
+                <text x="250" y="250" class="marker-text">pH 6.0</text>
+
+                <!-- Arrows: Entry → Early -->
+                <path d="M 350 60 L 320 160" stroke="#0c4a6e" stroke-width="2.5" fill="none" marker-end="url(#arrowhead)"/>
+                <text x="375" y="100" class="pathway-label" style="font-size: 10px;">Internalization</text>
+
+                <!-- Sorting Endosome -->
+                <ellipse cx="500" cy="200" rx="90" ry="70" fill="url(#grad-sorting)" stroke="#6b21a8" stroke-width="2" class="compartment" data-tooltip="Sorting Endosome: Cargo distribution hub"/>
+                <text x="500" y="190" class="compartment-label" style="font-weight: 600; font-size: 13px; fill: #fff;">Sorting</text>
+                <text x="500" y="208" class="compartment-label" style="font-weight: 600; font-size: 13px; fill: #fff;">Endosome</text>
+                <text x="500" y="235" class="marker-text" style="fill: #fff;">Rab4, Rab5</text>
+                <text x="500" y="250" class="marker-text" style="fill: #fff;">pH 5.8</text>
+
+                <!-- Arrow: Early → Sorting -->
+                <path d="M 340 200 L 410 200" stroke="#6b21a8" stroke-width="2.5" fill="none" marker-end="url(#arrowhead)"/>
+                <text x="375" y="185" class="pathway-label" style="font-size: 10px;">Maturation</text>
+
+                <!-- Recycling Endosome Branch -->
+                <ellipse cx="500" cy="420" rx="85" ry="65" fill="url(#grad-recycling)" stroke="#15803d" stroke-width="2" class="compartment" data-tooltip="Recycling Endosome: Rab11+, returns to PM"/>
+                <text x="500" y="410" class="compartment-label" style="font-weight: 600; font-size: 13px; fill: #fff;">Recycling</text>
+                <text x="500" y="428" class="compartment-label" style="font-weight: 600; font-size: 13px; fill: #fff;">Endosome</text>
+                <text x="500" y="455" class="marker-text" style="fill: #fff;">Rab11, STX4</text>
+
+                <!-- Arrow: Sorting → Recycling -->
+                <path d="M 490 270 L 500 360" stroke="#15803d" stroke-width="2.5" fill="none" stroke-dasharray="5,5" marker-end="url(#arrowhead)"/>
+                <text x="440" y="315" class="pathway-label" style="font-size: 10px;">Retromer</text>
+
+                <!-- Arrow: Recycling → Plasma Membrane -->
+                <path d="M 500 485 L 250 100" stroke="#15803d" stroke-width="2.5" fill="none" stroke-dasharray="5,5" marker-end="url(#arrowhead)"/>
+                <text x="370" y="290" class="pathway-label" style="font-size: 10px; fill: #15803d;">Return</text>
+
+                <!-- Late Endosome/MVB -->
+                <ellipse cx="750" cy="200" rx="95" ry="75" fill="url(#grad-late)" stroke="#831843" stroke-width="2" class="compartment" data-tooltip="Late Endosome/MVB: Rab7+, CD63+, pH 5.5"/>
+                <circle cx="730" cy="180" r="15" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.6"/>
+                <circle cx="760" cy="200" r="12" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.6"/>
+                <circle cx="740" cy="220" r="14" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.6"/>
+                <text x="750" y="190" class="compartment-label" style="font-weight: 600; font-size: 13px; fill: #fff;">Late Endosome</text>
+                <text x="750" y="208" class="compartment-label" style="font-weight: 600; font-size: 13px; fill: #fff;">/ MVB</text>
+                <text x="750" y="235" class="marker-text" style="fill: #fff;">Rab7, CD63</text>
+                <text x="750" y="250" class="marker-text" style="fill: #fff;">pH 5.5</text>
+
+                <!-- Arrow: Sorting → Late -->
+                <path d="M 590 200 L 655 200" stroke="#831843" stroke-width="2.5" fill="none" marker-end="url(#arrowhead)"/>
+                <text x="620" y="185" class="pathway-label" style="font-size: 10px;">ESCRT pathway</text>
+
+                <!-- Exosome Release -->
+                <ellipse cx="750" cy="420" rx="80" ry="60" fill="url(#grad-exosome)" stroke="#b45309" stroke-width="2" class="compartment" data-tooltip="Exosome Release: CD63+, CD81+, TSG101"/>
+                <circle cx="735" cy="405" r="10" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.6"/>
+                <circle cx="760" cy="425" r="9" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.6"/>
+                <text x="750" y="410" class="compartment-label" style="font-weight: 600; font-size: 12px; fill: #1a1a1a;">Exosome</text>
+                <text x="750" y="428" class="compartment-label" style="font-weight: 600; font-size: 12px; fill: #1a1a1a;">Release</text>
+                <text x="750" y="455" class="marker-text" style="fill: #1a1a1a;">CD63, CD81</text>
+
+                <!-- Arrow: Late → Exosome -->
+                <path d="M 750 275 L 750 360" stroke="#b45309" stroke-width="2.5" fill="none" marker-end="url(#arrowhead)"/>
+                <text x="690" y="320" class="pathway-label" style="font-size: 10px;">Fusion</text>
+
+                <!-- Exosome Exit -->
+                <path d="M 830 420 L 950 420" stroke="#b45309" stroke-width="2.5" fill="none" stroke-dasharray="5,5" marker-end="url(#arrowhead)"/>
+                <rect x="970" y="405" width="100" height="30" fill="none" stroke="#b45309" stroke-width="1.5" stroke-dasharray="3,3" rx="4"/>
+                <text x="1020" y="425" class="pathway-label" style="font-size: 10px;">Extracellular</text>
+
+                <!-- Lysosome -->
+                <ellipse cx="750" cy="600" rx="100" ry="80" fill="url(#grad-lyso)" stroke="#7c2d12" stroke-width="2" class="compartment" data-tooltip="Lysosome: LAMP1+, pH 4.5, terminal degradation"/>
+                <circle cx="720" cy="570" r="18" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.4"/>
+                <circle cx="760" cy="590" r="16" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.4"/>
+                <circle cx="740" cy="620" r="17" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.4"/>
+                <circle cx="780" cy="630" r="15" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.4"/>
+                <text x="750" y="590" class="compartment-label" style="font-weight: 600; font-size: 13px; fill: #fff;">Lysosome</text>
+                <text x="750" y="610" class="compartment-label" style="font-weight: 600; font-size: 13px; fill: #fff;">Degradation</text>
+                <text x="750" y="640" class="marker-text" style="fill: #fff;">LAMP1, Cathepsins</text>
+                <text x="750" y="655" class="marker-text" style="fill: #fff;">pH 4.5</text>
+
+                <!-- Arrow: Late → Lysosome -->
+                <path d="M 750 275 L 750 520" stroke="#7c2d12" stroke-width="2.5" fill="none" marker-end="url(#arrowhead)"/>
+                <text x="695" y="400" class="pathway-label" style="font-size: 10px;">Acidification</text>
+                <text x="695" y="415" class="pathway-label" style="font-size: 10px;">& Degradation</text>
+
+                <!-- Degradation products -->
+                <path d="M 850 640 L 950 640" stroke="#7c2d12" stroke-width="2.5" fill="none" stroke-dasharray="5,5" marker-end="url(#arrowhead)"/>
+                <text x="1000" y="645" class="pathway-label" style="font-size: 10px;">Amino acids</text>
+                <text x="1000" y="660" class="pathway-label" style="font-size: 10px;">& metabolites</text>
+            </svg>
+        </div>
+
+        <div class="legend">
+            <div class="legend-title">Compartment Classification</div>
+            <div class="legend-grid">
+                <div class="legend-item">
+                    <div class="legend-swatch" style="background: #3b82f6;"></div>
+                    <span><strong>Early Endosome</strong> — Rab5, pH 6.0</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-swatch" style="background: #a855f7;"></div>
+                    <span><strong>Sorting Endosome</strong> — pH 5.8</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-swatch" style="background: #ec4899;"></div>
+                    <span><strong>Late Endosome/MVB</strong> — Rab7, pH 5.5</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-swatch" style="background: #dc2626;"></div>
+                    <span><strong>Lysosome</strong> — LAMP1, pH 4.5</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-swatch" style="background: #16a34a;"></div>
+                    <span><strong>Recycling Endosome</strong> — Rab11</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-swatch" style="background: #f59e0b;"></div>
+                    <span><strong>Exosome Release</strong> — CD63, CD81</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="rab-panel">
+            <div class="rab-title">Rab GTPase Functional Classification</div>
+            <div class="rab-grid">
+                <div class="rab-item">Rab5: Early tethering & fusion</div>
+                <div class="rab-item">Rab4: Rapid recycling endosomes</div>
+                <div class="rab-item">Rab7: Late endosome maturation</div>
+                <div class="rab-item">Rab11: Slow recycling pathway</div>
+                <div class="rab-item">Rab9: Retromer-dependent retrieval</div>
+                <div class="rab-item">Rab27: Exosome/secretory docking</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tooltip"></div>
+    <div class="attribution">Armin Bayati · arminbayati.com</div>
+
+    <script>
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+        if (prefersDark.matches) {
+            document.documentElement.classList.add('dark');
+        }
+        prefersDark.addEventListener('change', (e) => {
+            document.documentElement.classList.toggle('dark', e.matches);
+        });
+
+        const tooltip = document.querySelector('.tooltip');
+        const compartments = document.querySelectorAll('.compartment');
+
+        compartments.forEach(compartment => {
+            compartment.addEventListener('mouseenter', (e) => {
+                const text = e.target.getAttribute('data-tooltip');
+                if (text) {
+                    tooltip.textContent = text;
+                    tooltip.classList.add('active');
+                }
+            });
+
+            compartment.addEventListener('mousemove', (e) => {
+                const rect = e.target.getBoundingClientRect();
+                tooltip.style.left = (rect.right + 10) + 'px';
+                tooltip.style.top = (rect.top - 10) + 'px';
+            });
+
+            compartment.addEventListener('mouseleave', () => {
+                tooltip.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

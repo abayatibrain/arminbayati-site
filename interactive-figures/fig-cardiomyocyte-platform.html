@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cardiomyocyte Differentiation & Functional Assessment</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f1419; --paper: #fafaf7; --mid: #6b7280; --accent: #c0392b;
+    --rule: #d4d0c8; --card: #ffffff; --section-bg: #f4f3ef;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+    --mono: 'IBM Plex Mono', 'Menlo', monospace;
+    --wnt: #d97706; --cardiac: #dc2626; --func: #2563eb; --safety: #059669;
+  }
+  html.dark {
+    --ink: #e8e6e1; --paper: #111318; --mid: #9ca3af; --rule: #2a2d35;
+    --card: #1a1d24; --section-bg: #15171d;
+    --wnt: #fbbf24; --cardiac: #f87171; --func: #60a5fa; --safety: #34d399;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--sans); background: var(--paper); color: var(--ink);
+    display: flex; flex-direction: column; align-items: center;
+    padding: 40px 20px 48px;
+  }
+  .fig-label { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--accent); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 8px; }
+  .fig-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; color: var(--ink); margin-bottom: 6px; text-align: center; }
+  .fig-subtitle { font-size: 13px; font-weight: 300; color: var(--mid); margin-bottom: 36px; text-align: center; max-width: 700px; line-height: 1.6; }
+
+  .wrapper { width: 100%; max-width: 1060px; overflow-x: auto; }
+
+  /* Differentiation timeline */
+  .diff-timeline {
+    display: flex; min-width: 920px; gap: 0; margin-bottom: 24px;
+    border: 1px solid var(--rule); border-radius: 10px; overflow: hidden;
+    background: var(--card);
+  }
+  .diff-phase {
+    flex: 1; padding: 18px 16px; border-right: 1px solid var(--rule);
+    position: relative;
+  }
+  .diff-phase:last-child { border-right: none; }
+  .diff-phase::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .diff-phase:nth-child(1)::before { background: var(--wnt); }
+  .diff-phase:nth-child(2)::before { background: var(--wnt); }
+  .diff-phase:nth-child(3)::before { background: var(--cardiac); }
+  .diff-phase:nth-child(4)::before { background: var(--cardiac); }
+  .diff-phase:nth-child(5)::before { background: var(--func); }
+  .diff-phase:nth-child(6)::before { background: var(--safety); }
+
+  .diff-day { font-family: var(--mono); font-size: 10px; font-weight: 500; color: var(--accent); letter-spacing: 0.5px; margin-bottom: 4px; }
+  .diff-name { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+  .diff-detail { font-size: 11px; font-weight: 300; color: var(--mid); line-height: 1.5; }
+  .diff-tag {
+    display: inline-block; margin-top: 6px; padding: 2px 7px; border-radius: 3px;
+    font-family: var(--mono); font-size: 9px; font-weight: 500;
+  }
+  .diff-tag.wnt { background: color-mix(in srgb, var(--wnt) 10%, transparent); color: var(--wnt); }
+  .diff-tag.cardiac { background: color-mix(in srgb, var(--cardiac) 10%, transparent); color: var(--cardiac); }
+  .diff-tag.func { background: color-mix(in srgb, var(--func) 10%, transparent); color: var(--func); }
+  .diff-tag.safety { background: color-mix(in srgb, var(--safety) 10%, transparent); color: var(--safety); }
+
+  /* Four-quadrant assay grid */
+  .quad-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    min-width: 920px;
+  }
+  .quad {
+    background: var(--card); border: 1px solid var(--rule); border-radius: 10px;
+    padding: 20px; position: relative; overflow: hidden;
+  }
+  .quad::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .quad:nth-child(1)::before { background: var(--func); }
+  .quad:nth-child(2)::before { background: var(--func); }
+  .quad:nth-child(3)::before { background: var(--safety); }
+  .quad:nth-child(4)::before { background: var(--safety); }
+  .quad:hover { border-color: var(--accent); }
+
+  .quad-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .quad-icon {
+    width: 36px; height: 36px; border-radius: 8px; display: flex;
+    align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+  }
+  .quad:nth-child(1) .quad-icon { background: color-mix(in srgb, var(--func) 10%, transparent); color: var(--func); }
+  .quad:nth-child(2) .quad-icon { background: color-mix(in srgb, var(--func) 10%, transparent); color: var(--func); }
+  .quad:nth-child(3) .quad-icon { background: color-mix(in srgb, var(--safety) 10%, transparent); color: var(--safety); }
+  .quad:nth-child(4) .quad-icon { background: color-mix(in srgb, var(--safety) 10%, transparent); color: var(--safety); }
+  .quad-title { font-size: 14px; font-weight: 600; color: var(--ink); }
+  .quad-subtitle { font-size: 11px; font-weight: 300; color: var(--mid); }
+
+  .quad-items { display: flex; flex-direction: column; gap: 8px; }
+  .quad-item {
+    display: flex; gap: 10px; padding: 10px 12px; background: var(--section-bg);
+    border-radius: 6px;
+  }
+  .qi-label { font-size: 12px; font-weight: 500; color: var(--ink); min-width: 100px; }
+  .qi-value { font-size: 11px; font-weight: 300; color: var(--mid); line-height: 1.5; }
+
+  /* Disease model strip */
+  .disease-label {
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    color: var(--accent); letter-spacing: 1px; margin: 24px 0 10px; text-transform: uppercase;
+  }
+  .disease-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px; min-width: 920px;
+  }
+  .disease-card {
+    background: var(--ink); border-radius: 8px; padding: 16px; color: rgba(255,255,255,0.95);
+  }
+  .disease-name { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+  .disease-desc { font-size: 10px; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.5; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .fig-label, .fig-title, .fig-subtitle { animation: fadeIn 0.5s ease both; }
+  .fig-title { animation-delay: 0.05s; } .fig-subtitle { animation-delay: 0.1s; }
+</style>
+</head>
+<body>
+<div class="fig-label">Figure 8</div>
+<div class="fig-title">iPSC-CM Differentiation & Functional Assessment Platform</div>
+<div class="fig-subtitle">
+  Wnt-modulated cardiac differentiation through metabolic selection, electrophysiological characterization,
+  and multi-parameter safety pharmacology endpoints for drug discovery and cardiotoxicity profiling.
+</div>
+
+<div class="wrapper">
+
+<!-- Differentiation timeline -->
+<div class="diff-timeline">
+  <div class="diff-phase">
+    <div class="diff-day">Day 0–1</div>
+    <div class="diff-name">Wnt Activation</div>
+    <div class="diff-detail">CHIR99021 GSK3β inhibition. Mesoderm specification.</div>
+    <div class="diff-tag wnt">GiWi PROTOCOL</div>
+  </div>
+  <div class="diff-phase">
+    <div class="diff-day">Day 3–5</div>
+    <div class="diff-name">Wnt Inhibition</div>
+    <div class="diff-detail">IWP2/IWP4 Wnt antagonism. Cardiac mesoderm commitment.</div>
+    <div class="diff-tag wnt">SPECIFICATION</div>
+  </div>
+  <div class="diff-phase">
+    <div class="diff-day">Day 7–10</div>
+    <div class="diff-name">Spontaneous Beating</div>
+    <div class="diff-detail">First contractile activity. Visual QC of beating monolayers.</div>
+    <div class="diff-tag cardiac">CONTRACTION</div>
+  </div>
+  <div class="diff-phase">
+    <div class="diff-day">Day 10–15</div>
+    <div class="diff-name">Metabolic Selection</div>
+    <div class="diff-detail">Lactate media purification. Eliminate non-CM cells. >90% cTnT⁺.</div>
+    <div class="diff-tag cardiac">PURIFICATION</div>
+  </div>
+  <div class="diff-phase">
+    <div class="diff-day">Day 30–60+</div>
+    <div class="diff-name">Maturation</div>
+    <div class="diff-detail">Electrical pacing, substrate stiffness. Adult-like sarcomeric organization.</div>
+    <div class="diff-tag func">MATURATION</div>
+  </div>
+  <div class="diff-phase">
+    <div class="diff-day">Day 60+</div>
+    <div class="diff-name">Assay-Ready</div>
+    <div class="diff-detail">96/384-well formats. HCS, MEA, calcium, impedance compatible.</div>
+    <div class="diff-tag safety">SCREENING</div>
+  </div>
+</div>
+
+<!-- Four quadrant assays -->
+<div class="quad-grid">
+  <!-- MEA -->
+  <div class="quad">
+    <div class="quad-header">
+      <div class="quad-icon">MEA</div>
+      <div><div class="quad-title">Electrophysiology (MEA)</div><div class="quad-subtitle">Axion Maestro multiwell array</div></div>
+    </div>
+    <div class="quad-items">
+      <div class="quad-item"><div class="qi-label">Beat Rate</div><div class="qi-value">Spontaneous & paced. BPM across conditions.</div></div>
+      <div class="quad-item"><div class="qi-label">FPDc</div><div class="qi-value">Corrected field potential duration — QT prolongation surrogate.</div></div>
+      <div class="quad-item"><div class="qi-label">Conduction</div><div class="qi-value">Conduction velocity mapping. Arrhythmia detection.</div></div>
+      <div class="quad-item"><div class="qi-label">Drug Response</div><div class="qi-value">hERG blockers (Dofetilide, E-4031), isoproterenol, nifedipine.</div></div>
+    </div>
+  </div>
+
+  <!-- Calcium -->
+  <div class="quad">
+    <div class="quad-header">
+      <div class="quad-icon">Ca²⁺</div>
+      <div><div class="quad-title">Calcium Transient Imaging</div><div class="quad-subtitle">Fluo-4 / GCaMP reporters</div></div>
+    </div>
+    <div class="quad-items">
+      <div class="quad-item"><div class="qi-label">Amplitude</div><div class="qi-value">ΔF/F₀ peak calcium transient magnitude.</div></div>
+      <div class="quad-item"><div class="qi-label">CTD50/90</div><div class="qi-value">Calcium transient duration at 50% and 90% decay.</div></div>
+      <div class="quad-item"><div class="qi-label">Rise Time</div><div class="qi-value">Time to peak calcium — SR release kinetics.</div></div>
+      <div class="quad-item"><div class="qi-label">Irregularity</div><div class="qi-value">Beat-to-beat variability & arrhythmia scoring.</div></div>
+    </div>
+  </div>
+
+  <!-- Safety -->
+  <div class="quad">
+    <div class="quad-header">
+      <div class="quad-icon">Tox</div>
+      <div><div class="quad-title">Cardiotoxicity & Safety</div><div class="quad-subtitle">Multi-parameter injury endpoints</div></div>
+    </div>
+    <div class="quad-items">
+      <div class="quad-item"><div class="qi-label">cTnI / LDH</div><div class="qi-value">Cardiac troponin I and lactate dehydrogenase release — injury markers.</div></div>
+      <div class="quad-item"><div class="qi-label">hERG</div><div class="qi-value">Channel pharmacology — IC₅₀ determination for QT liability.</div></div>
+      <div class="quad-item"><div class="qi-label">Impedance</div><div class="qi-value">xCELLigence real-time monitoring. Continuous viability tracking.</div></div>
+      <div class="quad-item"><div class="qi-label">Structural</div><div class="qi-value">Sarcomeric disarray ICC. α-actinin, cTnT, connexin-43 integrity.</div></div>
+    </div>
+  </div>
+
+  <!-- HCS -->
+  <div class="quad">
+    <div class="quad-header">
+      <div class="quad-icon">HCS</div>
+      <div><div class="quad-title">High-Content Screening</div><div class="quad-subtitle">96/384-well automated imaging</div></div>
+    </div>
+    <div class="quad-items">
+      <div class="quad-item"><div class="qi-label">Viability</div><div class="qi-value">CellTiter-Glo, Live/Dead, Calcein/EthD-1 multiplexing.</div></div>
+      <div class="quad-item"><div class="qi-label">Morphology</div><div class="qi-value">Cell area, circularity, sarcomeric alignment quantification.</div></div>
+      <div class="quad-item"><div class="qi-label">Contractility</div><div class="qi-value">Video-based edge detection. Beat amplitude, frequency, relaxation.</div></div>
+      <div class="quad-item"><div class="qi-label">Dose-Response</div><div class="qi-value">8-point curves, IC₅₀/EC₅₀ fitting. Z-factor quality metrics.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Disease models -->
+<div class="disease-label">Disease Models Banked</div>
+<div class="disease-grid">
+  <div class="disease-card">
+    <div class="disease-name">Hypertrophic CM (HCM)</div>
+    <div class="disease-desc">MYH7 / MYBPC3 mutations. Sarcomeric hypertrophy, diastolic dysfunction.</div>
+  </div>
+  <div class="disease-card">
+    <div class="disease-name">Dilated CM (DCM)</div>
+    <div class="disease-desc">TTN / LMNA variants. Contractile impairment, reduced force generation.</div>
+  </div>
+  <div class="disease-card">
+    <div class="disease-name">Long QT Syndrome</div>
+    <div class="disease-desc">KCNQ1 / hERG mutations. Prolonged APD, arrhythmia liability.</div>
+  </div>
+  <div class="disease-card">
+    <div class="disease-name">Brugada Syndrome</div>
+    <div class="disease-desc">SCN5A variants. Conduction abnormalities, VF risk assessment.</div>
+  </div>
+  <div class="disease-card">
+    <div class="disease-name">Drug Cardiotoxicity</div>
+    <div class="disease-desc">Doxorubicin, tyrosine kinase inhibitors. Structural & functional injury profiling.</div>
+  </div>
+</div>
+
+</div>
+
+<script>
+</script>
+</body>
+</html>

@@ -1,0 +1,2591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>In Vivo Neuroscience — Armin Bayati, PhD</title>
+<meta name="description" content="Photothrombotic stroke model, perfusion fixation, toluidine blue histology, and transmission electron microscopy in adult mouse brain.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════
+   ARMIN BAYATI — DESIGN SYSTEM
+   Matching iPSC-Cardiomyocyte page aesthetic
+   ══════════════════════════════════════════════ */
+
+:root {
+  --ink: #0f1419;
+  --paper: #fafaf7;
+  --mid: #6b7280;
+  --accent: #c0392b;
+  --accent-soft: #e74c3c15;
+  --rule: #d4d0c8;
+  --card: #ffffff;
+  --section-bg: #f4f3ef;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+  --mono: 'IBM Plex Mono', 'Menlo', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAVIGATION ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 250, 247, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+  padding: 0 24px;
+}
+
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: auto;
+  padding: 10px 0;
+  gap: 16px;
+}
+
+.nav-brand {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--mid);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-brand:hover { color: var(--ink); }
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-logo {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+.nav-brand-text {
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  color: var(--ink);
+}
+.nav-brand:hover .nav-logo { color: var(--ink); }
+
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+  min-width: 0;
+}
+.nav-row {
+  display: flex;
+  gap: 1px;
+  justify-content: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.nav-row::-webkit-scrollbar { display: none; }
+
+.nav-links a {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  padding: 8px 11px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.nav-links a:hover { color: var(--ink); background: rgba(0,0,0,0.04); }
+.nav-links a.active { color: var(--accent); }
+
+/* Mobile nav toggle */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--mid);
+}
+.nav-toggle svg { display: block; }
+
+/* ── HERO ── */
+.hero {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 80px 32px 64px;
+}
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1.5px;
+  background: var(--accent);
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+  max-width: 780px;
+  margin-bottom: 28px;
+}
+
+.hero-description {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--mid);
+  max-width: 760px;
+  margin-bottom: 36px;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  padding: 5px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  color: var(--mid);
+  background: var(--card);
+}
+
+/* ── SECTIONS ── */
+.section {
+  border-top: 1px solid var(--rule);
+}
+
+.section-header {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 64px 32px 0;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.section-index {
+  position: sticky;
+  top: 80px;
+  padding-top: 4px;
+}
+
+.section-number {
+  font-family: var(--serif);
+  font-size: 4rem;
+  color: var(--rule);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.section-content {
+  padding-bottom: 20px;
+}
+
+.section-content h2 {
+  font-family: var(--serif);
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+
+.section-content h3 {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 32px;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+
+.section-content p {
+  font-size: 15.5px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #444;
+  max-width: 760px;
+  margin-bottom: 16px;
+}
+
+.section-content p strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.section-content a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.section-content a:hover {
+  border-bottom-color: var(--accent);
+}
+
+/* ── SUB-SECTION DIVIDER ── */
+.subsection {
+  margin-top: 48px;
+  padding-top: 36px;
+  border-top: 1px dashed var(--rule);
+}
+
+.subsection:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.subsection-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.subsection-label::before {
+  content: '→';
+  font-size: 13px;
+}
+
+/* ── FINDINGS STRIP ── */
+.findings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 28px 0 32px;
+  max-width: 760px;
+}
+
+.finding {
+  background: var(--card);
+  padding: 18px 20px;
+}
+
+.finding-value {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.finding-label {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--mid);
+  line-height: 1.4;
+}
+
+/* ── TIMELINE ── */
+.timeline {
+  margin: 32px 0;
+  max-width: 760px;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 28px;
+  padding-bottom: 32px;
+  border-left: 1.5px solid var(--rule);
+}
+.timeline-item:last-child { padding-bottom: 0; }
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--accent);
+}
+
+.timeline-year {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.timeline-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.timeline-desc {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--mid);
+}
+
+/* ── WORKFLOW STRIP ── */
+.workflow-strip {
+  background: var(--ink);
+  color: #fff;
+  padding: 48px 32px;
+}
+
+.workflow-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.workflow-inner h3 {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 28px;
+  color: rgba(255,255,255,0.9);
+}
+
+.workflow-steps {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+}
+
+.workflow-step {
+  flex: 1;
+  padding: 20px 24px;
+  border-left: 1px solid rgba(255,255,255,0.12);
+  position: relative;
+}
+.workflow-step:first-child { border-left: none; }
+
+.step-number {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.step-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: rgba(255,255,255,0.95);
+}
+
+.step-detail {
+  font-size: 12.5px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.55;
+}
+
+/* ── CARD GRID ── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 28px 0 32px;
+  max-width: 760px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 24px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+a.card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.card-desc {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.6;
+}
+
+/* ── IMAGE PLACEHOLDER ── */
+.image-placeholder {
+  background: var(--section-bg);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 48px 24px;
+  text-align: center;
+  margin: 20px 0 24px;
+  max-width: 760px;
+}
+
+.image-placeholder .ph-icon {
+  font-size: 28px;
+  color: var(--rule);
+  margin-bottom: 8px;
+}
+
+.image-placeholder .ph-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--mid);
+  letter-spacing: 0.5px;
+}
+
+/* ── INLINE LIST ── */
+.inline-list {
+  list-style: none;
+  margin: 16px 0;
+  max-width: 760px;
+}
+
+.inline-list li {
+  font-size: 14px;
+  font-weight: 300;
+  color: #444;
+  line-height: 1.7;
+  padding: 6px 0;
+  padding-left: 20px;
+  position: relative;
+}
+.inline-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 14px;
+  width: 6px;
+  height: 1.5px;
+  background: var(--accent);
+}
+
+/* ── PUBLICATION LIST ── */
+.pub-list {
+  margin: 20px 0;
+  max-width: 760px;
+}
+
+.pub-item {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.pub-item:last-child { border-bottom: none; }
+
+.pub-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.pub-authors {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.5;
+}
+
+.pub-journal {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: 0.3px;
+  margin-top: 4px;
+}
+
+/* ── CONTACT LINKS ── */
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 24px 0;
+  max-width: 400px;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.contact-link:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.contact-link .cl-icon {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  min-width: 60px;
+}
+
+/* ── FIGURE CONTAINER ── */
+.figure-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 12px 32px 64px;
+}
+
+.figure-frame {
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.03);
+}
+
+.figure-caption-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: var(--section-bg);
+  border-top: 1px solid var(--rule);
+  font-size: 12.5px;
+  color: var(--mid);
+}
+
+.figure-caption-bar .fig-label {
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── FOOTER ── */
+
+
+  .footer-inner { max-width: 1120px; margin: 0 auto; padding: 56px 32px 40px; display: flex; justify-content: space-between; gap: 48px; }
+  .footer-brand { max-width: 320px; }
+  .footer-name { font-family: var(--serif); font-size: 1.3rem; color: #fff; margin-bottom: 8px; }
+  .footer-role { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.6; }
+  .footer-links-grid { display: flex; gap: 56px; }
+  .footer-col { display: flex; flex-direction: column; gap: 8px; }
+  .footer-col-title { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .footer-col a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .footer-col a:hover { color: #fff; }
+  .footer-bottom { max-width: 1120px; margin: 0 auto; padding: 20px 32px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: rgba(255,255,255,0.3); text-align: center; }
+  @media (max-width: 768px) { .footer-inner { flex-direction: column; gap: 32px; } .footer-links-grid { flex-direction: column; gap: 24px; } }
+
+
+.footer-left {
+  font-size: 13px;
+  color: var(--mid);
+}
+
+.footer-left a {
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 500;
+}
+.footer-left a:hover { text-decoration: underline; }
+
+.footer-right {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-right a {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--mid);
+  text-decoration: none;
+  letter-spacing: 0.3px;
+}
+.footer-right a:hover { color: var(--ink); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow, .hero h1, .hero-description, .hero-tags {
+  animation: fadeUp 0.6s ease both;
+}
+.hero h1 { animation-delay: 0.1s; }
+.hero-description { animation-delay: 0.2s; }
+.hero-tags { animation-delay: 0.3s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    padding: 12px 20px;
+    gap: 4px;
+  }
+  .nav-links.open .nav-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .nav-toggle { display: block; }
+  .section-header {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 40px 20px 0;
+  }
+  .section-index {
+    position: static;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-number { font-size: 2rem; margin-bottom: 0; }
+  .hero { padding: 48px 20px 40px; }
+  .figure-container { padding: 12px 20px 48px; }
+  .workflow-steps { flex-direction: column; }
+  .workflow-step { border-left: none; border-top: 1px solid rgba(255,255,255,0.12); padding: 16px 0; }
+  .workflow-step:first-child { border-top: none; }
+  .findings { grid-template-columns: 1fr 1fr; }
+  .card-grid { grid-template-columns: 1fr; }
+  
+
+  .footer-inner { max-width: 1120px; margin: 0 auto; padding: 56px 32px 40px; display: flex; justify-content: space-between; gap: 48px; }
+  .footer-brand { max-width: 320px; }
+  .footer-name { font-family: var(--serif); font-size: 1.3rem; color: #fff; margin-bottom: 8px; }
+  .footer-role { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.6; }
+  .footer-links-grid { display: flex; gap: 56px; }
+  .footer-col { display: flex; flex-direction: column; gap: 8px; }
+  .footer-col-title { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .footer-col a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .footer-col a:hover { color: #fff; }
+  .footer-bottom { max-width: 1120px; margin: 0 auto; padding: 20px 32px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: rgba(255,255,255,0.3); text-align: center; }
+  @media (max-width: 768px) { .footer-inner { flex-direction: column; gap: 32px; } .footer-links-grid { flex-direction: column; gap: 24px; } }
+
+}
+
+
+/* ── GALLERY ── */
+.gallery {
+  margin: 20px 0 28px;
+  max-width: 760px;
+}
+.gallery-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--mid);
+  margin-bottom: 10px;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 6px;
+}
+.gallery-thumb {
+  aspect-ratio: 4/3;
+  border-radius: 4px;
+  border: 1px solid var(--rule);
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  background: var(--section-bg);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.gallery-thumb:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.gallery-thumb::after {
+  content: attr(data-caption);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.85));
+  color: rgba(255,255,255,0.95);
+  font-size: 11px;
+  font-style: italic;
+  line-height: 1.35;
+  padding: 28px 8px 8px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+.gallery-thumb:hover::after {
+  opacity: 1;
+}
+.gallery-thumb .thumb-index {
+  position: absolute;
+  bottom: 4px;
+  left: 6px;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: #fff;
+  background: rgba(0,0,0,0.55);
+  padding: 1px 5px;
+  border-radius: 2px;
+  letter-spacing: 0.3px;
+}
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(15,20,25,0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.lightbox.open { display: flex; }
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 78vh;
+  border-radius: 6px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+  object-fit: contain;
+}
+.lightbox-caption {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.7);
+  margin-top: 14px;
+  text-align: center;
+  max-width: 600px;
+}
+.lightbox-counter {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.5px;
+  margin-top: 6px;
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.6);
+  font-size: 28px;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+  font-family: var(--sans);
+}
+.lightbox-close:hover { color: #fff; background: rgba(255,255,255,0.1); }
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.5);
+  font-size: 36px;
+  cursor: pointer;
+  padding: 12px 16px;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+  font-family: var(--sans);
+}
+.lightbox-nav:hover { color: #fff; background: rgba(255,255,255,0.08); }
+.lightbox-prev { left: 16px; }
+.lightbox-next { right: 16px; }
+@media (max-width: 768px) {
+  .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+  .lightbox-nav { font-size: 24px; padding: 8px 12px; }
+}
+
+
+/* ── HIGH-TECH OVERLAY ── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(rgba(15,20,25,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15,20,25,0.015) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero-eyebrow::after {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+  margin-left: 4px;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(192,57,43,0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(192,57,43,0); }
+}
+
+.tag {
+  background: rgba(15,20,25,0.03);
+  border-color: rgba(15,20,25,0.12);
+  transition: all 0.25s ease;
+}
+.tag:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+.section-number {
+  background: linear-gradient(135deg, var(--rule) 0%, rgba(192,57,43,0.15) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.chart-container {
+  border-color: rgba(15,20,25,0.08);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.02);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.chart-container:hover {
+  border-color: rgba(192,57,43,0.2);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04);
+}
+
+.findings {
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.finding {
+  transition: background 0.2s ease;
+}
+.finding:hover {
+  background: rgba(192,57,43,0.02);
+}
+
+nav {
+  background: rgba(250, 250, 247, 0.88);
+  border-bottom-color: rgba(15,20,25,0.08);
+}
+
+.workflow-strip {
+  background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #0f1419 100%);
+  position: relative;
+  overflow: hidden;
+}
+.workflow-strip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+
+.gallery-thumb {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+.gallery-thumb:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+
+
+  .footer-inner { max-width: 1120px; margin: 0 auto; padding: 56px 32px 40px; display: flex; justify-content: space-between; gap: 48px; }
+  .footer-brand { max-width: 320px; }
+  .footer-name { font-family: var(--serif); font-size: 1.3rem; color: #fff; margin-bottom: 8px; }
+  .footer-role { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.6; }
+  .footer-links-grid { display: flex; gap: 56px; }
+  .footer-col { display: flex; flex-direction: column; gap: 8px; }
+  .footer-col-title { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .footer-col a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .footer-col a:hover { color: #fff; }
+  .footer-bottom { max-width: 1120px; margin: 0 auto; padding: 20px 32px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: rgba(255,255,255,0.3); text-align: center; }
+  @media (max-width: 768px) { .footer-inner { flex-direction: column; gap: 32px; } .footer-links-grid { flex-direction: column; gap: 24px; } }
+
+
+.nav-links a {
+  transition: all 0.2s ease;
+  position: relative;
+}
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 10px;
+  right: 10px;
+  height: 1.5px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+
+  /* ── DARK MODE ── */
+  .dark-toggle {
+    background: none; border: 1px solid var(--rule); border-radius: 50%;
+    width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 14px; color: var(--mid); transition: all 0.25s ease; flex-shrink: 0;
+  }
+  .dark-toggle:hover { border-color: var(--accent); color: var(--ink); }
+  html.dark {
+    --ink: #e8e6e1; --paper: #111318; --mid: #9ca3af; --rule: #2a2d35;
+    --card: #1a1d24; --section-bg: #15171d; --accent-soft: rgba(192,57,43,0.15);
+  }
+  html.dark body::before {
+    background: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  }
+  html.dark nav { background: rgba(17,19,24,0.92); }
+  html.dark .section-content p, html.dark .timeline-desc { color: rgba(232,230,225,0.6); }
+  html.dark .card, html.dark .finding { background: var(--card); border-color: var(--rule); }
+  html.dark .hero-photo { border-color: var(--rule); }
+  html.dark img { filter: brightness(0.92); }
+  html.dark .gallery-thumb { border-color: var(--rule); }
+  html.dark .chart-container { background: var(--card); border-color: var(--rule); }
+  a.tag { text-decoration: none; cursor: pointer; }
+  a.tag:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--ink); }
+
+
+  html.dark .page-footer { background: #0a0c10; }
+  html.dark .footer-name { color: #e8e6e1; }
+  html.dark .footer-role { color: rgba(232,230,225,0.5); }
+  html.dark .footer-col a { color: rgba(232,230,225,0.6); }
+  html.dark .footer-col a:hover { color: #e8e6e1; }
+  html.dark .footer-bottom { color: rgba(232,230,225,0.3); border-top-color: rgba(232,230,225,0.08); }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal { opacity: 0.35; transform: translateY(0); transition: opacity 0.7s ease, transform 0.5s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .page-footer { background: var(--ink); color: rgba(255,255,255,0.7); padding: 0; border-top: none; display: block; }
+  .footer-inner { max-width: 1120px; margin: 0 auto; padding: 56px 32px 40px; display: flex; justify-content: space-between; gap: 48px; }
+  .footer-brand { max-width: 320px; }
+  .footer-name { font-family: var(--serif); font-size: 1.3rem; color: #fff; margin-bottom: 8px; }
+  .footer-role { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.6; }
+  .footer-links-grid { display: flex; gap: 56px; }
+  .footer-col { display: flex; flex-direction: column; gap: 8px; }
+  .footer-col-title { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .footer-col a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .footer-col a:hover { color: #fff; }
+  .footer-bottom { max-width: 1120px; margin: 0 auto; padding: 20px 32px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: rgba(255,255,255,0.3); text-align: center; }
+  @media (max-width: 768px) { .footer-inner { flex-direction: column; gap: 32px; } .footer-links-grid { flex-direction: column; gap: 24px; } }
+
+
+
+/* ── SITE SEARCH ── */
+.search-toggle {
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--mid);
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+  margin-right: 4px;
+}
+.search-toggle:hover { border-color: var(--accent); color: var(--ink); }
+
+.search-result-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+.search-section-badge {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+.search-suggestion {
+  font-size: 12px;
+  color: var(--mid);
+  margin-top: 6px;
+}
+.search-result-desc {
+  font-size: 12px;
+  color: var(--mid);
+  line-height: 1.5;
+  margin-top: 2px;
+}
+.search-toggle svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(15,20,25,0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: min(18vh, 160px);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.search-overlay.active { display: flex; opacity: 1; }
+.search-overlay.fade-in { opacity: 1; }
+
+.search-modal {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  width: 92%;
+  max-width: 580px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.25), 0 0 0 1px rgba(0,0,0,0.04);
+  overflow: hidden;
+  transform: translateY(12px) scale(0.98);
+  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1);
+}
+.search-overlay.fade-in .search-modal {
+  transform: translateY(0) scale(1);
+}
+
+.search-input-wrap {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--rule);
+  gap: 12px;
+}
+.search-input-wrap svg { width: 18px; height: 18px; stroke: var(--mid); fill: none; stroke-width: 2; flex-shrink: 0; }
+.search-input {
+  flex: 1;
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 400;
+  border: none;
+  background: transparent;
+  color: var(--ink);
+  padding: 16px 0;
+  outline: none;
+}
+.search-input::placeholder { color: var(--mid); opacity: 0.7; }
+.search-kbd {
+  font-family: var(--mono);
+  font-size: 10px;
+  background: var(--section-bg);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 2px 6px;
+  color: var(--mid);
+  flex-shrink: 0;
+}
+
+.search-results {
+  max-height: 420px;
+  overflow-y: auto;
+  padding: 8px 0;
+  scrollbar-width: thin;
+}
+.search-results::-webkit-scrollbar { width: 4px; }
+.search-results::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 2px; }
+
+.search-result {
+  display: block;
+  padding: 12px 20px;
+  text-decoration: none;
+  transition: background 0.12s ease;
+  border-left: 3px solid transparent;
+}
+.search-result:hover, .search-result.active {
+  background: var(--accent-soft);
+  border-left-color: var(--accent);
+}
+.search-result-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+.search-result-page {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.search-result-desc {
+  font-size: 12.5px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.5;
+}
+.search-result mark {
+  background: rgba(192,57,43,0.15);
+  color: var(--ink);
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+.search-empty {
+  padding: 32px 20px;
+  text-align: center;
+  color: var(--mid);
+  font-size: 14px;
+  font-weight: 300;
+}
+.search-empty span { display: block; font-size: 28px; margin-bottom: 8px; }
+
+.search-footer {
+  border-top: 1px solid var(--rule);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--mid);
+  letter-spacing: 0.3px;
+}
+.search-footer-keys { display: flex; gap: 8px; align-items: center; }
+.search-footer-keys kbd {
+  font-family: var(--mono);
+  font-size: 10px;
+  background: var(--section-bg);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 1px 5px;
+  color: var(--mid);
+}
+
+html.dark .search-overlay { background: rgba(0,0,0,0.65); }
+html.dark .search-modal { background: var(--card); }
+html.dark .search-result mark { background: rgba(192,57,43,0.3); }
+
+
+
+/* ── INTERACTIVE FIGURE IFRAME ── */
+.interactive-fig-frame {
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 28px 0 32px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.02);
+  background: var(--card);
+}
+.interactive-fig-frame iframe {
+  width: 100%;
+  border: none;
+  display: block;
+  min-height: 580px;
+}
+.interactive-fig-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--section-bg);
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.interactive-fig-label .fig-desc {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 12.5px;
+  color: var(--mid);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* ══════════════════════════════════════════════
+   MOBILE OPTIMIZATION — Only affects <768px
+   Desktop layout is completely unchanged.
+   ══════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  /* ── Typography scaling ── */
+  body { font-size: 15px; }
+  .hero h1, h1 { font-size: clamp(1.6rem, 7vw, 2.2rem) !important; }
+  .section-content h2 { font-size: 1.35rem; }
+  .section-content h3 { font-size: 0.95rem; margin-top: 24px; }
+  .section-content p { font-size: 14.5px; line-height: 1.7; }
+  .hero-description { font-size: 15px !important; line-height: 1.65 !important; }
+
+  /* ── Hero section ── */
+  .hero {
+    padding: 36px 16px 32px !important;
+    flex-direction: column-reverse !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 20px !important;
+  }
+  .hero-photo {
+    width: 140px !important;
+    height: 140px !important;
+    margin: 0 auto 4px !important;
+  }
+  .hero-eyebrow { justify-content: center; font-size: 11px; }
+  .hero-tags { justify-content: center; gap: 6px; }
+  .hero-cta { justify-content: center !important; }
+  .hero-description {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 100% !important;
+  }
+  .tag { font-size: 10px; padding: 4px 10px; }
+  .btn-primary, .btn-secondary { font-size: 11px; padding: 10px 20px; }
+
+  /* ── Navigation ── */
+  nav { padding: 0 12px !important; }
+  .nav-inner { padding: 8px 0 !important; gap: 8px !important; }
+  .nav-brand { font-size: 11px; }
+  .search-toggle, .dark-toggle { width: 28px; height: 28px; }
+  .search-toggle svg { width: 13px; height: 13px; }
+
+  /* ── Sections ── */
+  .section-header {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    padding: 32px 16px 0 !important;
+  }
+  .section-index {
+    position: static !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+  .section-number { font-size: 1.8rem !important; margin-bottom: 0 !important; }
+  .section-label { font-size: 10px; }
+  .section-content { padding-bottom: 32px; }
+  .section-content p { max-width: 100%; }
+
+  /* ── Figures & images ── */
+  .figure-container { padding: 8px 16px 36px !important; }
+  figure { margin: 0 !important; }
+  figure img, .section-content img {
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 12px 0 8px !important;
+  }
+  figcaption {
+    font-size: 12px !important;
+    max-width: 100% !important;
+    padding: 0 4px !important;
+  }
+
+  /* ── Gallery grid — 2 columns on mobile ── */
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 4px !important;
+  }
+  .gallery-thumb::after {
+    font-size: 9px !important;
+    padding: 20px 6px 6px !important;
+  }
+  .gallery-label { font-size: 11px; padding: 8px 12px; }
+
+  /* ── Findings grid ── */
+  .findings {
+    grid-template-columns: 1fr 1fr !important;
+    margin: 16px 0 20px !important;
+    max-width: 100% !important;
+  }
+  .finding { padding: 14px 16px; }
+  .finding-value { font-size: 1.2rem; }
+  .finding-label { font-size: 11px; }
+
+  /* ── Workflow strip ── */
+  .workflow-strip { padding: 32px 16px !important; }
+  .workflow-steps { flex-direction: column !important; }
+  .workflow-step {
+    border-left: none !important;
+    border-top: 1px solid rgba(255,255,255,0.12) !important;
+    padding: 14px 0 !important;
+  }
+  .workflow-step:first-child { border-top: none !important; }
+  .step-title { font-size: 13px; }
+  .step-detail { font-size: 12px; }
+
+  /* ── Highlights strip ── */
+  .highlights-strip { padding: 28px 16px; }
+  .highlights-inner {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .highlight-title { font-size: 12.5px; }
+  .highlight-desc { font-size: 11px; }
+  .highlight-icon { font-size: 18px; }
+
+  /* ── News items ── */
+  .news-item { flex-direction: column; gap: 4px; padding: 12px 0; }
+  .news-date { min-width: auto; }
+  .news-body { font-size: 13.5px; }
+
+  /* ── Timeline ── */
+  .timeline { margin: 20px 0; }
+  .timeline-item { padding-left: 20px; padding-bottom: 24px; }
+  .timeline-title { font-size: 14px; }
+  .timeline-desc { font-size: 13px; }
+
+  /* ── Publication list ── */
+  .pub-item { padding: 12px 0; }
+  .pub-title { font-size: 14px; }
+  .pub-authors { font-size: 12px; }
+  .pub-journal { font-size: 10px; }
+
+  /* ── Contact links ── */
+  .contact-links { max-width: 100%; }
+  .contact-link { padding: 12px 14px; font-size: 13px; }
+
+  /* ── Footer ── */
+  .page-footer { margin-top: 0; }
+  .footer-inner {
+    flex-direction: column !important;
+    gap: 28px !important;
+    padding: 36px 16px 28px !important;
+  }
+  .footer-brand { max-width: 100%; }
+  .footer-name { font-size: 1.1rem; }
+  .footer-links-grid {
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+  .footer-bottom { padding: 16px; font-size: 11px; }
+
+  /* ── Search overlay ── */
+  .search-modal { width: 96%; max-width: none; border-radius: 8px; }
+  .search-overlay { padding-top: 10vh; }
+  .search-input { font-size: 15px; }
+  .search-result { padding: 10px 16px; }
+  .search-result-title { font-size: 13px; }
+  .search-result-desc { font-size: 11px; }
+
+  /* ── Inline grids with style attributes (VC page etc) ── */
+  [style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Card grids ── */
+  .card-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+  .research-grid {
+    grid-template-columns: 1fr !important;
+    padding: 0 16px 32px !important;
+    gap: 12px !important;
+  }
+  .research-tile { padding: 18px 16px 14px; }
+  .tile-desc { font-size: 12px; }
+
+  /* ── Lightbox ── */
+  .lightbox-img { max-width: 98vw !important; max-height: 80vh !important; }
+  .lightbox-caption { font-size: 12px !important; padding: 8px 16px !important; }
+}
+
+/* ── Extra small screens (≤ 480px) ── */
+@media (max-width: 480px) {
+  .hero h1, h1 { font-size: clamp(1.4rem, 6vw, 1.8rem) !important; }
+  .hero-description { font-size: 14px !important; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .findings { grid-template-columns: 1fr !important; }
+  .tag { font-size: 9.5px; padding: 3px 8px; }
+  .hero-tags { gap: 5px; }
+  .section-header { padding: 24px 12px 0 !important; }
+  .section-content { padding-bottom: 24px; }
+  .figure-container { padding: 8px 12px 28px !important; }
+  .workflow-strip { padding: 24px 12px !important; }
+  .footer-inner { padding: 28px 12px 20px !important; }
+}
+
+/* ── Touch-friendly improvements ── */
+@media (hover: none) and (pointer: coarse) {
+  /* Show gallery captions always on touch (no hover) */
+  .gallery-thumb::after {
+    opacity: 1 !important;
+    background: linear-gradient(transparent 30%, rgba(0,0,0,0.7)) !important;
+    font-size: 9px !important;
+  }
+  /* Bigger tap targets */
+  .nav-links a { padding: 10px 12px !important; min-height: 44px; display: flex; align-items: center; }
+  .nav-toggle { min-width: 44px; min-height: 44px; }
+  .search-toggle, .dark-toggle { min-width: 36px; min-height: 36px; }
+  .contact-link { min-height: 48px; }
+  .tag { min-height: 36px; display: inline-flex; align-items: center; }
+  .btn-primary, .btn-secondary { min-height: 44px; }
+  /* Remove hover effects on touch */
+  .gallery-thumb:hover { transform: none; box-shadow: none; }
+  .research-tile:hover { transform: none; }
+}
+
+
+/* ── CHART CONTAINER ── */
+.chart-container {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 28px 24px;
+  margin: 24px 0;
+  max-width: 760px;
+}
+.chart-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.chart-subtitle {
+  font-size: 12.5px;
+  font-weight: 300;
+  color: var(--mid);
+  margin-bottom: 16px;
+}
+.chart-wrap {
+  position: relative;
+  height: 280px;
+}
+
+/* ── DOWNLOAD CARDS ── */
+.download-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  margin-bottom: 12px;
+  max-width: 760px;
+}
+.download-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.download-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background: var(--accent-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.download-info { flex: 1; }
+.download-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.download-desc {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.5;
+}
+.download-meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent);
+  margin-top: 6px;
+  letter-spacing: 0.3px;
+}
+
+/* ── PROTOCOL SVG ── */
+.protocol-svg-wrap {
+  margin: 28px 0 32px;
+  max-width: 760px;
+  overflow-x: auto;
+}
+.protocol-svg-wrap svg {
+  display: block;
+}
+
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body><script>if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark');</script>
+
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand"><svg class="nav-logo" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1" y="1" width="26" height="26" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="14" y="19.5" text-anchor="middle" font-family="'DM Serif Display',Georgia,serif" font-size="15" font-weight="400" fill="currentColor">AB</text>
+</svg><span class="nav-brand-text">Armin Bayati</span></a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="17" y2="6"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14" x2="17" y2="14"/></svg>
+    </button>
+    <div class="nav-links">
+      <div class="nav-row">
+        <a href="index.html">Home</a>
+        <a href="ipscs.html">iPSC Neurons</a>
+        <a href="cardiomyocytes.html">Cardiomyocytes</a>
+        <a href="cancer-immunology.html">Cancer Immunology</a>
+        <a href="cellular-assays.html">Cellular Assays</a>
+        <a href="genetics.html">Genetics</a>
+        <a href="drug-discovery.html">Drug Discovery</a>
+      </div>
+      <div class="nav-row">
+        <a href="microscopy.html">Microscopy</a>
+        <a href="flow-cytometry.html">Flow Cytometry</a>
+        <a href="proteomics.html">Proteomics</a>
+        <a href="in-vivo.html" class="active">In Vivo</a>
+        <a href="coding.html">Coding &amp; Data</a>
+        <a href="skills.html">Technical Skills</a>
+        <a href="publications.html">Publications</a>
+        <a href="vc-portfolio.html">Portfolio &amp; VC</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div><button class="search-toggle" aria-label="Search site" title="Search (⌘K)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button><button class="dark-toggle" onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light')" aria-label="Toggle dark mode" title="Toggle dark mode">☀</button>
+
+  </div>
+</nav>
+
+
+
+<!-- SITE SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-modal">
+    <div class="search-input-wrap">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search pages, topics, techniques..." autocomplete="off" spellcheck="false">
+      <span class="search-kbd">ESC</span>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+    <div class="search-footer">
+      <div class="search-footer-keys">
+        <kbd>&uarr;</kbd><kbd>&darr;</kbd> navigate &nbsp;
+        <kbd>&crarr;</kbd> open
+      </div>
+      <span>Site Search</span>
+    </div>
+  </div>
+</div>
+
+
+<div class="hero">
+  <div class="hero-eyebrow">In Vivo Neuroscience</div>
+  <h1>Ischemic Stroke &amp; Ultrastructural Analysis</h1>
+  <p class="hero-description">
+    Investigation of neuronal and glial cell structure in the peri-infarct zone following photothrombotic stroke in adult mice. Combining toluidine blue histology with transmission electron microscopy to characterize ultrastructural changes at the synapse, astrocyte, and mitochondrial level.
+  </p>
+  <div class="hero-tags">
+    <a class="tag" href="#stroke-model">Photothrombotic Stroke</a>
+    <a class="tag" href="#tissue-processing">Perfusion Fixation</a>
+    <a class="tag" href="#tissue-processing">Vibratome Sectioning</a>
+    <a class="tag" href="#light-microscopy">Toluidine Blue</a>
+    <a class="tag" href="#tissue-processing">Spurr's Resin Embedding</a>
+    <a class="tag" href="#electron-microscopy">Transmission EM</a>
+    <a class="tag" href="#electron-microscopy">Ultramicrotomy</a>
+    <a class="tag" href="#quantitative-results">Morphometric Analysis</a>
+    <a class="tag" href="#synaptic-ultrastructure">Pseudocoloring</a>
+    <a class="tag" href="#quantitative-results">ImageJ Analysis</a>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- SECTION 01 — STROKE MODEL                       -->
+<!-- ════════════════════════════════════════════════ -->
+<div class="section reveal" id="stroke-model">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">01</div>
+      <div class="section-label">Animal Model</div>
+    </div>
+    <div class="section-content">
+      <h2>Photothrombotic Stroke Model</h2>
+      <p>Focal unilateral stroke was induced in the <strong>somatosensory cortex</strong> (SSC) corresponding to the forelimb representation in adult mice (3 and 18 months, n = 5). Rose Bengal (110 mg/kg, IP) was administered as a photosensitizing agent, followed by targeted illumination with a <strong>green laser</strong> (532 nm, 17 mW, 15 min) through a thinned skull window. No craniotomy was needed — the skull was thinned to ~50% thickness with a dental drill under stereotaxic guidance.</p>
+      <p>Following 72 hours of recovery, mice were deeply anesthetized and prepared for <strong>transcardial perfusion fixation</strong> to preserve ultrastructure for both light and electron microscopy.</p>
+
+      <div class="findings">
+        <div class="finding">
+          <div class="finding-value">532 nm</div>
+          <div class="finding-label">Green laser wavelength</div>
+        </div>
+        <div class="finding">
+          <div class="finding-value">15 min</div>
+          <div class="finding-label">Illumination duration</div>
+        </div>
+        <div class="finding">
+          <div class="finding-value">72 h</div>
+          <div class="finding-label">Recovery period</div>
+        </div>
+        <div class="finding">
+          <div class="finding-value">n = 5</div>
+          <div class="finding-label">Adult mice (C57BL/6)</div>
+        </div>
+      </div>
+
+      <div class="protocol-svg-wrap">
+        <svg viewBox="0 0 860 200" width="860" xmlns="http://www.w3.org/2000/svg" style="font-family: 'IBM Plex Sans', sans-serif;">
+          <!-- Step boxes -->
+          <g transform="translate(0,30)">
+            <!-- Step 1 -->
+            <rect x="0" y="0" width="110" height="80" rx="6" fill="none" stroke="#c0392b" stroke-width="1.5"/>
+            <text x="55" y="30" text-anchor="middle" font-size="12" font-weight="600" fill="#0f1419">Anesthesia</text>
+            <text x="55" y="48" text-anchor="middle" font-size="10" fill="#6b7280">1.5% Isoflurane</text>
+            <text x="55" y="62" text-anchor="middle" font-size="10" fill="#6b7280">Stereotaxic frame</text>
+            <!-- Arrow -->
+            <polygon points="118,40 130,34 130,46" fill="#d4d0c8"/>
+            
+            <!-- Step 2 -->
+            <rect x="138" y="0" width="110" height="80" rx="6" fill="none" stroke="#c0392b" stroke-width="1.5"/>
+            <text x="193" y="30" text-anchor="middle" font-size="12" font-weight="600" fill="#0f1419">Skull Thinning</text>
+            <text x="193" y="48" text-anchor="middle" font-size="10" fill="#6b7280">Dental drill</text>
+            <text x="193" y="62" text-anchor="middle" font-size="10" fill="#6b7280">50% thickness</text>
+            <polygon points="256,40 268,34 268,46" fill="#d4d0c8"/>
+
+            <!-- Step 3 -->
+            <rect x="276" y="0" width="110" height="80" rx="6" fill="#c0392b08" stroke="#c0392b" stroke-width="1.5"/>
+            <text x="331" y="30" text-anchor="middle" font-size="12" font-weight="600" fill="#0f1419">Rose Bengal</text>
+            <text x="331" y="48" text-anchor="middle" font-size="10" fill="#6b7280">110 mg/kg IP</text>
+            <text x="331" y="62" text-anchor="middle" font-size="10" fill="#6b7280">Photosensitizer</text>
+            <polygon points="394,40 406,34 406,46" fill="#d4d0c8"/>
+
+            <!-- Step 4 -->
+            <rect x="414" y="0" width="110" height="80" rx="6" fill="#c0392b08" stroke="#c0392b" stroke-width="1.5"/>
+            <text x="469" y="30" text-anchor="middle" font-size="12" font-weight="600" fill="#0f1419">Green Laser</text>
+            <text x="469" y="48" text-anchor="middle" font-size="10" fill="#6b7280">532 nm, 17 mW</text>
+            <text x="469" y="62" text-anchor="middle" font-size="10" fill="#6b7280">15 min illumination</text>
+            <polygon points="532,40 544,34 544,46" fill="#d4d0c8"/>
+
+            <!-- Step 5 -->
+            <rect x="552" y="0" width="110" height="80" rx="6" fill="none" stroke="#d4d0c8" stroke-width="1.5"/>
+            <text x="607" y="30" text-anchor="middle" font-size="12" font-weight="600" fill="#0f1419">Recovery</text>
+            <text x="607" y="48" text-anchor="middle" font-size="10" fill="#6b7280">72 hours</text>
+            <text x="607" y="62" text-anchor="middle" font-size="10" fill="#6b7280">Post-stroke</text>
+            <polygon points="670,40 682,34 682,46" fill="#d4d0c8"/>
+
+            <!-- Step 6 -->
+            <rect x="690" y="0" width="150" height="80" rx="6" fill="none" stroke="#c0392b" stroke-width="1.5"/>
+            <text x="765" y="30" text-anchor="middle" font-size="12" font-weight="600" fill="#0f1419">Perfusion Fixation</text>
+            <text x="765" y="48" text-anchor="middle" font-size="10" fill="#6b7280">2% Glut + 2% PFA</text>
+            <text x="765" y="62" text-anchor="middle" font-size="10" fill="#6b7280">Cacodylate buffer</text>
+          </g>
+
+          <!-- Timeline bar -->
+          <line x1="55" y1="130" x2="765" y2="130" stroke="#d4d0c8" stroke-width="2" stroke-dasharray="4,4"/>
+          <text x="55" y="152" text-anchor="middle" font-size="9" font-family="'IBM Plex Mono', monospace" fill="#c0392b" letter-spacing="0.5">T = 0</text>
+          <text x="607" y="152" text-anchor="middle" font-size="9" font-family="'IBM Plex Mono', monospace" fill="#c0392b" letter-spacing="0.5">T + 72h</text>
+          <text x="765" y="152" text-anchor="middle" font-size="9" font-family="'IBM Plex Mono', monospace" fill="#c0392b" letter-spacing="0.5">FIXATION</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- SECTION 02 — TISSUE PROCESSING                  -->
+<!-- ════════════════════════════════════════════════ -->
+<div class="section reveal" id="tissue-processing">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">02</div>
+      <div class="section-label">Tissue Processing</div>
+    </div>
+    <div class="section-content">
+      <h2>Perfusion, Fixation &amp; Embedding</h2>
+      <p>Transcardial perfusion with heparinized PBS (5 min) followed by <strong>2% glutaraldehyde + 2% paraformaldehyde</strong> in 0.15M cacodylate buffer. Post-fixation in <strong>1% OsO₄-potassium ferrocyanide</strong> (2 h), en bloc uranyl acetate staining (2 h), ascending ethanol dehydration (50–100%), and infiltration with <strong>Spurr's resin</strong>. Tissue embedded in BEEM capsules at 60 °C for 48 h.</p>
+      <p>Coronal sections (200 µm) cut on a <strong>Leica VT1000S vibratome</strong>. Under stereomicroscope, 1 mm² tissue blocks microdissected from the peri-infarct zone and contralateral control hemisphere.</p>
+
+      <div class="protocol-svg-wrap">
+        <svg viewBox="0 0 860 260" width="860" xmlns="http://www.w3.org/2000/svg" style="font-family: 'IBM Plex Sans', sans-serif;">
+          <!-- Title: Perfusion & Fixation row -->
+          <text x="0" y="16" font-size="11" font-weight="600" font-family="'IBM Plex Mono', monospace" fill="#c0392b" letter-spacing="1" text-transform="uppercase">PERFUSION &amp; FIXATION</text>
+          
+          <g transform="translate(0,28)">
+            <rect x="0" y="0" width="120" height="64" rx="5" fill="#c0392b08" stroke="#c0392b" stroke-width="1.2"/>
+            <text x="60" y="26" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f1419">PBS Flush</text>
+            <text x="60" y="42" text-anchor="middle" font-size="10" fill="#6b7280">5 min, heparinized</text>
+            <polygon points="128,32 138,26 138,38" fill="#d4d0c8"/>
+
+            <rect x="146" y="0" width="140" height="64" rx="5" fill="#c0392b08" stroke="#c0392b" stroke-width="1.2"/>
+            <text x="216" y="26" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f1419">Glut + PFA (2%)</text>
+            <text x="216" y="42" text-anchor="middle" font-size="10" fill="#6b7280">Cacodylate buffer</text>
+            <polygon points="294,32 304,26 304,38" fill="#d4d0c8"/>
+
+            <rect x="312" y="0" width="140" height="64" rx="5" fill="none" stroke="#c0392b" stroke-width="1.2"/>
+            <text x="382" y="26" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f1419">OsO₄ + Ferrocyanide</text>
+            <text x="382" y="42" text-anchor="middle" font-size="10" fill="#6b7280">2 hours post-fix</text>
+            <polygon points="460,32 470,26 470,38" fill="#d4d0c8"/>
+
+            <rect x="478" y="0" width="130" height="64" rx="5" fill="none" stroke="#c0392b" stroke-width="1.2"/>
+            <text x="543" y="26" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f1419">Uranyl Acetate</text>
+            <text x="543" y="42" text-anchor="middle" font-size="10" fill="#6b7280">En bloc, 2 hours</text>
+          </g>
+
+          <!-- Dehydration row -->
+          <text x="0" y="128" font-size="11" font-weight="600" font-family="'IBM Plex Mono', monospace" fill="#c0392b" letter-spacing="1" text-transform="uppercase">DEHYDRATION &amp; EMBEDDING</text>
+          
+          <g transform="translate(0,140)">
+            <rect x="0" y="0" width="80" height="50" rx="4" fill="none" stroke="#d4d0c8" stroke-width="1.2"/>
+            <text x="40" y="22" text-anchor="middle" font-size="11" font-weight="500" fill="#0f1419">50% EtOH</text>
+            <polygon points="86,25 94,20 94,30" fill="#d4d0c8"/>
+
+            <rect x="100" y="0" width="80" height="50" rx="4" fill="none" stroke="#d4d0c8" stroke-width="1.2"/>
+            <text x="140" y="22" text-anchor="middle" font-size="11" font-weight="500" fill="#0f1419">70% EtOH</text>
+            <polygon points="186,25 194,20 194,30" fill="#d4d0c8"/>
+
+            <rect x="200" y="0" width="80" height="50" rx="4" fill="none" stroke="#d4d0c8" stroke-width="1.2"/>
+            <text x="240" y="22" text-anchor="middle" font-size="11" font-weight="500" fill="#0f1419">90% EtOH</text>
+            <polygon points="286,25 294,20 294,30" fill="#d4d0c8"/>
+
+            <rect x="300" y="0" width="90" height="50" rx="4" fill="none" stroke="#d4d0c8" stroke-width="1.2"/>
+            <text x="345" y="22" text-anchor="middle" font-size="11" font-weight="500" fill="#0f1419">100% EtOH</text>
+            <polygon points="396,25 404,20 404,30" fill="#d4d0c8"/>
+
+            <rect x="410" y="0" width="110" height="50" rx="4" fill="#c0392b08" stroke="#c0392b" stroke-width="1.2"/>
+            <text x="465" y="22" text-anchor="middle" font-size="11" font-weight="600" fill="#0f1419">Spurr's Resin</text>
+            <text x="465" y="38" text-anchor="middle" font-size="9.5" fill="#6b7280">Infiltration</text>
+            <polygon points="526,25 534,20 534,30" fill="#d4d0c8"/>
+
+            <rect x="540" y="0" width="130" height="50" rx="4" fill="#c0392b08" stroke="#c0392b" stroke-width="1.2"/>
+            <text x="605" y="22" text-anchor="middle" font-size="11" font-weight="600" fill="#0f1419">BEEM Capsule</text>
+            <text x="605" y="38" text-anchor="middle" font-size="9.5" fill="#6b7280">60 °C, 48 h cure</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="findings">
+        <div class="finding">
+          <div class="finding-value">200 µm</div>
+          <div class="finding-label">Vibratome section thickness</div>
+        </div>
+        <div class="finding">
+          <div class="finding-value">1 mm²</div>
+          <div class="finding-label">Microdissected block</div>
+        </div>
+        <div class="finding">
+          <div class="finding-value">0.5 µm</div>
+          <div class="finding-label">Semithin (toluidine blue)</div>
+        </div>
+        <div class="finding">
+          <div class="finding-value">70–80 nm</div>
+          <div class="finding-label">Ultrathin (TEM)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- SECTION 03 — LIGHT MICROSCOPY                   -->
+<!-- ════════════════════════════════════════════════ -->
+<div class="section reveal" id="light-microscopy">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">03</div>
+      <div class="section-label">Histology</div>
+    </div>
+    <div class="section-content">
+      <h2>Toluidine Blue Light Microscopy</h2>
+      <p>Semithin sections (~0.5 µm) were cut with glass knives on a <strong>Reichert-Jung UltraCut E</strong> ultramicrotome, stained with toluidine blue, and imaged on an <strong>Olympus BX51</strong> light microscope with a DP73 camera at 4800 × 3600 px resolution. These sections served as orientation for subsequent ultrathin sectioning and quality control.</p>
+
+      <div class="subsection" id="cortical-layers">
+        <div class="subsection-label">Cortical Layer Architecture</div>
+        <p>Toluidine blue staining reveals the full laminar architecture of the adult mouse somatosensory cortex (layers 1–6). Capillaries (Cap), pyramidal neurons (Pyr), and glial cells (GC) are readily identified in the control hemisphere.</p>
+        <figure style="margin:20px 0 24px;">
+          <img src="images/invivo-cortex-layers-toluidine.jpg" alt="Toluidine blue stained layers 1-6 of adult mouse somatosensory cortex" style="width:100%; max-width:500px; border-radius:6px; border:1px solid var(--rule);" loading="lazy">
+          <figcaption style="font-size:12.5px; color:var(--mid); margin-top:8px; line-height:1.5; max-width:500px;">Toluidine blue light micrograph showing cortical layers 1–6 of the adult mouse SSC. Capillaries (Cap), pyramidal neurons (Pyr), and glial cells (GC) annotated. Semithin section (0.5 µm). From Bayati, BSc Honours Thesis 2018.</figcaption>
+        </figure>
+      </div>
+
+      <div class="subsection" id="ischemic-zones">
+        <div class="subsection-label">Ischemic Tissue Zones</div>
+        <p>The photothrombotic lesion creates three distinct zones visible at low magnification: the intact zone (normal cytoarchitecture), the <strong>peri-infarct zone</strong> (PI — compromised but recoverable tissue), and the <strong>necrotic core</strong> (complete tissue destruction with pyknotic nuclei).</p>
+        <figure style="margin:20px 0 24px;">
+          <img src="images/invivo-ischemic-zones-toluidine.jpg" alt="Toluidine blue section showing intact zone, peri-infarct, and necrotic core" style="width:100%; max-width:560px; border-radius:6px; border:1px solid var(--rule);" loading="lazy">
+          <figcaption style="font-size:12.5px; color:var(--mid); margin-top:8px; line-height:1.5; max-width:560px;">Ischemic tissue showing the three zones: intact zone with normal pyramidal neurons (Pyr), peri-infarct zone with reduced capillary density (Cap), and necrotic core with pyknotic nuclei (Pkn). Dashed lines indicate zone boundaries. From Bayati, BSc Honours Thesis 2018.</figcaption>
+        </figure>
+      </div>
+
+      <div class="subsection" id="peri-infarct-detail">
+        <div class="subsection-label">Peri-Infarct Zone Detail</div>
+        <p>Higher magnification of the ischemic border region reveals the gradual transition from intact tissue to necrotic core. Within the peri-infarct zone, there is a progressive loss of recognizable capillaries, decreased concentration of pyramidal neurons, and compromised blood-brain barrier morphology evidenced by perivascular vacuoles.</p>
+        <figure style="margin:20px 0 24px;">
+          <img src="images/invivo-peri-infarct-detail.jpg" alt="High magnification toluidine blue showing peri-infarct zone detail" style="width:100%; max-width:500px; border-radius:6px; border:1px solid var(--rule);" loading="lazy">
+          <figcaption style="font-size:12.5px; color:var(--mid); margin-top:8px; line-height:1.5; max-width:500px;">Higher magnification view of the three regions near the necrotic focal point. The peri-infarct zone shows compromised cellular ultrastructure while maintaining overall morphological integrity compared to the necrotic core. From Bayati, BSc Honours Thesis 2018.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- SECTION 04 — ELECTRON MICROSCOPY                -->
+<!-- ════════════════════════════════════════════════ -->
+<div class="section reveal" id="electron-microscopy">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">04</div>
+      <div class="section-label">Electron Microscopy</div>
+    </div>
+    <div class="section-content">
+      <h2>Transmission Electron Microscopy</h2>
+      <p>Ultrathin sections (70–80 nm) were cut with a <strong>Diatome diamond knife</strong> on the UltraCut E, collected on 200-hex copper mesh grids, and imaged at 80 kV on a <strong>JEOL JEM-1400</strong> TEM equipped with a Gatan Orius SC1000 CCD camera (4008 × 2672 px). Key subcellular structures were pseudocolored in Adobe Photoshop to enhance visualization and enable morphometric quantification in ImageJ.</p>
+
+      <div class="subsection" id="synaptic-ultrastructure">
+        <div class="subsection-label">Pseudocolored Ultrastructure Overview</div>
+        <p>Low-magnification pseudocolored EM panorama showing the neuropil of the contralateral (control) SSC. <strong>Pyramidal neurons</strong> (blue) display characteristic round morphology with prominent nucleoli, surrounded by <strong>astrocytic processes</strong> (yellow) and <strong>mitochondria</strong> (red). Synaptic contacts with pre- and post-synaptic elements visible throughout the neuropil.</p>
+        <figure style="margin:20px 0 24px;">
+          <img src="images/invivo-em-pseudocolor-overview.jpg" alt="Pseudocolored TEM overview showing neurons (blue), astrocytes (yellow), mitochondria (red)" style="width:100%; max-width:560px; border-radius:6px; border:1px solid var(--rule);" loading="lazy">
+          <figcaption style="font-size:12.5px; color:var(--mid); margin-top:8px; line-height:1.5; max-width:560px;">Pseudocolored TEM panorama of control SSC neuropil. Pyramidal neurons (blue), astrocytic processes (yellow), mitochondria (red), pre-synaptic terminals (green). From Bayati, BSc Honours Thesis 2018.</figcaption>
+        </figure>
+      </div>
+
+      <div class="subsection" id="synaptic-classification">
+        <div class="subsection-label">Synaptic Classification</div>
+        <p>Synapses were classified and pseudocolored for morphometric analysis. <strong>Presynaptic terminals</strong> (green) contain synaptic vesicles and interface with <strong>postsynaptic structures</strong> (blue). The dendrite shown here features multiple synaptic contacts including both excitatory (round vesicles, large PSD) and inhibitory (flattened vesicles) types.</p>
+        <figure style="margin:20px 0 24px;">
+          <img src="images/invivo-em-pyramidal-dendrite.jpg" alt="Pseudocolored pyramidal neuron dendrite with synaptic contacts" style="width:100%; max-width:440px; border-radius:6px; border:1px solid var(--rule);" loading="lazy">
+          <figcaption style="font-size:12.5px; color:var(--mid); margin-top:8px; line-height:1.5; max-width:440px;">Pyramidal neuron dendrite (blue) with associated mitochondria (pink/red) and synaptic contacts (green presynaptic terminals). From Bayati, BSc Honours Thesis 2018.</figcaption>
+        </figure>
+      </div>
+
+      <div class="subsection" id="control-neurons">
+        <div class="subsection-label">Control Pyramidal Neurons</div>
+        <p>In the contralateral (uninjured) hemisphere, pyramidal neurons display <strong>round, electron-lucent morphology</strong> with intact nuclear envelopes, prominent nucleoli, and well-organized cytoplasmic organelles. Astrocytes (wavy arrows) occupy relatively limited space in the surrounding neuropil.</p>
+        <figure style="margin:20px 0 24px;">
+          <img src="images/invivo-em-control-pyramidal.jpg" alt="Control pyramidal neurons with healthy round morphology in contralateral SSC" style="width:100%; max-width:560px; border-radius:6px; border:1px solid var(--rule);" loading="lazy">
+          <figcaption style="font-size:12.5px; color:var(--mid); margin-top:8px; line-height:1.5; max-width:560px;">Pyramidal neurons (blue) within the contralateral SSC exhibiting round morphology with intact cellular processes (arrows) and healthy astrocytes (wavy arrows). From Bayati, BSc Honours Thesis 2018.</figcaption>
+        </figure>
+      </div>
+
+      <div class="subsection" id="pi-neurons">
+        <div class="subsection-label">Peri-Infarct Neuronal Degeneration</div>
+        <p>Progressive neuronal degeneration is observed with increasing proximity to the infarct core. <strong>Distal PI neurons</strong> show early cytoplasmic darkening with partial organellar preservation and microglia encroachment. <strong>Proximal PI neurons</strong> display advanced degeneration — swollen mitochondria, disrupted endoplasmic reticulum, and vacuolization of the surrounding neuropil.</p>
+        <figure style="margin:20px 0 24px;">
+          <img src="images/invivo-em-distal-pi-neuron.jpg" alt="Distal peri-infarct neuron showing early ischemic changes with microglia" style="width:100%; max-width:560px; border-radius:6px; border:1px solid var(--rule);" loading="lazy">
+          <figcaption style="font-size:12.5px; color:var(--mid); margin-top:8px; line-height:1.5; max-width:560px;">Distal peri-infarct zone: neurons (blue) showing early ischemic changes with microglia encroachment (labeled). Note the reduced dendritic complexity compared to control tissue. From Bayati, BSc Honours Thesis 2018.</figcaption>
+        </figure>
+        <figure style="margin:20px 0 24px;">
+          <img src="images/invivo-em-proximal-pi-neuron.jpg" alt="Proximal peri-infarct neuron showing advanced degeneration" style="width:100%; max-width:560px; border-radius:6px; border:1px solid var(--rule);" loading="lazy">
+          <figcaption style="font-size:12.5px; color:var(--mid); margin-top:8px; line-height:1.5; max-width:560px;">Proximal peri-infarct zone: advanced neuronal degeneration (blue) with extensive neuropil vacuolization, swollen mitochondria, and near-complete loss of surrounding synaptic contacts. From Bayati, BSc Honours Thesis 2018.</figcaption>
+        </figure>
+      </div>
+
+      <div class="subsection" id="infarct-degeneration">
+        <div class="subsection-label">Necrotic Core &amp; Infarct Zone</div>
+        <p>Within the necrotic core, neurons show <strong>complete loss of organellar integrity</strong> — barren dendritic processes, no identifiable synapses, and pyknotic glial cell nuclei. This zone is characterized by widespread degenerating neuropil tissue and the complete absence of functional synaptic structures.</p>
+        <figure style="margin:20px 0 24px;">
+          <img src="images/invivo-em-necrotic-core.jpg" alt="Degenerating neuron and pyknotic glial cell in the necrotic core" style="width:100%; max-width:560px; border-radius:6px; border:1px solid var(--rule);" loading="lazy">
+          <figcaption style="font-size:12.5px; color:var(--mid); margin-top:8px; line-height:1.5; max-width:560px;">Necrotic core: degenerating neuron (blue) and pyknotic glial cell (arrow) surrounded by disintegrating neuropil. No identifiable synapses were observed within this region. Scale bar: 5 µm. From Bayati, BSc Honours Thesis 2018.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- SECTION 05 — ASTROCYTE & MITOCHONDRIA           -->
+<!-- ════════════════════════════════════════════════ -->
+<div class="section reveal" id="astrocyte-analysis">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">05</div>
+      <div class="section-label">Glial Response</div>
+    </div>
+    <div class="section-content">
+      <h2>Astrocytic Inflammation &amp; Mitochondrial Changes</h2>
+      <p>Astrocytes responded dramatically to ischemic injury, showing increased process area and reactive morphology in the peri-infarct zone. Astrocytic processes were traced and <strong>pseudocolored yellow</strong> for quantification, revealing glycogen granule accumulation, swollen mitochondria, and extensive perivascular endfeet coverage around capillaries.</p>
+
+      <div class="subsection" id="astrocytic-response">
+        <div class="subsection-label">Reactive Astrocytosis</div>
+        <figure style="margin:20px 0 24px;">
+          <img src="images/invivo-em-astrocyte-inflammation.jpg" alt="Pseudocolored astrocytes (yellow) surrounding neurons (blue) in peri-infarct zone" style="width:100%; max-width:560px; border-radius:6px; border:1px solid var(--rule);" loading="lazy">
+          <figcaption style="font-size:12.5px; color:var(--mid); margin-top:8px; line-height:1.5; max-width:560px;">Peri-infarct zone: reactive astrocytes (yellow) surrounding pyramidal neurons (blue). Note the dramatically increased astrocytic coverage compared to control tissue, with microglia also visible. From Bayati, BSc Honours Thesis 2018.</figcaption>
+        </figure>
+        <figure style="margin:20px 0 24px;">
+          <img src="images/invivo-em-astrocyte-endfeet.jpg" alt="Astrocytic endfeet around capillary with microglia" style="width:100%; max-width:560px; border-radius:6px; border:1px solid var(--rule);" loading="lazy">
+          <figcaption style="font-size:12.5px; color:var(--mid); margin-top:8px; line-height:1.5; max-width:560px;">Astrocytic endfeet (yellow) surrounding a capillary in the peri-infarct zone. Lighter mitochondria (arrows) and glycogen granules (arrowheads) are identifying features. Microglia visible in close proximity, suggesting active inflammation. From Bayati, BSc Honours Thesis 2018.</figcaption>
+        </figure>
+      </div>
+
+      <div class="subsection" id="synapse-prepost">
+        <div class="subsection-label">Pre- &amp; Post-Synaptic Structures</div>
+        <figure style="margin:20px 0 24px;">
+          <img src="images/invivo-em-synapse-prepost.jpg" alt="Pseudocolored pre-synaptic (green) and post-synaptic (blue) structures" style="width:100%; max-width:560px; border-radius:6px; border:1px solid var(--rule);" loading="lazy">
+          <figcaption style="font-size:12.5px; color:var(--mid); margin-top:8px; line-height:1.5; max-width:560px;">Pseudocolored EM showing presynaptic terminals (green) and postsynaptic structures (blue) within a control neuropil test field. Scale bar: 1 µm. From Bayati, BSc Honours Thesis 2018.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- SECTION 06 — QUANTITATIVE RESULTS               -->
+<!-- ════════════════════════════════════════════════ -->
+<div class="section reveal" id="quantitative-results">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">06</div>
+      <div class="section-label">Quantification</div>
+    </div>
+    <div class="section-content">
+      <h2>Morphometric Quantification</h2>
+      <p>Over <strong>600 synapses</strong> were identified and counted across 50 test fields (6.58 × 4.39 µm each) at 30,000× magnification. Subcellular structures were traced in Adobe Photoshop and quantified via thresholding in ImageJ. Contralateral hemisphere served as paired control for each animal (n = 5).</p>
+
+      <div class="findings">
+        <div class="finding">
+          <div class="finding-value">600+</div>
+          <div class="finding-label">Synapses identified</div>
+        </div>
+        <div class="finding">
+          <div class="finding-value">50</div>
+          <div class="finding-label">Test fields analyzed</div>
+        </div>
+        <div class="finding">
+          <div class="finding-value">30,000×</div>
+          <div class="finding-label">TEM magnification</div>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-title">Synaptic Density</div>
+        <div class="chart-subtitle">Mean synapse count per test field — contralateral vs. peri-infarct (p &lt; 0.0001)</div>
+        <div class="chart-wrap"><canvas id="chartSynaptic"></canvas></div>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-title">Astrocytic Area</div>
+        <div class="chart-subtitle">Mean astrocytic area per test field — µm² (p = 0.0004)</div>
+        <div class="chart-wrap"><canvas id="chartAstrocyte"></canvas></div>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-title">Postsynaptic Density Area</div>
+        <div class="chart-subtitle">Mean PSD area per test field — µm² (p = 0.014)</div>
+        <div class="chart-wrap"><canvas id="chartPSD"></canvas></div>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-title">Mitochondrial Area</div>
+        <div class="chart-subtitle">Mean mitochondrial area per test field — µm² (p = 0.088)</div>
+        <div class="chart-wrap"><canvas id="chartMito"></canvas></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<div class="page-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-name">Armin Bayati, PhD</div>
+        <div class="footer-role">Research Fellow · Harvard Medical School &amp; Massachusetts General Hospital</div>
+      </div>
+      <div class="footer-links-grid">
+        <div class="footer-col">
+          <div class="footer-col-title">Research</div>
+          <a href="ipscs.html">iPSC Models</a>
+          <a href="cancer-immunology.html">Cancer Immunology</a>
+          <a href="drug-discovery.html">Drug Discovery</a>
+          <a href="proteomics.html">Proteomics</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Connect</div>
+          <a href="https://scholar.google.com/citations?user=MIW8P2MAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+          <a href="https://linkedin.com/in/arminbayati" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/abayatibrain" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://orcid.org/0000-0002-5960-0479" target="_blank" rel="noopener">ORCID</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Contact</div>
+          <a href="contact.html#chat">Reach Out to Armin</a>
+          <a href="contact.html">Contact Page</a>
+          <a href="publications.html">Publications</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Armin Bayati. All rights reserved.</div>
+  </div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+(function(){
+  const lb = document.createElement('div');
+  lb.className = 'lightbox';
+  lb.innerHTML = '<button class="lightbox-close" onclick="closeLB()">&times;</button>'
+    + '<button class="lightbox-nav lightbox-prev" onclick="navLB(-1)">&#8249;</button>'
+    + '<img class="lightbox-img" src="" alt="">'
+    + '<div class="lightbox-caption"></div>'
+    + '<div class="lightbox-counter"></div>'
+    + '<button class="lightbox-nav lightbox-next" onclick="navLB(1)">&#8250;</button>';
+  document.body.appendChild(lb);
+  
+  let imgs=[], idx=0, gid='';
+  
+  window.openLB = function(galleryId, i){
+    gid = galleryId;
+    const gallery = document.querySelector('[data-gallery="'+galleryId+'"]');
+    imgs = Array.from(gallery.querySelectorAll('.gallery-thumb'));
+    idx = i;
+    showLB();
+    lb.classList.add('open');
+    document.body.style.overflow='hidden';
+  };
+  
+  function showLB(){
+    const t = imgs[idx];
+    const src = t.querySelector('img').src;
+    const cap = t.getAttribute('data-caption')||'';
+    lb.querySelector('.lightbox-img').src = src;
+    lb.querySelector('.lightbox-caption').textContent = cap;
+    lb.querySelector('.lightbox-counter').textContent = (idx+1)+' / '+imgs.length;
+  }
+  
+  window.closeLB = function(){
+    lb.classList.remove('open');
+    document.body.style.overflow='';
+  };
+  
+  window.navLB = function(d){
+    idx = (idx+d+imgs.length)%imgs.length;
+    showLB();
+  };
+  
+  lb.addEventListener('click',function(e){
+    if(e.target===lb) closeLB();
+  });
+  
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('open')) return;
+    if(e.key==='Escape') closeLB();
+    if(e.key==='ArrowRight') navLB(1);
+    if(e.key==='ArrowLeft') navLB(-1);
+  });
+})();
+</script>
+
+<script>
+// HCS scatter
+(function(){
+  var labels=[],data=[],colors=[];
+  for(var i=0;i<96;i++){
+    labels.push('Cpd-'+String(i+1).padStart(3,'0'));
+    var v;
+    if(i<8) v=100+15*Math.random(); // DMSO controls
+    else if(i>=88) v=28+10*Math.random(); // positive controls
+    else v=40+60*Math.random(); // library
+    data.push(v);
+    colors.push(v<52?'rgba(192,57,43,0.8)':'rgba(107,114,128,0.4)');
+  }
+  new Chart(document.getElementById('hcsChart'),{type:'bar',
+    data:{labels:labels,datasets:[{data:data,backgroundColor:colors,borderWidth:0}]},
+    options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return 'Inclusion area: '+ctx.parsed.y.toFixed(1)+' μm²/cell';}}}},
+      scales:{y:{beginAtZero:true,title:{display:true,text:'α-Syn Inclusion Area (μm²/cell)',font:{size:11,family:"'IBM Plex Sans'"}},grid:{color:'rgba(0,0,0,0.05)'}},
+        x:{display:false}}}
+  });
+})();
+
+// Seed amplification assay
+(function(){
+  var t=[],pos=[],neg=[],ipsc=[];
+  for(var i=0;i<=120;i+=2){
+    t.push(i);
+    neg.push(2000+500*Math.random());
+    if(i<24) pos.push(2500+600*Math.random());
+    else pos.push(2500+42000/(1+Math.exp(-0.15*(i-48)))+800*Math.random());
+    if(i<36) ipsc.push(2200+500*Math.random());
+    else ipsc.push(2200+38000/(1+Math.exp(-0.12*(i-60)))+700*Math.random());
+  }
+  new Chart(document.getElementById('saaChart'),{type:'line',
+    data:{labels:t,datasets:[
+      {label:'Negative Control (Healthy CSF)',data:neg,borderColor:'rgba(107,114,128,0.6)',pointRadius:0,borderWidth:1.5,tension:0.3},
+      {label:'PD Patient CSF',data:pos,borderColor:'rgba(192,57,43,0.9)',pointRadius:0,borderWidth:2,tension:0.3},
+      {label:'iPSC Neuron Lysate (Dual-Hit)',data:ipsc,borderColor:'rgba(46,134,193,0.85)',pointRadius:0,borderWidth:2,tension:0.3,borderDash:[5,5]}
+    ]},
+    options:{responsive:true,plugins:{legend:{position:'bottom',labels:{font:{size:11,family:"'IBM Plex Sans'"},padding:16}}},
+      scales:{y:{beginAtZero:true,title:{display:true,text:'ThT Fluorescence (RFU)',font:{size:11,family:"'IBM Plex Sans'"}},grid:{color:'rgba(0,0,0,0.05)'}},
+        x:{title:{display:true,text:'Time (hours)',font:{size:11,family:"'IBM Plex Sans'"}},grid:{color:'rgba(0,0,0,0.03)'},ticks:{maxTicksLimit:10}}}}
+  });
+})();
+</script>
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+<script>
+(function() {
+  var searchIndex = [
+    // Page-level entries
+    {page:'index.html', title:'Home — Overview', category:'Main', section:'',
+     keywords:'armin bayati phd neuroscience cell biology drug discovery harvard medical school mass general brigham research fellow translational science',
+     description:'Overview of research portfolio spanning neurodegeneration, drug discovery, and translational science.'},
+    {page:'ipscs.html', title:'iPSC-Derived Neurons', category:'Research', section:'',
+     keywords:'ipsc induced pluripotent stem cells dopaminergic neurons cortical neurons differentiation disease modeling parkinson lewy body dual-hit mea calcium imaging electrophysiology co-culture microglia astrocyte',
+     description:'iPSC differentiation protocols for dopaminergic and cortical neurons, disease modeling, and co-culture systems.'},
+    {page:'ipscs.html#differentiation', title:'iPSC Differentiation Protocol', category:'Research', section:'Differentiation',
+     keywords:'differentiation protocol dopaminergic cortical neurons small molecule patterning smadis floor plate midbrain astrocyte microglia',
+     description:'Dual SMAD inhibition to floor-plate patterning for midbrain dopaminergic neuron generation.'},
+    {page:'ipscs.html#electrophysiology', title:'Electrophysiology & Calcium Imaging', category:'Research', section:'Functional',
+     keywords:'mea multielectrode array calcium imaging fluo-4 spontaneous activity spike raster neuronal maturation electrophysiology functional',
+     description:'MEA recordings and calcium imaging confirming functional maturity of iPSC-derived neurons.'},
+    {page:'ipscs.html#disease-modeling', title:'Disease Modeling (Dual-Hit)', category:'Research', section:'Disease Modeling',
+     keywords:'dual-hit model lewy body inclusion pff preformed fibrils ifn-gamma cytokine parkinson synuclein neurodegeneration inflammation neuroinflammation',
+     description:'Sequential PFF + IFN-gamma exposure producing Lewy body-like inclusions in human dopaminergic neurons.'},
+    {page:'ipscs.html#co-culture', title:'Neuron-Glia Co-Culture', category:'Research', section:'Co-Culture',
+     keywords:'co-culture microglia astrocyte neuron-glia neuroinflammation phagocytosis neuroprotection alpha-synuclein inclusion formation',
+     description:'Microglia accelerate inclusion formation while astrocytes provide neuroprotection in co-culture systems.'},
+    {page:'cardiomyocytes.html', title:'iPSC-Derived Cardiomyocytes', category:'Research', section:'',
+     keywords:'cardiomyocyte cardiac ipsc beating heart safety pharmacology calcium transients field potential duration impedance sarcomere contractility cardiotoxicity herg',
+     description:'iPSC-cardiomyocyte assays for cardiac safety pharmacology and cardiotoxicity screening.'},
+    {page:'cancer-immunology.html', title:'Cancer Immunology', category:'Research', section:'',
+     keywords:'t cell killing adcc cdc checkpoint blockade cytokine profiling car-t characterization immune co-culture systems tumor microenvironment immunotherapy pd-1 pd-l1 nk cells antibody dependent cellular cytotoxicity complement dependent cytotoxicity',
+     description:'Immune cell-mediated killing assays, checkpoint blockade, and tumor microenvironment modeling.'},
+    {page:'cellular-assays.html', title:'Cellular & Functional Assays', category:'Research', section:'',
+     keywords:'endocytosis exosomal biology autophagy flow cytometry pbmc immune assays plate-based readouts immunocytochemistry clathrin cd63 cd9 reporter exosome transfer assay mitophagy lysosomal stress viability cytotoxicity celltiter-glo',
+     description:'Endocytosis, exosomal biology, autophagy/mitophagy, and lysosomal stress assay platforms.'},
+    {page:'cellular-assays.html#autophagy', title:'Autophagy & Mitophagy Assays', category:'Research', section:'Autophagy',
+     keywords:'autophagy mitophagy lc3b lysotracker lysosensor lysosomal ph stress dual-hit impairment',
+     description:'LysoSensor, LysoTracker, and LC3B-based assays for autophagy and mitophagy quantification.'},
+    {page:'cellular-assays.html#endocytosis', title:'Endocytosis & Uptake Assays', category:'Research', section:'Endocytosis',
+     keywords:'endocytosis clathrin macropinocytosis fibril uptake sars-cov-2 spike protein ace2 receptor internalization trafficking',
+     description:'Clathrin-mediated endocytosis and macropinocytosis pathways for PFF and SARS-CoV-2 entry.'},
+    {page:'cellular-assays.html#exosome', title:'Exosomal Biology & Transfer', category:'Research', section:'Exosomes',
+     keywords:'exosome cd63 multivesicular body mvb manumycin a gold-labeled transfer naïve recipient disease propagation',
+     description:'Exosome-mediated disease propagation tracked via CD63-GFP and nanogold-labeled fibrils.'},
+    {page:'genetics.html', title:'Genetics & Molecular Biology', category:'Research', section:'',
+     keywords:'crispr cas9 sirna shrna aso antisense oligonucleotide molecular cloning viral constructs protein conjugation lysosomal biology gene editing lentivirus aav adenovirus transfection plasmid dna rna gba knockout snca triplication',
+     description:'CRISPR gene editing, viral vector delivery, and molecular biology for disease modeling.'},
+    {page:'genetics.html#lysosomal', title:'Lysosomal Biology', category:'Research', section:'Lysosomal',
+     keywords:'lysosome lamp1 lamp2 tfeb nrf2 galectin-3 membrane permeabilization rab7 cd63 lyso-ip nanogold fibril trafficking dysfunction',
+     description:'Lysosomal dysfunction, membrane rupture, and fibril trafficking in neurodegeneration.'},
+    {page:'genetics.html#gene-editing', title:'Gene Editing & Viral Delivery', category:'Research', section:'Gene Editing',
+     keywords:'lentivirus adenovirus shrna knockdown overexpression crispr gba lamp2 alpha-synuclein ha western blot fractionation',
+     description:'Lentiviral knockdown, adenoviral overexpression, and CRISPR editing in iPSC neurons.'},
+    {page:'drug-discovery.html', title:'Drug Discovery & Translation', category:'Research', section:'',
+     keywords:'parkin agonist tac lysosomal rescue antivirals biomarker strategy preclinical compound testing small molecule screening sar dose response pseudovirus sars-cov-2 pikfyve csnk2 hplc compound purity analytical characterization dls dynamic light scattering particle size nanoparticle formulation lc-ms pharmacokinetics target engagement pharmacodynamic',
+     description:'Small-molecule drug discovery for Parkinson\'s disease and antiviral target validation.'},
+    {page:'drug-discovery.html#parkin', title:'Parkin Agonism & Neuroprotection', category:'Research', section:'Parkin',
+     keywords:'parkin fb231 agonist alpha-synuclein inclusion reduction western blot tfeb nrf2 hdac6 neuroprotection dopaminergic',
+     description:'Small-molecule Parkin agonist reducing alpha-synuclein inclusions in iPSC dopaminergic neurons.'},
+    {page:'drug-discovery.html#antiviral', title:'Antiviral Drug Discovery', category:'Research', section:'Antiviral',
+     keywords:'csnk2 pikfyve sars-cov-2 beta-coronavirus pseudovirus gfp spike inhibitor entry clathrin endocytosis host-directed antiviral',
+     description:'CSNK2 and PIKfyve inhibitors blocking SARS-CoV-2 entry via host-directed antiviral strategies.'},
+    {page:'microscopy.html', title:'Microscopy & Imaging', category:'Research', section:'',
+     keywords:'confocal sted super-resolution tem transmission electron microscopy live-cell imaging high-content screening ihc histology immunohistochemistry fluorescence opera phenix hcs image analysis',
+     description:'Multi-modal imaging from confocal and STED super-resolution to TEM ultrastructural analysis.'},
+    {page:'microscopy.html#confocal', title:'Confocal Microscopy', category:'Research', section:'Confocal',
+     keywords:'confocal laser scanning multichannel z-stack maximum intensity projection pff inclusion sars spike lysosomal stress co-culture colocalization',
+     description:'High-resolution confocal imaging of protein aggregation, viral entry, and co-culture systems.'},
+    {page:'microscopy.html#em', title:'Electron Microscopy', category:'Research', section:'EM',
+     keywords:'tem transmission electron microscopy nanogold lewy body inclusion ultrastructure multivesicular body neurite 49000x 98000x',
+     description:'TEM ultrastructural analysis of Lewy body-like inclusions and nanogold-labeled fibril trafficking.'},
+    {page:'microscopy.html#sted', title:'STED Super-Resolution', category:'Research', section:'STED',
+     keywords:'sted stimulated emission depletion super-resolution sub-lysosomal fibril localization nanoscale',
+     description:'STED nanoscopy resolving sub-lysosomal fibril localization beyond confocal limits.'},
+    {page:'flow-cytometry.html', title:'Flow Cytometry', category:'Research', section:'',
+     keywords:'flow cytometry multicolor immunophenotyping intracellular staining facs sorting gating strategy surface marker t cell b cell nk cell monocyte macrophage pbmc viability dye compensation tregs ki67 cd4 cd8',
+     description:'Multicolor immunophenotyping, intracellular staining, and FACS sorting for immune cell analysis.'},
+    {page:'proteomics.html', title:'Proteomics & Single-Cell Genomics', category:'Research', section:'',
+     keywords:'tmt quantitative proteomics scrna-seq 10x genomics bulk rna-seq gsea pathway analysis umap deseq2 seurat mass spectrometry protein biomarker volcano plot gene ontology single cell transcriptomics',
+     description:'TMT proteomics, scRNA-seq, and multi-omics data analysis pipelines.'},
+    {page:'coding.html', title:'Coding, Automation & Data', category:'Technical', section:'',
+     keywords:'python automorphotrack pipelines bravo tecan liquid handling 96 384 well miniaturization machine learning automation data analysis github programming r matlab imageJ fiji cellprofiler',
+     description:'Python-based automation, liquid handling, and custom image analysis tools.'},
+    {page:'skills.html', title:'Full Technical Skills', category:'Technical', section:'',
+     keywords:'techniques instruments software capabilities laboratory skills comprehensive listing assays methods platforms tools equipment',
+     description:'Comprehensive listing of laboratory techniques, instruments, and software capabilities.'},
+    {page:'publications.html', title:'Publications', category:'Academic', section:'',
+     keywords:'peer-reviewed papers citations journal articles nature neuroscience lancet science translational medicine acs chemical biology first author corresponding author pubmed google scholar 25 publications 1300 citations',
+     description:'25+ peer-reviewed publications with 1,300+ citations across neuroscience, virology, and cell biology.'},
+    {page:'vc-portfolio.html', title:'Portfolio & VC', category:'Industry', section:'',
+     keywords:'venture capital portfolio management drug discovery translational science biopharma partnerships alliance management funding grants awards ip patent regulatory ind fda biotech startup pharmaceutical scientific evaluation',
+     description:'Translational science leadership, biopharma partnerships, and scientific portfolio management experience.'},
+    {page:'contact.html', title:'Contact', category:'Connect', section:'',
+     keywords:'email linkedin github orcid google scholar contact collaboration',
+     description:'Contact information, LinkedIn, and academic profiles.'}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('searchInput');
+  var resultsEl = document.getElementById('searchResults');
+  var activeIdx = -1;
+
+  function openSearch() {
+    overlay.classList.add('active');
+    requestAnimationFrame(function(){ overlay.classList.add('fade-in'); });
+    input.value = '';
+    input.focus();
+    renderResults('');
+    activeIdx = -1;
+  }
+
+  function closeSearch() {
+    overlay.classList.remove('fade-in');
+    setTimeout(function(){ overlay.classList.remove('active'); }, 200);
+  }
+
+  function escapeRegex(s) {
+    return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function highlight(text, terms) {
+    if (!terms.length) return text;
+    var pattern = terms.map(escapeRegex).join('|');
+    var regex = new RegExp('(' + pattern + ')', 'gi');
+    return text.replace(regex, '<mark>$1</mark>');
+  }
+
+  // Fuzzy substring match: returns true if all chars of query appear in order in str
+  function fuzzyMatch(str, query) {
+    var strIdx = 0;
+    for (var i = 0; i < query.length; i++) {
+      var found = false;
+      while (strIdx < str.length) {
+        if (str[strIdx].toLowerCase() === query[i].toLowerCase()) {
+          strIdx++;
+          found = true;
+          break;
+        }
+        strIdx++;
+      }
+      if (!found) return false;
+    }
+    return true;
+  }
+
+  function renderResults(query) {
+    var terms = query.toLowerCase().trim().split(/\s+/).filter(function(t){ return t.length > 1; });
+    var scored = [];
+
+    searchIndex.forEach(function(item) {
+      if (!terms.length) { scored.push({item: item, score: 0}); return; }
+      var score = 0;
+      var titleLow = item.title.toLowerCase();
+      var kwLow = item.keywords;
+      var descLow = (item.description || '').toLowerCase();
+      var sectionLow = (item.section || '').toLowerCase();
+
+      terms.forEach(function(t) {
+        // Exact matches
+        if (titleLow.indexOf(t) !== -1) score += 15;
+        if (sectionLow.indexOf(t) !== -1) score += 8;
+        if (descLow.indexOf(t) !== -1) score += 5;
+        if (kwLow.indexOf(t) !== -1) score += 3;
+        // Fuzzy match on title if no exact match
+        if (score === 0 && t.length > 2 && fuzzyMatch(titleLow, t)) score += 2;
+      });
+
+      // Bonus for matching all terms
+      var allMatch = terms.every(function(t) {
+        return titleLow.indexOf(t) !== -1 || kwLow.indexOf(t) !== -1 || descLow.indexOf(t) !== -1;
+      });
+      if (allMatch && terms.length > 1) score += 10;
+
+      if (score > 0) scored.push({item: item, score: score});
+    });
+
+    scored.sort(function(a, b){ return b.score - a.score; });
+
+    // Deduplicate: if a page-level and section-level entry have similar scores, keep both but cap at 12
+    scored = scored.slice(0, 12);
+
+    if (terms.length && !scored.length) {
+      resultsEl.innerHTML = '<div class="search-empty"><span>&#128269;</span>No results for &ldquo;' + query.replace(/</g, '&lt;') + '&rdquo;<div class="search-suggestion">Try broader terms or check spelling</div></div>';
+      return;
+    }
+
+    var html = '';
+    scored.forEach(function(s, i) {
+      var item = s.item;
+      var title = terms.length ? highlight(item.title, terms) : item.title;
+      var desc = item.description || '';
+      if (terms.length && desc) desc = highlight(desc, terms);
+
+      var sectionBadge = item.section ? '<span class="search-section-badge">' + item.section + '</span>' : '';
+
+      html += '<a class="search-result' + (i === 0 && terms.length ? ' active' : '') + '" href="' + item.page + '">';
+      html += '<div class="search-result-meta"><span class="search-result-page">' + item.category + '</span>' + sectionBadge + '</div>';
+      html += '<div class="search-result-title">' + title + '</div>';
+      html += '<div class="search-result-desc">' + desc + '</div></a>';
+    });
+
+    resultsEl.innerHTML = html;
+    activeIdx = terms.length ? 0 : -1;
+  }
+
+  function setActive(idx) {
+    var items = resultsEl.querySelectorAll('.search-result');
+    if (!items.length) return;
+    items.forEach(function(el){ el.classList.remove('active'); });
+    if (idx < 0) idx = items.length - 1;
+    if (idx >= items.length) idx = 0;
+    activeIdx = idx;
+    items[idx].classList.add('active');
+    items[idx].scrollIntoView({block: 'nearest'});
+  }
+
+  if (input) {
+    input.addEventListener('input', function(){ renderResults(this.value); });
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowDown') { e.preventDefault(); setActive(activeIdx + 1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(activeIdx - 1); }
+      else if (e.key === 'Enter') {
+        e.preventDefault();
+        var active = resultsEl.querySelector('.search-result.active');
+        if (active) window.location.href = active.href;
+      }
+    });
+  }
+
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeSearch();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
+    if (e.key === 'Escape' && overlay.classList.contains('active')) closeSearch();
+    if (e.key === '/' && !overlay.classList.contains('active') && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+      e.preventDefault(); openSearch();
+    }
+  });
+
+  document.querySelectorAll('.search-toggle').forEach(function(btn){ btn.addEventListener('click', openSearch); });
+})();
+</script>
+
+
+
+
+<script>
+(function(){
+  const accentColor = '#c0392b';
+  const accentColorLight = 'rgba(192,57,43,0.15)';
+  const midColor = '#6b7280';
+  
+  const commonOpts = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { backgroundColor: '#0f1419', titleFont: { family: "'IBM Plex Mono', monospace", size: 11 }, bodyFont: { family: "'IBM Plex Sans', sans-serif", size: 13 } }
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { family: "'IBM Plex Sans', sans-serif", size: 12 }, color: midColor } },
+      y: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { family: "'IBM Plex Mono', monospace", size: 11 }, color: midColor } }
+    }
+  };
+
+  function makeBarChart(id, labels, data, errors, yLabel) {
+    const ctx = document.getElementById(id);
+    if (!ctx) return;
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          data: data,
+          backgroundColor: [accentColorLight, accentColor + '40'],
+          borderColor: [accentColor, accentColor],
+          borderWidth: 1.5,
+          borderRadius: 4,
+          barPercentage: 0.5
+        }]
+      },
+      options: {
+        ...commonOpts,
+        scales: {
+          ...commonOpts.scales,
+          y: { ...commonOpts.scales.y, title: { display: true, text: yLabel, font: { family: "'IBM Plex Mono', monospace", size: 10 }, color: midColor } }
+        }
+      },
+      plugins: [{
+        id: 'errorBars',
+        afterDraw(chart) {
+          const { ctx, scales: { x, y } } = chart;
+          const meta = chart.getDatasetMeta(0);
+          ctx.save();
+          ctx.strokeStyle = '#0f1419';
+          ctx.lineWidth = 1.5;
+          meta.data.forEach((bar, i) => {
+            if (errors[i]) {
+              const cx = bar.x;
+              const top = y.getPixelForValue(data[i] + errors[i]);
+              const bot = y.getPixelForValue(data[i] - errors[i]);
+              ctx.beginPath();
+              ctx.moveTo(cx, top); ctx.lineTo(cx, bot);
+              ctx.moveTo(cx - 6, top); ctx.lineTo(cx + 6, top);
+              ctx.moveTo(cx - 6, bot); ctx.lineTo(cx + 6, bot);
+              ctx.stroke();
+            }
+          });
+          ctx.restore();
+        }
+      }]
+    });
+  }
+
+  makeBarChart('chartSynaptic', ['Contralateral', 'Peri-Infarct'], [18.52, 7.20], [1.12, 1.30], 'Synapses / test field');
+  makeBarChart('chartAstrocyte', ['Contralateral', 'Peri-Infarct'], [2.81, 6.50], [0.54, 0.97], 'Area (µm²)');
+  makeBarChart('chartPSD', ['Contralateral', 'Peri-Infarct'], [0.246, 0.090], [0.130, 0.047], 'Area (µm²)');
+  makeBarChart('chartMito', ['Contralateral', 'Peri-Infarct'], [1.56, 5.97], [0.16, 5.06], 'Area (µm²)');
+})();
+</script>
+
+
+<script>
+(function(){
+  const els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  els.forEach(el => io.observe(el));
+})();
+</script>
+
+
+</body>
+</html>

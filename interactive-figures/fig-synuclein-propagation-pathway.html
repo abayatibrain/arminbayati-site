@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>α-Synuclein Propagation Pathway</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f1419; --paper: #fafaf7; --mid: #6b7280; --accent: #c0392b;
+    --rule: #d4d0c8; --card: #ffffff; --section-bg: #f4f3ef;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+    --mono: 'IBM Plex Mono', 'Menlo', monospace;
+  }
+  html.dark {
+    --ink: #e8e6e1; --paper: #111318; --mid: #9ca3af; --rule: #2a2d35;
+    --card: #1a1d24; --section-bg: #15171d;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--sans); background: var(--paper); color: var(--ink);
+    display: flex; flex-direction: column; align-items: center;
+    padding: 40px 20px 48px;
+  }
+  .fig-label { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--accent); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 8px; }
+  .fig-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; color: var(--ink); margin-bottom: 6px; text-align: center; }
+  .fig-subtitle { font-size: 13px; font-weight: 300; color: var(--mid); margin-bottom: 32px; text-align: center; max-width: 700px; line-height: 1.6; }
+  .diagram-container { width: 100%; max-width: 1060px; overflow-x: auto; }
+
+  /* Horizontal pipeline */
+  .pipeline {
+    display: flex; align-items: flex-start; gap: 0; min-width: 980px; padding: 0 12px;
+  }
+  .step {
+    flex: 1; position: relative; padding: 0 8px;
+  }
+  .step-box {
+    background: var(--card); border: 1px solid var(--rule); border-radius: 10px;
+    padding: 20px 16px 18px; position: relative; min-height: 240px;
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+  .step-box:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(192,57,43,0.08); }
+  .step-num {
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    color: var(--accent); letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase;
+  }
+  .step-name {
+    font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 4px; line-height: 1.3;
+  }
+  .step-loc {
+    font-family: var(--mono); font-size: 10px; color: var(--mid); margin-bottom: 10px;
+    padding: 2px 8px; background: var(--section-bg); border-radius: 4px; display: inline-block;
+  }
+  .step-desc {
+    font-size: 12px; font-weight: 300; color: var(--mid); line-height: 1.65;
+  }
+  .step-desc strong { font-weight: 500; color: var(--ink); }
+  .step-time {
+    margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--rule);
+    font-family: var(--mono); font-size: 10px; color: var(--accent); font-weight: 500;
+  }
+
+  /* Arrow connectors */
+  .arrow-col {
+    display: flex; align-items: center; justify-content: center;
+    width: 36px; min-width: 36px; padding-top: 80px;
+  }
+  .arrow-col svg { flex-shrink: 0; }
+
+  /* Inhibitor badges */
+  .inhibitor {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 500;
+    background: #c0392b10; color: #c0392b; border: 1px solid #c0392b30;
+    margin-top: 6px; margin-right: 4px;
+  }
+
+  /* Key finding strip */
+  .findings-strip {
+    display: flex; gap: 1px; background: var(--rule); border: 1px solid var(--rule);
+    border-radius: 8px; overflow: hidden; margin-top: 28px; max-width: 980px; width: 100%;
+  }
+  .finding {
+    flex: 1; background: var(--card); padding: 16px 18px; text-align: center;
+  }
+  .finding-val { font-family: var(--serif); font-size: 1.3rem; color: var(--ink); margin-bottom: 3px; }
+  .finding-lbl { font-size: 11px; color: var(--mid); font-weight: 400; line-height: 1.4; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .fig-label, .fig-title, .fig-subtitle { animation: fadeIn 0.5s ease both; }
+  .fig-title { animation-delay: 0.05s; } .fig-subtitle { animation-delay: 0.1s; }
+  .step { animation: fadeIn 0.4s ease both; }
+  .step:nth-child(1) { animation-delay: 0.15s; }
+  .step:nth-child(3) { animation-delay: 0.25s; }
+  .step:nth-child(5) { animation-delay: 0.35s; }
+  .step:nth-child(7) { animation-delay: 0.45s; }
+  .step:nth-child(9) { animation-delay: 0.55s; }
+</style>
+</head>
+<body>
+<div class="fig-label">Figure 2</div>
+<div class="fig-title">Prion-like α-Synuclein Propagation Pathway</div>
+<div class="fig-subtitle">
+  Pre-formed fibrils (PFFs) enter neurons via macropinocytosis, traffic through the endolysosomal system,
+  and propagate to neighboring cells via exosomal release — a key therapeutic intervention axis.
+</div>
+
+<div class="diagram-container">
+<div class="pipeline">
+
+  <!-- Step 1: Membrane Engagement -->
+  <div class="step">
+    <div class="step-box">
+      <div class="step-num">01 · Binding</div>
+      <div class="step-name">Membrane Engagement</div>
+      <div class="step-loc">Cell Surface</div>
+      <div class="step-desc">
+        Exogenous <strong>α-synuclein PFFs</strong> bind to cell-surface heparan sulfate proteoglycans (HSPGs) and lipid rafts. Spike–ACE2 receptor engagement uses <strong>clathrin-mediated endocytosis</strong>.
+      </div>
+      <div class="step-time">t = 0 min</div>
+    </div>
+  </div>
+
+  <div class="arrow-col">
+    <svg width="24" height="16" viewBox="0 0 24 16"><path d="M0 8h18m0 0l-5-5m5 5l-5 5" stroke="#c0392b" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg>
+  </div>
+
+  <!-- Step 2: Macropinocytosis -->
+  <div class="step">
+    <div class="step-box">
+      <div class="step-num">02 · Entry</div>
+      <div class="step-name">Macropinocytosis</div>
+      <div class="step-loc">Plasma Membrane</div>
+      <div class="step-desc">
+        PFFs are internalized via <strong>macropinocytic ruffles</strong>, bypassing classical clathrin and caveolar routes. Confirmed by <strong>EIPA</strong> and <strong>Latrunculin B</strong> inhibition.
+      </div>
+      <div>
+        <span class="inhibitor">✕ EIPA</span>
+        <span class="inhibitor">✕ LatB</span>
+      </div>
+      <div class="step-time">t = 0–2 min</div>
+    </div>
+  </div>
+
+  <div class="arrow-col">
+    <svg width="24" height="16" viewBox="0 0 24 16"><path d="M0 8h18m0 0l-5-5m5 5l-5 5" stroke="#c0392b" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg>
+  </div>
+
+  <!-- Step 3: Lysosomal Accumulation -->
+  <div class="step">
+    <div class="step-box">
+      <div class="step-num">03 · Trafficking</div>
+      <div class="step-name">Lysosomal Accumulation</div>
+      <div class="step-loc">Endolysosomal System</div>
+      <div class="step-desc">
+        PFFs <strong>bypass early endosomes</strong> and reach <strong>LAMP1⁺ lysosomes within 2 min</strong>. Nanogold EM tracing confirms rapid transit. Fibrils resist degradation and accumulate, causing <strong>lysosomal dysfunction</strong>.
+      </div>
+      <div class="step-time">t = 2 min → accumulation</div>
+    </div>
+  </div>
+
+  <div class="arrow-col">
+    <svg width="24" height="16" viewBox="0 0 24 16"><path d="M0 8h18m0 0l-5-5m5 5l-5 5" stroke="#c0392b" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg>
+  </div>
+
+  <!-- Step 4: Inclusion Formation -->
+  <div class="step">
+    <div class="step-box">
+      <div class="step-num">04 · Seeding</div>
+      <div class="step-name">Lewy-like Inclusions</div>
+      <div class="step-loc">Cytoplasm</div>
+      <div class="step-desc">
+        Fibril seeds recruit <strong>endogenous α-synuclein</strong>, forming pS129⁺ Lewy-like inclusions. <strong>Thioflavin S⁺</strong> amyloid cores form over 14–21 days. Dual-hit (PFF + IFN-γ) dramatically accelerates pathology.
+      </div>
+      <div class="step-time">t = 7–21 days</div>
+    </div>
+  </div>
+
+  <div class="arrow-col">
+    <svg width="24" height="16" viewBox="0 0 24 16"><path d="M0 8h18m0 0l-5-5m5 5l-5 5" stroke="#c0392b" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg>
+  </div>
+
+  <!-- Step 5: Exosomal Release -->
+  <div class="step">
+    <div class="step-box">
+      <div class="step-num">05 · Spread</div>
+      <div class="step-name">Exosomal Propagation</div>
+      <div class="step-loc">MVB → Extracellular</div>
+      <div class="step-desc">
+        <strong>CD63⁺ multivesicular bodies</strong> (MVBs) package fibrils into exosomes for <strong>cell-to-cell transmission</strong>. EM gold-labeled exosomes confirmed transfer to naïve neurons — the prion-like spread mechanism.
+      </div>
+      <div class="step-time">Continuous propagation</div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- Key findings -->
+<div class="findings-strip">
+  <div class="finding">
+    <div class="finding-val">&lt; 2 min</div>
+    <div class="finding-lbl">PFF → Lysosome transit</div>
+  </div>
+  <div class="finding">
+    <div class="finding-val">Bypassed</div>
+    <div class="finding-lbl">Early endosome route</div>
+  </div>
+  <div class="finding">
+    <div class="finding-val">14–21 d</div>
+    <div class="finding-lbl">Inclusion maturation</div>
+  </div>
+  <div class="finding">
+    <div class="finding-val">CD63⁺</div>
+    <div class="finding-lbl">Exosome-mediated spread</div>
+  </div>
+</div>
+
+<script>
+</script>
+</body>
+</html>

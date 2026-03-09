@@ -57,13 +57,14 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 48px;
+  height: auto;
+  padding: 10px 0;
   gap: 16px;
 }
 
 .nav-brand {
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.5px;
   color: var(--mid);
@@ -72,26 +73,54 @@ nav {
   flex-shrink: 0;
 }
 .nav-brand:hover { color: var(--ink); }
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-logo {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+.nav-brand-text {
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  color: var(--ink);
+}
+.nav-brand:hover .nav-logo { color: var(--ink); }
+
 
 .nav-links {
   display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+  min-width: 0;
+}
+.nav-row {
+  display: flex;
   gap: 1px;
+  justify-content: center;
   flex-wrap: nowrap;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-.nav-links::-webkit-scrollbar { display: none; }
+.nav-row::-webkit-scrollbar { display: none; }
 
 .nav-links a {
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.4px;
   text-transform: uppercase;
   color: var(--mid);
   text-decoration: none;
-  padding: 6px 8px;
+  padding: 8px 11px;
   border-radius: 3px;
   transition: all 0.2s ease;
   white-space: nowrap;
@@ -153,7 +182,7 @@ nav {
   font-weight: 300;
   line-height: 1.75;
   color: var(--mid);
-  max-width: 640px;
+  max-width: 760px;
   margin-bottom: 36px;
 }
 
@@ -185,7 +214,7 @@ nav {
   margin: 0 auto;
   padding: 64px 32px 0;
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 120px 1fr;
   gap: 48px;
   align-items: start;
 }
@@ -240,7 +269,7 @@ nav {
   font-weight: 300;
   line-height: 1.8;
   color: #444;
-  max-width: 640px;
+  max-width: 760px;
   margin-bottom: 16px;
 }
 
@@ -299,7 +328,7 @@ nav {
   border-radius: 6px;
   overflow: hidden;
   margin: 28px 0 32px;
-  max-width: 640px;
+  max-width: 760px;
 }
 
 .finding {
@@ -324,7 +353,7 @@ nav {
 /* ── TIMELINE ── */
 .timeline {
   margin: 32px 0;
-  max-width: 640px;
+  max-width: 760px;
 }
 
 .timeline-item {
@@ -433,7 +462,7 @@ nav {
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 16px;
   margin: 28px 0 32px;
-  max-width: 640px;
+  max-width: 760px;
 }
 
 .card {
@@ -473,7 +502,7 @@ a.card:hover {
   padding: 48px 24px;
   text-align: center;
   margin: 20px 0 24px;
-  max-width: 640px;
+  max-width: 760px;
 }
 
 .image-placeholder .ph-icon {
@@ -493,7 +522,7 @@ a.card:hover {
 .inline-list {
   list-style: none;
   margin: 16px 0;
-  max-width: 640px;
+  max-width: 760px;
 }
 
 .inline-list li {
@@ -518,7 +547,7 @@ a.card:hover {
 /* ── PUBLICATION LIST ── */
 .pub-list {
   margin: 20px 0;
-  max-width: 640px;
+  max-width: 760px;
 }
 
 .pub-item {
@@ -694,6 +723,11 @@ a.card:hover {
     padding: 12px 20px;
     gap: 4px;
   }
+  .nav-links.open .nav-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
   .nav-toggle { display: block; }
   .section-header {
     grid-template-columns: 1fr;
@@ -732,7 +766,7 @@ a.card:hover {
 
 /* ── CHARTS ── */
 .chart-container {
-  max-width: 640px;
+  max-width: 760px;
   margin: 24px 0 32px;
   background: var(--card);
   border: 1px solid var(--rule);
@@ -919,6 +953,14 @@ nav {
   a.tag { text-decoration: none; cursor: pointer; }
   a.tag:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--ink); }
 
+
+  html.dark .page-footer { background: #0a0c10; }
+  html.dark .footer-name { color: #e8e6e1; }
+  html.dark .footer-role { color: rgba(232,230,225,0.5); }
+  html.dark .footer-col a { color: rgba(232,230,225,0.6); }
+  html.dark .footer-col a:hover { color: #e8e6e1; }
+  html.dark .footer-bottom { color: rgba(232,230,225,0.3); border-top-color: rgba(232,230,225,0.08); }
+
   /* ── SCROLL ANIMATIONS ── */
   .reveal { opacity: 0.35; transform: translateY(0); transition: opacity 0.7s ease, transform 0.5s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -955,6 +997,35 @@ nav {
   margin-right: 4px;
 }
 .search-toggle:hover { border-color: var(--accent); color: var(--ink); }
+
+.search-result-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+.search-section-badge {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+.search-suggestion {
+  font-size: 12px;
+  color: var(--mid);
+  margin-top: 6px;
+}
+.search-result-desc {
+  font-size: 12px;
+  color: var(--mid);
+  line-height: 1.5;
+  margin-top: 2px;
+}
 .search-toggle svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; }
 
 .search-overlay {
@@ -1102,6 +1173,374 @@ html.dark .search-overlay { background: rgba(0,0,0,0.65); }
 html.dark .search-modal { background: var(--card); }
 html.dark .search-result mark { background: rgba(192,57,43,0.3); }
 
+
+
+/* ── INTERACTIVE FIGURE IFRAME ── */
+.interactive-fig-frame {
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 28px 0 32px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.02);
+  background: var(--card);
+}
+.interactive-fig-frame iframe {
+  width: 100%;
+  border: none;
+  display: block;
+  min-height: 580px;
+}
+.interactive-fig-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--section-bg);
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.interactive-fig-label .fig-desc {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 12.5px;
+  color: var(--mid);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* ══════════════════════════════════════════════
+   MOBILE OPTIMIZATION — Only affects <768px
+   Desktop layout is completely unchanged.
+   ══════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  /* ── Typography scaling ── */
+  body { font-size: 15px; }
+  .hero h1, h1 { font-size: clamp(1.6rem, 7vw, 2.2rem) !important; }
+  .section-content h2 { font-size: 1.35rem; }
+  .section-content h3 { font-size: 0.95rem; margin-top: 24px; }
+  .section-content p { font-size: 14.5px; line-height: 1.7; }
+  .hero-description { font-size: 15px !important; line-height: 1.65 !important; }
+
+  /* ── Hero section ── */
+  .hero {
+    padding: 36px 16px 32px !important;
+    flex-direction: column-reverse !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 20px !important;
+  }
+  .hero-photo {
+    width: 140px !important;
+    height: 140px !important;
+    margin: 0 auto 4px !important;
+  }
+  .hero-eyebrow { justify-content: center; font-size: 11px; }
+  .hero-tags { justify-content: center; gap: 6px; }
+  .hero-cta { justify-content: center !important; }
+  .hero-description {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 100% !important;
+  }
+  .tag { font-size: 10px; padding: 4px 10px; }
+  .btn-primary, .btn-secondary { font-size: 11px; padding: 10px 20px; }
+
+  /* ── Navigation ── */
+  nav { padding: 0 12px !important; }
+  .nav-inner { padding: 8px 0 !important; gap: 8px !important; }
+  .nav-brand { font-size: 11px; }
+  .search-toggle, .dark-toggle { width: 28px; height: 28px; }
+  .search-toggle svg { width: 13px; height: 13px; }
+
+  /* ── Sections ── */
+  .section-header {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    padding: 32px 16px 0 !important;
+  }
+  .section-index {
+    position: static !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+  .section-number { font-size: 1.8rem !important; margin-bottom: 0 !important; }
+  .section-label { font-size: 10px; }
+  .section-content { padding-bottom: 32px; }
+  .section-content p { max-width: 100%; }
+
+  /* ── Figures & images ── */
+  .figure-container { padding: 8px 16px 36px !important; }
+  figure { margin: 0 !important; }
+  figure img, .section-content img {
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 12px 0 8px !important;
+  }
+  figcaption {
+    font-size: 12px !important;
+    max-width: 100% !important;
+    padding: 0 4px !important;
+  }
+
+  /* ── Gallery grid — 2 columns on mobile ── */
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 4px !important;
+  }
+  .gallery-thumb::after {
+    font-size: 9px !important;
+    padding: 20px 6px 6px !important;
+  }
+  .gallery-label { font-size: 11px; padding: 8px 12px; }
+
+  /* ── Findings grid ── */
+  .findings {
+    grid-template-columns: 1fr 1fr !important;
+    margin: 16px 0 20px !important;
+    max-width: 100% !important;
+  }
+  .finding { padding: 14px 16px; }
+  .finding-value { font-size: 1.2rem; }
+  .finding-label { font-size: 11px; }
+
+  /* ── Workflow strip ── */
+  .workflow-strip { padding: 32px 16px !important; }
+  .workflow-steps { flex-direction: column !important; }
+  .workflow-step {
+    border-left: none !important;
+    border-top: 1px solid rgba(255,255,255,0.12) !important;
+    padding: 14px 0 !important;
+  }
+  .workflow-step:first-child { border-top: none !important; }
+  .step-title { font-size: 13px; }
+  .step-detail { font-size: 12px; }
+
+  /* ── Highlights strip ── */
+  .highlights-strip { padding: 28px 16px; }
+  .highlights-inner {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .highlight-title { font-size: 12.5px; }
+  .highlight-desc { font-size: 11px; }
+  .highlight-icon { font-size: 18px; }
+
+  /* ── News items ── */
+  .news-item { flex-direction: column; gap: 4px; padding: 12px 0; }
+  .news-date { min-width: auto; }
+  .news-body { font-size: 13.5px; }
+
+  /* ── Timeline ── */
+  .timeline { margin: 20px 0; }
+  .timeline-item { padding-left: 20px; padding-bottom: 24px; }
+  .timeline-title { font-size: 14px; }
+  .timeline-desc { font-size: 13px; }
+
+  /* ── Publication list ── */
+  .pub-item { padding: 12px 0; }
+  .pub-title { font-size: 14px; }
+  .pub-authors { font-size: 12px; }
+  .pub-journal { font-size: 10px; }
+
+  /* ── Contact links ── */
+  .contact-links { max-width: 100%; }
+  .contact-link { padding: 12px 14px; font-size: 13px; }
+
+  /* ── Footer ── */
+  .page-footer { margin-top: 0; }
+  .footer-inner {
+    flex-direction: column !important;
+    gap: 28px !important;
+    padding: 36px 16px 28px !important;
+  }
+  .footer-brand { max-width: 100%; }
+  .footer-name { font-size: 1.1rem; }
+  .footer-links-grid {
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+  .footer-bottom { padding: 16px; font-size: 11px; }
+
+  /* ── Search overlay ── */
+  .search-modal { width: 96%; max-width: none; border-radius: 8px; }
+  .search-overlay { padding-top: 10vh; }
+  .search-input { font-size: 15px; }
+  .search-result { padding: 10px 16px; }
+  .search-result-title { font-size: 13px; }
+  .search-result-desc { font-size: 11px; }
+
+  /* ── Inline grids with style attributes (VC page etc) ── */
+  [style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Card grids ── */
+  .card-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+  .research-grid {
+    grid-template-columns: 1fr !important;
+    padding: 0 16px 32px !important;
+    gap: 12px !important;
+  }
+  .research-tile { padding: 18px 16px 14px; }
+  .tile-desc { font-size: 12px; }
+
+  /* ── Lightbox ── */
+  .lightbox-img { max-width: 98vw !important; max-height: 80vh !important; }
+  .lightbox-caption { font-size: 12px !important; padding: 8px 16px !important; }
+}
+
+/* ── Extra small screens (≤ 480px) ── */
+@media (max-width: 480px) {
+  .hero h1, h1 { font-size: clamp(1.4rem, 6vw, 1.8rem) !important; }
+  .hero-description { font-size: 14px !important; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .findings { grid-template-columns: 1fr !important; }
+  .tag { font-size: 9.5px; padding: 3px 8px; }
+  .hero-tags { gap: 5px; }
+  .section-header { padding: 24px 12px 0 !important; }
+  .section-content { padding-bottom: 24px; }
+  .figure-container { padding: 8px 12px 28px !important; }
+  .workflow-strip { padding: 24px 12px !important; }
+  .footer-inner { padding: 28px 12px 20px !important; }
+}
+
+/* ── Touch-friendly improvements ── */
+@media (hover: none) and (pointer: coarse) {
+  /* Show gallery captions always on touch (no hover) */
+  .gallery-thumb::after {
+    opacity: 1 !important;
+    background: linear-gradient(transparent 30%, rgba(0,0,0,0.7)) !important;
+    font-size: 9px !important;
+  }
+  /* Bigger tap targets */
+  .nav-links a { padding: 10px 12px !important; min-height: 44px; display: flex; align-items: center; }
+  .nav-toggle { min-width: 44px; min-height: 44px; }
+  .search-toggle, .dark-toggle { min-width: 36px; min-height: 36px; }
+  .contact-link { min-height: 48px; }
+  .tag { min-height: 36px; display: inline-flex; align-items: center; }
+  .btn-primary, .btn-secondary { min-height: 44px; }
+  /* Remove hover effects on touch */
+  .gallery-thumb:hover { transform: none; box-shadow: none; }
+  .research-tile:hover { transform: none; }
+}
+
+
+  /* ── INLINE FIGURE: fig-immuno-oncology-platform.html ── */
+
+
+
+
+  .ifig-immuno-oncology-platform .fig-label { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--accent); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 8px; }
+  .ifig-immuno-oncology-platform .fig-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; color: var(--ink); margin-bottom: 6px; text-align: center; }
+  .ifig-immuno-oncology-platform .fig-subtitle { font-size: 13px; font-weight: 300; color: var(--mid); margin-bottom: 36px; text-align: center; max-width: 700px; line-height: 1.6; }
+
+  .ifig-immuno-oncology-platform .wrapper { width: 100%; max-width: 1060px; overflow-x: auto; }
+
+  /* Central hub diagram */
+  .ifig-immuno-oncology-platform .hub-layout {
+    display: grid; grid-template-columns: 1fr 260px 1fr; gap: 20px;
+    min-width: 900px; align-items: start; margin-bottom: 24px;
+  }
+
+  /* Side columns */
+  .ifig-immuno-oncology-platform .side-col { display: flex; flex-direction: column; gap: 10px; }
+  .ifig-immuno-oncology-platform .side-card {
+    background: var(--card); border: 1px solid var(--rule); border-radius: 8px;
+    padding: 16px; transition: border-color 0.2s;
+  }
+  .ifig-immuno-oncology-platform .side-card:hover { border-color: var(--accent); }
+  .ifig-immuno-oncology-platform .side-tag {
+    font-family: var(--mono); font-size: 9px; font-weight: 500;
+    letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 5px;
+    padding: 2px 7px; border-radius: 3px; display: inline-block;
+  }
+  .ifig-immuno-oncology-platform .side-tag.eff { background: color-mix(in srgb, var(--effector) 10%, transparent); color: var(--effector); }
+  .ifig-immuno-oncology-platform .side-tag.tgt { background: color-mix(in srgb, var(--target) 10%, transparent); color: var(--target); }
+  .ifig-immuno-oncology-platform .side-tag.chk { background: color-mix(in srgb, var(--checkpoint) 10%, transparent); color: var(--checkpoint); }
+  .ifig-immuno-oncology-platform .side-tag.rd { background: color-mix(in srgb, var(--readout) 10%, transparent); color: var(--readout); }
+  .ifig-immuno-oncology-platform .side-title { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 3px; }
+  .ifig-immuno-oncology-platform .side-desc { font-size: 11px; font-weight: 300; color: var(--mid); line-height: 1.55; }
+
+  /* Center hub */
+  .ifig-immuno-oncology-platform .hub-center {
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    padding-top: 20px;
+  }
+  .ifig-immuno-oncology-platform .hub-ring {
+    width: 200px; height: 200px; border-radius: 50%;
+    border: 2px solid var(--accent); display: flex; align-items: center;
+    justify-content: center; flex-direction: column; text-align: center;
+    background: color-mix(in srgb, var(--accent) 3%, var(--card));
+    position: relative;
+  }
+  .ifig-immuno-oncology-platform .hub-ring::before {
+    content: ''; position: absolute; inset: -12px; border-radius: 50%;
+    border: 1px dashed var(--rule);
+  }
+  .ifig-immuno-oncology-platform .hub-label {
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    color: var(--accent); letter-spacing: 1px; margin-bottom: 4px;
+  }
+  .ifig-immuno-oncology-platform .hub-title {
+    font-family: var(--serif); font-size: 1.1rem; color: var(--ink); font-weight: 400;
+  }
+  .ifig-immuno-oncology-platform .hub-sub { font-size: 11px; font-weight: 300; color: var(--mid); margin-top: 4px; }
+
+  .ifig-immuno-oncology-platform .hub-metrics {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%;
+  }
+  .ifig-immuno-oncology-platform .hub-metric {
+    background: var(--section-bg); border-radius: 6px; padding: 10px;
+    text-align: center;
+  }
+  .ifig-immuno-oncology-platform .hub-metric-val { font-family: var(--serif); font-size: 1.1rem; color: var(--ink); }
+  .ifig-immuno-oncology-platform .hub-metric-lbl { font-size: 10px; color: var(--mid); font-weight: 300; }
+
+  /* Assay type grid at bottom */
+  .ifig-immuno-oncology-platform .assay-label {
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    color: var(--accent); letter-spacing: 1px; margin-bottom: 12px; text-transform: uppercase;
+  }
+  .ifig-immuno-oncology-platform .assay-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+    min-width: 900px;
+  }
+  .ifig-immuno-oncology-platform .assay-card {
+    background: var(--ink); color: rgba(255,255,255,0.95); border-radius: 8px;
+    padding: 18px 16px; position: relative; overflow: hidden;
+  }
+  .ifig-immuno-oncology-platform .assay-card::after {
+    content: ''; position: absolute; top: 0; right: 0; width: 60px; height: 60px;
+    border-radius: 0 0 0 60px; opacity: 0.06;
+  }
+  .ifig-immuno-oncology-platform .assay-card:nth-child(1)::after { background: var(--effector); }
+  .ifig-immuno-oncology-platform .assay-card:nth-child(2)::after { background: var(--target); }
+  .ifig-immuno-oncology-platform .assay-card:nth-child(3)::after { background: var(--checkpoint); }
+  .ifig-immuno-oncology-platform .assay-card:nth-child(4)::after { background: var(--readout); }
+  .ifig-immuno-oncology-platform .assay-type {
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    letter-spacing: 0.8px; margin-bottom: 6px;
+  }
+  .ifig-immuno-oncology-platform .assay-card:nth-child(1) .assay-type { color: var(--effector); }
+  .ifig-immuno-oncology-platform .assay-card:nth-child(2) .assay-type { color: var(--target); }
+  .ifig-immuno-oncology-platform .assay-card:nth-child(3) .assay-type { color: var(--checkpoint); }
+  .ifig-immuno-oncology-platform .assay-card:nth-child(4) .assay-type { color: var(--readout); }
+  .ifig-immuno-oncology-platform .assay-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .ifig-immuno-oncology-platform .assay-desc { font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.55; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .ifig-immuno-oncology-platform .fig-label, .ifig-immuno-oncology-platform .fig-title, .ifig-immuno-oncology-platform .fig-subtitle { animation: fadeIn 0.5s ease both; }
+  .ifig-immuno-oncology-platform .fig-title { animation-delay: 0.05s; } .fig-subtitle { animation-delay: 0.1s; }
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
@@ -1110,25 +1549,34 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
 
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="nav-brand">arminbayati.com</a>
+    <a href="index.html" class="nav-brand"><svg class="nav-logo" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1" y="1" width="26" height="26" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="14" y="19.5" text-anchor="middle" font-family="'DM Serif Display',Georgia,serif" font-size="15" font-weight="400" fill="currentColor">AB</text>
+</svg><span class="nav-brand-text">Armin Bayati</span></a>
     <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="17" y2="6"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14" x2="17" y2="14"/></svg>
     </button>
     <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="ipscs.html">iPSCs</a>
-      <a href="cardiomyocytes.html">Cardio</a>
-      <a href="cancer-immunology.html" class="active">Cancer</a>
-      <a href="cellular-assays.html">Assays</a>
-      <a href="genetics.html">Genetics</a>
-      <a href="drug-discovery.html">Drug Disc.</a>
-      <a href="microscopy.html">Imaging</a>
-      <a href="flow-cytometry.html">Flow Cyt.</a>
-      <a href="proteomics.html">Proteomics</a>
-      <a href="coding.html">Coding</a>
-      <a href="skills.html">Skills</a>
-      <a href="publications.html">Pubs</a>
-      <a href="contact.html">Contact</a>
+      <div class="nav-row">
+        <a href="index.html">Home</a>
+        <a href="ipscs.html">iPSC Neurons</a>
+        <a href="cardiomyocytes.html">Cardiomyocytes</a>
+        <a href="cancer-immunology.html" class="active">Cancer Immunology</a>
+        <a href="cellular-assays.html">Cellular Assays</a>
+        <a href="genetics.html">Genetics</a>
+        <a href="drug-discovery.html">Drug Discovery</a>
+      </div>
+      <div class="nav-row">
+        <a href="microscopy.html">Microscopy</a>
+        <a href="flow-cytometry.html">Flow Cytometry</a>
+        <a href="proteomics.html">Proteomics</a>
+        <a href="in-vivo.html">In Vivo</a>
+        <a href="coding.html">Coding &amp; Data</a>
+        <a href="skills.html">Technical Skills</a>
+        <a href="publications.html">Publications</a>
+        <a href="vc-portfolio.html">Portfolio &amp; VC</a>
+        <a href="contact.html">Contact</a>
+      </div>
     </div><button class="search-toggle" aria-label="Search site" title="Search (⌘K)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button><button class="dark-toggle" onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light')" aria-label="Toggle dark mode" title="Toggle dark mode">☀</button>
 
   </div>
@@ -1161,16 +1609,16 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
     I develop and deploy immunological assays that characterize tumor-immune interactions, checkpoint biology, CAR-T and NK cell function, and immune cell co-culture systems. My work integrates flow cytometry, multiplex cytokine quantification, and functional killing assays to enable mechanistic understanding and translational readouts.
   </p>
   <div class="hero-tags">
-    <span class="tag">T-Cell Killing</span>
-    <span class="tag">ADCC</span>
-    <span class="tag">CDC</span>
-    <span class="tag">Checkpoint</span>
-    <span class="tag">CAR-T</span>
-    <span class="tag">NK Cells</span>
-    <span class="tag">Cytokine Profiling</span>
+    <a class="tag" href="#immune-killing">T-Cell Killing</a>
+    <a class="tag" href="#adcc">ADCC</a>
+    <a class="tag" href="#cdc">CDC</a>
+    <a class="tag" href="#checkpoint">Checkpoint</a>
+    <a class="tag" href="#car-t">CAR-T</a>
+    <a class="tag" href="#nk-cells">NK Cells</a>
+    <a class="tag" href="#cytokine">Cytokine Profiling</a>
     <a class="tag" href="flow-cytometry.html">PBMC</a>
     <a class="tag" href="flow-cytometry.html">Flow Cytometry</a>
-    <span class="tag">Immune Co-Culture</span>
+    <a class="tag" href="#immune-coculture">Immune Co-Culture</a>
   </div>
 </div>
 
@@ -1183,6 +1631,25 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
     <div class="section-content">
       <h2>Immune Cell Killing Assays</h2>
       <p>I design and execute T-cell mediated killing, antibody-dependent cellular cytotoxicity (ADCC), complement-dependent cytotoxicity (CDC), and optimize effector-to-target ratios to profile immune potency and mechanistic dependencies. Assays employ primary human T-cells, NK cells, and macrophages in co-culture with fluorescently-labeled or viability-dye-stained target cells, with quantification by flow cytometry or luciferase-based readouts.</p>
+
+      <div class="subsection">
+        <div class="subsection-label">RT-qPCR — Immune Cell Marker Expression</div>
+        <p>RT-qPCR quantification confirms cell-type identity and treatment response at the transcriptional level. Expression is normalized to housekeeping genes (<strong>GAPDH</strong>, <strong>ACTB</strong>) and presented as fold change relative to undifferentiated or untreated controls. Error bars represent SEM from n=3 biological replicates.</p>
+
+        <div class="chart-container">
+          <div class="chart-title">RT-qPCR: Immune Checkpoint &amp; Cytokine Profiling</div>
+          <div class="chart-subtitle">Fold change in T-cell markers and cytokines across co-culture conditions vs unstimulated PBMCs</div>
+          <canvas id="qpcrBarCancer" height="300"></canvas>
+          <div class="chart-note">ΔΔCt method. n=3 donors. Stimulation: anti-CD3/CD28 ± tumor co-culture (48h). Housekeeping: GAPDH, B2M.</div>
+        </div>
+
+        <div class="chart-container">
+          <div class="chart-title">RT-qPCR Expression Heatmap</div>
+          <div class="chart-subtitle">Relative gene expression across conditions (log₂ fold change)</div>
+          <canvas id="qpcrHeatCancer" height="260"></canvas>
+          <div class="chart-note">Color intensity: red = upregulated, blue = downregulated relative to control. Values are log₂(fold change).</div>
+        </div>
+      </div>
 
       <div class="subsection">
         <div class="subsection-label">T-Cell Killing Dose-Response</div>
@@ -1316,6 +1783,181 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
   </div>
 </div>
 
+
+<!-- ═══ NEW KEYWORD SECTIONS ═══ -->
+<div class="section reveal">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">+</div>
+      <div class="section-label">Methods</div>
+    </div>
+    <div class="section-content">
+      <h2>Detailed Methodology &amp; Techniques</h2>
+      <p>Comprehensive descriptions of key experimental techniques, assay platforms, and analytical methods referenced throughout this page.</p>
+
+      <div class="subsection" id="adcc">
+        <div class="subsection-label">ADCC Assays</div>
+        <p>I develop and optimize <strong>ADCC assays</strong> using NK effector cells and PBMC-derived effectors against antibody-opsonized tumor target cells. Readouts include <strong>LDH release</strong>, flow cytometric viability (Annexin V/7-AAD), and real-time impedance-based killing on the <strong>xCELLigence RTCA</strong> platform. These assays benchmark therapeutic antibody potency, Fc engineering variants, and biosimilar comparisons.</p>
+        
+        
+        <div class="chart-container">
+          <div class="chart-title">Fig. — ADCC Dose-Response by E:T Ratio</div>
+          <div class="chart-subtitle">NK cell–mediated killing of HER2+ target cells at varying effector:target ratios</div>
+          <canvas id="adccLysisChart" height="260"></canvas>
+          <div class="chart-note">LDH release assay, 4 hr co-culture. n=3 replicates per condition.</div>
+        </div>
+        
+      </div>
+
+      <div class="subsection" id="cdc">
+        <div class="subsection-label">CDC Assays</div>
+        <p>I establish <strong>complement-dependent cytotoxicity (CDC) assays</strong> using human serum complement against antibody-opsonized tumor cells. CDC measures the ability of therapeutic antibodies to activate the classical complement pathway (C1q binding → MAC formation). Readouts include <strong>propidium iodide uptake</strong> by flow cytometry and <strong>CellTiter-Glo viability</strong>. These assays characterize IgG1 vs IgG2 subclass activity and evaluate Fc mutations that enhance or ablate complement fixation.</p>
+        
+        
+        <div class="chart-container">
+          <div class="chart-title">Fig. — CDC Potency: Antibody Subclass Comparison</div>
+          <div class="chart-subtitle">Complement-mediated lysis of CD20+ Raji cells at saturating antibody concentration</div>
+          <canvas id="cdcPotencyChart" height="260"></canvas>
+          <div class="chart-note">20% pooled human serum. 2 hr incubation. PI uptake by flow cytometry. n=4.</div>
+        </div>
+        
+      </div>
+
+      <div class="subsection" id="nk-cells">
+        <div class="subsection-label">NK Cell Biology</div>
+        <p>I isolate and expand <strong>NK cells</strong> from PBMCs using IL-2/IL-15 cytokine cocktails for use in ADCC, direct cytotoxicity, and serial killing assays. NK phenotyping includes <strong>CD56, CD16, NKG2D, KIR, NKp46</strong> by multicolor flow cytometry. Functional readouts include degranulation (CD107a surface mobilization), intracellular IFN-γ/TNF staining, and real-time killing kinetics via impedance or IncuCyte imaging.</p>
+        
+        
+        <div class="chart-container">
+          <div class="chart-title">Fig. — NK Cell Activation Markers</div>
+          <div class="chart-subtitle">Functional marker expression in resting, IL-2 activated, and target-engaged NK cells</div>
+          <canvas id="nkActivChart" height="260"></canvas>
+          <div class="chart-note">Intracellular staining + CD107a surface assay. Flow cytometry. n=3 donors.</div>
+        </div>
+        
+      </div>
+
+      <div class="subsection" id="immune-coculture">
+        <div class="subsection-label">Immune Co-Culture Systems</div>
+        <p>I establish <strong>immune–tumor co-culture assays</strong> combining patient-derived PBMCs, purified T-cell subsets, or NK cells with tumor target cells at defined E:T ratios. These enable evaluation of <strong>checkpoint blockade efficacy</strong>, bispecific antibody potency, and CAR-T cytotoxicity. Readouts include real-time impedance (xCELLigence), endpoint viability (CTG/LDH), and multiplexed cytokine profiling (MSD V-PLEX).</p>
+        
+<div class="interactive-fig-inline ifig-immuno-oncology-platform" style="width:100%; overflow-x:auto; border:1px solid var(--rule); border-radius:8px; margin:28px 0 32px; padding:40px 20px 48px; background:var(--paper);">
+<div class="fig-title">Cancer Immunology & Immune Cell Assay Platform</div>
+<div class="fig-subtitle">
+  An integrated assay framework for characterizing tumor–immune interactions across T-cell killing,
+  ADCC/CDC, checkpoint biology, CAR-T, NK cell function, and multiplex cytokine profiling.
+</div>
+
+<div class="wrapper">
+
+<div class="hub-layout">
+  <!-- Left: Effector & Checkpoint -->
+  <div class="side-col">
+    <div class="side-card">
+      <div class="side-tag eff">Effector Cells</div>
+      <div class="side-title">Primary Human T-Cells</div>
+      <div class="side-desc">CD3⁺/CD8⁺ cytotoxic T lymphocytes. Anti-PD-L1 enhanced killing. Dose-response across E:T ratios (1:1 → 50:1).</div>
+    </div>
+    <div class="side-card">
+      <div class="side-tag eff">Effector Cells</div>
+      <div class="side-title">NK Cells</div>
+      <div class="side-desc">Freshly isolated or expanded NK cells. CD16-dependent ADCC. K562 and primary tumor target killing.</div>
+    </div>
+    <div class="side-card">
+      <div class="side-tag chk">Checkpoint</div>
+      <div class="side-title">Exhaustion Profiling</div>
+      <div class="side-desc">PD-1, CTLA-4, LAG-3, TIM-3, TIGIT MFI on TILs vs. PBMCs. Blockade rescue of IFN-γ secretion and proliferation.</div>
+    </div>
+    <div class="side-card">
+      <div class="side-tag eff">Engineered</div>
+      <div class="side-title">CAR-T & CAR-NK</div>
+      <div class="side-desc">Lentiviral CAR construct transduction. Antigen-specific killing, cytokine release, and exhaustion kinetics.</div>
+    </div>
+  </div>
+
+  <!-- Center hub -->
+  <div class="hub-center">
+    <div class="hub-ring">
+      <div class="hub-label">CENTRAL ASSAY</div>
+      <div class="hub-title">Immune–Tumor<br>Co-Culture</div>
+      <div class="hub-sub">Effector + Target<br>4–72 h incubation</div>
+    </div>
+    <div class="hub-metrics">
+      <div class="hub-metric"><div class="hub-metric-val">4 h</div><div class="hub-metric-lbl">Acute killing</div></div>
+      <div class="hub-metric"><div class="hub-metric-val">72 h</div><div class="hub-metric-lbl">Extended co-culture</div></div>
+      <div class="hub-metric"><div class="hub-metric-val">E:T scan</div><div class="hub-metric-lbl">Ratio optimization</div></div>
+      <div class="hub-metric"><div class="hub-metric-val">Multi-Ab</div><div class="hub-metric-lbl">Antibody profiling</div></div>
+    </div>
+  </div>
+
+  <!-- Right: Target & Readout -->
+  <div class="side-col">
+    <div class="side-card">
+      <div class="side-tag tgt">Target Cells</div>
+      <div class="side-title">Tumor Cell Lines</div>
+      <div class="side-desc">Fluorescently labeled or viability-dye stained. Surface antigen expression validated by flow cytometry.</div>
+    </div>
+    <div class="side-card">
+      <div class="side-tag rd">Readout</div>
+      <div class="side-title">Flow Cytometry</div>
+      <div class="side-desc">Multicolor panels: CD3, CD4, CD8, CD56, PD-1, PD-L1, Ki-67. Live/dead discrimination. Intracellular cytokines.</div>
+    </div>
+    <div class="side-card">
+      <div class="side-tag rd">Readout</div>
+      <div class="side-title">Cytokine Quantification</div>
+      <div class="side-desc">MSD V-PLEX 10-plex: IFN-γ, TNF-α, IL-2, IL-6, IL-10, Granzyme B. Supernatant & intracellular staining.</div>
+    </div>
+    <div class="side-card">
+      <div class="side-tag rd">Readout</div>
+      <div class="side-title">Killing Quantification</div>
+      <div class="side-desc">Luciferase release, LDH, Annexin V, PI, CellTiter-Glo. Real-time impedance (xCELLigence) for kinetics.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Assay type grid -->
+<div class="assay-label">Functional Assay Modalities</div>
+<div class="assay-grid">
+  <div class="assay-card">
+    <div class="assay-type">T-CELL KILLING</div>
+    <div class="assay-name">CTL Cytotoxicity</div>
+    <div class="assay-desc">Anti-PD-L1 enhanced. Dose-response across E:T ratios. Specific lysis calculation.</div>
+  </div>
+  <div class="assay-card">
+    <div class="assay-type">ADCC</div>
+    <div class="assay-name">Antibody-Dependent</div>
+    <div class="assay-desc">Trastuzumab, Rituximab, Cetuximab profiling. PBMC effectors at 10:1 E:T.</div>
+  </div>
+  <div class="assay-card">
+    <div class="assay-type">CDC</div>
+    <div class="assay-name">Complement-Dependent</div>
+    <div class="assay-desc">Human complement serum. Time-course kinetics. Maximal lysis at 2 hours.</div>
+  </div>
+  <div class="assay-card">
+    <div class="assay-type">CHECKPOINT BLOCKADE</div>
+    <div class="assay-name">Exhaustion Rescue</div>
+    <div class="assay-desc">Anti-PD-1, anti-CTLA-4, anti-LAG-3 monoclonal antibodies. Functional IFN-γ rescue.</div>
+  </div>
+</div>
+
+</div>
+
+
+</div>
+
+        
+        <div class="chart-container">
+          <div class="chart-title">Fig. — Real-Time Killing Kinetics (xCELLigence)</div>
+          <div class="chart-subtitle">Impedance-based cell index tracking tumor cell viability during immune co-culture</div>
+          <canvas id="cocultureKinChart" height="260"></canvas>
+          <div class="chart-note">xCELLigence RTCA. E:T = 5:1 (PBMC), 1:1 (CAR-T). n=4 wells per condition.</div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="workflow-strip">
   <div class="workflow-inner">
     <h3>Workflow</h3>
@@ -1367,7 +2009,7 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
         </div>
         <div class="footer-col">
           <div class="footer-col-title">Contact</div>
-          <a href="/cdn-cgi/l/email-protection#c6a7e8a4a7bfa7b2afe8a4b4a7afa886a1aba7afaae8a5a9ab">Email</a>
+          <a href="contact.html#chat">Reach Out to Armin</a>
           <a href="contact.html">Contact Page</a>
           <a href="publications.html">Publications</a>
         </div>
@@ -1762,36 +2404,96 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 <script>
-(function(){
+(function() {
   var searchIndex = [
-    {page:'index.html', title:'Home \u2014 Overview', category:'Main',
-     keywords:'armin bayati phd neuroscience cell biology drug discovery harvard medical school mass general brigham research fellow ipsc dopaminergic neurons parkinson disease lewy body nature neuroscience publications citations'},
-    {page:'ipscs.html', title:'iPSC-Derived Neurons', category:'Research',
-     keywords:'ipsc induced pluripotent stem cells dopaminergic cortical neurons glial differentiation lewy body disease modeling mea electrophysiology calcium imaging hplc dopamine quantification parkinson disease alpha synuclein preformed fibrils pff neurodegeneration apoptosis autophagy protein aggregation mitochondrial dysfunction'},
-    {page:'cardiomyocytes.html', title:'iPSC-Derived Cardiomyocytes', category:'Research',
-     keywords:'cardiac differentiation mea beat rate analysis calcium transient profiling cardiotoxicity screening disease modeling hcm dcm hypertrophic cardiomyopathy dilated cardiomyopathy cardiac safety pharmacology ipsc cardiomyocytes contractility sarcomere'},
-    {page:'cancer-immunology.html', title:'Cancer Immunology', category:'Research',
-     keywords:'t cell killing adcc cdc checkpoint blockade cytokine profiling car-t characterization immune co-culture systems tumor microenvironment immunotherapy pd-1 pd-l1 nk cells antibody dependent cellular cytotoxicity complement dependent cytotoxicity'},
-    {page:'cellular-assays.html', title:'Cellular & Functional Assays', category:'Research',
-     keywords:'endocytosis exosomal biology autophagy flow cytometry pbmc immune assays plate-based readouts immunocytochemistry clathrin cd63 cd9 reporter exosome transfer assay mitophagy lysosomal stress viability cytotoxicity celltiter-glo'},
-    {page:'genetics.html', title:'Genetics & Molecular Biology', category:'Research',
-     keywords:'crispr cas9 sirna shrna aso antisense oligonucleotide molecular cloning viral constructs protein conjugation lysosomal biology gene editing lentivirus aav adenovirus transfection plasmid dna rna'},
-    {page:'drug-discovery.html', title:'Drug Discovery & Translation', category:'Research',
-     keywords:'parkin agonist tac lysosomal rescue antivirals biomarker strategy preclinical compound testing small molecule screening sar dose response pseudovirus sars-cov-2 pikfyve csnk2 hplc compound purity analytical characterization dls dynamic light scattering particle size nanoparticle formulation lc-ms pharmacokinetics target engagement pharmacodynamic'},
-    {page:'microscopy.html', title:'Microscopy & Imaging', category:'Research',
-     keywords:'confocal sted super-resolution tem transmission electron microscopy live-cell imaging high-content screening ihc histology immunohistochemistry fluorescence opera phenix hcs image analysis'},
-    {page:'flow-cytometry.html', title:'Flow Cytometry', category:'Research',
-     keywords:'flow cytometry multicolor immunophenotyping intracellular staining facs sorting gating strategy surface marker t cell b cell nk cell monocyte macrophage pbmc viability dye compensation'},
-    {page:'proteomics.html', title:'Proteomics & Single-Cell Genomics', category:'Research',
-     keywords:'tmt quantitative proteomics scrna-seq 10x genomics bulk rna-seq gsea pathway analysis umap deseq2 seurat mass spectrometry protein biomarker volcano plot gene ontology single cell transcriptomics'},
-    {page:'coding.html', title:'Coding, Automation & Data', category:'Technical',
-     keywords:'python automorphotrack pipelines bravo tecan liquid handling 96 384 well miniaturization machine learning automation data analysis github programming r matlab imageJ fiji cellprofiler'},
-    {page:'skills.html', title:'Full Technical Skills', category:'Technical',
-     keywords:'techniques instruments software capabilities laboratory skills comprehensive listing assays methods platforms tools equipment'},
-    {page:'publications.html', title:'Publications', category:'Academic',
-     keywords:'peer-reviewed papers citations journal articles nature neuroscience lancet science translational medicine acs chemical biology first author corresponding author pubmed google scholar'},
-    {page:'contact.html', title:'Contact', category:'Connect',
-     keywords:'email linkedin github orcid google scholar contact collaboration'}
+    // Page-level entries
+    {page:'index.html', title:'Home — Overview', category:'Main', section:'',
+     keywords:'armin bayati phd neuroscience cell biology drug discovery harvard medical school mass general brigham research fellow translational science',
+     description:'Overview of research portfolio spanning neurodegeneration, drug discovery, and translational science.'},
+    {page:'ipscs.html', title:'iPSC-Derived Neurons', category:'Research', section:'',
+     keywords:'ipsc induced pluripotent stem cells dopaminergic neurons cortical neurons differentiation disease modeling parkinson lewy body dual-hit mea calcium imaging electrophysiology co-culture microglia astrocyte',
+     description:'iPSC differentiation protocols for dopaminergic and cortical neurons, disease modeling, and co-culture systems.'},
+    {page:'ipscs.html#differentiation', title:'iPSC Differentiation Protocol', category:'Research', section:'Differentiation',
+     keywords:'differentiation protocol dopaminergic cortical neurons small molecule patterning smadis floor plate midbrain astrocyte microglia',
+     description:'Dual SMAD inhibition to floor-plate patterning for midbrain dopaminergic neuron generation.'},
+    {page:'ipscs.html#electrophysiology', title:'Electrophysiology & Calcium Imaging', category:'Research', section:'Functional',
+     keywords:'mea multielectrode array calcium imaging fluo-4 spontaneous activity spike raster neuronal maturation electrophysiology functional',
+     description:'MEA recordings and calcium imaging confirming functional maturity of iPSC-derived neurons.'},
+    {page:'ipscs.html#disease-modeling', title:'Disease Modeling (Dual-Hit)', category:'Research', section:'Disease Modeling',
+     keywords:'dual-hit model lewy body inclusion pff preformed fibrils ifn-gamma cytokine parkinson synuclein neurodegeneration inflammation neuroinflammation',
+     description:'Sequential PFF + IFN-gamma exposure producing Lewy body-like inclusions in human dopaminergic neurons.'},
+    {page:'ipscs.html#co-culture', title:'Neuron-Glia Co-Culture', category:'Research', section:'Co-Culture',
+     keywords:'co-culture microglia astrocyte neuron-glia neuroinflammation phagocytosis neuroprotection alpha-synuclein inclusion formation',
+     description:'Microglia accelerate inclusion formation while astrocytes provide neuroprotection in co-culture systems.'},
+    {page:'cardiomyocytes.html', title:'iPSC-Derived Cardiomyocytes', category:'Research', section:'',
+     keywords:'cardiomyocyte cardiac ipsc beating heart safety pharmacology calcium transients field potential duration impedance sarcomere contractility cardiotoxicity herg',
+     description:'iPSC-cardiomyocyte assays for cardiac safety pharmacology and cardiotoxicity screening.'},
+    {page:'cancer-immunology.html', title:'Cancer Immunology', category:'Research', section:'',
+     keywords:'t cell killing adcc cdc checkpoint blockade cytokine profiling car-t characterization immune co-culture systems tumor microenvironment immunotherapy pd-1 pd-l1 nk cells antibody dependent cellular cytotoxicity complement dependent cytotoxicity',
+     description:'Immune cell-mediated killing assays, checkpoint blockade, and tumor microenvironment modeling.'},
+    {page:'cellular-assays.html', title:'Cellular & Functional Assays', category:'Research', section:'',
+     keywords:'endocytosis exosomal biology autophagy flow cytometry pbmc immune assays plate-based readouts immunocytochemistry clathrin cd63 cd9 reporter exosome transfer assay mitophagy lysosomal stress viability cytotoxicity celltiter-glo',
+     description:'Endocytosis, exosomal biology, autophagy/mitophagy, and lysosomal stress assay platforms.'},
+    {page:'cellular-assays.html#autophagy', title:'Autophagy & Mitophagy Assays', category:'Research', section:'Autophagy',
+     keywords:'autophagy mitophagy lc3b lysotracker lysosensor lysosomal ph stress dual-hit impairment',
+     description:'LysoSensor, LysoTracker, and LC3B-based assays for autophagy and mitophagy quantification.'},
+    {page:'cellular-assays.html#endocytosis', title:'Endocytosis & Uptake Assays', category:'Research', section:'Endocytosis',
+     keywords:'endocytosis clathrin macropinocytosis fibril uptake sars-cov-2 spike protein ace2 receptor internalization trafficking',
+     description:'Clathrin-mediated endocytosis and macropinocytosis pathways for PFF and SARS-CoV-2 entry.'},
+    {page:'cellular-assays.html#exosome', title:'Exosomal Biology & Transfer', category:'Research', section:'Exosomes',
+     keywords:'exosome cd63 multivesicular body mvb manumycin a gold-labeled transfer naïve recipient disease propagation',
+     description:'Exosome-mediated disease propagation tracked via CD63-GFP and nanogold-labeled fibrils.'},
+    {page:'genetics.html', title:'Genetics & Molecular Biology', category:'Research', section:'',
+     keywords:'crispr cas9 sirna shrna aso antisense oligonucleotide molecular cloning viral constructs protein conjugation lysosomal biology gene editing lentivirus aav adenovirus transfection plasmid dna rna gba knockout snca triplication',
+     description:'CRISPR gene editing, viral vector delivery, and molecular biology for disease modeling.'},
+    {page:'genetics.html#lysosomal', title:'Lysosomal Biology', category:'Research', section:'Lysosomal',
+     keywords:'lysosome lamp1 lamp2 tfeb nrf2 galectin-3 membrane permeabilization rab7 cd63 lyso-ip nanogold fibril trafficking dysfunction',
+     description:'Lysosomal dysfunction, membrane rupture, and fibril trafficking in neurodegeneration.'},
+    {page:'genetics.html#gene-editing', title:'Gene Editing & Viral Delivery', category:'Research', section:'Gene Editing',
+     keywords:'lentivirus adenovirus shrna knockdown overexpression crispr gba lamp2 alpha-synuclein ha western blot fractionation',
+     description:'Lentiviral knockdown, adenoviral overexpression, and CRISPR editing in iPSC neurons.'},
+    {page:'drug-discovery.html', title:'Drug Discovery & Translation', category:'Research', section:'',
+     keywords:'parkin agonist tac lysosomal rescue antivirals biomarker strategy preclinical compound testing small molecule screening sar dose response pseudovirus sars-cov-2 pikfyve csnk2 hplc compound purity analytical characterization dls dynamic light scattering particle size nanoparticle formulation lc-ms pharmacokinetics target engagement pharmacodynamic',
+     description:'Small-molecule drug discovery for Parkinson\'s disease and antiviral target validation.'},
+    {page:'drug-discovery.html#parkin', title:'Parkin Agonism & Neuroprotection', category:'Research', section:'Parkin',
+     keywords:'parkin fb231 agonist alpha-synuclein inclusion reduction western blot tfeb nrf2 hdac6 neuroprotection dopaminergic',
+     description:'Small-molecule Parkin agonist reducing alpha-synuclein inclusions in iPSC dopaminergic neurons.'},
+    {page:'drug-discovery.html#antiviral', title:'Antiviral Drug Discovery', category:'Research', section:'Antiviral',
+     keywords:'csnk2 pikfyve sars-cov-2 beta-coronavirus pseudovirus gfp spike inhibitor entry clathrin endocytosis host-directed antiviral',
+     description:'CSNK2 and PIKfyve inhibitors blocking SARS-CoV-2 entry via host-directed antiviral strategies.'},
+    {page:'microscopy.html', title:'Microscopy & Imaging', category:'Research', section:'',
+     keywords:'confocal sted super-resolution tem transmission electron microscopy live-cell imaging high-content screening ihc histology immunohistochemistry fluorescence opera phenix hcs image analysis',
+     description:'Multi-modal imaging from confocal and STED super-resolution to TEM ultrastructural analysis.'},
+    {page:'microscopy.html#confocal', title:'Confocal Microscopy', category:'Research', section:'Confocal',
+     keywords:'confocal laser scanning multichannel z-stack maximum intensity projection pff inclusion sars spike lysosomal stress co-culture colocalization',
+     description:'High-resolution confocal imaging of protein aggregation, viral entry, and co-culture systems.'},
+    {page:'microscopy.html#em', title:'Electron Microscopy', category:'Research', section:'EM',
+     keywords:'tem transmission electron microscopy nanogold lewy body inclusion ultrastructure multivesicular body neurite 49000x 98000x',
+     description:'TEM ultrastructural analysis of Lewy body-like inclusions and nanogold-labeled fibril trafficking.'},
+    {page:'microscopy.html#sted', title:'STED Super-Resolution', category:'Research', section:'STED',
+     keywords:'sted stimulated emission depletion super-resolution sub-lysosomal fibril localization nanoscale',
+     description:'STED nanoscopy resolving sub-lysosomal fibril localization beyond confocal limits.'},
+    {page:'flow-cytometry.html', title:'Flow Cytometry', category:'Research', section:'',
+     keywords:'flow cytometry multicolor immunophenotyping intracellular staining facs sorting gating strategy surface marker t cell b cell nk cell monocyte macrophage pbmc viability dye compensation tregs ki67 cd4 cd8',
+     description:'Multicolor immunophenotyping, intracellular staining, and FACS sorting for immune cell analysis.'},
+    {page:'proteomics.html', title:'Proteomics & Single-Cell Genomics', category:'Research', section:'',
+     keywords:'tmt quantitative proteomics scrna-seq 10x genomics bulk rna-seq gsea pathway analysis umap deseq2 seurat mass spectrometry protein biomarker volcano plot gene ontology single cell transcriptomics',
+     description:'TMT proteomics, scRNA-seq, and multi-omics data analysis pipelines.'},
+    {page:'coding.html', title:'Coding, Automation & Data', category:'Technical', section:'',
+     keywords:'python automorphotrack pipelines bravo tecan liquid handling 96 384 well miniaturization machine learning automation data analysis github programming r matlab imageJ fiji cellprofiler',
+     description:'Python-based automation, liquid handling, and custom image analysis tools.'},
+    {page:'skills.html', title:'Full Technical Skills', category:'Technical', section:'',
+     keywords:'techniques instruments software capabilities laboratory skills comprehensive listing assays methods platforms tools equipment',
+     description:'Comprehensive listing of laboratory techniques, instruments, and software capabilities.'},
+    {page:'publications.html', title:'Publications', category:'Academic', section:'',
+     keywords:'peer-reviewed papers citations journal articles nature neuroscience lancet science translational medicine acs chemical biology first author corresponding author pubmed google scholar 25 publications 1300 citations',
+     description:'25+ peer-reviewed publications with 1,300+ citations across neuroscience, virology, and cell biology.'},
+    {page:'vc-portfolio.html', title:'Portfolio & VC', category:'Industry', section:'',
+     keywords:'venture capital portfolio management drug discovery translational science biopharma partnerships alliance management funding grants awards ip patent regulatory ind fda biotech startup pharmaceutical scientific evaluation',
+     description:'Translational science leadership, biopharma partnerships, and scientific portfolio management experience.'},
+    {page:'contact.html', title:'Contact', category:'Connect', section:'',
+     keywords:'email linkedin github orcid google scholar contact collaboration',
+     description:'Contact information, LinkedIn, and academic profiles.'}
   ];
 
   var overlay = document.getElementById('searchOverlay');
@@ -1824,6 +2526,24 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     return text.replace(regex, '<mark>$1</mark>');
   }
 
+  // Fuzzy substring match: returns true if all chars of query appear in order in str
+  function fuzzyMatch(str, query) {
+    var strIdx = 0;
+    for (var i = 0; i < query.length; i++) {
+      var found = false;
+      while (strIdx < str.length) {
+        if (str[strIdx].toLowerCase() === query[i].toLowerCase()) {
+          strIdx++;
+          found = true;
+          break;
+        }
+        strIdx++;
+      }
+      if (!found) return false;
+    }
+    return true;
+  }
+
   function renderResults(query) {
     var terms = query.toLowerCase().trim().split(/\s+/).filter(function(t){ return t.length > 1; });
     var scored = [];
@@ -1833,17 +2553,35 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
       var score = 0;
       var titleLow = item.title.toLowerCase();
       var kwLow = item.keywords;
+      var descLow = (item.description || '').toLowerCase();
+      var sectionLow = (item.section || '').toLowerCase();
+
       terms.forEach(function(t) {
-        if (titleLow.indexOf(t) !== -1) score += 10;
+        // Exact matches
+        if (titleLow.indexOf(t) !== -1) score += 15;
+        if (sectionLow.indexOf(t) !== -1) score += 8;
+        if (descLow.indexOf(t) !== -1) score += 5;
         if (kwLow.indexOf(t) !== -1) score += 3;
+        // Fuzzy match on title if no exact match
+        if (score === 0 && t.length > 2 && fuzzyMatch(titleLow, t)) score += 2;
       });
+
+      // Bonus for matching all terms
+      var allMatch = terms.every(function(t) {
+        return titleLow.indexOf(t) !== -1 || kwLow.indexOf(t) !== -1 || descLow.indexOf(t) !== -1;
+      });
+      if (allMatch && terms.length > 1) score += 10;
+
       if (score > 0) scored.push({item: item, score: score});
     });
 
     scored.sort(function(a, b){ return b.score - a.score; });
 
+    // Deduplicate: if a page-level and section-level entry have similar scores, keep both but cap at 12
+    scored = scored.slice(0, 12);
+
     if (terms.length && !scored.length) {
-      resultsEl.innerHTML = '<div class="search-empty"><span>&#128269;</span>No results for &ldquo;' + query.replace(/</g, '&lt;') + '&rdquo;</div>';
+      resultsEl.innerHTML = '<div class="search-empty"><span>&#128269;</span>No results for &ldquo;' + query.replace(/</g, '&lt;') + '&rdquo;<div class="search-suggestion">Try broader terms or check spelling</div></div>';
       return;
     }
 
@@ -1851,20 +2589,13 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     scored.forEach(function(s, i) {
       var item = s.item;
       var title = terms.length ? highlight(item.title, terms) : item.title;
-      var kwArr = item.keywords.split(' ');
-      var matchedKw = [];
-      if (terms.length) {
-        kwArr.forEach(function(kw) {
-          terms.forEach(function(t) {
-            if (kw.indexOf(t) !== -1 && matchedKw.indexOf(kw) === -1) matchedKw.push(kw);
-          });
-        });
-      }
-      var desc = matchedKw.length ? matchedKw.slice(0, 6).join(' &middot; ') : kwArr.slice(0, 5).join(' &middot; ');
-      if (terms.length) desc = highlight(desc, terms);
+      var desc = item.description || '';
+      if (terms.length && desc) desc = highlight(desc, terms);
+
+      var sectionBadge = item.section ? '<span class="search-section-badge">' + item.section + '</span>' : '';
 
       html += '<a class="search-result' + (i === 0 && terms.length ? ' active' : '') + '" href="' + item.page + '">';
-      html += '<div class="search-result-page">' + item.category + '</div>';
+      html += '<div class="search-result-meta"><span class="search-result-page">' + item.category + '</span>' + sectionBadge + '</div>';
       html += '<div class="search-result-title">' + title + '</div>';
       html += '<div class="search-result-desc">' + desc + '</div></a>';
     });
@@ -1911,6 +2642,206 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
   document.querySelectorAll('.search-toggle').forEach(function(btn){ btn.addEventListener('click', openSearch); });
 })();
+
+
+(function(){
+  var errorBarPlugin = {
+    id: 'errorBars',
+    afterDatasetsDraw: function(chart) {
+      var ctx = chart.ctx;
+      chart.data.datasets.forEach(function(ds, i) {
+        if (!ds.errorBars) return;
+        var meta = chart.getDatasetMeta(i);
+        meta.data.forEach(function(bar, j) {
+          var err = ds.errorBars[j];
+          if (err === undefined) return;
+          var x = bar.x, y = bar.y;
+          var yScale = chart.scales.y;
+          var yTop = yScale.getPixelForValue(ds.data[j] + err);
+          var yBot = yScale.getPixelForValue(ds.data[j] - err);
+          ctx.save();
+          ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+          ctx.lineWidth = 1.2;
+          ctx.beginPath();
+          ctx.moveTo(x, yTop);
+          ctx.lineTo(x, yBot);
+          ctx.moveTo(x - 4, yTop);
+          ctx.lineTo(x + 4, yTop);
+          ctx.moveTo(x - 4, yBot);
+          ctx.lineTo(x + 4, yBot);
+          ctx.stroke();
+          ctx.restore();
+        });
+      });
+    }
+  };
+  new Chart(document.getElementById('qpcrBarCancer'), {
+    type: 'bar',
+    plugins: [errorBarPlugin],
+    data: {
+      labels: ['CD3\u03b5', 'CD8\u03b1', 'PD-1', 'FOXP3', 'IFN-\u03b3', 'TNF-\u03b1'],
+      datasets: [{
+      label: 'Stimulated PBMCs',
+      data: [4.2, 6.8, 8.4, 1.8, 12.6, 9.4],
+      errorBars: [0.6, 0.9, 1.2, 0.3, 1.8, 1.3],
+      backgroundColor: 'rgba(192,57,43,0.75)',
+      borderColor: 'rgba(192,57,43,1)',
+      borderWidth: 1
+    },{
+      label: '+ Tumor Co-culture',
+      data: [3.8, 5.4, 18.2, 4.6, 6.8, 14.2],
+      errorBars: [0.5, 0.7, 2.4, 0.8, 1.1, 2.0],
+      backgroundColor: 'rgba(46,134,193,0.7)',
+      borderColor: 'rgba(46,134,193,1)',
+      borderWidth: 1
+    },{
+      label: '+ Anti-PD-1 blockade',
+      data: [4.1, 7.2, 6.2, 2.1, 18.4, 16.8],
+      errorBars: [0.5, 1.0, 0.9, 0.4, 2.6, 2.2],
+      backgroundColor: 'rgba(39,174,96,0.65)',
+      borderColor: 'rgba(39,174,96,1)',
+      borderWidth: 1
+    }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11, family: "'IBM Plex Sans'" }, padding: 16 } } },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: 'Fold Change (vs Control)', font: { size: 11, family: "'IBM Plex Sans'" } }, grid: { color: 'rgba(0,0,0,0.05)' } },
+        x: { grid: { display: false }, ticks: { font: { size: 11, family: "'IBM Plex Sans'" } } }
+      }
+    }
+  });
+})();
+
+
+(function(){
+  var genes = ['CD3\u03b5','CD8\u03b1','PD-1','FOXP3','IFN-\u03b3','TNF-\u03b1'];
+  var conds = ['Unstim PBMC','Stim PBMC','+ Tumor','+ Anti-PD-1','+ CAR-T'];
+  var vals = [[0, 0, 0, 0, 0, 0], [2.1, 2.8, 3.1, 0.8, 3.7, 3.2], [1.9, 2.4, 4.2, 2.2, 2.8, 3.8], [2.0, 2.9, 2.6, 1.1, 4.2, 4.1], [2.8, 3.6, 1.4, 0.6, 4.8, 4.5]];
+  var pts = [];
+  for(var r=0; r<conds.length; r++) {
+    for(var c=0; c<genes.length; c++) {
+      pts.push({x: c, y: r, v: vals[r][c]});
+    }
+  }
+  var maxAbs = 0;
+  pts.forEach(function(p){ if(Math.abs(p.v)>maxAbs) maxAbs=Math.abs(p.v); });
+
+  new Chart(document.getElementById('qpcrHeatCancer'), {
+    type: 'scatter',
+    data: {
+      datasets: [{
+        data: pts.map(function(p){ return {x: p.x, y: p.y}; }),
+        pointRadius: pts.map(function(){ return 18; }),
+        pointStyle: 'rectRounded',
+        backgroundColor: pts.map(function(p){
+          var t = p.v / maxAbs;
+          if(t > 0) return 'rgba(192,57,43,' + (0.15 + 0.85*t).toFixed(2) + ')';
+          else return 'rgba(41,98,163,' + (0.15 + 0.85*Math.abs(t)).toFixed(2) + ')';
+        }),
+        borderWidth: 0
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              var i = ctx.dataIndex;
+              var p = pts[i];
+              return genes[p.x] + ' in ' + conds[p.y] + ': ' + p.v.toFixed(1) + 'x';
+            }
+          }
+        }
+      },
+      scales: {
+        x: { type: 'linear', min: -0.5, max: genes.length - 0.5, ticks: { callback: function(v){ return genes[v]; }, stepSize: 1, font: { size: 10, family: "'IBM Plex Sans'" } }, grid: { display: false } },
+        y: { type: 'linear', min: -0.5, max: conds.length - 0.5, ticks: { callback: function(v){ return conds[v]; }, stepSize: 1, font: { size: 10, family: "'IBM Plex Sans'" } }, grid: { display: false }, reverse: false }
+      }
+    }
+  });
+})();
+
+// ── New keyword section charts ──
+
+new Chart(document.getElementById('adccLysisChart').getContext('2d'), {
+  type: 'line',
+  data: {
+    labels: ['1:1', '5:1', '10:1', '25:1', '50:1'],
+    datasets: [{
+      label: 'Wild-type Fc', data: [8, 22, 41, 62, 75],
+      borderColor: 'rgba(192,57,43,0.8)', backgroundColor: 'rgba(192,57,43,0.1)', fill: true, tension: 0.3
+    },{
+      label: 'Fc-enhanced', data: [15, 38, 58, 78, 89],
+      borderColor: 'rgba(52,73,94,0.8)', backgroundColor: 'rgba(52,73,94,0.1)', fill: true, tension: 0.3
+    },{
+      label: 'Isotype', data: [3, 5, 7, 9, 11],
+      borderColor: 'rgba(149,165,166,0.6)', borderDash: [5,3], fill: false, tension: 0.3
+    }]
+  },
+  options: { responsive: true, plugins: { legend: { position: 'top', labels: { font: { size: 11 }}}},
+    scales: { y: { beginAtZero: true, max: 100, title: { display: true, text: '% Specific Lysis' }},
+              x: { title: { display: true, text: 'E:T Ratio' }}}}
+});
+
+new Chart(document.getElementById('cdcPotencyChart').getContext('2d'), {
+  type: 'bar',
+  data: {
+    labels: ['Rituximab', 'Ofatumumab', 'IgG2 variant', 'Fc-silent', 'Isotype'],
+    datasets: [{
+      label: '% CDC Lysis', data: [52, 78, 28, 4, 2],
+      backgroundColor: ['rgba(192,57,43,0.65)','rgba(192,57,43,0.8)','rgba(52,73,94,0.6)','rgba(149,165,166,0.5)','rgba(149,165,166,0.3)'],
+      borderWidth: 1
+    }]
+  },
+  options: { responsive: true, plugins: { legend: { display: false }},
+    scales: { y: { beginAtZero: true, max: 100, title: { display: true, text: '% Lysis (PI uptake)' }}}}
+});
+
+new Chart(document.getElementById('nkActivChart').getContext('2d'), {
+  type: 'bar',
+  data: {
+    labels: ['CD107a+', 'IFN-γ+', 'TNF+', 'Perforin+', 'Granzyme B+'],
+    datasets: [{
+      label: 'Resting NK', data: [5, 2, 1, 65, 72],
+      backgroundColor: 'rgba(149,165,166,0.5)', borderWidth: 1
+    },{
+      label: 'IL-2 activated', data: [42, 35, 28, 88, 91],
+      backgroundColor: 'rgba(192,57,43,0.4)', borderWidth: 1
+    },{
+      label: 'NK + K562', data: [68, 52, 41, 90, 94],
+      backgroundColor: 'rgba(192,57,43,0.75)', borderWidth: 1
+    }]
+  },
+  options: { responsive: true, plugins: { legend: { position: 'top', labels: { font: { size: 11 }}}},
+    scales: { y: { beginAtZero: true, max: 100, title: { display: true, text: '% Positive NK Cells' }}}}
+});
+
+new Chart(document.getElementById('cocultureKinChart').getContext('2d'), {
+  type: 'line',
+  data: {
+    labels: ['0h','4h','8h','12h','16h','20h','24h','36h','48h'],
+    datasets: [{
+      label: 'Target only', data: [1.0, 1.05, 1.1, 1.12, 1.15, 1.18, 1.2, 1.22, 1.25],
+      borderColor: 'rgba(149,165,166,0.7)', borderDash: [5,3], fill: false, tension: 0.3
+    },{
+      label: 'PBMC + Isotype', data: [1.0, 0.98, 0.95, 0.92, 0.88, 0.85, 0.82, 0.78, 0.75],
+      borderColor: 'rgba(52,73,94,0.6)', fill: false, tension: 0.3
+    },{
+      label: 'PBMC + anti-PD-1', data: [1.0, 0.92, 0.78, 0.62, 0.48, 0.38, 0.30, 0.22, 0.18],
+      borderColor: 'rgba(192,57,43,0.8)', backgroundColor: 'rgba(192,57,43,0.1)', fill: true, tension: 0.3
+    },{
+      label: 'CAR-T (1:1)', data: [1.0, 0.82, 0.55, 0.32, 0.18, 0.10, 0.06, 0.04, 0.03],
+      borderColor: 'rgba(39,174,96,0.8)', fill: false, tension: 0.3
+    }]
+  },
+  options: { responsive: true, plugins: { legend: { position: 'top', labels: { font: { size: 10 }}}},
+    scales: { y: { title: { display: true, text: 'Cell Index' }}, x: { title: { display: true, text: 'Time' }}}}
+});
 </script>
 
 </body>

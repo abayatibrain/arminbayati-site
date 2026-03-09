@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dual-Hit Neurodegeneration Model</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f1419; --paper: #fafaf7; --mid: #6b7280; --accent: #c0392b;
+    --rule: #d4d0c8; --card: #ffffff; --section-bg: #f4f3ef;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+    --mono: 'IBM Plex Mono', 'Menlo', monospace;
+    --hit1: #2563eb; --hit2: #dc2626;
+  }
+  html.dark {
+    --ink: #e8e6e1; --paper: #111318; --mid: #9ca3af; --rule: #2a2d35;
+    --card: #1a1d24; --section-bg: #15171d;
+    --hit1: #60a5fa; --hit2: #f87171;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--sans); background: var(--paper); color: var(--ink);
+    display: flex; flex-direction: column; align-items: center;
+    padding: 40px 20px 48px;
+  }
+  .fig-label { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--accent); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 8px; }
+  .fig-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; color: var(--ink); margin-bottom: 6px; text-align: center; }
+  .fig-subtitle { font-size: 13px; font-weight: 300; color: var(--mid); margin-bottom: 36px; text-align: center; max-width: 700px; line-height: 1.6; }
+
+  .model-wrapper { width: 100%; max-width: 1060px; overflow-x: auto; }
+
+  /* Hits row */
+  .hits-row { display: flex; gap: 16px; margin-bottom: 24px; min-width: 900px; }
+  .hit-card {
+    flex: 1; border-radius: 10px; padding: 20px 22px;
+    border: 1px solid; display: flex; gap: 16px; align-items: flex-start;
+  }
+  .hit-card.h1 { border-color: var(--hit1); background: color-mix(in srgb, var(--hit1) 4%, transparent); }
+  .hit-card.h2 { border-color: var(--hit2); background: color-mix(in srgb, var(--hit2) 4%, transparent); }
+  .hit-icon {
+    width: 48px; height: 48px; border-radius: 10px; display: flex;
+    align-items: center; justify-content: center; font-family: var(--serif);
+    font-size: 1.5rem; flex-shrink: 0; font-weight: 400;
+  }
+  .hit-card.h1 .hit-icon { background: color-mix(in srgb, var(--hit1) 12%, transparent); color: var(--hit1); }
+  .hit-card.h2 .hit-icon { background: color-mix(in srgb, var(--hit2) 12%, transparent); color: var(--hit2); }
+  .hit-label { font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.8px; margin-bottom: 4px; }
+  .hit-card.h1 .hit-label { color: var(--hit1); }
+  .hit-card.h2 .hit-label { color: var(--hit2); }
+  .hit-name { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+  .hit-desc { font-size: 12px; font-weight: 300; color: var(--mid); line-height: 1.6; }
+
+  /* Timeline */
+  .timeline { position: relative; min-width: 900px; padding: 12px 0 0; }
+  .timeline-track {
+    position: relative; height: 4px; background: var(--rule); border-radius: 2px;
+    margin: 0 40px;
+  }
+  .timeline-fill {
+    position: absolute; top: 0; left: 0; height: 100%; border-radius: 2px;
+    background: linear-gradient(90deg, var(--hit1), var(--hit2), var(--accent));
+  }
+  .timeline-markers {
+    display: flex; justify-content: space-between; margin: 0 20px; padding-top: 0;
+    position: relative;
+  }
+  .marker {
+    display: flex; flex-direction: column; align-items: center; width: 140px;
+    text-align: center; position: relative;
+  }
+  .marker-dot {
+    width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--card);
+    margin-bottom: 8px; position: relative; top: -9px;
+    box-shadow: 0 0 0 1px var(--rule);
+  }
+  .marker:nth-child(1) .marker-dot { background: var(--hit1); }
+  .marker:nth-child(2) .marker-dot { background: var(--hit1); }
+  .marker:nth-child(3) .marker-dot { background: var(--hit2); }
+  .marker:nth-child(4) .marker-dot { background: #7c3aed; }
+  .marker:nth-child(5) .marker-dot { background: var(--accent); }
+  .marker:nth-child(6) .marker-dot { background: var(--accent); }
+
+  .marker-day { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--ink); margin-bottom: 3px; }
+  .marker-event { font-size: 11px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+  .marker-detail { font-size: 10px; font-weight: 300; color: var(--mid); line-height: 1.4; }
+
+  /* Readout grid */
+  .readouts-label {
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    color: var(--accent); letter-spacing: 1px; margin: 28px 0 12px; text-transform: uppercase;
+  }
+  .readouts-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px; min-width: 900px;
+  }
+  .readout {
+    background: var(--card); border: 1px solid var(--rule); border-radius: 8px;
+    padding: 14px 14px 12px; transition: border-color 0.2s;
+  }
+  .readout:hover { border-color: var(--accent); }
+  .readout-cat {
+    font-family: var(--mono); font-size: 9px; font-weight: 500;
+    color: var(--mid); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 5px;
+  }
+  .readout-name { font-size: 12px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+  .readout-markers { font-size: 10px; font-weight: 300; color: var(--mid); line-height: 1.5; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .fig-label, .fig-title, .fig-subtitle { animation: fadeIn 0.5s ease both; }
+  .fig-title { animation-delay: 0.05s; } .fig-subtitle { animation-delay: 0.1s; }
+</style>
+</head>
+<body>
+<div class="fig-label">Figure 4</div>
+<div class="fig-title">Dual-Hit Neurodegeneration Model</div>
+<div class="fig-subtitle">
+  A two-insult paradigm combining α-synuclein pre-formed fibrils (PFFs) with interferon-γ
+  to recapitulate inflammatory Lewy body pathology in iPSC-derived dopaminergic neurons.
+</div>
+
+<div class="model-wrapper">
+
+<!-- Hits -->
+<div class="hits-row">
+  <div class="hit-card h1">
+    <div class="hit-icon">1</div>
+    <div>
+      <div class="hit-label">HIT 1 — PROTEOPATHIC SEED</div>
+      <div class="hit-name">α-Synuclein Pre-Formed Fibrils (PFFs)</div>
+      <div class="hit-desc">Sonicated recombinant fibrils that seed endogenous α-synuclein aggregation via macropinocytic uptake. Fibrils bypass early endosomes and accumulate in lysosomes within 2 minutes, triggering lysosomal dysfunction and Lewy-like inclusion formation.</div>
+    </div>
+  </div>
+  <div class="hit-card h2">
+    <div class="hit-icon">2</div>
+    <div>
+      <div class="hit-label">HIT 2 — NEUROINFLAMMATORY INSULT</div>
+      <div class="hit-name">Interferon-γ (IFN-γ)</div>
+      <div class="hit-desc">Pro-inflammatory cytokine that activates JAK/STAT signaling, upregulates MHC-I, and disrupts autophagy flux. When combined with PFFs, IFN-γ dramatically accelerates α-synuclein pathology, collapses the autophagy-lysosomal pathway, and drives neuronal death.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Timeline -->
+<div class="timeline">
+  <div class="timeline-track">
+    <div class="timeline-fill" style="width: 100%;"></div>
+  </div>
+  <div class="timeline-markers">
+    <div class="marker">
+      <div class="marker-dot"></div>
+      <div class="marker-day">Day 0</div>
+      <div class="marker-event">PFF Addition</div>
+      <div class="marker-detail">Sonicated fibrils added to mature DA neurons</div>
+    </div>
+    <div class="marker">
+      <div class="marker-dot"></div>
+      <div class="marker-day">Day 1</div>
+      <div class="marker-event">IFN-γ Addition</div>
+      <div class="marker-detail">10 ng/mL inflammatory insult</div>
+    </div>
+    <div class="marker">
+      <div class="marker-dot"></div>
+      <div class="marker-day">Day 7</div>
+      <div class="marker-event">Early Pathology</div>
+      <div class="marker-detail">pS129⁺ puncta visible; lysosomal stress begins</div>
+    </div>
+    <div class="marker">
+      <div class="marker-dot"></div>
+      <div class="marker-day">Day 14</div>
+      <div class="marker-event">Inclusion Growth</div>
+      <div class="marker-detail">Thioflavin S⁺ amyloid cores; autophagy collapse</div>
+    </div>
+    <div class="marker">
+      <div class="marker-dot"></div>
+      <div class="marker-day">Day 21</div>
+      <div class="marker-event">Mature Pathology</div>
+      <div class="marker-detail">Lewy body–like inclusions; neuronal death</div>
+    </div>
+    <div class="marker">
+      <div class="marker-dot"></div>
+      <div class="marker-day">Day 21+</div>
+      <div class="marker-event">Drug Window</div>
+      <div class="marker-detail">PAH / Parkin agonist rescue experiments</div>
+    </div>
+  </div>
+</div>
+
+<!-- Readouts -->
+<div class="readouts-label">Multi-Readout Validation Endpoints</div>
+<div class="readouts-grid">
+  <div class="readout">
+    <div class="readout-cat">Pathology</div>
+    <div class="readout-name">Inclusion Quantification</div>
+    <div class="readout-markers">pS129, ThioS, ubiquitin ICC + confocal</div>
+  </div>
+  <div class="readout">
+    <div class="readout-cat">Lysosomal</div>
+    <div class="readout-name">ALP Integrity</div>
+    <div class="readout-markers">LAMP1, LAMP2, TFEB, Galectin-3 WB</div>
+  </div>
+  <div class="readout">
+    <div class="readout-cat">Autophagy</div>
+    <div class="readout-name">Flux Monitoring</div>
+    <div class="readout-markers">LC3B, p62/SQSTM1, HDAC6 WB</div>
+  </div>
+  <div class="readout">
+    <div class="readout-cat">Stress</div>
+    <div class="readout-name">ISR & Senescence</div>
+    <div class="readout-markers">ATF4, ATF3, SA-β-gal, ROS</div>
+  </div>
+  <div class="readout">
+    <div class="readout-cat">Viability</div>
+    <div class="readout-name">Cell Death Markers</div>
+    <div class="readout-markers">LDH, Caspase-3/7, CellTiter-Glo</div>
+  </div>
+  <div class="readout">
+    <div class="readout-cat">Proteomics</div>
+    <div class="readout-name">TMT Mass Spec</div>
+    <div class="readout-markers">Subcellular fractionation + pathway analysis</div>
+  </div>
+</div>
+
+</div>
+
+<script>
+</script>
+</body>
+</html>

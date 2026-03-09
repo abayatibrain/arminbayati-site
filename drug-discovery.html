@@ -57,13 +57,14 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 48px;
+  height: auto;
+  padding: 10px 0;
   gap: 16px;
 }
 
 .nav-brand {
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.5px;
   color: var(--mid);
@@ -72,26 +73,54 @@ nav {
   flex-shrink: 0;
 }
 .nav-brand:hover { color: var(--ink); }
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-logo {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+.nav-brand-text {
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  color: var(--ink);
+}
+.nav-brand:hover .nav-logo { color: var(--ink); }
+
 
 .nav-links {
   display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+  min-width: 0;
+}
+.nav-row {
+  display: flex;
   gap: 1px;
+  justify-content: center;
   flex-wrap: nowrap;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-.nav-links::-webkit-scrollbar { display: none; }
+.nav-row::-webkit-scrollbar { display: none; }
 
 .nav-links a {
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.4px;
   text-transform: uppercase;
   color: var(--mid);
   text-decoration: none;
-  padding: 6px 8px;
+  padding: 8px 11px;
   border-radius: 3px;
   transition: all 0.2s ease;
   white-space: nowrap;
@@ -153,7 +182,7 @@ nav {
   font-weight: 300;
   line-height: 1.75;
   color: var(--mid);
-  max-width: 640px;
+  max-width: 760px;
   margin-bottom: 36px;
 }
 
@@ -185,7 +214,7 @@ nav {
   margin: 0 auto;
   padding: 64px 32px 0;
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 120px 1fr;
   gap: 48px;
   align-items: start;
 }
@@ -240,7 +269,7 @@ nav {
   font-weight: 300;
   line-height: 1.8;
   color: #444;
-  max-width: 640px;
+  max-width: 760px;
   margin-bottom: 16px;
 }
 
@@ -299,7 +328,7 @@ nav {
   border-radius: 6px;
   overflow: hidden;
   margin: 28px 0 32px;
-  max-width: 640px;
+  max-width: 760px;
 }
 
 .finding {
@@ -324,7 +353,7 @@ nav {
 /* ── TIMELINE ── */
 .timeline {
   margin: 32px 0;
-  max-width: 640px;
+  max-width: 760px;
 }
 
 .timeline-item {
@@ -371,6 +400,209 @@ nav {
 }
 
 /* ── WORKFLOW STRIP ── */
+
+<!-- ═══ NEW KEYWORD SECTIONS ═══ -->
+<div class="section reveal">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">+</div>
+      <div class="section-label">Methods</div>
+    </div>
+    <div class="section-content">
+      <h2>Detailed Methodology &amp; Techniques</h2>
+      <p>Comprehensive descriptions of key experimental techniques, assay platforms, and analytical methods referenced throughout this page.</p>
+
+      <div class="subsection" id="oncology">
+        <div class="subsection-label">Oncology Programs</div>
+        <p>I support <strong>oncology drug discovery</strong> through cell-based proliferation assays, immune killing assays (ADCC, T-cell redirected), and compound screening in tumor cell lines and patient-derived models. Endpoints include <strong>dose-response curves (IC50/EC50)</strong>, combination index analysis (Chou-Talalay), and mechanism-of-action studies using phospho-proteomics and pathway reporters. I bridge target biology to translational readouts across solid tumor and hematological malignancy contexts.</p>
+
+      <div class="subsection">
+        <div class="subsection-label">RT-qPCR — Drug Response Biomarkers</div>
+        <p>RT-qPCR quantification confirms cell-type identity and treatment response at the transcriptional level. Expression is normalized to housekeeping genes (<strong>GAPDH</strong>, <strong>ACTB</strong>) and presented as fold change relative to undifferentiated or untreated controls. Error bars represent SEM from n=3 biological replicates.</p>
+
+        <div class="chart-container">
+          <div class="chart-title">RT-qPCR: Target Engagement & Pathway Modulation</div>
+          <div class="chart-subtitle">Fold change in neuroprotective and stress markers after compound treatment (48h) vs DMSO vehicle</div>
+          <canvas id="qpcrBarDrug" height="300"></canvas>
+          <div class="chart-note">ΔΔCt method. iPSC-DA neurons (DIV 42), n=3. Compounds at EC₅₀. Housekeeping: GAPDH, ACTB.</div>
+        </div>
+
+        <div class="chart-container">
+          <div class="chart-title">RT-qPCR Expression Heatmap</div>
+          <div class="chart-subtitle">Relative gene expression across conditions (log₂ fold change)</div>
+          <canvas id="qpcrHeatDrug" height="260"></canvas>
+          <div class="chart-note">Color intensity: red = upregulated, blue = downregulated relative to control. Values are log₂(fold change).</div>
+        </div>
+      </div>
+
+
+        
+<div class="interactive-fig-inline ifig-drug-discovery-pipeline" style="width:100%; overflow-x:auto; border:1px solid var(--rule); border-radius:8px; margin:28px 0 32px; padding:40px 20px 48px; background:var(--paper);">
+<div class="fig-title">Drug Discovery & Translational Pipeline</div>
+<div class="fig-subtitle">
+  End-to-end preclinical workflow — from target biology and cell model development through
+  hit identification, mechanism validation, and biomarker-enabled decision-making.
+</div>
+
+<div class="pipeline-wrapper">
+
+<!-- Phase header -->
+<div class="phase-row">
+  <div class="phase"><div class="phase-num">PHASE 1</div><div class="phase-name">Target Biology</div><div class="phase-sub">Disease mechanism & rationale</div></div>
+  <div class="phase"><div class="phase-num">PHASE 2</div><div class="phase-name">Model Development</div><div class="phase-sub">iPSC & cell-based systems</div></div>
+  <div class="phase"><div class="phase-num">PHASE 3</div><div class="phase-name">Assay & Screening</div><div class="phase-sub">HCS, FLIPR, functional readouts</div></div>
+  <div class="phase"><div class="phase-num">PHASE 4</div><div class="phase-name">MoA Validation</div><div class="phase-sub">Mechanistic & PD confirmation</div></div>
+  <div class="phase"><div class="phase-num">PHASE 5</div><div class="phase-name">Translation</div><div class="phase-sub">Biomarkers & decision data</div></div>
+</div>
+
+<!-- Content columns -->
+<div class="content-grid">
+  <!-- Phase 1 -->
+  <div class="col">
+    <div class="item">
+      <div class="item-tag neuro">Neuro</div>
+      <div class="item-title">Parkin / Mitophagy</div>
+      <div class="item-desc">Mitochondrial QC failure in PD. Parkin E3 ubiquitin ligase as druggable target for agonism.</div>
+    </div>
+    <div class="item">
+      <div class="item-tag neuro">Neuro</div>
+      <div class="item-title">Lysosomal Dysfunction</div>
+      <div class="item-desc">GBA loss, LAMP1/2 depletion, TFEB downregulation in synucleinopathy.</div>
+    </div>
+    <div class="item">
+      <div class="item-tag antiviral">Antiviral</div>
+      <div class="item-title">Endocytic Entry</div>
+      <div class="item-desc">SARS-CoV-2 Spike–ACE2 clathrin-mediated entry as host-directed antiviral target.</div>
+    </div>
+    <div class="item">
+      <div class="item-tag onco">Oncology</div>
+      <div class="item-title">PARK2 in Cancer</div>
+      <div class="item-desc">PARK2 downregulation across multiple tumor types links Parkin biology to oncology.</div>
+    </div>
+  </div>
+
+  <!-- Phase 2 -->
+  <div class="col">
+    <div class="item">
+      <div class="item-tag method">Model</div>
+      <div class="item-title">iPSC-DA Neurons</div>
+      <div class="item-desc">9 donor lines. TH⁺/GIRK2⁺ dopaminergic identity. 4–6 wk maturation. MEA-validated.</div>
+    </div>
+    <div class="item">
+      <div class="item-tag method">Model</div>
+      <div class="item-title">Dual-Hit Protocol</div>
+      <div class="item-desc">PFF + IFN-γ to model neuroinflammatory Lewy body pathology. 21-day time course.</div>
+    </div>
+    <div class="item">
+      <div class="item-tag method">Model</div>
+      <div class="item-title">CRISPR KO Lines</div>
+      <div class="item-desc">Parkin KO, GBA KO, α-syn KO, LRRK2 KO iPSCs for genetic disease modeling.</div>
+    </div>
+    <div class="item">
+      <div class="item-tag cardiac">Cardiac</div>
+      <div class="item-title">iPSC-Cardiomyocytes</div>
+      <div class="item-desc">GiWi differentiation. >90% cTnT⁺. Cardiotoxicity & safety pharmacology.</div>
+    </div>
+  </div>
+
+  <!-- Phase 3 -->
+  <div class="col">
+    <div class="item">
+      <div class="item-tag method">Screening</div>
+      <div class="item-title">High-Content Imaging</div>
+      <div class="item-desc">96/384-well confocal with automated segmentation. Inclusion count, mitophagy, viability.</div>
+    </div>
+    <div class="item">
+      <div class="item-tag method">Screening</div>
+      <div class="item-title">FLIPR & Incucyte</div>
+      <div class="item-desc">Kinetic calcium flux and real-time proliferation / cytotoxicity monitoring.</div>
+    </div>
+    <div class="item">
+      <div class="item-tag method">Screening</div>
+      <div class="item-title">Plate-Based Readouts</div>
+      <div class="item-desc">CellTiter-Glo, LDH, caspase-3/7, ROS (CellROX), SA-β-gal for senescence.</div>
+    </div>
+  </div>
+
+  <!-- Phase 4 -->
+  <div class="col">
+    <div class="item">
+      <div class="item-tag neuro">MoA</div>
+      <div class="item-title">Western Blot PD Panel</div>
+      <div class="item-desc">pS129 α-syn, LAMP1/2, TFEB, NRF2, HDAC6, LC3B, p62 — multi-readout PD confirmation.</div>
+    </div>
+    <div class="item">
+      <div class="item-tag antiviral">MoA</div>
+      <div class="item-title">Pseudovirus Neutralization</div>
+      <div class="item-desc">GFP-pseudotyped virus entry assay. Dose-response inhibition of Spike-mediated entry.</div>
+    </div>
+    <div class="item">
+      <div class="item-tag method">MoA</div>
+      <div class="item-title">TMT Proteomics</div>
+      <div class="item-desc">Subcellular fractionation + TMT-MS to map drug-induced proteome shifts.</div>
+    </div>
+  </div>
+
+  <!-- Phase 5 -->
+  <div class="col">
+    <div class="item">
+      <div class="item-tag neuro">Biomarker</div>
+      <div class="item-title">TE/PD Decision Matrix</div>
+      <div class="item-desc">Target engagement (Parkin activity) + pharmacodynamic (inclusion clearance) biomarker panel.</div>
+    </div>
+    <div class="item">
+      <div class="item-tag method">Biomarker</div>
+      <div class="item-title">Cytokine Profiling</div>
+      <div class="item-desc">MSD V-PLEX multiplex for IL-6, TNF-α, IFN-γ, IL-1β — inflammatory response readouts.</div>
+    </div>
+    <div class="item">
+      <div class="item-tag method">Output</div>
+      <div class="item-title">Go/No-Go Data Package</div>
+      <div class="item-desc">Integrated efficacy, safety, and biomarker dataset enabling translational decision-making.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Active Compounds -->
+<div class="compounds-strip">
+  <div class="compounds-label">Active Therapeutic Programs</div>
+  <div class="compounds-grid">
+    <div class="compound">
+      <div class="compound-icon pa">PA</div>
+      <div><div class="compound-name">Parkin Agonists</div><div class="compound-target">Mitophagy · E3 ligase activation</div></div>
+    </div>
+    <div class="compound">
+      <div class="compound-icon tac">TC</div>
+      <div><div class="compound-name">TAC (Telomerase Activating)</div><div class="compound-target">Cellular aging · ISR rescue</div></div>
+    </div>
+    <div class="compound">
+      <div class="compound-icon pah">PH</div>
+      <div><div class="compound-name">Perillaldehyde (PAH)</div><div class="compound-target">Lysosomal rescue · Inclusion clearance</div></div>
+    </div>
+    <div class="compound">
+      <div class="compound-icon av">AV</div>
+      <div><div class="compound-name">Host-Directed Antivirals</div><div class="compound-target">Endocytic entry blockade</div></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+</div>
+
+        
+        <div class="chart-container">
+          <div class="chart-title">Fig. — Tumor Cell Viability: Compound Panel</div>
+          <div class="chart-subtitle">Dose-response curves for selected compounds across 3 tumor cell lines</div>
+          <canvas id="oncoChart" height="260"></canvas>
+          <div class="chart-note">CTG viability. 72 hr treatment. 8-point dose-response. n=3.</div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
 .workflow-strip {
   background: var(--ink);
   color: #fff;
@@ -433,7 +665,7 @@ nav {
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 16px;
   margin: 28px 0 32px;
-  max-width: 640px;
+  max-width: 760px;
 }
 
 .card {
@@ -473,7 +705,7 @@ a.card:hover {
   padding: 48px 24px;
   text-align: center;
   margin: 20px 0 24px;
-  max-width: 640px;
+  max-width: 760px;
 }
 
 .image-placeholder .ph-icon {
@@ -493,7 +725,7 @@ a.card:hover {
 .inline-list {
   list-style: none;
   margin: 16px 0;
-  max-width: 640px;
+  max-width: 760px;
 }
 
 .inline-list li {
@@ -518,7 +750,7 @@ a.card:hover {
 /* ── PUBLICATION LIST ── */
 .pub-list {
   margin: 20px 0;
-  max-width: 640px;
+  max-width: 760px;
 }
 
 .pub-item {
@@ -694,6 +926,11 @@ a.card:hover {
     padding: 12px 20px;
     gap: 4px;
   }
+  .nav-links.open .nav-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
   .nav-toggle { display: block; }
   .section-header {
     grid-template-columns: 1fr;
@@ -733,7 +970,7 @@ a.card:hover {
 
 /* ── CHARTS ── */
 .chart-container {
-  max-width: 640px;
+  max-width: 760px;
   margin: 24px 0 32px;
   background: var(--card);
   border: 1px solid var(--rule);
@@ -775,7 +1012,7 @@ a.card:hover {
   font-size: 12.5px;
   line-height: 1.7;
   margin: 20px 0 24px;
-  max-width: 640px;
+  max-width: 760px;
   border: 1px solid rgba(255,255,255,0.06);
 }
 .code-block .comment { color: #6a9955; }
@@ -938,6 +1175,14 @@ nav {
   a.tag { text-decoration: none; cursor: pointer; }
   a.tag:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--ink); }
 
+
+  html.dark .page-footer { background: #0a0c10; }
+  html.dark .footer-name { color: #e8e6e1; }
+  html.dark .footer-role { color: rgba(232,230,225,0.5); }
+  html.dark .footer-col a { color: rgba(232,230,225,0.6); }
+  html.dark .footer-col a:hover { color: #e8e6e1; }
+  html.dark .footer-bottom { color: rgba(232,230,225,0.3); border-top-color: rgba(232,230,225,0.08); }
+
   /* ── SCROLL ANIMATIONS ── */
   .reveal { opacity: 0.35; transform: translateY(0); transition: opacity 0.7s ease, transform 0.5s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -974,6 +1219,35 @@ nav {
   margin-right: 4px;
 }
 .search-toggle:hover { border-color: var(--accent); color: var(--ink); }
+
+.search-result-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+.search-section-badge {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+.search-suggestion {
+  font-size: 12px;
+  color: var(--mid);
+  margin-top: 6px;
+}
+.search-result-desc {
+  font-size: 12px;
+  color: var(--mid);
+  line-height: 1.5;
+  margin-top: 2px;
+}
 .search-toggle svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; }
 
 .search-overlay {
@@ -1121,6 +1395,357 @@ html.dark .search-overlay { background: rgba(0,0,0,0.65); }
 html.dark .search-modal { background: var(--card); }
 html.dark .search-result mark { background: rgba(192,57,43,0.3); }
 
+
+
+/* ── INTERACTIVE FIGURE IFRAME ── */
+.interactive-fig-frame {
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 28px 0 32px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.02);
+  background: var(--card);
+}
+.interactive-fig-frame iframe {
+  width: 100%;
+  border: none;
+  display: block;
+  min-height: 580px;
+}
+.interactive-fig-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--section-bg);
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.interactive-fig-label .fig-desc {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 12.5px;
+  color: var(--mid);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* ══════════════════════════════════════════════
+   MOBILE OPTIMIZATION — Only affects <768px
+   Desktop layout is completely unchanged.
+   ══════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  /* ── Typography scaling ── */
+  body { font-size: 15px; }
+  .hero h1, h1 { font-size: clamp(1.6rem, 7vw, 2.2rem) !important; }
+  .section-content h2 { font-size: 1.35rem; }
+  .section-content h3 { font-size: 0.95rem; margin-top: 24px; }
+  .section-content p { font-size: 14.5px; line-height: 1.7; }
+  .hero-description { font-size: 15px !important; line-height: 1.65 !important; }
+
+  /* ── Hero section ── */
+  .hero {
+    padding: 36px 16px 32px !important;
+    flex-direction: column-reverse !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 20px !important;
+  }
+  .hero-photo {
+    width: 140px !important;
+    height: 140px !important;
+    margin: 0 auto 4px !important;
+  }
+  .hero-eyebrow { justify-content: center; font-size: 11px; }
+  .hero-tags { justify-content: center; gap: 6px; }
+  .hero-cta { justify-content: center !important; }
+  .hero-description {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 100% !important;
+  }
+  .tag { font-size: 10px; padding: 4px 10px; }
+  .btn-primary, .btn-secondary { font-size: 11px; padding: 10px 20px; }
+
+  /* ── Navigation ── */
+  nav { padding: 0 12px !important; }
+  .nav-inner { padding: 8px 0 !important; gap: 8px !important; }
+  .nav-brand { font-size: 11px; }
+  .search-toggle, .dark-toggle { width: 28px; height: 28px; }
+  .search-toggle svg { width: 13px; height: 13px; }
+
+  /* ── Sections ── */
+  .section-header {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    padding: 32px 16px 0 !important;
+  }
+  .section-index {
+    position: static !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+  .section-number { font-size: 1.8rem !important; margin-bottom: 0 !important; }
+  .section-label { font-size: 10px; }
+  .section-content { padding-bottom: 32px; }
+  .section-content p { max-width: 100%; }
+
+  /* ── Figures & images ── */
+  .figure-container { padding: 8px 16px 36px !important; }
+  figure { margin: 0 !important; }
+  figure img, .section-content img {
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 12px 0 8px !important;
+  }
+  figcaption {
+    font-size: 12px !important;
+    max-width: 100% !important;
+    padding: 0 4px !important;
+  }
+
+  /* ── Gallery grid — 2 columns on mobile ── */
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 4px !important;
+  }
+  .gallery-thumb::after {
+    font-size: 9px !important;
+    padding: 20px 6px 6px !important;
+  }
+  .gallery-label { font-size: 11px; padding: 8px 12px; }
+
+  /* ── Findings grid ── */
+  .findings {
+    grid-template-columns: 1fr 1fr !important;
+    margin: 16px 0 20px !important;
+    max-width: 100% !important;
+  }
+  .finding { padding: 14px 16px; }
+  .finding-value { font-size: 1.2rem; }
+  .finding-label { font-size: 11px; }
+
+  /* ── Workflow strip ── */
+  .workflow-strip { padding: 32px 16px !important; }
+  .workflow-steps { flex-direction: column !important; }
+  .workflow-step {
+    border-left: none !important;
+    border-top: 1px solid rgba(255,255,255,0.12) !important;
+    padding: 14px 0 !important;
+  }
+  .workflow-step:first-child { border-top: none !important; }
+  .step-title { font-size: 13px; }
+  .step-detail { font-size: 12px; }
+
+  /* ── Highlights strip ── */
+  .highlights-strip { padding: 28px 16px; }
+  .highlights-inner {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .highlight-title { font-size: 12.5px; }
+  .highlight-desc { font-size: 11px; }
+  .highlight-icon { font-size: 18px; }
+
+  /* ── News items ── */
+  .news-item { flex-direction: column; gap: 4px; padding: 12px 0; }
+  .news-date { min-width: auto; }
+  .news-body { font-size: 13.5px; }
+
+  /* ── Timeline ── */
+  .timeline { margin: 20px 0; }
+  .timeline-item { padding-left: 20px; padding-bottom: 24px; }
+  .timeline-title { font-size: 14px; }
+  .timeline-desc { font-size: 13px; }
+
+  /* ── Publication list ── */
+  .pub-item { padding: 12px 0; }
+  .pub-title { font-size: 14px; }
+  .pub-authors { font-size: 12px; }
+  .pub-journal { font-size: 10px; }
+
+  /* ── Contact links ── */
+  .contact-links { max-width: 100%; }
+  .contact-link { padding: 12px 14px; font-size: 13px; }
+
+  /* ── Footer ── */
+  .page-footer { margin-top: 0; }
+  .footer-inner {
+    flex-direction: column !important;
+    gap: 28px !important;
+    padding: 36px 16px 28px !important;
+  }
+  .footer-brand { max-width: 100%; }
+  .footer-name { font-size: 1.1rem; }
+  .footer-links-grid {
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+  .footer-bottom { padding: 16px; font-size: 11px; }
+
+  /* ── Search overlay ── */
+  .search-modal { width: 96%; max-width: none; border-radius: 8px; }
+  .search-overlay { padding-top: 10vh; }
+  .search-input { font-size: 15px; }
+  .search-result { padding: 10px 16px; }
+  .search-result-title { font-size: 13px; }
+  .search-result-desc { font-size: 11px; }
+
+  /* ── Inline grids with style attributes (VC page etc) ── */
+  [style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Card grids ── */
+  .card-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+  .research-grid {
+    grid-template-columns: 1fr !important;
+    padding: 0 16px 32px !important;
+    gap: 12px !important;
+  }
+  .research-tile { padding: 18px 16px 14px; }
+  .tile-desc { font-size: 12px; }
+
+  /* ── Lightbox ── */
+  .lightbox-img { max-width: 98vw !important; max-height: 80vh !important; }
+  .lightbox-caption { font-size: 12px !important; padding: 8px 16px !important; }
+}
+
+/* ── Extra small screens (≤ 480px) ── */
+@media (max-width: 480px) {
+  .hero h1, h1 { font-size: clamp(1.4rem, 6vw, 1.8rem) !important; }
+  .hero-description { font-size: 14px !important; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .findings { grid-template-columns: 1fr !important; }
+  .tag { font-size: 9.5px; padding: 3px 8px; }
+  .hero-tags { gap: 5px; }
+  .section-header { padding: 24px 12px 0 !important; }
+  .section-content { padding-bottom: 24px; }
+  .figure-container { padding: 8px 12px 28px !important; }
+  .workflow-strip { padding: 24px 12px !important; }
+  .footer-inner { padding: 28px 12px 20px !important; }
+}
+
+/* ── Touch-friendly improvements ── */
+@media (hover: none) and (pointer: coarse) {
+  /* Show gallery captions always on touch (no hover) */
+  .gallery-thumb::after {
+    opacity: 1 !important;
+    background: linear-gradient(transparent 30%, rgba(0,0,0,0.7)) !important;
+    font-size: 9px !important;
+  }
+  /* Bigger tap targets */
+  .nav-links a { padding: 10px 12px !important; min-height: 44px; display: flex; align-items: center; }
+  .nav-toggle { min-width: 44px; min-height: 44px; }
+  .search-toggle, .dark-toggle { min-width: 36px; min-height: 36px; }
+  .contact-link { min-height: 48px; }
+  .tag { min-height: 36px; display: inline-flex; align-items: center; }
+  .btn-primary, .btn-secondary { min-height: 44px; }
+  /* Remove hover effects on touch */
+  .gallery-thumb:hover { transform: none; box-shadow: none; }
+  .research-tile:hover { transform: none; }
+}
+
+
+  /* ── INLINE FIGURE: fig-drug-discovery-pipeline.html ── */
+
+
+
+
+  .ifig-drug-discovery-pipeline .fig-label { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--accent); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 8px; }
+  .ifig-drug-discovery-pipeline .fig-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; color: var(--ink); margin-bottom: 6px; text-align: center; }
+  .ifig-drug-discovery-pipeline .fig-subtitle { font-size: 13px; font-weight: 300; color: var(--mid); margin-bottom: 36px; text-align: center; max-width: 700px; line-height: 1.6; }
+
+  .ifig-drug-discovery-pipeline .pipeline-wrapper { width: 100%; max-width: 1080px; overflow-x: auto; }
+
+  /* Phase row */
+  .ifig-drug-discovery-pipeline .phase-row {
+    display: flex; gap: 0; min-width: 1000px;
+    background: var(--ink); border-radius: 10px; overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .ifig-drug-discovery-pipeline .phase {
+    flex: 1; padding: 16px 20px; border-right: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+  }
+  .ifig-drug-discovery-pipeline .phase:last-child { border-right: none; }
+  .ifig-drug-discovery-pipeline .phase-num {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 1px;
+    color: var(--accent); font-weight: 500; margin-bottom: 4px;
+  }
+  .ifig-drug-discovery-pipeline .phase-name {
+    font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.95); margin-bottom: 2px;
+  }
+  .ifig-drug-discovery-pipeline .phase-sub {
+    font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.45);
+  }
+
+  /* Content grid */
+  .ifig-drug-discovery-pipeline .content-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+    min-width: 1000px;
+  }
+  .ifig-drug-discovery-pipeline .col { display: flex; flex-direction: column; gap: 10px; }
+
+  .ifig-drug-discovery-pipeline .item {
+    background: var(--card); border: 1px solid var(--rule); border-radius: 8px;
+    padding: 14px 14px 12px; transition: border-color 0.2s;
+  }
+  .ifig-drug-discovery-pipeline .item:hover { border-color: var(--accent); }
+  .ifig-drug-discovery-pipeline .item-tag {
+    font-family: var(--mono); font-size: 9px; font-weight: 500;
+    letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 5px;
+    padding: 2px 6px; border-radius: 3px; display: inline-block;
+  }
+  .ifig-drug-discovery-pipeline .item-tag.neuro { background: #2563eb12; color: #2563eb; }
+  .ifig-drug-discovery-pipeline .item-tag.cardiac { background: #d9770612; color: #d97706; }
+  .ifig-drug-discovery-pipeline .item-tag.antiviral { background: #05966912; color: #059669; }
+  .ifig-drug-discovery-pipeline .item-tag.onco { background: #7c3aed12; color: #7c3aed; }
+  .ifig-drug-discovery-pipeline .item-tag.method { background: #0f141908; color: var(--mid); }
+  .ifig-drug-discovery-pipeline .item-title { font-size: 12.5px; font-weight: 500; color: var(--ink); margin-bottom: 3px; line-height: 1.35; }
+  .ifig-drug-discovery-pipeline .item-desc { font-size: 11px; font-weight: 300; color: var(--mid); line-height: 1.55; }
+
+  /* Compounds strip */
+  .ifig-drug-discovery-pipeline .compounds-strip {
+    margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--rule);
+    max-width: 1080px; width: 100%;
+  }
+  .ifig-drug-discovery-pipeline .compounds-label {
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    color: var(--accent); letter-spacing: 1px; margin-bottom: 12px; text-transform: uppercase;
+  }
+  .ifig-drug-discovery-pipeline .compounds-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;
+  }
+  .ifig-drug-discovery-pipeline .compound {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--section-bg); border-radius: 8px; padding: 12px 14px;
+  }
+  .ifig-drug-discovery-pipeline .compound-icon {
+    width: 36px; height: 36px; border-radius: 8px; display: flex;
+    align-items: center; justify-content: center; font-size: 14px; font-weight: 600;
+    flex-shrink: 0;
+  }
+  .ifig-drug-discovery-pipeline .compound-icon.pa { background: #2563eb15; color: #2563eb; }
+  .ifig-drug-discovery-pipeline .compound-icon.tac { background: #d9770615; color: #d97706; }
+  .ifig-drug-discovery-pipeline .compound-icon.pah { background: #05966915; color: #059669; }
+  .ifig-drug-discovery-pipeline .compound-icon.av { background: #7c3aed15; color: #7c3aed; }
+  .ifig-drug-discovery-pipeline .compound-name { font-size: 12px; font-weight: 500; color: var(--ink); }
+  .ifig-drug-discovery-pipeline .compound-target { font-size: 10px; font-weight: 300; color: var(--mid); }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .ifig-drug-discovery-pipeline .fig-label, .ifig-drug-discovery-pipeline .fig-title, .ifig-drug-discovery-pipeline .fig-subtitle { animation: fadeIn 0.5s ease both; }
+  .ifig-drug-discovery-pipeline .fig-title { animation-delay: 0.05s; } .fig-subtitle { animation-delay: 0.1s; }
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
@@ -1129,25 +1754,34 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
 
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="nav-brand">arminbayati.com</a>
+    <a href="index.html" class="nav-brand"><svg class="nav-logo" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1" y="1" width="26" height="26" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="14" y="19.5" text-anchor="middle" font-family="'DM Serif Display',Georgia,serif" font-size="15" font-weight="400" fill="currentColor">AB</text>
+</svg><span class="nav-brand-text">Armin Bayati</span></a>
     <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="17" y2="6"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14" x2="17" y2="14"/></svg>
     </button>
     <div class="nav-links">
-      <a href="index.html" >Home</a>
-      <a href="ipscs.html" >iPSCs</a>
-      <a href="cardiomyocytes.html" >Cardio</a>
-      <a href="cancer-immunology.html" >Cancer</a>
-      <a href="cellular-assays.html" >Assays</a>
-      <a href="genetics.html" >Genetics</a>
-      <a href="drug-discovery.html" class="active">Drug Disc.</a>
-      <a href="microscopy.html" >Imaging</a>
-      <a href="flow-cytometry.html" >Flow Cyt.</a>
-      <a href="proteomics.html" >Proteomics</a>
-      <a href="coding.html" >Coding</a>
-      <a href="skills.html" >Skills</a>
-      <a href="publications.html" >Pubs</a>
-      <a href="contact.html" >Contact</a>
+      <div class="nav-row">
+        <a href="index.html">Home</a>
+        <a href="ipscs.html">iPSC Neurons</a>
+        <a href="cardiomyocytes.html">Cardiomyocytes</a>
+        <a href="cancer-immunology.html">Cancer Immunology</a>
+        <a href="cellular-assays.html">Cellular Assays</a>
+        <a href="genetics.html">Genetics</a>
+        <a href="drug-discovery.html" class="active">Drug Discovery</a>
+      </div>
+      <div class="nav-row">
+        <a href="microscopy.html">Microscopy</a>
+        <a href="flow-cytometry.html">Flow Cytometry</a>
+        <a href="proteomics.html">Proteomics</a>
+        <a href="in-vivo.html">In Vivo</a>
+        <a href="coding.html">Coding &amp; Data</a>
+        <a href="skills.html">Technical Skills</a>
+        <a href="publications.html">Publications</a>
+        <a href="vc-portfolio.html">Portfolio &amp; VC</a>
+        <a href="contact.html">Contact</a>
+      </div>
     </div><button class="search-toggle" aria-label="Search site" title="Search (⌘K)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button><button class="dark-toggle" onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light')" aria-label="Toggle dark mode" title="Toggle dark mode">☀</button>
 
   </div>
@@ -1180,12 +1814,12 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
     I connect mechanistic insights to therapeutic development by testing small molecules, building biomarker strategies, and advancing preclinical programs from discovery through decision-enabling datasets.
   </p>
   <div class="hero-tags">
-    <span class="tag">Parkin Agonists</span>
-    <span class="tag">Telomerase Activating Compound</span>
+    <a class="tag" href="#parkin">Parkin Agonists</a>
+    <a class="tag" href="#tac">Telomerase Activating Compound</a>
     <a class="tag" href="genetics.html">Lysosomal Rescue</a>
     <a class="tag" href="genetics.html">Antiviral Targets</a>
-    <span class="tag">TE/PD Biomarkers</span>
-    <span class="tag">Oncology</span>
+    <a class="tag" href="#biomarkers">TE/PD Biomarkers</a>
+    <a class="tag" href="#oncology">Oncology</a>
   </div>
 </div>
 
@@ -1213,9 +1847,15 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
       <h2>TAC &amp; Lysosomal Rescue</h2>
       <p>I evaluated a <strong>Telomerase Activating Compound (TAC)</strong> designed to enhance neuronal resilience by targeting mitochondrial and lysosomal biology. In iPSC-derived neurons, TAC reduced α-synuclein pathology, restored integrated stress response markers (ATF4/ATF3), and decreased senescence-associated phenotypes.</p>
       <p>In parallel, I demonstrated that <strong>Perillaldehyde (PAH)</strong> rescues lysosomal function in the dual-hit model, restoring LAMP1, LAMP2, NRF2, and TFEB protein levels while progressively clearing α-synuclein inclusions over 8 days. Western blot pharmacodynamic profiling confirmed reduction of both total and phosphorylated α-synuclein, decreased HDAC6 (aggresome marker), and normalized autophagy-lysosomal pathway proteins — providing a multi-readout therapeutic validation dataset. Published in Bayati et al., <em>Nature Neuroscience</em> 2024.</p>
+<figure style="margin:0;">
       <img src="images/drugdiscovery-PAH-inclusion-reduction.jpg" alt="Treatment timeline and confocal microscopy: PAH reducing alpha-synuclein inclusions over 1, 4, and 8 days versus untreated" style="width:100%; max-width:640px; border-radius:6px; border:1px solid var(--rule); margin:20px 0 16px;">
+<figcaption style="font-size:13px; color:var(--mid); font-style:italic; max-width:640px; line-height:1.5; margin-bottom:20px;">Confocal immunofluorescence showing reduced α-synuclein–positive perinuclear inclusions in neurons treated with PAH (parkin agonist) vs vehicle control.</figcaption>
+</figure>
       <p style="font-size:13px; color:var(--mid); font-style:italic; margin-top:-8px;">Perillaldehyde (PAH) treatment timeline and confocal time course. PAH rescues lysosomal function and progressively reduces α-synuclein inclusion burden over 8 days in iPSC-derived DA neurons treated with the dual-hit protocol. Left panels show treatment scheme; right panels show confocal imaging at Day 1, 4, and 8 demonstrating inclusion clearance versus no-treatment control. Bayati et al., <em>Nature Neuroscience</em> 2024.</p>
+<figure style="margin:0;">
       <img src="images/drugdiscovery-PAH-inclusion-reduction-westernblot.jpg" alt="Western blots showing PAH treatment effects on alpha-synuclein, phospho-alpha-synuclein, TFEB, NRF2, LAMP1, LAMP2, and HDAC6" style="width:100%; max-width:640px; border-radius:6px; border:1px solid var(--rule); margin:20px 0 16px;">
+<figcaption style="font-size:13px; color:var(--mid); font-style:italic; max-width:640px; line-height:1.5; margin-bottom:20px;">Western blot quantification of α-synuclein and phospho-α-synuclein levels in cell lysates ± PAH treatment, demonstrating dose-dependent inclusion reduction.</figcaption>
+</figure>
       <p style="font-size:13px; color:var(--mid); font-style:italic; margin-top:-8px;">Western blot pharmacodynamic panel: PAH treatment restores LAMP1, LAMP2, TFEB, and NRF2 protein levels while reducing α-synuclein and phospho-α-synuclein (S129) in dual-hit DA neurons. HDAC6 (aggresome marker) decreases with treatment, confirming dissolution of insoluble aggregates. Multi-readout biomarker validation of lysosomal rescue as therapeutic mechanism. Bayati et al., <em>Nature Neuroscience</em> 2024.</p>
     </div>
   </div>
@@ -1230,9 +1870,15 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
     <div class="section-content">
       <h2>Host-Directed Antiviral Strategies</h2>
       <p>My first-author <em>JBC</em> 2021 paper (Editors' Pick) was the first to demonstrate that <strong>SARS-CoV-2 enters cells via clathrin-mediated endocytosis</strong> — Spike protein binds ACE2 and is rapidly internalized through CME. Building on this, I contributed to two drug-discovery programs: a <strong>PIKfyve chemical probe</strong> (IC50 = 0.82 nM) that blocks viral trafficking and replication (<em>J. Med. Chem.</em> 2022), and <strong>CSNK2 inhibitors</strong> that prevent Spike endocytosis across human, bat, and murine β-coronaviruses (<em>ACS Chem. Biol.</em> 2022). I translated these mechanisms into scalable screening platforms using Spike pseudovirus/GFP quantification on the Opera Phenix HCS system.</p>
+<figure style="margin:0;">
       <img src="images/drugdiscovery-sars-antiviral-entry.jpg" alt="Schematic: CSNK2 inhibitor blocking SARS-CoV-2 entry at ACE2 binding, clathrin-mediated endocytosis, replication, and transmission stages" style="width:100%; max-width:640px; border-radius:6px; border:1px solid var(--rule); margin:20px 0 16px;">
+<figcaption style="font-size:13px; color:var(--mid); font-style:italic; max-width:640px; line-height:1.5; margin-bottom:20px;">Schematic of SARS-CoV-2 viral entry mechanisms: ACE2 receptor binding, membrane fusion, and intracellular trafficking pathways targeted by CSNK2 and PIKfyve inhibitors.</figcaption>
+</figure>
       <p style="font-size:13px; color:var(--mid); font-style:italic; margin-top:-8px;">Mechanism of host-directed antiviral strategy: CSNK2 (Casein Kinase 2) inhibition blocks multiple stages of SARS-CoV-2 lifecycle — from Spike/ACE2 binding and clathrin-mediated endocytic entry, through viral replication, to cell-to-cell transmission. This host-kinase targeting approach provides broad-spectrum activity against β-coronaviruses (SARS-CoV-2, SARS-CoV, MERS-CoV). Published in Yang, Dickmander, Bayati et al., <em>ACS Chemical Biology</em> 2022.</p>
+<figure style="margin:0;">
       <img src="images/drugdiscovery-sars-inhibition-entry.jpg" alt="Structure-activity relationship: CSNK2A inhibitor potency (pIC50) vs beta-coronavirus inhibition (pIC50), R-squared 0.68" style="width:100%; max-width:640px; border-radius:6px; border:1px solid var(--rule); margin:20px 0 16px;">
+<figcaption style="font-size:13px; color:var(--mid); font-style:italic; max-width:640px; line-height:1.5; margin-bottom:20px;">Confocal imaging showing inhibition of SARS-CoV-2 spike protein internalization by CSNK2 and PIKfyve inhibitor co-treatment vs control.</figcaption>
+</figure>
       <p style="font-size:13px; color:var(--mid); font-style:italic; margin-top:-8px;">Structure-activity relationship (SAR) correlation between CSNK2A kinase inhibition potency and antiviral activity against β-coronaviruses. The strong correlation (R² = 0.68) across the pyrazolopyrimidine series validates CSNK2 as the mechanistic target for antiviral activity. 30 inhibitors were profiled using nanoBRET target engagement assays and MIV-nLuc reporter viral assays. Yang, Dickmander, Bayati et al., <em>ACS Chemical Biology</em> 2022.</p>
     </div>
   </div>
@@ -1276,9 +1922,15 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
       <h2>High-Content Screening &amp; Hit Discovery</h2>
       <p>I translated the SARS-CoV-2 cellular entry mechanism into scalable cell-based screening assays using Spike pseudovirus and GFP quantification on <strong>Opera Phenix HCS</strong>. These platforms enabled hit discovery and validation of viral-entry inhibitors across dose-response and time-course designs in Caco-2, Calu-3, and Vero E6 cells.</p>
 
+<figure style="margin:0;">
       <img src="images/drug-pseudovirus-gfp.jpg" alt="SARS-CoV-2 pseudovirus GFP expression: untreated vs inhibitor-treated cells" style="width:100%; max-width:640px; border-radius:6px; border:1px solid var(--rule); margin:20px 0 24px;">
+<figcaption style="font-size:13px; color:var(--mid); font-style:italic; max-width:640px; line-height:1.5; margin-bottom:20px;">Fluorescence microscopy of pseudovirus-GFP infection assay in epithelial cells, quantifying viral entry efficiency with and without pharmacological inhibitors.</figcaption>
+</figure>
 
+<figure style="margin:0;">
       <img src="images/drug-spike-tilescan.jpg" alt="Lightning tile scan: Spike-His488 and Phalloidin-647 binding across epithelial cell monolayer" style="width:100%; max-width:640px; border-radius:6px; border:1px solid var(--rule); margin:20px 0 24px;">
+<figcaption style="font-size:13px; color:var(--mid); font-style:italic; max-width:640px; line-height:1.5; margin-bottom:20px;">High-resolution confocal tile-scan showing SARS-CoV-2 spike protein distribution and cellular uptake patterns across a multi-cell epithelial monolayer.</figcaption>
+</figure>
 
       <div class="chart-container">
         <div class="chart-title">Fig. — Pseudovirus Entry Inhibition Dose-Response</div>
@@ -1420,7 +2072,7 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
         </div>
         <div class="footer-col">
           <div class="footer-col-title">Contact</div>
-          <a href="/cdn-cgi/l/email-protection#f697d894978f97829fd89484979f98b6919b979f9ad895999b">Email</a>
+          <a href="contact.html#chat">Reach Out to Armin</a>
           <a href="contact.html">Contact Page</a>
           <a href="publications.html">Publications</a>
         </div>
@@ -1659,36 +2311,96 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 
 <script>
-(function(){
+(function() {
   var searchIndex = [
-    {page:'index.html', title:'Home \u2014 Overview', category:'Main',
-     keywords:'armin bayati phd neuroscience cell biology drug discovery harvard medical school mass general brigham research fellow ipsc dopaminergic neurons parkinson disease lewy body nature neuroscience publications citations'},
-    {page:'ipscs.html', title:'iPSC-Derived Neurons', category:'Research',
-     keywords:'ipsc induced pluripotent stem cells dopaminergic cortical neurons glial differentiation lewy body disease modeling mea electrophysiology calcium imaging hplc dopamine quantification parkinson disease alpha synuclein preformed fibrils pff neurodegeneration apoptosis autophagy protein aggregation mitochondrial dysfunction'},
-    {page:'cardiomyocytes.html', title:'iPSC-Derived Cardiomyocytes', category:'Research',
-     keywords:'cardiac differentiation mea beat rate analysis calcium transient profiling cardiotoxicity screening disease modeling hcm dcm hypertrophic cardiomyopathy dilated cardiomyopathy cardiac safety pharmacology ipsc cardiomyocytes contractility sarcomere'},
-    {page:'cancer-immunology.html', title:'Cancer Immunology', category:'Research',
-     keywords:'t cell killing adcc cdc checkpoint blockade cytokine profiling car-t characterization immune co-culture systems tumor microenvironment immunotherapy pd-1 pd-l1 nk cells antibody dependent cellular cytotoxicity complement dependent cytotoxicity'},
-    {page:'cellular-assays.html', title:'Cellular & Functional Assays', category:'Research',
-     keywords:'endocytosis exosomal biology autophagy flow cytometry pbmc immune assays plate-based readouts immunocytochemistry clathrin cd63 cd9 reporter exosome transfer assay mitophagy lysosomal stress viability cytotoxicity celltiter-glo'},
-    {page:'genetics.html', title:'Genetics & Molecular Biology', category:'Research',
-     keywords:'crispr cas9 sirna shrna aso antisense oligonucleotide molecular cloning viral constructs protein conjugation lysosomal biology gene editing lentivirus aav adenovirus transfection plasmid dna rna'},
-    {page:'drug-discovery.html', title:'Drug Discovery & Translation', category:'Research',
-     keywords:'parkin agonist tac lysosomal rescue antivirals biomarker strategy preclinical compound testing small molecule screening sar dose response pseudovirus sars-cov-2 pikfyve csnk2 hplc compound purity analytical characterization dls dynamic light scattering particle size nanoparticle formulation lc-ms pharmacokinetics target engagement pharmacodynamic'},
-    {page:'microscopy.html', title:'Microscopy & Imaging', category:'Research',
-     keywords:'confocal sted super-resolution tem transmission electron microscopy live-cell imaging high-content screening ihc histology immunohistochemistry fluorescence opera phenix hcs image analysis'},
-    {page:'flow-cytometry.html', title:'Flow Cytometry', category:'Research',
-     keywords:'flow cytometry multicolor immunophenotyping intracellular staining facs sorting gating strategy surface marker t cell b cell nk cell monocyte macrophage pbmc viability dye compensation'},
-    {page:'proteomics.html', title:'Proteomics & Single-Cell Genomics', category:'Research',
-     keywords:'tmt quantitative proteomics scrna-seq 10x genomics bulk rna-seq gsea pathway analysis umap deseq2 seurat mass spectrometry protein biomarker volcano plot gene ontology single cell transcriptomics'},
-    {page:'coding.html', title:'Coding, Automation & Data', category:'Technical',
-     keywords:'python automorphotrack pipelines bravo tecan liquid handling 96 384 well miniaturization machine learning automation data analysis github programming r matlab imageJ fiji cellprofiler'},
-    {page:'skills.html', title:'Full Technical Skills', category:'Technical',
-     keywords:'techniques instruments software capabilities laboratory skills comprehensive listing assays methods platforms tools equipment'},
-    {page:'publications.html', title:'Publications', category:'Academic',
-     keywords:'peer-reviewed papers citations journal articles nature neuroscience lancet science translational medicine acs chemical biology first author corresponding author pubmed google scholar'},
-    {page:'contact.html', title:'Contact', category:'Connect',
-     keywords:'email linkedin github orcid google scholar contact collaboration'}
+    // Page-level entries
+    {page:'index.html', title:'Home — Overview', category:'Main', section:'',
+     keywords:'armin bayati phd neuroscience cell biology drug discovery harvard medical school mass general brigham research fellow translational science',
+     description:'Overview of research portfolio spanning neurodegeneration, drug discovery, and translational science.'},
+    {page:'ipscs.html', title:'iPSC-Derived Neurons', category:'Research', section:'',
+     keywords:'ipsc induced pluripotent stem cells dopaminergic neurons cortical neurons differentiation disease modeling parkinson lewy body dual-hit mea calcium imaging electrophysiology co-culture microglia astrocyte',
+     description:'iPSC differentiation protocols for dopaminergic and cortical neurons, disease modeling, and co-culture systems.'},
+    {page:'ipscs.html#differentiation', title:'iPSC Differentiation Protocol', category:'Research', section:'Differentiation',
+     keywords:'differentiation protocol dopaminergic cortical neurons small molecule patterning smadis floor plate midbrain astrocyte microglia',
+     description:'Dual SMAD inhibition to floor-plate patterning for midbrain dopaminergic neuron generation.'},
+    {page:'ipscs.html#electrophysiology', title:'Electrophysiology & Calcium Imaging', category:'Research', section:'Functional',
+     keywords:'mea multielectrode array calcium imaging fluo-4 spontaneous activity spike raster neuronal maturation electrophysiology functional',
+     description:'MEA recordings and calcium imaging confirming functional maturity of iPSC-derived neurons.'},
+    {page:'ipscs.html#disease-modeling', title:'Disease Modeling (Dual-Hit)', category:'Research', section:'Disease Modeling',
+     keywords:'dual-hit model lewy body inclusion pff preformed fibrils ifn-gamma cytokine parkinson synuclein neurodegeneration inflammation neuroinflammation',
+     description:'Sequential PFF + IFN-gamma exposure producing Lewy body-like inclusions in human dopaminergic neurons.'},
+    {page:'ipscs.html#co-culture', title:'Neuron-Glia Co-Culture', category:'Research', section:'Co-Culture',
+     keywords:'co-culture microglia astrocyte neuron-glia neuroinflammation phagocytosis neuroprotection alpha-synuclein inclusion formation',
+     description:'Microglia accelerate inclusion formation while astrocytes provide neuroprotection in co-culture systems.'},
+    {page:'cardiomyocytes.html', title:'iPSC-Derived Cardiomyocytes', category:'Research', section:'',
+     keywords:'cardiomyocyte cardiac ipsc beating heart safety pharmacology calcium transients field potential duration impedance sarcomere contractility cardiotoxicity herg',
+     description:'iPSC-cardiomyocyte assays for cardiac safety pharmacology and cardiotoxicity screening.'},
+    {page:'cancer-immunology.html', title:'Cancer Immunology', category:'Research', section:'',
+     keywords:'t cell killing adcc cdc checkpoint blockade cytokine profiling car-t characterization immune co-culture systems tumor microenvironment immunotherapy pd-1 pd-l1 nk cells antibody dependent cellular cytotoxicity complement dependent cytotoxicity',
+     description:'Immune cell-mediated killing assays, checkpoint blockade, and tumor microenvironment modeling.'},
+    {page:'cellular-assays.html', title:'Cellular & Functional Assays', category:'Research', section:'',
+     keywords:'endocytosis exosomal biology autophagy flow cytometry pbmc immune assays plate-based readouts immunocytochemistry clathrin cd63 cd9 reporter exosome transfer assay mitophagy lysosomal stress viability cytotoxicity celltiter-glo',
+     description:'Endocytosis, exosomal biology, autophagy/mitophagy, and lysosomal stress assay platforms.'},
+    {page:'cellular-assays.html#autophagy', title:'Autophagy & Mitophagy Assays', category:'Research', section:'Autophagy',
+     keywords:'autophagy mitophagy lc3b lysotracker lysosensor lysosomal ph stress dual-hit impairment',
+     description:'LysoSensor, LysoTracker, and LC3B-based assays for autophagy and mitophagy quantification.'},
+    {page:'cellular-assays.html#endocytosis', title:'Endocytosis & Uptake Assays', category:'Research', section:'Endocytosis',
+     keywords:'endocytosis clathrin macropinocytosis fibril uptake sars-cov-2 spike protein ace2 receptor internalization trafficking',
+     description:'Clathrin-mediated endocytosis and macropinocytosis pathways for PFF and SARS-CoV-2 entry.'},
+    {page:'cellular-assays.html#exosome', title:'Exosomal Biology & Transfer', category:'Research', section:'Exosomes',
+     keywords:'exosome cd63 multivesicular body mvb manumycin a gold-labeled transfer naïve recipient disease propagation',
+     description:'Exosome-mediated disease propagation tracked via CD63-GFP and nanogold-labeled fibrils.'},
+    {page:'genetics.html', title:'Genetics & Molecular Biology', category:'Research', section:'',
+     keywords:'crispr cas9 sirna shrna aso antisense oligonucleotide molecular cloning viral constructs protein conjugation lysosomal biology gene editing lentivirus aav adenovirus transfection plasmid dna rna gba knockout snca triplication',
+     description:'CRISPR gene editing, viral vector delivery, and molecular biology for disease modeling.'},
+    {page:'genetics.html#lysosomal', title:'Lysosomal Biology', category:'Research', section:'Lysosomal',
+     keywords:'lysosome lamp1 lamp2 tfeb nrf2 galectin-3 membrane permeabilization rab7 cd63 lyso-ip nanogold fibril trafficking dysfunction',
+     description:'Lysosomal dysfunction, membrane rupture, and fibril trafficking in neurodegeneration.'},
+    {page:'genetics.html#gene-editing', title:'Gene Editing & Viral Delivery', category:'Research', section:'Gene Editing',
+     keywords:'lentivirus adenovirus shrna knockdown overexpression crispr gba lamp2 alpha-synuclein ha western blot fractionation',
+     description:'Lentiviral knockdown, adenoviral overexpression, and CRISPR editing in iPSC neurons.'},
+    {page:'drug-discovery.html', title:'Drug Discovery & Translation', category:'Research', section:'',
+     keywords:'parkin agonist tac lysosomal rescue antivirals biomarker strategy preclinical compound testing small molecule screening sar dose response pseudovirus sars-cov-2 pikfyve csnk2 hplc compound purity analytical characterization dls dynamic light scattering particle size nanoparticle formulation lc-ms pharmacokinetics target engagement pharmacodynamic',
+     description:'Small-molecule drug discovery for Parkinson\'s disease and antiviral target validation.'},
+    {page:'drug-discovery.html#parkin', title:'Parkin Agonism & Neuroprotection', category:'Research', section:'Parkin',
+     keywords:'parkin fb231 agonist alpha-synuclein inclusion reduction western blot tfeb nrf2 hdac6 neuroprotection dopaminergic',
+     description:'Small-molecule Parkin agonist reducing alpha-synuclein inclusions in iPSC dopaminergic neurons.'},
+    {page:'drug-discovery.html#antiviral', title:'Antiviral Drug Discovery', category:'Research', section:'Antiviral',
+     keywords:'csnk2 pikfyve sars-cov-2 beta-coronavirus pseudovirus gfp spike inhibitor entry clathrin endocytosis host-directed antiviral',
+     description:'CSNK2 and PIKfyve inhibitors blocking SARS-CoV-2 entry via host-directed antiviral strategies.'},
+    {page:'microscopy.html', title:'Microscopy & Imaging', category:'Research', section:'',
+     keywords:'confocal sted super-resolution tem transmission electron microscopy live-cell imaging high-content screening ihc histology immunohistochemistry fluorescence opera phenix hcs image analysis',
+     description:'Multi-modal imaging from confocal and STED super-resolution to TEM ultrastructural analysis.'},
+    {page:'microscopy.html#confocal', title:'Confocal Microscopy', category:'Research', section:'Confocal',
+     keywords:'confocal laser scanning multichannel z-stack maximum intensity projection pff inclusion sars spike lysosomal stress co-culture colocalization',
+     description:'High-resolution confocal imaging of protein aggregation, viral entry, and co-culture systems.'},
+    {page:'microscopy.html#em', title:'Electron Microscopy', category:'Research', section:'EM',
+     keywords:'tem transmission electron microscopy nanogold lewy body inclusion ultrastructure multivesicular body neurite 49000x 98000x',
+     description:'TEM ultrastructural analysis of Lewy body-like inclusions and nanogold-labeled fibril trafficking.'},
+    {page:'microscopy.html#sted', title:'STED Super-Resolution', category:'Research', section:'STED',
+     keywords:'sted stimulated emission depletion super-resolution sub-lysosomal fibril localization nanoscale',
+     description:'STED nanoscopy resolving sub-lysosomal fibril localization beyond confocal limits.'},
+    {page:'flow-cytometry.html', title:'Flow Cytometry', category:'Research', section:'',
+     keywords:'flow cytometry multicolor immunophenotyping intracellular staining facs sorting gating strategy surface marker t cell b cell nk cell monocyte macrophage pbmc viability dye compensation tregs ki67 cd4 cd8',
+     description:'Multicolor immunophenotyping, intracellular staining, and FACS sorting for immune cell analysis.'},
+    {page:'proteomics.html', title:'Proteomics & Single-Cell Genomics', category:'Research', section:'',
+     keywords:'tmt quantitative proteomics scrna-seq 10x genomics bulk rna-seq gsea pathway analysis umap deseq2 seurat mass spectrometry protein biomarker volcano plot gene ontology single cell transcriptomics',
+     description:'TMT proteomics, scRNA-seq, and multi-omics data analysis pipelines.'},
+    {page:'coding.html', title:'Coding, Automation & Data', category:'Technical', section:'',
+     keywords:'python automorphotrack pipelines bravo tecan liquid handling 96 384 well miniaturization machine learning automation data analysis github programming r matlab imageJ fiji cellprofiler',
+     description:'Python-based automation, liquid handling, and custom image analysis tools.'},
+    {page:'skills.html', title:'Full Technical Skills', category:'Technical', section:'',
+     keywords:'techniques instruments software capabilities laboratory skills comprehensive listing assays methods platforms tools equipment',
+     description:'Comprehensive listing of laboratory techniques, instruments, and software capabilities.'},
+    {page:'publications.html', title:'Publications', category:'Academic', section:'',
+     keywords:'peer-reviewed papers citations journal articles nature neuroscience lancet science translational medicine acs chemical biology first author corresponding author pubmed google scholar 25 publications 1300 citations',
+     description:'25+ peer-reviewed publications with 1,300+ citations across neuroscience, virology, and cell biology.'},
+    {page:'vc-portfolio.html', title:'Portfolio & VC', category:'Industry', section:'',
+     keywords:'venture capital portfolio management drug discovery translational science biopharma partnerships alliance management funding grants awards ip patent regulatory ind fda biotech startup pharmaceutical scientific evaluation',
+     description:'Translational science leadership, biopharma partnerships, and scientific portfolio management experience.'},
+    {page:'contact.html', title:'Contact', category:'Connect', section:'',
+     keywords:'email linkedin github orcid google scholar contact collaboration',
+     description:'Contact information, LinkedIn, and academic profiles.'}
   ];
 
   var overlay = document.getElementById('searchOverlay');
@@ -1721,6 +2433,24 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     return text.replace(regex, '<mark>$1</mark>');
   }
 
+  // Fuzzy substring match: returns true if all chars of query appear in order in str
+  function fuzzyMatch(str, query) {
+    var strIdx = 0;
+    for (var i = 0; i < query.length; i++) {
+      var found = false;
+      while (strIdx < str.length) {
+        if (str[strIdx].toLowerCase() === query[i].toLowerCase()) {
+          strIdx++;
+          found = true;
+          break;
+        }
+        strIdx++;
+      }
+      if (!found) return false;
+    }
+    return true;
+  }
+
   function renderResults(query) {
     var terms = query.toLowerCase().trim().split(/\s+/).filter(function(t){ return t.length > 1; });
     var scored = [];
@@ -1730,17 +2460,35 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
       var score = 0;
       var titleLow = item.title.toLowerCase();
       var kwLow = item.keywords;
+      var descLow = (item.description || '').toLowerCase();
+      var sectionLow = (item.section || '').toLowerCase();
+
       terms.forEach(function(t) {
-        if (titleLow.indexOf(t) !== -1) score += 10;
+        // Exact matches
+        if (titleLow.indexOf(t) !== -1) score += 15;
+        if (sectionLow.indexOf(t) !== -1) score += 8;
+        if (descLow.indexOf(t) !== -1) score += 5;
         if (kwLow.indexOf(t) !== -1) score += 3;
+        // Fuzzy match on title if no exact match
+        if (score === 0 && t.length > 2 && fuzzyMatch(titleLow, t)) score += 2;
       });
+
+      // Bonus for matching all terms
+      var allMatch = terms.every(function(t) {
+        return titleLow.indexOf(t) !== -1 || kwLow.indexOf(t) !== -1 || descLow.indexOf(t) !== -1;
+      });
+      if (allMatch && terms.length > 1) score += 10;
+
       if (score > 0) scored.push({item: item, score: score});
     });
 
     scored.sort(function(a, b){ return b.score - a.score; });
 
+    // Deduplicate: if a page-level and section-level entry have similar scores, keep both but cap at 12
+    scored = scored.slice(0, 12);
+
     if (terms.length && !scored.length) {
-      resultsEl.innerHTML = '<div class="search-empty"><span>&#128269;</span>No results for &ldquo;' + query.replace(/</g, '&lt;') + '&rdquo;</div>';
+      resultsEl.innerHTML = '<div class="search-empty"><span>&#128269;</span>No results for &ldquo;' + query.replace(/</g, '&lt;') + '&rdquo;<div class="search-suggestion">Try broader terms or check spelling</div></div>';
       return;
     }
 
@@ -1748,20 +2496,13 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     scored.forEach(function(s, i) {
       var item = s.item;
       var title = terms.length ? highlight(item.title, terms) : item.title;
-      var kwArr = item.keywords.split(' ');
-      var matchedKw = [];
-      if (terms.length) {
-        kwArr.forEach(function(kw) {
-          terms.forEach(function(t) {
-            if (kw.indexOf(t) !== -1 && matchedKw.indexOf(kw) === -1) matchedKw.push(kw);
-          });
-        });
-      }
-      var desc = matchedKw.length ? matchedKw.slice(0, 6).join(' &middot; ') : kwArr.slice(0, 5).join(' &middot; ');
-      if (terms.length) desc = highlight(desc, terms);
+      var desc = item.description || '';
+      if (terms.length && desc) desc = highlight(desc, terms);
+
+      var sectionBadge = item.section ? '<span class="search-section-badge">' + item.section + '</span>' : '';
 
       html += '<a class="search-result' + (i === 0 && terms.length ? ' active' : '') + '" href="' + item.page + '">';
-      html += '<div class="search-result-page">' + item.category + '</div>';
+      html += '<div class="search-result-meta"><span class="search-result-page">' + item.category + '</span>' + sectionBadge + '</div>';
       html += '<div class="search-result-title">' + title + '</div>';
       html += '<div class="search-result-desc">' + desc + '</div></a>';
     });
@@ -1808,6 +2549,158 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
   document.querySelectorAll('.search-toggle').forEach(function(btn){ btn.addEventListener('click', openSearch); });
 })();
+
+
+(function(){
+  var errorBarPlugin = {
+    id: 'errorBars',
+    afterDatasetsDraw: function(chart) {
+      var ctx = chart.ctx;
+      chart.data.datasets.forEach(function(ds, i) {
+        if (!ds.errorBars) return;
+        var meta = chart.getDatasetMeta(i);
+        meta.data.forEach(function(bar, j) {
+          var err = ds.errorBars[j];
+          if (err === undefined) return;
+          var x = bar.x, y = bar.y;
+          var yScale = chart.scales.y;
+          var yTop = yScale.getPixelForValue(ds.data[j] + err);
+          var yBot = yScale.getPixelForValue(ds.data[j] - err);
+          ctx.save();
+          ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+          ctx.lineWidth = 1.2;
+          ctx.beginPath();
+          ctx.moveTo(x, yTop);
+          ctx.lineTo(x, yBot);
+          ctx.moveTo(x - 4, yTop);
+          ctx.lineTo(x + 4, yTop);
+          ctx.moveTo(x - 4, yBot);
+          ctx.lineTo(x + 4, yBot);
+          ctx.stroke();
+          ctx.restore();
+        });
+      });
+    }
+  };
+  new Chart(document.getElementById('qpcrBarDrug'), {
+    type: 'bar',
+    plugins: [errorBarPlugin],
+    data: {
+      labels: ['NRF2', 'BDNF', 'TH', 'CASP3', 'SQSTM1', 'TFEB'],
+      datasets: [{
+      label: 'DMSO Vehicle',
+      data: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
+      errorBars: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+      backgroundColor: 'rgba(107,114,128,0.5)',
+      borderColor: 'rgba(107,114,128,1)',
+      borderWidth: 1
+    },{
+      label: 'Compound A (autophagy activator)',
+      data: [2.8, 1.6, 1.2, 0.6, 3.4, 4.2],
+      errorBars: [0.4, 0.2, 0.2, 0.1, 0.5, 0.6],
+      backgroundColor: 'rgba(192,57,43,0.75)',
+      borderColor: 'rgba(192,57,43,1)',
+      borderWidth: 1
+    },{
+      label: 'Compound B (kinase inhibitor)',
+      data: [1.4, 2.2, 1.8, 0.4, 1.6, 1.8],
+      errorBars: [0.2, 0.3, 0.3, 0.1, 0.2, 0.3],
+      backgroundColor: 'rgba(46,134,193,0.7)',
+      borderColor: 'rgba(46,134,193,1)',
+      borderWidth: 1
+    },{
+      label: 'Isradipine (Ca²⁺ blocker)',
+      data: [1.8, 2.6, 2.2, 0.5, 1.2, 1.4],
+      errorBars: [0.3, 0.4, 0.3, 0.1, 0.2, 0.2],
+      backgroundColor: 'rgba(39,174,96,0.65)',
+      borderColor: 'rgba(39,174,96,1)',
+      borderWidth: 1
+    }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11, family: "'IBM Plex Sans'" }, padding: 16 } } },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: 'Fold Change (vs Control)', font: { size: 11, family: "'IBM Plex Sans'" } }, grid: { color: 'rgba(0,0,0,0.05)' } },
+        x: { grid: { display: false }, ticks: { font: { size: 11, family: "'IBM Plex Sans'" } } }
+      }
+    }
+  });
+})();
+
+
+(function(){
+  var genes = ['NRF2','BDNF','TH','CASP3','SQSTM1','TFEB'];
+  var conds = ['Vehicle','Comp A','Comp B','Isradipine','PFF stress'];
+  var vals = [[0, 0, 0, 0, 0, 0], [1.5, 0.7, 0.3, -0.7, 1.8, 2.1], [0.5, 1.1, 0.8, -1.3, 0.7, 0.8], [0.8, 1.4, 1.1, -1.0, 0.3, 0.5], [-0.6, -1.2, -1.8, 2.4, 1.6, -0.8]];
+  var pts = [];
+  for(var r=0; r<conds.length; r++) {
+    for(var c=0; c<genes.length; c++) {
+      pts.push({x: c, y: r, v: vals[r][c]});
+    }
+  }
+  var maxAbs = 0;
+  pts.forEach(function(p){ if(Math.abs(p.v)>maxAbs) maxAbs=Math.abs(p.v); });
+
+  new Chart(document.getElementById('qpcrHeatDrug'), {
+    type: 'scatter',
+    data: {
+      datasets: [{
+        data: pts.map(function(p){ return {x: p.x, y: p.y}; }),
+        pointRadius: pts.map(function(){ return 18; }),
+        pointStyle: 'rectRounded',
+        backgroundColor: pts.map(function(p){
+          var t = p.v / maxAbs;
+          if(t > 0) return 'rgba(192,57,43,' + (0.15 + 0.85*t).toFixed(2) + ')';
+          else return 'rgba(41,98,163,' + (0.15 + 0.85*Math.abs(t)).toFixed(2) + ')';
+        }),
+        borderWidth: 0
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              var i = ctx.dataIndex;
+              var p = pts[i];
+              return genes[p.x] + ' in ' + conds[p.y] + ': ' + p.v.toFixed(1) + 'x';
+            }
+          }
+        }
+      },
+      scales: {
+        x: { type: 'linear', min: -0.5, max: genes.length - 0.5, ticks: { callback: function(v){ return genes[v]; }, stepSize: 1, font: { size: 10, family: "'IBM Plex Sans'" } }, grid: { display: false } },
+        y: { type: 'linear', min: -0.5, max: conds.length - 0.5, ticks: { callback: function(v){ return conds[v]; }, stepSize: 1, font: { size: 10, family: "'IBM Plex Sans'" } }, grid: { display: false }, reverse: false }
+      }
+    }
+  });
+})();
+
+// ── New keyword section charts ──
+
+new Chart(document.getElementById('oncoChart').getContext('2d'), {
+  type: 'line',
+  data: {
+    labels: ['0.001', '0.01', '0.1', '1', '10', '100'],
+    datasets: [{
+      label: 'A549 (NSCLC)', data: [98, 95, 82, 48, 15, 5],
+      borderColor: 'rgba(192,57,43,0.8)', fill: false, tension: 0.4
+    },{
+      label: 'MDA-MB-231 (TNBC)', data: [100, 97, 90, 65, 32, 12],
+      borderColor: 'rgba(52,73,94,0.8)', fill: false, tension: 0.4
+    },{
+      label: 'Raji (Burkitt)', data: [96, 88, 55, 22, 8, 3],
+      borderColor: 'rgba(39,174,96,0.8)', fill: false, tension: 0.4
+    }]
+  },
+  options: { responsive: true, plugins: { legend: { position: 'top' }},
+    scales: { y: { beginAtZero: true, max: 110, title: { display: true, text: '% Viability' }},
+              x: { title: { display: true, text: 'Concentration (µM)' }}}}
+});
 </script>
 
 </body>
