@@ -1,0 +1,2299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biomarker Quantification & Analysis — Armin Bayati, PhD</title>
+<meta name="description" content="Multi-modal biomarker profiling spanning neurodegeneration, immunology, cardiac biology, and oncology with integrated quantification methods.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════
+   ARMIN BAYATI — DESIGN SYSTEM
+   Matching iPSC-Cardiomyocyte page aesthetic
+   ══════════════════════════════════════════════ */
+
+:root {
+  --ink: #0f1419;
+  --paper: #fafaf7;
+  --mid: #6b7280;
+  --accent: #c0392b;
+  --accent-soft: #e74c3c15;
+  --rule: #d4d0c8;
+  --card: #ffffff;
+  --section-bg: #f4f3ef;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+  --mono: 'IBM Plex Mono', 'Menlo', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAVIGATION ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 250, 247, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+  padding: 0 24px;
+}
+
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: auto;
+  padding: 10px 0;
+  gap: 16px;
+}
+
+.nav-brand {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--mid);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-brand:hover { color: var(--ink); }
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-logo {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+.nav-brand-text {
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  color: var(--ink);
+}
+.nav-brand:hover .nav-logo { color: var(--ink); }
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  flex: 1;
+}
+.nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+/* Mobile nav toggle */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--mid);
+}
+.nav-toggle svg { display: block; }
+
+/* ── DROPDOWN NAV ── */
+.nav-dropdown {
+  position: relative;
+}
+.nav-dropdown > .nav-drop-trigger {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  padding: 8px 11px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  font-family: var(--sans);
+}
+.nav-drop-trigger::after {
+  content: "";
+  border-left: 3.5px solid transparent;
+  border-right: 3.5px solid transparent;
+  border-top: 4px solid currentColor;
+  opacity: 0.5;
+  transition: transform 0.2s ease;
+}
+.nav-dropdown:hover > .nav-drop-trigger,
+.nav-dropdown.open > .nav-drop-trigger {
+  color: var(--ink);
+  background: rgba(0,0,0,0.04);
+}
+.nav-dropdown:hover > .nav-drop-trigger::after,
+.nav-dropdown.open > .nav-drop-trigger::after {
+  transform: rotate(180deg);
+  opacity: 0.8;
+}
+.nav-dropdown.has-active > .nav-drop-trigger {
+  color: var(--accent);
+}
+.nav-drop-panel {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 220px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10), 0 1px 3px rgba(0,0,0,0.06);
+  padding: 6px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.18s ease, visibility 0.18s ease, transform 0.18s ease;
+  transform: translateX(-50%) translateY(4px);
+  z-index: 200;
+}
+.nav-dropdown:hover > .nav-drop-panel,
+.nav-dropdown.open > .nav-drop-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+.nav-drop-panel a {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  color: var(--mid);
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.nav-drop-panel a:hover {
+  color: var(--ink);
+  background: var(--section-bg);
+}
+.nav-drop-panel a.active {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+/* Direct nav links (Home, Endocytosis, Contact) */
+.nav-links > a,
+.nav-row > a {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  padding: 8px 11px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.nav-links > a:hover,
+.nav-row > a:hover { color: var(--ink); background: rgba(0,0,0,0.04); }
+.nav-links > a.active,
+.nav-row > a.active { color: var(--accent); }
+
+/* ── HERO ── */
+.hero {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 80px 32px 64px;
+  position: relative;
+  z-index: 10;
+  text-align: center;
+}
+
+.hero-text { text-align: center; }
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1.5px;
+  background: var(--accent);
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+  max-width: 780px;
+  margin: 0 auto 28px;
+}
+
+.hero-description {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--mid);
+  max-width: 760px;
+  margin: 0 auto 36px;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  padding: 5px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  color: var(--mid);
+  background: var(--card);
+}
+
+/* ── SECTIONS ── */
+.section {
+  border-top: 1px solid var(--rule);
+  overflow: visible;
+}
+
+.section-header {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 64px 32px 32px;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 48px;
+  align-items: start;
+  overflow: visible;
+}
+
+.section-index {
+  position: sticky;
+  top: 80px;
+  padding-top: 4px;
+}
+
+.section-number {
+  font-family: var(--serif);
+  font-size: 4rem;
+  color: var(--rule);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.section-content {
+  padding-bottom: 48px;
+  overflow: visible;
+}
+
+.section-content h2 {
+  font-family: var(--serif);
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+
+.section-content h3 {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 32px;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+
+.section-content p {
+  font-size: 15.5px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #444;
+  max-width: 760px;
+  margin-bottom: 16px;
+}
+
+.section-content p strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.section-content a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.section-content a:hover {
+  border-bottom-color: var(--accent);
+}
+
+/* ── SUB-SECTION DIVIDER ── */
+.subsection {
+  margin-top: 48px;
+  padding-top: 36px;
+  border-top: 1px dashed var(--rule);
+}
+
+.subsection:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.subsection-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.subsection-label::before {
+  content: '→';
+  font-size: 13px;
+}
+
+/* ── FINDINGS STRIP ── */
+.findings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 28px 0 32px;
+  max-width: 760px;
+}
+
+.finding {
+  background: var(--card);
+  padding: 18px 20px;
+}
+
+.finding-value {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.finding-label {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--mid);
+  line-height: 1.4;
+}
+
+/* ── TIMELINE ── */
+.timeline {
+  margin: 32px 0;
+  max-width: 760px;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 28px;
+  padding-bottom: 32px;
+  border-left: 1.5px solid var(--rule);
+}
+.timeline-item:last-child { padding-bottom: 0; }
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--accent);
+}
+
+.timeline-year {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.timeline-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.timeline-desc {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--mid);
+}
+
+/* ── WORKFLOW STRIP ── */
+.workflow-strip {
+  background: var(--ink);
+  color: #fff;
+  padding: 48px 32px;
+}
+
+.workflow-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.workflow-inner h3 {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 28px;
+  color: rgba(255,255,255,0.9);
+}
+
+.workflow-steps {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+}
+
+.workflow-step {
+  flex: 1;
+  padding: 20px 24px;
+  border-left: 1px solid rgba(255,255,255,0.12);
+  position: relative;
+}
+.workflow-step:first-child { border-left: none; }
+
+.step-number {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.step-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: rgba(255,255,255,0.95);
+}
+
+.step-detail {
+  font-size: 12.5px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.55;
+}
+
+/* ── INLINE LIST ── */
+.inline-list {
+  list-style: none;
+  margin: 16px 0;
+  max-width: 760px;
+}
+
+.inline-list li {
+  font-size: 14px;
+  font-weight: 300;
+  color: #444;
+  line-height: 1.7;
+  padding: 6px 0;
+  padding-left: 20px;
+  position: relative;
+}
+.inline-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 14px;
+  width: 6px;
+  height: 1.5px;
+  background: var(--accent);
+}
+
+/* ── CHARTS ── */
+.chart-container {
+  max-width: 760px;
+  margin: 24px 0 32px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.chart-container canvas { width: 100% !important; }
+.chart-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.chart-subtitle {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--mid);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.chart-note {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--mid);
+  margin-top: 12px;
+  font-style: italic;
+}
+
+/* ── HIGH-TECH OVERLAY ── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(rgba(15,20,25,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15,20,25,0.015) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero-eyebrow::after {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+  margin-left: 4px;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(192,57,43,0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(192,57,43,0); }
+}
+
+.tag {
+  background: rgba(15,20,25,0.03);
+  border-color: rgba(15,20,25,0.12);
+  transition: all 0.25s ease;
+}
+.tag:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+.section-number {
+  background: linear-gradient(135deg, var(--rule) 0%, rgba(192,57,43,0.15) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.chart-container {
+  border-color: rgba(15,20,25,0.08);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.02);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.chart-container:hover {
+  border-color: rgba(192,57,43,0.2);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04);
+}
+
+.findings {
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.finding {
+  transition: background 0.2s ease;
+}
+.finding:hover {
+  background: rgba(192,57,43,0.02);
+}
+
+nav {
+  background: rgba(250, 250, 247, 0.88);
+  border-bottom-color: rgba(15,20,25,0.08);
+}
+
+.workflow-strip {
+  background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #0f1419 100%);
+  position: relative;
+  overflow: hidden;
+}
+.workflow-strip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+
+/* ── FOOTER ── */
+.page-footer {
+  background: var(--ink);
+  color: rgba(255,255,255,0.7);
+  padding: 0;
+  border-top: none;
+  display: block;
+}
+.footer-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 56px 32px 40px;
+  display: flex;
+  justify-content: space-between;
+  gap: 48px;
+}
+.footer-brand {
+  max-width: 320px;
+}
+.footer-name {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.footer-role {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.6;
+}
+.footer-links-grid {
+  display: flex;
+  gap: 56px;
+}
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.footer-col-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.footer-col a {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-col a:hover {
+  color: #fff;
+}
+.footer-bottom {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 20px 32px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+  text-align: center;
+}
+
+.nav-links > a,
+.nav-row > a {
+  transition: all 0.2s ease;
+  position: relative;
+}
+.nav-links > a.active::after,
+.nav-row > a.active::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 10px;
+  right: 10px;
+  height: 1.5px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+/* ── DARK MODE ── */
+.dark-toggle {
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--mid);
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+.dark-toggle:hover {
+  border-color: var(--accent);
+  color: var(--ink);
+}
+
+html.dark {
+  --ink: #e8e6e1;
+  --paper: #111318;
+  --mid: #9ca3af;
+  --rule: #2a2d35;
+  --card: #1a1d24;
+  --section-bg: #15171d;
+  --accent-soft: rgba(192,57,43,0.15);
+}
+
+html.dark body::before {
+  background: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+}
+
+html.dark nav {
+  background: rgba(17,19,24,0.92);
+}
+
+html.dark .nav-drop-panel {
+  background: #1a1d24;
+  border-color: rgba(255,255,255,0.08);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+html.dark .nav-drop-panel a:hover {
+  background: rgba(255,255,255,0.06);
+}
+
+html.dark .nav-drop-panel a.active {
+  background: rgba(192,57,43,0.15);
+}
+
+html.dark .nav-dropdown:hover > .nav-drop-trigger,
+html.dark .nav-dropdown.open > .nav-drop-trigger {
+  background: rgba(255,255,255,0.06);
+}
+
+html.dark .nav-links.open {
+  background: #111318;
+}
+
+html.dark .section-content p,
+html.dark .timeline-desc {
+  color: rgba(232,230,225,0.6);
+}
+
+html.dark .card,
+html.dark .finding {
+  background: var(--card);
+  border-color: var(--rule);
+}
+
+html.dark .chart-container {
+  background: var(--card);
+  border-color: var(--rule);
+}
+
+html.dark .page-footer {
+  background: #0a0c10;
+}
+
+html.dark .footer-name {
+  color: #e8e6e1;
+}
+
+html.dark .footer-role {
+  color: rgba(232,230,225,0.5);
+}
+
+html.dark .footer-col a {
+  color: rgba(232,230,225,0.6);
+}
+
+html.dark .footer-col a:hover {
+  color: #e8e6e1;
+}
+
+html.dark .footer-bottom {
+  color: rgba(232,230,225,0.3);
+  border-top-color: rgba(232,230,225,0.08);
+}
+
+/* ── SCROLL ANIMATIONS ── */
+.reveal {
+  opacity: 0.35;
+  transform: translateY(0);
+  transition: opacity 0.7s ease, transform 0.5s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── SITE SEARCH ── */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.search-toggle {
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--mid);
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+.search-toggle:hover {
+  border-color: var(--accent);
+  color: var(--ink);
+}
+
+.search-toggle svg {
+  width: 15px;
+  height: 15px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+}
+
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(15,20,25,0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: min(18vh, 160px);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.search-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+.search-overlay.fade-in {
+  opacity: 1;
+}
+
+.search-modal {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  width: 92%;
+  max-width: 580px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.25), 0 0 0 1px rgba(0,0,0,0.04);
+  overflow: hidden;
+  transform: translateY(12px) scale(0.98);
+  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1);
+}
+
+.search-overlay.fade-in .search-modal {
+  transform: translateY(0) scale(1);
+}
+
+.search-input-wrap {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--rule);
+  gap: 12px;
+}
+
+.search-input-wrap svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--mid);
+  fill: none;
+  stroke-width: 2;
+  flex-shrink: 0;
+}
+
+.search-input {
+  flex: 1;
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 400;
+  border: none;
+  background: transparent;
+  color: var(--ink);
+  padding: 16px 0;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: var(--mid);
+  opacity: 0.7;
+}
+
+.search-kbd {
+  font-family: var(--mono);
+  font-size: 10px;
+  background: var(--section-bg);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 2px 6px;
+  color: var(--mid);
+  flex-shrink: 0;
+}
+
+.search-results {
+  max-height: 420px;
+  overflow-y: auto;
+  padding: 8px 0;
+  scrollbar-width: thin;
+}
+
+.search-results::-webkit-scrollbar {
+  width: 4px;
+}
+
+.search-results::-webkit-scrollbar-thumb {
+  background: var(--rule);
+  border-radius: 2px;
+}
+
+.search-result {
+  display: block;
+  padding: 12px 20px;
+  text-decoration: none;
+  transition: background 0.12s ease;
+  border-left: 3px solid transparent;
+}
+
+.search-result:hover,
+.search-result.active {
+  background: var(--accent-soft);
+  border-left-color: var(--accent);
+}
+
+.search-result-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+
+.search-result-page {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.search-result-desc {
+  font-size: 12.5px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.5;
+}
+
+.search-result mark {
+  background: rgba(192,57,43,0.15);
+  color: var(--ink);
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+.search-empty {
+  padding: 32px 20px;
+  text-align: center;
+  color: var(--mid);
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.search-empty span {
+  display: block;
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.search-footer {
+  border-top: 1px solid var(--rule);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--mid);
+  letter-spacing: 0.3px;
+}
+
+.search-footer-keys {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.search-footer-keys kbd {
+  font-family: var(--mono);
+  font-size: 10px;
+  background: var(--section-bg);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 1px 5px;
+  color: var(--mid);
+}
+
+html.dark .search-overlay {
+  background: rgba(0,0,0,0.65);
+}
+
+html.dark .search-modal {
+  background: var(--card);
+}
+
+html.dark .search-result mark {
+  background: rgba(192,57,43,0.3);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-eyebrow,
+.hero h1,
+.hero-description,
+.hero-tags {
+  animation: fadeUp 0.6s ease both;
+}
+
+.hero h1 {
+  animation-delay: 0.1s;
+}
+
+.hero-description {
+  animation-delay: 0.2s;
+}
+
+.hero-tags {
+  animation-delay: 0.3s;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav {
+    padding: 0 12px;
+  }
+
+  .nav-inner {
+    display: grid;
+    grid-template-columns: 44px 1fr auto;
+    align-items: center;
+    padding: 8px 0;
+    gap: 4px;
+  }
+
+  .nav-toggle {
+    display: block;
+    order: 1;
+    justify-self: start;
+  }
+
+  .nav-brand {
+    order: 2;
+    justify-self: center;
+    font-size: 11px;
+  }
+
+  .nav-right {
+    order: 3;
+    justify-self: end;
+    display: flex;
+    gap: 4px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    padding: 12px 20px;
+    gap: 4px;
+  }
+
+  .nav-links.open .nav-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .nav-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    width: 100%;
+  }
+
+  /* Mobile dropdown overrides */
+  .nav-drop-panel {
+    position: static !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 0 4px 12px !important;
+    min-width: 0 !important;
+    display: none;
+    background: transparent !important;
+  }
+
+  .nav-dropdown.open > .nav-drop-panel {
+    display: block;
+  }
+
+  .nav-dropdown > .nav-drop-trigger {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 13px;
+    justify-content: space-between;
+  }
+
+  .nav-drop-panel a {
+    padding: 8px 14px;
+    font-size: 12.5px;
+  }
+
+  /* Typography scaling */
+  body {
+    font-size: 15px;
+  }
+
+  .hero h1,
+  h1 {
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
+  }
+
+  .section-content h2 {
+    font-size: 1.35rem;
+  }
+
+  .section-content h3 {
+    font-size: 0.95rem;
+    margin-top: 24px;
+  }
+
+  .section-content p {
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+
+  .hero-description {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* Hero section */
+  .hero {
+    padding: 36px 16px 32px;
+    flex-direction: column-reverse;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .hero-photo {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 4px;
+  }
+
+  .hero-eyebrow {
+    justify-content: center;
+    font-size: 11px;
+  }
+
+  .hero-tags {
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .hero-description {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+  }
+
+  .tag {
+    font-size: 10px;
+    padding: 4px 10px;
+  }
+
+  /* Sections */
+  .section-header {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 32px 16px 0;
+  }
+
+  .section-index {
+    position: static;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-number {
+    font-size: 1.8rem;
+    margin-bottom: 0;
+  }
+
+  .section-label {
+    font-size: 10px;
+  }
+
+  .section-content {
+    padding-bottom: 32px;
+  }
+
+  .section-content p {
+    max-width: 100%;
+  }
+
+  /* Workflow */
+  .workflow-steps {
+    flex-direction: column;
+  }
+
+  .workflow-step {
+    border-left: none;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding: 16px 0;
+  }
+
+  .workflow-step:first-child {
+    border-top: none;
+  }
+
+  /* Findings */
+  .findings {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Footer */
+  .footer-inner {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .footer-links-grid {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* Search and dark toggle */
+  .search-toggle,
+  .dark-toggle {
+    width: 28px;
+    height: 28px;
+  }
+
+  .search-toggle svg {
+    width: 13px;
+    height: 13px;
+  }
+}
+
+a.tag {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a.tag:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+/* ── FIGURE FRAMES ── */
+.figure-frame {
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.03);
+}
+html.dark .figure-frame {
+  background: var(--card);
+}
+
+.figure-caption-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: var(--section-bg);
+  border-top: 1px solid var(--rule);
+  font-size: 12.5px;
+  color: var(--mid);
+  line-height: 1.5;
+}
+
+.figure-caption-bar .fig-label {
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.figure-grid figure img {
+  transition: transform 0.3s ease;
+}
+.figure-grid figure:hover img {
+  transform: scale(1.02);
+}
+
+@media (max-width: 768px) {
+  .figure-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .figure-caption-bar {
+    font-size: 11px;
+    padding: 8px 12px;
+  }
+}
+</style>
+</head>
+<body>
+<script>if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark');</script>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand"><svg class="nav-logo" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1" y="1" width="26" height="26" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="14" y="19.5" text-anchor="middle" font-family="'DM Serif Display',Georgia,serif" font-size="15" font-weight="400" fill="currentColor">AB</text>
+</svg><span class="nav-brand-text">Armin Bayati</span></a>
+    <button class="nav-toggle" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="17" y2="6"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14" x2="17" y2="14"/></svg>
+    </button>
+    <div class="nav-links">
+      <div class="nav-row">
+        <a href="index.html">Home</a>
+        <div class="nav-dropdown">
+          <button class="nav-drop-trigger">iPSC Models</button>
+          <div class="nav-drop-panel">
+            <a href="ipscs.html">iPSC-Derived Neurons</a>
+            <a href="protocols.html">Differentiation Protocols</a>
+            <a href="cardiomyocytes.html">iPSC Cardiomyocytes</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-drop-trigger">Drug Discovery</button>
+          <div class="nav-drop-panel">
+            <a href="drug-discovery.html">Drug Discovery & Translation</a>
+            <a href="biologics.html">Biologics & Immunotherapy</a>
+          </div>
+        </div>
+        <a href="endocytosis.html">Endocytosis</a>
+        <div class="nav-dropdown">
+          <button class="nav-drop-trigger">Immunology</button>
+          <div class="nav-drop-panel">
+            <a href="cancer-immunology.html">Cancer Immunology</a>
+            <a href="flow-cytometry.html">Flow Cytometry</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-drop-trigger">Cellular Assays</button>
+          <div class="nav-drop-panel">
+            <a href="cellular-assays.html">Cellular & Functional Assays</a>
+            <a href="genetics.html">Genetics & Molecular Biology</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-row">
+        <div class="nav-dropdown">
+          <button class="nav-drop-trigger">In Vivo & Primary</button>
+          <div class="nav-drop-panel">
+            <a href="in-vivo.html">In Vivo Studies</a>
+            <a href="primary-neurons.html">Primary Neuronal Culture</a>
+            <a href="primary-cardiomyocytes.html">Primary Cardiomyocyte Culture</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-drop-trigger">Technical Skills</button>
+          <div class="nav-drop-panel">
+            <a href="microscopy.html">Microscopy & Imaging</a>
+            <a href="proteomics.html">Proteomics & Genomics</a>
+            <a href="coding.html">Coding & Automation</a>
+            <a href="skills.html">Full Technical Skills</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-drop-trigger">Resources</button>
+          <div class="nav-drop-panel">
+            <a href="publications.html">Publications</a>
+            <a href="vc-portfolio.html">Portfolio & VC</a>
+          </div>
+        </div>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="nav-right"><button class="search-toggle" aria-label="Search site" title="Search (&#x2318;K)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button><button class="dark-toggle" onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light')" aria-label="Toggle dark mode" title="Toggle dark mode">☀</button></div>
+  </div>
+</nav>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-modal">
+    <div class="search-input-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.35-4.35"></path>
+      </svg>
+      <input
+        type="text"
+        class="search-input"
+        id="searchInput"
+        placeholder="Search pages and content..."
+        autocomplete="off"
+      />
+      <kbd class="search-kbd">ESC</kbd>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+    <div class="search-footer">
+      <span>Use arrow keys to navigate</span>
+      <div class="search-footer-keys">
+        <span>Enter to select</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Biomarker Quantification</div>
+    <h1>Quantitative Biomarker Analysis Across Disease Platforms</h1>
+    <p class="hero-description">Multi-modal biomarker profiling spanning neurodegeneration, immunology, cardiac biology, and oncology — integrating Western blot, flow cytometry, immunofluorescence, ELISA/Luminex, and mass spectrometry–based proteomics for translational drug discovery.</p>
+  </div>
+</div>
+
+<!-- SECTION 01: OVERVIEW -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">01</div>
+      <div class="section-label">Overview</div>
+    </div>
+    <div class="section-content">
+      <h2>Cross-Platform Biomarker Expertise</h2>
+      <p>Comprehensive biomarker quantification across multiple analytical platforms, enabling precise characterization of disease mechanisms and therapeutic response. Integration of complementary technologies provides multi-dimensional insights into cellular and molecular pathology.</p>
+
+      <div class="findings">
+        <div class="finding">
+          <div class="finding-value">6+</div>
+          <div class="finding-label">Biomarker Platforms</div>
+        </div>
+        <div class="finding">
+          <div class="finding-value">50+</div>
+          <div class="finding-label">Validated Markers</div>
+        </div>
+        <div class="finding">
+          <div class="finding-value">5</div>
+          <div class="finding-label">Disease Areas</div>
+        </div>
+        <div class="finding">
+          <div class="finding-value">10+</div>
+          <div class="finding-label">Quantification Methods</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 02: NEURODEGENERATION -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">02</div>
+      <div class="section-label">Neurodegeneration</div>
+    </div>
+    <div class="section-content">
+      <h2>Neurodegeneration Biomarker Panel</h2>
+      <p>Comprehensive profiling of α-synuclein pathology, lysosomal dysfunction, autophagy impairment, and dopaminergic neuronal viability in Parkinson's disease models.</p>
+
+      <h3>Key Biomarkers</h3>
+      <ul class="inline-list">
+        <li>pS129 α-synuclein (phosphorylated form)</li>
+        <li>Total insoluble α-synuclein</li>
+        <li>TH (Tyrosine Hydroxylase) for dopaminergic neuron viability</li>
+        <li>LAMP1/LAMP2 for lysosomal dysfunction</li>
+        <li>LC3B / p62/SQSTM1 for autophagy flux</li>
+        <li>HDAC6 (aggresome marker)</li>
+        <li>TFEB (lysosomal master regulator)</li>
+      </ul>
+
+      <div class="chart-container">
+        <div class="chart-title">Pharmacodynamic Biomarker Panel</div>
+        <div class="chart-subtitle">Dual-Hit PD Model (PFF + IFN-γ)</div>
+        <canvas id="neuropdChart"></canvas>
+      </div>
+
+      <!-- Receptor Expression Confocal Panels -->
+      <div class="subsection">
+        <div class="subsection-label">Receptor-Level Biomarker Validation</div>
+        <p>Confocal imaging of cytokine receptor expression in iPSC-derived neurons co-cultured with activated microglia and PFF488. Multichannel panels show receptor signal (top), Hoechst nuclear stain, Tuj1 neuronal marker, composite overlay, and magnified insets with arrowheads marking PFF aggregates at neuronal processes.</p>
+
+        <div class="figure-grid" style="display:grid; grid-template-columns:2fr 1fr; gap:16px; margin:28px 0; max-width:760px;">
+          <figure class="figure-frame" style="margin:0;">
+            <img src="images/biomarker-ifngr-confocal.png"
+                 alt="IFNGR1 and IFNGR2 confocal panels: receptor expression, Hoechst, Tuj1, composite, and inset showing PFF aggregates at neuronal processes"
+                 style="width:100%; display:block; border-radius:6px 6px 0 0;"
+                 loading="lazy">
+            <div class="figure-caption-bar">
+              <span class="fig-label">Fig.</span> IFNGR1 &amp; IFNGR2 receptor expression — multichannel confocal panels with PFF488 co-localization
+            </div>
+          </figure>
+          <figure class="figure-frame" style="margin:0; overflow:hidden;">
+            <div style="overflow:hidden; padding-top:12px; background:#000;">
+            <img src="images/biomarker-il1r1-confocal.png"
+                 alt="IL1R1 confocal panels: receptor expression, Hoechst, Tuj1, composite, and inset showing PFF aggregates"
+                 style="width:100%; display:block; margin-top:-35px;"
+                 loading="lazy">
+            </div>
+            <div class="figure-caption-bar">
+              <span class="fig-label">Fig.</span> IL1R1 receptor expression — confocal panel with PFF aggregate identification
+            </div>
+          </figure>
+        </div>
+      </div>
+
+      <!-- pSyn Inclusion Time Course -->
+      <div class="subsection">
+        <div class="subsection-label">Inclusion Quantification Over Time</div>
+        <p>Time-resolved phospho-synuclein (pSyn) inclusion growth in TH+ dopaminergic neurons exposed to PFF + IFN-γ over 7, 10, and 14 days. Deconvoluted images with measurements (µm) show progressive inclusion maturation and coalescence, providing quantitative morphometric data for biomarker tracking.</p>
+
+        <figure class="figure-frame" style="margin:28px 0; max-width:760px; overflow:hidden;">
+          <div style="overflow:hidden;">
+          <img src="images/biomarker-psyn-timecourse.png"
+               alt="pSyn + TH time course: 7d, 10d, 14d PFF+IFN showing original and deconvoluted inclusions with size measurements"
+               style="width:100%; display:block; margin-top:-3.5%;"
+               loading="lazy">
+          </div>
+          <div class="figure-caption-bar">
+            <span class="fig-label">Fig.</span> pS129 α-synuclein inclusion growth — deconvoluted morphometry at 7, 10, and 14 days post dual-hit
+          </div>
+        </figure>
+      </div>
+
+      <!-- α-Synuclein Phosphorylation Time Course -->
+      <div class="subsection">
+        <div class="subsection-label">Phospho-Synuclein Biomarker Validation</div>
+        <p>Confocal time course of α-synuclein-HA expressing neurons probed with two independent phospho-synuclein antibodies (phospho S129 and pSyn#64). Control neurons show diffuse cytoplasmic α-syn-HA signal, while IFN-γ–treated neurons develop perinuclear pS129-positive inclusions by day 7, progressively maturing through day 14 — validating the biomarker with orthogonal antibody approaches.</p>
+
+        <figure class="figure-frame" style="margin:28px 0; max-width:760px; overflow:hidden;">
+          <div style="overflow:hidden;">
+          <img src="images/biomarker-synuclein-phospho-timecourse.png"
+               alt="α-syn-HA with phospho S129 and pSyn#64 antibodies: control vs IFN-γ time course showing progressive inclusion formation from 2d to 14d"
+               style="width:100%; display:block; margin-top:-2.5%;"
+               loading="lazy">
+          </div>
+          <div class="figure-caption-bar">
+            <span class="fig-label">Fig.</span> Phospho-synuclein biomarker validation — dual antibody time course (pS129 &amp; pSyn#64) in IFN-γ–treated neurons
+          </div>
+        </figure>
+      </div>
+
+      <!-- Western Blot Panel -->
+      <div class="subsection">
+        <div class="subsection-label">Western Blot Biomarker Panel</div>
+        <p>Multi-target Western blot panel across three cell lines (U2OS, U87, SH-SY5Y) under control, IFN-γ, PFF, and PFF+IFN conditions. Biomarkers quantified include CHC (clathrin heavy chain), LAMP1, LAMP2, NRF2, TFEB, and α-synuclein — capturing endocytic machinery, lysosomal integrity, oxidative stress response, and protein aggregation state in a single pharmacodynamic readout.</p>
+
+        <figure class="figure-frame" style="margin:28px 0; max-width:760px;">
+          <img src="images/biomarker-western-panel.png"
+               alt="Western blot panel showing CHC, LAMP1, LAMP2, NRF2, TFEB, α-syn across U2OS, U87, SH-SY5Y cell lines"
+               style="width:100%; display:block; border-radius:6px 6px 0 0;"
+               loading="lazy">
+          <div class="figure-caption-bar">
+            <span class="fig-label">Fig.</span> Pharmacodynamic Western blot panel — CHC, LAMP1, LAMP2, NRF2, TFEB, α-synuclein across cell lines
+          </div>
+        </figure>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-title">TH+ Neuron Survival Assessment</div>
+        <div class="chart-subtitle">Anti-Cytokine Biologics Therapeutic Response</div>
+        <canvas id="thNeuronChart"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 03: IMMUNE & ONCOLOGY -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">03</div>
+      <div class="section-label">Immune & Oncology</div>
+    </div>
+    <div class="section-content">
+      <h2>Immune & Oncology Biomarker Suite</h2>
+      <p>Comprehensive immunophenotyping of T cell activation, checkpoint receptor expression, cytokine secretion, and immune cell subset composition for cancer immunotherapy assessment.</p>
+
+      <h3>Key Checkpoint & Cytokine Markers</h3>
+      <ul class="inline-list">
+        <li>Checkpoint receptors: PD-1, CTLA-4, LAG-3, TIM-3, TIGIT</li>
+        <li>Cytokines: IL-2, IL-6, IL-10, IFN-γ, TNF-α, Granzyme B</li>
+        <li>Cell markers: CD4, CD8, CD3, CD56, CD16, NKG2D, Ki67, CD107a</li>
+      </ul>
+
+      <div class="chart-container">
+        <div class="chart-title">Cytokine Secretion Profile</div>
+        <div class="chart-subtitle">Immune Co-Culture with Tumor Cells and PD-1 Blockade</div>
+        <canvas id="cytokineChart"></canvas>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-title">Immune Cell Subset Distribution</div>
+        <div class="chart-subtitle">Lymph Node vs Spleen Composition</div>
+        <canvas id="immuneSubsetChart"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 04: CARDIAC -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">04</div>
+      <div class="section-label">Cardiac Biology</div>
+    </div>
+    <div class="section-content">
+      <h2>Cardiac Biomarker Assessment</h2>
+      <p>Quantitative evaluation of cardiomyocyte-specific proteins, structural integrity, and cell purity for pluripotent stem cell-derived and primary cardiomyocyte characterization.</p>
+
+      <h3>Key Cardiac Markers</h3>
+      <ul class="inline-list">
+        <li>cTnT, cTnI (cardiac troponins)</li>
+        <li>α-actinin (sarcomeric structure)</li>
+        <li>LDH (cell viability/damage)</li>
+        <li>Connexin-43 (gap junctions)</li>
+        <li>Vimentin (fibroblast contamination assessment)</li>
+      </ul>
+
+      <div class="chart-container">
+        <div class="chart-title">Cardiomyocyte Purity & Viability</div>
+        <div class="chart-subtitle">Quality Control Assessment of iPSC-Derived Cardiomyocytes</div>
+        <canvas id="cardiacChart"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 05: PROTEOMICS & TRANSCRIPTOMICS -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">05</div>
+      <div class="section-label">Proteomics & Genomics</div>
+    </div>
+    <div class="section-content">
+      <h2>Quantitative Proteomics & Transcriptomics</h2>
+      <p>Comprehensive proteome-wide and transcriptome-wide biomarker discovery using mass spectrometry and next-generation sequencing technologies, enabling unbiased identification of disease-relevant molecular signatures.</p>
+
+      <h3>Key Technologies</h3>
+      <ul class="inline-list">
+        <li>TMT isobaric labeling (6-plex, 10-plex, 16-plex)</li>
+        <li>Match-between-runs (MBR) for enhanced coverage</li>
+        <li>Subcellular fractionation and organellar proteomics</li>
+        <li>Single-cell RNA sequencing (scRNA-seq)</li>
+        <li>Volcano plot and UMAP analysis</li>
+      </ul>
+
+      <div class="chart-container">
+        <div class="chart-title">TMT Proteomics Platform Coverage</div>
+        <div class="chart-subtitle">Impact of Multiplexing and Match-Between-Runs</div>
+        <canvas id="proteomicsChart"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 06: QUANTIFICATION METHODS -->
+<section class="section">
+  <div class="workflow-strip">
+    <div class="workflow-inner">
+      <h3>Biomarker Quantification Methods Toolkit</h3>
+      <div class="workflow-steps">
+        <div class="workflow-step">
+          <div class="step-number">01 Western Blot</div>
+          <div class="step-title">Band Intensity Quantification</div>
+          <div class="step-detail">Subcellular fractionation, phospho-protein analysis, densitometry normalization</div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">02 Flow Cytometry</div>
+          <div class="step-title">Multicolor Immunophenotyping</div>
+          <div class="step-detail">Intracellular staining, viability assessment, gating strategies, compensation</div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">03 Immunofluorescence</div>
+          <div class="step-title">Confocal & Super-Resolution</div>
+          <div class="step-detail">STED super-resolution, high-content screening, colocalization analysis</div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">04 ELISA/Luminex</div>
+          <div class="step-title">Multiplex Quantification</div>
+          <div class="step-detail">Multiplex cytokine quantification, dose-response profiling, EC50 determination</div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">05 Mass Spectrometry</div>
+          <div class="step-title">TMT & Label-Free</div>
+          <div class="step-detail">Isobaric labeling, LC-MS/MS, Orbitrap platforms, subcellular fractionation</div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">06 qPCR</div>
+          <div class="step-title">Gene Expression Profiling</div>
+          <div class="step-detail">Housekeeping normalization, fold-change analysis, qRT-PCR validation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="page-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-name">Armin Bayati</div>
+      <div class="footer-role">PhD Neuroscience & Cell Biology<br>Research Fellow, Harvard Medical School</div>
+    </div>
+    <div class="footer-links-grid">
+      <div class="footer-col">
+        <div class="footer-col-title">Research</div>
+        <a href="ipscs.html">iPSC Models</a>
+        <a href="drug-discovery.html">Drug Discovery</a>
+        <a href="cancer-immunology.html">Cancer Immunology</a>
+        <a href="in-vivo.html">In Vivo Studies</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Methods</div>
+        <a href="microscopy.html">Microscopy</a>
+        <a href="proteomics.html">Proteomics</a>
+        <a href="flow-cytometry.html">Flow Cytometry</a>
+        <a href="coding.html">Coding</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Resources</div>
+        <a href="publications.html">Publications</a>
+        <a href="vc-portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+        <a href="index.html">Home</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Armin Bayati. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+// Nav dropdown toggle (mobile)
+document.querySelector('.nav-toggle').addEventListener('click', function(){
+  document.querySelector('.nav-links').classList.toggle('open');
+  if(!document.querySelector('.nav-links').classList.contains('open')){
+    document.querySelectorAll('.nav-dropdown.open').forEach(d => d.classList.remove('open'));
+  }
+});
+document.querySelectorAll('.nav-drop-trigger').forEach(function(btn){
+  btn.addEventListener('click', function(e){
+    if(window.innerWidth <= 768){
+      e.preventDefault();
+      var dd = this.parentElement;
+      document.querySelectorAll('.nav-dropdown.open').forEach(function(d){
+        if(d !== dd) d.classList.remove('open');
+      });
+      dd.classList.toggle('open');
+    }
+  });
+});
+document.addEventListener('click', function(e){
+  if(!e.target.closest('.nav-dropdown') && !e.target.closest('.nav-toggle')){
+    document.querySelectorAll('.nav-dropdown.open').forEach(d => d.classList.remove('open'));
+  }
+  if(!e.target.closest('nav')){
+    document.querySelector('.nav-links').classList.remove('open');
+  }
+});
+</script>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+<script>
+// ════════════════════════════════════════════════
+// SEARCH
+// ════════════════════════════════════════════════
+const searchIndex = [
+  { title: 'Home', page: 'index.html', section: 'Home', keywords: 'home page main' },
+  { title: 'Biomarker Quantification', page: 'biomarkers.html', section: 'Overview', keywords: 'biomarker quantification analysis disease platforms neurodegeneration immunology cardiac oncology' },
+  { title: 'Neurodegeneration Biomarkers', page: 'biomarkers.html', section: 'Section 02', keywords: 'alpha synuclein LAMP1 LAMP2 TFEB HDAC6 autophagy lysosomal' },
+  { title: 'Immune & Oncology Biomarkers', page: 'biomarkers.html', section: 'Section 03', keywords: 'PD-1 CTLA-4 cytokine CD4 CD8 immunotherapy checkpoint' },
+  { title: 'Cardiac Biomarkers', page: 'biomarkers.html', section: 'Section 04', keywords: 'cardiomyocyte troponin connexin vimentin' },
+  { title: 'Proteomics & Genomics', page: 'biomarkers.html', section: 'Section 05', keywords: 'TMT mass spectrometry proteomics scRNA-seq transcriptomics' },
+  { title: 'Quantification Methods', page: 'biomarkers.html', section: 'Section 06', keywords: 'western blot flow cytometry immunofluorescence ELISA qPCR' },
+  { title: 'iPSC Models', page: 'ipscs.html', section: 'Research', keywords: 'iPSC induced pluripotent stem cells neurons differentiation' },
+  { title: 'Drug Discovery', page: 'drug-discovery.html', section: 'Research', keywords: 'drug discovery translation therapeutic screening' },
+  { title: 'Cancer Immunology', page: 'cancer-immunology.html', section: 'Research', keywords: 'cancer immunology tumor immune checkpoint' },
+  { title: 'Flow Cytometry', page: 'flow-cytometry.html', section: 'Methods', keywords: 'flow cytometry immunophenotyping FACS' },
+  { title: 'Microscopy & Imaging', page: 'microscopy.html', section: 'Methods', keywords: 'microscopy confocal imaging immunofluorescence' },
+  { title: 'Proteomics', page: 'proteomics.html', section: 'Methods', keywords: 'proteomics mass spectrometry LC-MS genomics' },
+  { title: 'Contact', page: 'contact.html', section: 'Contact', keywords: 'contact email reach out' },
+];
+
+function initSearch() {
+  const overlay = document.getElementById('searchOverlay');
+  const input = document.getElementById('searchInput');
+  const results = document.getElementById('searchResults');
+  const toggle = document.querySelector('.search-toggle');
+  let currentIndex = -1;
+
+  toggle.addEventListener('click', () => {
+    overlay.classList.add('active');
+    setTimeout(() => overlay.classList.add('fade-in'), 10);
+    input.focus();
+  });
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove('fade-in');
+      setTimeout(() => overlay.classList.remove('active'), 200);
+    }
+  });
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      overlay.classList.remove('fade-in');
+      setTimeout(() => overlay.classList.remove('active'), 200);
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const items = results.querySelectorAll('.search-result');
+      currentIndex = Math.min(currentIndex + 1, items.length - 1);
+      items.forEach((item, i) => {
+        item.classList.toggle('active', i === currentIndex);
+      });
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      const items = results.querySelectorAll('.search-result');
+      currentIndex = Math.max(currentIndex - 1, -1);
+      items.forEach((item, i) => {
+        item.classList.toggle('active', i === currentIndex);
+      });
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      const active = results.querySelector('.search-result.active');
+      if (active) active.click();
+    }
+  });
+
+  input.addEventListener('input', () => {
+    const query = input.value.toLowerCase().trim();
+    currentIndex = -1;
+
+    if (!query) {
+      results.innerHTML = '';
+      return;
+    }
+
+    const filtered = searchIndex.filter(item =>
+      item.title.toLowerCase().includes(query) ||
+      item.keywords.includes(query)
+    );
+
+    results.innerHTML = filtered.length
+      ? filtered.map((item, i) => `
+          <a href="${item.page}" class="search-result" data-index="${i}">
+            <div class="search-result-title">${item.title}</div>
+            <div class="search-result-page">${item.section}</div>
+          </a>
+        `).join('')
+      : '<div class="search-empty"><span>🔍</span>No results found</div>';
+  });
+}
+
+// ════════════════════════════════════════════════
+// SCROLL REVEAL
+// ════════════════════════════════════════════════
+function initScrollReveal() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.section-content, .chart-container').forEach(el => {
+    el.classList.add('reveal');
+    observer.observe(el);
+  });
+}
+
+// ════════════════════════════════════════════════
+// CHARTS
+// ════════════════════════════════════════════════
+function getChartColor(isDark) {
+  return {
+    text: isDark ? 'rgba(232,230,225,0.6)' : '#444',
+    border: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)',
+    gridColor: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'
+  };
+}
+
+function initCharts() {
+  const isDark = document.documentElement.classList.contains('dark');
+  const colors = getChartColor(isDark);
+
+  // Chart.js defaults
+  Chart.defaults.color = colors.text;
+  Chart.defaults.borderColor = colors.border;
+  Chart.defaults.font.family = "'IBM Plex Sans', -apple-system, sans-serif";
+
+  // 1. Neurodegeneration PD Panel
+  const neuropdCtx = document.getElementById('neuropdChart');
+  if (neuropdCtx) {
+    new Chart(neuropdCtx, {
+      type: 'bar',
+      data: {
+        labels: ['pS129', 'Total α-Syn', 'LAMP1', 'LAMP2', 'TFEB', 'HDAC6', 'p62', 'LC3B'],
+        datasets: [
+          {
+            label: 'Vehicle',
+            data: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
+            backgroundColor: 'rgba(149,165,166,0.6)',
+            borderRadius: 4
+          },
+          {
+            label: 'Dual-Hit (PFF + IFN-γ)',
+            data: [4.8, 3.6, 0.42, 0.38, 0.35, 3.2, 2.8, 3.4],
+            backgroundColor: 'rgba(192,57,43,0.6)',
+            borderRadius: 4
+          },
+          {
+            label: 'Dual-Hit + Drug',
+            data: [1.8, 1.4, 0.78, 0.82, 0.72, 1.3, 1.2, 1.5],
+            backgroundColor: 'rgba(52,152,219,0.6)',
+            borderRadius: 4
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: { legend: { position: 'bottom' } },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: { display: true, text: 'Fold Change vs Vehicle' },
+            grid: { color: colors.gridColor }
+          },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+  }
+
+  // 2. TH+ Neuron Survival
+  const thNeuronCtx = document.getElementById('thNeuronChart');
+  if (thNeuronCtx) {
+    new Chart(thNeuronCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Vehicle', 'Anti-TNFα', 'Anti-IL-1β', 'Anti-IL-6', 'Anti-TNFα + Anti-IL-1β', 'Triple Combo'],
+        datasets: [{
+          label: '% TH+ Neuron Survival',
+          data: [34.2, 62.8, 55.4, 48.6, 68.2, 72.1],
+          backgroundColor: 'rgba(192,57,43,0.6)',
+          borderRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        indexAxis: 'y',
+        plugins: { legend: { display: false } },
+        scales: {
+          x: {
+            beginAtZero: true,
+            max: 100,
+            grid: { color: colors.gridColor }
+          },
+          y: { grid: { display: false } }
+        }
+      }
+    });
+  }
+
+  // 3. Cytokine Secretion Profile
+  const cytokineCtx = document.getElementById('cytokineChart');
+  if (cytokineCtx) {
+    new Chart(cytokineCtx, {
+      type: 'bar',
+      data: {
+        labels: ['IFN-γ', 'TNF-α', 'IL-2', 'IL-6', 'IL-10', 'Granzyme B'],
+        datasets: [
+          {
+            label: 'Tumor alone',
+            data: [12, 45, 5, 280, 85, 8],
+            backgroundColor: 'rgba(149,165,166,0.6)',
+            borderRadius: 4
+          },
+          {
+            label: 'T-cell + Tumor',
+            data: [2800, 1200, 450, 680, 42, 1850],
+            backgroundColor: 'rgba(192,57,43,0.6)',
+            borderRadius: 4
+          },
+          {
+            label: 'T-cell + Tumor + anti-PD-1',
+            data: [4200, 1800, 680, 520, 28, 3200],
+            backgroundColor: 'rgba(52,152,219,0.6)',
+            borderRadius: 4
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: { legend: { position: 'bottom' } },
+        scales: {
+          y: {
+            type: 'logarithmic',
+            title: { display: true, text: 'pg/mL (log scale)' },
+            grid: { color: colors.gridColor }
+          },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+  }
+
+  // 4. Immune Cell Subset Frequencies
+  const immuneSubsetCtx = document.getElementById('immuneSubsetChart');
+  if (immuneSubsetCtx) {
+    new Chart(immuneSubsetCtx, {
+      type: 'bar',
+      data: {
+        labels: ['CD4+ T', 'CD8+ T', 'B cells', 'NK', 'Tregs', 'DC'],
+        datasets: [
+          {
+            label: 'Lymph Node',
+            data: [28, 18, 38, 4, 3.5, 5],
+            backgroundColor: 'rgba(192,57,43,0.6)',
+            borderRadius: 4,
+            stack: 'stack'
+          },
+          {
+            label: 'Spleen',
+            data: [22, 15, 42, 6, 2.5, 3.8],
+            backgroundColor: 'rgba(80,80,80,0.6)',
+            borderRadius: 4,
+            stack: 'stack'
+          }
+        ]
+      },
+      options: {
+        indexAxis: 'x',
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: { legend: { position: 'bottom' } },
+        scales: {
+          x: { stacked: true, grid: { display: false } },
+          y: { stacked: true, max: 100, title: { display: true, text: '% of Live Cells' }, grid: { color: colors.gridColor } }
+        }
+      }
+    });
+  }
+
+  // 5. Cardiomyocyte Purity & Viability
+  const cardiacCtx = document.getElementById('cardiacChart');
+  if (cardiacCtx) {
+    new Chart(cardiacCtx, {
+      type: 'bar',
+      data: {
+        labels: ['cTnT+ (Purity)', 'Vimentin+ (Fibroblast)', 'Viability (Trypan Blue)', 'α-Actinin+ (Structural)'],
+        datasets: [{
+          label: '% Positive Cells',
+          data: [89.4, 8.2, 92.8, 91.2],
+          backgroundColor: 'rgba(192,57,43,0.6)',
+          borderRadius: 4,
+          errorBars: {
+            plus: [3, 2, 2.5, 3.2],
+            minus: [2.8, 1.5, 3, 2.5]
+          }
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        indexAxis: 'y',
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { beginAtZero: true, max: 100, grid: { color: colors.gridColor } },
+          y: { grid: { display: false } }
+        }
+      }
+    });
+  }
+
+  // 6. TMT Proteomics Coverage
+  const proteomicsCtx = document.getElementById('proteomicsChart');
+  if (proteomicsCtx) {
+    new Chart(proteomicsCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Without MBR', 'With MBR (6-plex)', 'With MBR (10-plex)', 'With MBR (16-plex)'],
+        datasets: [{
+          label: 'Proteins Quantified',
+          data: [3200, 5100, 6400, 7200],
+          backgroundColor: [
+            'rgba(149,165,166,0.6)',
+            'rgba(170,120,100,0.6)',
+            'rgba(192,80,60,0.6)',
+            'rgba(192,57,43,0.6)'
+          ],
+          borderRadius: 4
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { beginAtZero: true, grid: { color: colors.gridColor } },
+          y: { grid: { display: false } }
+        }
+      }
+    });
+  }
+
+  // 7. Radar Chart removed per user request
+}
+
+// ════════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  initSearch();
+  initCharts();
+});
+</script>
+</body>
+</html>

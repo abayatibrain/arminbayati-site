@@ -1117,6 +1117,12 @@ html.dark .nav-links.open {
 
 
 /* ── SITE SEARCH ── */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
 .search-toggle {
   background: none;
   border: 1px solid var(--rule);
@@ -1131,7 +1137,6 @@ html.dark .nav-links.open {
   color: var(--mid);
   transition: all 0.25s ease;
   flex-shrink: 0;
-  margin-right: 4px;
 }
 .search-toggle:hover { border-color: var(--accent); color: var(--ink); }
 
@@ -1392,7 +1397,28 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
 
   /* ── Navigation ── */
   nav { padding: 0 12px !important; }
-  .nav-inner { padding: 8px 0 !important; gap: 8px !important; }
+  .nav-inner {
+    display: grid !important;
+    grid-template-columns: 44px 1fr auto !important;
+    align-items: center !important;
+    padding: 8px 0 !important;
+    gap: 4px !important;
+  }
+  .nav-toggle {
+    order: 1;
+    justify-self: start;
+  }
+  .nav-brand {
+    order: 2;
+    justify-self: center;
+  }
+  .nav-right {
+    order: 3;
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
   .nav-brand { font-size: 11px; }
   .search-toggle, .dark-toggle { width: 28px; height: 28px; }
   .search-toggle svg { width: 13px; height: 13px; }
@@ -1709,6 +1735,7 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
             <a href="primary-cardiomyocytes.html">Primary Cardiomyocyte Culture</a>
           </div>
         </div>
+        <a href="biomarkers.html">Biomarkers</a>
         <div class="nav-dropdown">
           <button class="nav-drop-trigger">Technical Skills</button>
           <div class="nav-drop-panel">
@@ -1728,7 +1755,7 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
         <a href="contact.html">Contact</a>
       </div>
     </div>
-    <button class="search-toggle" aria-label="Search site" title="Search (&#x2318;K)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button><button class="dark-toggle" onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light')" aria-label="Toggle dark mode" title="Toggle dark mode">☀</button>
+    <div class="nav-right"><button class="search-toggle" aria-label="Search site" title="Search (&#x2318;K)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button><button class="dark-toggle" onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light')" aria-label="Toggle dark mode" title="Toggle dark mode">☀</button></div>
   </div>
 </nav>
 
@@ -2191,6 +2218,9 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     {page:'protocols.html', title:'iPSC Differentiation Protocols', category:'Research', section:'',
      keywords:'protocols differentiation dopaminergic cortical ngn2 cardiomyocyte ipsc step-by-step methods procedure reagents timeline maturation',
      description:'Interactive step-by-step protocols for dopaminergic, cortical, NGN2+, and cardiomyocyte iPSC differentiation.'},
+    {page:'biomarkers.html', title:'Biomarker Quantification', category:'Research', section:'',
+     keywords:'biomarker quantification analysis elisa western blot flow cytometry immunofluorescence luminex msd proteomics qpcr pS129 alpha-synuclein cTnT cardiac troponin cytokine checkpoint pd-1 ctla-4 lamp1 lamp2 tfeb hdac6',
+     description:'Multi-modal biomarker profiling across neurodegeneration, immunology, cardiac biology, and oncology.'},
     {page:'biologics.html', title:'Biologics & Immunotherapy', category:'Research', section:'',
      keywords:'biologics antibody anti-tnf anti-il1 anti-il6 anti-synuclein neuroprotection immunotherapy cytokine neuroinflammation monoclonal biologic',
      description:'Biologics for inhibiting proinflammatory cytokine activation in DA neurons.'},
