@@ -28,7 +28,7 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   font-family: var(--sans);
@@ -1623,7 +1623,7 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
   /* ── Interactive figures: scroll-enabled ── */
   .figure-container { padding: 8px 0 32px !important; }
   .figure-frame { overflow-x: auto !important; -webkit-overflow-scrolling: touch; }
-  .figure-frame iframe { min-width: 700px; width: 700px; }
+  .figure-frame iframe { min-width: 0; width: 100%; }
 
   /* Inline interactive figures (SVG diagrams, HTML figures) */
   .interactive-fig-inline,
@@ -1633,13 +1633,14 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
     padding: 24px 12px 32px !important;
     max-width: 100vw;
   }
-  /* Prevent SVGs from being squished — keep intrinsic width for scroll */
+  /* SVG diagrams: fit viewport, scroll if needed */
   .interactive-fig-inline svg,
   [class*="ifig-"] svg,
   .diagram-container svg {
-    max-width: none !important;
-    width: auto;
-    min-width: 600px;
+    max-width: 100% !important;
+    width: 100%;
+    min-width: 0;
+    height: auto;
   }
   .diagram-container {
     overflow-x: auto !important;
