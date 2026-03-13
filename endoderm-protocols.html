@@ -236,6 +236,7 @@ nav {
   flex-shrink: 0;
 }
 .search-toggle:hover { border-color: var(--accent); color: var(--ink); }
+.search-toggle svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; }
 
 .dark-toggle {
   background: none;
@@ -902,6 +903,8 @@ html.dark .card { background: var(--card); border-color: var(--rule); }
     gap: 12px;
   }
   .section-number { font-size: 2rem; margin-bottom: 0; }
+  .search-toggle, .dark-toggle { width: 28px; height: 28px; }
+  .search-toggle svg { width: 13px; height: 13px; }
   .hero { padding: 48px 20px 40px; }
   .workflow-steps { flex-direction: column; }
   .workflow-step { border-left: none; border-top: 1px solid rgba(255,255,255,0.12); padding: 16px 0; }
@@ -909,6 +912,28 @@ html.dark .card { background: var(--card); border-color: var(--rule); }
   .footer-inner { flex-direction: column; gap: 32px; }
   .footer-links-grid { flex-direction: column; gap: 24px; }
   .flowchart-grid { grid-template-columns: repeat(2, 1fr); }
+  .nav-brand { font-size: 11px; }
+  .section-content p { max-width: 100%; }
+  .protocol-summary { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── Extra small screens ── */
+@media (max-width: 480px) {
+  .hero h1, h1 { font-size: clamp(1.4rem, 6vw, 1.8rem) !important; }
+  .hero-description { font-size: 14px !important; }
+  .section-header { padding: 24px 12px 0 !important; }
+  .section-content { padding-bottom: 24px; }
+  .workflow-strip { padding: 24px 12px !important; }
+  .footer-inner { padding: 28px 12px 20px !important; }
+  .flowchart-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Touch-friendly improvements ── */
+@media (hover: none) and (pointer: coarse) {
+  .nav-links a { padding: 10px 12px !important; min-height: 44px; display: flex; align-items: center; }
+  .nav-toggle { min-width: 44px; min-height: 44px; }
+  .search-toggle, .dark-toggle { min-width: 36px; min-height: 36px; }
+  .tag { min-height: 36px; display: inline-flex; align-items: center; }
 }
 
 /* SEARCH OVERLAY */
@@ -1022,11 +1047,10 @@ html.dark body::before {
     <div class="nav-links">
       <div class="nav-row">
         <a href="index.html">Home</a>
-        <div class="nav-dropdown has-active">
+        <div class="nav-dropdown">
           <button class="nav-drop-trigger">iPSC Models</button>
           <div class="nav-drop-panel">
             <a href="ipscs.html">iPSC-Derived Neurons</a>
-            <a href="endoderm-protocols.html" class="active">Endoderm & Ectodermal</a>
             <a href="cardiomyocytes.html">iPSC Cardiomyocytes</a>
           </div>
         </div>
@@ -1072,12 +1096,13 @@ html.dark body::before {
             <a href="skills.html">Full Technical Skills</a>
           </div>
         </div>
-        <div class="nav-dropdown">
+        <div class="nav-dropdown has-active">
           <button class="nav-drop-trigger">Resources &amp; Protocols</button>
           <div class="nav-drop-panel">
             <a href="protocols.html">Neuron/Cardiac Differentiation</a>
+            <a href="endoderm-protocols.html" class="active">Endoderm &amp; Ectodermal Protocols</a>
             <a href="publications.html">Publications</a>
-            <a href="vc-portfolio.html">Portfolio & VC</a>
+            <a href="vc-portfolio.html">Portfolio &amp; VC</a>
           </div>
         </div>
         <a href="contact.html">Contact</a>
