@@ -1,0 +1,79 @@
+<style>
+*{box-sizing:border-box;margin:0}
+.stage{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-left:3px solid var(--color-border-tertiary);margin-left:18px;position:relative;transition:border-color .2s}
+.stage:hover{border-left-color:var(--color-text-info)}
+.stage::before{content:attr(data-num);position:absolute;left:-22px;top:14px;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;font-family:var(--font-sans)}
+.s1::before{background:#E1F5EE;color:#0F6E56}.s2::before{background:#E6F1FB;color:#185FA5}.s3::before{background:#EEEDFE;color:#534AB7}.s4::before{background:#FAEEDA;color:#854F0B}.s5::before{background:#FAECE7;color:#993C1D}.s6::before{background:#EAF3DE;color:#3B6D11}.s7::before{background:#FBEAF0;color:#993556}
+@media(prefers-color-scheme:dark){.s1::before{background:#085041;color:#9FE1CB}.s2::before{background:#0C447C;color:#B5D4F4}.s3::before{background:#3C3489;color:#CECBF6}.s4::before{background:#633806;color:#FAC775}.s5::before{background:#712B13;color:#F5C4B3}.s6::before{background:#27500A;color:#C0DD97}.s7::before{background:#72243E;color:#F4C0D1}}
+.info{flex:1;min-width:0}
+.sname{font-size:15px;font-weight:500;color:var(--color-text-primary);font-family:var(--font-sans);margin-bottom:2px}
+.sdur{font-size:12px;color:var(--color-text-tertiary);font-family:var(--font-sans);margin-bottom:6px}
+.sdesc{font-size:13px;color:var(--color-text-secondary);font-family:var(--font-sans);line-height:1.6}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;margin:2px 3px 2px 0;font-family:var(--font-sans);font-weight:400}
+.marker{background:var(--color-background-info);color:var(--color-text-info)}
+.mol{background:var(--color-background-warning);color:var(--color-text-warning)}
+.qc{background:var(--color-background-success);color:var(--color-text-success)}
+.tags{margin-top:8px;display:flex;flex-wrap:wrap}
+.legend{display:flex;gap:16px;padding:8px 0 12px 36px;font-size:12px;color:var(--color-text-tertiary);font-family:var(--font-sans)}
+.legend span{display:flex;align-items:center;gap:4px}
+.total{text-align:center;padding:10px 0 4px;font-size:13px;color:var(--color-text-secondary);font-family:var(--font-sans);font-weight:500}
+</style>
+<div class="legend"><span><span class="tag marker" style="margin:0">Markers</span> Flow/ICC QC</span><span><span class="tag mol" style="margin:0">Molecules</span> Key factors</span><span><span class="tag qc" style="margin:0">QC gate</span> Stage checkpoint</span></div>
+
+<div class="stage s1" data-num="S1">
+<div class="info">
+<div class="sname">Definitive endoderm (DE)</div>
+<div class="sdur">Days 0-3 (~3 days)</div>
+<div class="sdesc">iPSCs are driven out of pluripotency toward definitive endoderm, recapitulating gastrulation. High-dose Activin A activates the TGF-beta/Nodal pathway, and a brief pulse of CHIR99021 (GSK3 inhibitor / Wnt agonist) during the first 24h synergizes to specify DE fate. By the end of S1, cells should be uniformly SOX17+ and FOXA2+, with loss of pluripotency markers (OCT4, NANOG).</div>
+<div class="tags"><span class="tag marker">SOX17+</span><span class="tag marker">FOXA2+</span><span class="tag marker">CXCR4/CD184+</span><span class="tag marker">CD117+</span><span class="tag mol">Activin A</span><span class="tag mol">CHIR99021</span><span class="tag qc">Flow: SOX17/CXCR4 >90%</span></div>
+</div></div>
+
+<div class="stage s2" data-num="S2">
+<div class="info">
+<div class="sname">Primitive gut tube (PGT)</div>
+<div class="sdur">Days 3-5 (~2 days)</div>
+<div class="sdesc">DE cells transition to a gut-tube-like identity through FGF signaling. KGF (FGF7) is the primary driver, promoting posterior foregut patterning. Cells become HNF1B+ and maintain FOXA2 expression. This stage is brief but important for setting up the competence to respond to pancreatic induction signals in the next stage.</div>
+<div class="tags"><span class="tag marker">HNF1B+</span><span class="tag marker">FOXA2+</span><span class="tag mol">KGF (FGF7)</span></div>
+</div></div>
+
+<div class="stage s3" data-num="S3">
+<div class="info">
+<div class="sname">Posterior foregut (PF)</div>
+<div class="sdur">Days 5-7 (~2 days)</div>
+<div class="sdesc">Cells are patterned toward posterior foregut / early pancreatic endoderm. Retinoic acid (RA) is the key inducer of PDX1, the earliest pancreatic transcription factor. Simultaneous inhibition of BMP (LDN193189 or Noggin) and Hedgehog (SANT1) pathways prevents hepatic and intestinal fates, restricting specification to pancreas. A PKC activator (TPPB or TPB) further promotes pancreatic commitment.</div>
+<div class="tags"><span class="tag marker">PDX1+</span><span class="tag marker">FOXA2+</span><span class="tag mol">Retinoic acid</span><span class="tag mol">SANT1</span><span class="tag mol">LDN193189</span><span class="tag mol">TPPB / TPB</span><span class="tag mol">KGF</span><span class="tag qc">Flow: PDX1+ >80%</span></div>
+</div></div>
+
+<div class="stage s4" data-num="S4">
+<div class="info">
+<div class="sname">Pancreatic progenitors (PP)</div>
+<div class="sdur">Days 7-12 (~5 days)</div>
+<div class="sdesc">The critical specification stage. PDX1+ cells co-express NKX6.1, the hallmark of bona fide pancreatic progenitor identity. Continued RA, SANT1, and LDN treatment with addition of Noggin and EGF/Nicotinamide in some protocols drives NKX6.1 induction. GP2 (glycoprotein 2) has emerged as a useful surface marker for enriching true pancreatic progenitors. This is the stage where many protocols transition from 2D to 3D (aggregation in AggreWell plates or transfer to bioreactors).</div>
+<div class="tags"><span class="tag marker">PDX1+/NKX6.1+</span><span class="tag marker">GP2+</span><span class="tag marker">SOX9+</span><span class="tag mol">RA</span><span class="tag mol">SANT1</span><span class="tag mol">LDN/Noggin</span><span class="tag mol">EGF</span><span class="tag qc">Flow: PDX1+NKX6.1+ >60%</span><span class="tag qc">2D-to-3D transition</span></div>
+</div></div>
+
+<div class="stage s5" data-num="S5">
+<div class="info">
+<div class="sname">Endocrine progenitors (EP)</div>
+<div class="sdur">Days 12-19 (~7 days)</div>
+<div class="sdesc">Endocrine commitment is triggered by inhibiting Notch signaling (gamma-secretase inhibitor XXI or DAPT) and depolymerizing the cytoskeleton (Latrunculin A), which together push progenitors out of the proliferative state and into endocrine specification. T3 (thyroid hormone) and ALK5 inhibitor II promote beta cell fate over other endocrine lineages. Cells become NEUROG3+ (transient) then CHGA+ (chromogranin A), NKX2.2+, and begin expressing INS (insulin) and C-peptide.</div>
+<div class="tags"><span class="tag marker">NEUROG3+</span><span class="tag marker">CHGA+</span><span class="tag marker">NKX2.2+</span><span class="tag marker">INS+</span><span class="tag mol">XXI / DAPT</span><span class="tag mol">Latrunculin A</span><span class="tag mol">T3</span><span class="tag mol">ALK5 inh. II</span><span class="tag mol">SANT1</span><span class="tag mol">RA</span></div>
+</div></div>
+
+<div class="stage s6" data-num="S6">
+<div class="info">
+<div class="sname">Immature SC-islets</div>
+<div class="sdur">Days 19-28 (~9 days)</div>
+<div class="sdesc">Endocrine cells are aggregated into islet-like clusters (if not already in 3D) and cultured in enriched media to begin maturation. Cells upregulate MAFA (a late beta cell maturation marker), increase insulin content, and begin to show glucose responsiveness, though typically incomplete at this stage. The clusters self-organize, with beta, alpha (GCG+), and delta (SST+) cells forming a mixed endocrine population resembling native islet architecture.</div>
+<div class="tags"><span class="tag marker">INS+/C-PEP+</span><span class="tag marker">MAFA+</span><span class="tag marker">GCG+ (alpha)</span><span class="tag marker">SST+ (delta)</span><span class="tag mol">T3</span><span class="tag mol">ALK5 inh. II</span><span class="tag qc">GSIS: static assay</span></div>
+</div></div>
+
+<div class="stage s7" data-num="S7">
+<div class="info">
+<div class="sname">Functional SC-islets (maturation)</div>
+<div class="sdur">Days 28-44+ (~14+ days)</div>
+<div class="sdesc">Extended culture in maturation media with or without additional factors to achieve functional glucose-stimulated insulin secretion (GSIS). Mature SC-beta cells show dynamic GSIS (first and second phase), appropriate proinsulin-to-insulin processing, and MAFA/UCN3 co-expression. For cell therapy (like Sana's SC451), this is where the product must meet release criteria: target purity of on-target populations (INS+/NKX6.1+), viability, potency (GSIS stimulation index), and sterility. Full in vivo maturation often further improves function after transplantation.</div>
+<div class="tags"><span class="tag marker">INS+/NKX6.1+/MAFA+</span><span class="tag marker">UCN3+</span><span class="tag marker">Low GCG co-expression</span><span class="tag qc">Dynamic GSIS</span><span class="tag qc">Proinsulin/insulin ratio</span><span class="tag qc">Insulin content</span><span class="tag qc">Viability and sterility</span></div>
+</div></div>
+
+<div class="total">Total protocol duration: ~34-44 days (+ 1-2 weeks iPSC expansion)</div>
