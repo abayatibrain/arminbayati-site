@@ -608,6 +608,12 @@ nav {
   .workflow-step { border-left: none; border-top: 1px solid rgba(255,255,255,0.12); padding: 16px 0; }
   .workflow-step:first-child { border-top: none; }
   .findings { grid-template-columns: 1fr 1fr; }
+  .footer-inner { flex-direction: column; gap: 32px; }
+  .footer-links-grid { flex-direction: column; gap: 24px; }
+  .search-toggle, .dark-toggle { width: 28px; height: 28px; }
+  .search-toggle svg { width: 13px; height: 13px; }
+  .nav-brand { font-size: 11px; }
+  .section-content p { max-width: 100%; }
 }
 
 /* ── HIGH-TECH OVERLAY ── */
@@ -1068,6 +1074,22 @@ html.dark .search-modal { background: var(--card); }
   .protocol-summary .ps-item { padding: 12px 14px; }
   .protocol-summary .ps-value { font-size: 1.1rem; }
   .protocol-summary .ps-label { font-size: 10px; }
+  .protocol-card { max-width: 100% !important; margin: 20px 0 24px; }
+  .protocol-card-header { padding: 16px 16px; }
+  .protocol-card-header h3 { font-size: 14px; gap: 8px; }
+  .protocol-card-body { padding: 0 16px 16px; }
+  .protocol-step { gap: 12px; }
+  .step-content .step-desc-text { font-size: 12.5px; }
+  .step-content .reagent-tag { font-size: 9px; }
+  .step-content .time-tag { font-size: 9px; }
+  .interactive-fig-inline { padding: 16px; margin: 24px 0; max-width: 100% !important; }
+  .flowchart-grid { grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
+  .flowchart-title { font-size: 1.1rem; }
+  .stage-box { padding: 10px; }
+  .stage-name { font-size: 12px; }
+  .stage-time { font-size: 8px; }
+  .stage-drivers, .stage-markers { font-size: 8px; }
+  .chart-container { max-width: 100% !important; overflow-x: auto; }
 }
 
 @media (max-width: 480px) {
@@ -1079,6 +1101,18 @@ html.dark .search-modal { background: var(--card); }
   .section-content { padding-bottom: 24px; }
   .workflow-strip { padding: 24px 12px !important; }
   .footer-inner { padding: 28px 12px 20px !important; }
+  .flowchart-grid { grid-template-columns: 1fr !important; }
+  .findings { grid-template-columns: 1fr !important; }
+  .protocol-card-header { padding: 14px 12px; }
+  .protocol-card-body { padding: 0 12px 12px; }
+  .protocol-summary { grid-template-columns: 1fr !important; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .nav-links a { padding: 10px 12px !important; min-height: 44px; display: flex; align-items: center; }
+  .nav-toggle { min-width: 44px; min-height: 44px; }
+  .search-toggle, .dark-toggle { min-width: 36px; min-height: 36px; }
+  .tag { min-height: 36px; display: inline-flex; align-items: center; }
 }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
