@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Endoderm & Ectodermal Protocols — Armin Bayati, PhD</title>
-<meta name="description" content="Step-by-step iPSC differentiation protocols for pancreatic islets, hepatocytes, and gut epithelium with detailed quality checkpoints.">
+<meta name="description" content="Step-by-step iPSC differentiation protocols for hepatocytes and gut epithelium with detailed quality checkpoints.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -1052,6 +1052,7 @@ html.dark body::before {
           <div class="nav-drop-panel">
             <a href="ipscs.html">iPSC-Derived Neurons</a>
             <a href="cardiomyocytes.html">iPSC Cardiomyocytes</a>
+            <a href="islet-cells.html">iPSC &beta;-Islet Cells</a>
           </div>
         </div>
         <div class="nav-dropdown">
@@ -1065,6 +1066,7 @@ html.dark body::before {
         <div class="nav-dropdown">
           <button class="nav-drop-trigger">Immunology</button>
           <div class="nav-drop-panel">
+            <a href="neuroimmunology.html">Neuroimmunology</a>
             <a href="cancer-immunology.html">Cancer Immunology</a>
             <a href="flow-cytometry.html">Flow Cytometry</a>
           </div>
@@ -1102,6 +1104,7 @@ html.dark body::before {
           <div class="nav-drop-panel">
             <a href="protocols.html">Neuron/Cardiac Differentiation</a>
             <a href="endoderm-protocols.html" class="active">Endoderm &amp; Ectodermal Protocols</a>
+            <a href="pancreatic-protocols.html">Pancreatic &beta;-Cell Differentiation</a>
             <a href="assay-protocols.html">Assay &amp; Molecular Protocols</a>
             <a href="publications.html">Publications</a>
             <a href="vc-portfolio.html">Portfolio &amp; VC</a>
@@ -1129,196 +1132,25 @@ html.dark body::before {
   <div class="hero-eyebrow">Protocol Library</div>
   <h1>Endoderm & Ectodermal Differentiation Protocols</h1>
   <p class="hero-description">
-    Comprehensive protocols for generating endoderm-derived cell types from human iPSCs, including pancreatic islets, hepatocytes, and gut epithelium. These protocols detail key signaling pathways, molecular markers, quality checkpoints, and functional validation assays optimized from hands-on differentiation of 15+ iPSC lines.
+    Comprehensive protocols for generating endoderm-derived cell types from human iPSCs, including hepatocytes and gut epithelium. These protocols detail key signaling pathways, molecular markers, quality checkpoints, and functional validation assays optimized from hands-on differentiation of 15+ iPSC lines. For pancreatic islet differentiation, see the dedicated <a href="pancreatic-protocols.html" style="color:var(--accent);">Pancreatic &beta;-Cell Differentiation</a> page.
   </p>
   <div class="hero-tags">
-    <a class="tag" href="#pancreatic">Pancreatic Islets</a>
     <a class="tag" href="#hepatic">Hepatocytes</a>
     <a class="tag" href="#gut">Gut Epithelium</a>
+    <a class="tag" href="pancreatic-protocols.html">Pancreatic Protocols</a>
     <a class="tag" href="protocols.html">Neural Protocols</a>
     <a class="tag" href="ipscs.html">iPSC Models</a>
   </div>
-  <a href="#pancreatic" class="scroll-hint" aria-label="Scroll down">
+  <a href="#hepatic" class="scroll-hint" aria-label="Scroll down">
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 8 10 13 15 8"/></svg>
   </a>
 </div>
 
-<!-- SECTION 01: PANCREATIC ISLET DIFFERENTIATION -->
-<div class="section reveal" id="pancreatic">
-  <div class="section-header">
-    <div class="section-index">
-      <div class="section-number">01</div>
-      <div class="section-label">Pancreatic</div>
-    </div>
-    <div class="section-content">
-      <h2>Pancreatic Islet Differentiation Protocol</h2>
-      <p>This protocol generates <strong>functional pancreatic beta cells and islet-like clusters</strong> from human iPSCs through a 7-stage directed differentiation spanning 34–44 days. The protocol progresses through definitive endoderm specification, pancreatic patterning via retinoic acid signaling, endocrine commitment through NEUROG3 activation, and islet assembly with maturation. The resulting SC-islets express <strong>INS, NKX6.1, MAFA, GCG, SST</strong> and exhibit robust glucose-stimulated insulin secretion (GSIS) suitable for diabetes modeling and beta-cell replacement therapy research.</p>
-
-      <div class="protocol-summary">
-        <div class="ps-item"><div class="ps-value">34–44</div><div class="ps-label">Days Total</div></div>
-        <div class="ps-item"><div class="ps-value">&gt;60%</div><div class="ps-label">INS+/NKX6.1+</div></div>
-        <div class="ps-item"><div class="ps-value">7</div><div class="ps-label">Stages</div></div>
-        <div class="ps-item"><div class="ps-value">GSIS</div><div class="ps-label">Validated</div></div>
-      </div>
-
-      <!-- PHASE 1: ENDODERM SPECIFICATION -->
-      <div class="protocol-card open" id="pancreatic-phase1">
-        <div class="protocol-card-header" onclick="this.parentElement.classList.toggle('open')">
-          <h3><span class="step-badge">PHASE 1</span> Endoderm Specification (Days 0–5)</h3>
-          <span class="toggle-icon">&#9660;</span>
-        </div>
-        <div class="protocol-card-body">
-          <div class="protocol-step">
-            <div class="step-num-circle">1</div>
-            <div class="step-content">
-              <div class="step-title-text">Stage 1: Definitive Endoderm Induction (Days 0–3)</div>
-              <div class="step-desc-text">Seed iPSCs at <strong>300,000 cells/cm&sup2;</strong> on Matrigel in mTeSR Plus + 10 &mu;M Y-27632. Switch to RPMI + B27 + <strong>Activin A</strong> (100 ng/mL) + <strong>CHIR99021</strong> (3 &mu;M) on Day 0. Feed daily. By Day 3, cells express <strong>SOX17+, FOXA2+, CXCR4+, CD117+</strong>. QC: Flow cytometry SOX17/CXCR4 &gt;90%.</div>
-              <span class="reagent-tag">Activin A</span><span class="reagent-tag">CHIR99021</span><span class="reagent-tag">RPMI/B27</span>
-              <div class="time-tag">&#9202; Days 0–3</div>
-            </div>
-          </div>
-          <div class="protocol-step">
-            <div class="step-num-circle">2</div>
-            <div class="step-content">
-              <div class="step-title-text">Stage 2: Primitive Gut Tube (Days 3–5)</div>
-              <div class="step-desc-text">Continue Activin A (25 ng/mL) + add <strong>KGF/FGF7</strong> (100 ng/mL). Cells elongate and express <strong>HNF1B+, FOXA2+</strong>. These signals push foregut specification before pancreatic patterning.</div>
-              <span class="reagent-tag">KGF (FGF7)</span><span class="reagent-tag">Activin A</span>
-              <div class="time-tag">&#9202; Days 3–5</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- PHASE 2: PANCREATIC PATTERNING -->
-      <div class="protocol-card" id="pancreatic-phase2">
-        <div class="protocol-card-header" onclick="this.parentElement.classList.toggle('open')">
-          <h3><span class="step-badge">PHASE 2</span> Pancreatic Patterning (Days 5–12)</h3>
-          <span class="toggle-icon">&#9660;</span>
-        </div>
-        <div class="protocol-card-body">
-          <div class="protocol-step">
-            <div class="step-num-circle">3</div>
-            <div class="step-content">
-              <div class="step-title-text">Stage 3: Posterior Foregut Induction (Days 5–7)</div>
-              <div class="step-desc-text">Switch to <strong>Retinoic Acid</strong> (RA, 2 &mu;M) + <strong>SANT1</strong> (250 nM, SHH inhibitor) + <strong>LDN193189</strong> (100 nM, BMP inhibitor) + TPPB/TPB (1 &mu;M) + KGF (100 ng/mL). This combination drives pancreatic field specification. Cells express <strong>PDX1+, FOXA2+</strong>. QC: Flow PDX1+ &gt;80%.</div>
-              <span class="reagent-tag">Retinoic Acid</span><span class="reagent-tag">SANT1</span><span class="reagent-tag">LDN193189</span>
-              <div class="time-tag">&#9202; Days 5–7</div>
-            </div>
-          </div>
-          <div class="protocol-step">
-            <div class="step-num-circle">4</div>
-            <div class="step-content">
-              <div class="step-title-text">Stage 4: Pancreatic Progenitors (Days 7–12)</div>
-              <div class="step-desc-text">Continue RA (2 &mu;M) + SANT1 + LDN/Noggin (100 nM) + <strong>EGF</strong> (50 ng/mL). Transition to 3D culture: form 2D monolayers then transfer to ultra-low attachment plates for spheroid formation on Day 10. Cells express <strong>PDX1+/NKX6.1+, GP2+, SOX9+</strong>. QC: Flow PDX1+NKX6.1+ &gt;60%, confirm 3D spheroid morphology.</div>
-              <span class="reagent-tag">EGF</span><span class="reagent-tag">Noggin</span><span class="reagent-tag">Ultra-Low Attachment</span>
-              <div class="time-tag">&#9202; Days 7–12</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- PHASE 3: ENDOCRINE COMMITMENT -->
-      <div class="protocol-card" id="pancreatic-phase3">
-        <div class="protocol-card-header" onclick="this.parentElement.classList.toggle('open')">
-          <h3><span class="step-badge">PHASE 3</span> Endocrine Commitment (Days 12–19)</h3>
-          <span class="toggle-icon">&#9660;</span>
-        </div>
-        <div class="protocol-card-body">
-          <div class="protocol-step">
-            <div class="step-num-circle">5</div>
-            <div class="step-content">
-              <div class="step-title-text">Stage 5: Endocrine Progenitors (Days 12–19)</div>
-              <div class="step-desc-text">Switch to maturation medium: <strong>XXI/DAPT</strong> (10 &mu;M, Notch inhibitor) + <strong>Latrunculin A</strong> (0.5 &mu;M) + <strong>T3</strong> (1 &mu;M) + <strong>ALK5 inhibitor II</strong> (10 &mu;M) + SANT1 (250 nM) + RA (2 &mu;M). DAPT drives NEUROG3 expression. Cells express <strong>NEUROG3+, CHGA+, NKX2.2+, INS+ (immature)</strong>. Remove Latrunculin A on Day 15.</div>
-              <span class="reagent-tag">DAPT</span><span class="reagent-tag">T3</span><span class="reagent-tag">ALK5 Inh</span><span class="reagent-tag">Latrunculin A</span>
-              <div class="time-tag">&#9202; Days 12–19</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- PHASE 4: ISLET ASSEMBLY & MATURATION -->
-      <div class="protocol-card" id="pancreatic-phase4">
-        <div class="protocol-card-header" onclick="this.parentElement.classList.toggle('open')">
-          <h3><span class="step-badge">PHASE 4</span> Islet Assembly & Maturation (Days 19–44+)</h3>
-          <span class="toggle-icon">&#9660;</span>
-        </div>
-        <div class="protocol-card-body">
-          <div class="protocol-step">
-            <div class="step-num-circle">6</div>
-            <div class="step-content">
-              <div class="step-title-text">Stage 6: Immature SC-islets (Days 19–28)</div>
-              <div class="step-desc-text">Maintain spheroids in medium + T3 (1 &mu;M) + ALK5 inhibitor II (10 &mu;M). Spheroids compact and self-organize into islet-like structures. Cells express <strong>INS+/C-PEP+, MAFA+, GCG+ (alpha), SST+ (delta)</strong>. Perform static glucose-stimulated insulin secretion (GSIS) assay at Day 25: measure insulin content and secretion at basal (2.8 mM glucose) and stimulated (16.7 mM glucose) conditions.</div>
-              <span class="reagent-tag">T3</span><span class="reagent-tag">ALK5 Inh</span><span class="reagent-tag">GSIS Assay</span>
-              <div class="time-tag">&#9202; Days 19–28</div>
-            </div>
-          </div>
-          <div class="protocol-step">
-            <div class="step-num-circle">7</div>
-            <div class="step-content">
-              <div class="step-title-text">Stage 7: Functional SC-islets (Days 28–44+)</div>
-              <div class="step-desc-text">Continue T3 + ALK5 inhibitor. Perform dynamic GSIS at Day 35: perfusion assay with step-wise glucose increase (2.8 → 16.7 → 2.8 mM). Measure proinsulin/insulin ratio (should be &lt;3:1 in mature islets), total insulin content, and viability (Annexin V/PI flow). Expected: INS+/NKX6.1+/MAFA+ &gt;60%, low GCG co-expression. Islets remain viable for &gt;60 days in culture.</div>
-              <span class="reagent-tag">Dynamic GSIS</span><span class="reagent-tag">Proinsulin/Insulin</span><span class="reagent-tag">Viability Assay</span>
-              <div class="time-tag">&#9202; Days 28–44+ QC</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- PANCREATIC FLOWCHART -->
-      <div class="interactive-fig-inline ifig-pancreatic-flowchart">
-        <div class="flowchart-container">
-          <div class="flowchart-label">Figure 1a</div>
-          <div class="flowchart-title">Pancreatic Islet Differentiation Pathway</div>
-          <div class="flowchart-grid">
-            <div class="stage-box" style="border-color: #10b981; background: rgba(16,185,129,0.08);">
-              <div class="stage-label" style="color: #10b981;">S1–S2</div>
-              <div class="stage-name">Definitive Endoderm</div>
-              <div class="stage-time">Days 0–5</div>
-              <div class="stage-drivers-label">Key Molecules:</div>
-              <div class="stage-drivers">Activin A, CHIR, KGF</div>
-              <div class="stage-markers-label">Markers:</div>
-              <div class="stage-markers">SOX17+, FOXA2+, CXCR4+</div>
-            </div>
-            <div class="stage-box" style="border-color: #3b82f6; background: rgba(59,130,246,0.08);">
-              <div class="stage-label" style="color: #3b82f6;">S3–S4</div>
-              <div class="stage-name">Pancreatic Patterning</div>
-              <div class="stage-time">Days 5–12</div>
-              <div class="stage-drivers-label">Key Molecules:</div>
-              <div class="stage-drivers">RA, SANT1, LDN, EGF</div>
-              <div class="stage-markers-label">Markers:</div>
-              <div class="stage-markers">PDX1+, NKX6.1+, SOX9+</div>
-            </div>
-            <div class="stage-box" style="border-color: #8b5cf6; background: rgba(139,92,246,0.08);">
-              <div class="stage-label" style="color: #8b5cf6;">S5</div>
-              <div class="stage-name">Endocrine Commitment</div>
-              <div class="stage-time">Days 12–19</div>
-              <div class="stage-drivers-label">Key Molecules:</div>
-              <div class="stage-drivers">DAPT, T3, ALK5 Inh</div>
-              <div class="stage-markers-label">Markers:</div>
-              <div class="stage-markers">NEUROG3+, INS+, CHGA+</div>
-            </div>
-            <div class="stage-box" style="border-color: #f59e0b; background: rgba(245,158,11,0.08);">
-              <div class="stage-label" style="color: #f59e0b;">S6–S7</div>
-              <div class="stage-name">Islet Maturation</div>
-              <div class="stage-time">Days 19–44+</div>
-              <div class="stage-drivers-label">Key Molecules:</div>
-              <div class="stage-drivers">T3, ALK5 Inh</div>
-              <div class="stage-markers-label">Markers:</div>
-              <div class="stage-markers">INS+, MAFA+, GSIS+</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- SECTION 02: HEPATIC DIFFERENTIATION -->
+<!-- SECTION 01: HEPATIC DIFFERENTIATION -->
 <div class="section reveal" id="hepatic">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">02</div>
+      <div class="section-number">01</div>
       <div class="section-label">Hepatic</div>
     </div>
     <div class="section-content">
@@ -1458,7 +1290,7 @@ html.dark body::before {
 <div class="section reveal" id="gut">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">03</div>
+      <div class="section-number">02</div>
       <div class="section-label">Gut</div>
     </div>
     <div class="section-content">
@@ -1600,11 +1432,6 @@ html.dark body::before {
     <h3>Endoderm Differentiation Pathways — Comparative Overview</h3>
     <div class="workflow-steps">
       <div class="workflow-step">
-        <div class="step-number">PANCREATIC</div>
-        <div class="step-title">Islet Differentiation</div>
-        <div class="step-detail"><strong>Duration:</strong> 34–44 days | <strong>Key Driver Phase 2:</strong> RA + SANT1 (BMP inhibition) | <strong>Fate Switch:</strong> Posteriorization via RA | <strong>Output:</strong> β/α/δ cells in 3D islets | <strong>Purity:</strong> &gt;60% INS+/NKX6.1+ | <strong>QC:</strong> GSIS dynamic assay</div>
-      </div>
-      <div class="workflow-step">
         <div class="step-number">HEPATIC</div>
         <div class="step-title">Hepatocyte Differentiation</div>
         <div class="step-detail"><strong>Duration:</strong> 25–30 days | <strong>Key Driver Phase 2:</strong> BMP4 activation (diverges at specification) | <strong>Fate Switch:</strong> Lateral plate mesoderm avoidance | <strong>Output:</strong> Mature hepatocytes | <strong>Purity:</strong> &gt;70% ALB+ | <strong>QC:</strong> CYP3A4 activity, urea synthesis</div>
@@ -1631,6 +1458,7 @@ html.dark body::before {
         <a href="ipscs.html">iPSC Models</a>
         <a href="protocols.html">Neural Protocols</a>
         <a href="endoderm-protocols.html">Endoderm Protocols</a>
+            <a href="pancreatic-protocols.html">Pancreatic &beta;-Cell Differentiation</a>
         <a href="biologics.html">Biologics</a>
       </div>
       <div class="footer-col">
@@ -1692,11 +1520,8 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 (function() {
   var searchIndex = [
     {page:'endoderm-protocols.html', title:'Endoderm & Ectodermal Protocols', category:'Research', section:'',
-     keywords:'endoderm protocols pancreatic islet hepatocyte gut epithelium ipsc differentiation gsis cyp3a4 teer',
-     description:'Comprehensive protocols for pancreatic, hepatic, and intestinal iPSC differentiation with functional validation.'},
-    {page:'endoderm-protocols.html#pancreatic', title:'Pancreatic Islet Protocol', category:'Research', section:'Pancreatic',
-     keywords:'pancreatic islet protocol beta cell gsis glucose-stimulated insulin secretion pax1 nkx6.1 pdx1 neurog3 stage 7 maturation',
-     description:'Directed 7-stage pancreatic islet differentiation with GSIS validation and functional beta cell generation.'},
+     keywords:'endoderm protocols hepatocyte gut epithelium ipsc differentiation cyp3a4 teer',
+     description:'Comprehensive protocols for hepatic and intestinal iPSC differentiation with functional validation.'},
     {page:'endoderm-protocols.html#hepatic', title:'Hepatocyte Differentiation Protocol', category:'Research', section:'Hepatic',
      keywords:'hepatocyte protocol liver alb albumin cyp3a4 cyp1a2 hep44 bmp4 fgf2 hgf osm drug metabolism',
      description:'25–30 day hepatocyte differentiation with CYP450 enzyme activity and urea synthesis validation.'},

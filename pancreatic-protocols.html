@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pancreatic β-Cell Differentiation Protocols — Armin Bayati, PhD</title>
+<meta name="description" content="Step-by-step iPSC differentiation protocols for pancreatic β-islet and α-islet cell generation with functional validation (GSIS, amino acid stimulation).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════
+   ARMIN BAYATI — DESIGN SYSTEM
+   Matching iPSC-Cardiomyocyte page aesthetic
+   ══════════════════════════════════════════════ */
+
+:root {
+  --ink: #0f1419;
+  --paper: #fafaf7;
+  --mid: #6b7280;
+  --accent: #c0392b;
+  --accent-soft: #e74c3c15;
+  --rule: #d4d0c8;
+  --card: #ffffff;
+  --section-bg: #f4f3ef;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+  --mono: 'IBM Plex Mono', 'Menlo', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAVIGATION ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 250, 247, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+  padding: 0 24px;
+}
+
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: auto;
+  padding: 10px 0;
+  gap: 16px;
+}
+
+.nav-brand {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--mid);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-brand:hover { color: var(--ink); }
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-logo {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+.nav-brand-text {
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  color: var(--ink);
+}
+.nav-brand:hover .nav-logo { color: var(--ink); }
+
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  flex: 1;
+}
+.nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+/* Mobile nav toggle */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--mid);
+}
+.nav-toggle svg { display: block; }
+/* ── DROPDOWN NAV ── */
+.nav-dropdown {
+  position: relative;
+}
+.nav-dropdown > .nav-drop-trigger {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  padding: 8px 11px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  font-family: var(--sans);
+}
+.nav-drop-trigger::after {
+  content: "";
+  border-left: 3.5px solid transparent;
+  border-right: 3.5px solid transparent;
+  border-top: 4px solid currentColor;
+  opacity: 0.5;
+  transition: transform 0.2s ease;
+}
+.nav-dropdown:hover > .nav-drop-trigger,
+.nav-dropdown.open > .nav-drop-trigger {
+  color: var(--ink);
+  background: rgba(0,0,0,0.04);
+}
+.nav-dropdown:hover > .nav-drop-trigger::after,
+.nav-dropdown.open > .nav-drop-trigger::after {
+  transform: rotate(180deg);
+  opacity: 0.8;
+}
+.nav-dropdown.has-active > .nav-drop-trigger {
+  color: var(--accent);
+}
+.nav-drop-panel {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 220px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10), 0 1px 3px rgba(0,0,0,0.06);
+  padding: 6px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.18s ease, visibility 0.18s ease, transform 0.18s ease;
+  transform: translateX(-50%) translateY(4px);
+  z-index: 200;
+}
+.nav-dropdown:hover > .nav-drop-panel,
+.nav-dropdown.open > .nav-drop-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+.nav-drop-panel a {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  color: var(--mid);
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.nav-drop-panel a:hover {
+  color: var(--ink);
+  background: var(--section-bg);
+}
+.nav-drop-panel a.active {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+/* Direct nav links (Home, Endocytosis, Contact) */
+.nav-links > a,
+.nav-row > a {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  padding: 8px 11px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.nav-links > a:hover,
+.nav-row > a:hover { color: var(--ink); background: rgba(0,0,0,0.04); }
+.nav-links > a.active,
+.nav-row > a.active { color: var(--accent); }
+
+
+/* ── HERO ── */
+.hero {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 64px 32px 32px;
+}
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1.5px;
+  background: var(--accent);
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+  max-width: 780px;
+  margin-bottom: 28px;
+}
+
+.hero-description {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--mid);
+  max-width: 760px;
+  margin-bottom: 36px;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  padding: 5px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  color: var(--mid);
+  background: var(--card);
+}
+
+/* ── SECTIONS ── */
+.section {
+  border-top: 1px solid var(--rule);
+}
+
+.section-header {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 64px 32px 0;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.section-index {
+  position: sticky;
+  top: 80px;
+  padding-top: 4px;
+}
+
+.section-number {
+  font-family: var(--serif);
+  font-size: 4rem;
+  color: var(--rule);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.section-content {
+  padding-bottom: 20px;
+}
+
+.section-content h2 {
+  font-family: var(--serif);
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+
+.section-content h3 {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 32px;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+
+.section-content p {
+  font-size: 15.5px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #444;
+  max-width: 760px;
+  margin-bottom: 16px;
+}
+
+.section-content p strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.section-content a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.section-content a:hover {
+  border-bottom-color: var(--accent);
+}
+
+/* ── SUB-SECTION DIVIDER ── */
+.subsection {
+  margin-top: 48px;
+  padding-top: 36px;
+  border-top: 1px dashed var(--rule);
+}
+
+.subsection:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.subsection-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.subsection-label::before {
+  content: '→';
+  font-size: 13px;
+}
+
+/* ── FINDINGS STRIP ── */
+.findings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 28px 0 32px;
+  max-width: 760px;
+}
+
+.finding {
+  background: var(--card);
+  padding: 18px 20px;
+}
+
+.finding-value {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.finding-label {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--mid);
+  line-height: 1.4;
+}
+
+/* ── WORKFLOW STRIP ── */
+.workflow-strip {
+  background: var(--ink);
+  color: #fff;
+  padding: 48px 32px;
+}
+
+.workflow-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.workflow-inner h3 {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 28px;
+  color: rgba(255,255,255,0.9);
+}
+
+.workflow-steps {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+}
+
+.workflow-step {
+  flex: 1;
+  padding: 20px 24px;
+  border-left: 1px solid rgba(255,255,255,0.12);
+  position: relative;
+}
+.workflow-step:first-child { border-left: none; }
+
+.step-number {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.step-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: rgba(255,255,255,0.95);
+}
+
+.step-detail {
+  font-size: 12.5px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.55;
+}
+
+/* ── FOOTER ── */
+.footer-inner { max-width: 1120px; margin: 0 auto; padding: 56px 32px 40px; display: flex; justify-content: space-between; gap: 48px; }
+.footer-brand { max-width: 320px; }
+.footer-name { font-family: var(--serif); font-size: 1.3rem; color: #fff; margin-bottom: 8px; }
+.footer-role { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.6; }
+.footer-links-grid { display: flex; gap: 56px; }
+.footer-col { display: flex; flex-direction: column; gap: 8px; }
+.footer-col-title { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+.footer-col a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+.footer-col a:hover { color: #fff; }
+.footer-bottom { max-width: 1120px; margin: 0 auto; padding: 20px 32px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: rgba(255,255,255,0.3); text-align: center; }
+@media (max-width: 768px) { .footer-inner { flex-direction: column; gap: 32px; } .footer-links-grid { flex-direction: column; gap: 24px; } }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow, .hero h1, .hero-description, .hero-tags {
+  animation: fadeUp 0.6s ease both;
+}
+.hero h1 { animation-delay: 0.1s; }
+.hero-description { animation-delay: 0.2s; }
+.hero-tags { animation-delay: 0.3s; }
+
+/* ── SCROLL HINT ── */
+.scroll-hint {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  color: var(--mid);
+  text-decoration: none;
+  animation: bounce 2s ease infinite 1.5s;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+.scroll-hint:hover { opacity: 1; color: var(--accent); }
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    padding: 12px 20px;
+    gap: 4px;
+  }
+  .nav-links.open .nav-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .nav-toggle { display: block; }
+  .nav-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    width: 100%;
+  }
+  /* Mobile dropdown overrides */
+  .nav-drop-panel {
+    position: static !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 0 4px 12px !important;
+    min-width: 0 !important;
+    display: none;
+    background: transparent !important;
+  }
+  .nav-dropdown.open > .nav-drop-panel {
+    display: block;
+  }
+  .nav-dropdown > .nav-drop-trigger {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 13px;
+    justify-content: space-between;
+  }
+  .nav-drop-panel a {
+    padding: 8px 14px;
+    font-size: 12.5px;
+  }
+
+  .section-header {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 40px 20px 0;
+  }
+  .section-index {
+    position: static;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-number { font-size: 2rem; margin-bottom: 0; }
+  .hero { padding: 48px 20px 40px; }
+  .workflow-steps { flex-direction: column; }
+  .workflow-step { border-left: none; border-top: 1px solid rgba(255,255,255,0.12); padding: 16px 0; }
+  .workflow-step:first-child { border-top: none; }
+  .findings { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── HIGH-TECH OVERLAY ── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(rgba(15,20,25,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15,20,25,0.015) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero-eyebrow::after {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+  margin-left: 4px;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(192,57,43,0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(192,57,43,0); }
+}
+
+.tag {
+  background: rgba(15,20,25,0.03);
+  border-color: rgba(15,20,25,0.12);
+  transition: all 0.25s ease;
+}
+.tag:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+.section-number {
+  background: linear-gradient(135deg, var(--rule) 0%, rgba(192,57,43,0.15) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.findings {
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.finding {
+  transition: background 0.2s ease;
+}
+.finding:hover {
+  background: rgba(192,57,43,0.02);
+}
+
+nav {
+  background: rgba(250, 250, 247, 0.88);
+  border-bottom-color: rgba(15,20,25,0.08);
+}
+
+.workflow-strip {
+  background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #0f1419 100%);
+  position: relative;
+  overflow: hidden;
+}
+.workflow-strip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+
+.nav-links > a,
+.nav-row > a {
+  transition: all 0.2s ease;
+  position: relative;
+}
+.nav-links > a.active::after,
+.nav-row > a.active::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 10px;
+  right: 10px;
+  height: 1.5px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+/* ── DARK MODE ── */
+.dark-toggle {
+  background: none; border: 1px solid var(--rule); border-radius: 50%;
+  width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 14px; color: var(--mid); transition: all 0.25s ease; flex-shrink: 0;
+}
+.dark-toggle:hover { border-color: var(--accent); color: var(--ink); }
+html.dark {
+  --ink: #e8e6e1; --paper: #111318; --mid: #9ca3af; --rule: #2a2d35;
+  --card: #1a1d24; --section-bg: #15171d; --accent-soft: rgba(192,57,43,0.15);
+}
+html.dark body::before {
+  background: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+}
+html.dark nav { background: rgba(17,19,24,0.92); }
+html.dark .nav-drop-panel {
+  background: #1a1d24;
+  border-color: rgba(255,255,255,0.08);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+html.dark .nav-drop-panel a:hover {
+  background: rgba(255,255,255,0.06);
+}
+html.dark .nav-drop-panel a.active {
+  background: rgba(192,57,43,0.15);
+}
+html.dark .nav-dropdown:hover > .nav-drop-trigger,
+html.dark .nav-dropdown.open > .nav-drop-trigger {
+  background: rgba(255,255,255,0.06);
+}
+html.dark .nav-links.open {
+  background: #111318;
+}
+
+html.dark .section-content p { color: rgba(232,230,225,0.6); }
+html.dark .card, html.dark .finding { background: var(--card); border-color: var(--rule); }
+a.tag { text-decoration: none; cursor: pointer; }
+a.tag:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--ink); }
+
+html.dark .page-footer { background: #0a0c10; }
+html.dark .footer-name { color: #e8e6e1; }
+html.dark .footer-role { color: rgba(232,230,225,0.5); }
+html.dark .footer-col a { color: rgba(232,230,225,0.6); }
+html.dark .footer-col a:hover { color: #e8e6e1; }
+html.dark .footer-bottom { color: rgba(232,230,225,0.3); border-top-color: rgba(232,230,225,0.08); }
+
+/* ── SCROLL ANIMATIONS ── */
+.reveal { opacity: 0.35; transform: translateY(0); transition: opacity 0.7s ease, transform 0.5s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.page-footer { background: var(--ink); color: rgba(255,255,255,0.7); padding: 0; border-top: none; display: block; }
+
+html.dark .search-overlay { background: rgba(0,0,0,0.65); }
+html.dark .search-modal { background: var(--card); }
+
+/* ── SITE SEARCH ── */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.search-toggle {
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--mid);
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+.search-toggle:hover { border-color: var(--accent); color: var(--ink); }
+.search-toggle svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(15,20,25,0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: min(18vh, 160px);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.search-overlay.active { display: flex; opacity: 1; }
+.search-overlay.fade-in { opacity: 1; }
+
+.search-modal {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  width: 92%;
+  max-width: 580px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.25), 0 0 0 1px rgba(0,0,0,0.04);
+  overflow: hidden;
+  transform: translateY(12px) scale(0.98);
+  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1);
+}
+.search-overlay.fade-in .search-modal {
+  transform: translateY(0) scale(1);
+}
+
+.search-input-wrap {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--rule);
+  gap: 12px;
+}
+.search-input-wrap svg { width: 18px; height: 18px; stroke: var(--mid); fill: none; stroke-width: 2; flex-shrink: 0; }
+.search-input {
+  flex: 1;
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 400;
+  border: none;
+  background: transparent;
+  color: var(--ink);
+  padding: 16px 0;
+  outline: none;
+}
+.search-input::placeholder { color: var(--mid); opacity: 0.7; }
+
+.search-results {
+  max-height: 420px;
+  overflow-y: auto;
+  padding: 8px 0;
+  scrollbar-width: thin;
+}
+.search-results::-webkit-scrollbar { width: 4px; }
+.search-results::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 2px; }
+
+.search-result {
+  display: block;
+  padding: 12px 20px;
+  text-decoration: none;
+  transition: background 0.12s ease;
+  border-left: 3px solid transparent;
+}
+.search-result:hover, .search-result.active {
+  background: var(--accent-soft);
+  border-left-color: var(--accent);
+}
+.search-result-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+.search-result-page {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.search-result-desc {
+  font-size: 12.5px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.5;
+}
+.search-result mark {
+  background: rgba(192,57,43,0.15);
+  color: var(--ink);
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+.search-empty {
+  padding: 32px 20px;
+  text-align: center;
+  color: var(--mid);
+  font-size: 14px;
+  font-weight: 300;
+}
+.search-empty span { display: block; font-size: 28px; margin-bottom: 8px; }
+
+.search-footer {
+  border-top: 1px solid var(--rule);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--mid);
+  letter-spacing: 0.3px;
+}
+.search-footer-keys { display: flex; gap: 8px; align-items: center; }
+.search-footer-keys kbd {
+  font-family: var(--mono);
+  font-size: 10px;
+  background: var(--section-bg);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 1px 5px;
+  color: var(--mid);
+}
+
+/* ── PROTOCOL-SPECIFIC STYLES ── */
+.protocol-card {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  margin: 28px 0 32px;
+  max-width: 760px;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+.protocol-card:hover { border-color: var(--accent); }
+.protocol-card-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 24px;
+  cursor: pointer;
+  user-select: none;
+}
+.protocol-card-header h3 {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0;
+  display: flex; align-items: center; gap: 10px;
+}
+.protocol-card-header .step-badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+.protocol-card-header .toggle-icon {
+  font-size: 18px; color: var(--mid); transition: transform 0.3s;
+}
+.protocol-card.open .toggle-icon { transform: rotate(180deg); }
+.protocol-card-body {
+  display: none;
+  padding: 0 24px 24px;
+  border-top: 1px solid var(--rule);
+}
+.protocol-card.open .protocol-card-body { display: block; }
+
+.protocol-step {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.protocol-step:last-child { border-bottom: none; }
+.step-num-circle {
+  width: 28px; height: 28px; min-width: 28px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 2px;
+}
+.step-content { flex: 1; }
+.step-content .step-title-text {
+  font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 4px;
+}
+.step-content .step-desc-text {
+  font-size: 13px; font-weight: 300; color: var(--mid); line-height: 1.65;
+}
+.step-content .reagent-tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 1px 6px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  color: var(--mid);
+  margin: 4px 4px 0 0;
+  background: var(--section-bg);
+}
+.step-content .time-tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  color: #fff;
+  background: var(--accent);
+  margin-top: 8px;
+}
+.protocol-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 16px 0 8px;
+}
+.protocol-summary .ps-item {
+  background: var(--card); padding: 14px 16px; text-align: center;
+}
+.protocol-summary .ps-value {
+  font-family: var(--serif); font-size: 1.3rem; color: var(--ink); margin-bottom: 2px;
+}
+.protocol-summary .ps-label {
+  font-size: 11px; font-weight: 400; color: var(--mid);
+}
+
+@media (max-width: 768px) {
+  body { font-size: 15px; }
+  .hero h1, h1 { font-size: clamp(1.6rem, 7vw, 2.2rem) !important; }
+  .section-content h2 { font-size: 1.35rem; }
+  .section-content h3 { font-size: 0.95rem; margin-top: 24px; }
+  .section-content p { font-size: 14.5px; line-height: 1.7; }
+  .hero-description { font-size: 15px !important; line-height: 1.65 !important; }
+  .hero { padding: 36px 16px 32px !important; }
+  .search-toggle, .dark-toggle { width: 28px; height: 28px; }
+  .search-toggle svg { width: 13px; height: 13px; }
+  .section-header { grid-template-columns: 1fr !important; gap: 12px !important; padding: 32px 16px 0 !important; }
+  .section-index { position: static !important; display: flex !important; align-items: center !important; gap: 10px !important; }
+  .section-number { font-size: 1.8rem !important; margin-bottom: 0 !important; }
+  .section-label { font-size: 10px; }
+  .section-content { padding-bottom: 32px; }
+  .section-content p { max-width: 100%; }
+  .workflow-strip { padding: 32px 16px !important; }
+  .workflow-steps { flex-direction: column !important; }
+  .workflow-step { border-left: none !important; border-top: 1px solid rgba(255,255,255,0.12) !important; padding: 14px 0 !important; }
+  .workflow-step:first-child { border-top: none !important; }
+  .step-title { font-size: 13px; }
+  .step-detail { font-size: 12px; }
+  .findings { grid-template-columns: 1fr 1fr !important; }
+  .page-footer { margin-top: 0; }
+  .footer-inner { flex-direction: column !important; gap: 28px !important; padding: 36px 16px 28px !important; }
+  .footer-brand { max-width: 100%; }
+  .footer-name { font-size: 1.1rem; }
+  .footer-links-grid { flex-direction: column !important; gap: 20px !important; }
+  .footer-bottom { padding: 16px; font-size: 11px; }
+  .search-modal { width: 96%; max-width: none; border-radius: 8px; }
+  .search-overlay { padding-top: 10vh; }
+  .search-input { font-size: 15px; }
+  .search-result { padding: 10px 16px; }
+  .search-result-title { font-size: 13px; }
+  .search-result-desc { font-size: 11px; }
+  .protocol-summary { grid-template-columns: 1fr 1fr !important; }
+  .protocol-summary .ps-item { padding: 12px 14px; }
+  .protocol-summary .ps-value { font-size: 1.1rem; }
+  .protocol-summary .ps-label { font-size: 10px; }
+}
+
+@media (max-width: 480px) {
+  .hero h1, h1 { font-size: clamp(1.4rem, 6vw, 1.8rem) !important; }
+  .hero-description { font-size: 14px !important; }
+  .tag { font-size: 9.5px; padding: 3px 8px; }
+  .hero-tags { gap: 5px; }
+  .section-header { padding: 24px 12px 0 !important; }
+  .section-content { padding-bottom: 24px; }
+  .workflow-strip { padding: 24px 12px !important; }
+  .footer-inner { padding: 28px 12px 20px !important; }
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body><script>if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark');</script>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand"><svg class="nav-logo" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1" y="1" width="26" height="26" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="14" y="19.5" text-anchor="middle" font-family="'DM Serif Display',Georgia,serif" font-size="15" font-weight="400" fill="currentColor">AB</text>
+</svg><span class="nav-brand-text">Armin Bayati</span></a>
+    <button class="nav-toggle" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="17" y2="6"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14" x2="17" y2="14"/></svg>
+    </button>
+    <div class="nav-links">
+      <div class="nav-row">
+        <a href="index.html">Home</a>
+        <div class="nav-dropdown">
+          <button class="nav-drop-trigger">iPSC Models</button>
+          <div class="nav-drop-panel">
+            <a href="ipscs.html">iPSC-Derived Neurons</a>
+            <a href="cardiomyocytes.html">iPSC Cardiomyocytes</a>
+            <a href="islet-cells.html">iPSC &beta;-Islet Cells</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-drop-trigger">Drug Discovery</button>
+          <div class="nav-drop-panel">
+            <a href="drug-discovery.html">Drug Discovery &amp; Translation</a>
+            <a href="biologics.html">Biologics &amp; Immunotherapy</a>
+          </div>
+        </div>
+        <a href="endocytosis.html">Endocytosis</a>
+        <div class="nav-dropdown">
+          <button class="nav-drop-trigger">Immunology</button>
+          <div class="nav-drop-panel">
+            <a href="neuroimmunology.html">Neuroimmunology</a>
+            <a href="cancer-immunology.html">Cancer Immunology</a>
+            <a href="flow-cytometry.html">Flow Cytometry</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-drop-trigger">Cellular Assays</button>
+          <div class="nav-drop-panel">
+            <a href="cellular-assays.html">Cellular &amp; Functional Assays</a>
+            <a href="genetics.html">Genetics &amp; Molecular Biology</a>
+            <a href="assay-expertise.html">Proximity &amp; Molecular Assays</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-row">
+        <div class="nav-dropdown">
+          <button class="nav-drop-trigger">In Vivo &amp; Primary</button>
+          <div class="nav-drop-panel">
+            <a href="in-vivo.html">In Vivo Studies</a>
+            <a href="primary-neurons.html">Primary Neuronal Culture</a>
+            <a href="primary-cardiomyocytes.html">Primary Cardiomyocyte Culture</a>
+          </div>
+        </div>
+        <a href="biomarkers.html">Biomarkers</a>
+        <div class="nav-dropdown">
+          <button class="nav-drop-trigger">Technical Skills</button>
+          <div class="nav-drop-panel">
+            <a href="microscopy.html">Microscopy &amp; Imaging</a>
+            <a href="proteomics.html">Proteomics &amp; Genomics</a>
+            <a href="coding.html">Coding &amp; Automation</a>
+            <a href="skills.html">Full Technical Skills</a>
+          </div>
+        </div>
+        <div class="nav-dropdown has-active">
+          <button class="nav-drop-trigger">Resources &amp; Protocols</button>
+          <div class="nav-drop-panel">
+            <a href="protocols.html">Neuron/Cardiac Differentiation</a>
+            <a href="endoderm-protocols.html">Endoderm &amp; Ectodermal Protocols</a>
+            <a href="pancreatic-protocols.html" class="active">Pancreatic &beta;-Cell Differentiation</a>
+            <a href="assay-protocols.html">Assay &amp; Molecular Protocols</a>
+            <a href="publications.html">Publications</a>
+            <a href="vc-portfolio.html">Portfolio &amp; VC</a>
+          </div>
+        </div>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="nav-right"><button class="search-toggle" aria-label="Search site" title="Search (&#x2318;K)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button><button class="dark-toggle" onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light')" aria-label="Toggle dark mode" title="Toggle dark mode">☀</button></div>
+  </div>
+</nav>
+
+<script>
+// Nav dropdown toggle (mobile)
+document.querySelector('.nav-toggle').addEventListener('click', function(){
+  document.querySelector('.nav-links').classList.toggle('open');
+  if(!document.querySelector('.nav-links').classList.contains('open')){
+    document.querySelectorAll('.nav-dropdown.open').forEach(d => d.classList.remove('open'));
+  }
+});
+document.querySelectorAll('.nav-drop-trigger').forEach(function(btn){
+  btn.addEventListener('click', function(e){
+    if(window.innerWidth <= 768){
+      e.preventDefault();
+      var dd = this.parentElement;
+      document.querySelectorAll('.nav-dropdown.open').forEach(function(d){
+        if(d !== dd) d.classList.remove('open');
+      });
+      dd.classList.toggle('open');
+    }
+  });
+});
+document.addEventListener('click', function(e){
+  if(!e.target.closest('.nav-dropdown') && !e.target.closest('.nav-toggle')){
+    document.querySelectorAll('.nav-dropdown.open').forEach(d => d.classList.remove('open'));
+  }
+  if(!e.target.closest('nav')){
+    document.querySelector('.nav-links').classList.remove('open');
+  }
+});
+</script>
+
+<!-- SITE SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-modal">
+    <div class="search-input-wrap">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search pages, topics, techniques..." autocomplete="off" spellcheck="false">
+      <span class="search-kbd">ESC</span>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+    <div class="search-footer">
+      <div class="search-footer-keys">
+        <kbd>&uarr;</kbd><kbd>&darr;</kbd> navigate &nbsp;
+        <kbd>&crarr;</kbd> open
+      </div>
+      <span>Site Search</span>
+    </div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Pancreatic Protocol Library</div>
+  <h1>Pancreatic β-Cell &amp; α-Cell Differentiation Protocols</h1>
+  <p class="hero-description">
+    Stepwise protocols for directed differentiation of human iPSCs into functional pancreatic β-islet and α-islet cells. Covers definitive endoderm induction through pancreatic endocrine specification, with a critical 2D-to-3D transition at Stage 4 to promote islet-like cluster formation. Protocols refined across three iPSC lines with validated functional endpoints including glucose-stimulated insulin secretion and glucagon release.
+  </p>
+  <div class="hero-tags">
+    <a class="tag" href="#beta">β-Islet Differentiation</a>
+    <a class="tag" href="#alpha">α-Islet Differentiation</a>
+    <a class="tag" href="#beta">Definitive Endoderm</a>
+    <a class="tag" href="#beta">Pancreatic Progenitor</a>
+    <a class="tag" href="#beta">GSIS</a>
+    <a class="tag" href="#beta">2D-to-3D Transition</a>
+    <a class="tag" href="#beta">Islet Clusters</a>
+    <a class="tag" href="#beta">Insulin</a>
+    <a class="tag" href="#alpha">Glucagon</a>
+    <a class="tag" href="#beta">iPSC</a>
+  </div>
+  <a href="#beta" class="scroll-hint" aria-label="Scroll down">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 8 10 13 15 8"/></svg>
+  </a>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SECTION 01 — β-ISLET CELL DIFFERENTIATION
+     ══════════════════════════════════════════════ -->
+<div class="section reveal" id="beta">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">01</div>
+      <div class="section-label">β-Cells</div>
+    </div>
+    <div class="section-content">
+      <h2>iPSC to β-Islet Cell Differentiation Protocol</h2>
+      <p>A 28-day directed differentiation protocol generating functional insulin-secreting β-like cells from human iPSCs. The protocol follows pancreatic developmental biology through five defined stages, transitioning from 2D monolayer culture to 3D suspension aggregates at Stage 4 to promote islet-like cluster organization and functional maturation. Final β-like cells express <strong>INS, NKX6.1, PDX1, MAFA, and C-peptide</strong> with glucose-stimulated insulin secretion.</p>
+
+      <div class="protocol-summary">
+        <div class="ps-item"><div class="ps-value">28</div><div class="ps-label">Days to Maturity</div></div>
+        <div class="ps-item"><div class="ps-value">&gt;65%</div><div class="ps-label">C-Peptide+ Cells</div></div>
+        <div class="ps-item"><div class="ps-value">2D→3D</div><div class="ps-label">Stage 4 Transition</div></div>
+        <div class="ps-item"><div class="ps-value">5</div><div class="ps-label">Protocol Stages</div></div>
+      </div>
+
+      <div class="protocol-card open" id="beta-stage1">
+        <div class="protocol-card-header" onclick="this.parentElement.classList.toggle('open')">
+          <h3><span class="step-badge">STAGE 1</span> Definitive Endoderm Induction (Days 0–3)</h3>
+          <span class="toggle-icon">&#9660;</span>
+        </div>
+        <div class="protocol-card-body">
+          <div class="protocol-step">
+            <div class="step-num-circle">1</div>
+            <div class="step-content">
+              <div class="step-title-text">iPSC Preparation</div>
+              <div class="step-desc-text">Expand iPSCs to 80% confluency on Matrigel-coated 6-well plates in mTeSR Plus. Confirm pluripotency markers (OCT4+/NANOG+/TRA-1-60+) by ICC or flow. Passage quality: &lt;5% spontaneous differentiation, passage &lt;35. On Day −1: seed at 1.5 × 10⁶ cells per well in mTeSR Plus + 10 µM Y-27632.</div>
+              <span class="reagent-tag">mTeSR Plus</span><span class="reagent-tag">Matrigel</span><span class="reagent-tag">Y-27632</span>
+              <div class="time-tag">&#9202; Day −1 to Day 0</div>
+            </div>
+          </div>
+          <div class="protocol-step">
+            <div class="step-num-circle">2</div>
+            <div class="step-content">
+              <div class="step-title-text">Definitive Endoderm Induction</div>
+              <div class="step-desc-text">Day 0: Replace media with RPMI 1640 + 0.2% FBS + 100 ng/mL Activin A + 3 µM CHIR99021 (WNT agonist for mesendoderm specification). Day 1: RPMI + 0.2% FBS + 100 ng/mL Activin A (remove CHIR). Days 2–3: RPMI + 0.2% FBS + 100 ng/mL Activin A. Feed daily.</div>
+              <span class="reagent-tag">RPMI 1640</span><span class="reagent-tag">Activin A</span><span class="reagent-tag">CHIR99021</span><span class="reagent-tag">FBS</span>
+              <div class="time-tag">&#9202; Days 0–3</div>
+            </div>
+          </div>
+          <div class="protocol-step">
+            <div class="step-num-circle">3</div>
+            <div class="step-content">
+              <div class="step-title-text">Definitive Endoderm QC</div>
+              <div class="step-desc-text">Day 3: Harvest subset for flow cytometry. Stain for SOX17 and FOXA2. Expected: &gt;90% SOX17+/FOXA2+ double-positive. Also assess CXCR4 surface expression (&gt;85%). If &lt;80% SOX17+, troubleshoot Activin A lot, cell density, or iPSC quality.</div>
+              <span class="reagent-tag">SOX17</span><span class="reagent-tag">FOXA2</span><span class="reagent-tag">CXCR4</span><span class="reagent-tag">Flow Cytometry</span>
+              <div class="time-tag">&#9202; Day 3 QC</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="protocol-card" id="beta-stage2">
+        <div class="protocol-card-header" onclick="this.parentElement.classList.toggle('open')">
+          <h3><span class="step-badge">STAGE 2</span> Primitive Gut Tube (Days 3–7)</h3>
+          <span class="toggle-icon">&#9660;</span>
+        </div>
+        <div class="protocol-card-body">
+          <div class="protocol-step">
+            <div class="step-num-circle">4</div>
+            <div class="step-content">
+              <div class="step-title-text">Gut Tube Specification</div>
+              <div class="step-desc-text">Day 3: Switch to DMEM/F12 + 0.5% BSA + 50 ng/mL FGF10 (fibroblast growth factor for gut tube patterning) + 50 ng/mL KGF (keratinocyte growth factor). Feed every other day. By Day 7: cells should exhibit characteristic flat morphology and express HNF4α and HNF1β.</div>
+              <span class="reagent-tag">FGF10</span><span class="reagent-tag">KGF</span><span class="reagent-tag">DMEM/F12</span><span class="reagent-tag">BSA</span>
+              <div class="time-tag">&#9202; Days 3–7</div>
+            </div>
+          </div>
+          <div class="protocol-step">
+            <div class="step-num-circle">5</div>
+            <div class="step-content">
+              <div class="step-title-text">Stage 2 QC</div>
+              <div class="step-desc-text">Day 7: ICC for HNF4α (nuclear, &gt;70% expected) and FOXA2 (maintained). Optional: qPCR panel for HNF4A, HNF1B, SOX17 (downregulating), and CDX2 (should be negative — indicates intestinal diversion).</div>
+              <span class="reagent-tag">HNF4α</span><span class="reagent-tag">HNF1β</span><span class="reagent-tag">ICC</span>
+              <div class="time-tag">&#9202; Day 7 QC</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="protocol-card" id="beta-stage3">
+        <div class="protocol-card-header" onclick="this.parentElement.classList.toggle('open')">
+          <h3><span class="step-badge">STAGE 3</span> Posterior Foregut / Pancreatic Progenitor (Days 7–12)</h3>
+          <span class="toggle-icon">&#9660;</span>
+        </div>
+        <div class="protocol-card-body">
+          <div class="protocol-step">
+            <div class="step-num-circle">6</div>
+            <div class="step-content">
+              <div class="step-title-text">Pancreatic Specification</div>
+              <div class="step-desc-text">Day 7: Switch to DMEM/F12 + 0.5% BSA + 2 µM retinoic acid (RA, critical for pancreatic fate) + 200 ng/mL Noggin (BMP inhibitor) + 0.25 µM SANT-1 (SHH inhibitor) + 500 nM TPB (PKC activator, Stages 7–9 only). Feed daily. By Day 12: &gt;75% PDX1+ pancreatic progenitors expected.</div>
+              <span class="reagent-tag">Retinoic Acid</span><span class="reagent-tag">Noggin</span><span class="reagent-tag">SANT-1</span><span class="reagent-tag">TPB</span>
+              <div class="time-tag">&#9202; Days 7–12</div>
+            </div>
+          </div>
+          <div class="protocol-step">
+            <div class="step-num-circle">7</div>
+            <div class="step-content">
+              <div class="step-title-text">PDX1 Validation</div>
+              <div class="step-desc-text">Day 12: ICC for PDX1 (nuclear, &gt;75%). Co-stain with NKX6.1 (emerging, &gt;15%). qPCR: PDX1 upregulated &gt;100-fold vs iPSC. SOX9 (progenitor marker) should be co-expressed. Passage checkpoint: if PDX1 &lt;60%, consider extending Stage 3 by 1–2 days.</div>
+              <span class="reagent-tag">PDX1</span><span class="reagent-tag">NKX6.1</span><span class="reagent-tag">SOX9</span><span class="reagent-tag">ICC</span><span class="reagent-tag">qPCR</span>
+              <div class="time-tag">&#9202; Day 12 QC</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="protocol-card" id="beta-stage4">
+        <div class="protocol-card-header" onclick="this.parentElement.classList.toggle('open')">
+          <h3><span class="step-badge">STAGE 4</span> Pancreatic Endocrine / 2D→3D Transition (Days 12–20)</h3>
+          <span class="toggle-icon">&#9660;</span>
+        </div>
+        <div class="protocol-card-body">
+          <div class="protocol-step">
+            <div class="step-num-circle">8</div>
+            <div class="step-content">
+              <div class="step-title-text">2D to 3D Aggregate Formation</div>
+              <div class="step-desc-text"><strong>CRITICAL TRANSITION</strong> (Day 12): Dissociate 2D monolayer with TrypLE (37°C, 8 min). Resuspend at 1 × 10⁶ cells/mL in cluster medium: MCDB 131 + 1.5% BSA + 10 µM ALK5 inhibitor II + 1 µM T3 (thyroid hormone) + 20 ng/mL Betacellulin + 100 nM γ-secretase inhibitor XX (Notch inhibitor for endocrine commitment). Seed into ultra-low attachment 6-well plates (Corning) or AggreWell 400 plates for uniform cluster size. Incubate on orbital shaker (70 rpm) in humidified incubator.</div>
+              <span class="reagent-tag">TrypLE</span><span class="reagent-tag">ALK5 Inhibitor II</span><span class="reagent-tag">T3</span><span class="reagent-tag">Betacellulin</span><span class="reagent-tag">γ-Secretase Inhibitor</span><span class="reagent-tag">Ultra-Low Attachment</span>
+              <div class="time-tag">&#9202; Day 12</div>
+            </div>
+          </div>
+          <div class="protocol-step">
+            <div class="step-num-circle">9</div>
+            <div class="step-content">
+              <div class="step-title-text">3D Cluster Formation &amp; Monitoring</div>
+              <div class="step-desc-text">Days 13–14: Clusters should form within 24–48h. Target size: 100–200 µm diameter. Feed every other day by tilting plate, allowing clusters to settle (2 min), then removing 80% spent media and replacing with fresh. Monitor: round morphology, no excessive aggregation (&gt;500 µm), no central necrosis. If clusters are too large: reduce seeding density. If too small: increase density or use AggreWell.</div>
+              <span class="reagent-tag">MCDB 131</span><span class="reagent-tag">Orbital Shaker</span>
+              <div class="time-tag">&#9202; Days 13–16</div>
+            </div>
+          </div>
+          <div class="protocol-step">
+            <div class="step-num-circle">10</div>
+            <div class="step-content">
+              <div class="step-title-text">Endocrine Commitment</div>
+              <div class="step-desc-text">Days 16–20: Continue cluster medium. By Day 20: NKX6.1+ cells &gt;55%, NGN3 transiently expressed (peaks Day 15–16). Chromogranin A (CHGA) marks committed endocrine cells (&gt;40%). Beginning of insulin expression: C-peptide+ cells &gt;25%. Some glucagon+ cells (α-cell precursors) will also emerge (~10–15%).</div>
+              <span class="reagent-tag">NKX6.1</span><span class="reagent-tag">NGN3</span><span class="reagent-tag">CHGA</span><span class="reagent-tag">C-Peptide</span>
+              <div class="time-tag">&#9202; Days 16–20 QC</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="protocol-card" id="beta-stage5">
+        <div class="protocol-card-header" onclick="this.parentElement.classList.toggle('open')">
+          <h3><span class="step-badge">STAGE 5</span> β-Cell Maturation (Days 20–28)</h3>
+          <span class="toggle-icon">&#9660;</span>
+        </div>
+        <div class="protocol-card-body">
+          <div class="protocol-step">
+            <div class="step-num-circle">11</div>
+            <div class="step-content">
+              <div class="step-title-text">Maturation Medium</div>
+              <div class="step-desc-text">Day 20: Switch to maturation medium: MCDB 131 + 1.5% BSA + 1 µM T3 + 10 µM ALK5 inhibitor II + 1 mM N-acetyl cysteine (NAC, antioxidant for β-cell survival) + 10 µM zinc sulfate (ZnSO₄, supports insulin crystallization) + 100 nM GLP-1 receptor agonist (exendin-4, optional for enhanced maturation). Feed every other day. Maintain on orbital shaker (70 rpm).</div>
+              <span class="reagent-tag">T3</span><span class="reagent-tag">ALK5 Inhibitor II</span><span class="reagent-tag">NAC</span><span class="reagent-tag">ZnSO₄</span><span class="reagent-tag">Exendin-4</span>
+              <div class="time-tag">&#9202; Days 20–28</div>
+            </div>
+          </div>
+          <div class="protocol-step">
+            <div class="step-num-circle">12</div>
+            <div class="step-content">
+              <div class="step-title-text">Functional Validation (GSIS)</div>
+              <div class="step-desc-text">Day 28: Perform glucose-stimulated insulin secretion assay. Pre-incubate clusters in Krebs-Ringer buffer + 2.8 mM glucose (1h, 37°C). Sequential challenge: 2.8 mM glucose (basal, 1h) → 16.7 mM glucose (stimulated, 1h) → 30 mM KCl (depolarization, 30 min). Collect supernatants, measure insulin/C-peptide by ELISA. Expected stimulation index (SI): 2.0–3.0.</div>
+              <span class="reagent-tag">Krebs-Ringer Buffer</span><span class="reagent-tag">Glucose</span><span class="reagent-tag">KCl</span><span class="reagent-tag">Insulin ELISA</span>
+              <div class="time-tag">&#9202; Day 28 Functional</div>
+            </div>
+          </div>
+          <div class="protocol-step">
+            <div class="step-num-circle">13</div>
+            <div class="step-content">
+              <div class="step-title-text">Final QC Panel</div>
+              <div class="step-desc-text">Day 28: Flow cytometry for C-Peptide/NKX6.1 co-expression (&gt;65% target). ICC: INS+/NKX6.1+ co-localization, PDX1, MAFA (mature β-cell marker). qPCR panel: INS, GCK, MAFA, NKX6.1, PDX1, SLC30A8, ABCC8, KCNJ11. Calcium imaging: Fluo-4 AM oscillations with glucose stimulation. Cryopreserve validated clusters in mFreSR for future use.</div>
+              <span class="reagent-tag">Flow Cytometry</span><span class="reagent-tag">ICC</span><span class="reagent-tag">qPCR</span><span class="reagent-tag">Calcium Imaging</span>
+              <div class="time-tag">&#9202; Day 28–30</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SECTION 02 — α-ISLET CELL DIFFERENTIATION
+     ══════════════════════════════════════════════ -->
+<div class="section reveal" id="alpha">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">02</div>
+      <div class="section-label">α-Cells</div>
+    </div>
+    <div class="section-content">
+      <h2>iPSC to α-Islet Cell (Glucagon-Secreting) Protocol</h2>
+      <p>A modified protocol generating glucagon-secreting α-like cells from the same pancreatic progenitor population. The key modification occurs at Stage 4, where BMP4 and Wnt activation promote α-cell specification over β-cell fate. α-cells are critical for modeling glucagon dysregulation in Type 2 diabetes and for studying islet cell interactions.</p>
+
+      <div class="protocol-summary">
+        <div class="ps-item"><div class="ps-value">25</div><div class="ps-label">Days to Maturity</div></div>
+        <div class="ps-item"><div class="ps-value">&gt;45%</div><div class="ps-label">GCG+ Cells</div></div>
+        <div class="ps-item"><div class="ps-value">ARX+/BRN4+</div><div class="ps-label">α-Cell Markers</div></div>
+        <div class="ps-item"><div class="ps-value">2</div><div class="ps-label">QC Checkpoints</div></div>
+      </div>
+
+      <div class="protocol-card open" id="alpha-stage1-3">
+        <div class="protocol-card-header" onclick="this.parentElement.classList.toggle('open')">
+          <h3><span class="step-badge">STAGES 1–3</span> Shared Pancreatic Progenitor (Days 0–12)</h3>
+          <span class="toggle-icon">&#9660;</span>
+        </div>
+        <div class="protocol-card-body">
+          <div class="protocol-step">
+            <div class="step-num-circle">1</div>
+            <div class="step-content">
+              <div class="step-title-text">Common Differentiation Path</div>
+              <div class="step-desc-text">Follow Stages 1–3 identically to the β-cell protocol above. Generate SOX17+/FOXA2+ definitive endoderm → HNF4α+ primitive gut tube → PDX1+ pancreatic progenitors by Day 12. QC checkpoints are identical: &gt;90% SOX17+ (Day 3), &gt;75% PDX1+ (Day 12).</div>
+              <span class="reagent-tag">See β-Cell Stages 1–3</span>
+              <div class="time-tag">&#9202; Days 0–12</div>
+            </div>
+          </div>
+          <div class="protocol-step">
+            <div class="step-num-circle">2</div>
+            <div class="step-content">
+              <div class="step-title-text">Stage 3 α-Cell Diversion QC</div>
+              <div class="step-desc-text">At Day 12, confirm NKX6.1 is low (&lt;15%) — important because high NKX6.1 at this stage biases toward β-cell fate. If NKX6.1 &gt;20%, consider earlier Stage 4 transition (Day 11) to capture more ARX-competent progenitors.</div>
+              <span class="reagent-tag">NKX6.1</span><span class="reagent-tag">ARX</span><span class="reagent-tag">ICC</span>
+              <div class="time-tag">&#9202; Day 12 QC</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="protocol-card" id="alpha-stage4">
+        <div class="protocol-card-header" onclick="this.parentElement.classList.toggle('open')">
+          <h3><span class="step-badge">STAGE 4</span> α-Cell Endocrine Specification (Days 12–18)</h3>
+          <span class="toggle-icon">&#9660;</span>
+        </div>
+        <div class="protocol-card-body">
+          <div class="protocol-step">
+            <div class="step-num-circle">3</div>
+            <div class="step-content">
+              <div class="step-title-text">2D→3D Transition with α-Bias</div>
+              <div class="step-desc-text">Day 12: Dissociate and form 3D aggregates as per β-cell protocol, but use α-specification medium: MCDB 131 + 1.5% BSA + 10 µM ALK5 inhibitor II + 50 ng/mL BMP4 (promotes α-cell fate) + 3 µM CHIR99021 (WNT activation for α-specification) + 100 nM γ-secretase inhibitor. Omit T3 and Betacellulin (which favor β-cell fate). Seed in ultra-low attachment plates, orbital shaker.</div>
+              <span class="reagent-tag">BMP4</span><span class="reagent-tag">CHIR99021</span><span class="reagent-tag">ALK5 Inhibitor II</span><span class="reagent-tag">γ-Secretase Inhibitor</span>
+              <div class="time-tag">&#9202; Day 12</div>
+            </div>
+          </div>
+          <div class="protocol-step">
+            <div class="step-num-circle">4</div>
+            <div class="step-content">
+              <div class="step-title-text">α-Lineage Commitment</div>
+              <div class="step-desc-text">Days 13–18: Feed every other day. Monitor for ARX expression (α-cell transcription factor, by Day 15). By Day 18: ARX+/BRN4+ &gt;35%, GCG (glucagon) expression emerging (&gt;15%). NKX6.1 should remain low (&lt;10%) — this confirms α-cell vs β-cell specification. If NKX6.1 rises &gt;20%: increase BMP4 to 100 ng/mL.</div>
+              <span class="reagent-tag">ARX</span><span class="reagent-tag">BRN4</span><span class="reagent-tag">GCG</span><span class="reagent-tag">MCDB 131</span>
+              <div class="time-tag">&#9202; Days 13–18</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="protocol-card" id="alpha-stage5">
+        <div class="protocol-card-header" onclick="this.parentElement.classList.toggle('open')">
+          <h3><span class="step-badge">STAGE 5</span> α-Cell Maturation (Days 18–25)</h3>
+          <span class="toggle-icon">&#9660;</span>
+        </div>
+        <div class="protocol-card-body">
+          <div class="protocol-step">
+            <div class="step-num-circle">5</div>
+            <div class="step-content">
+              <div class="step-title-text">Maturation</div>
+              <div class="step-desc-text">Day 18: Switch to maturation medium: MCDB 131 + 1.5% BSA + 1 mM NAC + 10 µM zinc sulfate. Omit T3 (not required for α-cells). Maintain 3D suspension on orbital shaker. Feed every other day. By Day 25: GCG+ cells &gt;45%, co-expressing ARX and IRX2.</div>
+              <span class="reagent-tag">NAC</span><span class="reagent-tag">ZnSO₄</span>
+              <div class="time-tag">&#9202; Days 18–25</div>
+            </div>
+          </div>
+          <div class="protocol-step">
+            <div class="step-num-circle">6</div>
+            <div class="step-content">
+              <div class="step-title-text">Functional Validation</div>
+              <div class="step-desc-text">Day 25: Perform amino acid–stimulated glucagon secretion assay. Pre-incubate in Krebs-Ringer buffer (1h). Challenge: low glucose (1 mM, stimulates glucagon) → high glucose (16.7 mM, suppresses glucagon). Measure glucagon by ELISA. Expected: &gt;2-fold glucagon release at low vs high glucose. Also assess: arginine stimulation (10 mM, robust glucagon release).</div>
+              <span class="reagent-tag">Glucagon ELISA</span><span class="reagent-tag">Arginine</span><span class="reagent-tag">Krebs-Ringer</span>
+              <div class="time-tag">&#9202; Day 25 Functional</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WORKFLOW DECISION TREE -->
+<div class="workflow-strip">
+  <div class="workflow-inner">
+    <h3>Pancreatic Differentiation Decision Tree</h3>
+    <div class="workflow-steps">
+      <div class="workflow-step">
+        <div class="step-number">Step 1</div>
+        <div class="step-title">iPSC QC</div>
+        <div class="step-detail">Pluripotency markers, karyotype, mycoplasma</div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-number">Step 2</div>
+        <div class="step-title">Endoderm</div>
+        <div class="step-detail">Activin A + CHIR, SOX17/FOXA2 validation</div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-number">Step 3</div>
+        <div class="step-title">Foregut</div>
+        <div class="step-detail">RA + Noggin, PDX1 checkpoint</div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-number">Step 4</div>
+        <div class="step-title">2D→3D Split</div>
+        <div class="step-detail">β-path (T3 + Betacellulin) vs α-path (BMP4 + CHIR)</div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-number">Step 5</div>
+        <div class="step-title">Maturation</div>
+        <div class="step-detail">GSIS (β) or amino acid–stimulated glucagon (α) validation</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-name">Armin Bayati, PhD</div>
+        <div class="footer-role">Research Fellow &middot; Harvard Medical School &amp; Massachusetts General Hospital</div>
+      </div>
+      <div class="footer-links-grid">
+        <div class="footer-col">
+          <div class="footer-col-title">Research</div>
+          <a href="ipscs.html">iPSC Models</a>
+          <a href="protocols.html">Protocols</a>
+          <a href="biologics.html">Biologics</a>
+          <a href="drug-discovery.html">Drug Discovery</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Connect</div>
+          <a href="https://scholar.google.com/citations?user=MIW8P2MAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+          <a href="https://linkedin.com/in/arminbayati" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/abayatibrain" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://orcid.org/0000-0002-5960-0479" target="_blank" rel="noopener">ORCID</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Contact</div>
+          <a href="contact.html#chat">Reach Out to Armin</a>
+          <a href="contact.html">Contact Page</a>
+          <a href="publications.html">Publications</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Armin Bayati. All rights reserved.</div>
+  </div>
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+<script>
+(function() {
+  var searchIndex = [
+    {page:'index.html', title:'Home — Overview', category:'Main', section:'',
+     keywords:'armin bayati phd neuroscience cell biology drug discovery harvard medical school mass general brigham research fellow translational science',
+     description:'Overview of research portfolio spanning neurodegeneration, drug discovery, and translational science.'},
+    {page:'ipscs.html', title:'iPSC-Derived Neurons', category:'Research', section:'',
+     keywords:'ipsc induced pluripotent stem cells dopaminergic neurons cortical neurons differentiation disease modeling parkinson lewy body dual-hit mea calcium imaging electrophysiology co-culture microglia astrocyte',
+     description:'iPSC differentiation protocols for dopaminergic and cortical neurons, disease modeling, and co-culture systems.'},
+    {page:'cardiomyocytes.html', title:'iPSC-Derived Cardiomyocytes', category:'Research', section:'',
+     keywords:'cardiomyocyte cardiac ipsc beating heart safety pharmacology calcium transients field potential duration impedance sarcomere contractility cardiotoxicity herg',
+     description:'iPSC-cardiomyocyte assays for cardiac safety pharmacology and cardiotoxicity screening.'},
+    {page:'protocols.html', title:'iPSC Differentiation Protocols', category:'Research', section:'',
+     keywords:'protocols differentiation dopaminergic cortical ngn2 cardiomyocyte ipsc step-by-step methods procedure reagents timeline maturation',
+     description:'Interactive step-by-step protocols for dopaminergic, cortical, NGN2+, and cardiomyocyte iPSC differentiation.'},
+     keywords:'pancreatic protocol beta cell islet alpha cell insulin glucagon gsis glucose-stimulated secretion differentiation ipsc endoderm',
+     description:'Detailed protocols for pancreatic β-islet and α-islet cell differentiation from human iPSCs with functional endpoints.'},
+     keywords:'beta cell islet insulin c-peptide nkx6.1 pdx1 mafa 2d to 3d transition clusters glucose-stimulated insulin secretion gsis',
+     description:'28-day protocol for generating functional insulin-secreting β-like cells from human iPSCs.'},
+     keywords:'alpha cell islet glucagon gcg arx brn4 irx2 amino acid stimulation type 2 diabetes',
+     description:'Protocol for glucagon-secreting α-cell generation with amino acid-stimulated secretion validation.'},
+    {page:'endoderm-protocols.html', title:'Endoderm & Ectodermal Protocols', category:'Research', section:'',
+     keywords:'endoderm ectodermal hepatocyte intestinal kidney neural patterning directed differentiation',
+     description:'Protocols for endodermal and ectodermal cell type differentiation.'},
+    {page:'assay-protocols.html', title:'Assay & Molecular Protocols', category:'Research', section:'',
+     keywords:'assay protocol molecular biology techniques western blot flow cytometry immunocytochemistry qpcr',
+     description:'Bench-ready protocols for molecular and cellular assays.'},
+    {page:'publications.html', title:'Publications', category:'Academic', section:'',
+     keywords:'peer-reviewed papers citations journal articles nature neuroscience lancet science translational medicine acs chemical biology',
+     description:'25+ peer-reviewed publications with 1,300+ citations across neuroscience, virology, and cell biology.'},
+    {page:'vc-portfolio.html', title:'Portfolio & VC', category:'Industry', section:'',
+     keywords:'venture capital portfolio management drug discovery translational science biopharma partnerships alliance management',
+     description:'Translational science leadership, biopharma partnerships, and scientific portfolio management experience.'},
+    {page:'contact.html', title:'Contact', category:'Connect', section:'',
+     keywords:'email linkedin github orcid google scholar contact collaboration',
+     description:'Contact information, LinkedIn, and academic profiles.'},
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('searchInput');
+  var resultsEl = document.getElementById('searchResults');
+  var activeIdx = -1;
+
+  function openSearch() {
+    overlay.classList.add('active');
+    requestAnimationFrame(function(){ overlay.classList.add('fade-in'); });
+    input.value = '';
+    input.focus();
+    renderResults('');
+    activeIdx = -1;
+  }
+
+  function closeSearch() {
+    overlay.classList.remove('fade-in');
+    setTimeout(function(){ overlay.classList.remove('active'); }, 200);
+  }
+
+  function escapeRegex(s) {
+    return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function highlight(text, terms) {
+    if (!terms.length) return text;
+    var pattern = terms.map(escapeRegex).join('|');
+    var regex = new RegExp('(' + pattern + ')', 'gi');
+    return text.replace(regex, '<mark>$1</mark>');
+  }
+
+  function fuzzyMatch(str, query) {
+    var strIdx = 0;
+    for (var i = 0; i < query.length; i++) {
+      var found = false;
+      while (strIdx < str.length) {
+        if (str[strIdx].toLowerCase() === query[i].toLowerCase()) {
+          strIdx++;
+          found = true;
+          break;
+        }
+        strIdx++;
+      }
+      if (!found) return false;
+    }
+    return true;
+  }
+
+  function renderResults(query) {
+    var terms = query.toLowerCase().trim().split(/\s+/).filter(function(t){ return t.length > 1; });
+    var scored = [];
+
+    searchIndex.forEach(function(item) {
+      if (!terms.length) { scored.push({item: item, score: 0}); return; }
+      var score = 0;
+      var titleLow = item.title.toLowerCase();
+      var kwLow = item.keywords;
+      var descLow = (item.description || '').toLowerCase();
+      var sectionLow = (item.section || '').toLowerCase();
+
+      terms.forEach(function(t) {
+        if (titleLow.indexOf(t) !== -1) score += 15;
+        if (sectionLow.indexOf(t) !== -1) score += 8;
+        if (descLow.indexOf(t) !== -1) score += 5;
+        if (kwLow.indexOf(t) !== -1) score += 3;
+        if (score === 0 && t.length > 2 && fuzzyMatch(titleLow, t)) score += 2;
+      });
+
+      var allMatch = terms.every(function(t) {
+        return titleLow.indexOf(t) !== -1 || kwLow.indexOf(t) !== -1 || descLow.indexOf(t) !== -1;
+      });
+      if (allMatch && terms.length > 1) score += 10;
+
+      if (score > 0) scored.push({item: item, score: score});
+    });
+
+    scored.sort(function(a, b){ return b.score - a.score; });
+    scored = scored.slice(0, 12);
+
+    if (terms.length && !scored.length) {
+      resultsEl.innerHTML = '<div class="search-empty"><span>&#128269;</span>No results for &ldquo;' + query.replace(/</g, '&lt;') + '&rdquo;<div class="search-suggestion">Try broader terms or check spelling</div></div>';
+      return;
+    }
+
+    var html = '';
+    scored.forEach(function(s, i) {
+      var item = s.item;
+      var title = terms.length ? highlight(item.title, terms) : item.title;
+      var desc = item.description || '';
+      if (terms.length && desc) desc = highlight(desc, terms);
+
+      var sectionBadge = item.section ? '<span class="search-section-badge">' + item.section + '</span>' : '';
+
+      html += '<a class="search-result' + (i === 0 && terms.length ? ' active' : '') + '" href="' + item.page + '">';
+      html += '<div class="search-result-meta"><span class="search-result-page">' + item.category + '</span>' + sectionBadge + '</div>';
+      html += '<div class="search-result-title">' + title + '</div>';
+      html += '<div class="search-result-desc">' + desc + '</div></a>';
+    });
+
+    resultsEl.innerHTML = html;
+    activeIdx = terms.length ? 0 : -1;
+  }
+
+  function setActive(idx) {
+    var items = resultsEl.querySelectorAll('.search-result');
+    if (!items.length) return;
+    items.forEach(function(el){ el.classList.remove('active'); });
+    if (idx < 0) idx = items.length - 1;
+    if (idx >= items.length) idx = 0;
+    activeIdx = idx;
+    items[idx].classList.add('active');
+    items[idx].scrollIntoView({block: 'nearest'});
+  }
+
+  if (input) {
+    input.addEventListener('input', function(){ renderResults(this.value); });
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowDown') { e.preventDefault(); setActive(activeIdx + 1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(activeIdx - 1); }
+      else if (e.key === 'Enter') {
+        e.preventDefault();
+        var active = resultsEl.querySelector('.search-result.active');
+        if (active) window.location.href = active.href;
+      }
+    });
+  }
+
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeSearch();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
+    if (e.key === 'Escape' && overlay.classList.contains('active')) closeSearch();
+    if (e.key === '/' && !overlay.classList.contains('active') && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+      e.preventDefault(); openSearch();
+    }
+  });
+
+  document.querySelectorAll('.search-toggle').forEach(function(btn){ btn.addEventListener('click', openSearch); });
+})()
+</script>
+
+</body>
+</html>
