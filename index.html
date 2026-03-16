@@ -2560,13 +2560,13 @@ document.addEventListener('click', function(e){
     <div class="stats-live-bar">
       <div class="stats-live-item">
         <div class="stats-live-dot"></div>
-        <span><span class="stats-live-count" id="live-visitors">—</span> visiting now</span>
+        <span>Live</span>
       </div>
       <div class="stats-live-item">
-        <span><span class="stats-live-count" id="live-pageviews">—</span> views today</span>
+        <span><span class="stats-live-count" id="live-total">—</span> total pageviews</span>
       </div>
       <div class="stats-live-item">
-        <span><span class="stats-live-count" id="live-countries">—</span> countries this month</span>
+        <span><span class="stats-live-count" id="live-today">—</span> views today</span>
       </div>
     </div>
   </div>
@@ -3439,33 +3439,31 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     observer.observe(statsSection);
   }
 
-  // ── LIVE VISITOR ANALYTICS (GoatCounter) ──
-  // Lightweight, privacy-friendly analytics
-  // To activate: create a free GoatCounter account at goatcounter.com
-  // and replace 'arminbayati' with your site code
+  // ── LIVE ANALYTICS (GoatCounter) ──
+  // Uses arminbayati.goatcounter.com (arminbayati.org)
   function fetchLiveAnalytics() {
-    const visitorEl = document.getElementById('live-visitors');
-    const pageviewEl = document.getElementById('live-pageviews');
-    const countriesEl = document.getElementById('live-countries');
+    const totalEl = document.getElementById('live-total');
+    const todayEl = document.getElementById('live-today');
 
-    // Simulated live data with realistic variance
-    // Replace this block with actual GoatCounter API calls once account is set up:
-    // fetch('https://YOURSITE.goatcounter.com/counter//.json')
-    function simulateLive() {
-      const hour = new Date().getHours();
-      // Traffic pattern: peaks at 10am-2pm and 7-9pm
-      const baseTraffic = (hour >= 10 && hour <= 14) ? 8 : (hour >= 19 && hour <= 21) ? 6 : 3;
-      const visitors = baseTraffic + Math.floor(Math.random() * 4);
-      const views = 120 + Math.floor(Math.random() * 80) + (hour * 12);
-      const countries = 14 + Math.floor(Math.random() * 6);
+    // Fetch total pageviews across all pages
+    fetch('https://arminbayati.goatcounter.com/counter//TOTAL.json')
+      .then(r => r.json())
+      .then(data => {
+        if (totalEl && data.count) totalEl.textContent = data.count;
+      })
+      .catch(() => { if (totalEl) totalEl.textContent = '—'; });
 
-      if (visitorEl) visitorEl.textContent = visitors;
-      if (pageviewEl) pageviewEl.textContent = views.toLocaleString();
-      if (countriesEl) countriesEl.textContent = countries;
-    }
-
-    simulateLive();
-    setInterval(simulateLive, 30000); // refresh every 30s
+    // Fetch today's count using the no_events counter for the homepage
+    fetch('https://arminbayati.goatcounter.com/counter//.json')
+      .then(r => r.json())
+      .then(data => {
+        if (todayEl && data.count_unique) {
+          todayEl.textContent = data.count_unique;
+        } else if (todayEl && data.count) {
+          todayEl.textContent = data.count;
+        }
+      })
+      .catch(() => { if (todayEl) todayEl.textContent = '—'; });
   }
 
   // Delay analytics fetch until section is visible
@@ -3482,5 +3480,11 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   }
 })();
 </script>
+
+<!-- GoatCounter tracking -->
+<script data-goatcounter="https://arminbayaticom.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script data-goatcounter="https://arminbayati.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
