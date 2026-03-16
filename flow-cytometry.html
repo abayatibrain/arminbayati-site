@@ -403,7 +403,9 @@ nav {
 .figure-frame {
   border: 1px solid var(--rule);
   border-radius: 8px;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
   background: #fff;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.03);
 }
@@ -682,76 +684,6 @@ nav {
   border-bottom-color: rgba(15,20,25,0.08);
 }
 
-
-<!-- ═══ NEW KEYWORD SECTIONS ═══ -->
-<div class="section reveal">
-  <div class="section-header">
-    <div class="section-index">
-      <div class="section-number">+</div>
-      <div class="section-label">Methods</div>
-    </div>
-    <div class="section-content">
-      <h2>Detailed Methodology &amp; Techniques</h2>
-      <p>Comprehensive descriptions of key experimental techniques, assay platforms, and analytical methods referenced throughout this page.</p>
-
-      <div class="subsection" id="myeloid">
-        <div class="subsection-label">Myeloid Panels</div>
-        <p>I design and run <strong>myeloid-focused flow cytometry panels</strong> for characterizing monocytes, macrophages, dendritic cells, and microglia in blood, tissue, and iPSC-derived models. Panels include <strong>CD14, CD16, CD11b, CD11c, CD68, CD163, CD206, HLA-DR, CX3CR1</strong> with gating strategies to distinguish classical, intermediate, and non-classical monocyte subsets. These panels are critical for neuroinflammation studies and immuno-oncology characterization.</p>
-        
-        
-        <div class="chart-container">
-          <div class="chart-title">Fig. — Myeloid Subset Distribution</div>
-          <div class="chart-subtitle">Relative frequencies of monocyte/macrophage subsets in PBMC vs brain tissue</div>
-          <canvas id="myeloidChart" height="260"></canvas>
-          <div class="chart-note">12-color flow panel. BD LSRFortessa. n=6 donors.</div>
-        </div>
-        
-      </div>
-
-      <div class="subsection" id="ki67">
-        <div class="subsection-label">Ki67 Proliferation</div>
-        <p>I quantify <strong>cellular proliferation</strong> using intracellular Ki67 staining combined with DNA content (DAPI/PI) for simultaneous proliferation and cell cycle analysis. This approach identifies cells in G0 (Ki67−/2N), G1 (Ki67+/2N), S (Ki67+/>2N), and G2/M (Ki67+/4N) phases. Applied to T-cell expansion post-stimulation, tumor cell proliferation under drug treatment, and iPSC-CM cell cycle exit during maturation.</p>
-        
-        
-        <div class="chart-container">
-          <div class="chart-title">Fig. — Ki67+ Proliferation Index</div>
-          <div class="chart-subtitle">Ki67+ fraction across T-cell expansion timepoints post anti-CD3/CD28 stimulation</div>
-          <canvas id="ki67Chart" height="260"></canvas>
-          <div class="chart-note">Intracellular Ki67 + DAPI. BD LSRFortessa. n=4 donors.</div>
-        </div>
-        
-      </div>
-
-      <div class="subsection" id="lymph-node">
-        <div class="subsection-label">Lymph Node &amp; Spleen Analysis</div>
-        <p>I process and analyze <strong>lymph node and spleen tissue</strong> from mouse models for comprehensive immune profiling. Tissue is mechanically dissociated, filtered, and stained with multi-parameter panels covering <strong>T cells, B cells, NK cells, dendritic cells, macrophages</strong>, and germinal center populations. These panels characterize immune responses in LRRK2 mouse models of Parkinson's disease and in tumor-bearing mice for immuno-oncology studies.</p>
-        
-        
-        <div class="chart-container">
-          <div class="chart-title">Fig. — Lymph Node Immune Composition</div>
-          <div class="chart-subtitle">Major immune cell populations in WT vs LRRK2-G2019S mouse lymph nodes</div>
-          <canvas id="lnChart" height="260"></canvas>
-          <div class="chart-note">16-color spectral flow. Cytek Aurora. n=8 mice per genotype.</div>
-        </div>
-        
-      </div>
-
-      <div class="subsection" id="lrrk2">
-        <div class="subsection-label">LRRK2 Immune Profiling</div>
-        <p>I perform comprehensive <strong>immune profiling of LRRK2 mutant mice</strong> (G2019S knock-in) compared to wild-type controls. LRRK2 is highly expressed in immune cells and its gain-of-function mutation alters immune cell function. I characterize <strong>T-cell activation, myeloid polarization, cytokine secretion profiles</strong>, and tissue-resident immune populations across spleen, lymph nodes, and brain. These studies connect peripheral immune dysregulation to neuroinflammation in Parkinson's disease models.</p>
-        
-        
-        <div class="chart-container">
-          <div class="chart-title">Fig. — LRRK2 vs WT: Immune Cell Frequencies</div>
-          <div class="chart-subtitle">Splenic immune cell populations in LRRK2-G2019S vs wild-type mice</div>
-          <canvas id="lrrk2Chart" height="260"></canvas>
-          <div class="chart-note">Spectral flow cytometry. Cytek Aurora. n=8 per genotype. *p<0.05, **p<0.01.</div>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-</div>
 
 .workflow-strip {
   background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #0f1419 100%);
@@ -1560,6 +1492,32 @@ document.addEventListener('click', function(e){
 });
 </script>
 
+<script>
+// Scale wide Plotly iframes to fit their container
+(function(){
+  function scaleFigs(){
+    document.querySelectorAll('.scaled-fig-wrap').forEach(function(wrap){
+      var nw = +wrap.dataset.nativeW;
+      var nh = +wrap.dataset.nativeH;
+      var frame = wrap.closest('.figure-frame');
+      var availW = frame.clientWidth - 2; // account for border
+      var s = Math.min(1, availW / nw);
+      wrap.style.width = nw + 'px';
+      wrap.style.transform = 'scale(' + s + ')';
+      wrap.style.transformOrigin = 'top left';
+      wrap.style.height = nh + 'px';
+      wrap.style.overflow = 'hidden';
+      // Set the outer wrapper height to the scaled height
+      var outer = wrap.closest('.scaled-fig-outer');
+      if(outer) { outer.style.height = Math.ceil(nh * s) + 'px'; }
+    });
+  }
+  scaleFigs();
+  window.addEventListener('resize', scaleFigs);
+  window.addEventListener('load', scaleFigs);
+})();
+</script>
+
 <!-- SITE SEARCH OVERLAY -->
 <div class="search-overlay" id="searchOverlay">
   <div class="search-modal">
@@ -1594,6 +1552,8 @@ document.addEventListener('click', function(e){
     <a class="tag" href="#ki67">Ki67 Proliferation</a>
     <a class="tag" href="#lymph-node">Lymph Node &amp; Spleen</a>
     <a class="tag" href="#lrrk2">WT vs LRRK2</a>
+    <a class="tag" href="#protocols">FACS Protocols</a>
+    <a class="tag" href="#facs-sorting">BD FACSAria Sorting</a>
   </div>
 </div>
 
@@ -1629,10 +1589,14 @@ document.addEventListener('click', function(e){
 </div>
 
 <div class="figure-container">
-  <div class="figure-frame">
-    <iframe src="interactive-figures/LN_Panel_1_bar_charts_3-5-24.html" height="900" loading="lazy"></iframe>
+  <div class="figure-frame" style="overflow: hidden;">
+    <div class="scaled-fig-outer" style="overflow: hidden;">
+      <div class="scaled-fig-wrap" data-native-w="1400" data-native-h="1260">
+        <iframe src="interactive-figures/LN_Panel_1_bar_charts_3-5-24.html" width="1400" height="1260" style="border: none; display: block;" loading="lazy"></iframe>
+      </div>
+    </div>
     <div class="figure-caption-bar">
-Lymph Node — Panel 1 cell population frequencies by strain and treatment. Hover for exact values; individual data points shown.
+      <span class="fig-label">Fig 1</span> Lymph Node — Panel 1 cell population frequencies by strain and treatment. Hover for exact values; individual data points shown.
     </div>
   </div>
 </div>
@@ -1655,10 +1619,14 @@ Lymph Node — Panel 1 cell population frequencies by strain and treatment. Hove
 </div>
 
 <div class="figure-container">
-  <div class="figure-frame">
-    <iframe src="interactive-figures/LN_Panel_3_histograms_3-5-24.html" height="900" loading="lazy"></iframe>
+  <div class="figure-frame" style="overflow: hidden;">
+    <div class="scaled-fig-outer" style="overflow: hidden;">
+      <div class="scaled-fig-wrap" data-native-w="1400" data-native-h="1000">
+        <iframe src="interactive-figures/LN_Panel_3_histograms_3-5-24.html" width="1400" height="1000" style="border: none; display: block;" loading="lazy"></iframe>
+      </div>
+    </div>
     <div class="figure-caption-bar">
-Lymph Node — Panel 3 myeloid marker histograms. Click legend entries to toggle individual samples on/off.
+      <span class="fig-label">Fig 2</span> Lymph Node — Panel 3 myeloid marker histograms. Click legend entries to toggle individual samples on/off.
     </div>
   </div>
 </div>
@@ -1680,11 +1648,305 @@ Lymph Node — Panel 3 myeloid marker histograms. Click legend entries to toggle
   </div>
 </div>
 
-<div class="figure-container">
-  <div class="figure-frame">
-    <iframe src="interactive-figures/Spleen_Panel_1_FSC_SSC_4-17-24.html" height="650" loading="lazy"></iframe>
+<div class="figure-container" style="max-width: 760px; margin: 0 auto;">
+  <div class="figure-frame" style="overflow: hidden;">
+    <div style="width: 100%; overflow: hidden; display: flex; justify-content: center;">
+      <div style="width: 700px; max-width: 100%; transform-origin: top center;">
+        <iframe src="interactive-figures/Spleen_Panel_1_FSC_SSC_4-17-24.html" width="700" height="600" style="border: none; display: block; max-width: 100%;" loading="lazy"></iframe>
+      </div>
+    </div>
     <div class="figure-caption-bar">
-Spleen — Panel 1 FSC vs SSC scatter plot. Click-drag to zoom into gating regions.
+      <span class="fig-label">Fig 3</span> Spleen — Panel 1 FSC vs SSC scatter plot. Click-drag to zoom into gating regions.
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ SECTION 4: FLOW CYTOMETRY PROTOCOLS ═══════ -->
+
+<div class="section reveal" id="protocols">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">04</div>
+      <div class="section-label">Protocols</div>
+    </div>
+    <div class="section-content">
+      <h2>Flow Cytometry Protocols &amp; Equipment</h2>
+      <p>
+        Detailed protocols for surface and intracellular flow cytometry staining, as well as fluorescence-activated cell sorting (FACS) on the <strong>BD FACSAria III</strong>. All analytical acquisition is performed on the <strong>BD LSRFortessa</strong> (4-laser, up to 18-parameter configuration) or the <strong>Cytek Aurora</strong> spectral cytometer (5-laser, full-spectrum). Sorting is performed on the <strong>BD FACSAria III</strong> equipped with 4 lasers (405 nm, 488 nm, 561 nm, 640 nm), 100 µm nozzle, and 4-way sorting capability.
+      </p>
+      <div class="findings">
+        <div class="finding">
+          <div class="finding-value">BD LSRFortessa</div>
+          <div class="finding-label">4-laser analytical cytometer (405/488/561/640 nm) — up to 18 parameters</div>
+        </div>
+        <div class="finding">
+          <div class="finding-value">BD FACSAria III</div>
+          <div class="finding-label">4-laser high-speed sorter — 4-way sorting, 100 µm nozzle, biosafety containment</div>
+        </div>
+        <div class="finding">
+          <div class="finding-value">Cytek Aurora</div>
+          <div class="finding-label">5-laser spectral cytometer — full-spectrum unmixing for high-parameter panels</div>
+        </div>
+        <div class="finding">
+          <div class="finding-value">FlowJo v10</div>
+          <div class="finding-label">Analysis software — compensation, gating, t-SNE/UMAP dimensionality reduction</div>
+        </div>
+      </div>
+
+      <!-- ── Surface Staining Protocol ── -->
+      <div class="subsection" id="surface-staining">
+        <div class="subsection-label">Surface Staining Protocol (Standard Flow Cytometry)</div>
+        <p>This is my standard multi-color surface staining protocol used for immunophenotyping lymphocyte and myeloid populations from mouse tissue (spleen, lymph node) or human PBMCs. All steps performed on ice or at 4 °C unless otherwise noted.</p>
+
+        <div style="background: var(--card); border: 1px solid var(--rule); border-radius: 8px; padding: 28px 28px 20px; margin: 24px 0 32px; max-width: 760px;">
+          <div style="font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px;">Protocol — Surface Staining for Flow Cytometry</div>
+
+          <div style="margin-bottom: 20px;">
+            <div style="font-weight: 500; font-size: 13px; color: var(--ink); margin-bottom: 6px;">1. Tissue Dissociation &amp; Single-Cell Suspension</div>
+            <div style="font-size: 13.5px; color: #555; line-height: 1.7; padding-left: 16px;">
+              Harvest spleen or lymph nodes into ice-cold RPMI + 2% FBS. Mechanically dissociate tissue through a <strong>70 µm cell strainer</strong> using a syringe plunger. Rinse strainer with 5 mL FACS buffer (PBS + 2% FBS + 2 mM EDTA). For spleen: lyse red blood cells with <strong>ACK lysis buffer</strong> (2 min, RT), then quench with 10 mL FACS buffer. Centrifuge 400 × g, 5 min, 4 °C. Resuspend in FACS buffer and count viable cells using trypan blue exclusion.
+            </div>
+          </div>
+
+          <div style="margin-bottom: 20px;">
+            <div style="font-weight: 500; font-size: 13px; color: var(--ink); margin-bottom: 6px;">2. Viability Staining</div>
+            <div style="font-size: 13.5px; color: #555; line-height: 1.7; padding-left: 16px;">
+              Aliquot <strong>1 × 10⁶ cells</strong> per condition into 96-well V-bottom plate. Wash 1× with PBS (no protein). Resuspend in 100 µL PBS containing <strong>Zombie Aqua™ fixable viability dye</strong> (1:500 dilution). Incubate <strong>15 min, RT, protected from light</strong>. Wash 2× with FACS buffer.
+            </div>
+          </div>
+
+          <div style="margin-bottom: 20px;">
+            <div style="font-weight: 500; font-size: 13px; color: var(--ink); margin-bottom: 6px;">3. Fc Receptor Blockade</div>
+            <div style="font-size: 13.5px; color: #555; line-height: 1.7; padding-left: 16px;">
+              Resuspend cell pellet in 50 µL FACS buffer containing <strong>anti-CD16/CD32 Fc block</strong> (clone 2.4G2, 1:100) for mouse cells, or <strong>Human TruStain FcX™</strong> (1:20) for human PBMCs. Incubate <strong>10 min on ice</strong>. Do not wash — proceed directly to antibody staining.
+            </div>
+          </div>
+
+          <div style="margin-bottom: 20px;">
+            <div style="font-weight: 500; font-size: 13px; color: var(--ink); margin-bottom: 6px;">4. Surface Antibody Cocktail</div>
+            <div style="font-size: 13.5px; color: #555; line-height: 1.7; padding-left: 16px;">
+              Prepare antibody master mix at pre-titrated concentrations in FACS buffer. Add 50 µL antibody cocktail directly to cells (final volume 100 µL). <strong>Typical Panel 1 (Lymphoid):</strong> CD45-BV785, CD3-BV421, CD4-FITC, CD8-PE-Cy7, CD19-APC, NK1.1-PE, CD25-BV605, CD44-APC-Cy7, CD62L-PerCP-Cy5.5. <strong>Typical Panel 3 (Myeloid):</strong> CD45-BV785, CD11b-BV421, CD11c-PE, F4/80-APC, Ly6G-FITC, Ly6C-PerCP-Cy5.5, MHC-II-BV605. Incubate <strong>30 min on ice, protected from light</strong>.
+            </div>
+          </div>
+
+          <div style="margin-bottom: 20px;">
+            <div style="font-weight: 500; font-size: 13px; color: var(--ink); margin-bottom: 6px;">5. Wash &amp; Fix</div>
+            <div style="font-size: 13.5px; color: #555; line-height: 1.7; padding-left: 16px;">
+              Wash 2× with 200 µL FACS buffer (400 × g, 5 min, 4 °C). For immediate acquisition: resuspend in 200 µL FACS buffer and proceed to cytometer. For delayed acquisition (up to 72 h): fix in <strong>100 µL 1% PFA in PBS</strong> for 15 min at 4 °C, wash 1×, resuspend in 200 µL FACS buffer, store at 4 °C protected from light.
+            </div>
+          </div>
+
+          <div style="margin-bottom: 20px;">
+            <div style="font-weight: 500; font-size: 13px; color: var(--ink); margin-bottom: 6px;">6. Acquisition on BD LSRFortessa</div>
+            <div style="font-size: 13.5px; color: #555; line-height: 1.7; padding-left: 16px;">
+              Run <strong>CS&amp;T beads</strong> daily for cytometer QC. Set voltages using unstained and single-stain compensation controls (CompBeads or single-stained cells). Acquire compensation matrix in <strong>BD FACSDiva™</strong> software. Record <strong>≥ 50,000 live singlet events</strong> per sample at medium flow rate (~1,000–3,000 events/sec). Export .fcs files for analysis in <strong>FlowJo v10</strong>.
+            </div>
+          </div>
+
+          <div>
+            <div style="font-weight: 500; font-size: 13px; color: var(--ink); margin-bottom: 6px;">7. Gating Strategy</div>
+            <div style="font-size: 13.5px; color: #555; line-height: 1.7; padding-left: 16px;">
+              Standard hierarchy: <strong>FSC-A vs SSC-A</strong> (exclude debris) → <strong>FSC-H vs FSC-A</strong> (singlet gate) → <strong>Viability dye⁻</strong> (live cells) → <strong>CD45+</strong> (leukocyte gate) → lineage markers for subset identification. Apply fluorescence-minus-one (FMO) controls to set positive/negative gates for each marker. Export population statistics and overlays for publication-quality figures.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Intracellular Staining Protocol ── -->
+      <div class="subsection" id="intracellular-staining">
+        <div class="subsection-label">Intracellular Staining Protocol (Ki67 / Cytokines / FoxP3)</div>
+        <p>Extended protocol for intracellular targets requiring fixation and permeabilization. Used for Ki67 proliferation analysis, FoxP3 Treg identification, and intracellular cytokine staining (ICS) following PMA/ionomycin stimulation with brefeldin A/monensin.</p>
+
+        <div style="background: var(--card); border: 1px solid var(--rule); border-radius: 8px; padding: 28px 28px 20px; margin: 24px 0 32px; max-width: 760px;">
+          <div style="font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px;">Protocol — Intracellular Staining (Fix/Perm)</div>
+
+          <div style="margin-bottom: 20px;">
+            <div style="font-weight: 500; font-size: 13px; color: var(--ink); margin-bottom: 6px;">1. Surface Staining (Steps 1–5 above)</div>
+            <div style="font-size: 13.5px; color: #555; line-height: 1.7; padding-left: 16px;">
+              Complete surface staining and viability staining as described above. Do not fix with PFA if using the eBioscience FoxP3/Transcription Factor Staining Buffer Set.
+            </div>
+          </div>
+
+          <div style="margin-bottom: 20px;">
+            <div style="font-weight: 500; font-size: 13px; color: var(--ink); margin-bottom: 6px;">2. Fixation &amp; Permeabilization</div>
+            <div style="font-size: 13.5px; color: #555; line-height: 1.7; padding-left: 16px;">
+              <strong>For nuclear targets (Ki67, FoxP3):</strong> Use eBioscience FoxP3/Transcription Factor Staining Buffer Set. Add 200 µL Fix/Perm working solution, vortex immediately, incubate <strong>30–60 min at 4 °C</strong>. Wash 2× with 1× Permeabilization Buffer.
+              <br><strong>For cytoplasmic targets (IFN-γ, TNF-α, IL-2):</strong> Use BD Cytofix/Cytoperm™. Add 100 µL Cytofix/Cytoperm solution, incubate <strong>20 min at 4 °C</strong>. Wash 2× with 1× BD Perm/Wash™ Buffer.
+            </div>
+          </div>
+
+          <div style="margin-bottom: 20px;">
+            <div style="font-weight: 500; font-size: 13px; color: var(--ink); margin-bottom: 6px;">3. Intracellular Antibody Staining</div>
+            <div style="font-size: 13.5px; color: #555; line-height: 1.7; padding-left: 16px;">
+              Resuspend permeabilized cells in 100 µL Perm Buffer containing intracellular antibodies at pre-titrated dilutions (e.g., <strong>Ki67-PE 1:200, FoxP3-APC 1:100, IFN-γ-FITC 1:100</strong>). Incubate <strong>30 min at 4 °C, protected from light</strong>. Wash 2× with Perm Buffer. Resuspend in 200 µL FACS buffer for acquisition.
+            </div>
+          </div>
+
+          <div>
+            <div style="font-weight: 500; font-size: 13px; color: var(--ink); margin-bottom: 6px;">4. Acquisition &amp; Analysis</div>
+            <div style="font-size: 13.5px; color: #555; line-height: 1.7; padding-left: 16px;">
+              Acquire on BD LSRFortessa as above. Use <strong>isotype controls and FMO controls</strong> to gate intracellular markers, as fixation/perm can increase background fluorescence. For Ki67: gate Ki67+ vs Ki67− within each T-cell subset. For FoxP3: gate CD4+CD25+FoxP3+ Tregs. For ICS: report % cytokine-positive within CD4+ or CD8+ gates after subtracting unstimulated control values.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── BD FACSAria III Sorting Protocol ── -->
+      <div class="subsection" id="facs-sorting">
+        <div class="subsection-label">BD FACSAria III — FACS Sorting Protocol</div>
+        <p>High-purity cell sorting protocol on the <strong>BD FACSAria III</strong> for isolating specific immune populations for downstream functional assays, RNA extraction, or single-cell genomics. I routinely sort rare populations (Tregs, antigen-specific T cells, tissue-resident macrophages) to &gt; 95% purity with &gt; 85% post-sort viability.</p>
+
+        <div style="background: var(--card); border: 1px solid var(--rule); border-radius: 8px; padding: 28px 28px 20px; margin: 24px 0 32px; max-width: 760px;">
+          <div style="font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px;">Protocol — BD FACSAria III Cell Sorting</div>
+
+          <div style="margin-bottom: 20px;">
+            <div style="font-weight: 500; font-size: 13px; color: var(--ink); margin-bottom: 6px;">1. Instrument Setup &amp; QC</div>
+            <div style="font-size: 13.5px; color: #555; line-height: 1.7; padding-left: 16px;">
+              Power on BD FACSAria III and allow <strong>15 min laser warm-up</strong> (405 nm violet, 488 nm blue, 561 nm yellow-green, 640 nm red). Run <strong>CS&amp;T beads</strong> for automated QC and baseline performance tracking. Install <strong>100 µm nozzle</strong> (standard for immune cells; use 85 µm for smaller cells or 130 µm for large/fragile cells). Set sheath pressure to <strong>20 psi</strong> (100 µm) or 45 psi (70 µm). Run <strong>Accudrop beads</strong> to optimize drop delay and verify sort accuracy into a test tube.
+            </div>
+          </div>
+
+          <div style="margin-bottom: 20px;">
+            <div style="font-weight: 500; font-size: 13px; color: var(--ink); margin-bottom: 6px;">2. Sample Preparation for Sorting</div>
+            <div style="font-size: 13.5px; color: #555; line-height: 1.7; padding-left: 16px;">
+              Prepare single-cell suspension and stain as per surface staining protocol above. Critical differences for sorting: resuspend at <strong>10–20 × 10⁶ cells/mL</strong> in sort buffer (PBS + 1% BSA + 25 mM HEPES + 1 mM EDTA, sterile-filtered, 0.22 µm). <strong>Filter through 35 µm nylon mesh cap</strong> (BD Falcon™ FACS tube) immediately before sorting to prevent clogging. Keep cells on ice and protected from light.
+            </div>
+          </div>
+
+          <div style="margin-bottom: 20px;">
+            <div style="font-weight: 500; font-size: 13px; color: var(--ink); margin-bottom: 6px;">3. Sort Configuration</div>
+            <div style="font-size: 13.5px; color: #555; line-height: 1.7; padding-left: 16px;">
+              Define sort gates in <strong>BD FACSDiva™</strong> using the same gating hierarchy as analytical flow (FSC/SSC → singlets → live → CD45+ → lineage gates). Select sort mode based on application: <strong>Purity mode</strong> (&gt; 99% purity, lower yield — for genomics/proteomics), <strong>4-Way Purity</strong> (sorting up to 4 populations simultaneously), or <strong>Single-Cell mode</strong> (index sorting into 96/384-well plates for scRNA-seq or clonal expansion). Set sort mask: 1-2-0 (yield-purity-phase) for standard sorts, 0-32-0 for maximum purity.
+            </div>
+          </div>
+
+          <div style="margin-bottom: 20px;">
+            <div style="font-weight: 500; font-size: 13px; color: var(--ink); margin-bottom: 6px;">4. Collection &amp; Post-Sort Processing</div>
+            <div style="font-size: 13.5px; color: #555; line-height: 1.7; padding-left: 16px;">
+              Collect sorted cells into <strong>15 mL tubes pre-coated with FBS</strong> (add 1 mL FBS, rotate to coat walls, then add 2 mL complete medium). For plate sorts: pre-fill wells with lysis buffer (scRNA-seq) or complete medium (functional assays). Sort at <strong>≤ 5,000 events/sec</strong> for optimal purity and viability. Monitor sort efficiency and abort rate during the run; acceptable abort rate &lt; 20%.
+            </div>
+          </div>
+
+          <div style="margin-bottom: 20px;">
+            <div style="font-weight: 500; font-size: 13px; color: var(--ink); margin-bottom: 6px;">5. Post-Sort Purity Check</div>
+            <div style="font-size: 13.5px; color: #555; line-height: 1.7; padding-left: 16px;">
+              Re-run a small aliquot (~5,000 cells) of each sorted population on the FACSAria to verify <strong>sort purity ≥ 95%</strong>. Record post-sort purity and total cell yield. For viability-sensitive applications, perform <strong>trypan blue count</strong> or <strong>Annexin V/PI staining</strong> on a post-sort aliquot to confirm viability &gt; 85%.
+            </div>
+          </div>
+
+          <div>
+            <div style="font-weight: 500; font-size: 13px; color: var(--ink); margin-bottom: 6px;">6. Downstream Applications</div>
+            <div style="font-size: 13.5px; color: #555; line-height: 1.7; padding-left: 16px;">
+              Sorted populations are used for: <strong>RNA extraction</strong> (RNeasy Micro for &lt; 100K cells, RNeasy Mini for &gt; 100K), <strong>scRNA-seq</strong> (10x Genomics Chromium), <strong>functional co-culture assays</strong> (e.g., sorted Tregs added back to effector T cells for suppression assays), <strong>Western blot / proteomics</strong> (≥ 500K cells per condition), or <strong>in vitro expansion</strong> (sorted T-cell subsets with anti-CD3/CD28 Dynabeads).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Equipment Summary Table ── -->
+      <div class="subsection" id="equipment">
+        <div class="subsection-label">Equipment &amp; Software Summary</div>
+        <table style="width: 100%; max-width: 760px; border-collapse: collapse; margin: 16px 0 24px; font-size: 13px; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden;">
+          <thead>
+            <tr style="background: var(--section-bg);">
+              <th style="padding: 10px 14px; text-align: left; font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; color: var(--accent); border-bottom: 1px solid var(--rule);">Instrument</th>
+              <th style="padding: 10px 14px; text-align: left; font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; color: var(--accent); border-bottom: 1px solid var(--rule);">Application</th>
+              <th style="padding: 10px 14px; text-align: left; font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; color: var(--accent); border-bottom: 1px solid var(--rule);">Configuration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 10px 14px; border-bottom: 1px solid var(--rule); font-weight: 500;">BD LSRFortessa</td>
+              <td style="padding: 10px 14px; border-bottom: 1px solid var(--rule); color: #555;">Analytical immunophenotyping</td>
+              <td style="padding: 10px 14px; border-bottom: 1px solid var(--rule); color: #555;">4 lasers, 18 detectors, HTS plate reader</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 14px; border-bottom: 1px solid var(--rule); font-weight: 500;">BD FACSAria III</td>
+              <td style="padding: 10px 14px; border-bottom: 1px solid var(--rule); color: #555;">High-speed cell sorting</td>
+              <td style="padding: 10px 14px; border-bottom: 1px solid var(--rule); color: #555;">4 lasers, 4-way sort, 70/85/100 µm nozzles, ACDU</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 14px; border-bottom: 1px solid var(--rule); font-weight: 500;">Cytek Aurora</td>
+              <td style="padding: 10px 14px; border-bottom: 1px solid var(--rule); color: #555;">Spectral flow cytometry</td>
+              <td style="padding: 10px 14px; border-bottom: 1px solid var(--rule); color: #555;">5 lasers, full-spectrum unmixing, 64-channel</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 14px; border-bottom: 1px solid var(--rule); font-weight: 500;">BD FACSDiva™</td>
+              <td style="padding: 10px 14px; border-bottom: 1px solid var(--rule); color: #555;">Acquisition &amp; instrument control</td>
+              <td style="padding: 10px 14px; border-bottom: 1px solid var(--rule); color: #555;">Compensation, gating, sort logic, CS&amp;T QC</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 14px; border-bottom: 1px solid var(--rule); font-weight: 500;">FlowJo v10</td>
+              <td style="padding: 10px 14px; border-bottom: 1px solid var(--rule); color: #555;">Post-acquisition analysis</td>
+              <td style="padding: 10px 14px; border-bottom: 1px solid var(--rule); color: #555;">Compensation, t-SNE/UMAP, batch analysis, plugins</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 14px; font-weight: 500;">SpectroFlo®</td>
+              <td style="padding: 10px 14px; color: #555;">Cytek spectral unmixing</td>
+              <td style="padding: 10px 14px; color: #555;">Reference controls, autofluorescence extraction</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ SECTION 5: EXTENDED METHODS ═══════ -->
+
+<div class="section reveal" id="methods">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">05</div>
+      <div class="section-label">Methods</div>
+    </div>
+    <div class="section-content">
+      <h2>Detailed Methodology &amp; Techniques</h2>
+      <p>Comprehensive descriptions of key experimental techniques, assay platforms, and analytical methods referenced throughout this page.</p>
+
+      <div class="subsection" id="myeloid">
+        <div class="subsection-label">Myeloid Panels</div>
+        <p>I design and run <strong>myeloid-focused flow cytometry panels</strong> for characterizing monocytes, macrophages, dendritic cells, and microglia in blood, tissue, and iPSC-derived models. Panels include <strong>CD14, CD16, CD11b, CD11c, CD68, CD163, CD206, HLA-DR, CX3CR1</strong> with gating strategies to distinguish classical, intermediate, and non-classical monocyte subsets. These panels are critical for neuroinflammation studies and immuno-oncology characterization.</p>
+        <div class="chart-container" style="background: var(--card); border: 1px solid var(--rule); border-radius: 8px; padding: 20px; margin: 24px 0 28px; max-width: 760px;">
+          <div class="chart-title" style="font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px;">Fig. — Myeloid Subset Distribution</div>
+          <div class="chart-subtitle" style="font-size: 12.5px; color: var(--mid); margin-bottom: 16px;">Relative frequencies of monocyte/macrophage subsets in PBMC vs brain tissue</div>
+          <canvas id="myeloidChart" height="260"></canvas>
+          <div class="chart-note" style="font-size: 11px; color: var(--mid); margin-top: 12px;">12-color flow panel. BD LSRFortessa. n=6 donors.</div>
+        </div>
+      </div>
+
+      <div class="subsection" id="ki67">
+        <div class="subsection-label">Ki67 Proliferation</div>
+        <p>I quantify <strong>cellular proliferation</strong> using intracellular Ki67 staining combined with DNA content (DAPI/PI) for simultaneous proliferation and cell cycle analysis. This approach identifies cells in G0 (Ki67−/2N), G1 (Ki67+/2N), S (Ki67+/&gt;2N), and G2/M (Ki67+/4N) phases. Applied to T-cell expansion post-stimulation, tumor cell proliferation under drug treatment, and iPSC-CM cell cycle exit during maturation.</p>
+        <div class="chart-container" style="background: var(--card); border: 1px solid var(--rule); border-radius: 8px; padding: 20px; margin: 24px 0 28px; max-width: 760px;">
+          <div class="chart-title" style="font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px;">Fig. — Ki67+ Proliferation Index</div>
+          <div class="chart-subtitle" style="font-size: 12.5px; color: var(--mid); margin-bottom: 16px;">Ki67+ fraction across T-cell expansion timepoints post anti-CD3/CD28 stimulation</div>
+          <canvas id="ki67Chart" height="260"></canvas>
+          <div class="chart-note" style="font-size: 11px; color: var(--mid); margin-top: 12px;">Intracellular Ki67 + DAPI. BD LSRFortessa. n=4 donors.</div>
+        </div>
+      </div>
+
+      <div class="subsection" id="lymph-node">
+        <div class="subsection-label">Lymph Node &amp; Spleen Analysis</div>
+        <p>I process and analyze <strong>lymph node and spleen tissue</strong> from mouse models for comprehensive immune profiling. Tissue is mechanically dissociated, filtered, and stained with multi-parameter panels covering <strong>T cells, B cells, NK cells, dendritic cells, macrophages</strong>, and germinal center populations. These panels characterize immune responses in LRRK2 mouse models of Parkinson's disease and in tumor-bearing mice for immuno-oncology studies.</p>
+        <div class="chart-container" style="background: var(--card); border: 1px solid var(--rule); border-radius: 8px; padding: 20px; margin: 24px 0 28px; max-width: 760px;">
+          <div class="chart-title" style="font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px;">Fig. — Lymph Node Immune Composition</div>
+          <div class="chart-subtitle" style="font-size: 12.5px; color: var(--mid); margin-bottom: 16px;">Major immune cell populations in WT vs LRRK2-G2019S mouse lymph nodes</div>
+          <canvas id="lnChart" height="260"></canvas>
+          <div class="chart-note" style="font-size: 11px; color: var(--mid); margin-top: 12px;">16-color spectral flow. Cytek Aurora. n=8 mice per genotype.</div>
+        </div>
+      </div>
+
+      <div class="subsection" id="lrrk2">
+        <div class="subsection-label">LRRK2 Immune Profiling</div>
+        <p>I perform comprehensive <strong>immune profiling of LRRK2 mutant mice</strong> (G2019S knock-in) compared to wild-type controls. LRRK2 is highly expressed in immune cells and its gain-of-function mutation alters immune cell function. I characterize <strong>T-cell activation, myeloid polarization, cytokine secretion profiles</strong>, and tissue-resident immune populations across spleen, lymph nodes, and brain. These studies connect peripheral immune dysregulation to neuroinflammation in Parkinson's disease models.</p>
+        <div class="chart-container" style="background: var(--card); border: 1px solid var(--rule); border-radius: 8px; padding: 20px; margin: 24px 0 28px; max-width: 760px;">
+          <div class="chart-title" style="font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px;">Fig. — LRRK2 vs WT: Immune Cell Frequencies</div>
+          <div class="chart-subtitle" style="font-size: 12.5px; color: var(--mid); margin-bottom: 16px;">Splenic immune cell populations in LRRK2-G2019S vs wild-type mice</div>
+          <canvas id="lrrk2Chart" height="260"></canvas>
+          <div class="chart-note" style="font-size: 11px; color: var(--mid); margin-top: 12px;">Spectral flow cytometry. Cytek Aurora. n=8 per genotype. *p&lt;0.05, **p&lt;0.01.</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -1986,6 +2248,9 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   document.querySelectorAll('.search-toggle').forEach(function(btn){ btn.addEventListener('click', openSearch); });
 })();
 
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
 // ── New keyword section charts ──
 
 new Chart(document.getElementById('myeloidChart').getContext('2d'), {

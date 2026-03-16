@@ -1446,10 +1446,10 @@ document.addEventListener('click', function(e){
 
       <div class="subsection">
         <div class="subsection-label">Image Gallery</div>
-        <div class="image-gallery" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 24px 0; max-width: 760px;">
-          <figure style="margin: 0;">
-            <img src="images/biomarker-ifngr-confocal.png" alt="IFNGR1 surface expression" class="gallery-thumb" style="width: 100%; border-radius: 6px; border: 1px solid var(--rule); cursor: pointer;" loading="lazy">
-            <figcaption style="font-size: 11px; color: var(--mid); margin-top: 6px; line-height: 1.4;">IFNGR1 surface expression on iPSC-derived dopaminergic neurons (confocal, 63×)</figcaption>
+        <div class="image-gallery" style="margin: 24px 0; max-width: 760px;">
+          <figure style="margin: 0; max-width: 200px;">
+            <img src="images/biomarker-ifngr-confocal.png" alt="IFNGR1 surface expression" class="gallery-thumb" style="width: 100%; border-radius: 6px; border: 1px solid var(--rule); cursor: zoom-in;" loading="lazy">
+            <figcaption style="font-size: 10px; color: var(--mid); margin-top: 6px; line-height: 1.4;">IFNGR1 surface expression (63×) <span style="font-family: var(--mono); font-size: 9px; color: var(--accent); cursor: pointer;" onclick="this.closest('figure').querySelector('img').click()">↗ expand</span></figcaption>
           </figure>
         </div>
       </div>
