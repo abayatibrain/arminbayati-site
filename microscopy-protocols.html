@@ -1554,6 +1554,103 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
   font-size: 11px; font-weight: 400; color: var(--mid);
 }
 
+@media (max-width: 768px) {
+  body { font-size: 15px; }
+  .hero h1, h1 { font-size: clamp(1.6rem, 7vw, 2.2rem) !important; }
+  .section-content h2 { font-size: 1.35rem; }
+  .section-content h3 { font-size: 0.95rem; margin-top: 24px; }
+  .section-content p { font-size: 14.5px; line-height: 1.7; }
+  .hero-description { font-size: 15px !important; line-height: 1.65 !important; }
+  .hero { padding: 36px 16px 32px !important; }
+  /* ── Mobile Navigation Grid ── */
+  nav { padding: 0 12px !important; }
+  .nav-inner {
+    display: grid !important;
+    grid-template-columns: 44px 1fr auto !important;
+    align-items: center !important;
+    padding: 8px 0 !important;
+    gap: 4px !important;
+  }
+  .nav-toggle {
+    order: 1;
+    justify-self: start;
+  }
+  .nav-brand {
+    order: 2;
+    justify-self: center;
+  }
+  .nav-right {
+    order: 3;
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .nav-brand-text { font-size: 11px; }
+  .search-toggle, .dark-toggle { width: 28px; height: 28px; }
+  .search-toggle svg { width: 13px; height: 13px; }
+  .section-header { grid-template-columns: 1fr !important; gap: 12px !important; padding: 32px 16px 0 !important; }
+  .section-index { position: static !important; display: flex !important; align-items: center !important; gap: 10px !important; }
+  .section-number { font-size: 1.8rem !important; margin-bottom: 0 !important; }
+  .section-label { font-size: 10px; }
+  .section-content { padding-bottom: 32px; }
+  .section-content p { max-width: 100%; }
+  .workflow-strip { padding: 32px 16px !important; }
+  .workflow-steps { flex-direction: column !important; }
+  .workflow-step { border-left: none !important; border-top: 1px solid rgba(255,255,255,0.12) !important; padding: 14px 0 !important; }
+  .workflow-step:first-child { border-top: none !important; }
+  .step-title { font-size: 13px; }
+  .step-detail { font-size: 12px; }
+  .findings { grid-template-columns: 1fr 1fr !important; }
+  .page-footer { margin-top: 0; }
+  .footer-inner { flex-direction: column !important; gap: 28px !important; padding: 36px 16px 28px !important; }
+  .footer-brand { max-width: 100%; }
+  .footer-name { font-size: 1.1rem; }
+  .footer-links-grid { flex-direction: column !important; gap: 20px !important; }
+  .footer-bottom { padding: 16px; font-size: 11px; }
+  .search-modal { width: 96%; max-width: none; border-radius: 8px; }
+  .search-overlay { padding-top: 10vh; }
+  .search-input { font-size: 15px; }
+  .search-result { padding: 10px 16px; }
+  .search-result-title { font-size: 13px; }
+  .search-result-desc { font-size: 11px; }
+  .protocol-summary { grid-template-columns: 1fr 1fr !important; }
+  .protocol-summary .ps-item { padding: 12px 14px; }
+  .protocol-summary .ps-value { font-size: 1.1rem; }
+  .protocol-summary .ps-label { font-size: 10px; }
+  .protocol-card { max-width: 100% !important; margin: 20px 0 24px; }
+  .protocol-card-header { padding: 16px 16px; }
+  .protocol-card-header h3 { font-size: 14px; gap: 8px; }
+  .protocol-card-body { padding: 0 16px 16px; }
+  .protocol-step { gap: 12px; }
+  .step-content .step-desc-text { font-size: 12.5px; }
+  .step-content .reagent-tag { font-size: 9px; }
+  .step-content .time-tag { font-size: 9px; }
+  .chart-container { max-width: 100% !important; overflow-x: auto; }
+}
+
+@media (max-width: 480px) {
+  .hero h1, h1 { font-size: clamp(1.4rem, 6vw, 1.8rem) !important; }
+  .hero-description { font-size: 14px !important; }
+  .tag { font-size: 9.5px; padding: 3px 8px; }
+  .hero-tags { gap: 5px; }
+  .section-header { padding: 24px 12px 0 !important; }
+  .section-content { padding-bottom: 24px; }
+  .workflow-strip { padding: 24px 12px !important; }
+  .footer-inner { padding: 28px 12px 20px !important; }
+  .findings { grid-template-columns: 1fr !important; }
+  .protocol-card-header { padding: 14px 12px; }
+  .protocol-card-body { padding: 0 12px 12px; }
+  .protocol-summary { grid-template-columns: 1fr !important; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .nav-links a { padding: 10px 12px !important; min-height: 44px; display: flex; align-items: center; }
+  .nav-toggle { min-width: 44px; min-height: 44px; }
+  .search-toggle, .dark-toggle { min-width: 36px; min-height: 36px; }
+  .tag { min-height: 36px; display: inline-flex; align-items: center; }
+}
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
