@@ -2160,6 +2160,18 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
   .ifig-crispr-workflow .fig-label, .ifig-crispr-workflow .fig-title, .ifig-crispr-workflow .fig-subtitle { animation: fadeIn 0.5s ease both; }
   .ifig-crispr-workflow .fig-title { animation-delay: 0.05s; } .fig-subtitle { animation-delay: 0.1s; }
 
+  /* Protocol Summary Stat Boxes (Sections 07-09) */
+  .protocol-summary { display: flex; gap: 0; margin: 24px 0 32px; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; background: var(--paper); }
+  .ps-item { flex: 1; padding: 18px 16px; border-left: 1px solid var(--rule); text-align: center; }
+  .ps-item:first-child { border-left: none; }
+  .ps-value { font-family: var(--mono); font-size: 1.45rem; font-weight: 600; color: var(--accent); line-height: 1.2; margin-bottom: 4px; }
+  .ps-label { font-size: 11px; font-weight: 400; color: var(--mid); letter-spacing: 0.3px; text-transform: uppercase; }
+  @media (max-width: 600px) {
+    .protocol-summary { flex-direction: column; }
+    .ps-item { border-left: none; border-top: 1px solid var(--rule); padding: 14px 16px; }
+    .ps-item:first-child { border-top: none; }
+  }
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
@@ -2310,8 +2322,11 @@ document.addEventListener('click', function(e){
     <a class="tag" href="#rna-therapeutics">siRNA / shRNA / ASO / SSO</a>
     <a class="tag" href="#cloning">Molecular Cloning</a>
     <a class="tag" href="#viral">Lentiviral / AAV / Adenoviral</a>
-    <a class="tag" href="#protein-conjugation">Protein Conjugation</a>
+    <a class="tag" href="#ip-fraction">IP / Fractionation</a>
     <a class="tag" href="#lysosomal">Lysosomal Biology</a>
+    <a class="tag" href="#qpcr-data">qPCR Data</a>
+    <a class="tag" href="#flow-data">Flow Cytometry Data</a>
+    <a class="tag" href="#virology-data">Virology</a>
     <a class="tag" href="#western-blot">Western Blot / ELISA / MSD</a>
     <a class="tag" href="#pcr">PCR / qPCR / ddPCR</a>
   </div>
@@ -2396,11 +2411,6 @@ document.addEventListener('click', function(e){
 <figcaption style="font-size:13px; color:var(--mid); font-style:italic; max-width:640px; line-height:1.5; margin-bottom:20px;">Confocal time-course showing adenoviral α-synuclein-HA overexpression in iPSC neurons ± IFN-γ treatment, revealing IFN-induced accumulation.</figcaption>
 </figure>
       <p style="font-size:13px; color:var(--mid); font-style:italic; margin-top:-8px;">Adenoviral overexpression of α-synuclein-HA in iPSC-derived DA neurons. Phospho-synuclein (pSyn S129) accumulation is dramatically enhanced under dual-hit conditions (PFF + IFN-γ), confirming that endogenous α-synuclein is recruited into pathological inclusions. Western blot quantification shows dose-dependent pSyn increase. Bayati et al., <em>Nature Neuroscience</em> 2024.</p>
-<figure style="margin:0;">
-      <img src="images/biochemical-isolation-synuclein-inclusions.jpg" alt="Subcellular fractionation Western blots: HDAC6 and α-synuclein from sequential extraction" style="width:100%; max-width:640px; border-radius:6px; border:1px solid var(--rule); margin:20px 0 16px;">
-<figcaption style="font-size:13px; color:var(--mid); font-style:italic; max-width:640px; line-height:1.5; margin-bottom:20px;">Western blot of biochemical fractionation (soluble, membrane, and pellet) showing α-synuclein distribution with and without inclusion formation.</figcaption>
-</figure>
-      <p style="font-size:13px; color:var(--mid); font-style:italic; margin-top:-8px;">Biochemical fractionation of α-synuclein inclusions from iPSC-derived DA neurons. Sequential extraction (Triton-soluble → SDS-soluble → pellet) reveals enrichment of α-synuclein and HDAC6 (an aggresome marker) in the insoluble pellet fraction under dual-hit conditions, confirming the formation of detergent-resistant aggregates. Bayati et al., <em>Nature Neuroscience</em> 2024.</p>
     </div>
   </div>
 </div>
@@ -2471,6 +2481,238 @@ document.addEventListener('click', function(e){
     </div>
     </div>
   </div>
+
+
+<!-- ══════════════════════════════════════════════
+     SECTION 06 — IMMUNOPRECIPITATION & BIOCHEMICAL FRACTIONATION
+     ══════════════════════════════════════════════ -->
+<div class="section reveal" id="ip-fraction">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">06</div>
+      <div class="section-label">IP / Fractionation</div>
+    </div>
+    <div class="section-content">
+      <h2>Immunoprecipitation &amp; Biochemical Fractionation</h2>
+      <p>I apply biochemical fractionation and immunoprecipitation (IP/Co-IP) techniques to resolve protein compartmentalization and interaction networks. Key applications include: (1) <strong>sequential detergent extraction</strong> (Triton-soluble → SDS-soluble → insoluble pellet) to separate soluble, membrane-associated, and aggregated protein pools; (2) <strong>Lyso-IP</strong> (HA-tagged TMEM192-RFP + magnetic bead immunoprecipitation) to isolate intact lysosomes and confirm fibril cargo arrival within 2 minutes; and (3) native co-IP workflows for capturing transient protein–protein interactions under physiological conditions. Downstream readouts include Western blot, mass spectrometry, and activity assays.</p>
+
+<figure style="margin:0;">
+      <img src="images/biochemical-isolation-synuclein-inclusions.jpg" alt="Subcellular fractionation Western blots: HDAC6 and α-synuclein from sequential extraction" style="width:100%; max-width:640px; border-radius:6px; border:1px solid var(--rule); margin:20px 0 16px;">
+<figcaption style="font-size:13px; color:var(--mid); font-style:italic; max-width:640px; line-height:1.5; margin-bottom:20px;">Western blot of biochemical fractionation (soluble, membrane, and pellet) showing α-synuclein distribution with and without inclusion formation.</figcaption>
+</figure>
+      <p style="font-size:13px; color:var(--mid); font-style:italic; margin-top:-8px;">Biochemical fractionation of α-synuclein inclusions from iPSC-derived DA neurons. Sequential extraction (Triton-soluble → SDS-soluble → pellet) reveals enrichment of α-synuclein and HDAC6 (an aggresome marker) in the insoluble pellet fraction under dual-hit conditions, confirming the formation of detergent-resistant aggregates. Bayati et al., <em>Nature Neuroscience</em> 2024.</p>
+
+      <div style="margin-top:20px; padding:16px; background:var(--section-bg); border-radius:8px; border:1px solid var(--rule);">
+        <div style="font-size:12px; font-weight:600; color:var(--accent); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px;">Related Protocols &amp; Data</div>
+        <p style="font-size:13px; color:var(--mid); margin:0;">
+          <a href="assay-protocols.html#ip" style="color:var(--accent);">IP / Co-IP Protocol (Assay Library)</a> ·
+          <a href="assay-protocols.html#western" style="color:var(--accent);">Western Blot Protocol</a> ·
+          <a href="#lysosomal" style="color:var(--accent);">Lyso-IP &amp; Lysosomal Biology</a> ·
+          <a href="proteomics.html" style="color:var(--accent);">Proteomics &amp; Mass Spectrometry</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     SECTION 07 — qPCR / RT-qPCR DATA
+     ══════════════════════════════════════════════ -->
+<div class="section reveal" id="qpcr-data">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">07</div>
+      <div class="section-label">qPCR Data</div>
+    </div>
+    <div class="section-content">
+      <h2>RT-qPCR &amp; Gene Expression Data</h2>
+      <p>RT-qPCR datasets from iPSC-derived neuronal, cardiac, and pancreatic differentiation experiments as well as viral host-response profiling. Expression is normalized to geometric mean of housekeeping genes (GAPDH, ACTB, RPLP0) and presented as fold change (2<sup>−ΔΔCt</sup>) relative to undifferentiated iPSCs or vehicle controls. All primer pairs validated with efficiency 90–110% and single melt-curve peaks. 500+ primer pairs validated across the lab.</p>
+
+      <div class="protocol-summary">
+        <div class="ps-item"><div class="ps-value">500+</div><div class="ps-label">Primer Pairs</div></div>
+        <div class="ps-item"><div class="ps-value">ΔΔCt</div><div class="ps-label">Quantification</div></div>
+        <div class="ps-item"><div class="ps-value">n=3</div><div class="ps-label">Bio Replicates</div></div>
+        <div class="ps-item"><div class="ps-value">384</div><div class="ps-label">Well Format</div></div>
+      </div>
+
+      <!-- qPCR Bar Chart: iPSC-DA Neuron Markers -->
+      <div class="chart-container" style="margin-top:24px;">
+        <div class="chart-title">Fig. — iPSC → DA Neuron RT-qPCR (DIV 42)</div>
+        <div class="chart-subtitle">Fold change vs undifferentiated iPSCs. GAPDH/ACTB/RPLP0 normalization. TaqMan probes. n=3. *p&lt;0.05, **p&lt;0.01, ***p&lt;0.001.</div>
+        <canvas id="chart-qpcr-da" width="700" height="340"></canvas>
+        <div class="chart-note">QuantStudio 7. Technical triplicates. One-way ANOVA with Dunnett's post-hoc.</div>
+      </div>
+
+      <!-- qPCR Heatmap: Multi-lineage -->
+      <div class="chart-container" style="margin-top:24px;">
+        <div class="chart-title">Fig. — Multi-Lineage Differentiation Expression Heatmap</div>
+        <div class="chart-subtitle">Log₂(fold change) relative to undifferentiated iPSCs. Red = upregulated, blue = downregulated. RT-qPCR, GAPDH normalization, n=3.</div>
+        <canvas id="chart-qpcr-heatmap" width="680" height="380"></canvas>
+        <div class="chart-note">Rows = genes, columns = lineages. Values are log₂(fold change) from ΔΔCt quantification.</div>
+      </div>
+
+      <!-- qPCR: Viral Host Genes -->
+      <div class="chart-container" style="margin-top:24px;">
+        <div class="chart-title">Fig. — Host Gene Response to SARS-CoV-2 Spike Exposure</div>
+        <div class="chart-subtitle">RT-qPCR in Calu-3 cells after 6h exposure to purified Spike (10 µg/mL). Fold change vs vehicle. n=3.</div>
+        <canvas id="chart-qpcr-viral" width="700" height="320"></canvas>
+        <div class="chart-note">Endocytic (grey/red), trafficking (orange), and innate immunity (green/purple) gene panels.</div>
+      </div>
+
+      <div style="margin-top:20px; padding:16px; background:var(--section-bg); border-radius:8px; border:1px solid var(--rule);">
+        <div style="font-size:12px; font-weight:600; color:var(--accent); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px;">See Also</div>
+        <p style="font-size:13px; color:var(--mid); margin:0;">
+          <a href="ipscs.html#da-neurons" style="color:var(--accent);">iPSC Dopaminergic Neurons</a> ·
+          <a href="cardiomyocytes.html#qpcr" style="color:var(--accent);">Cardiomyocyte RT-qPCR</a> ·
+          <a href="drug-discovery.html#biomarkers" style="color:var(--accent);">Drug Response Biomarkers</a> ·
+          <a href="pancreatic-protocols.html#beta" style="color:var(--accent);">Pancreatic β-Cell qPCR Panels</a> ·
+          <a href="#rna-therapeutics" style="color:var(--accent);">Gene Knockdown RT-qPCR</a> ·
+          <a href="proteomics.html#transcriptomics" style="color:var(--accent);">Bulk Transcriptomics</a> ·
+          <a href="assay-protocols.html#qpcr" style="color:var(--accent);">RT-qPCR Protocol</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     SECTION 08 — FLOW CYTOMETRY DATA
+     ══════════════════════════════════════════════ -->
+<div class="section reveal" id="flow-data">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">08</div>
+      <div class="section-label">Flow Data</div>
+    </div>
+    <div class="section-content">
+      <h2>Flow Cytometry Quantitative Data</h2>
+      <p>Multicolor flow cytometry datasets from immunophenotyping experiments across immune cell profiling (lymph node and spleen tissue from LRRK2 mouse models), iPSC differentiation QC, and cancer immunology co-cultures. Acquired on BD LSRFortessa and Cytek Aurora platforms. Analyzed in FlowJo v10 with tSNE/UMAP dimensionality reduction. All data gated on live singlets (Zombie Aqua⁻, FSC-A/FSC-H).</p>
+
+      <div class="protocol-summary">
+        <div class="ps-item"><div class="ps-value">12+</div><div class="ps-label">Panels Validated</div></div>
+        <div class="ps-item"><div class="ps-value">50k+</div><div class="ps-label">Events/Sample</div></div>
+        <div class="ps-item"><div class="ps-value">BD / Cytek</div><div class="ps-label">Platforms</div></div>
+        <div class="ps-item"><div class="ps-value">FlowJo</div><div class="ps-label">Analysis</div></div>
+      </div>
+
+      <!-- Flow: Immune Populations -->
+      <div class="chart-container" style="margin-top:24px;">
+        <div class="chart-title">Fig. — Lymph Node Immune Cell Frequencies — WT vs LRRK2 G2019S</div>
+        <div class="chart-subtitle">Cervical lymph nodes, n=8/genotype, 12 months. Surface: CD45/CD3/CD4/CD8/CD19/NK1.1/CD11b/Ly6G/Ly6C. Intracellular: Ki67, FoxP3.</div>
+        <canvas id="chart-flow-immune" width="720" height="360"></canvas>
+        <div class="chart-note">BD LSRFortessa. *p&lt;0.05, **p&lt;0.01 (unpaired t-test). Gated on live CD45+ singlets.</div>
+      </div>
+
+      <!-- Flow: iPSC Differentiation QC -->
+      <div class="chart-container" style="margin-top:24px;">
+        <div class="chart-title">Fig. — iPSC Differentiation QC — Multi-Lineage Marker Expression</div>
+        <div class="chart-subtitle">DA neurons (DIV 42): TH, FOXA2, TUJ1. Cardiomyocytes (D30): cTnT, NKX2.5. β-Cells (D28): C-Peptide, NKX6.1, PDX1. n=3.</div>
+        <canvas id="chart-flow-ipsc" width="700" height="340"></canvas>
+        <div class="chart-note">Each lineage shows high marker specificity and low off-target expression.</div>
+      </div>
+
+      <!-- Flow: T-Cell Checkpoint -->
+      <div class="chart-container" style="margin-top:24px;">
+        <div class="chart-title">Fig. — T-Cell Checkpoint Expression — PB vs TIL</div>
+        <div class="chart-subtitle">CD3+CD8+ T cells. Markers: PD-1, CTLA-4, TIM-3, LAG-3, TIGIT. Cytek Aurora. n=6 donors.</div>
+        <canvas id="chart-flow-checkpoint" width="700" height="320"></canvas>
+        <div class="chart-note">MFI normalized to isotype controls. TILs show elevated checkpoint expression consistent with T-cell exhaustion.</div>
+      </div>
+
+      <div style="margin-top:20px; padding:16px; background:var(--section-bg); border-radius:8px; border:1px solid var(--rule);">
+        <div style="font-size:12px; font-weight:600; color:var(--accent); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px;">See Also</div>
+        <p style="font-size:13px; color:var(--mid); margin:0;">
+          <a href="flow-cytometry.html" style="color:var(--accent);">Full Flow Cytometry Panels &amp; Gating</a> ·
+          <a href="neuroimmunology.html#immune" style="color:var(--accent);">Neuroimmunology Immune Profiling</a> ·
+          <a href="cancer-immunology.html#checkpoint" style="color:var(--accent);">Checkpoint Biology &amp; Exhaustion</a> ·
+          <a href="cancer-immunology.html#killing" style="color:var(--accent);">Immune-Mediated Killing Assays</a> ·
+          <a href="ipscs.html#characterization" style="color:var(--accent);">iPSC Characterization</a> ·
+          <a href="pancreatic-protocols.html#beta" style="color:var(--accent);">Pancreatic β-Cell QC</a> ·
+          <a href="assay-protocols.html#flow" style="color:var(--accent);">Flow Cytometry Protocol</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     SECTION 09 — VIROLOGY DATA
+     ══════════════════════════════════════════════ -->
+<div class="section reveal" id="virology-data">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">09</div>
+      <div class="section-label">Virology</div>
+    </div>
+    <div class="section-content">
+      <h2>Virology — Viral Internalization, Entry &amp; Transduction</h2>
+      <p>Quantitative virology datasets spanning SARS-CoV-2 spike internalization via clathrin-mediated endocytosis (CME), pseudoviral infectivity assays, host-directed antiviral screening, and viral vector transduction optimization. This work led to the first paper demonstrating the cellular entry mechanism of SARS-CoV-2 (<em>J. Biol. Chem.</em> 2021; 500+ citations) and contributed to host-directed antiviral strategies targeting PIKfyve and CSNK2 kinases in collaboration with UNC Chapel Hill, GSK, and the Structural Genomics Consortium.</p>
+
+      <div class="protocol-summary">
+        <div class="ps-item"><div class="ps-value">500+</div><div class="ps-label">Citations (JBC 2021)</div></div>
+        <div class="ps-item"><div class="ps-value">4</div><div class="ps-label">Cell Lines Validated</div></div>
+        <div class="ps-item"><div class="ps-value">BSL-2/3</div><div class="ps-label">Biosafety</div></div>
+        <div class="ps-item"><div class="ps-value">3</div><div class="ps-label">Viral Vector Systems</div></div>
+      </div>
+
+      <!-- Viral Internalization Kinetics -->
+      <div class="chart-container" style="margin-top:24px;">
+        <div class="chart-title">Fig. — SARS-CoV-2 Spike Internalization Kinetics</div>
+        <div class="chart-subtitle">His₆-tagged Spike uptake in HEK-293T-ACE2 cells. Pulse-chase with confocal quantification. n=3, 50+ cells/condition/timepoint.</div>
+        <canvas id="chart-viral-kinetics" width="720" height="380"></canvas>
+        <div class="chart-note">CME disruption (Pitstop 2, Dynasore, CHC siRNA) blocks &gt;60% of Spike internalization, confirming clathrin-dependent entry.</div>
+      </div>
+
+      <!-- CME Across Cell Lines -->
+      <div class="chart-container" style="margin-top:24px;">
+        <div class="chart-title">Fig. — CME-Dependent Spike Uptake &amp; Pseudoviral Infectivity</div>
+        <div class="chart-subtitle">Spike uptake (% DMSO) and pseudoviral GFP+ across 4 cell lines under CME disruption. n=3.</div>
+        <canvas id="chart-viral-cme" width="720" height="380"></canvas>
+        <div class="chart-note">CHC siRNA 72h (95% KD). Pitstop 2 (30 µM). Dynasore (80 µM). Pseudovirus: Spike-pseudotyped lentivirus, 48h.</div>
+      </div>
+
+      <!-- Kinase Dose-Response -->
+      <div class="chart-container" style="margin-top:24px;">
+        <div class="chart-title">Fig. — Host Kinase Inhibitor Dose-Response — Viral Entry &amp; Replication</div>
+        <div class="chart-subtitle">PIKfyve (Compound 17, Apilimod) and CSNK2 (Silmitasertib) inhibitors on pseudoviral entry and replication in Calu-3. n=4.</div>
+        <canvas id="chart-viral-doseresponse" width="720" height="360"></canvas>
+        <div class="chart-note">Compound 17 IC₅₀ = 0.82 nM. Compound 30 = negative control probe. Solid = entry, dashed = replication.</div>
+      </div>
+
+      <!-- Viral Transduction Efficiency -->
+      <div class="chart-container" style="margin-top:24px;">
+        <div class="chart-title">Fig. — Viral Transduction Efficiency Across Cell Types</div>
+        <div class="chart-subtitle">Lentivirus (MOI 10), Ad5 (MOI 50), AAV serotypes 1/2/6/9. GFP+ or tag+ by flow cytometry. 72h (lenti/Ad5), 7d (AAV). n=3.</div>
+        <canvas id="chart-viral-transduction" width="720" height="400"></canvas>
+        <div class="chart-note">VSV-G pseudotyped lentivirus. Ad5 CMV promoter. AAV serotype tropism varies by cell type.</div>
+      </div>
+
+      <!-- MOI Optimization -->
+      <div class="chart-container" style="margin-top:24px;">
+        <div class="chart-title">Fig. — Lentiviral MOI Optimization — Efficiency vs Viability</div>
+        <div class="chart-subtitle">iPSC-DA neurons (DIV 35). VSV-G 3rd-gen lentivirus, pLKO.1-shLAMP2-GFP. Polybrene (8 µg/mL). 72h. n=3.</div>
+        <canvas id="chart-viral-moi" width="700" height="340"></canvas>
+        <div class="chart-note">Green zone: optimal MOI range (10–20) balancing transduction efficiency (&gt;60%) with viability (&gt;80%).</div>
+      </div>
+
+      <div style="margin-top:20px; padding:16px; background:var(--section-bg); border-radius:8px; border:1px solid var(--rule);">
+        <div style="font-size:12px; font-weight:600; color:var(--accent); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px;">See Also</div>
+        <p style="font-size:13px; color:var(--mid); margin:0;">
+          <a href="#viral" style="color:var(--accent);">Viral Transduction &amp; Expression (Lenti/Ad5 Figures)</a> ·
+          <a href="endocytosis.html#cme" style="color:var(--accent);">Clathrin-Mediated Endocytosis</a> ·
+          <a href="endocytosis.html#kinase" style="color:var(--accent);">PIKfyve &amp; CSNK2 Host Kinase Targets</a> ·
+          <a href="drug-discovery.html#antiviral" style="color:var(--accent);">Host-Directed Antiviral Strategies</a> ·
+          <a href="publications.html" style="color:var(--accent);">Publications (JBC 2021, J. Med. Chem. 2022)</a> ·
+          <a href="microscopy.html#sars" style="color:var(--accent);">SARS-CoV-2 Imaging Gallery</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <div class="page-footer">
     <div class="footer-inner">
@@ -2691,8 +2933,20 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
      keywords:'lysosome lamp1 lamp2 tfeb nrf2 galectin-3 membrane permeabilization rab7 cd63 lyso-ip nanogold fibril trafficking dysfunction',
      description:'Lysosomal dysfunction, membrane rupture, and fibril trafficking in neurodegeneration.'},
     {page:'genetics.html#gene-editing', title:'Gene Editing & Viral Delivery', category:'Research', section:'Gene Editing',
-     keywords:'lentivirus adenovirus shrna knockdown overexpression crispr gba lamp2 alpha-synuclein ha western blot fractionation',
+     keywords:'lentivirus adenovirus shrna knockdown overexpression crispr gba lamp2 alpha-synuclein ha western blot',
      description:'Lentiviral knockdown, adenoviral overexpression, and CRISPR editing in iPSC neurons.'},
+    {page:'genetics.html#ip-fraction', title:'IP & Biochemical Fractionation', category:'Research', section:'IP / Fractionation',
+     keywords:'immunoprecipitation co-ip biochemical fractionation sequential extraction triton sds pellet soluble membrane insoluble lyso-ip tmem192 alpha-synuclein hdac6 aggresome detergent-resistant aggregates protein interaction',
+     description:'Immunoprecipitation and sequential detergent fractionation for protein compartmentalization analysis.'},
+    {page:'genetics.html#qpcr-data', title:'RT-qPCR Gene Expression Data', category:'Data', section:'qPCR Data',
+     keywords:'qpcr rt-qpcr fold change gene expression da neuron cardiomyocyte beta cell heatmap multi-lineage viral host genes spike calu-3 innate immunity ifn ifit mx1 th nurr1 foxa2 primer taqman sybr',
+     description:'RT-qPCR datasets from iPSC differentiation and viral host-response experiments.'},
+    {page:'genetics.html#flow-data', title:'Flow Cytometry Data', category:'Data', section:'Flow Data',
+     keywords:'flow cytometry data immune profiling checkpoint ipsc differentiation qc t cell b cell lrrk2 wt lymph node spleen cd4 cd8 cd19 nk pd-1 ctla-4 tim-3 lag-3 tigit til ctnt nkx6.1 c-peptide',
+     description:'Multicolor flow cytometry datasets from immune profiling, iPSC QC, and checkpoint biology.'},
+    {page:'genetics.html#virology-data', title:'Virology Data — Internalization & Transduction', category:'Data', section:'Virology',
+     keywords:'virology sars-cov-2 spike internalization cme clathrin pseudovirus pikfyve csnk2 lentivirus adenovirus aav transduction moi dose-response kinase inhibitor apilimod silmitasertib compound 17 viral entry replication host-directed antiviral',
+     description:'Viral internalization kinetics, pseudoviral infectivity, host kinase dose-response, and transduction optimization.'},
     {page:'drug-discovery.html', title:'Drug Discovery & Translation', category:'Research', section:'',
      keywords:'parkin agonist tac lysosomal rescue antivirals biomarker strategy preclinical compound testing small molecule screening sar dose response pseudovirus sars-cov-2 pikfyve csnk2 hplc compound purity analytical characterization dls dynamic light scattering particle size nanoparticle formulation lc-ms pharmacokinetics target engagement pharmacodynamic',
      description:'Small-molecule drug discovery for Parkinson\'s disease and antiviral target validation.'},
@@ -2949,6 +3203,383 @@ new Chart(document.getElementById('pcrChart').getContext('2d'), {
   options: { responsive: true, plugins: { legend: { display: false }},
     scales: { y: { beginAtZero: true, max: 5, ticks: { stepSize: 1 }, title: { display: true, text: 'Copies/genome' }}}}
 });
+</script>
+
+<script>
+/* ══════════════════════════════════════════
+   INTERACTIVE CHART ENGINE
+   Canvas-based charts for data sections 07-09
+   ══════════════════════════════════════════ */
+(function(){
+  var accent = '#c0392b';
+  var accentB = '#2980b9';
+  var accentG = '#27ae60';
+  var accentO = '#e67e22';
+  var accentP = '#8e44ad';
+  var mid = '#6b7280';
+  var ink = '#0f1419';
+  var rule = '#d4d0c8';
+
+  function getCtx(id) {
+    var c = document.getElementById(id);
+    if (!c) return null;
+    var dpr = window.devicePixelRatio || 1;
+    var rect = c.parentElement.getBoundingClientRect();
+    c.style.width = '100%';
+    c.style.height = c.height + 'px';
+    c.width = rect.width * dpr;
+    c.height = parseInt(c.style.height) * dpr;
+    var ctx = c.getContext('2d');
+    ctx.scale(dpr, dpr);
+    ctx.cw = rect.width;
+    ctx.ch = parseInt(c.style.height);
+    return ctx;
+  }
+
+  function drawBarChart(ctx, data, opts) {
+    if (!ctx) return;
+    var cw = ctx.cw, ch = ctx.ch;
+    var pad = opts.pad || {t:40,r:30,b:80,l:60};
+    var pw = cw - pad.l - pad.r;
+    var ph = ch - pad.t - pad.b;
+    var maxVal = opts.maxVal || Math.max.apply(null, data.map(function(d){ return Array.isArray(d.val) ? Math.max.apply(null,d.val) : d.val; })) * 1.15;
+    var grouped = Array.isArray(data[0].val);
+    var nGroups = data.length;
+    var nBars = grouped ? data[0].val.length : 1;
+    var groupW = pw / nGroups;
+    var barW = Math.min(grouped ? groupW/(nBars+1) : groupW*0.55, 48);
+    var colors = opts.colors || [accent, accentB, accentG, accentO, accentP];
+
+    ctx.strokeStyle = rule; ctx.lineWidth = 0.5;
+    ctx.font = '11px IBM Plex Sans, sans-serif';
+    ctx.fillStyle = mid; ctx.textAlign = 'right';
+    for (var i = 0; i <= 5; i++) {
+      var y = pad.t + ph - (i/5)*ph;
+      ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(cw-pad.r, y); ctx.stroke();
+      var label = (maxVal * i / 5);
+      ctx.fillText(label >= 10 ? Math.round(label).toString() : label.toFixed(1), pad.l - 8, y + 4);
+    }
+    if (opts.yLabel) {
+      ctx.save(); ctx.translate(14, pad.t + ph/2); ctx.rotate(-Math.PI/2);
+      ctx.font = '11px IBM Plex Sans, sans-serif'; ctx.fillStyle = mid; ctx.textAlign = 'center';
+      ctx.fillText(opts.yLabel, 0, 0); ctx.restore();
+    }
+
+    data.forEach(function(d, gi) {
+      var gx = pad.l + gi * groupW + groupW/2;
+      if (grouped) {
+        d.val.forEach(function(v, bi) {
+          var bx = gx - (nBars * barW)/2 + bi * barW + barW * 0.08;
+          var bh = (v / maxVal) * ph;
+          ctx.fillStyle = colors[bi % colors.length]; ctx.globalAlpha = 0.85;
+          ctx.beginPath(); var r = 3;
+          ctx.moveTo(bx, pad.t + ph); ctx.lineTo(bx, pad.t + ph - bh + r);
+          ctx.quadraticCurveTo(bx, pad.t + ph - bh, bx + r, pad.t + ph - bh);
+          ctx.lineTo(bx + barW*0.84 - r, pad.t + ph - bh);
+          ctx.quadraticCurveTo(bx + barW*0.84, pad.t + ph - bh, bx + barW*0.84, pad.t + ph - bh + r);
+          ctx.lineTo(bx + barW*0.84, pad.t + ph); ctx.fill(); ctx.globalAlpha = 1;
+        });
+      } else {
+        var bx = gx - barW/2;
+        var bh = (d.val / maxVal) * ph;
+        ctx.fillStyle = d.color || colors[gi % colors.length]; ctx.globalAlpha = 0.85;
+        ctx.beginPath(); var r = 3;
+        ctx.moveTo(bx, pad.t + ph); ctx.lineTo(bx, pad.t + ph - bh + r);
+        ctx.quadraticCurveTo(bx, pad.t + ph - bh, bx + r, pad.t + ph - bh);
+        ctx.lineTo(bx + barW - r, pad.t + ph - bh);
+        ctx.quadraticCurveTo(bx + barW, pad.t + ph - bh, bx + barW, pad.t + ph - bh + r);
+        ctx.lineTo(bx + barW, pad.t + ph); ctx.fill(); ctx.globalAlpha = 1;
+        if (d.err) {
+          var errPx = (d.err / maxVal) * ph; var cx = bx + barW/2; var ty = pad.t + ph - bh;
+          ctx.strokeStyle = ink; ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(cx, ty - errPx); ctx.lineTo(cx, ty + errPx); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(cx-4, ty - errPx); ctx.lineTo(cx+4, ty - errPx); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(cx-4, ty + errPx); ctx.lineTo(cx+4, ty + errPx); ctx.stroke();
+        }
+        if (d.sig) {
+          ctx.font = '12px IBM Plex Sans, sans-serif'; ctx.fillStyle = accent; ctx.textAlign = 'center';
+          ctx.fillText(d.sig, bx + barW/2, pad.t + ph - bh - (d.err ? (d.err/maxVal)*ph : 0) - 8);
+        }
+      }
+      ctx.font = '10px IBM Plex Sans, sans-serif'; ctx.fillStyle = ink; ctx.textAlign = 'center';
+      if (d.label.length > 10) {
+        ctx.save(); ctx.translate(gx, pad.t + ph + 12); ctx.rotate(-Math.PI/6);
+        ctx.textAlign = 'right'; ctx.fillText(d.label, 0, 0); ctx.restore();
+      } else { ctx.fillText(d.label, gx, pad.t + ph + 16); }
+    });
+
+    if (opts.legend) {
+      var lx = pad.l + 8, ly = pad.t - 20;
+      ctx.font = '11px IBM Plex Sans, sans-serif';
+      opts.legend.forEach(function(l, i) {
+        ctx.fillStyle = colors[i]; ctx.fillRect(lx, ly - 8, 12, 12);
+        ctx.fillStyle = ink; ctx.textAlign = 'left'; ctx.fillText(l, lx + 16, ly + 2);
+        lx += ctx.measureText(l).width + 36;
+      });
+    }
+  }
+
+  function drawLineChart(ctx, series, xLabels, opts) {
+    if (!ctx) return;
+    var cw = ctx.cw, ch = ctx.ch;
+    var pad = opts.pad || {t:50,r:30,b:60,l:60};
+    var pw = cw - pad.l - pad.r; var ph = ch - pad.t - pad.b;
+    var maxVal = opts.maxVal || 100;
+    var colors = opts.colors || [accent, accentB, accentG, accentO, accentP];
+
+    ctx.font = '11px IBM Plex Sans, sans-serif'; ctx.fillStyle = mid; ctx.textAlign = 'right';
+    for (var i = 0; i <= 5; i++) {
+      var y = pad.t + ph - (i/5)*ph;
+      ctx.strokeStyle = rule; ctx.lineWidth = 0.5;
+      ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(cw-pad.r, y); ctx.stroke();
+      ctx.fillText(Math.round(maxVal * i / 5), pad.l - 8, y + 4);
+    }
+    ctx.textAlign = 'center'; ctx.fillStyle = ink;
+    xLabels.forEach(function(xl, xi) {
+      var x = pad.l + (xi / (xLabels.length - 1)) * pw;
+      ctx.fillText(xl, x, pad.t + ph + 20);
+    });
+    if (opts.yLabel) { ctx.save(); ctx.translate(14, pad.t + ph/2); ctx.rotate(-Math.PI/2); ctx.fillStyle = mid; ctx.textAlign = 'center'; ctx.fillText(opts.yLabel, 0, 0); ctx.restore(); }
+    if (opts.xLabel) { ctx.fillStyle = mid; ctx.textAlign = 'center'; ctx.fillText(opts.xLabel, pad.l + pw/2, ch - 8); }
+
+    series.forEach(function(s, si) {
+      ctx.strokeStyle = colors[si]; ctx.lineWidth = 2;
+      ctx.setLineDash(s.dashed ? [6,4] : []);
+      ctx.beginPath();
+      s.data.forEach(function(v, di) {
+        var x = pad.l + (di / (xLabels.length - 1)) * pw;
+        var y = pad.t + ph - (v / maxVal) * ph;
+        if (di === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      });
+      ctx.stroke(); ctx.setLineDash([]);
+      s.data.forEach(function(v, di) {
+        var x = pad.l + (di / (xLabels.length - 1)) * pw;
+        var y = pad.t + ph - (v / maxVal) * ph;
+        ctx.fillStyle = colors[si]; ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(x, y, 2, 0, Math.PI * 2); ctx.fill();
+      });
+      if (s.err) {
+        ctx.fillStyle = colors[si]; ctx.globalAlpha = 0.1; ctx.beginPath();
+        s.data.forEach(function(v, di) { var x = pad.l + (di / (xLabels.length - 1)) * pw; var y = pad.t + ph - ((v + s.err[di]) / maxVal) * ph; if (di === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); });
+        for (var di = s.data.length - 1; di >= 0; di--) { var x = pad.l + (di / (xLabels.length - 1)) * pw; var y = pad.t + ph - ((s.data[di] - s.err[di]) / maxVal) * ph; ctx.lineTo(x, y); }
+        ctx.closePath(); ctx.fill(); ctx.globalAlpha = 1;
+      }
+    });
+    if (opts.legend) {
+      var lx = pad.l + 8, ly = pad.t - 26;
+      ctx.font = '11px IBM Plex Sans, sans-serif';
+      opts.legend.forEach(function(l, i) {
+        ctx.strokeStyle = colors[i]; ctx.lineWidth = 2; ctx.setLineDash(series[i] && series[i].dashed ? [4,3] : []);
+        ctx.beginPath(); ctx.moveTo(lx, ly); ctx.lineTo(lx + 18, ly); ctx.stroke(); ctx.setLineDash([]);
+        ctx.fillStyle = colors[i]; ctx.beginPath(); ctx.arc(lx + 9, ly, 3, 0, Math.PI*2); ctx.fill();
+        ctx.fillStyle = ink; ctx.textAlign = 'left'; ctx.fillText(l, lx + 24, ly + 4);
+        lx += ctx.measureText(l).width + 44;
+      });
+    }
+  }
+
+  /* ── CHART: qPCR DA Neuron Markers ── */
+  setTimeout(function(){
+    var ctx = getCtx('chart-qpcr-da');
+    drawBarChart(ctx, [
+      {label:'TH', val:142.3, err:18.4, sig:'***', color:accent},
+      {label:'NURR1', val:98.7, err:12.1, sig:'***', color:accent},
+      {label:'FOXA2', val:87.4, err:9.8, sig:'***', color:accent},
+      {label:'LMX1A', val:63.1, err:8.2, sig:'***', color:accent},
+      {label:'EN1', val:54.8, err:7.6, sig:'**', color:accent},
+      {label:'PITX3', val:41.2, err:6.3, sig:'**', color:accent},
+      {label:'DAT', val:28.6, err:4.9, sig:'**', color:accentB},
+      {label:'GIRK2', val:19.4, err:3.7, sig:'*', color:accentB},
+      {label:'OCT4', val:0.02, err:0.01, color:mid},
+      {label:'NANOG', val:0.04, err:0.01, color:mid}
+    ], {yLabel:'Fold Change (2^−ΔΔCt)'});
+  }, 300);
+
+  /* ── CHART: qPCR Heatmap ── */
+  setTimeout(function(){
+    var ctx = getCtx('chart-qpcr-heatmap');
+    if (!ctx) return;
+    var cw = ctx.cw, ch = ctx.ch;
+    var genes = ['TH','NURR1','FOXA2','TNNT2','NKX2.5','MYH7','INS','NKX6.1','PDX1','SOX17','MAP2','SYN1'];
+    var lineages = ['DA Neuron','Cardiomyocyte','β-Cell','Def. Endoderm','Cortical Neuron'];
+    var data = [[7.2,-0.3,0.4,-0.1,2.1],[6.6,0.1,-0.2,0.2,1.8],[6.4,0.3,5.8,6.1,0.4],[-0.4,8.9,-0.1,-0.3,-0.2],[0.1,7.4,0.3,-0.1,0.1],[-0.2,7.8,-0.3,-0.2,-0.1],[-0.1,-0.2,8.4,-0.3,-0.1],[0.2,0.1,6.2,0.4,0.1],[0.1,-0.1,6.8,1.2,0.0],[0.3,0.2,1.4,7.6,0.1],[5.4,0.3,-0.2,-0.1,6.8],[4.8,-0.1,-0.3,-0.2,5.9]];
+    var padL = 70, padT = 40, padR = 80, padB = 20;
+    var cellW = (cw - padL - padR) / lineages.length;
+    var cellH = (ch - padT - padB) / genes.length;
+    genes.forEach(function(g, gi) {
+      lineages.forEach(function(l, li) {
+        var v = data[gi][li]; var r, gc, b;
+        if (v > 0) { var intensity = Math.min(v / 9, 1); r = Math.round(192+(220-192)*(1-intensity)); gc = Math.round(57+(220-57)*(1-intensity)); b = Math.round(43+(220-43)*(1-intensity)); }
+        else { var intensity = Math.min(Math.abs(v) / 3, 1); r = Math.round(41+(220-41)*(1-intensity)); gc = Math.round(128+(220-128)*(1-intensity)); b = Math.round(185+(220-185)*(1-intensity)); }
+        ctx.fillStyle = 'rgb('+r+','+gc+','+b+')';
+        ctx.fillRect(padL + li * cellW, padT + gi * cellH, cellW - 1, cellH - 1);
+        ctx.font = '10px IBM Plex Mono, monospace'; ctx.fillStyle = Math.abs(v) > 4 ? '#fff' : ink;
+        ctx.textAlign = 'center'; ctx.fillText(v.toFixed(1), padL + li * cellW + cellW/2, padT + gi * cellH + cellH/2 + 4);
+      });
+      ctx.font = '11px IBM Plex Mono, monospace'; ctx.fillStyle = ink; ctx.textAlign = 'right';
+      ctx.fillText(g, padL - 8, padT + gi * cellH + cellH/2 + 4);
+    });
+    ctx.font = '10px IBM Plex Sans, sans-serif'; ctx.fillStyle = ink; ctx.textAlign = 'center';
+    lineages.forEach(function(l, li) { ctx.save(); ctx.translate(padL + li * cellW + cellW/2, padT - 6); ctx.rotate(-Math.PI/8); ctx.fillText(l, 0, 0); ctx.restore(); });
+    var scaleX = cw - padR + 14, scaleH = ch - padT - padB;
+    for (var i = 0; i < scaleH; i++) {
+      var v = 9 * (1 - i/scaleH) - 2; var r, gc, b;
+      if (v > 0) { var intensity = Math.min(v / 9, 1); r = Math.round(192+(220-192)*(1-intensity)); gc = Math.round(57+(220-57)*(1-intensity)); b = Math.round(43+(220-43)*(1-intensity)); }
+      else { var intensity = Math.min(Math.abs(v) / 3, 1); r = Math.round(41+(220-41)*(1-intensity)); gc = Math.round(128+(220-128)*(1-intensity)); b = Math.round(185+(220-185)*(1-intensity)); }
+      ctx.fillStyle = 'rgb('+r+','+gc+','+b+')'; ctx.fillRect(scaleX, padT + i, 14, 1);
+    }
+    ctx.font = '9px IBM Plex Mono, monospace'; ctx.fillStyle = mid; ctx.textAlign = 'left';
+    ctx.fillText('+9', scaleX + 18, padT + 8); ctx.fillText('0', scaleX + 18, padT + scaleH * 0.78);
+    ctx.fillText('−2', scaleX + 18, padT + scaleH); ctx.fillText('log₂FC', scaleX - 2, padT - 6);
+  }, 400);
+
+  /* ── CHART: qPCR Viral Host Genes ── */
+  setTimeout(function(){
+    var ctx = getCtx('chart-qpcr-viral');
+    drawBarChart(ctx, [
+      {label:'ACE2', val:1.1, err:0.18, color:mid}, {label:'TMPRSS2', val:1.3, err:0.22, color:mid},
+      {label:'CLTC', val:2.8, err:0.34, sig:'**', color:accent}, {label:'PIK3C3', val:2.1, err:0.28, sig:'*', color:accent},
+      {label:'PIKFYVE', val:1.9, err:0.24, sig:'*', color:accent}, {label:'RAB5A', val:2.4, err:0.31, sig:'**', color:accentO},
+      {label:'RAB7A', val:1.7, err:0.21, sig:'*', color:accentO}, {label:'IFNB1', val:18.6, err:3.2, sig:'***', color:accentG},
+      {label:'IFIT1', val:24.3, err:4.1, sig:'***', color:accentG}, {label:'MX1', val:16.8, err:2.9, sig:'***', color:accentG},
+      {label:'ISG15', val:12.4, err:2.1, sig:'***', color:accentG}, {label:'CXCL10', val:8.7, err:1.8, sig:'***', color:accentP}
+    ], {yLabel:'Fold Change (2^−ΔΔCt)'});
+  }, 500);
+
+  /* ── CHART: Flow Immune Populations ── */
+  setTimeout(function(){
+    var ctx = getCtx('chart-flow-immune');
+    drawBarChart(ctx, [
+      {label:'CD4+ T', val:[28.4, 22.1]}, {label:'CD8+ T', val:[18.6, 14.3]},
+      {label:'B cells', val:[34.2, 38.7]}, {label:'NK cells', val:[4.8, 3.6]},
+      {label:'Tregs', val:[6.2, 4.1]}, {label:'Monocytes', val:[5.1, 8.4]},
+      {label:'Neutrophils', val:[2.3, 5.8]}, {label:'Ki67+ (CD4)', val:[8.4, 12.6]}
+    ], {yLabel:'% of Live CD45+ Singlets', legend:['WT','LRRK2 G2019S'], colors:[accentB, accent]});
+  }, 600);
+
+  /* ── CHART: Flow iPSC QC ── */
+  setTimeout(function(){
+    var ctx = getCtx('chart-flow-ipsc');
+    drawBarChart(ctx, [
+      {label:'TH', val:[82.4, 4.2, 2.1]}, {label:'FOXA2', val:[78.6, 3.8, 52.1]},
+      {label:'TUJ1', val:[94.2, 8.4, 5.6]}, {label:'cTnT', val:[6.2, 91.8, 3.1]},
+      {label:'NKX2.5', val:[2.1, 84.6, 1.8]}, {label:'C-Peptide', val:[1.4, 2.8, 68.4]},
+      {label:'NKX6.1', val:[0.8, 1.2, 62.8]}, {label:'PDX1', val:[1.1, 0.9, 74.2]}
+    ], {yLabel:'% Positive (Live Singlets)', legend:['DA Neurons','Cardiomyocytes','β-Cells'], colors:[accent, accentB, accentG]});
+  }, 700);
+
+  /* ── CHART: Flow Checkpoint ── */
+  setTimeout(function(){
+    var ctx = getCtx('chart-flow-checkpoint');
+    drawBarChart(ctx, [
+      {label:'PD-1', val:[12.4, 68.2]}, {label:'CTLA-4', val:[8.6, 34.1]},
+      {label:'TIM-3', val:[4.2, 42.8]}, {label:'LAG-3', val:[6.8, 38.4]},
+      {label:'TIGIT', val:[9.4, 52.6]}
+    ], {yLabel:'% Positive (CD3+CD8+)', legend:['Peripheral Blood','TIL'], colors:[accentB, accent]});
+  }, 800);
+
+  /* ── CHART: Viral Internalization Kinetics ── */
+  setTimeout(function(){
+    var ctx = getCtx('chart-viral-kinetics');
+    drawLineChart(ctx, [
+      {label:'DMSO', data:[0, 24.6, 52.3, 78.4, 88.2, 94.1], err:[0, 3.2, 4.8, 5.1, 4.2, 3.4]},
+      {label:'Pitstop 2', data:[0, 8.4, 18.6, 28.2, 34.1, 38.8], err:[0, 2.1, 3.4, 3.8, 4.1, 3.6]},
+      {label:'Dynasore', data:[0, 6.2, 14.8, 24.6, 30.4, 36.2], err:[0, 1.8, 2.8, 3.2, 3.6, 3.2]},
+      {label:'CHC siRNA', data:[0, 4.8, 11.2, 18.4, 22.6, 26.1], err:[0, 1.4, 2.2, 2.8, 3.1, 2.8], dashed:true}
+    ], ['0','2','5','10','20','30'],
+    {yLabel:'% Spike Internalized', xLabel:'Time (min)', maxVal:110, legend:['DMSO','Pitstop 2','Dynasore','CHC siRNA'], colors:[mid, accent, accentO, accentB]});
+  }, 900);
+
+  /* ── CHART: CME Across Cell Lines ── */
+  setTimeout(function(){
+    var ctx = getCtx('chart-viral-cme');
+    drawBarChart(ctx, [
+      {label:'HEK-ACE2', val:[100, 28.4, 42.6, 38.1, 18.2]},
+      {label:'Vero', val:[100, 31.2, 46.8, 41.4, 21.6]},
+      {label:'Calu-3', val:[100, 34.8, 48.2, 44.6, 24.8]},
+      {label:'Caco-2', val:[100, 32.6, 44.4, 40.8, 22.4]}
+    ], {yLabel:'Spike Uptake (% DMSO)', legend:['DMSO','CHC siRNA','Pitstop 2','Dynasore','Pseudovirus'], colors:[mid, accent, accentO, accentB, accentP]});
+  }, 1000);
+
+  /* ── CHART: Kinase Dose-Response ── */
+  setTimeout(function(){
+    var ctx = getCtx('chart-viral-doseresponse');
+    drawLineChart(ctx, [
+      {label:'Cmpd 17 Entry', data:[98, 82, 56, 32, 18, 12, 8], err:[4, 6, 5, 4, 3, 2, 2]},
+      {label:'Cmpd 17 Repl', data:[96, 74, 42, 18, 8, 4, 3], err:[5, 6, 5, 3, 2, 1, 1], dashed:true},
+      {label:'Silmitasertib Entry', data:[97, 88, 68, 48, 38, 32, 28], err:[4, 5, 6, 5, 4, 4, 3]},
+      {label:'Silmitasertib Repl', data:[94, 78, 54, 32, 18, 12, 8], err:[5, 6, 5, 4, 3, 2, 2], dashed:true},
+      {label:'Cmpd 30 (neg)', data:[100, 98, 96, 94, 96, 95, 94], err:[3, 3, 4, 3, 4, 3, 3], dashed:true}
+    ], ['0.01','0.1','1','10','100','1k','10k'],
+    {yLabel:'% of DMSO Control', xLabel:'Concentration (nM)', maxVal:115, legend:['Cmpd17 Ent','Cmpd17 Rep','Silm Ent','Silm Rep','Cmpd30'], colors:[accent, accent, accentB, accentB, mid]});
+  }, 1100);
+
+  /* ── CHART: Viral Transduction ── */
+  setTimeout(function(){
+    var ctx = getCtx('chart-viral-transduction');
+    drawBarChart(ctx, [
+      {label:'DA Neurons', val:[72.4, 48.6, 18.2, 12.4, 42.8, 68.4]},
+      {label:'Cardiomyocytes', val:[64.8, 52.1, 8.4, 6.2, 34.6, 58.2]},
+      {label:'HEK-293T', val:[92.4, 86.2, 42.6, 38.4, 74.8, 88.6]},
+      {label:'iPSC-Astrocytes', val:[58.6, 34.2, 24.8, 22.1, 48.2, 62.4]}
+    ], {yLabel:'% Transduced', legend:['Lenti','Ad5','AAV1','AAV2','AAV6','AAV9'], colors:[accent, accentB, accentG, accentO, accentP, '#2c3e50'], pad:{t:50,r:30,b:80,l:60}});
+  }, 1200);
+
+  /* ── CHART: MOI Optimization Dual-Axis ── */
+  setTimeout(function(){
+    var ctx = getCtx('chart-viral-moi');
+    if (!ctx) return;
+    var cw = ctx.cw, ch = ctx.ch;
+    var pad = {t:50,r:70,b:50,l:60};
+    var pw = cw - pad.l - pad.r; var ph = ch - pad.t - pad.b;
+    var mois = [1, 3, 5, 10, 15, 20, 30, 50];
+    var efficiency = [8.2, 22.4, 38.6, 62.1, 72.4, 78.8, 82.6, 84.2];
+    var viability = [98.4, 97.1, 95.8, 92.4, 88.6, 82.1, 68.4, 52.8];
+
+    ctx.font = '11px IBM Plex Sans, sans-serif';
+    for (var i = 0; i <= 5; i++) {
+      var y = pad.t + ph - (i/5)*ph;
+      ctx.strokeStyle = rule; ctx.lineWidth = 0.5;
+      ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(cw-pad.r, y); ctx.stroke();
+      ctx.fillStyle = accent; ctx.textAlign = 'right'; ctx.fillText(Math.round(100*i/5), pad.l - 8, y + 4);
+      ctx.fillStyle = accentB; ctx.textAlign = 'left'; ctx.fillText(Math.round(100*i/5), cw - pad.r + 8, y + 4);
+    }
+    ctx.save(); ctx.translate(14, pad.t + ph/2); ctx.rotate(-Math.PI/2); ctx.fillStyle = accent; ctx.textAlign = 'center'; ctx.fillText('% GFP+', 0, 0); ctx.restore();
+    ctx.save(); ctx.translate(cw - 10, pad.t + ph/2); ctx.rotate(Math.PI/2); ctx.fillStyle = accentB; ctx.textAlign = 'center'; ctx.fillText('% Viability', 0, 0); ctx.restore();
+    ctx.fillStyle = ink; ctx.textAlign = 'center';
+    mois.forEach(function(m, mi) { ctx.fillText('MOI ' + m, pad.l + (mi / (mois.length - 1)) * pw, pad.t + ph + 20); });
+
+    // Optimal zone
+    var optX1 = pad.l + (3 / (mois.length - 1)) * pw, optX2 = pad.l + (5 / (mois.length - 1)) * pw;
+    ctx.fillStyle = 'rgba(39, 174, 96, 0.08)'; ctx.fillRect(optX1, pad.t, optX2 - optX1, ph);
+    ctx.strokeStyle = accentG; ctx.lineWidth = 1; ctx.setLineDash([4,3]); ctx.strokeRect(optX1, pad.t, optX2 - optX1, ph); ctx.setLineDash([]);
+    ctx.font = '10px IBM Plex Sans, sans-serif'; ctx.fillStyle = accentG; ctx.textAlign = 'center'; ctx.fillText('Optimal', (optX1 + optX2)/2, pad.t + 14);
+
+    // Efficiency line
+    ctx.strokeStyle = accent; ctx.lineWidth = 2.5; ctx.beginPath();
+    efficiency.forEach(function(v, i) { var x = pad.l + (i / (mois.length - 1)) * pw; var y = pad.t + ph - (v / 100) * ph; if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); });
+    ctx.stroke();
+    efficiency.forEach(function(v, i) { var x = pad.l + (i / (mois.length - 1)) * pw; var y = pad.t + ph - (v / 100) * ph; ctx.fillStyle = accent; ctx.beginPath(); ctx.arc(x, y, 5, 0, Math.PI*2); ctx.fill(); ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(x, y, 2.5, 0, Math.PI*2); ctx.fill(); });
+
+    // Viability line
+    ctx.strokeStyle = accentB; ctx.lineWidth = 2.5; ctx.setLineDash([6,4]); ctx.beginPath();
+    viability.forEach(function(v, i) { var x = pad.l + (i / (mois.length - 1)) * pw; var y = pad.t + ph - (v / 100) * ph; if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); });
+    ctx.stroke(); ctx.setLineDash([]);
+    viability.forEach(function(v, i) { var x = pad.l + (i / (mois.length - 1)) * pw; var y = pad.t + ph - (v / 100) * ph; ctx.fillStyle = accentB; ctx.beginPath(); ctx.arc(x, y, 5, 0, Math.PI*2); ctx.fill(); ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(x, y, 2.5, 0, Math.PI*2); ctx.fill(); });
+
+    // Legend
+    var lx = pad.l + 8, ly = pad.t - 26;
+    ctx.font = '11px IBM Plex Sans, sans-serif';
+    ctx.strokeStyle = accent; ctx.lineWidth = 2; ctx.setLineDash([]);
+    ctx.beginPath(); ctx.moveTo(lx, ly); ctx.lineTo(lx+18, ly); ctx.stroke();
+    ctx.fillStyle = ink; ctx.textAlign = 'left'; ctx.fillText('Efficiency', lx + 24, ly + 4);
+    lx += 120;
+    ctx.strokeStyle = accentB; ctx.setLineDash([4,3]);
+    ctx.beginPath(); ctx.moveTo(lx, ly); ctx.lineTo(lx+18, ly); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = ink; ctx.fillText('Viability', lx + 24, ly + 4);
+  }, 1300);
+
+})();
 </script>
 
 </body>
