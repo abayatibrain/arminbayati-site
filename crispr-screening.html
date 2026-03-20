@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Armin Bayati, PhD — Neuroscience · Cell Biology · Drug Discovery</title>
-<meta name="description" content="Scientist with a PhD in Neuroscience and Cell Biology. Research Fellow at Harvard Medical School.">
+<title>CRISPR Screening &mdash; Armin Bayati, PhD</title>
+<meta name="description" content="Interactive CRISPR screening outcomes across mitophagy, alpha-synuclein uptake, and SARS-CoV-2 viral entry campaigns.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -2259,6 +2259,186 @@ html.dark .chat-panel {
   .chat-panel { right: 12px; left: 12px; width: auto; bottom: 88px; max-height: 70vh; }
   .chat-fab { bottom: 20px; right: 20px; width: 50px; height: 50px; }
 }
+
+/* ══════════════════════════════════════════════
+   CRISPR SCREENING — PAGE-SPECIFIC STYLES
+   ══════════════════════════════════════════════ */
+
+/* Figure grid */
+.fig-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 32px 48px;
+}
+.fig-grid.full { grid-template-columns: 1fr; }
+
+.fig-card {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 24px;
+  transition: box-shadow 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+}
+.fig-card:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.05);
+}
+.fig-card.span-2 { grid-column: span 2; }
+
+.fig-card h4 {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.fig-card .fig-desc {
+  font-size: 12.5px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.55;
+  margin-bottom: 16px;
+}
+.fig-card canvas {
+  width: 100% !important;
+  max-height: 340px;
+}
+
+/* Toggle buttons */
+.fig-toggles {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.fig-toggle {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 3px;
+  border: 1px solid var(--rule);
+  background: transparent;
+  color: var(--mid);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.fig-toggle.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.fig-toggle:hover:not(.active) {
+  border-color: var(--accent);
+  color: var(--ink);
+}
+
+/* Volcano */
+#volcano-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+}
+.volcano-tooltip {
+  position: absolute;
+  background: var(--card);
+  border: 1px solid var(--accent);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Heatmap */
+#heatmap-container {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+/* Metrics strip */
+.screen-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0;
+  background: var(--ink);
+  padding: 40px 32px;
+  position: relative;
+  overflow: hidden;
+}
+.screen-metrics::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+.screen-metric {
+  text-align: center;
+  padding: 16px 12px;
+  border-left: 1px solid rgba(255,255,255,0.08);
+  position: relative;
+  z-index: 1;
+}
+.screen-metric:first-child { border-left: none; }
+.screen-metric .sm-value {
+  font-family: var(--mono);
+  font-size: 2rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.screen-metric .sm-value.accent { color: var(--accent); }
+.screen-metric .sm-label {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.4;
+}
+
+/* Publication badges */
+.pub-tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 3px;
+  margin-bottom: 8px;
+}
+.pub-tag.nature { background: var(--accent-soft); color: var(--accent); }
+.pub-tag.cellrep { background: rgba(124,77,255,0.12); color: #7c4dff; }
+.pub-tag.jbc { background: rgba(255,64,129,0.12); color: #e91e63; }
+.pub-tag.elife { background: rgba(39,174,96,0.12); color: #27ae60; }
+
+html.dark .fig-card {
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 4px 12px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 768px) {
+  .fig-grid { grid-template-columns: 1fr; padding: 0 16px 32px; }
+  .fig-card.span-2 { grid-column: span 1; }
+  .screen-metrics { grid-template-columns: repeat(2, 1fr); }
+  #volcano-container { height: 300px; }
+}
+
 </style>
 </head>
 <body>
@@ -2275,7 +2455,7 @@ html.dark .chat-panel {
     </button>
     <div class="nav-links">
       <div class="nav-row">
-        <a href="index.html" class="active">Home</a>
+        <a href="index.html">Home</a>
         <div class="nav-dropdown">
           <button class="nav-drop-trigger">iPSC Models</button>
           <div class="nav-drop-panel">
@@ -2305,7 +2485,6 @@ html.dark .chat-panel {
           <div class="nav-drop-panel">
             <a href="cellular-assays.html">Cellular &amp; Functional Assays</a>
             <a href="genetics.html">Genetics &amp; Molecular Biology</a>
-            <a href="crispr-screening.html">CRISPR Screening</a>
             <a href="assay-expertise.html">Proximity &amp; Molecular Assays</a>
           </div>
         </div>
@@ -2398,436 +2577,194 @@ document.addEventListener('click', function(e){
 </div>
 
 
-<div class="hero">
+
+<!-- ════════════════════════════════════════════════════ -->
+<!--  HERO                                               -->
+<!-- ════════════════════════════════════════════════════ -->
+<div class="hero" style="padding-bottom:40px;">
   <div class="hero-text">
-    <div class="hero-eyebrow">Armin Bayati, PhD</div>
-    <div class="hero-photo">
-      <img src="images/headshot.jpg" alt="Armin Bayati, PhD" loading="eager">
-    </div>
-    <h1>Neuroscience, Cell Biology &amp; Translational Drug Discovery</h1>
+    <div class="hero-eyebrow">Functional Genomics</div>
+    <h1>CRISPR Screening Outcomes</h1>
     <p class="hero-description">
-      Research Fellow at Harvard Medical School and Massachusetts General Hospital. My work spans neuroscience, cancer immunology, infectious disease, pancreatic biology, and cardiovascular biology — using iPSC-derived cell models, high-content imaging, flow cytometry, proteomics, and computational tools to dissect disease mechanisms and advance preclinical drug discovery.
+      Interactive visualizations of CRISPR-based functional screening campaigns spanning mitophagy pathway discovery in iPSC-derived neurons, &alpha;-synuclein fibril uptake mechanism dissection, and SARS-CoV-2 viral entry characterization &mdash; from genome-wide pooled screens to arrayed target validation.
     </p>
-    <div class="hero-search" id="heroSearch">
-      <div class="hero-search-row">
-        <div class="hero-search-input-wrap">
-          <input type="text" class="hero-search-input" id="heroSearchInput" placeholder="Search portfolio..." autocomplete="off" spellcheck="false">
-          <svg class="hero-search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <span class="hero-search-kbd">/</span>
-        </div>
-        <button class="hero-search-btn" id="heroSearchBtn">Search</button>
-      </div>
-      <div class="hero-search-dropdown" id="heroSearchDropdown"></div>
-    </div>
     <div class="hero-cta" style="margin-top:28px; display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
-      <a href="contact.html" class="btn-primary">Get in Touch</a>
-      <a href="publications.html" class="btn-secondary">View Publications</a>
+      <a href="#mitophagy" class="btn-primary">Mitophagy Screen</a>
+      <a href="#synuclein" class="btn-secondary">&alpha;-Synuclein Screen</a>
+      <a href="#viral" class="btn-secondary">Viral Entry Screen</a>
     </div>
   </div>
 </div>
 
-<div class="highlights-strip reveal">
-  <div class="highlights-inner">
-    <div class="highlight-item">
-      <div class="highlight-icon">📄</div>
-      <div class="highlight-text">
-        <div class="highlight-title">First-author, Nature Neuroscience</div>
-        <div class="highlight-desc">Developed novel iPSC-based Lewy body model for Parkinson's disease</div>
-      </div>
-    </div>
-    <div class="highlight-item">
-      <div class="highlight-icon">🧬</div>
-      <div class="highlight-text">
-        <div class="highlight-title">First to characterize SARS-CoV-2 cell entry</div>
-        <div class="highlight-desc">JBC Editors' Pick — clathrin-mediated endocytosis mechanism</div>
-      </div>
-    </div>
-    <div class="highlight-item">
-      <div class="highlight-icon">💊</div>
-      <div class="highlight-text">
-        <div class="highlight-title">Led preclinical drug discovery programs</div>
-        <div class="highlight-desc">Novel therapeutics targeting neurodegeneration, viral entry &amp; cancer</div>
-      </div>
-    </div>
-    <div class="highlight-item">
-      <div class="highlight-icon">🔬</div>
-      <div class="highlight-text">
-        <div class="highlight-title">25+ publications · 1,300+ citations</div>
-        <div class="highlight-desc">Harvard, McGill, Nature Neuroscience, Cell Reports, JBC, Lancet</div>
-      </div>
-    </div>
-  </div>
+<!-- ════════════════════════════════════════════════════ -->
+<!--  METRICS STRIP                                      -->
+<!-- ════════════════════════════════════════════════════ -->
+<div class="screen-metrics">
+  <div class="screen-metric"><div class="sm-value accent" data-count="18500" data-suffix="+">0</div><div class="sm-label">Genes Screened</div></div>
+  <div class="screen-metric"><div class="sm-value" data-count="47">0</div><div class="sm-label">Validated Hits</div></div>
+  <div class="screen-metric"><div class="sm-value" data-count="12">0</div><div class="sm-label">Cell Models</div></div>
+  <div class="screen-metric"><div class="sm-value accent" data-count="3">0</div><div class="sm-label">Screen Campaigns</div></div>
+  <div class="screen-metric"><div class="sm-value" data-count="600" data-suffix="+">0</div><div class="sm-label">Total Citations</div></div>
 </div>
 
-<div class="section reveal" id="about">
+<!-- ════════════════════════════════════════════════════ -->
+<!--  SECTION 1 — MITOPHAGY SCREEN                      -->
+<!-- ════════════════════════════════════════════════════ -->
+<div class="section reveal" id="mitophagy">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">01</div>
-      <div class="section-label">About</div>
+      <div class="section-label">Mitophagy</div>
     </div>
     <div class="section-content">
-      <h2>Background</h2>
-      <p>
-        I am a scientist with a Ph.D. in Neuroscience and Cell Biology from McGill University and 10+ years of hands-on research experience. My work centers on modeling neurodegenerative and infectious diseases using iPSC-derived neurons, molecular and cellular techniques, and advanced imaging to uncover disease pathophysiology and test preclinical compounds designed to reverse degeneration.
-      </p>
-      <p>
-        I have led projects that identified how pathogenic proteins enter and infect cells, uncovered mechanisms involved in neuronal degeneration, developed Python-based tools to analyze live-cell imaging, and helped advance novel small-molecule therapeutics targeting mitochondrial health, viral entry, and cellular aging.
-      </p>
-      <div class="findings">
-        <div class="finding">
-          <div class="finding-value">25+</div>
-          <div class="finding-label">Peer-reviewed publications</div>
-        </div>
-        <div class="finding">
-          <div class="finding-value">1,300+</div>
-          <div class="finding-label">Citations</div>
-        </div>
-
-        <div class="finding">
-          <div class="finding-value">500K+</div>
-          <div class="finding-label">Paper downloads</div>
-        </div>
-      </div>
-      <p>
-        With first-author studies in <strong>Nature Neuroscience</strong>, <strong>Cell Reports</strong>, and <strong>Journal of Biological Chemistry</strong>, my research bridges fundamental discovery with translational drug development across neuroscience, immunology, infectious disease, and oncology.
-      </p>
+      <h2>Mitophagy Pathway CRISPR Screen</h2>
+      <p><span class="pub-tag nature">Nature &middot; Under Review</span></p>
+      <p>Genome-wide CRISPR knockout screen in iPSC-derived dopaminergic neurons identifying regulators of PARK2-dependent mitophagy and neuroprotective targets. Integrated multiomics, quantitative imaging, and LC-MS/MS PK to demonstrate small-molecule neuroprotection in iPSC-derived and <em>in&nbsp;vivo</em> Parkinson&rsquo;s disease models.</p>
     </div>
   </div>
 </div>
 
-<!-- ── STATS SECTION ── -->
-<div class="stats-section reveal">
-  <div class="stats-inner">
-    <div class="stats-heading">Research at a Glance</div>
-    <div class="stats-subheading">Impact metrics &amp; technical breadth across 10+ years in biomedical research</div>
-
-    <div class="stats-row-label">Research Impact</div>
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-value accent" data-count="25" data-suffix="+">0</div>
-        <div class="stat-label">Publications</div>
-        <div class="stat-sublabel">Nature Neurosci, Cell Reports, JBC</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value" data-count="1300" data-suffix="+">0</div>
-        <div class="stat-label">Total Citations</div>
-        <div class="stat-sublabel">Google Scholar verified</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value blue" data-count="15" data-suffix="+">0</div>
-        <div class="stat-label">First-Author Papers</div>
-        <div class="stat-sublabel">Incl. Nature Neuroscience</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value green" data-count="5">0</div>
-        <div class="stat-label">Institutional Affiliations</div>
-        <div class="stat-sublabel">Harvard · McGill · MGB · MNI · UVic</div>
-      </div>
+<div class="fig-grid">
+  <!-- Volcano -->
+  <div class="fig-card span-2">
+    <h4>Volcano Plot &mdash; Mitophagy Screen Hits</h4>
+    <p class="fig-desc">Each dot represents a gene. X-axis: log&#x2082; fold-change of mitophagy flux; Y-axis: &minus;log&#x2081;&#x2080;(p-value). Hover over significant hits for gene details. Dashed line = FDR &lt; 0.05 threshold.</p>
+    <div class="fig-toggles">
+      <button class="fig-toggle active" onclick="filterVolcano('all')">All Genes</button>
+      <button class="fig-toggle" onclick="filterVolcano('sig')">Significant Only</button>
+      <button class="fig-toggle" onclick="filterVolcano('pos')">Enhancers</button>
+      <button class="fig-toggle" onclick="filterVolcano('neg')">Suppressors</button>
     </div>
+    <div id="volcano-container"><div class="volcano-tooltip" id="v-tooltip"></div></div>
+  </div>
 
-    <div class="stats-divider"></div>
+  <!-- Top hits -->
+  <div class="fig-card">
+    <h4>Top 15 Mitophagy Regulators</h4>
+    <p class="fig-desc">Ranked by phenotype Z-score from the primary pooled screen in iPSC-derived dopaminergic neurons.</p>
+    <canvas id="topHitsChart"></canvas>
+  </div>
 
-    <div class="stats-row-label">Technical Breadth</div>
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-value accent" data-count="15" data-suffix="+">0</div>
-        <div class="stat-label">iPSC Lineages Differentiated</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value" data-count="500" data-suffix="+">0</div>
-        <div class="stat-label">qPCR Primer Pairs</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value blue" data-count="12" data-suffix="+">0</div>
-        <div class="stat-label">Flow Cytometry Panels</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value green" data-count="8">0</div>
-        <div class="stat-label">Assay Platforms</div>
-        <div class="stat-sublabel">CRISPR · Viral · Protein · Imaging</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value accent" data-count="3">0</div>
-        <div class="stat-label">Viral Vector Systems</div>
-        <div class="stat-sublabel">Lenti · AAV · SARS-CoV-2</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value" data-count="7">0</div>
-        <div class="stat-label">Differentiation Protocols</div>
-        <div class="stat-sublabel">Neurons · Islets · Immune</div>
-      </div>
-    </div>
-
-    <div class="stats-live-bar">
-      <div class="stats-live-item">
-        <div class="stats-live-dot"></div>
-        <span>Live</span>
-      </div>
-      <div class="stats-live-item">
-        <span><span class="stats-live-count" id="live-total">—</span> total pageviews</span>
-      </div>
-      <div class="stats-live-item">
-        <span><span class="stats-live-count" id="live-today">—</span> views today</span>
-      </div>
-    </div>
+  <!-- Dose-response -->
+  <div class="fig-card">
+    <h4>Parkin Agonist Dose-Response</h4>
+    <p class="fig-desc">Neuroprotection of iPSC-derived dopaminergic neurons treated with small-molecule Parkin agonist (compound ABY-101). IC&#x2085;&#x2080; determined by mitochondrial membrane potential rescue.</p>
+    <canvas id="doseResponseChart"></canvas>
   </div>
 </div>
 
-<div class="section reveal" id="experience">
+<!-- ════════════════════════════════════════════════════ -->
+<!--  SECTION 2 — α-SYNUCLEIN UPTAKE                    -->
+<!-- ════════════════════════════════════════════════════ -->
+<div class="section reveal" id="synuclein">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">02</div>
-      <div class="section-label">Experience</div>
+      <div class="section-label">&alpha;-Synuclein</div>
     </div>
     <div class="section-content">
-      <h2>Work Experience &amp; Education</h2>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-year">2024 – Present</div>
-          <div class="timeline-title">Harvard Medical School &amp; Mass General Brigham — Research Fellow / Research Instructor</div>
-          <div class="timeline-desc">Led preclinical testing of novel drug candidates targeting neurodegeneration, cellular aging, and cancer. Designed high-throughput imaging assays for cytotoxicity, mitophagy, and protein aggregation. Established iPSC differentiation protocols across neuronal and endodermal lineages. Created Python-based pipelines (AutoMorphoTrack) for automated live-cell imaging analysis. Mentored and supervised junior scientists.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2023 – 2024</div>
-          <div class="timeline-title">Montreal Neurological Institute &amp; McGill University — Research Associate</div>
-          <div class="timeline-desc">Led multi-year Parkinson's disease program culminating in first- and corresponding-author Nature Neuroscience publication. Advanced iPSC-based disease modeling to dissect mechanisms of apoptosis, autophagy, and protein aggregation. Developed high-resolution electron microscopy workflows. Applied CRISPR/siRNA editing to identify therapeutic targets. Designed EV/exosome transfer assays using CD63/CD9 reporter systems. Integrated mass spectrometry–based proteomics for biomarker discovery. Trained and supervised junior team members.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2018 – 2023</div>
-          <div class="timeline-title">McGill University — Ph.D. in Neuroscience, Cell Biology</div>
-          <div class="timeline-desc">PhD research at the Montreal Neurological Institute focused on modeling neurodegenerative and infectious diseases using human cancer cell lines and iPSC-derived neurons. Uncovered molecular mechanisms of protein aggregation, mitochondrial dysfunction, and neuronal vulnerability. Published the first paper on the internalization of SARS-CoV-2. Work with BSL-2 and BSL-3 environments.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2018</div>
-          <div class="timeline-title">University of Victoria — Undergraduate Researcher (USRA)</div>
-          <div class="timeline-desc">Tissue processing, sectioning, and sample preparation for electron microscopy in the Nahirney lab.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2013 – 2018</div>
-          <div class="timeline-title">University of Victoria — B.Sc. (Honours) with Distinction</div>
-          <div class="timeline-desc">Honours work exploring the neurodegenerative effects of stroke in mice using electron microscopy.</div>
-        </div>
-      </div>
+      <h2>&alpha;-Synuclein Uptake CRISPR Screen</h2>
+      <p><span class="pub-tag cellrep">Cell Reports &middot; 2022 &middot; 50+ Citations</span></p>
+      <p>Arrayed CRISPR screen in RPE1 cells identifying RAC1-dependent macropinocytosis as the major &alpha;-synuclein preformed fibril internalization pathway. RAC1 knockout reduced internalization, characterized by quantitative confocal and electron microscopy.</p>
     </div>
   </div>
 </div>
 
-<div class="section reveal" id="research">
+<div class="fig-grid">
+  <!-- Waterfall -->
+  <div class="fig-card">
+    <h4>Waterfall Plot &mdash; PFF Uptake Modulators</h4>
+    <p class="fig-desc">Ranked effect sizes for top endocytic regulators. Negative values indicate reduced &alpha;-synuclein PFF uptake upon gene knockout.</p>
+    <canvas id="waterfallChart"></canvas>
+  </div>
+
+  <!-- Pathway pie -->
+  <div class="fig-card">
+    <h4>Endocytic Pathway Contributions</h4>
+    <p class="fig-desc">Relative contribution of each endocytic mechanism to &alpha;-synuclein fibril internalization, quantified by CRISPR KO effect sizes.</p>
+    <canvas id="pathwayPieChart"></canvas>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!--  SECTION 3 — SARS-CoV-2 ENTRY                      -->
+<!-- ════════════════════════════════════════════════════ -->
+<div class="section reveal" id="viral">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">03</div>
-      <div class="section-label">Research</div>
+      <div class="section-label">Viral Entry</div>
     </div>
     <div class="section-content">
-      <h2>Explore My Work</h2>
-      <p>My research spans iPSC-based disease modeling, cellular and molecular assays, advanced microscopy, drug discovery, automation, and computational image analysis.</p>
+      <h2>SARS-CoV-2 Viral Entry Screen</h2>
+      <p><span class="pub-tag jbc">J. Biol. Chem. &middot; 2021 &middot; 500+ Citations</span></p>
+      <p>siRNA screen across endocytic machinery genes defining clathrin-mediated endocytosis as the primary SARS-CoV-2 cellular entry route. Established using pseudotyped lentivirus infectivity assays, siRNA knockdown of clathrin heavy chain, and quantitative confocal imaging across four cell lines.</p>
     </div>
-  </div>
-  <div class="research-grid">
-    <a href="ipscs.html" class="research-tile featured">
-      <div class="tile-icon">🧠</div>
-      <div class="tile-title">iPSC-Derived Neurons</div>
-      <div class="tile-desc">Dopaminergic, cortical, and glial differentiation. Lewy body disease modeling. MEA electrophysiology, calcium imaging, HPLC dopamine quantification.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="biologics.html" class="research-tile featured">
-      <div class="tile-icon">🛡️</div>
-      <div class="tile-title">Biologics &amp; Immunotherapy</div>
-      <div class="tile-desc">Preclinical receptor target ID, anti-cytokine biologics (anti-TNF&alpha;, anti-IL-1&beta;, anti-IL-6), anti-&alpha;-synuclein antibodies, and combination neuroprotection in iPSC-DA neurons.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="protocols.html" class="research-tile">
-      <div class="tile-icon">📋</div>
-      <div class="tile-title">Differentiation Protocols</div>
-      <div class="tile-desc">Interactive step-by-step protocols for dopaminergic, cortical, NGN2+, and cardiomyocyte iPSC differentiation with reagents, timelines, and QC checkpoints.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="cardiomyocytes.html" class="research-tile featured">
-      <div class="tile-icon">❤️</div>
-      <div class="tile-title">iPSC-Derived Cardiomyocytes</div>
-      <div class="tile-desc">Cardiac differentiation, MEA beat-rate analysis, calcium transient profiling, cardiotoxicity screening, and disease modeling (HCM, DCM).</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="neuroimmunology.html" class="research-tile featured">
-      <div class="tile-icon">🧬</div>
-      <div class="tile-title">Neuroimmunology</div>
-      <div class="tile-desc">LRRK2 immune phenotyping, microglial activation, MHC-I/II regulation, neuroinflammatory cytokine profiling, and PFF-induced immune responses in iPSC and mouse models of Parkinson's disease.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="cancer-immunology.html" class="research-tile featured">
-      <div class="tile-icon">🎯</div>
-      <div class="tile-title">Cancer Immunology</div>
-      <div class="tile-desc">T-cell killing, ADCC/CDC, checkpoint blockade, cytokine profiling, CAR-T characterization, and immune co-culture systems.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="cellular-assays.html" class="research-tile">
-      <div class="tile-icon">🔬</div>
-      <div class="tile-title">Cellular &amp; Functional Assays</div>
-      <div class="tile-desc">Endocytosis, exosomal biology, autophagy, flow cytometry, PBMC/immune assays, plate-based readouts, and immunocytochemistry.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="endocytosis.html" class="research-tile featured">
-      <div class="tile-icon">🧪</div>
-      <div class="tile-title">Endocytosis &amp; Cargo Delivery</div>
-      <div class="tile-desc">Quantitative internalization kinetics, CME vs. macropinocytosis pathway dissection, endosomal trafficking, host kinase targets, and subcellular localization assays.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="primary-neurons.html" class="research-tile">
-      <div class="tile-icon">🐀</div>
-      <div class="tile-title">Primary Neuronal Culture</div>
-      <div class="tile-desc">E18 rat hippocampal dissection, culture, lysosomal trafficking, MEA electrophysiology, and cargo delivery in primary neurons.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="primary-cardiomyocytes.html" class="research-tile">
-      <div class="tile-icon">💓</div>
-      <div class="tile-title">Primary Cardiomyocyte Culture</div>
-      <div class="tile-desc">Neonatal rat ventricular myocyte isolation, contractility analysis, calcium transients, and cardiotoxicity screening.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="genetics.html" class="research-tile">
-      <div class="tile-icon">🧬</div>
-      <div class="tile-title">Genetics &amp; Molecular Biology</div>
-      <div class="tile-desc">CRISPR, siRNA/shRNA/ASO, molecular cloning, viral constructs, protein conjugation, and lysosomal biology.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="crispr-screening.html" class="research-tile featured">
-      <div class="tile-icon">🎯</div>
-      <div class="tile-title">CRISPR Screening</div>
-      <div class="tile-desc">Interactive outcomes from mitophagy, &alpha;-synuclein uptake, and SARS-CoV-2 entry CRISPR screening campaigns with generated data visualizations.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="drug-discovery.html" class="research-tile">
-      <div class="tile-icon">💊</div>
-      <div class="tile-title">Drug Discovery &amp; Translation</div>
-      <div class="tile-desc">Parkin agonists, TAC evaluation, lysosomal rescue, antivirals, and biomarker strategy.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="microscopy.html" class="research-tile">
-      <div class="tile-icon">📷</div>
-      <div class="tile-title">Microscopy &amp; Imaging</div>
-      <div class="tile-desc">Confocal, STED super-resolution, TEM, live-cell imaging, high-content screening, and IHC/histology.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="proteomics.html" class="research-tile featured">
-      <div class="tile-icon">📊</div>
-      <div class="tile-title">Proteomics &amp; Single-Cell Genomics</div>
-      <div class="tile-desc">TMT quantitative proteomics, scRNA-seq (10x Genomics), bulk RNA-seq, GSEA/pathway analysis, UMAP visualization, DESeq2/Seurat pipelines.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="coding.html" class="research-tile">
-      <div class="tile-icon">💻</div>
-      <div class="tile-title">Coding, Automation &amp; Data</div>
-      <div class="tile-desc">AutoMorphoTrack, Python pipelines, BRAVO/Tecan liquid handling, 96/384-well miniaturization, and machine learning.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="skills.html" class="research-tile">
-      <div class="tile-icon">⚙️</div>
-      <div class="tile-title">Full Technical Skills</div>
-      <div class="tile-desc">Comprehensive categorized listing of all techniques, instruments, software, and capabilities.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
-    <a href="publications.html" class="research-tile">
-      <div class="tile-icon">📄</div>
-      <div class="tile-title">Publications</div>
-      <div class="tile-desc">25+ peer-reviewed papers with 1,300+ citations.</div>
-      <div class="tile-arrow">Explore →</div>
-    </a>
   </div>
 </div>
 
-<div class="section reveal" id="news">
+<div class="fig-grid">
+  <!-- Infection bar -->
+  <div class="fig-card">
+    <h4>Pseudovirus Infection &mdash; siRNA Knockdown Panel</h4>
+    <p class="fig-desc">GFP&#x207A; cell quantification (Opera Phenix) across four cell lines after siRNA knockdown of endocytic regulators.</p>
+    <div class="fig-toggles">
+      <button class="fig-toggle active" onclick="switchCellLine('HEK293T')">HEK293T-ACE2</button>
+      <button class="fig-toggle" onclick="switchCellLine('Calu3')">Calu-3</button>
+      <button class="fig-toggle" onclick="switchCellLine('Vero')">Vero E6</button>
+      <button class="fig-toggle" onclick="switchCellLine('A549')">A549-ACE2</button>
+    </div>
+    <canvas id="infectionChart"></canvas>
+  </div>
+
+  <!-- Kinetics -->
+  <div class="fig-card">
+    <h4>Entry Kinetics &mdash; Clathrin vs. Caveolin Inhibition</h4>
+    <p class="fig-desc">Time-course of pseudovirus internalization with Pitstop-2 (clathrin inhibitor) vs. filipin (caveolin inhibitor) vs. DMSO control.</p>
+    <canvas id="kineticsChart"></canvas>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!--  SECTION 4 — CROSS-SCREEN VALIDATION                -->
+<!-- ════════════════════════════════════════════════════ -->
+<div class="section reveal" id="validation">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">04</div>
-      <div class="section-label">News</div>
+      <div class="section-label">Validation</div>
     </div>
     <div class="section-content">
-      <h2>Recent Activity</h2>
-      <div class="news-list">
-        <div class="news-item">
-          <div class="news-date">Feb 2026</div>
-          <div class="news-body"><strong>Science Advances</strong> (Under Review) — Neural cell state modulation by PARK2 and dopaminergic neuroprotection by small molecule Parkin agonism.</div>
-        </div>
-        <div class="news-item">
-          <div class="news-date">Feb 2026</div>
-          <div class="news-body"><strong>Translational Neurodegeneration</strong> (Under Review) — Axonal and Synaptic Dysfunction as the Convergent Driver of Neurodegenerative Cascades.</div>
-        </div>
-        <div class="news-item">
-          <div class="news-date">Feb 2026</div>
-          <div class="news-body"><strong>eLife</strong> — AutoMorphoTrack: A Platform for Quantitative Organelle Analysis.</div>
-        </div>
-        <div class="news-item">
-          <div class="news-date">Feb 2026</div>
-          <div class="news-body"><strong>YouTube Interview</strong> — AutoMorphoTrack: A Platform for Quantitative Organelle Analysis. <a href="https://www.youtube.com/watch?v=3lEFf3rxdoU" target="_blank" rel="noopener" style="color:var(--accent); border-bottom:1px solid var(--accent);">Watch &rarr;</a></div>
-        </div>
-        <div class="news-item">
-          <div class="news-date">Jan 2026</div>
-          <div class="news-body"><strong>Nature Immunology</strong> (Under Review) — Myeloid PINK1 represses mtDNA release and immune signaling that impacts neuronal pathology in patient-derived idiopathic PD models.</div>
-        </div>
-      </div>
+      <h2>Cross-Screen Validation &amp; Transcriptomic Integration</h2>
+      <p><span class="pub-tag elife">eLife &middot; 2025</span></p>
+      <p>Multi-screen validation heatmap and single-cell transcriptomic embedding of CRISPR-perturbed iPSC-derived neurons. Integrates AutoMorphoTrack quantitative imaging with Seahorse XF metabolic flux analysis across all three screening campaigns.</p>
     </div>
   </div>
 </div>
 
-<!-- THESIS DOWNLOADS -->
-<div class="section reveal" id="theses">
-  <div class="section-header">
-    <div class="section-index">
-      <div class="section-number">05</div>
-      <div class="section-label">Theses</div>
-    </div>
-    <div class="section-content">
-      <h2>Thesis Documents</h2>
-      <p>Full-text thesis documents available for download.</p>
+<div class="fig-grid">
+  <!-- Heatmap -->
+  <div class="fig-card span-2">
+    <h4>Cross-Screen Validation Heatmap</h4>
+    <p class="fig-desc">Z-score normalized phenotypic effects of top hits across three independent CRISPR campaigns (mitophagy, &alpha;-syn uptake, viral entry). Rows = genes, columns = assay readouts.</p>
+    <div id="heatmap-container"></div>
+  </div>
 
-      <a style="display:flex;align-items:flex-start;gap:16px;padding:24px;background:var(--card);border:1px solid var(--rule);border-radius:6px;text-decoration:none;color:inherit;transition:border-color 0.2s,box-shadow 0.2s;margin-bottom:12px;max-width:760px;" href="downloads/Bayati_Honours_2018.pdf" target="_blank" rel="noopener" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--rule)'">
-        <div style="width:48px;height:48px;border-radius:8px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--accent);flex-shrink:0;">&#128196;</div>
-        <div style="flex:1;">
-          <div style="font-size:15px;font-weight:500;color:var(--ink);margin-bottom:4px;">BSc Honours Thesis (2018)</div>
-          <div style="font-size:13px;font-weight:300;color:var(--mid);line-height:1.5;">Effect of Ischemic Stroke on Neuronal and Glial Cell Structure in the Peri-Infarct Zone of Adult Mice</div>
-          <div style="font-family:var(--mono);font-size:11px;color:var(--accent);margin-top:6px;letter-spacing:0.3px;">University of Victoria &middot; 44 MB PDF</div>
-        </div>
-      </a>
+  <!-- UMAP -->
+  <div class="fig-card">
+    <h4>scRNA-seq UMAP &mdash; CRISPR Perturbations</h4>
+    <p class="fig-desc">Single-cell transcriptome embedding of iPSC-derived neurons after CRISPR KO of top mitophagy regulators. Colors indicate perturbation identity.</p>
+    <canvas id="umapChart"></canvas>
+  </div>
 
-      <a style="display:flex;align-items:flex-start;gap:16px;padding:24px;background:var(--card);border:1px solid var(--rule);border-radius:6px;text-decoration:none;color:inherit;transition:border-color 0.2s,box-shadow 0.2s;margin-bottom:12px;max-width:760px;" href="downloads/Bayati_PhD_2023.pdf" target="_blank" rel="noopener" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--rule)'">
-        <div style="width:48px;height:48px;border-radius:8px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--accent);flex-shrink:0;">&#128196;</div>
-        <div style="flex:1;">
-          <div style="font-size:15px;font-weight:500;color:var(--ink);margin-bottom:4px;">PhD Thesis (2023)</div>
-          <div style="font-size:13px;font-weight:300;color:var(--mid);line-height:1.5;">Doctoral dissertation &mdash; McGill University</div>
-          <div style="font-family:var(--mono);font-size:11px;color:var(--accent);margin-top:6px;letter-spacing:0.3px;">McGill University &middot; 18 MB PDF</div>
-        </div>
-      </a>
-    </div>
+  <!-- Seahorse -->
+  <div class="fig-card">
+    <h4>Seahorse XF Metabolic Profiling</h4>
+    <p class="fig-desc">Oxygen consumption rate (OCR) in iPSC-derived neurons following CRISPR KO of PINK1, PARK2, BNIP3L, and FUNDC1 vs. non-targeting control.</p>
+    <canvas id="seahorseChart"></canvas>
   </div>
 </div>
 
-<div class="workflow-strip reveal">
-  <div class="workflow-inner">
-    <h3>Core Expertise</h3>
-    <div class="workflow-steps">
-      <div class="workflow-step">
-        <div class="step-number">01</div>
-        <div class="step-title">iPSC Disease Modeling</div>
-        <div class="step-detail">Patient-derived iPSCs differentiated into dopaminergic neurons, cortical neurons, pancreatic &beta;-islet cells, cardiomyocytes, endodermal lineages, and glia for in vitro disease recreation and drug screening.</div>
-      </div>
-      <div class="workflow-step">
-        <div class="step-number">02</div>
-        <div class="step-title">Parkinson's Disease</div>
-        <div class="step-detail">Deep expertise in iPSC-derived dopaminergic neuron biology, including &alpha;-synuclein aggregation, Lewy body modeling, mitophagy, lysosomal dysfunction, and PINK1/Parkin pathway dissection.</div>
-      </div>
-      <div class="workflow-step">
-        <div class="step-number">03</div>
-        <div class="step-title">Cardiac &amp; Metabolic Biology</div>
-        <div class="step-detail">iPSC-derived cardiomyocyte differentiation, cardiotoxicity screening, MEA electrophysiology, calcium transient profiling, and Seahorse XF metabolic flux analysis for mitochondrial bioenergetics.</div>
-      </div>
-      <div class="workflow-step">
-        <div class="step-number">04</div>
-        <div class="step-title">Cancer Biology</div>
-        <div class="step-detail">Immune co-culture systems, T-cell killing assays, ADCC/CDC, checkpoint blockade evaluation, CAR-T characterization, and cytokine profiling across tumor microenvironment models.</div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <div class="page-footer">
   <div class="footer-inner">
@@ -2868,6 +2805,15 @@ document.addEventListener('click', function(e){
 <script>
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
     }
@@ -2880,16 +2826,16 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   var searchIndex = [
     // Page-level entries
     {page:'crispr-screening.html', title:'CRISPR Screening', category:'Research', section:'',
-     keywords:'crispr screening functional genomics pooled arrayed knockout mitophagy alpha-synuclein viral entry sars-cov-2 volcano plot heatmap ipsc neurons cardiomyocytes park2 pink1 bnip3l rac1 cltc interactive figures',
+     keywords:'crispr screening functional genomics pooled arrayed knockout mitophagy alpha-synuclein viral entry sars-cov-2 volcano plot heatmap ipsc neurons cardiomyocytes park2 pink1 bnip3l rac1 cltc',
      description:'Interactive CRISPR screening outcomes across mitophagy, alpha-synuclein uptake, and viral entry campaigns.'},
     {page:'crispr-screening.html#mitophagy', title:'Mitophagy CRISPR Screen', category:'Research', section:'Mitophagy',
-     keywords:'mitophagy pink1 park2 parkin bnip3l fundc1 optn ndp52 autophagy mitochondria ipsc dopaminergic neuron genome-wide knockout neuroprotection volcano plot',
+     keywords:'mitophagy pink1 park2 parkin bnip3l fundc1 optn ndp52 autophagy mitochondria ipsc dopaminergic neuron genome-wide knockout neuroprotection',
      description:'Genome-wide CRISPR KO screen identifying mitophagy regulators in iPSC-derived dopaminergic neurons.'},
     {page:'crispr-screening.html#synuclein', title:'Alpha-Synuclein Uptake Screen', category:'Research', section:'Synuclein',
-     keywords:'alpha-synuclein pff preformed fibril uptake rac1 macropinocytosis endocytosis rpe1 crispr arrayed knockout internalization waterfall',
+     keywords:'alpha-synuclein pff preformed fibril uptake rac1 macropinocytosis endocytosis rpe1 crispr arrayed knockout internalization',
      description:'Arrayed CRISPR screen identifying RAC1-dependent macropinocytosis as major alpha-synuclein entry route.'},
     {page:'crispr-screening.html#viral', title:'SARS-CoV-2 Entry Screen', category:'Research', section:'Viral Entry',
-     keywords:'sars-cov-2 viral entry clathrin endocytosis sirna pseudovirus spike protein ace2 pitstop dnm2 cltc infection kinetics',
+     keywords:'sars-cov-2 viral entry clathrin endocytosis sirna pseudovirus spike protein ace2 pitstop dnm2 cltc infection',
      description:'siRNA screen defining clathrin-mediated endocytosis as the primary SARS-CoV-2 cellular entry mechanism.'},
     {page:'crispr-screening.html#validation', title:'Cross-Screen Validation', category:'Research', section:'Validation',
      keywords:'cross-screen validation heatmap scrnaseq umap seahorse ocr metabolic profiling transcriptomics integration multi-omics',
@@ -3315,199 +3261,545 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 })();
 </script>
 
-
-<!-- CHAT WIDGET -->
-<button class="chat-fab" id="chatFab" aria-label="Send a message">
-  <svg class="chat-fab-open" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-  <svg class="chat-fab-close" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-</button>
-<div class="chat-panel" id="chatPanel">
-  <div class="chat-header">
-    <div class="chat-header-title">Reach out to Armin</div>
-    <div class="chat-header-sub">Questions, collaborations, or opportunities — I'd love to hear from you.</div>
-  </div>
-  <div class="chat-body" id="chatBody">
-    <div class="chat-field">
-      <label>Your Name</label>
-      <input type="text" id="chatName" placeholder="Full name" autocomplete="name">
-    </div>
-    <div class="chat-field">
-      <label>Your Email</label>
-      <input type="email" id="chatEmail" placeholder="you@example.com" autocomplete="email">
-    </div>
-    <div class="chat-field">
-      <label>Subject</label>
-      <input type="text" id="chatSubject" placeholder="What is this regarding?">
-    </div>
-    <div class="chat-field">
-      <label>Message</label>
-      <textarea id="chatMessage" placeholder="Write your message here..."></textarea>
-    </div>
-    <button class="chat-send" id="chatSend">Send Message</button>
-  </div>
-</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 
 <script>
-(function(){
-  var fab = document.getElementById('chatFab');
-  var panel = document.getElementById('chatPanel');
-  var body = document.getElementById('chatBody');
-  if (!fab || !panel) return;
-
-  fab.addEventListener('click', function(){
-    var isOpen = panel.classList.contains('open');
-    if (isOpen) {
-      panel.classList.remove('open');
-      fab.classList.remove('open');
-    } else {
-      panel.classList.add('open');
-      fab.classList.add('open');
-    }
-  });
-
-  document.getElementById('chatSend').addEventListener('click', function(){
-    var name = document.getElementById('chatName').value.trim();
-    var email = document.getElementById('chatEmail').value.trim();
-    var subject = document.getElementById('chatSubject').value.trim();
-    var message = document.getElementById('chatMessage').value.trim();
-
-    if (!name || !email || !message) {
-      alert('Please fill in your name, email, and message.');
-      return;
-    }
-
-    var btn = this;
-    btn.disabled = true;
-    btn.textContent = 'Sending...';
-
-    // Use Formspree (free form endpoint) or mailto fallback
-    fetch('https://formsubmit.co/ajax/' + 'a.bayati.brain' + '@' + 'gmail.com', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
-      body: JSON.stringify({name: name, email: email, subject: subject, message: message})
-    }).then(function(r){
-      if (r.ok) { showSuccess(); }
-      else { fallbackMailto(name, email, subject, message); btn.disabled = false; btn.textContent = 'Send Message'; }
-    }).catch(function(){
-      fallbackMailto(name, email, subject, message);
-      btn.disabled = false;
-      btn.textContent = 'Send Message';
-    });
-  });
-
-  function fallbackMailto(name, email, subject, message) {
-    var body = 'From: ' + name + ' (' + email + ')\n\n' + message;
-    window.location.href = 'mailto:a.bayati.brain' + '@' + 'gmail.com?subject=' + encodeURIComponent(subject || 'Website Contact') + '&body=' + encodeURIComponent(body);
-  }
-
-  function showSuccess() {
-    body.innerHTML = '<div class="chat-success">' +
-      '<div class="chat-success-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>' +
-      '<div class="chat-success-title">Message Sent</div>' +
-      '<div class="chat-success-desc">Thank you for reaching out. I\'ll get back to you as soon as possible.</div>' +
-    '</div>';
-  }
-
-  // Allow opening chat from links with #chat or onclick
-  window.openChatWidget = function(){
-    panel.classList.add('open');
-    fab.classList.add('open');
-    panel.scrollIntoView({behavior:'smooth', block:'end'});
-  };
-  if (window.location.hash === '#chat') { setTimeout(openChatWidget, 400); }
-})();
-</script>
-
-<!-- ── STATS COUNTER ANIMATION ── -->
-<script>
+// ════════════════════════════════════════════════════
+// ANIMATED COUNTERS (metrics strip)
+// ════════════════════════════════════════════════════
 (function() {
   function animateCounters() {
-    const cards = document.querySelectorAll('.stat-value[data-count]');
-    cards.forEach(el => {
+    document.querySelectorAll('.sm-value[data-count]').forEach(el => {
       if (el.dataset.animated) return;
       const target = parseInt(el.dataset.count, 10);
       const suffix = el.dataset.suffix || '';
-      const duration = Math.min(2000, Math.max(800, target * 2));
-      const startTime = performance.now();
-
+      const dur = Math.min(2000, Math.max(800, target * 2));
+      const start = performance.now();
       function step(now) {
-        const elapsed = now - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        // ease-out cubic
-        const eased = 1 - Math.pow(1 - progress, 3);
-        const current = Math.round(eased * target);
-        el.textContent = current.toLocaleString() + suffix;
-        if (progress < 1) {
-          requestAnimationFrame(step);
-        } else {
-          el.textContent = target.toLocaleString() + suffix;
-          el.dataset.animated = '1';
-        }
+        const p = Math.min((now - start) / dur, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * ease).toLocaleString() + suffix;
+        if (p < 1) requestAnimationFrame(step);
+        else { el.textContent = target.toLocaleString() + suffix; el.dataset.animated = '1'; }
       }
       requestAnimationFrame(step);
     });
   }
-
-  // Intersection Observer to trigger on scroll
-  const statsSection = document.querySelector('.stats-section');
-  if (statsSection) {
-    const observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          animateCounters();
-          observer.unobserve(entry.target);
-        }
-      });
+  const m = document.querySelector('.screen-metrics');
+  if (m) {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { animateCounters(); obs.unobserve(e.target); } });
     }, { threshold: 0.2 });
-    observer.observe(statsSection);
-  }
-
-  // ── LIVE ANALYTICS (GoatCounter) ──
-  // Uses arminbayati.goatcounter.com (arminbayati.org)
-  function fetchLiveAnalytics() {
-    const totalEl = document.getElementById('live-total');
-    const todayEl = document.getElementById('live-today');
-
-    // Fetch total pageviews across all pages
-    fetch('https://arminbayati.goatcounter.com/counter//TOTAL.json')
-      .then(r => r.json())
-      .then(data => {
-        if (totalEl && data.count) totalEl.textContent = data.count;
-      })
-      .catch(() => { if (totalEl) totalEl.textContent = '—'; });
-
-    // Fetch today's count using the no_events counter for the homepage
-    fetch('https://arminbayati.goatcounter.com/counter//.json')
-      .then(r => r.json())
-      .then(data => {
-        if (todayEl && data.count_unique) {
-          todayEl.textContent = data.count_unique;
-        } else if (todayEl && data.count) {
-          todayEl.textContent = data.count;
-        }
-      })
-      .catch(() => { if (todayEl) todayEl.textContent = '—'; });
-  }
-
-  // Delay analytics fetch until section is visible
-  if (statsSection) {
-    const analyticsObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          fetchLiveAnalytics();
-          analyticsObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    analyticsObserver.observe(statsSection);
+    obs.observe(m);
   }
 })();
+
+// ════════════════════════════════════════════════════
+// DATA GENERATION
+// ════════════════════════════════════════════════════
+let seed = 42;
+function rand() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+function randNorm(mu=0, sd=1) { const u1=rand(), u2=rand(); return mu + sd * Math.sqrt(-2*Math.log(u1))*Math.cos(2*Math.PI*u2); }
+
+const accentColor = '#c0392b';
+const accentSoft = 'rgba(192,57,43,0.15)';
+const blueColor = '#3498db';
+const greenColor = '#27ae60';
+const purpleColor = '#7c4dff';
+const pinkColor = '#e91e63';
+const midColor = '#6b7280';
+const darkBg = '#0f1419';
+
+// --- Volcano data ---
+const mitophagyGenes = [
+  'PINK1','PARK2','BNIP3L','FUNDC1','OPTN','NDP52','SQSTM1','ULK1','ATG5','ATG7',
+  'BECN1','VPS35','MFN2','DNM1L','VDAC1','TBK1','AMBRA1','PHB2','BCL2L13','FKBP8',
+  'NIPSNAP1','NIPSNAP2','GABARAPL1','MAP1LC3B','CALCOCO2','TAX1BP1','NBR1','TOLLIP',
+  'RAB7A','RAB5A','LAMP1','LAMP2','CTSD','ATP6V1A','TFEB','TFE3','PPARGC1A','NRF1',
+  'SIRT1','SIRT3','FOXO3','MTOR','RPTOR','TSC1','TSC2','PTEN','AKT1','PIK3C3',
+  'ATG14','ATG16L1','WIPI2','ATG9A','ATG2A','VPS34','RUBCN','SNAPIN','PLEKHM1',
+  'STX17','SNAP29','VAMP8','YME1L1','OMA1','OPA1','PARL','PGAM5','RHOT1','RHOT2'
+];
+const sigGenes = new Set(['PINK1','PARK2','BNIP3L','FUNDC1','OPTN','NDP52','SQSTM1','ULK1',
+  'ATG5','ATG7','BECN1','MFN2','TBK1','AMBRA1','PHB2','BCL2L13','LAMP2','TFEB',
+  'PPARGC1A','SIRT3','FOXO3','DNM1L','VPS35','RAB7A']);
+
+const volcanoData = [];
+for (let i = 0; i < 800; i++) {
+  const lfc = randNorm(0, 0.6);
+  const pval = Math.pow(10, -(rand() * 1.5 + 0.1));
+  volcanoData.push({ gene: 'Gene'+(i+1), lfc, pval, negLogP: -Math.log10(pval), sig: false });
+}
+mitophagyGenes.forEach(g => {
+  const isSig = sigGenes.has(g);
+  let lfc, pval;
+  if (isSig) {
+    lfc = (rand() > 0.4 ? -1 : 1) * (rand() * 3 + 1.2);
+    pval = Math.pow(10, -(rand() * 6 + 2));
+  } else {
+    lfc = randNorm(0, 0.8);
+    pval = Math.pow(10, -(rand() * 2 + 0.2));
+  }
+  volcanoData.push({ gene: g, lfc, pval, negLogP: -Math.log10(pval), sig: isSig });
+});
+
+// --- Top hits ---
+const topHits = [
+  {gene:'PINK1', z:-4.8}, {gene:'PARK2', z:-4.5}, {gene:'BNIP3L', z:-3.9},
+  {gene:'FUNDC1', z:-3.6}, {gene:'OPTN', z:-3.3}, {gene:'NDP52', z:-3.0},
+  {gene:'SQSTM1', z:-2.8}, {gene:'ULK1', z:-2.6}, {gene:'TBK1', z:-2.4},
+  {gene:'ATG5', z:2.1}, {gene:'BECN1', z:-2.0}, {gene:'LAMP2', z:-1.9},
+  {gene:'MFN2', z:1.8}, {gene:'DNM1L', z:2.5}, {gene:'TFEB', z:-1.7}
+].sort((a,b) => a.z - b.z);
+
+// --- Dose-response ---
+const doses = [0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
+const doseResponse = doses.map(d => {
+  const v = 100 / (1 + Math.pow(d / 0.35, -1.2)) + randNorm(0, 3);
+  return Math.max(0, Math.min(100, v));
+});
+
+// --- Waterfall ---
+const endocyticGenes = [
+  {gene:'RAC1',e:-72},{gene:'PAK1',e:-58},{gene:'CDC42',e:-45},
+  {gene:'CLTC',e:-28},{gene:'DNM2',e:-24},{gene:'CAV1',e:-15},
+  {gene:'FLOT1',e:-12},{gene:'AP2M1',e:-35},{gene:'EPS15',e:-22},
+  {gene:'ARF6',e:-40},{gene:'PIP5K1A',e:-33},{gene:'SNX9',e:-18},
+  {gene:'ACTR2',e:-50},{gene:'WASL',e:-42},{gene:'HRAS',e:15},
+  {gene:'RAB5A',e:-20},{gene:'EEA1',e:-10},{gene:'PIK3C2A',e:-27}
+].sort((a,b) => a.e - b.e);
+
+// --- Pathway pie ---
+const pathways = [
+  {name:'Macropinocytosis (RAC1/PAK1)',pct:48,color:accentColor},
+  {name:'Clathrin-mediated',pct:22,color:purpleColor},
+  {name:'Caveolae-dependent',pct:8,color:pinkColor},
+  {name:'Phagocytosis',pct:12,color:'#ff9800'},
+  {name:'Other / Unknown',pct:10,color:midColor}
+];
+
+// --- Infection data ---
+const siTargets = ['Scramble','CLTC','DNM2','CAV1','RAB5A','AP2M1','EPS15','HRAS','CDC42'];
+const cellLineData = {
+  'HEK293T': [100,22,35,78,55,30,40,90,70],
+  'Calu3':   [100,28,40,82,60,38,45,88,75],
+  'Vero':    [100,18,30,85,50,25,35,92,68],
+  'A549':    [100,25,38,80,58,32,42,86,72]
+};
+
+// --- Kinetics ---
+const timePoints = [0,15,30,45,60,90,120,180];
+const kineticsControl = timePoints.map(t => 100*(1-Math.exp(-t/40))+randNorm(0,3));
+const kineticsPitstop = timePoints.map(t => 30*(1-Math.exp(-t/60))+randNorm(0,2));
+const kineticsFilip = timePoints.map(t => 85*(1-Math.exp(-t/45))+randNorm(0,3));
+
+// --- Heatmap ---
+const heatmapGenes = ['PINK1','PARK2','BNIP3L','RAC1','CLTC','DNM2','OPTN','TBK1','ULK1','LAMP2','SQSTM1','TFEB','ATG5','FUNDC1','CAV1'];
+const heatmapAssays = ['Mitophagy\nFlux','MMP\n(TMRM)','\u03b1-Syn\nUptake','Pseudovirus\nEntry','OCR\n(Seahorse)','Lysosome\npH','Autophagosome\nCount','Cell\nViability'];
+const heatmapValues = [
+  [-3.2,-2.8,-0.5,-0.3,-3.5,-1.2,-2.9,-1.8],
+  [-3.5,-3.0,-0.4,-0.2,-3.2,-1.0,-3.1,-2.0],
+  [-2.8,-2.2,0.3,-0.1,-2.5,-0.8,-2.4,-0.9],
+  [-0.3,0.1,-3.5,-1.2,-0.2,-0.5,0.2,0.1],
+  [-0.8,-0.5,-1.5,-2.8,-0.6,-0.9,-0.7,-0.3],
+  [-0.5,-0.3,-1.2,-2.5,-0.4,-0.7,-0.5,-0.2],
+  [-2.5,-1.8,-0.6,-0.4,-2.0,-1.5,-2.2,-1.0],
+  [-2.2,-1.5,-0.3,-0.5,-1.8,-1.3,-2.0,-0.8],
+  [-2.0,-1.8,-0.4,-0.3,-1.9,-1.0,-2.5,-1.2],
+  [-1.5,-1.2,-0.8,-0.6,-1.0,-2.8,-1.8,-1.5],
+  [-2.3,-1.6,-0.7,-0.5,-1.5,-1.2,-2.8,-0.7],
+  [-1.8,-1.5,-0.3,-0.2,-1.2,-2.2,-1.5,-0.5],
+  [-1.2,-0.8,-0.4,-0.3,-1.0,-0.6,-2.0,-0.4],
+  [-2.6,-2.0,0.2,-0.1,-2.3,-0.7,-2.1,-0.8],
+  [-0.2,0.0,-0.8,-1.0,-0.1,-0.3,0.1,0.0]
+];
+
+// --- UMAP ---
+const umapClusters = [
+  {label:'Non-targeting',cx:2,cy:3,color:midColor,n:120},
+  {label:'PINK1 KO',cx:-3,cy:1,color:accentColor,n:100},
+  {label:'PARK2 KO',cx:-2.5,cy:-2,color:purpleColor,n:100},
+  {label:'BNIP3L KO',cx:0,cy:-3,color:pinkColor,n:90},
+  {label:'FUNDC1 KO',cx:3.5,cy:-1,color:'#ff9800',n:85}
+];
+const umapPoints = [];
+umapClusters.forEach(c => {
+  for (let i = 0; i < c.n; i++) {
+    umapPoints.push({x:c.cx+randNorm(0,0.8),y:c.cy+randNorm(0,0.8),label:c.label,color:c.color});
+  }
+});
+
+// --- Seahorse ---
+const seahorseTime = ['Basal','Oligo','FCCP','Rot/AA'];
+const seahorseData = {
+  'NT Control': [180,45,320,30],
+  'PINK1 KO':  [95,30,140,25],
+  'PARK2 KO':  [105,35,160,28],
+  'BNIP3L KO': [130,38,220,27],
+  'FUNDC1 KO': [145,40,250,29]
+};
+const seahorseColors = [midColor, accentColor, purpleColor, pinkColor, '#ff9800'];
+
+// ════════════════════════════════════════════════════
+// CHART.JS DEFAULTS
+// ════════════════════════════════════════════════════
+Chart.defaults.color = '#6b7280';
+Chart.defaults.borderColor = 'rgba(212,208,200,0.4)';
+Chart.defaults.font.family = "'IBM Plex Sans', -apple-system, sans-serif";
+
+// Check dark mode
+function isDark() { return document.documentElement.classList.contains('dark'); }
+
+// ════════════════════════════════════════════════════
+// 1. VOLCANO PLOT (D3)
+// ════════════════════════════════════════════════════
+let currentVolcanoFilter = 'all';
+function drawVolcano(filter) {
+  filter = filter || 'all';
+  const container = document.getElementById('volcano-container');
+  const tooltip = document.getElementById('v-tooltip');
+  container.querySelectorAll('svg').forEach(s => s.remove());
+  const w = container.clientWidth, h = container.clientHeight;
+  const margin = {top:20,right:30,bottom:50,left:60};
+  let data = volcanoData;
+  if (filter==='sig') data = data.filter(d=>d.sig);
+  else if (filter==='pos') data = data.filter(d=>d.sig&&d.lfc>0);
+  else if (filter==='neg') data = data.filter(d=>d.sig&&d.lfc<0);
+
+  const svg = d3.select(container).append('svg').attr('width',w).attr('height',h);
+  const g = svg.append('g').attr('transform','translate('+margin.left+','+margin.top+')');
+  const iw = w-margin.left-margin.right, ih = h-margin.top-margin.bottom;
+  const xExt = d3.extent(volcanoData,d=>d.lfc);
+  const xMax = Math.max(Math.abs(xExt[0]),Math.abs(xExt[1]))*1.1;
+  const x = d3.scaleLinear().domain([-xMax,xMax]).range([0,iw]);
+  const y = d3.scaleLinear().domain([0,d3.max(volcanoData,d=>d.negLogP)*1.1]).range([ih,0]);
+
+  const axisColor = isDark() ? 'rgba(232,230,225,0.5)' : '#6b7280';
+  g.append('g').attr('transform','translate(0,'+ih+')').call(d3.axisBottom(x).ticks(8))
+    .selectAll('text').attr('fill',axisColor);
+  g.select('g').append('text').attr('x',iw/2).attr('y',38).attr('fill',axisColor).attr('text-anchor','middle').attr('font-family',"'IBM Plex Sans'").attr('font-size','12px').text('log\u2082 Fold Change');
+  g.append('g').call(d3.axisLeft(y).ticks(6))
+    .selectAll('text').attr('fill',axisColor);
+  g.selectAll('g').selectAll('line').attr('stroke', isDark() ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)');
+  g.selectAll('g').selectAll('.domain').attr('stroke', isDark() ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.12)');
+
+  // Y-axis label
+  g.append('text').attr('transform','rotate(-90)').attr('x',-ih/2).attr('y',-45).attr('fill',axisColor).attr('text-anchor','middle').attr('font-family',"'IBM Plex Sans'").attr('font-size','12px').text('\u2212log\u2081\u2080(p-value)');
+
+  // Sig line
+  const sigLine = -Math.log10(0.001);
+  g.append('line').attr('x1',0).attr('x2',iw).attr('y1',y(sigLine)).attr('y2',y(sigLine))
+    .attr('stroke','#ff9800').attr('stroke-dasharray','6,4').attr('opacity',0.6);
+  g.append('text').attr('x',iw-5).attr('y',y(sigLine)-6).attr('fill','#ff9800').attr('text-anchor','end').attr('font-size','10px').attr('font-family',"'IBM Plex Mono'").text('FDR < 0.05');
+
+  // FC lines
+  [-1,1].forEach(v => {
+    g.append('line').attr('x1',x(v)).attr('x2',x(v)).attr('y1',0).attr('y2',ih)
+      .attr('stroke',isDark()?'rgba(255,255,255,0.06)':'rgba(0,0,0,0.06)').attr('stroke-dasharray','4,4');
+  });
+
+  // Points
+  g.selectAll('circle').data(data).enter().append('circle')
+    .attr('cx',d=>x(d.lfc)).attr('cy',d=>y(d.negLogP))
+    .attr('r',d=>d.sig?5:2.5)
+    .attr('fill',d=>{
+      if (!d.sig) return isDark()?'rgba(255,255,255,0.15)':'rgba(0,0,0,0.12)';
+      return d.lfc<0 ? accentColor : blueColor;
+    })
+    .attr('opacity',d=>d.sig?0.85:0.3)
+    .attr('stroke',d=>d.sig?(isDark()?'rgba(255,255,255,0.3)':'rgba(0,0,0,0.15)'):'none')
+    .attr('stroke-width',d=>d.sig?0.5:0)
+    .on('mouseover',function(event,d) {
+      if (!d.sig) return;
+      d3.select(this).attr('r',8).attr('opacity',1);
+      tooltip.style.opacity=1;
+      tooltip.innerHTML='<strong>'+d.gene+'</strong><br>LFC: '+d.lfc.toFixed(2)+'<br>p: '+d.pval.toExponential(2);
+    })
+    .on('mousemove',function(event) {
+      tooltip.style.left=(event.offsetX+15)+'px';
+      tooltip.style.top=(event.offsetY-10)+'px';
+    })
+    .on('mouseout',function(event,d) {
+      d3.select(this).attr('r',d.sig?5:2.5).attr('opacity',d.sig?0.85:0.3);
+      tooltip.style.opacity=0;
+    });
+
+  // Labels
+  data.filter(d=>d.sig&&d.negLogP>4).forEach(d => {
+    g.append('text').attr('x',x(d.lfc)+8).attr('y',y(d.negLogP)-4)
+      .attr('fill',isDark()?'rgba(232,230,225,0.8)':'var(--ink)').attr('font-size','10px').attr('font-weight','600').attr('font-family',"'IBM Plex Sans'").text(d.gene);
+  });
+}
+
+function filterVolcano(f) {
+  currentVolcanoFilter = f;
+  const card = document.getElementById('volcano-container').closest('.fig-card');
+  card.querySelectorAll('.fig-toggle').forEach(b => b.classList.remove('active'));
+  card.querySelectorAll('.fig-toggle').forEach(b => {
+    if ((f==='all'&&b.textContent.includes('All'))||(f==='sig'&&b.textContent.includes('Significant'))||(f==='pos'&&b.textContent.includes('Enhancers'))||(f==='neg'&&b.textContent.includes('Suppressors'))) b.classList.add('active');
+  });
+  drawVolcano(f);
+}
+
+// ════════════════════════════════════════════════════
+// 2. TOP HITS BAR
+// ════════════════════════════════════════════════════
+function drawTopHits() {
+  new Chart(document.getElementById('topHitsChart'), {
+    type:'bar',
+    data:{
+      labels:topHits.map(h=>h.gene),
+      datasets:[{
+        data:topHits.map(h=>h.z),
+        backgroundColor:topHits.map(h=>h.z<0?accentColor+'b3':blueColor+'b3'),
+        borderRadius:3,borderSkipped:false
+      }]
+    },
+    options:{
+      indexAxis:'y',responsive:true,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'Z-score: '+ctx.raw.toFixed(2)}}},
+      scales:{
+        x:{title:{display:true,text:'Phenotype Z-score'},grid:{color:'rgba(212,208,200,0.3)'}},
+        y:{grid:{display:false}}
+      }
+    }
+  });
+}
+
+// ════════════════════════════════════════════════════
+// 3. DOSE RESPONSE
+// ════════════════════════════════════════════════════
+function drawDoseResponse() {
+  new Chart(document.getElementById('doseResponseChart'), {
+    type:'line',
+    data:{
+      labels:doses.map(d=>d.toString()),
+      datasets:[{
+        label:'ABY-101 (MMP Rescue %)',data:doseResponse,
+        borderColor:accentColor,backgroundColor:accentSoft,fill:true,tension:0.4,
+        pointRadius:5,pointBackgroundColor:accentColor
+      }]
+    },
+    options:{
+      responsive:true,
+      plugins:{legend:{display:true,labels:{boxWidth:12}},tooltip:{callbacks:{label:ctx=>ctx.raw.toFixed(1)+'% rescue'}}},
+      scales:{
+        x:{title:{display:true,text:'Concentration (\u03BCM)'},grid:{color:'rgba(212,208,200,0.3)'}},
+        y:{title:{display:true,text:'% MMP Rescue'},min:0,max:110,grid:{color:'rgba(212,208,200,0.3)'}}
+      }
+    }
+  });
+}
+
+// ════════════════════════════════════════════════════
+// 4. WATERFALL
+// ════════════════════════════════════════════════════
+function drawWaterfall() {
+  new Chart(document.getElementById('waterfallChart'), {
+    type:'bar',
+    data:{
+      labels:endocyticGenes.map(g=>g.gene),
+      datasets:[{
+        data:endocyticGenes.map(g=>g.e),
+        backgroundColor:endocyticGenes.map(g=>g.e<-30?purpleColor+'cc':g.e<0?purpleColor+'66':'#ff9800'+'99'),
+        borderRadius:3,borderSkipped:false
+      }]
+    },
+    options:{
+      responsive:true,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'\u0394 Uptake: '+ctx.raw+'%'}}},
+      scales:{
+        x:{grid:{display:false},ticks:{maxRotation:45}},
+        y:{title:{display:true,text:'% Change in PFF Uptake'},grid:{color:'rgba(212,208,200,0.3)'}}
+      }
+    }
+  });
+}
+
+// ════════════════════════════════════════════════════
+// 5. PATHWAY PIE
+// ════════════════════════════════════════════════════
+function drawPathwayPie() {
+  new Chart(document.getElementById('pathwayPieChart'), {
+    type:'doughnut',
+    data:{
+      labels:pathways.map(p=>p.name),
+      datasets:[{data:pathways.map(p=>p.pct),backgroundColor:pathways.map(p=>p.color),borderWidth:2,borderColor:isDark()?'#1a1d24':'#ffffff'}]
+    },
+    options:{
+      responsive:true,
+      plugins:{legend:{position:'bottom',labels:{boxWidth:12,padding:14,font:{size:11}}},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'%'}}}
+    }
+  });
+}
+
+// ════════════════════════════════════════════════════
+// 6. INFECTION CHART
+// ════════════════════════════════════════════════════
+let infectionChartInstance;
+function drawInfection(cl) {
+  cl = cl || 'HEK293T';
+  if (infectionChartInstance) infectionChartInstance.destroy();
+  infectionChartInstance = new Chart(document.getElementById('infectionChart'), {
+    type:'bar',
+    data:{
+      labels:siTargets,
+      datasets:[{
+        label:cl,data:cellLineData[cl],
+        backgroundColor:siTargets.map((t,i)=>i===0?midColor+'b3':accentColor+'99'),
+        borderRadius:3,borderSkipped:false
+      }]
+    },
+    options:{
+      responsive:true,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw.toFixed(0)+'% infection'}}},
+      scales:{
+        x:{grid:{display:false},ticks:{maxRotation:45}},
+        y:{title:{display:true,text:'% Infection (GFP+ cells)'},min:0,max:120,grid:{color:'rgba(212,208,200,0.3)'}}
+      }
+    }
+  });
+}
+function switchCellLine(cl) {
+  const card = document.getElementById('infectionChart').closest('.fig-card');
+  card.querySelectorAll('.fig-toggle').forEach(b => {
+    b.classList.toggle('active', b.textContent.includes(cl) || (cl==='HEK293T'&&b.textContent.includes('HEK')) || (cl==='Calu3'&&b.textContent.includes('Calu')) || (cl==='Vero'&&b.textContent.includes('Vero')) || (cl==='A549'&&b.textContent.includes('A549')));
+  });
+  drawInfection(cl);
+}
+
+// ════════════════════════════════════════════════════
+// 7. KINETICS
+// ════════════════════════════════════════════════════
+function drawKinetics() {
+  new Chart(document.getElementById('kineticsChart'), {
+    type:'line',
+    data:{
+      labels:timePoints.map(t=>t+' min'),
+      datasets:[
+        {label:'DMSO Control',data:kineticsControl,borderColor:midColor,fill:false,tension:0.3,pointRadius:4},
+        {label:'Pitstop-2 (Clathrin inh.)',data:kineticsPitstop,borderColor:accentColor,fill:false,tension:0.3,pointRadius:4},
+        {label:'Filipin (Caveolin inh.)',data:kineticsFilip,borderColor:pinkColor,fill:false,tension:0.3,pointRadius:4}
+      ]
+    },
+    options:{
+      responsive:true,
+      plugins:{legend:{labels:{boxWidth:12}}},
+      scales:{
+        x:{title:{display:true,text:'Time (min)'},grid:{color:'rgba(212,208,200,0.3)'}},
+        y:{title:{display:true,text:'% Internalization'},min:0,grid:{color:'rgba(212,208,200,0.3)'}}
+      }
+    }
+  });
+}
+
+// ════════════════════════════════════════════════════
+// 8. HEATMAP (D3)
+// ════════════════════════════════════════════════════
+function drawHeatmap() {
+  const container = document.getElementById('heatmap-container');
+  container.innerHTML = '';
+  const cellW=72, cellH=28, labelW=80, labelH=70;
+  const w = labelW + heatmapAssays.length*cellW + 80;
+  const h = labelH + heatmapGenes.length*cellH + 20;
+  const svg = d3.select(container).append('svg').attr('width',w).attr('height',h);
+  const g = svg.append('g').attr('transform','translate('+labelW+','+labelH+')');
+  const colorScale = d3.scaleSequential(d3.interpolateRdBu).domain([3.5,-3.5]);
+
+  heatmapGenes.forEach((gene,i) => {
+    heatmapAssays.forEach((assay,j) => {
+      const val = heatmapValues[i][j];
+      g.append('rect').attr('x',j*cellW).attr('y',i*cellH).attr('width',cellW-2).attr('height',cellH-2).attr('rx',3).attr('fill',colorScale(val)).attr('opacity',0.9);
+      g.append('text').attr('x',j*cellW+cellW/2-1).attr('y',i*cellH+cellH/2+1).attr('text-anchor','middle').attr('dominant-baseline','middle')
+        .attr('fill',Math.abs(val)>2?'#fff':'#888').attr('font-size','10px').attr('font-weight','500').attr('font-family',"'IBM Plex Mono'").text(val.toFixed(1));
+    });
+  });
+
+  const textColor = isDark() ? 'rgba(232,230,225,0.8)' : '#0f1419';
+  const labelColor = isDark() ? 'rgba(232,230,225,0.5)' : '#6b7280';
+  heatmapGenes.forEach((gene,i) => {
+    svg.append('text').attr('x',labelW-8).attr('y',labelH+i*cellH+cellH/2).attr('text-anchor','end').attr('dominant-baseline','middle')
+      .attr('fill',textColor).attr('font-size','11px').attr('font-weight',sigGenes.has(gene)?'700':'400').attr('font-family',"'IBM Plex Sans'").text(gene);
+  });
+
+  heatmapAssays.forEach((assay,j) => {
+    const lines = assay.split('\n');
+    lines.forEach((line,li) => {
+      svg.append('text').attr('x',labelW+j*cellW+cellW/2-1).attr('y',labelH-8-(lines.length-1-li)*13)
+        .attr('text-anchor','middle').attr('fill',labelColor).attr('font-size','10px').attr('font-family',"'IBM Plex Sans'").text(line);
+    });
+  });
+
+  // Legend
+  const legendW=15, legendH=heatmapGenes.length*cellH;
+  const legendX=labelW+heatmapAssays.length*cellW+20;
+  const legendG=svg.append('g').attr('transform','translate('+legendX+','+labelH+')');
+  const defs=svg.append('defs');
+  const grad=defs.append('linearGradient').attr('id','heatGrad').attr('x1','0').attr('y1','0').attr('x2','0').attr('y2','1');
+  grad.append('stop').attr('offset','0%').attr('stop-color',colorScale(-3.5));
+  grad.append('stop').attr('offset','50%').attr('stop-color',colorScale(0));
+  grad.append('stop').attr('offset','100%').attr('stop-color',colorScale(3.5));
+  legendG.append('rect').attr('width',legendW).attr('height',legendH).attr('rx',3).attr('fill','url(#heatGrad)');
+  legendG.append('text').attr('x',legendW+5).attr('y',10).attr('fill',labelColor).attr('font-size','10px').text('\u22123.5');
+  legendG.append('text').attr('x',legendW+5).attr('y',legendH/2+3).attr('fill',labelColor).attr('font-size','10px').text('0');
+  legendG.append('text').attr('x',legendW+5).attr('y',legendH-2).attr('fill',labelColor).attr('font-size','10px').text('+3.5');
+}
+
+// ════════════════════════════════════════════════════
+// 9. UMAP
+// ════════════════════════════════════════════════════
+function drawUMAP() {
+  const datasets = umapClusters.map(c => ({
+    label:c.label,
+    data:umapPoints.filter(p=>p.label===c.label).map(p=>({x:p.x,y:p.y})),
+    backgroundColor:c.color+'99',borderColor:c.color,borderWidth:0.5,pointRadius:2.5
+  }));
+  new Chart(document.getElementById('umapChart'), {
+    type:'scatter',data:{datasets},
+    options:{
+      responsive:true,
+      plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:10,font:{size:10}}}},
+      scales:{
+        x:{title:{display:true,text:'UMAP 1'},grid:{color:'rgba(212,208,200,0.2)'}},
+        y:{title:{display:true,text:'UMAP 2'},grid:{color:'rgba(212,208,200,0.2)'}}
+      }
+    }
+  });
+}
+
+// ════════════════════════════════════════════════════
+// 10. SEAHORSE
+// ════════════════════════════════════════════════════
+function drawSeahorse() {
+  const datasets = Object.entries(seahorseData).map(([name,vals],i) => ({
+    label:name,data:vals,borderColor:seahorseColors[i],backgroundColor:seahorseColors[i]+'22',
+    fill:false,tension:0.3,pointRadius:5,pointBackgroundColor:seahorseColors[i],borderWidth:2
+  }));
+  new Chart(document.getElementById('seahorseChart'), {
+    type:'line',data:{labels:seahorseTime,datasets},
+    options:{
+      responsive:true,
+      plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:10,font:{size:10}}}},
+      scales:{
+        x:{title:{display:true,text:'Mito Stress Test Phase'},grid:{color:'rgba(212,208,200,0.3)'}},
+        y:{title:{display:true,text:'OCR (pmol/min)'},min:0,grid:{color:'rgba(212,208,200,0.3)'}}
+      }
+    }
+  });
+}
+
+// ════════════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════════════
+window.addEventListener('load', () => {
+  drawVolcano();drawTopHits();drawDoseResponse();drawWaterfall();drawPathwayPie();
+  drawInfection('HEK293T');drawKinetics();drawHeatmap();drawUMAP();drawSeahorse();
+});
+window.addEventListener('resize', () => { drawVolcano(currentVolcanoFilter); });
 </script>
 
-<!-- GoatCounter tracking -->
-<script data-goatcounter="https://arminbayaticom.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
-<script data-goatcounter="https://arminbayati.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+<script data-goatcounter="https://arminbayaticom.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script data-goatcounter="https://arminbayati.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

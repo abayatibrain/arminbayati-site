@@ -1725,6 +1725,7 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
           <div class="nav-drop-panel">
             <a href="cellular-assays.html">Cellular &amp; Functional Assays</a>
             <a href="genetics.html">Genetics &amp; Molecular Biology</a>
+            <a href="crispr-screening.html">CRISPR Screening</a>
             <a href="assay-expertise.html">Proximity &amp; Molecular Assays</a>
           </div>
         </div>
@@ -2137,6 +2138,21 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 (function() {
   var searchIndex = [
     // Page-level entries
+    {page:'crispr-screening.html', title:'CRISPR Screening', category:'Research', section:'',
+     keywords:'crispr screening functional genomics pooled arrayed knockout mitophagy alpha-synuclein viral entry sars-cov-2 volcano plot heatmap ipsc neurons cardiomyocytes park2 pink1 bnip3l rac1 cltc interactive figures',
+     description:'Interactive CRISPR screening outcomes across mitophagy, alpha-synuclein uptake, and viral entry campaigns.'},
+    {page:'crispr-screening.html#mitophagy', title:'Mitophagy CRISPR Screen', category:'Research', section:'Mitophagy',
+     keywords:'mitophagy pink1 park2 parkin bnip3l fundc1 optn ndp52 autophagy mitochondria ipsc dopaminergic neuron genome-wide knockout neuroprotection volcano plot',
+     description:'Genome-wide CRISPR KO screen identifying mitophagy regulators in iPSC-derived dopaminergic neurons.'},
+    {page:'crispr-screening.html#synuclein', title:'Alpha-Synuclein Uptake Screen', category:'Research', section:'Synuclein',
+     keywords:'alpha-synuclein pff preformed fibril uptake rac1 macropinocytosis endocytosis rpe1 crispr arrayed knockout internalization waterfall',
+     description:'Arrayed CRISPR screen identifying RAC1-dependent macropinocytosis as major alpha-synuclein entry route.'},
+    {page:'crispr-screening.html#viral', title:'SARS-CoV-2 Entry Screen', category:'Research', section:'Viral Entry',
+     keywords:'sars-cov-2 viral entry clathrin endocytosis sirna pseudovirus spike protein ace2 pitstop dnm2 cltc infection kinetics',
+     description:'siRNA screen defining clathrin-mediated endocytosis as the primary SARS-CoV-2 cellular entry mechanism.'},
+    {page:'crispr-screening.html#validation', title:'Cross-Screen Validation', category:'Research', section:'Validation',
+     keywords:'cross-screen validation heatmap scrnaseq umap seahorse ocr metabolic profiling transcriptomics integration multi-omics',
+     description:'Multi-screen validation heatmap and single-cell transcriptomic analysis of CRISPR-perturbed neurons.'},
     {page:'index.html', title:'Home — Overview', category:'Main', section:'',
      keywords:'armin bayati phd neuroscience cell biology drug discovery harvard medical school mass general brigham research fellow translational science',
      description:'Overview of research portfolio spanning neurodegeneration, drug discovery, and translational science.'},
