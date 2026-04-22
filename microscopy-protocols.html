@@ -1651,6 +1651,99 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
   .tag { min-height: 36px; display: inline-flex; align-items: center; }
 }
 
+
+
+/* ==== MOBILE POLISH v1 ==== */
+/* Universal safeguards — injected across all pages */
+
+html, body {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Prevent any element from overflowing horizontally */
+img, video, svg, canvas, iframe, figure, table, pre, code {
+  max-width: 100%;
+}
+img, video, svg { height: auto; }
+
+/* Tables scroll rather than break layout */
+table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+  white-space: normal;
+}
+
+/* Code blocks scroll horizontally */
+pre, code {
+  overflow-x: auto;
+  word-break: break-word;
+}
+
+/* Smooth iOS scroll in any scrollable containers */
+.scroll-x, .table-scroll, .overflow-x {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Touch-target minimums */
+@media (hover: none) and (pointer: coarse) {
+  a, button, .btn, .nav-drop-trigger, .nav-links > a {
+    min-height: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Grids collapse more aggressively on narrow screens */
+  [style*="grid-template-columns:repeat(auto-fit, minmax(320px"],
+  [style*="grid-template-columns:repeat(auto-fit,minmax(320px"] {
+    grid-template-columns: 1fr !important;
+  }
+  [style*="grid-template-columns:repeat(auto-fit, minmax(400px"],
+  [style*="grid-template-columns:repeat(auto-fit,minmax(400px"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Hero typography scaling — prevent overflow on narrow screens */
+  .hero h1 { font-size: clamp(28px, 7vw, 48px) !important; line-height: 1.15 !important; }
+  h1 { word-break: break-word; }
+  h2 { word-break: break-word; }
+
+  /* Cap paragraph width to viewport so no overflow */
+  p { word-wrap: break-word; overflow-wrap: anywhere; }
+
+  /* Inline style width:Npx -> scale to container on small screens */
+  [style*="max-width:760px"], [style*="max-width: 760px"] { max-width: 100% !important; }
+  [style*="max-width:800px"], [style*="max-width: 800px"] { max-width: 100% !important; }
+  [style*="max-width:900px"], [style*="max-width: 900px"] { max-width: 100% !important; }
+  [style*="max-width:1000px"], [style*="max-width: 1000px"] { max-width: 100% !important; }
+
+  /* Wide figures — allow horizontal scroll wrapper */
+  figure img { max-width: 100%; height: auto; }
+}
+
+@media (max-width: 480px) {
+  body { font-size: 15px; }
+  h1 { font-size: clamp(24px, 8vw, 40px); }
+  h2 { font-size: clamp(20px, 6vw, 28px); }
+  h3 { font-size: clamp(17px, 5vw, 22px); }
+  section.section, .section { padding-left: 4vw; padding-right: 4vw; }
+  /* Paragraphs a bit tighter */
+  p { line-height: 1.65; }
+  /* Nav spacing */
+  .nav-row, .nav-links { font-size: 13px; }
+  .nav-brand { font-size: 14px; }
+  /* Footer stacks cleanly */
+  .footer-inner, .footer-links-grid { grid-template-columns: 1fr !important; }
+}
+
+/* Accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+/* ==== /MOBILE POLISH v1 ==== */
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>

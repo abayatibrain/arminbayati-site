@@ -666,6 +666,28 @@ a.card:hover {
   margin-top: 4px;
 }
 
+.pub-journal a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+.pub-journal a:hover { color: var(--ink); }
+.pub-year {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--mid);
+  letter-spacing: 1.5px;
+  background: rgba(192, 57, 43, 0.06);
+  border: 1px solid rgba(192, 57, 43, 0.2);
+  padding: 2px 8px;
+  border-radius: 3px;
+  margin-bottom: 6px;
+}
+
+
 /* ── CONTACT LINKS ── */
 .contact-links {
   display: flex;
@@ -1607,6 +1629,58 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
   .research-tile:hover { transform: none; }
 }
 
+
+
+/* ==== MOBILE POLISH v1 ==== */
+html, body {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+img, video, svg, canvas, iframe, figure, table, pre, code {
+  max-width: 100%;
+}
+img, video, svg { height: auto; }
+table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+  white-space: normal;
+}
+pre, code { overflow-x: auto; word-break: break-word; }
+@media (hover: none) and (pointer: coarse) {
+  a, button, .btn, .nav-drop-trigger, .nav-links > a { min-height: 40px; }
+}
+@media (max-width: 768px) {
+  [style*="grid-template-columns:repeat(auto-fit, minmax(320px"],
+  [style*="grid-template-columns:repeat(auto-fit,minmax(320px"],
+  [style*="grid-template-columns:repeat(auto-fit, minmax(400px"],
+  [style*="grid-template-columns:repeat(auto-fit,minmax(400px"] { grid-template-columns: 1fr !important; }
+  .hero h1 { font-size: clamp(28px, 7vw, 48px) !important; line-height: 1.15 !important; }
+  h1, h2 { word-break: break-word; }
+  p { word-wrap: break-word; overflow-wrap: anywhere; }
+  [style*="max-width:760px"], [style*="max-width: 760px"],
+  [style*="max-width:800px"], [style*="max-width: 800px"],
+  [style*="max-width:900px"], [style*="max-width: 900px"],
+  [style*="max-width:1000px"], [style*="max-width: 1000px"] { max-width: 100% !important; }
+  figure img { max-width: 100%; height: auto; }
+}
+@media (max-width: 480px) {
+  body { font-size: 15px; }
+  h1 { font-size: clamp(24px, 8vw, 40px); }
+  h2 { font-size: clamp(20px, 6vw, 28px); }
+  h3 { font-size: clamp(17px, 5vw, 22px); }
+  section.section, .section { padding-left: 4vw; padding-right: 4vw; }
+  p { line-height: 1.65; }
+  .nav-row, .nav-links { font-size: 13px; }
+  .nav-brand { font-size: 14px; }
+  .footer-inner, .footer-links-grid { grid-template-columns: 1fr !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+/* ==== /MOBILE POLISH v1 ==== */
+
 </style>
 </head>
 <body><script>if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark');</script>
@@ -1796,33 +1870,100 @@ document.addEventListener('click', function(e){
       <div class="section-label">Selected Works</div>
     </div>
     <div class="section-content">
-      <h2>Selected Publications</h2>
+      <h2>Publications (Most Recent First)</h2>
       <div class="pub-list">
+
         <div class="pub-item">
-          <div class="pub-title">Lewy body formation through dual-hit α-synuclein and immune challenge in iPSC-derived dopaminergic neurons</div>
-          <div class="pub-authors"><strong>Bayati A</strong> et al. (First &amp; Corresponding Author)</div>
-          <div class="pub-journal">Nature Neuroscience</div>
+          <div class="pub-year">2026</div>
+          <div class="pub-title">Neural cell state modulation by PARK2 and dopaminergic neuroprotection by small-molecule Parkin agonism</div>
+          <div class="pub-authors">Gong Y, <strong>Bayati A</strong>, <em>et al.</em> &mdash; First Co-Author</div>
+          <div class="pub-journal"><em>Nature</em> &mdash; Under Review</div>
         </div>
+
         <div class="pub-item">
-          <div class="pub-title">PARK2 (Parkin) modulates neural cell state and enables dopaminergic neuroprotection through small-molecule Parkin agonism</div>
-          <div class="pub-authors"><strong>Bayati A</strong> et al. (First Co-Author)</div>
-          <div class="pub-journal">Nature Aging — Under Review</div>
+          <div class="pub-year">2026</div>
+          <div class="pub-title">Myeloid PINK1 represses mtDNA release and immune signaling that impacts neuronal pathology in patient-derived idiopathic PD models</div>
+          <div class="pub-authors">Recinto SJ, MacDonald A, Premachandran S, Liu L, <strong>Bayati A</strong>, <em>et al.</em></div>
+          <div class="pub-journal">Manuscript, 2026</div>
         </div>
+
         <div class="pub-item">
-          <div class="pub-title">SARS-CoV-2 uses clathrin-mediated endocytosis to gain access to cells</div>
-          <div class="pub-authors"><strong>Bayati A</strong> et al. (First Author) — 500+ citations</div>
-          <div class="pub-journal">Journal of Biological Chemistry</div>
+          <div class="pub-year">2025</div>
+          <div class="pub-title">Baseline &alpha;-synuclein seeding activity and disease progression in sporadic and genetic Parkinson&rsquo;s disease (PPMI cohort)</div>
+          <div class="pub-authors">Schumacher JG, Zhang X, Macklin EA, Wang J, <strong>Bayati A</strong>, <em>et al.</em></div>
+          <div class="pub-journal">PPMI Consortium, 2025</div>
         </div>
+
         <div class="pub-item">
-          <div class="pub-title">α-Synuclein fibril internalization and Lewy body propagation via macropinocytosis and exosome-mediated transfer</div>
-          <div class="pub-authors"><strong>Bayati A</strong> et al. (First Author)</div>
-          <div class="pub-journal">Cell Reports</div>
+          <div class="pub-year">2025</div>
+          <div class="pub-title">AutoMorphoTrack: a modular Python framework for automated organelle morphology, motility, and colocalization analysis</div>
+          <div class="pub-authors"><strong>Bayati A</strong>, Schumacher JG, Chen</div>
+          <div class="pub-journal"><a href="https://doi.org/10.1101/2025.07.19.665650" target="_blank" rel="noopener">bioRxiv 2025.07.19.665650</a></div>
         </div>
+
         <div class="pub-item">
-          <div class="pub-title">AutoMorphoTrack: automated organelle morphology classification, tracking, and colocalization</div>
-          <div class="pub-authors"><strong>Bayati A</strong> et al.</div>
-          <div class="pub-journal">bioRxiv Preprint — doi:10.1101/2025.07.19.665650</div>
+          <div class="pub-year">2024</div>
+          <div class="pub-title">Modeling Parkinson&rsquo;s disease pathology in human dopaminergic neurons by sequential exposure to &alpha;-synuclein fibrils and proinflammatory cytokines</div>
+          <div class="pub-authors"><strong>Bayati A</strong>, Ayoubi R, Aguila A, Zorca CE, Deyab G, Han C, Recinto SJ, <em>et al.</em> &mdash; First &amp; Corresponding Author &middot; 60+ citations</div>
+          <div class="pub-journal"><a href="https://doi.org/10.1038/s41593-024-01775-4" target="_blank" rel="noopener"><em>Nature Neuroscience</em> <strong>27</strong>:2401&ndash;2416</a> &middot; <a href="https://pubmed.ncbi.nlm.nih.gov/39379564/" target="_blank" rel="noopener">PMID 39379564</a></div>
         </div>
+
+        <div class="pub-item">
+          <div class="pub-year">2024</div>
+          <div class="pub-title">Alpha-synuclein, autophagy-lysosomal pathway, and Lewy bodies: mutations, propagation, aggregation, and formation of inclusions</div>
+          <div class="pub-authors"><strong>Bayati A</strong>, McPherson PS &middot; 35+ citations (invited review)</div>
+          <div class="pub-journal">Invited review, 2024</div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-year">2023</div>
+          <div class="pub-title">Visualization of &alpha;-synuclein trafficking via nanogold labeling and electron microscopy</div>
+          <div class="pub-authors"><strong>Bayati A</strong>, Luo W, Del Cid-Pellitero E, Fon EA, Durcan TM, McPherson PS &mdash; First Author</div>
+          <div class="pub-journal"><a href="https://doi.org/10.1016/j.xpro.2023.102113" target="_blank" rel="noopener"><em>STAR Protocols</em> 4:102113</a> &middot; <a href="https://pubmed.ncbi.nlm.nih.gov/36861831/" target="_blank" rel="noopener">PMID 36861831</a></div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-year">2022</div>
+          <div class="pub-title">Rapid macropinocytic transfer of &alpha;-synuclein to lysosomes</div>
+          <div class="pub-authors"><strong>Bayati A</strong>, Banks E, Han C, Luo W, Wolfgang WR, Zorca CE, Shlaifer I, <em>et al.</em> &mdash; First Author &middot; 60+ citations</div>
+          <div class="pub-journal"><a href="https://doi.org/10.1016/j.celrep.2022.111102" target="_blank" rel="noopener"><em>Cell Reports</em> 40:111102</a> &middot; <a href="https://pubmed.ncbi.nlm.nih.gov/35858558/" target="_blank" rel="noopener">PMID 35858558</a></div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-year">2022</div>
+          <div class="pub-title">Host kinase CSNK2 is a target for inhibition of pathogenic SARS-like &beta;-coronaviruses</div>
+          <div class="pub-authors">Yang X, Dickmander RJ, <strong>Bayati A</strong>, <em>et al.</em> &middot; 30+ citations</div>
+          <div class="pub-journal">ACS Chemical Biology / JBC, 2022</div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-year">2022</div>
+          <div class="pub-title">Identification and utilization of a chemical probe to interrogate PIKfyve in &beta;-coronavirus lifecycle</div>
+          <div class="pub-authors">Drewry DH, Potjewyd FM, <strong>Bayati A</strong>, <em>et al.</em> &middot; 25+ citations</div>
+          <div class="pub-journal">Journal of Medicinal Chemistry, 2022</div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-year">2021</div>
+          <div class="pub-title">SARS-CoV-2 infects cells after viral entry via clathrin-mediated endocytosis</div>
+          <div class="pub-authors"><strong>Bayati A</strong>, Kumar R, Francis V, McPherson PS &mdash; First Author &middot; 570+ citations</div>
+          <div class="pub-journal"><a href="https://doi.org/10.1016/j.jbc.2021.100306" target="_blank" rel="noopener"><em>Journal of Biological Chemistry</em> 296:100306</a> &middot; <a href="https://pubmed.ncbi.nlm.nih.gov/33476648/" target="_blank" rel="noopener">PMID 33476648</a></div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-year">2018</div>
+          <div class="pub-title">What are neurodegenerative diseases and how do they affect the brain?</div>
+          <div class="pub-authors">Berman T, <strong>Bayati A</strong> &middot; 55+ citations</div>
+          <div class="pub-journal">Frontiers for Young Minds, 2018</div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-year">2017</div>
+          <div class="pub-title">Localized versus systematic neurodegeneration: a paradigm for aetiological classification</div>
+          <div class="pub-authors"><strong>Bayati A</strong>, Berman T &middot; 15+ citations</div>
+          <div class="pub-journal">Review, 2017</div>
+        </div>
+
       </div>
       <p style="margin-top:24px;">
         Additional manuscripts in preparation and under review, including work on Parkin agonism and telomerase activating compounds. The complete publication record is available on <a href="https://scholar.google.com/citations?user=MIW8P2MAAAAJ&hl=en" target="_blank">Google Scholar</a>.
