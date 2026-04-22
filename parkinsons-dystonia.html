@@ -1612,6 +1612,39 @@ html.dark .figure-frame {
   text-transform: uppercase;
 }
 
+
+/* Legend arrow icons & grouping */
+.bg-legend .lg-grp {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.bg-legend .lg-grp em {
+  color: var(--mid);
+  font-style: normal;
+  opacity: 0.75;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.bg-legend .lg-arrows {
+  gap: 10px;
+  padding-left: 6px;
+  border-left: 1px solid var(--rule);
+  margin-left: 4px;
+}
+.bg-legend .lg-arrow { vertical-align: middle; }
+.bg-legend .lg-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.8px;
+  color: var(--ink);
+}
+/* Soft connector under arrow heads — improves discernibility by spacing the terminus */
+.bg-edge path { stroke-linecap: round; stroke-linejoin: round; }
+/* Subtle node halo when highlighted */
+.bg-node.hl rect { filter: drop-shadow(0 0 6px rgba(192,57,43,0.25)); }
+
 /* ── MOBILE REFINEMENTS ── */
 @media (max-width: 720px) {
   .bg-schematic-card { padding: 18px 12px 14px; border-radius: 8px; }
@@ -2025,159 +2058,191 @@ pre, code {
         </div>
 
         <div class="bg-svg-wrap">
-          <svg viewBox="0 0 900 540" role="img" aria-labelledby="bgTitle bgDesc" class="bg-svg" preserveAspectRatio="xMidYMid meet">
+          <svg viewBox="0 0 980 620" role="img" aria-labelledby="bgTitle bgDesc" class="bg-svg" preserveAspectRatio="xMidYMid meet">
             <title id="bgTitle">Basal ganglia circuit schematic</title>
             <desc id="bgDesc">Direct, indirect and hyperdirect pathways showing dysfunction in Parkinson's disease and dystonia.</desc>
 
             <defs>
-              <marker id="arrEx" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
-                <path d="M0,0 L10,5 L0,10 Z" fill="currentColor"/>
+              <!-- Excitatory arrow: sharp triangular head -->
+              <marker id="arrEx" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                <path d="M0,0 L12,6 L0,12 Z" fill="currentColor"/>
               </marker>
-              <marker id="arrInh" markerWidth="12" markerHeight="10" refX="10" refY="5" orient="auto">
-                <rect x="0" y="2" width="10" height="6" fill="currentColor"/>
+              <!-- Inhibitory marker: classical T-bar perpendicular to line (neuroscience convention) -->
+              <marker id="arrInh" markerWidth="16" markerHeight="16" refX="4" refY="8" orient="auto" markerUnits="userSpaceOnUse">
+                <rect x="2" y="0" width="4" height="16" fill="currentColor" rx="1"/>
               </marker>
+              <!-- subtle edge shadow (for overlapping edges) -->
+              <filter id="edgeSoft" x="-2%" y="-2%" width="104%" height="104%">
+                <feGaussianBlur stdDeviation="0.2"/>
+              </filter>
             </defs>
 
-            <!-- Cortex -->
+            <!-- ============ NODES ============ -->
+            <!-- Layout rationale:
+                 Cortex top-center, D1 left (direct side), D2/GPe/STN stacked right (indirect cascade),
+                 GPi/SNr center (converging output), Thalamus bottom (loop relay), SNc left mid (dopamine). -->
+
+            <!-- Motor Cortex (top center) -->
             <g class="bg-node" data-node="cortex">
-              <rect x="330" y="20" width="240" height="58" rx="10" fill="#fafaf7" stroke="#0f1419" stroke-width="1.5"/>
-              <text x="450" y="46" text-anchor="middle" font-family="'DM Serif Display', serif" font-size="18" fill="#0f1419">Motor Cortex</text>
-              <text x="450" y="64" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#8a8a85">M1 &middot; SMA</text>
+              <rect x="350" y="20" width="280" height="60" rx="10" fill="#fafaf7" stroke="#0f1419" stroke-width="1.6"/>
+              <text x="490" y="47" text-anchor="middle" font-family="'DM Serif Display', serif" font-size="20" fill="#0f1419">Motor Cortex</text>
+              <text x="490" y="67" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#8a8a85">M1 &middot; SMA</text>
             </g>
 
-            <!-- Striatum D1 -->
+            <!-- Striatum D1 (upper left) -->
             <g class="bg-node" data-node="d1">
-              <rect x="80" y="150" width="200" height="64" rx="10" fill="#fafaf7" stroke="#0f1419" stroke-width="1.5"/>
-              <text x="180" y="176" text-anchor="middle" font-family="'DM Serif Display', serif" font-size="16" fill="#0f1419">Striatum (D1)</text>
-              <text x="180" y="198" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#8a8a85">Direct &middot; GABA &middot; SP/Dyn</text>
+              <rect x="60" y="170" width="210" height="68" rx="10" fill="#fafaf7" stroke="#0f1419" stroke-width="1.6"/>
+              <text x="165" y="200" text-anchor="middle" font-family="'DM Serif Display', serif" font-size="17" fill="#0f1419">Striatum D1</text>
+              <text x="165" y="222" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#8a8a85">GABA &middot; SP / Dyn</text>
             </g>
-            <!-- Striatum D2 -->
+
+            <!-- Striatum D2 (upper right) -->
             <g class="bg-node" data-node="d2">
-              <rect x="620" y="150" width="200" height="64" rx="10" fill="#fafaf7" stroke="#0f1419" stroke-width="1.5"/>
-              <text x="720" y="176" text-anchor="middle" font-family="'DM Serif Display', serif" font-size="16" fill="#0f1419">Striatum (D2)</text>
-              <text x="720" y="198" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#8a8a85">Indirect &middot; GABA &middot; Enk</text>
+              <rect x="710" y="170" width="210" height="68" rx="10" fill="#fafaf7" stroke="#0f1419" stroke-width="1.6"/>
+              <text x="815" y="200" text-anchor="middle" font-family="'DM Serif Display', serif" font-size="17" fill="#0f1419">Striatum D2</text>
+              <text x="815" y="222" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#8a8a85">GABA &middot; Enk</text>
             </g>
 
-            <!-- GPe -->
+            <!-- GPe (right middle) -->
             <g class="bg-node" data-node="gpe">
-              <rect x="620" y="248" width="200" height="50" rx="8" fill="#fafaf7" stroke="#0f1419" stroke-width="1.5"/>
-              <text x="720" y="272" text-anchor="middle" font-family="'DM Serif Display', serif" font-size="15" fill="#0f1419">GPe</text>
-              <text x="720" y="288" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#8a8a85">Pallidus externa</text>
+              <rect x="710" y="278" width="210" height="54" rx="9" fill="#fafaf7" stroke="#0f1419" stroke-width="1.6"/>
+              <text x="815" y="304" text-anchor="middle" font-family="'DM Serif Display', serif" font-size="16" fill="#0f1419">GPe</text>
+              <text x="815" y="322" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#8a8a85">Globus pallidus externa</text>
             </g>
 
-            <!-- STN -->
+            <!-- STN (right lower) -->
             <g class="bg-node" data-node="stn">
-              <rect x="620" y="322" width="200" height="50" rx="8" fill="#fafaf7" stroke="#0f1419" stroke-width="1.5"/>
-              <text x="720" y="346" text-anchor="middle" font-family="'DM Serif Display', serif" font-size="15" fill="#0f1419">STN</text>
-              <text x="720" y="362" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#8a8a85">Subthalamic &middot; Glu</text>
+              <rect x="710" y="366" width="210" height="54" rx="9" fill="#fafaf7" stroke="#0f1419" stroke-width="1.6"/>
+              <text x="815" y="392" text-anchor="middle" font-family="'DM Serif Display', serif" font-size="16" fill="#0f1419">STN</text>
+              <text x="815" y="410" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#8a8a85">Subthalamic &middot; Glu</text>
             </g>
 
-            <!-- GPi/SNr -->
+            <!-- GPi / SNr (center-bottom, converging output) -->
             <g class="bg-node" data-node="gpi">
-              <rect x="340" y="360" width="220" height="64" rx="10" fill="#fafaf7" stroke="#0f1419" stroke-width="1.5"/>
-              <text x="450" y="386" text-anchor="middle" font-family="'DM Serif Display', serif" font-size="16" fill="#0f1419">GPi / SNr</text>
-              <text x="450" y="408" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#8a8a85">Output &middot; GABA</text>
+              <rect x="360" y="370" width="260" height="68" rx="10" fill="#fafaf7" stroke="#0f1419" stroke-width="1.6"/>
+              <text x="490" y="398" text-anchor="middle" font-family="'DM Serif Display', serif" font-size="17" fill="#0f1419">GPi / SNr</text>
+              <text x="490" y="420" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#8a8a85">Output nucleus &middot; GABA</text>
             </g>
 
-            <!-- Thalamus -->
+            <!-- Thalamus (bottom center) -->
             <g class="bg-node" data-node="thal">
-              <rect x="340" y="452" width="220" height="58" rx="10" fill="#fafaf7" stroke="#0f1419" stroke-width="1.5"/>
-              <text x="450" y="478" text-anchor="middle" font-family="'DM Serif Display', serif" font-size="16" fill="#0f1419">Thalamus (VA/VL)</text>
-              <text x="450" y="498" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#8a8a85">Motor relay &middot; Glu</text>
+              <rect x="360" y="496" width="260" height="62" rx="10" fill="#fafaf7" stroke="#0f1419" stroke-width="1.6"/>
+              <text x="490" y="524" text-anchor="middle" font-family="'DM Serif Display', serif" font-size="17" fill="#0f1419">Thalamus (VA / VL)</text>
+              <text x="490" y="544" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#8a8a85">Motor relay &middot; Glu</text>
             </g>
 
-            <!-- SNc -->
+            <!-- SNc (left middle, dopamine source) -->
             <g class="bg-node" data-node="snc">
-              <rect x="30" y="360" width="200" height="64" rx="10" fill="#fafaf7" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="4 3"/>
-              <text x="130" y="386" text-anchor="middle" font-family="'DM Serif Display', serif" font-size="16" fill="#c0392b">SNc</text>
-              <text x="130" y="408" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#8a8a85">Dopamine &middot; D1(+) D2(&minus;)</text>
+              <rect x="60" y="390" width="210" height="70" rx="10" fill="#fafaf7" stroke="#c0392b" stroke-width="1.8" stroke-dasharray="5 3"/>
+              <text x="165" y="418" text-anchor="middle" font-family="'DM Serif Display', serif" font-size="17" fill="#c0392b">SNc</text>
+              <text x="165" y="438" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#8a8a85">Dopamine</text>
+              <text x="165" y="454" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#8a8a85">D1 (+) &middot; D2 (&minus;)</text>
             </g>
 
-            <!-- Cortex -> D1 -->
-            <g class="bg-edge" data-pathway="ctx-d1" style="color:#0f1419">
-              <path d="M380,78 C380,110 220,110 180,150" fill="none" stroke="currentColor" stroke-width="2" marker-end="url(#arrEx)"/>
+            <!-- ============ EDGES ============ -->
+            <!-- All edges routed with deliberate clearance: no path passes through a node,
+                 and no text labels sit over any path. Pathway identity is conveyed by color
+                 + arrow terminus (triangle = excitatory, bar = inhibitory). -->
+
+            <!-- Cortex -> D1  (excitatory, grey) -->
+            <g class="bg-edge" data-pathway="ctx-d1" style="color:#4a4a47">
+              <path d="M 400,80 C 380,120 260,130 215,170" fill="none" stroke="currentColor" stroke-width="2" marker-end="url(#arrEx)"/>
             </g>
-            <!-- Cortex -> D2 -->
-            <g class="bg-edge" data-pathway="ctx-d2" style="color:#0f1419">
-              <path d="M520,78 C520,110 680,110 720,150" fill="none" stroke="currentColor" stroke-width="2" marker-end="url(#arrEx)"/>
+            <!-- Cortex -> D2  (excitatory, grey) -->
+            <g class="bg-edge" data-pathway="ctx-d2" style="color:#4a4a47">
+              <path d="M 580,80 C 600,120 720,130 765,170" fill="none" stroke="currentColor" stroke-width="2" marker-end="url(#arrEx)"/>
             </g>
 
-            <!-- Direct D1 -> GPi -->
+            <!-- DIRECT PATHWAY: D1 -> GPi  (inhibitory, green) -->
             <g class="bg-edge" data-pathway="direct" style="color:#2d7a4f">
-              <path d="M220,214 C230,290 330,345 360,360" fill="none" stroke="currentColor" stroke-width="2.5" marker-end="url(#arrInh)"/>
-              <text x="250" y="300" font-family="'IBM Plex Mono', monospace" font-size="10" fill="currentColor">Direct</text>
+              <path d="M 220,238 C 260,310 330,360 365,376" fill="none" stroke="currentColor" stroke-width="2.8" marker-end="url(#arrInh)"/>
             </g>
 
-            <!-- Indirect -->
+            <!-- INDIRECT PATHWAY: D2 -> GPe  (inhibitory, orange) -->
             <g class="bg-edge" data-pathway="ind-1" style="color:#d07020">
-              <path d="M720,214 L720,248" fill="none" stroke="currentColor" stroke-width="2.5" marker-end="url(#arrInh)"/>
+              <path d="M 815,238 L 815,278" fill="none" stroke="currentColor" stroke-width="2.8" marker-end="url(#arrInh)"/>
             </g>
+            <!-- GPe -> STN  (inhibitory, orange) -->
             <g class="bg-edge" data-pathway="ind-2" style="color:#d07020">
-              <path d="M720,298 L720,322" fill="none" stroke="currentColor" stroke-width="2.5" marker-end="url(#arrInh)"/>
+              <path d="M 815,332 L 815,366" fill="none" stroke="currentColor" stroke-width="2.8" marker-end="url(#arrInh)"/>
             </g>
+            <!-- STN -> GPi  (excitatory, orange) -->
             <g class="bg-edge" data-pathway="ind-3" style="color:#d07020">
-              <path d="M680,372 C620,380 570,385 560,390" fill="none" stroke="currentColor" stroke-width="2.5" marker-end="url(#arrEx)"/>
-              <text x="595" y="340" font-family="'IBM Plex Mono', monospace" font-size="10" fill="currentColor">Indirect</text>
+              <path d="M 710,395 C 660,400 630,402 625,404" fill="none" stroke="currentColor" stroke-width="2.8" marker-end="url(#arrEx)"/>
             </g>
 
-            <!-- Hyperdirect Cortex -> STN -->
+            <!-- HYPERDIRECT: Cortex -> STN  (excitatory, purple, dashed)
+                 Routed to the right of D2/GPe to avoid clipping nodes. -->
             <g class="bg-edge" data-pathway="hyper" style="color:#6a4fb0">
-              <path d="M570,50 C820,40 830,260 820,322" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrEx)"/>
-              <text x="795" y="190" font-family="'IBM Plex Mono', monospace" font-size="10" fill="currentColor">Hyperdirect</text>
+              <path d="M 630,50 C 970,50 970,280 925,390" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrEx)"/>
             </g>
 
-            <!-- GPi -> Thal -->
+            <!-- BASAL-GANGLIA OUTPUT: GPi -> Thalamus  (inhibitory, ink) -->
             <g class="bg-edge" data-pathway="output" style="color:#0f1419">
-              <path d="M450,424 L450,452" fill="none" stroke="currentColor" stroke-width="2.5" marker-end="url(#arrInh)"/>
+              <path d="M 490,438 L 490,496" fill="none" stroke="currentColor" stroke-width="2.8" marker-end="url(#arrInh)"/>
             </g>
-            <!-- Thal -> Cortex -->
+
+            <!-- THALAMO-CORTICAL LOOP: Thalamus -> Cortex  (excitatory, ink) -->
             <g class="bg-edge" data-pathway="loop" style="color:#0f1419">
-              <path d="M340,481 C200,481 200,50 330,50" fill="none" stroke="currentColor" stroke-width="2" marker-end="url(#arrEx)"/>
+              <path d="M 370,526 C 270,520 280,70 350,60" fill="none" stroke="currentColor" stroke-width="2" marker-end="url(#arrEx)"/>
             </g>
 
-            <!-- SNc -> D1 (exc) -->
+            <!-- NIGROSTRIATAL DA: SNc -> D1  (excitatory, red, dashed) -->
             <g class="bg-edge" data-pathway="da-d1" style="color:#c0392b">
-              <path d="M130,360 C130,280 150,220 180,214" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3" marker-end="url(#arrEx)"/>
+              <path d="M 165,390 C 165,320 160,250 165,238" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrEx)"/>
             </g>
-            <!-- SNc -> D2 (inh net) -->
+            <!-- NIGROSTRIATAL DA: SNc -> D2  (inhibitory net effect, red, dashed)
+                 Routed UP through the empty space between D1 and D2, terminating
+                 at D2's bottom-left corner. Avoids clipping GPi/SNr or the thalamus. -->
             <g class="bg-edge" data-pathway="da-d2" style="color:#c0392b">
-              <path d="M230,392 C430,392 620,240 700,214" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3" marker-end="url(#arrInh)"/>
+              <path d="M 260,400 C 450,280 600,260 720,238" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrInh)"/>
             </g>
 
-            <!-- Dysfunction badges -->
+            <!-- ============ DYSFUNCTION BADGES ============ -->
             <g class="bg-badge" data-badge="pd-snc" opacity="0">
-              <circle cx="130" cy="360" r="11" fill="#c0392b"/>
-              <text x="130" y="365" text-anchor="middle" font-size="13" fill="#fff" font-family="'IBM Plex Mono', monospace">&#8595;</text>
+              <circle cx="165" cy="388" r="13" fill="#c0392b" stroke="#fafaf7" stroke-width="2"/>
+              <text x="165" y="393" text-anchor="middle" font-size="14" fill="#fff" font-family="'IBM Plex Mono', monospace" font-weight="700">&#8595;</text>
             </g>
             <g class="bg-badge" data-badge="pd-stn" opacity="0">
-              <circle cx="720" cy="322" r="11" fill="#c0392b"/>
-              <text x="720" y="327" text-anchor="middle" font-size="13" fill="#fff" font-family="'IBM Plex Mono', monospace">&#8593;</text>
+              <circle cx="710" cy="393" r="13" fill="#c0392b" stroke="#fafaf7" stroke-width="2"/>
+              <text x="710" y="398" text-anchor="middle" font-size="14" fill="#fff" font-family="'IBM Plex Mono', monospace" font-weight="700">&#8593;</text>
             </g>
             <g class="bg-badge" data-badge="pd-gpi" opacity="0">
-              <circle cx="560" cy="392" r="11" fill="#c0392b"/>
-              <text x="560" y="397" text-anchor="middle" font-size="13" fill="#fff" font-family="'IBM Plex Mono', monospace">&#8593;</text>
+              <circle cx="620" cy="404" r="13" fill="#c0392b" stroke="#fafaf7" stroke-width="2"/>
+              <text x="620" y="409" text-anchor="middle" font-size="14" fill="#fff" font-family="'IBM Plex Mono', monospace" font-weight="700">&#8593;</text>
             </g>
             <g class="bg-badge" data-badge="dys-gpi" opacity="0">
-              <circle cx="560" cy="392" r="11" fill="#d07020"/>
-              <text x="560" y="397" text-anchor="middle" font-size="13" fill="#fff" font-family="'IBM Plex Mono', monospace">&#8595;</text>
+              <circle cx="620" cy="404" r="13" fill="#d07020" stroke="#fafaf7" stroke-width="2"/>
+              <text x="620" y="409" text-anchor="middle" font-size="14" fill="#fff" font-family="'IBM Plex Mono', monospace" font-weight="700">&#8595;</text>
             </g>
             <g class="bg-badge" data-badge="dys-thal" opacity="0">
-              <circle cx="560" cy="481" r="11" fill="#d07020"/>
-              <text x="560" y="486" text-anchor="middle" font-size="13" fill="#fff" font-family="'IBM Plex Mono', monospace">&#8593;</text>
+              <circle cx="620" cy="527" r="13" fill="#d07020" stroke="#fafaf7" stroke-width="2"/>
+              <text x="620" y="532" text-anchor="middle" font-size="14" fill="#fff" font-family="'IBM Plex Mono', monospace" font-weight="700">&#8593;</text>
             </g>
             <g class="bg-badge" data-badge="dys-ctx" opacity="0">
-              <circle cx="570" cy="50" r="11" fill="#d07020"/>
-              <text x="570" y="55" text-anchor="middle" font-size="13" fill="#fff" font-family="'IBM Plex Mono', monospace">!</text>
+              <circle cx="630" cy="50" r="13" fill="#d07020" stroke="#fafaf7" stroke-width="2"/>
+              <text x="630" y="55" text-anchor="middle" font-size="14" fill="#fff" font-family="'IBM Plex Mono', monospace" font-weight="700">!</text>
             </g>
           </svg>
         </div>
 
         <div class="bg-legend">
-          <span><span class="dot dot-dir"></span>Direct pathway (promotes movement)</span>
-          <span><span class="dot dot-ind"></span>Indirect pathway (inhibits movement)</span>
-          <span><span class="dot dot-hyp"></span>Hyperdirect (cortex &rarr; STN)</span>
-          <span><span class="dot dot-da"></span>Dopamine (SNc)</span>
-          <span><span class="dot dot-inh"></span>&#9632; inhibitory &nbsp;&nbsp;&#9654; excitatory</span>
+          <span class="lg-grp"><span class="dot dot-dir"></span>Direct pathway <em>(movement-promoting)</em></span>
+          <span class="lg-grp"><span class="dot dot-ind"></span>Indirect pathway <em>(movement-inhibiting)</em></span>
+          <span class="lg-grp"><span class="dot dot-hyp"></span>Hyperdirect (cortex &rarr; STN)</span>
+          <span class="lg-grp"><span class="dot dot-da"></span>Dopamine (SNc)</span>
+          <span class="lg-grp lg-arrows">
+            <svg class="lg-arrow" viewBox="0 0 44 14" width="44" height="14" aria-hidden="true">
+              <path d="M2,7 L30,7" stroke="#0f1419" stroke-width="2" fill="none"/>
+              <path d="M28,1 L40,7 L28,13 Z" fill="#0f1419"/>
+            </svg>
+            <span class="lg-label">excitatory</span>
+            <svg class="lg-arrow" viewBox="0 0 44 14" width="44" height="14" aria-hidden="true">
+              <path d="M2,7 L34,7" stroke="#0f1419" stroke-width="2" fill="none"/>
+              <rect x="34" y="0" width="4" height="14" fill="#0f1419"/>
+            </svg>
+            <span class="lg-label">inhibitory</span>
+          </span>
         </div>
 
         <div class="bg-panels">
@@ -3040,6 +3105,19 @@ document.addEventListener('DOMContentLoaded', () => {
            captionEl ? captionEl.textContent.trim() : '');
     });
     fig.setAttribute('role','button');
+    fig.setAttribute('tabindex','0');
+    fig.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        fig.click();
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
+;
     fig.setAttribute('tabindex','0');
     fig.addEventListener('keydown', function(e){
       if (e.key === 'Enter' || e.key === ' ') {
