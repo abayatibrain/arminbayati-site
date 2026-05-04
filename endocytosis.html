@@ -2121,6 +2121,137 @@ pre, code {
 }
 /* ==== /MOBILE POLISH v1 ==== */
 
+
+
+/* ── Unified menu typography (added 2026-05) ──
+   Ensures every nav item — plain links AND dropdown triggers — has
+   identical font size, letter-spacing, weight and density on both
+   desktop and mobile. */
+.nav-links > a,
+.nav-row > a,
+.nav-dropdown > .nav-drop-trigger {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  line-height: 1.2;
+  padding: 8px 11px;
+  border-radius: 3px;
+  white-space: nowrap;
+  color: var(--mid);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.nav-links > a:hover,
+.nav-row > a:hover,
+.nav-dropdown:hover > .nav-drop-trigger,
+.nav-dropdown.open > .nav-drop-trigger {
+  color: var(--ink);
+  background: rgba(0,0,0,0.04);
+}
+.nav-links > a.active,
+.nav-row > a.active,
+.nav-dropdown.has-active > .nav-drop-trigger { color: var(--accent); }
+
+@media (max-width: 768px) {
+  .nav-links > a,
+  .nav-row > a,
+  .nav-dropdown > .nav-drop-trigger {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 11px 14px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    white-space: normal;
+  }
+  .nav-links.open .nav-row > a,
+  .nav-links.open .nav-dropdown > .nav-drop-trigger { text-align: left; }
+}
+
+
+
+/* ── Site-wide link styling (added 2026-05) ──
+   Inline links inherit body text color with a subtle underline so they
+   blend with the prose. Hover deepens the underline to accent.
+   Excluded: nav, footer, hero-tags, lineage cards, buttons (which keep
+   their own styling). */
+.section-content a:not(.tag):not(.btn-primary):not(.btn-secondary):not(.lineage-card),
+.findings a,
+.subsection a,
+.section p a,
+.figcap a,
+.protocol-steps a {
+  color: inherit !important;
+  text-decoration: underline !important;
+  text-decoration-color: rgba(0,0,0,0.22) !important;
+  text-decoration-thickness: 1px !important;
+  text-underline-offset: 3px !important;
+  border-bottom: none !important;
+  transition: text-decoration-color 0.18s ease, color 0.18s ease;
+}
+.section-content a:not(.tag):not(.btn-primary):not(.btn-secondary):not(.lineage-card):hover,
+.findings a:hover,
+.subsection a:hover,
+.section p a:hover,
+.figcap a:hover,
+.protocol-steps a:hover {
+  color: var(--ink) !important;
+  text-decoration-color: var(--accent) !important;
+}
+
+/* ── Stronger flowchart fix (added 2026-05) ──
+   The section-content grid track wasn't allowing its child .diff-flow to
+   shrink, so the flowchart pushed past the column. Setting min-width:0
+   lets the track shrink, and overflow-x:auto on .diff-flow then scrolls. */
+.section-content { min-width: 0; }
+.diff-flow {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+.flow-track {
+  width: max-content !important;
+  min-width: 0 !important;
+}
+.flow-step { flex: 0 0 156px !important; width: 156px !important; }
+
+@media (min-width: 1281px) {
+  .flow-step { flex: 0 0 168px !important; width: 168px !important; }
+}
+@media (max-width: 768px) {
+  .flow-track {
+    flex-direction: column;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  .flow-step { flex: 1 1 auto !important; width: 100% !important; }
+}
+
+
+
+/* Nav dropdown section header (added 2026-05) */
+.nav-drop-panel .nav-drop-section {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--mid);
+  padding: 12px 14px 4px;
+  margin-top: 4px;
+  border-top: 1px solid var(--rule);
+}
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
@@ -2139,13 +2270,25 @@ pre, code {
     <div class="nav-links">
       <div class="nav-row">
         <a href="index.html">Home</a>
-        <a href="parkinsons-dystonia.html">Parkinson&#39;s &amp; Dystonia</a>
+        <a href="parkinsons-dystonia.html">Parkinson&#39;s</a>
         <div class="nav-dropdown">
           <button class="nav-drop-trigger">iPSC Models</button>
           <div class="nav-drop-panel">
-            <a href="ipscs.html">iPSC-Derived Neurons</a>
-            <a href="cardiomyocytes.html">iPSC Cardiomyocytes</a>
-            <a href="islet-cells.html">iPSC &beta;-Islet Cells</a>
+            <a href="ipscs.html">iPSC Hub &mdash; Overview</a>
+            <a href="ipsc-neurons.html">iPSC &rarr; Neurons</a>
+            <a href="ipsc-pancreatic.html">iPSC &rarr; Pancreatic &beta;-Cells</a>
+            <a href="ipsc-cardiomyocytes.html">iPSC &rarr; Cardiomyocytes</a>
+            <a href="ipsc-kidney.html">iPSC &rarr; Kidney Organoids</a>
+            <a href="ipsc-lung.html">iPSC &rarr; Lung Organoids</a>
+            <a href="ipsc-mesenchymal.html">iPSC &rarr; Mesenchymal Cells</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-drop-trigger">Genomics &amp; NGS</button>
+          <div class="nav-drop-panel">
+            <a href="ngs.html">NGS &mdash; Bulk &amp; scRNA-seq</a>
+            <a href="genetics.html">Genetics &amp; Molecular Biology</a>
+            <a href="assay-expertise.html">Proximity &amp; Molecular Assays</a>
           </div>
         </div>
         <div class="nav-dropdown">
@@ -2155,7 +2298,6 @@ pre, code {
             <a href="biologics.html">Biologics &amp; Immunotherapy</a>
           </div>
         </div>
-        <a href="endocytosis.html" class="active">Endocytosis</a>
         <div class="nav-dropdown">
           <button class="nav-drop-trigger">Immunology</button>
           <div class="nav-drop-panel">
@@ -2164,17 +2306,16 @@ pre, code {
             <a href="flow-cytometry.html">Flow Cytometry</a>
           </div>
         </div>
-        <div class="nav-dropdown">
+      </div>
+      <div class="nav-row">
+        <div class="nav-dropdown has-active">
           <button class="nav-drop-trigger">Cellular Assays</button>
           <div class="nav-drop-panel">
             <a href="cellular-assays.html">Cellular &amp; Functional Assays</a>
-            <a href="genetics.html">Genetics &amp; Molecular Biology</a>
+            <a href="endocytosis.html" class="active">Endocytosis</a>
             <a href="crispr-screening.html">CRISPR Screening</a>
-            <a href="assay-expertise.html">Proximity &amp; Molecular Assays</a>
           </div>
         </div>
-      </div>
-      <div class="nav-row">
         <div class="nav-dropdown">
           <button class="nav-drop-trigger">In Vivo &amp; Primary</button>
           <div class="nav-drop-panel">
@@ -2191,24 +2332,19 @@ pre, code {
             <a href="proteomics.html">Proteomics &amp; Genomics</a>
             <a href="coding.html">Coding &amp; Automation</a>
             <a href="skills.html">Full Technical Skills</a>
-          </div>
-        </div>
-        <div class="nav-dropdown">
-          <button class="nav-drop-trigger">Resources &amp; Protocols</button>
-          <div class="nav-drop-panel">
+            <div class="nav-drop-section">Protocols</div>
             <a href="protocols.html">Neuron/Cardiac Differentiation</a>
             <a href="endoderm-protocols.html">Endoderm &amp; Ectodermal Protocols</a>
             <a href="pancreatic-protocols.html">Pancreatic &beta;-Cell Differentiation</a>
             <a href="assay-protocols.html">Assay &amp; Molecular Protocols</a>
             <a href="microscopy-protocols.html">Microscopy &amp; Imaging Protocols</a>
             <a href="publications.html">Publications</a>
-            <a href="vc-portfolio.html">Portfolio &amp; VC</a>
           </div>
         </div>
         <a href="contact.html">Contact</a>
       </div>
     </div>
-    <div class="nav-right"><button class="search-toggle" aria-label="Search site" title="Search (&#x2318;K)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button><button class="dark-toggle" onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light')" aria-label="Toggle dark mode" title="Toggle dark mode">☀</button></div>
+    <div class="nav-right"><button class="search-toggle" aria-label="Search site" title="Search (&#x2318;K)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button><button class="dark-toggle" onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light')" aria-label="Toggle dark mode" title="Toggle dark mode">&#9728;</button></div>
   </div>
 </nav>
 

@@ -296,6 +296,23 @@ nav {
   margin: 0 auto 36px;
 }
 
+/* Inline links in the hero — match the surrounding text color, with a
+   subtle underline so they read as discoverable rather than decorated. */
+.hero-description .hero-link,
+.hero-description a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(0,0,0,0.18);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.18s ease, text-decoration-color 0.18s ease;
+}
+.hero-description .hero-link:hover,
+.hero-description a:hover {
+  color: var(--ink);
+  text-decoration-color: var(--accent);
+}
+
 .hero-tags {
   display: flex;
   flex-wrap: wrap;
@@ -2352,6 +2369,137 @@ pre, code {
 }
 /* ==== /MOBILE POLISH v1 ==== */
 
+
+
+/* ── Unified menu typography (added 2026-05) ──
+   Ensures every nav item — plain links AND dropdown triggers — has
+   identical font size, letter-spacing, weight and density on both
+   desktop and mobile. */
+.nav-links > a,
+.nav-row > a,
+.nav-dropdown > .nav-drop-trigger {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  line-height: 1.2;
+  padding: 8px 11px;
+  border-radius: 3px;
+  white-space: nowrap;
+  color: var(--mid);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.nav-links > a:hover,
+.nav-row > a:hover,
+.nav-dropdown:hover > .nav-drop-trigger,
+.nav-dropdown.open > .nav-drop-trigger {
+  color: var(--ink);
+  background: rgba(0,0,0,0.04);
+}
+.nav-links > a.active,
+.nav-row > a.active,
+.nav-dropdown.has-active > .nav-drop-trigger { color: var(--accent); }
+
+@media (max-width: 768px) {
+  .nav-links > a,
+  .nav-row > a,
+  .nav-dropdown > .nav-drop-trigger {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 11px 14px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    white-space: normal;
+  }
+  .nav-links.open .nav-row > a,
+  .nav-links.open .nav-dropdown > .nav-drop-trigger { text-align: left; }
+}
+
+
+
+/* ── Site-wide link styling (added 2026-05) ──
+   Inline links inherit body text color with a subtle underline so they
+   blend with the prose. Hover deepens the underline to accent.
+   Excluded: nav, footer, hero-tags, lineage cards, buttons (which keep
+   their own styling). */
+.section-content a:not(.tag):not(.btn-primary):not(.btn-secondary):not(.lineage-card),
+.findings a,
+.subsection a,
+.section p a,
+.figcap a,
+.protocol-steps a {
+  color: inherit !important;
+  text-decoration: underline !important;
+  text-decoration-color: rgba(0,0,0,0.22) !important;
+  text-decoration-thickness: 1px !important;
+  text-underline-offset: 3px !important;
+  border-bottom: none !important;
+  transition: text-decoration-color 0.18s ease, color 0.18s ease;
+}
+.section-content a:not(.tag):not(.btn-primary):not(.btn-secondary):not(.lineage-card):hover,
+.findings a:hover,
+.subsection a:hover,
+.section p a:hover,
+.figcap a:hover,
+.protocol-steps a:hover {
+  color: var(--ink) !important;
+  text-decoration-color: var(--accent) !important;
+}
+
+/* ── Stronger flowchart fix (added 2026-05) ──
+   The section-content grid track wasn't allowing its child .diff-flow to
+   shrink, so the flowchart pushed past the column. Setting min-width:0
+   lets the track shrink, and overflow-x:auto on .diff-flow then scrolls. */
+.section-content { min-width: 0; }
+.diff-flow {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+.flow-track {
+  width: max-content !important;
+  min-width: 0 !important;
+}
+.flow-step { flex: 0 0 156px !important; width: 156px !important; }
+
+@media (min-width: 1281px) {
+  .flow-step { flex: 0 0 168px !important; width: 168px !important; }
+}
+@media (max-width: 768px) {
+  .flow-track {
+    flex-direction: column;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  .flow-step { flex: 1 1 auto !important; width: 100% !important; }
+}
+
+
+
+/* Nav dropdown section header (added 2026-05) */
+.nav-drop-panel .nav-drop-section {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--mid);
+  padding: 12px 14px 4px;
+  margin-top: 4px;
+  border-top: 1px solid var(--rule);
+}
+
 </style>
 </head>
 <body>
@@ -2369,13 +2517,25 @@ pre, code {
     <div class="nav-links">
       <div class="nav-row">
         <a href="index.html" class="active">Home</a>
-        <a href="parkinsons-dystonia.html">Parkinson&#39;s &amp; Dystonia</a>
+        <a href="parkinsons-dystonia.html">Parkinson&#39;s</a>
         <div class="nav-dropdown">
           <button class="nav-drop-trigger">iPSC Models</button>
           <div class="nav-drop-panel">
-            <a href="ipscs.html">iPSC-Derived Neurons</a>
-            <a href="cardiomyocytes.html">iPSC Cardiomyocytes</a>
-            <a href="islet-cells.html">iPSC &beta;-Islet Cells</a>
+            <a href="ipscs.html">iPSC Hub &mdash; Overview</a>
+            <a href="ipsc-neurons.html">iPSC &rarr; Neurons</a>
+            <a href="ipsc-pancreatic.html">iPSC &rarr; Pancreatic &beta;-Cells</a>
+            <a href="ipsc-cardiomyocytes.html">iPSC &rarr; Cardiomyocytes</a>
+            <a href="ipsc-kidney.html">iPSC &rarr; Kidney Organoids</a>
+            <a href="ipsc-lung.html">iPSC &rarr; Lung Organoids</a>
+            <a href="ipsc-mesenchymal.html">iPSC &rarr; Mesenchymal Cells</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-drop-trigger">Genomics &amp; NGS</button>
+          <div class="nav-drop-panel">
+            <a href="ngs.html">NGS &mdash; Bulk &amp; scRNA-seq</a>
+            <a href="genetics.html">Genetics &amp; Molecular Biology</a>
+            <a href="assay-expertise.html">Proximity &amp; Molecular Assays</a>
           </div>
         </div>
         <div class="nav-dropdown">
@@ -2385,7 +2545,6 @@ pre, code {
             <a href="biologics.html">Biologics &amp; Immunotherapy</a>
           </div>
         </div>
-        <a href="endocytosis.html">Endocytosis</a>
         <div class="nav-dropdown">
           <button class="nav-drop-trigger">Immunology</button>
           <div class="nav-drop-panel">
@@ -2394,17 +2553,16 @@ pre, code {
             <a href="flow-cytometry.html">Flow Cytometry</a>
           </div>
         </div>
+      </div>
+      <div class="nav-row">
         <div class="nav-dropdown">
           <button class="nav-drop-trigger">Cellular Assays</button>
           <div class="nav-drop-panel">
             <a href="cellular-assays.html">Cellular &amp; Functional Assays</a>
-            <a href="genetics.html">Genetics &amp; Molecular Biology</a>
+            <a href="endocytosis.html">Endocytosis</a>
             <a href="crispr-screening.html">CRISPR Screening</a>
-            <a href="assay-expertise.html">Proximity &amp; Molecular Assays</a>
           </div>
         </div>
-      </div>
-      <div class="nav-row">
         <div class="nav-dropdown">
           <button class="nav-drop-trigger">In Vivo &amp; Primary</button>
           <div class="nav-drop-panel">
@@ -2421,24 +2579,19 @@ pre, code {
             <a href="proteomics.html">Proteomics &amp; Genomics</a>
             <a href="coding.html">Coding &amp; Automation</a>
             <a href="skills.html">Full Technical Skills</a>
-          </div>
-        </div>
-        <div class="nav-dropdown">
-          <button class="nav-drop-trigger">Resources &amp; Protocols</button>
-          <div class="nav-drop-panel">
+            <div class="nav-drop-section">Protocols</div>
             <a href="protocols.html">Neuron/Cardiac Differentiation</a>
             <a href="endoderm-protocols.html">Endoderm &amp; Ectodermal Protocols</a>
             <a href="pancreatic-protocols.html">Pancreatic &beta;-Cell Differentiation</a>
             <a href="assay-protocols.html">Assay &amp; Molecular Protocols</a>
             <a href="microscopy-protocols.html">Microscopy &amp; Imaging Protocols</a>
             <a href="publications.html">Publications</a>
-            <a href="vc-portfolio.html">Portfolio &amp; VC</a>
           </div>
         </div>
         <a href="contact.html">Contact</a>
       </div>
     </div>
-    <div class="nav-right"><button class="search-toggle" aria-label="Search site" title="Search (&#x2318;K)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button><button class="dark-toggle" onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light')" aria-label="Toggle dark mode" title="Toggle dark mode">☀</button></div>
+    <div class="nav-right"><button class="search-toggle" aria-label="Search site" title="Search (&#x2318;K)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button><button class="dark-toggle" onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light')" aria-label="Toggle dark mode" title="Toggle dark mode">&#9728;</button></div>
   </div>
 </nav>
 
@@ -2498,9 +2651,9 @@ document.addEventListener('click', function(e){
     <div class="hero-photo">
       <img src="images/headshot.jpg" alt="Armin Bayati, PhD" loading="eager">
     </div>
-    <h1>Neuroscience, Cell Biology &amp; Translational Drug Discovery</h1>
+    <h1>Stem Cell Biology, Disease Modeling, NGS &amp; Cellular Assays</h1>
     <p class="hero-description">
-      Research Fellow at Harvard Medical School and Massachusetts General Hospital. My work spans neuroscience, cancer immunology, infectious disease, pancreatic biology, and cardiovascular biology — using iPSC-derived cell models, high-content imaging, flow cytometry, proteomics, and computational tools to dissect disease mechanisms and advance preclinical drug discovery.
+      Research Fellow at Harvard Medical School and Massachusetts General Hospital. I differentiate iPSCs into <a class="hero-link" href="ipsc-neurons.html">neurons</a>, <a class="hero-link" href="ipsc-pancreatic.html">pancreatic &beta;-cells</a>, <a class="hero-link" href="ipsc-cardiomyocytes.html">cardiomyocytes</a>, <a class="hero-link" href="ipsc-kidney.html">kidney organoids</a>, and <a class="hero-link" href="ipsc-lung.html">lung organoids</a> &mdash; pairing each lineage with bulk and single-cell <a class="hero-link" href="ngs.html">NGS</a>, high-content imaging, flow cytometry, proteomics, and computational pipelines to dissect disease mechanisms and advance preclinical drug discovery in neurodegeneration, cancer immunology, infectious disease, metabolic disease, and cardiovascular biology.
     </p>
     <div class="hero-search" id="heroSearch">
       <div class="hero-search-row">
@@ -2652,18 +2805,6 @@ document.addEventListener('click', function(e){
       </div>
     </div>
 
-    <div class="stats-live-bar">
-      <div class="stats-live-item">
-        <div class="stats-live-dot"></div>
-        <span>Live</span>
-      </div>
-      <div class="stats-live-item">
-        <span><span class="stats-live-count" id="live-total">—</span> total pageviews</span>
-      </div>
-      <div class="stats-live-item">
-        <span><span class="stats-live-count" id="live-today">—</span> views today</span>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -2678,13 +2819,13 @@ document.addEventListener('click', function(e){
       <div class="timeline">
         <div class="timeline-item">
           <div class="timeline-year">2024 – Present</div>
-          <div class="timeline-title">Harvard Medical School &amp; Mass General Brigham — Research Fellow / Research Instructor</div>
-          <div class="timeline-desc">Led preclinical testing of novel drug candidates targeting neurodegeneration, cellular aging, and cancer. Designed high-throughput imaging assays for cytotoxicity, mitophagy, and protein aggregation. Established iPSC differentiation protocols across neuronal and endodermal lineages. Created Python-based pipelines (AutoMorphoTrack) for automated live-cell imaging analysis. Mentored and supervised junior scientists.</div>
+          <div class="timeline-title">Mass General Brigham — Research Fellow / Research Instructor</div>
+          <div class="timeline-desc">Co-appointed at Harvard Medical School. Led preclinical testing of novel drug candidates targeting neurodegeneration, cellular aging, and cancer. Designed high-throughput imaging assays for cytotoxicity, mitophagy, and protein aggregation. Established iPSC differentiation protocols across neuronal and endodermal lineages. Created Python-based pipelines (AutoMorphoTrack) for automated live-cell imaging analysis. Mentored and supervised junior scientists.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-year">2023 – 2024</div>
-          <div class="timeline-title">Montreal Neurological Institute &amp; McGill University — Research Associate</div>
-          <div class="timeline-desc">Led multi-year Parkinson's disease program culminating in first- and corresponding-author Nature Neuroscience publication. Advanced iPSC-based disease modeling to dissect mechanisms of apoptosis, autophagy, and protein aggregation. Developed high-resolution electron microscopy workflows. Applied CRISPR/siRNA editing to identify therapeutic targets. Designed EV/exosome transfer assays using CD63/CD9 reporter systems. Integrated mass spectrometry–based proteomics for biomarker discovery. Trained and supervised junior team members.</div>
+          <div class="timeline-title">Montreal Neurological Institute — Research Associate</div>
+          <div class="timeline-desc">Co-appointed at McGill University. Led multi-year Parkinson's disease program culminating in first- and corresponding-author Nature Neuroscience publication. Advanced iPSC-based disease modeling to dissect mechanisms of apoptosis, autophagy, and protein aggregation. Developed high-resolution electron microscopy workflows. Applied CRISPR/siRNA editing to identify therapeutic targets. Designed EV/exosome transfer assays using CD63/CD9 reporter systems. Integrated mass spectrometry–based proteomics for biomarker discovery. Trained and supervised junior team members.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-year">2018 – 2023</div>
@@ -2968,6 +3109,37 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* Count-up animation for .stat-value[data-count] */
+(function(){
+  function animateCount(el){
+    var target = parseInt(el.getAttribute('data-count'), 10) || 0;
+    var suffix = el.getAttribute('data-suffix') || '';
+    var duration = 1400; // ms
+    var start = performance.now();
+    function frame(now){
+      var t = Math.min(1, (now - start) / duration);
+      // ease-out cubic
+      var eased = 1 - Math.pow(1 - t, 3);
+      var val = Math.round(target * eased);
+      el.textContent = val.toLocaleString() + suffix;
+      if (t < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+  var seen = new WeakSet();
+  var statObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting && !seen.has(entry.target)) {
+        seen.add(entry.target);
+        animateCount(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.stat-value[data-count]').forEach(function(el){
+    statObs.observe(el);
+  });
+})();
 </script>
 <script>
 (function() {
@@ -2991,21 +3163,60 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     {page:'index.html', title:'Home — Overview', category:'Main', section:'',
      keywords:'armin bayati phd neuroscience cell biology drug discovery harvard medical school mass general brigham research fellow translational science',
      description:'Overview of research portfolio spanning neurodegeneration, drug discovery, and translational science.'},
-    {page:'ipscs.html', title:'iPSC-Derived Neurons', category:'Research', section:'',
-     keywords:'ipsc induced pluripotent stem cells dopaminergic neurons cortical neurons differentiation disease modeling parkinson lewy body dual-hit mea calcium imaging electrophysiology co-culture microglia astrocyte',
-     description:'iPSC differentiation protocols for dopaminergic and cortical neurons, disease modeling, and co-culture systems.'},
-    {page:'ipscs.html#differentiation', title:'iPSC Differentiation Protocol', category:'Research', section:'Differentiation',
-     keywords:'differentiation protocol dopaminergic cortical neurons small molecule patterning smadis floor plate midbrain astrocyte microglia',
-     description:'Dual SMAD inhibition to floor-plate patterning for midbrain dopaminergic neuron generation.'},
-    {page:'ipscs.html#electrophysiology', title:'Electrophysiology & Calcium Imaging', category:'Research', section:'Functional',
-     keywords:'mea multielectrode array calcium imaging fluo-4 spontaneous activity spike raster neuronal maturation electrophysiology functional',
-     description:'MEA recordings and calcium imaging confirming functional maturity of iPSC-derived neurons.'},
-    {page:'ipscs.html#disease-modeling', title:'Disease Modeling (Dual-Hit)', category:'Research', section:'Disease Modeling',
-     keywords:'dual-hit model lewy body inclusion pff preformed fibrils ifn-gamma cytokine parkinson synuclein neurodegeneration inflammation neuroinflammation',
-     description:'Sequential PFF + IFN-gamma exposure producing Lewy body-like inclusions in human dopaminergic neurons.'},
-    {page:'ipscs.html#co-culture', title:'Neuron-Glia Co-Culture', category:'Research', section:'Co-Culture',
-     keywords:'co-culture microglia astrocyte neuron-glia neuroinflammation phagocytosis neuroprotection alpha-synuclein inclusion formation',
-     description:'Microglia accelerate inclusion formation while astrocytes provide neuroprotection in co-culture systems.'},
+    {page:'ipscs.html', title:'iPSC Models — Hub & Overview', category:'Research', section:'',
+     keywords:'ipsc induced pluripotent stem cells lineage hub portfolio neurons pancreatic beta cells cardiomyocytes kidney organoids lung organoids differentiation backbone disease modeling',
+     description:'Top-level overview of the five iPSC lineages — neurons, pancreatic β-cells, cardiomyocytes, kidney organoids, and lung organoids — with the shared differentiation backbone.'},
+    {page:'ipsc-neurons.html', title:'iPSC → Neurons', category:'iPSC Models', section:'',
+     keywords:'ipsc neurons dopaminergic midbrain cortical motor differentiation dual smad floor plate th dat tuj1 girk2 parkin park2 ko alpha synuclein pff preformed fibrils dystonia parkinson disease modeling crispr isogenic',
+     description:'Dual-SMAD floor-plate iPSC differentiation to midbrain dopaminergic neurons; PARK2 KO and α-synuclein PFF disease modeling.'},
+    {page:'ipsc-neurons.html#differentiation', title:'iPSC Neuron Differentiation Protocol', category:'iPSC Models', section:'Differentiation',
+     keywords:'midbrain dopaminergic differentiation protocol dual smad ldn sb431542 shh purmorphamine fgf8 chir bdnf gdnf brainphys n2 b27',
+     description:'Step-by-step Kriks/Studer-style mDA differentiation with patterning, progenitor expansion, and maturation.'},
+    {page:'ipsc-pancreatic.html', title:'iPSC → Pancreatic β-Cells', category:'iPSC Models', section:'',
+     keywords:'ipsc pancreatic beta cell sc-beta sc-islet differentiation pdx1 nkx6.1 ngn3 neurod1 insulin c-peptide gsis glucose stimulated insulin secretion type 1 type 2 diabetes mody endocrine',
+     description:'Six-stage SC-β / SC-islet differentiation; static GSIS and dynamic perifusion for diabetes modeling.'},
+    {page:'ipsc-pancreatic.html#differentiation', title:'SC-β Differentiation Protocol', category:'iPSC Models', section:'Differentiation',
+     keywords:'definitive endoderm primitive gut tube posterior foregut pancreatic progenitor endocrine progenitor sc-beta activin a chir kgf retinoic acid xxi gamma secretase',
+     description:'Pagliuca/Rezania-style six-stage iPSC-to-SC-β differentiation with stage-defining markers.'},
+    {page:'ipsc-cardiomyocytes.html', title:'iPSC → Cardiomyocytes', category:'iPSC Models', section:'',
+     keywords:'ipsc cardiomyocyte cardiac giwi wnt chir99021 iwp-2 lactate selection ctnt sarcomere mea calcium imaging field potential cardiotoxicity herg arrhythmia',
+     description:'Wnt-modulated GiWi cardiac differentiation with lactate enrichment, MEA, and contractility.'},
+    {page:'ipsc-kidney.html', title:'iPSC → Kidney Organoids', category:'iPSC Models', section:'',
+     keywords:'ipsc kidney organoid intermediate mesoderm nephron takasato morizane fgf9 chir99021 six2 wt1 ltl podxl ecad podocyte proximal tubule pkd polycystic kidney aki acute injury nephrotoxicity',
+     description:'Self-organizing nephron organoids — intermediate-mesoderm protocol for PKD, AKI, and nephrotoxicity screening.'},
+    {page:'ipsc-lung.html', title:'iPSC → Lung Organoids', category:'iPSC Models', section:'',
+     keywords:'ipsc lung organoid alveolosphere airway anterior foregut nkx2.1 sftpc sftpb abca3 surfactant ace2 tmprss2 sars-cov-2 cystic fibrosis ipf surfactant deficiency air liquid interface ali pneumacult',
+     description:'DE → anterior foregut → NKX2.1+ lung progenitors; alveolospheres and ALI airway epithelium for SARS-CoV-2, IPF, and inhaled-drug screening.'},
+    {page:'ipsc-mesenchymal.html', title:'iPSC → Mesenchymal Cells', category:'iPSC Models', section:'',
+     keywords:'ipsc mesenchymal stromal cell imsc msc cd73 cd90 cd105 cd45 tri-lineage osteogenic chondrogenic adipogenic immunomodulation fibrosis emt tgf-beta runx2 ocn col1a1 alpha-sma fn1 ctgf isct',
+     description:'iPSC-derived mesenchymal stromal cells (iMSCs) — tri-lineage potential, immunomodulation, and fibrosis/EMT models.'},
+    {page:'ipsc-neurons.html#mda', title:'iPSC → Midbrain Dopaminergic Neurons', category:'iPSC Models', section:'mDA',
+     keywords:'midbrain dopaminergic mda kriks studer dual smad floor plate th dat girk2 nurr1 lmx1a foxa2 a9 parkinson',
+     description:'Kriks/Studer dual-SMAD floor-plate protocol for A9-like midbrain dopaminergic neurons.'},
+    {page:'ipsc-neurons.html#motor', title:'iPSC → Motor Neurons', category:'iPSC Models', section:'Motor',
+     keywords:'motor neuron als sma spinal mn olig2 hb9 isl1 lhx3 chat smi-32 vacht retinoic acid sag purmorphamine maury wichterle dapt sod1 c9orf72 tdp-43',
+     description:'Maury/Wichterle-style spinal motor neuron differentiation for ALS and SMA modeling.'},
+    {page:'ipsc-neurons.html#cortical', title:'iPSC → Cortical Glutamatergic Neurons', category:'iPSC Models', section:'Cortical',
+     keywords:'cortical glutamatergic shi livesey dorsal forebrain foxg1 tbr1 ctip2 satb2 cux1 vglut1 dual smad ftd autism schizophrenia deep upper layer',
+     description:'Shi/Livesey dorsal forebrain protocol for deep- and upper-layer cortical glutamatergic neurons.'},
+    {page:'ipsc-neurons.html#ngn2', title:'iPSC → NGN2-Induced Neurons (i₃N)', category:'iPSC Models', section:'NGN2',
+     keywords:'ngn2 induced neuron i3n zhang sudhof doxycycline tetO rtTA puromycin selection map2 tuj1 vglut1 psd-95 high throughput screen 96 384 well isogenic',
+     description:'Zhang/Südhof NGN2-induction for rapid scalable excitatory glutamatergic neurons (7–14 days).'},
+    {page:'ipsc-neurons.html#astrocytes', title:'iPSC → Astrocytes', category:'iPSC Models', section:'Astrocytes',
+     keywords:'astrocyte gfap s100b aqp4 aldh1l1 glt-1 cd44 nfia cntf bmp4 lif krencik zhang reactive a1 a2 c3 s100a10 tnf il-1 c1q',
+     description:'Krencik/Zhang extended differentiation to GFAP+/AQP4+ astrocytes; A1/A2 reactive states.'},
+    {page:'ngs.html', title:'Genomics & Next-Generation Sequencing', category:'Research', section:'',
+     keywords:'ngs next generation sequencing rna-seq bulk single cell scrna seurat scanpy harmony deseq2 edger gsea fgsea kegg reactome msigdb hallmark decoupler dorothea collectri transcription factor activity volcano umap park2 parkin fb231',
+     description:'Bulk and single-cell RNA-seq, GSEA, and DecoupleR transcription-factor inference applied to PARK2 KO neurons and beyond.'},
+    {page:'ngs.html#bulk', title:'Bulk RNA-seq — DE & GSEA', category:'Research', section:'Bulk RNA-seq',
+     keywords:'bulk rna-seq differential expression deseq2 edger volcano plot heatmap gsea leading edge kegg gobp reactome park2 parkin neural progenitor',
+     description:'Differential expression and pathway enrichment in PARK2 KO neural progenitors.'},
+    {page:'ngs.html#sc', title:'Single-Cell RNA-seq', category:'Research', section:'scRNA-seq',
+     keywords:'single cell rna-seq scrna 10x chromium seurat harmony umap clusters cell type annotation modulescore dot plot lineage trajectories',
+     description:'scRNA-seq cell-state and lineage analysis with Seurat, Harmony, and DecoupleR.'},
+    {page:'ngs.html#tf', title:'DecoupleR — TF Activity Inference', category:'Research', section:'TF',
+     keywords:'decoupler transcription factor activity inference dorothea collectri ulm mlm wsum regulons olig1 olig2 neurod2 foxo3 tp53 gata4',
+     description:'Transcription-factor activity scores from RNA-seq via DecoupleR with CollecTRI / DoRothEA regulons.'},
     {page:'cardiomyocytes.html', title:'iPSC-Derived Cardiomyocytes', category:'Research', section:'',
      keywords:'cardiomyocyte cardiac ipsc beating heart safety pharmacology calcium transients field potential duration impedance sarcomere contractility cardiotoxicity herg',
      description:'iPSC-cardiomyocyte assays for cardiac safety pharmacology and cardiotoxicity screening.'},
@@ -3090,9 +3301,6 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     {page:'publications.html', title:'Publications', category:'Academic', section:'',
      keywords:'peer-reviewed papers citations journal articles nature neuroscience lancet science translational medicine acs chemical biology first author corresponding author pubmed google scholar 25 publications 1300 citations',
      description:'25+ peer-reviewed publications with 1,300+ citations across neuroscience, virology, and cell biology.'},
-    {page:'vc-portfolio.html', title:'Portfolio & VC', category:'Industry', section:'',
-     keywords:'venture capital portfolio management drug discovery translational science biopharma partnerships alliance management funding grants awards ip patent regulatory ind fda biotech startup pharmaceutical scientific evaluation',
-     description:'Translational science leadership, biopharma partnerships, and scientific portfolio management experience.'},
     {page:'in-vivo.html', title:'In Vivo Neuroscience', category:'Research', section:'',
      keywords:'in vivo stroke ischemic photothrombotic perfusion fixation toluidine blue electron microscopy TEM ultrastructure synapse astrocyte mitochondria peri-infarct mouse brain vibratome ultramicrotomy',
      description:'Photothrombotic stroke model, tissue processing, toluidine blue histology, and TEM ultrastructural analysis of the peri-infarct zone.'},
@@ -3274,20 +3482,25 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   var heroActiveIdx = -1;
 
   var quickLinks = [
-    {label:'iPSC Disease Modeling', href:'ipscs.html', desc:'Dopaminergic & cortical neuron differentiation, Lewy body pathogenesis'},
-    {label:'Differentiation Protocols', href:'protocols.html', desc:'Step-by-step DA, cortical, NGN2+, and cardiomyocyte protocols'},
+    {label:'iPSC Models — Hub', href:'ipscs.html', desc:'Five iPSC lineages — neurons, pancreatic β-cells, cardiomyocytes, kidney, lung'},
+    {label:'iPSC → Neurons', href:'ipsc-neurons.html', desc:'Midbrain dopaminergic differentiation, PARK2 KO, α-synuclein PFF modeling'},
+    {label:'iPSC → Pancreatic β-Cells', href:'ipsc-pancreatic.html', desc:'Six-stage SC-β / SC-islet differentiation; GSIS for diabetes modeling'},
+    {label:'iPSC → Cardiomyocytes', href:'ipsc-cardiomyocytes.html', desc:'Wnt-modulated GiWi cardiac differentiation, MEA, contractility'},
+    {label:'iPSC → Kidney Organoids', href:'ipsc-kidney.html', desc:'Intermediate-mesoderm nephron organoids — PKD, AKI, nephrotoxicity'},
+    {label:'iPSC → Lung Organoids', href:'ipsc-lung.html', desc:'Alveolospheres & airway ALI — SARS-CoV-2, IPF, surfactant biology'},
+    {label:'iPSC → Mesenchymal Cells', href:'ipsc-mesenchymal.html', desc:'iMSCs — tri-lineage potential, immunomodulation, fibrosis & EMT'},
+    {label:'Genomics & NGS', href:'ngs.html', desc:'Bulk RNA-seq, scRNA-seq, GSEA, DecoupleR transcription-factor inference'},
+    {label:'Differentiation Protocols', href:'protocols.html', desc:'Step-by-step neuron, cardiac, endoderm, and pancreatic protocols'},
     {label:'Biologics & Immunotherapy', href:'biologics.html', desc:'Anti-cytokine and anti-synuclein biologics for neuroprotection'},
-    {label:'Dopaminergic Neurons', href:'ipscs.html#dopaminergic', desc:'Floor-plate patterning, functional maturation, MEA & calcium imaging'},
-    {label:"Parkinson's Disease", href:'ipscs.html#disease-modeling', desc:'Dual-hit model: PFF + IFN-γ Lewy body–like inclusions'},
+    {label:"Parkinson's", href:'parkinsons-dystonia.html', desc:'Disease focus: PARK2/Parkin, α-synuclein PFFs, FB231 Parkin agonism'},
     {label:'α-Synuclein Biology', href:'genetics.html#lysosomal', desc:'Lysosomal trafficking, prion-like propagation, SNCA triplication'},
+    {label:'Endocytosis', href:'endocytosis.html', desc:'Clathrin-mediated endocytosis, macropinocytosis, viral entry'},
     {label:'Live-Cell Imaging', href:'microscopy.html#confocal', desc:'Confocal, Opera Phenix high-content screening, time-lapse'},
     {label:'Electron Microscopy', href:'microscopy.html#em', desc:'TEM ultrastructure, nanogold tracing, pseudocolor analysis'},
-    {label:'CRISPR Screening Outcomes', href:'crispr-screening.html', desc:'Interactive figures from mitophagy, synuclein, and viral entry screens'},
+    {label:'CRISPR Screening Outcomes', href:'crispr-screening.html', desc:'Mitophagy, synuclein, and viral entry CRISPR screens'},
     {label:'CRISPR', href:'genetics.html#gene-editing', desc:'Gene editing, lentiviral delivery, GBA knockout, LAMP2 KD'},
     {label:'Cancer Immunology', href:'cancer-immunology.html', desc:'T-cell killing, ADCC/CDC, checkpoint blockade, CAR-T'},
-    {label:'Cardiomyocytes', href:'cardiomyocytes.html', desc:'iPSC-CM safety pharmacology, calcium transients, impedance'},
     {label:'Drug Discovery', href:'drug-discovery.html', desc:'Parkin agonism, antiviral screening, biomarker development'},
-    {label:'Biomarker Development', href:'drug-discovery.html#biomarker', desc:'LC-MS, DLS, HPLC compound purity & analytical characterization'},
     {label:'Flow Cytometry', href:'flow-cytometry.html', desc:'Multicolor immunophenotyping, FACS sorting, intracellular staining'},
     {label:'RNA Therapeutics', href:'genetics.html', desc:'ASO, siRNA, shRNA knockdown & molecular cloning'},
     {label:'Automation (BRAVO/Tecan)', href:'coding.html', desc:'Liquid handling, 96/384-well miniaturization, HTS workflows'},
@@ -3489,119 +3702,4 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     });
   });
 
-  function fallbackMailto(name, email, subject, message) {
-    var body = 'From: ' + name + ' (' + email + ')\n\n' + message;
-    window.location.href = 'mailto:a.bayati.brain' + '@' + 'gmail.com?subject=' + encodeURIComponent(subject || 'Website Contact') + '&body=' + encodeURIComponent(body);
-  }
-
-  function showSuccess() {
-    body.innerHTML = '<div class="chat-success">' +
-      '<div class="chat-success-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>' +
-      '<div class="chat-success-title">Message Sent</div>' +
-      '<div class="chat-success-desc">Thank you for reaching out. I\'ll get back to you as soon as possible.</div>' +
-    '</div>';
-  }
-
-  // Allow opening chat from links with #chat or onclick
-  window.openChatWidget = function(){
-    panel.classList.add('open');
-    fab.classList.add('open');
-    panel.scrollIntoView({behavior:'smooth', block:'end'});
-  };
-  if (window.location.hash === '#chat') { setTimeout(openChatWidget, 400); }
-})();
-</script>
-
-<!-- ── STATS COUNTER ANIMATION ── -->
-<script>
-(function() {
-  function animateCounters() {
-    const cards = document.querySelectorAll('.stat-value[data-count]');
-    cards.forEach(el => {
-      if (el.dataset.animated) return;
-      const target = parseInt(el.dataset.count, 10);
-      const suffix = el.dataset.suffix || '';
-      const duration = Math.min(2000, Math.max(800, target * 2));
-      const startTime = performance.now();
-
-      function step(now) {
-        const elapsed = now - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        // ease-out cubic
-        const eased = 1 - Math.pow(1 - progress, 3);
-        const current = Math.round(eased * target);
-        el.textContent = current.toLocaleString() + suffix;
-        if (progress < 1) {
-          requestAnimationFrame(step);
-        } else {
-          el.textContent = target.toLocaleString() + suffix;
-          el.dataset.animated = '1';
-        }
-      }
-      requestAnimationFrame(step);
-    });
-  }
-
-  // Intersection Observer to trigger on scroll
-  const statsSection = document.querySelector('.stats-section');
-  if (statsSection) {
-    const observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          animateCounters();
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.2 });
-    observer.observe(statsSection);
-  }
-
-  // ── LIVE ANALYTICS (GoatCounter) ──
-  // Uses arminbayati.goatcounter.com (arminbayati.org)
-  function fetchLiveAnalytics() {
-    const totalEl = document.getElementById('live-total');
-    const todayEl = document.getElementById('live-today');
-
-    // Fetch total pageviews across all pages
-    fetch('https://arminbayati.goatcounter.com/counter//TOTAL.json')
-      .then(r => r.json())
-      .then(data => {
-        if (totalEl && data.count) totalEl.textContent = data.count;
-      })
-      .catch(() => { if (totalEl) totalEl.textContent = '—'; });
-
-    // Fetch today's count using the no_events counter for the homepage
-    fetch('https://arminbayati.goatcounter.com/counter//.json')
-      .then(r => r.json())
-      .then(data => {
-        if (todayEl && data.count_unique) {
-          todayEl.textContent = data.count_unique;
-        } else if (todayEl && data.count) {
-          todayEl.textContent = data.count;
-        }
-      })
-      .catch(() => { if (todayEl) todayEl.textContent = '—'; });
-  }
-
-  // Delay analytics fetch until section is visible
-  if (statsSection) {
-    const analyticsObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          fetchLiveAnalytics();
-          analyticsObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    analyticsObserver.observe(statsSection);
-  }
-})();
-</script>
-
-<!-- GoatCounter tracking -->
-<script data-goatcounter="https://arminbayaticom.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
-<script data-goatcounter="https://arminbayati.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
-</body>
-</html>
+  function fallbackMailto(nam                                                                                                                                                                                                                                                                                                                                                                                                                                                              

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Technical Skills — Armin Bayati, PhD</title>
-<meta name="description" content="Comprehensive technical skills in cell biology, microscopy, molecular biology, automation, and data science.">
+<title>iPSC-Derived Pancreatic β-Cells — Armin Bayati, PhD</title>
+<meta name="description" content="Six-stage iPSC-to-SC-β differentiation for diabetes modeling, GSIS, and β-cell replacement research.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -885,6 +885,205 @@ a.card:hover {
 }
 
 
+/* ── GALLERY ── */
+.gallery {
+  margin: 20px 0 28px;
+  max-width: 760px;
+}
+.gallery-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--mid);
+  margin-bottom: 10px;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 6px;
+}
+.gallery-thumb {
+  aspect-ratio: 4/3;
+  border-radius: 4px;
+  border: 1px solid var(--rule);
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  background: var(--section-bg);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.gallery-thumb:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.gallery-thumb::after {
+  content: attr(data-caption);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.85));
+  color: rgba(255,255,255,0.95);
+  font-size: 11px;
+  font-style: italic;
+  line-height: 1.35;
+  padding: 28px 8px 8px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+.gallery-thumb:hover::after {
+  opacity: 1;
+}
+.gallery-thumb .thumb-index {
+  position: absolute;
+  bottom: 4px;
+  left: 6px;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: #fff;
+  background: rgba(0,0,0,0.55);
+  padding: 1px 5px;
+  border-radius: 2px;
+  letter-spacing: 0.3px;
+}
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(15,20,25,0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.lightbox.open { display: flex; }
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 78vh;
+  border-radius: 6px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+  object-fit: contain;
+}
+.lightbox-caption {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.7);
+  margin-top: 14px;
+  text-align: center;
+  max-width: 600px;
+}
+.lightbox-counter {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.5px;
+  margin-top: 6px;
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.6);
+  font-size: 28px;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+  font-family: var(--sans);
+}
+.lightbox-close:hover { color: #fff; background: rgba(255,255,255,0.1); }
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.5);
+  font-size: 36px;
+  cursor: pointer;
+  padding: 12px 16px;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+  font-family: var(--sans);
+}
+.lightbox-nav:hover { color: #fff; background: rgba(255,255,255,0.08); }
+.lightbox-prev { left: 16px; }
+.lightbox-next { right: 16px; }
+@media (max-width: 768px) {
+  .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+  .lightbox-nav { font-size: 24px; padding: 8px 12px; }
+}
+
+
+/* ── CHARTS ── */
+.chart-container {
+  max-width: 760px;
+  margin: 24px 0 32px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.chart-container canvas { width: 100% !important; }
+.chart-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.chart-subtitle {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--mid);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.chart-note {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--mid);
+  margin-top: 12px;
+  font-style: italic;
+}
+.code-block {
+  background: var(--ink);
+  color: #e6e6e6;
+  border-radius: 6px;
+  padding: 20px 24px;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.7;
+  margin: 20px 0 24px;
+  max-width: 760px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.code-block .comment { color: #6a9955; }
+.code-block .keyword { color: #569cd6; }
+.code-block .string { color: #ce9178; }
+.code-block .func { color: #dcdcaa; }
+.code-block .num { color: #b5cea8; }
+
+
 /* ── HIGH-TECH OVERLAY ── */
 body::before {
   content: "";
@@ -1285,6 +1484,47 @@ html.dark .search-modal { background: var(--card); }
 html.dark .search-result mark { background: rgba(192,57,43,0.3); }
 
 
+
+/* ── INTERACTIVE FIGURE IFRAME ── */
+.interactive-fig-frame {
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 28px 0 32px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.02);
+  background: var(--card);
+}
+.interactive-fig-frame iframe {
+  width: 100%;
+  border: none;
+  display: block;
+  min-height: 580px;
+}
+.interactive-fig-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--section-bg);
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.interactive-fig-label .fig-desc {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 12.5px;
+  color: var(--mid);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
 /* ══════════════════════════════════════════════
    MOBILE OPTIMIZATION — Only affects <768px
    Desktop layout is completely unchanged.
@@ -1572,6 +1812,17 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
   .lightbox-caption { font-size: 12px !important; padding: 8px 16px !important; }
 }
 
+/* ── Tablet adjustments (≤ 768px) ── */
+@media (max-width: 768px) {
+  .footer-inner { padding: 40px 20px 28px !important; }
+  .footer-links-grid { gap: 24px !important; }
+  /* Constrain interactive figure platform elements */
+  .ifig-cardiomyocyte-platform .diff-timeline { min-width: 0 !important; flex-wrap: wrap; }
+  .ifig-cardiomyocyte-platform .quad-grid { min-width: 0 !important; grid-template-columns: 1fr !important; }
+  .ifig-cardiomyocyte-platform .disease-grid { min-width: 0 !important; }
+  .ifig-cardiomyocyte-platform .wrapper { overflow-x: auto; }
+}
+
 /* ── Extra small screens (≤ 480px) ── */
 @media (max-width: 480px) {
   .hero h1, h1 { font-size: clamp(1.4rem, 6vw, 1.8rem) !important; }
@@ -1606,6 +1857,109 @@ html.dark .search-result mark { background: rgba(192,57,43,0.3); }
   .gallery-thumb:hover { transform: none; box-shadow: none; }
   .research-tile:hover { transform: none; }
 }
+
+
+  /* ── INLINE FIGURE: fig-cardiomyocyte-platform.html ── */
+
+
+
+
+  .ifig-cardiomyocyte-platform .fig-label { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--accent); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 8px; }
+  .ifig-cardiomyocyte-platform .fig-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; color: var(--ink); margin-bottom: 6px; text-align: center; }
+  .ifig-cardiomyocyte-platform .fig-subtitle { font-size: 13px; font-weight: 300; color: var(--mid); margin-bottom: 36px; text-align: center; max-width: 700px; line-height: 1.6; }
+
+  .ifig-cardiomyocyte-platform .wrapper { width: 100%; max-width: 1060px; overflow-x: auto; }
+
+  /* Differentiation timeline */
+  .ifig-cardiomyocyte-platform .diff-timeline {
+    display: flex; min-width: 920px; gap: 0; margin-bottom: 24px;
+    border: 1px solid var(--rule); border-radius: 10px; overflow: hidden;
+    background: var(--card);
+  }
+  .ifig-cardiomyocyte-platform .diff-phase {
+    flex: 1; padding: 18px 16px; border-right: 1px solid var(--rule);
+    position: relative;
+  }
+  .ifig-cardiomyocyte-platform .diff-phase:last-child { border-right: none; }
+  .ifig-cardiomyocyte-platform .diff-phase::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .ifig-cardiomyocyte-platform .diff-phase:nth-child(1)::before { background: var(--wnt); }
+  .ifig-cardiomyocyte-platform .diff-phase:nth-child(2)::before { background: var(--wnt); }
+  .ifig-cardiomyocyte-platform .diff-phase:nth-child(3)::before { background: var(--cardiac); }
+  .ifig-cardiomyocyte-platform .diff-phase:nth-child(4)::before { background: var(--cardiac); }
+  .ifig-cardiomyocyte-platform .diff-phase:nth-child(5)::before { background: var(--func); }
+  .ifig-cardiomyocyte-platform .diff-phase:nth-child(6)::before { background: var(--safety); }
+
+  .ifig-cardiomyocyte-platform .diff-day { font-family: var(--mono); font-size: 10px; font-weight: 500; color: var(--accent); letter-spacing: 0.5px; margin-bottom: 4px; }
+  .ifig-cardiomyocyte-platform .diff-name { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+  .ifig-cardiomyocyte-platform .diff-detail { font-size: 11px; font-weight: 300; color: var(--mid); line-height: 1.5; }
+  .ifig-cardiomyocyte-platform .diff-tag {
+    display: inline-block; margin-top: 6px; padding: 2px 7px; border-radius: 3px;
+    font-family: var(--mono); font-size: 9px; font-weight: 500;
+  }
+  .ifig-cardiomyocyte-platform .diff-tag.wnt { background: color-mix(in srgb, var(--wnt) 10%, transparent); color: var(--wnt); }
+  .ifig-cardiomyocyte-platform .diff-tag.cardiac { background: color-mix(in srgb, var(--cardiac) 10%, transparent); color: var(--cardiac); }
+  .ifig-cardiomyocyte-platform .diff-tag.func { background: color-mix(in srgb, var(--func) 10%, transparent); color: var(--func); }
+  .ifig-cardiomyocyte-platform .diff-tag.safety { background: color-mix(in srgb, var(--safety) 10%, transparent); color: var(--safety); }
+
+  /* Four-quadrant assay grid */
+  .ifig-cardiomyocyte-platform .quad-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    min-width: 920px;
+  }
+  .ifig-cardiomyocyte-platform .quad {
+    background: var(--card); border: 1px solid var(--rule); border-radius: 10px;
+    padding: 20px; position: relative; overflow: hidden;
+  }
+  .ifig-cardiomyocyte-platform .quad::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .ifig-cardiomyocyte-platform .quad:nth-child(1)::before { background: var(--func); }
+  .ifig-cardiomyocyte-platform .quad:nth-child(2)::before { background: var(--func); }
+  .ifig-cardiomyocyte-platform .quad:nth-child(3)::before { background: var(--safety); }
+  .ifig-cardiomyocyte-platform .quad:nth-child(4)::before { background: var(--safety); }
+  .ifig-cardiomyocyte-platform .quad:hover { border-color: var(--accent); }
+
+  .ifig-cardiomyocyte-platform .quad-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .ifig-cardiomyocyte-platform .quad-icon {
+    width: 36px; height: 36px; border-radius: 8px; display: flex;
+    align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+  }
+  .ifig-cardiomyocyte-platform .quad:nth-child(1) .quad-icon { background: color-mix(in srgb, var(--func) 10%, transparent); color: var(--func); }
+  .ifig-cardiomyocyte-platform .quad:nth-child(2) .quad-icon { background: color-mix(in srgb, var(--func) 10%, transparent); color: var(--func); }
+  .ifig-cardiomyocyte-platform .quad:nth-child(3) .quad-icon { background: color-mix(in srgb, var(--safety) 10%, transparent); color: var(--safety); }
+  .ifig-cardiomyocyte-platform .quad:nth-child(4) .quad-icon { background: color-mix(in srgb, var(--safety) 10%, transparent); color: var(--safety); }
+  .ifig-cardiomyocyte-platform .quad-title { font-size: 14px; font-weight: 600; color: var(--ink); }
+  .ifig-cardiomyocyte-platform .quad-subtitle { font-size: 11px; font-weight: 300; color: var(--mid); }
+
+  .ifig-cardiomyocyte-platform .quad-items { display: flex; flex-direction: column; gap: 8px; }
+  .ifig-cardiomyocyte-platform .quad-item {
+    display: flex; gap: 10px; padding: 10px 12px; background: var(--section-bg);
+    border-radius: 6px;
+  }
+  .ifig-cardiomyocyte-platform .qi-label { font-size: 12px; font-weight: 500; color: var(--ink); min-width: 100px; }
+  .ifig-cardiomyocyte-platform .qi-value { font-size: 11px; font-weight: 300; color: var(--mid); line-height: 1.5; }
+
+  /* Disease model strip */
+  .ifig-cardiomyocyte-platform .disease-label {
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    color: var(--accent); letter-spacing: 1px; margin: 24px 0 10px; text-transform: uppercase;
+  }
+  .ifig-cardiomyocyte-platform .disease-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px; min-width: 920px;
+  }
+  .ifig-cardiomyocyte-platform .disease-card {
+    background: var(--ink); border-radius: 8px; padding: 16px; color: rgba(255,255,255,0.95);
+  }
+  .ifig-cardiomyocyte-platform .disease-name { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+  .ifig-cardiomyocyte-platform .disease-desc { font-size: 10px; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.5; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .ifig-cardiomyocyte-platform .fig-label, .ifig-cardiomyocyte-platform .fig-title, .ifig-cardiomyocyte-platform .fig-subtitle { animation: fadeIn 0.5s ease both; }
+  .ifig-cardiomyocyte-platform .fig-title { animation-delay: 0.05s; } .fig-subtitle { animation-delay: 0.1s; }
 
 
 
@@ -1701,6 +2055,284 @@ pre, code {
 /* ==== /MOBILE POLISH v1 ==== */
 
 
+/* ── iPSC Lineage Cards (used on the hub page) ── */
+.lineage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin: 28px 0 16px;
+}
+.lineage-card {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 22px 22px 18px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  position: relative;
+  overflow: hidden;
+}
+.lineage-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--accent);
+  opacity: 0.85;
+}
+.lineage-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(0,0,0,0.08);
+  border-color: var(--ink);
+}
+.lineage-card .lineage-icon {
+  width: 36px; height: 36px;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.lineage-card h3 {
+  font-family: var(--serif);
+  font-size: 1.45rem;
+  line-height: 1.2;
+  font-weight: 400;
+  color: var(--ink);
+  margin: 0;
+}
+.lineage-card .lineage-blurb {
+  font-size: 0.94rem;
+  color: var(--mid);
+  line-height: 1.55;
+}
+.lineage-card .lineage-tag {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: auto;
+}
+
+/* ── Differentiation Flowchart ── */
+.diff-flow {
+  margin: 28px 0;
+  padding: 28px;
+  background: var(--section-bg);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  overflow-x: auto;
+}
+.diff-flow-title {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 6px;
+}
+.diff-flow-subtitle {
+  font-family: var(--serif);
+  font-size: 1.45rem;
+  line-height: 1.25;
+  margin-bottom: 22px;
+  color: var(--ink);
+}
+.flow-track {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 10px;
+  min-width: max-content;
+  padding-bottom: 6px;
+}
+.flow-step {
+  flex: 0 0 200px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 14px 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+.flow-step .flow-day {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.flow-step .flow-stage {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--ink);
+}
+.flow-step .flow-marker {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--mid);
+  letter-spacing: 0.2px;
+  margin-top: 2px;
+}
+.flow-step .flow-action {
+  font-size: 0.86rem;
+  color: var(--ink);
+  line-height: 1.45;
+}
+.flow-arrow {
+  flex: 0 0 22px;
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--mid);
+  font-size: 1.1rem;
+  user-select: none;
+}
+
+/* ── Protocol Steps (vertical numbered list) ── */
+.protocol-steps {
+  margin: 24px 0;
+  border-left: 2px solid var(--rule);
+  padding-left: 0;
+  counter-reset: prot;
+  list-style: none;
+}
+.protocol-steps li {
+  position: relative;
+  padding: 4px 0 18px 36px;
+  counter-increment: prot;
+}
+.protocol-steps li::before {
+  content: counter(prot, decimal-leading-zero);
+  position: absolute;
+  left: -16px;
+  top: 4px;
+  width: 32px;
+  height: 32px;
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.protocol-steps li strong {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+.protocol-steps li p {
+  font-size: 0.94rem;
+  color: var(--mid);
+  line-height: 1.55;
+  margin: 0;
+}
+.protocol-steps li code {
+  background: var(--section-bg);
+  border: 1px solid var(--rule);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: var(--ink);
+}
+
+/* ── Marker / chemistry chips ── */
+.marker-row {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;
+}
+.marker-chip {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.3px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid #e74c3c33;
+}
+.marker-chip.muted {
+  background: var(--section-bg);
+  color: var(--mid);
+  border-color: var(--rule);
+}
+
+/* ── NGS figure block ── */
+.ngs-figure {
+  margin: 26px 0;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.ngs-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: white;
+}
+.ngs-figure .figcap {
+  padding: 14px 18px;
+  border-top: 1px solid var(--rule);
+  font-size: 0.9rem;
+  color: var(--mid);
+  line-height: 1.55;
+}
+.ngs-figure .figcap strong {
+  color: var(--ink);
+  font-family: var(--serif);
+  font-weight: 400;
+  margin-right: 6px;
+}
+
+/* ── Schematic (SVG flow) wrapper ── */
+.schematic {
+  background: var(--section-bg);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 22px;
+  margin: 22px 0;
+  overflow-x: auto;
+}
+.schematic svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+/* Mobile: flowchart becomes vertical and steps fill width */
+@media (max-width: 768px) {
+  .diff-flow { padding: 18px; }
+  .flow-track {
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 0;
+  }
+  .flow-step { flex: 1 1 auto; width: 100%; }
+  .flow-arrow {
+    transform: rotate(90deg);
+    height: 24px;
+  }
+  .lineage-grid { grid-template-columns: 1fr; }
+}
+
+
 
 /* ── Unified menu typography (added 2026-05) ──
    Ensures every nav item — plain links AND dropdown triggers — has
@@ -1753,6 +2385,62 @@ pre, code {
   }
   .nav-links.open .nav-row > a,
   .nav-links.open .nav-dropdown > .nav-drop-trigger { text-align: left; }
+}
+
+
+
+/* ── Flowchart overflow fix (added 2026-05) ──
+   Stops the differentiation timeline from pushing past its grid column on
+   wide viewports, and gives users a visible horizontal scrollbar. */
+.diff-flow {
+  max-width: 100%;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule) transparent;
+}
+.diff-flow::-webkit-scrollbar { height: 8px; }
+.diff-flow::-webkit-scrollbar-track { background: transparent; }
+.diff-flow::-webkit-scrollbar-thumb {
+  background: var(--rule);
+  border-radius: 4px;
+}
+.diff-flow::-webkit-scrollbar-thumb:hover { background: var(--mid); }
+.flow-track {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 8px;
+  width: max-content;
+  min-width: 100%;
+}
+.flow-step {
+  flex: 0 0 168px;
+  width: 168px;
+}
+.flow-arrow { flex: 0 0 18px; }
+
+/* On medium-sized screens (laptops below ~1280px) tighten further so 5–6
+   cards fit naturally without scrolling. */
+@media (min-width: 769px) and (max-width: 1280px) {
+  .flow-step { flex: 0 0 152px; width: 152px; }
+  .flow-step .flow-stage { font-size: 0.98rem; }
+  .flow-step .flow-action { font-size: 0.82rem; }
+}
+
+/* Mobile already restacks vertically — keep that behavior. */
+@media (max-width: 768px) {
+  .flow-track {
+    flex-direction: column;
+    width: 100%;
+    min-width: 0;
+    align-items: stretch;
+    gap: 6px;
+  }
+  .flow-step { flex: 1 1 auto; width: 100%; }
+  .flow-arrow { flex: 0 0 auto; transform: rotate(90deg); height: 22px; }
 }
 
 
@@ -1831,7 +2519,163 @@ pre, code {
   border-top: 1px solid var(--rule);
 }
 
+
+
+/* ── Interactive flowchart cards (added 2026-05) ──
+   Hover/focus lifts the card and shows a "Click for details" hint.
+   When .flow-step.active is set (clicked / focused), an extra .flow-more
+   panel slides into view inside the card. */
+.flow-step {
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+              border-color 0.18s ease, background 0.18s ease;
+  position: relative;
+}
+.flow-step:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+  border-color: var(--ink);
+}
+.flow-step:hover::after,
+.flow-step:focus-visible::after {
+  content: "click for details ↓";
+  position: absolute;
+  bottom: 6px;
+  right: 10px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.4px;
+  color: var(--mid);
+  opacity: 0.9;
+  pointer-events: none;
+}
+.flow-step.active {
+  background: var(--paper);
+  border-color: var(--accent);
+  box-shadow: 0 10px 28px rgba(192,57,43,0.10);
+}
+.flow-step.active::after { content: "↑ collapse"; color: var(--accent); }
+
+/* Extended detail panel — hidden until .active */
+.flow-step .flow-more {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.28s ease;
+  margin-top: 0;
+}
+.flow-step .flow-more > div {
+  overflow: hidden;
+  min-height: 0;
+}
+.flow-step.active .flow-more {
+  grid-template-rows: 1fr;
+  margin-top: 8px;
+}
+.flow-step .flow-more p {
+  font-size: 0.82rem;
+  color: var(--mid);
+  line-height: 1.55;
+  margin: 8px 0 0;
+  padding-top: 8px;
+  border-top: 1px dashed var(--rule);
+}
+.flow-step .flow-more code {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  background: var(--section-bg);
+  padding: 1px 4px;
+  border-radius: 3px;
+  border: 1px solid var(--rule);
+}
+.flow-step .flow-more ul {
+  margin: 6px 0 0 16px;
+  font-size: 0.82rem;
+  color: var(--mid);
+  line-height: 1.55;
+}
+.flow-step .flow-more ul li { margin-bottom: 2px; }
+
+
+
+/* ── Refined flowchart hover/active (added 2026-05) ──
+   Override earlier rules so cards only show "click for details" if a
+   .flow-more child is present, and so hover lifts + enlarges slightly. */
+.flow-step:hover::after,
+.flow-step:focus-visible::after { content: none !important; }
+.flow-step:has(.flow-more):hover::after,
+.flow-step:has(.flow-more):focus-visible::after {
+  content: "click for details ↓";
+  position: absolute;
+  bottom: 6px;
+  right: 10px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.4px;
+  color: var(--mid);
+  opacity: 0.9;
+  pointer-events: none;
+}
+.flow-step:has(.flow-more).active::after {
+  content: "↑ collapse";
+  color: var(--accent);
+}
+.flow-step:not(:has(.flow-more)).active::after { content: none !important; }
+
+/* Hover lift + slight scale for better legibility */
+.flow-step {
+  will-change: transform;
+}
+.flow-step:hover {
+  transform: translateY(-3px) scale(1.025);
+  z-index: 2;
+}
+.flow-step:hover .flow-action {
+  color: var(--ink);
+}
+.flow-step.active {
+  transform: translateY(-3px);
+  z-index: 3;
+}
+
+
+
+/* ── Characterization charts (added 2026-05) ── */
+.chart-container {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 20px 22px 16px;
+  margin: 18px 0 22px;
+}
+.chart-container .chart-title {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+.chart-container .chart-subtitle {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.3px;
+  color: var(--mid);
+  margin-bottom: 14px;
+}
+.chart-container canvas {
+  width: 100% !important;
+  height: 260px !important;
+  max-width: 100%;
+}
+.chart-container .chart-note {
+  font-size: 12.5px;
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--mid);
+  margin-top: 10px;
+}
+
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
 <body><script>if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark');</script>
 
@@ -1849,12 +2693,12 @@ pre, code {
       <div class="nav-row">
         <a href="index.html">Home</a>
         <a href="parkinsons-dystonia.html">Parkinson&#39;s</a>
-        <div class="nav-dropdown">
+        <div class="nav-dropdown has-active">
           <button class="nav-drop-trigger">iPSC Models</button>
           <div class="nav-drop-panel">
             <a href="ipscs.html">iPSC Hub &mdash; Overview</a>
             <a href="ipsc-neurons.html">iPSC &rarr; Neurons</a>
-            <a href="ipsc-pancreatic.html">iPSC &rarr; Pancreatic &beta;-Cells</a>
+            <a href="ipsc-pancreatic.html" class="active">iPSC &rarr; Pancreatic &beta;-Cells</a>
             <a href="ipsc-cardiomyocytes.html">iPSC &rarr; Cardiomyocytes</a>
             <a href="ipsc-kidney.html">iPSC &rarr; Kidney Organoids</a>
             <a href="ipsc-lung.html">iPSC &rarr; Lung Organoids</a>
@@ -1903,13 +2747,13 @@ pre, code {
           </div>
         </div>
         <a href="biomarkers.html">Biomarkers</a>
-        <div class="nav-dropdown has-active">
+        <div class="nav-dropdown">
           <button class="nav-drop-trigger">Technical Skills</button>
           <div class="nav-drop-panel">
             <a href="microscopy.html">Microscopy &amp; Imaging</a>
             <a href="proteomics.html">Proteomics &amp; Genomics</a>
             <a href="coding.html">Coding &amp; Automation</a>
-            <a href="skills.html" class="active">Full Technical Skills</a>
+            <a href="skills.html">Full Technical Skills</a>
             <div class="nav-drop-section">Protocols</div>
             <a href="protocols.html">Neuron/Cardiac Differentiation</a>
             <a href="endoderm-protocols.html">Endoderm &amp; Ectodermal Protocols</a>
@@ -1976,153 +2820,231 @@ document.addEventListener('click', function(e){
 </div>
 
 
+
+
+
 <div class="hero">
-  <div class="hero-eyebrow">Technical Capabilities</div>
-  <h1>Full Technical Skills</h1>
+  <div class="hero-eyebrow">iPSC &mdash; Pancreatic</div>
+  <h1>iPSC-Derived Pancreatic &beta;-Cells &amp; SC-Islets</h1>
   <p class="hero-description">
-    A comprehensive overview of techniques, instruments, and platforms I have hands-on experience with — organized by category.
+    I differentiate human iPSCs into stem-cell-derived &beta;-cells (SC-&beta;) and self-organizing SC-islet clusters using a 6-stage definitive-endoderm-to-endocrine protocol. These insulin-secreting clusters respond to glucose challenge and provide a tractable platform for modeling type 1 and type 2 diabetes, MODY mutations, and &beta;-cell replacement strategies. Across each stage I integrate flow cytometry, immunofluorescence, GSIS, and bulk/single-cell transcriptomics.
   </p>
+  <div class="hero-tags">
+    <a class="tag" href="#differentiation">SC-&beta; Differentiation</a>
+    <a class="tag" href="#gsis">GSIS</a>
+    <a class="tag" href="#characterization">Characterization</a>
+    <a class="tag" href="#disease">Diabetes Modeling</a>
+    <a class="tag" href="ngs.html">RNA-seq</a>
+    <a class="tag" href="pancreatic-protocols.html">Full Protocol</a>
+  </div>
 </div>
 
-<div class="section reveal" id="cell-culture">
+<div class="section reveal" id="differentiation">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">01</div>
-      <div class="section-label">Cell Culture</div>
+      <div class="section-label">Differentiation</div>
     </div>
     <div class="section-content">
-      <h2>Cell Culture &amp; Disease Models</h2>
-      <h3>iPSC Platform</h3>
-      <p>iPSC expansion, maintenance, QC (morphology, pluripotency markers, mycoplasma), banking, and differentiation across <strong>dopaminergic neurons, cortical/excitatory neurons, astrocytes, microglia-like cells, and endodermal lineages</strong> (hepatic, lung/epithelial, gut, beta islet). Neuronal maturation, co-culture paradigms (neuron–glia, neuron–microglia, immune–neural), 2D and 3D culture systems, organoid-like models, and scale-up for screening.</p>
-      <h3>Mammalian Expression Systems</h3>
-      <p>CHO and HEK293 expression systems for recombinant protein production. Pool-to-clone workflows, screening funnel design, stable line generation, expression benchmarking, and single-use bioreactor operation (5 L scale). Suspension and adherent culture with long-term stability.</p>
-      <h3>Cell Lines</h3>
-      <p>20+ cell lines including HEK293/293T, HeLa, U2OS, U87, U251, SH-SY5Y, A549, Calu-3, Caco-2, HMC3, THP-1, LN229, HepG2, Vero E6, COS-7, CHO, Hap1, and RAW264.7. Primary rodent neurons, primary human astrocytes, primary glia/oligodendrocytes, and PBMCs.</p>
-      <h3>Biosafety</h3>
-      <p>BSL-2 and BSL-3 laboratory experience, aseptic technique, sterility controls, environmental monitoring, and contamination prevention.</p>
+      <h2>Six-Stage SC-&beta; Differentiation</h2>
+      <p>I use a refined Pagliuca/Rezania-style protocol, taking iPSCs through definitive endoderm, primitive gut tube, posterior foregut, pancreatic progenitors, endocrine progenitors, and finally insulin-producing &beta;-like cells. Each transition is gated by signaling cocktails (Activin A, KGF, retinoic acid, &gamma;-secretase inhibition, T3, AXL inhibition) and validated by lineage-defining transcription factors.</p>
+
+      <div class="diff-flow">
+        <div class="diff-flow-title">Differentiation Timeline</div>
+        <div class="diff-flow-subtitle">iPSC &rarr; Definitive Endoderm &rarr; PFG &rarr; PP &rarr; EP &rarr; SC-&beta;</div>
+        <div class="flow-track">
+          <div class="flow-step">
+            <div class="flow-day">Day 0&ndash;3</div>
+            <div class="flow-stage">Definitive Endoderm (DE)</div>
+            <div class="flow-marker">SOX17 &middot; FOXA2 &middot; CXCR4</div>
+            <div class="flow-action">Activin A (100&nbsp;ng/mL) + <code>CHIR99021</code> (3&nbsp;&micro;M, day 1).</div>
+          </div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step">
+            <div class="flow-day">Day 3&ndash;6</div>
+            <div class="flow-stage">Primitive Gut Tube</div>
+            <div class="flow-marker">HNF1B &middot; HNF4&alpha;</div>
+            <div class="flow-action">KGF (50&nbsp;ng/mL) ramp; ITS-X.</div>
+            <div class="flow-more"><div><p><code>Activin A</code> 100&nbsp;ng/mL + <code>CHIR99021</code> 3&nbsp;&micro;M (Day 1 only). Validate &gt;80% SOX17+/FOXA2+ by flow before proceeding.</p></div></div>
+          </div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step">
+            <div class="flow-day">Day 6&ndash;9</div>
+            <div class="flow-stage">Posterior Foregut</div>
+            <div class="flow-marker">PDX1 &middot; FOXA2</div>
+            <div class="flow-action">Retinoic acid (2&nbsp;&micro;M) + <code>LDN-193189</code> + KGF + Cyclopamine.</div>
+          </div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step">
+            <div class="flow-day">Day 9&ndash;13</div>
+            <div class="flow-stage">Pancreatic Progenitor</div>
+            <div class="flow-marker">PDX1 &middot; NKX6.1 &middot; SOX9</div>
+            <div class="flow-action">EGF, KGF, B27-vitA. Aim for &gt;50% PDX1+/NKX6.1+ co-positive.</div>
+            <div class="flow-more"><div><p><code>Retinoic acid</code> 2&nbsp;&micro;M + <code>LDN-193189</code> + KGF + <code>Cyclopamine</code>. PDX1 induction marks pancreatic commitment.</p></div></div>
+          </div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step">
+            <div class="flow-day">Day 13&ndash;20</div>
+            <div class="flow-stage">Endocrine Progenitor</div>
+            <div class="flow-marker">NEUROG3 &middot; NEUROD1 &middot; NKX2.2</div>
+            <div class="flow-action">&gamma;-secretase inhibition (XXI), T3, ALK5-i (SB431542), Heparin.</div>
+            <div class="flow-more"><div><p>&gamma;-secretase inhibition with <code>XXI</code> 1&nbsp;&micro;M, T3 1&nbsp;&micro;M, ALK5-i (<code>SB431542</code>), Heparin. NEUROG3 transient burst &rarr; NEUROD1+ endocrine progenitors.</p></div></div>
+          </div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step">
+            <div class="flow-day">Day 20&ndash;30+</div>
+            <div class="flow-stage">SC-&beta; / SC-Islet</div>
+            <div class="flow-marker">INS &middot; C-PEPTIDE &middot; MAFA &middot; UCN3</div>
+            <div class="flow-action">Aggregate to clusters; mature in CMRL + ZnSO&#8324; + AXL inhibition. Functional GSIS at &gt;D30.</div>
+          </div>
+        </div>
+      </div>
+
+      <ol class="protocol-steps">
+        <li><strong>Stage 1 &mdash; Definitive Endoderm</strong><p>Plate iPSCs at high density; treat with Activin A + CHIR99021 (Day 1 only) for 3 days. Validate &gt;80% SOX17+/FOXA2+ by flow.</p></li>
+        <li><strong>Stage 2&ndash;3 &mdash; Gut tube and posterior foregut</strong><p>Switch to KGF, then add retinoic acid + Cyclopamine + LDN-193189 to commit to PDX1+ pancreatic identity.</p></li>
+        <li><strong>Stage 4 &mdash; Pancreatic progenitors</strong><p>Continue KGF + EGF; sort or quantify PDX1+/NKX6.1+ co-positivity; expect &gt;50% efficiency.</p></li>
+        <li><strong>Stage 5 &mdash; Endocrine commitment</strong><p>Add &gamma;-secretase inhibitor XXI to silence Notch and induce NEUROG3+ endocrine progenitors. Co-treat with T3, SB431542 and heparin.</p></li>
+        <li><strong>Stage 6 &mdash; Aggregation &amp; maturation</strong><p>Aggregate cells in low-attachment plates or rotational culture (~75 &micro;m clusters). Mature 7&ndash;14+ days in CMRL + ZnSO&#8324; + AXL inhibition. Validate by static GSIS and dynamic perifusion.</p></li>
+      </ol>
+
+      <div class="findings">
+        <div class="finding"><div class="finding-value">&gt;80%</div><div class="finding-label">SOX17+/FOXA2+ DE</div></div>
+        <div class="finding"><div class="finding-value">&gt;50%</div><div class="finding-label">PDX1+/NKX6.1+ pancreatic progenitors</div></div>
+        <div class="finding"><div class="finding-value">2&ndash;4&times;</div><div class="finding-label">stimulation index by GSIS</div></div>
+        <div class="finding"><div class="finding-value">SC-Islets</div><div class="finding-label">3D self-organizing clusters</div></div>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="section reveal" id="genetics-skills">
+<div class="section reveal" id="gsis">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">02</div>
-      <div class="section-label">Genetics</div>
+      <div class="section-label">Functional GSIS</div>
     </div>
     <div class="section-content">
-      <h2>Genetic Engineering &amp; Molecular Biology</h2>
-      <h3>Gene Perturbation</h3>
-      <p>CRISPR/Cas9 knockout and knock-in, siRNA/shRNA-mediated knockdown, ASO/SSO-mediated silencing and modulation, lentiviral/adenoviral/AAV transduction, lipid-based transfection, and nucleofection/electroporation.</p>
-      <h3>Molecular Cloning</h3>
-      <p>Restriction cloning, Gibson assembly, Golden Gate cloning, primer design, PCR, bacterial transformation, colony screening, plasmid preparation (MiniPrep/MaxiPrep), Sanger sequencing, endotoxin-free DNA preparation, and construct design for membrane proteins and reporters.</p>
-      <h3>Nucleic Acid &amp; Protein Analysis</h3>
-      <p>DNA/RNA extraction and QC, RT-qPCR/ddPCR, RNA-seq sample preparation and coordination, cDNA synthesis, Western blot (including Simple Western/Wes), SDS-PAGE, ELISA/MSD/Luminex multiplex, biochemical fractionation, immunoprecipitation, and His-tagged protein purification.</p>
+      <h2>Glucose-Stimulated Insulin Secretion</h2>
+      <p>Mature SC-islets are starved in 2.8 mM glucose, then sequentially challenged with 2.8 mM, 16.7 mM, and 16.7 mM + 30 mM KCl. Static GSIS quantifies stimulation index (SI = high/low ratio &gt;2 considered functional). Dynamic perifusion captures first- and second-phase insulin release with &lt;1-min temporal resolution.</p>
     </div>
   </div>
 </div>
 
-<div class="section reveal" id="assays-skills">
+<div class="section reveal" id="characterization">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">03</div>
-      <div class="section-label">Assays</div>
+      <div class="section-label">Characterization</div>
     </div>
     <div class="section-content">
-      <h2>Cellular &amp; Functional Assays</h2>
-      <h3>Imaging-Based Assays</h3>
-      <p>Immunocytochemistry/immunofluorescence, live-cell imaging, cell painting (LysoTracker, Hoechst, MitoTracker, Cell Mask), high-content screening (Opera Phenix, Incucyte), calcium imaging, MEA-based electrophysiology, and multiplexed staining.</p>
-      <h3>Flow Cytometry</h3>
-      <p>Multicolor immunophenotyping, intracellular signaling readouts, cell-surface binding assays, gating strategy, compensation controls, activation-state profiling, and FlowJo analysis.</p>
-      <h3>Plate-Based &amp; Functional Readouts</h3>
-      <p>CellTiter-Glo viability, FLIPR calcium flux and membrane potential (BMG FLUOstar Omega), AlphaLISA, TR-FRET, HTRF, BRET, luminescence/fluorescence plate-reader assays, dose-response and time-course profiling, and 96/384-well miniaturization.</p>
-      <h3>Immune &amp; Primary Cell Assays</h3>
-      <p>PBMC isolation, culture/activation, and cytokine stimulation. Immune-target co-culture assays. T-cell functional assays. Primary human immune cell workflows. Cytokine quantification (ELISA/MSD/Luminex). Whole blood and hematopoietic cell matrices.</p>
-      <h3>Extracellular Vesicle Biology</h3>
-      <p>EV/exosome isolation from conditioned media, CD63/CD9 transfer assays, EV characterization by confocal microscopy, immunoblotting, and TEM. Exosome-mediated propagation assays.</p>
+      <h2>Multi-Modal Validation</h2>
+      <p>Validation combines C-peptide/insulin co-staining (with C-peptide as the bona fide marker of de novo synthesis), DTZ live-cluster staining for zinc-rich granules, electron microscopy for mature secretory granules, and bulk + single-cell RNA-seq for &alpha;/&beta;/&delta; cell identity assignment. See the <a href="ngs.html">Genomics &amp; NGS</a> page for representative pipelines.</p>
+      <div class="marker-row">
+        <span class="marker-chip">INS</span>
+        <span class="marker-chip">C-Peptide</span>
+        <span class="marker-chip">PDX1</span>
+        <span class="marker-chip">NKX6.1</span>
+        <span class="marker-chip">MAFA</span>
+        <span class="marker-chip">UCN3</span>
+        <span class="marker-chip muted">GCG</span>
+        <span class="marker-chip muted">SST</span>
+      </div>
+
+      <!-- Characterization quant charts (added 2026-05) -->
+
+      <div class="chart-container">
+        <div class="chart-title">Flow Cytometry &mdash; % Marker-Positive at Stage 6</div>
+        <div class="chart-subtitle">Mean &plusmn; SEM, n = 3 differentiations</div>
+        <canvas id="chart_flow_ipsc_pancreatic" height="260"></canvas>
+        <div class="chart-note">Representative values from typical batches.</div>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-title">RT-qPCR &mdash; SC-&beta; vs iPSC (log&#8322; FC)</div>
+        <div class="chart-subtitle">&Delta;&Delta;Ct method &middot; housekeeping: GAPDH, ACTB &middot; n = 3</div>
+        <canvas id="chart_qpcr_ipsc_pancreatic" height="260"></canvas>
+        <div class="chart-note">Bars above zero = up-regulated; bars below zero = down-regulated relative to undifferentiated iPSC.</div>
+      </div>
+
+<script>
+(function(){
+  if (typeof Chart === "undefined") return;
+  function ready(fn){ if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fn); else fn(); }
+  ready(function(){
+    var common = {
+      plugins: { legend: { display: false }, tooltip: { enabled: true } },
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+        y: { grid: { color: "rgba(0,0,0,0.06)" }, ticks: { font: { size: 11 } } }
+      }
+    };
+    var f = document.getElementById("chart_flow_ipsc_pancreatic");
+    if (f && !f.__chartReady) {
+      f.__chartReady = true;
+      new Chart(f.getContext("2d"), {
+        type: "bar",
+        data: { labels: ["PDX1", "NKX6.1", "NEUROD1", "INS", "C-PEPTIDE", "GCG", "SST"], datasets: [{
+          label: "% positive",
+          data: [82, 56, 48, 38, 35, 12, 6],
+          backgroundColor: "rgba(192,57,43,0.85)",
+          borderRadius: 4, maxBarThickness: 56
+        }] },
+        options: Object.assign({}, common, {
+          scales: Object.assign({}, common.scales, {
+            y: Object.assign({}, common.scales.y, {
+              min: 0, max: 100,
+              title: { display: true, text: "% positive", font: { size: 11 } }
+            })
+          })
+        })
+      });
+    }
+    var q = document.getElementById("chart_qpcr_ipsc_pancreatic");
+    if (q && !q.__chartReady) {
+      q.__chartReady = true;
+      var data = [-7.8, 7.4, 6.8, 4.3, 9.6, 5.1, 4.7];
+      var colors = data.map(function(v){ return v >= 0 ? "rgba(39,174,96,0.85)" : "rgba(192,57,43,0.85)"; });
+      new Chart(q.getContext("2d"), {
+        type: "bar",
+        data: { labels: ["OCT4", "PDX1", "NKX6.1", "NEUROG3", "INS", "MAFA", "UCN3"], datasets: [{
+          label: "log2 FC",
+          data: data,
+          backgroundColor: colors,
+          borderRadius: 4, maxBarThickness: 56
+        }] },
+        options: Object.assign({}, common, {
+          scales: Object.assign({}, common.scales, {
+            y: Object.assign({}, common.scales.y, {
+              title: { display: true, text: "log2 fold change", font: { size: 11 } }
+            })
+          })
+        })
+      });
+    }
+  });
+})();
+</script>
+
     </div>
   </div>
 </div>
 
-<div class="section reveal" id="microscopy-skills">
+<div class="section reveal" id="disease">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">04</div>
-      <div class="section-label">Microscopy</div>
+      <div class="section-label">Disease Modeling</div>
     </div>
     <div class="section-content">
-      <h2>Microscopy &amp; Imaging</h2>
-      <p>Confocal microscopy (Leica), Zeiss Airyscan super-resolution, Abberior STED microscopy, SIM, TIRF (Nikon), transmission electron microscopy (Tecnai), correlative light-electron microscopy (CLEM), negative-stain EM, live-cell imaging, widefield microscopy, high-content imaging (Opera Phenix, Incucyte), immunohistochemistry (IHC), cryosectioning, FFPE sectioning, RNAscope/FISH, and 3D z-stack volumetric analysis.</p>
+      <h2>Type 1, Type 2, MODY &amp; Stress Models</h2>
+      <p>SC-islets are stressed with cytokine cocktails (IFN&gamma; + IL-1&beta; + TNF&alpha;) for type-1-like immune attack; with palmitate or high glucose for type-2-like glucolipotoxicity; or compared genotype-matched to MODY-mutant lines (HNF1A, GCK, HNF4A) for monogenic diabetes. ER-stress (thapsigargin) and oxidative-stress (H&#8322;O&#8322;) challenges complete the panel.</p>
     </div>
   </div>
 </div>
 
-<div class="section reveal" id="computation-skills">
-  <div class="section-header">
-    <div class="section-index">
-      <div class="section-number">05</div>
-      <div class="section-label">Computation</div>
-    </div>
-    <div class="section-content">
-      <h2>Data Science, Automation &amp; Software</h2>
-      <h3>Programming &amp; Analysis</h3>
-      <p>Python (NumPy, pandas, scikit-learn, Jupyter), R, MATLAB, GraphPad Prism, FlowJo, JMP, ImageJ/Fiji, Imaris, PyMOL, Adobe Illustrator &amp; Photoshop, SnapGene, and SoftMax Pro.</p>
-      <h3>Automation</h3>
-      <p>BRAVO liquid handling, Tecan Fluent, Hamilton, VIAFLO, Assist Plus, KingFisher sample prep automation. 96- and 384-well plate-based workflow standardization. Automation-ready assay design for high-throughput execution.</p>
-      <h3>Computational Image Analysis</h3>
-      <p>AutoMorphoTrack (custom Python package), adaptive segmentation, morphology classification, frame-by-frame tracking, colocalization analysis, feature extraction, batch QC, automated visualization, and machine learning methods for phenotypic fingerprinting.</p>
-    </div>
-  </div>
-</div>
-
-<div class="section reveal" id="translational-skills">
-  <div class="section-header">
-    <div class="section-index">
-      <div class="section-number">06</div>
-      <div class="section-label">Translational</div>
-    </div>
-    <div class="section-content">
-      <h2>Translational &amp; Industry Experience</h2>
-      <h3>Biomarker Development</h3>
-      <p>Target engagement (TE) and pharmacodynamic (PD) biomarker panel design. Imaging biomarkers, protein biomarkers (Western/ELISA/MSD), nucleic acid readouts (RT-qPCR, ddPCR, RNA-seq), and mass spectrometry–guided discovery. Biomarker hypothesis development, prioritization, and biological justification.</p>
-
-      <h3>Documentation &amp; Quality</h3>
-      <p>ELN/LIMS discipline (LabArchives, Benchling), SOP authorship and review, technical reports, deviation tracking, OOS/OOT investigation awareness, GMP/CMC-quality mindset, and audit-ready recordkeeping.</p>
-      <h3>Disease Areas</h3>
-      <p>Parkinson's disease, Alzheimer's disease, frontotemporal dementia, multiple system atrophy, Duchenne muscular dystrophy, developmental epileptic encephalopathies, SARS-CoV-2 / infectious disease, and oncology (glioblastoma, cancer cell models, Parkin-mediated tumor biology).</p>
-      <h3>In Vivo Experience</h3>
-      <p>Rodent handling (mouse/rat), breeding, dosing/administration (i.p., i.v.), tissue collection, immune tissue processing, behavioral testing, and cross-model translation (human iPSC ↔ rodent systems).</p>
-    </div>
-  </div>
-</div>
-
-<div class="workflow-strip">
-  <div class="workflow-inner">
-    <h3>Key Instruments &amp; Platforms</h3>
-    <div class="workflow-steps">
-      <div class="workflow-step">
-        <div class="step-number">01</div>
-        <div class="step-title">Microscopes</div>
-        <div class="step-detail">Leica confocal, Zeiss Airyscan, Abberior STED, Nikon TIRF, Tecnai TEM, Opera Phenix HCS, Incucyte</div>
-      </div>
-      <div class="workflow-step">
-        <div class="step-number">02</div>
-        <div class="step-title">Liquid Handling</div>
-        <div class="step-detail">BRAVO, Tecan Fluent, Hamilton, VIAFLO, Assist Plus, KingFisher</div>
-      </div>
-      <div class="workflow-step">
-        <div class="step-number">03</div>
-        <div class="step-title">Plate Readers</div>
-        <div class="step-detail">BMG FLUOstar Omega (FLIPR/calcium flux), QuantStudio (qPCR), MSD/Luminex, Quanterix</div>
-      </div>
-      <div class="workflow-step">
-        <div class="step-number">04</div>
-        <div class="step-title">Software</div>
-        <div class="step-detail">Python, R, GraphPad Prism, FlowJo, JMP, ImageJ/Fiji, Imaris, Benchling, LabArchives</div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <div class="page-footer">
     <div class="footer-inner">
@@ -2157,6 +3079,269 @@ document.addEventListener('click', function(e){
     <div class="footer-bottom">&copy; 2026 Armin Bayati. All rights reserved.</div>
   </div>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+(function(){
+  const lb = document.createElement('div');
+  lb.className = 'lightbox';
+  lb.innerHTML = '<button class="lightbox-close" onclick="closeLB()">&times;</button>'
+    + '<button class="lightbox-nav lightbox-prev" onclick="navLB(-1)">&#8249;</button>'
+    + '<img class="lightbox-img" src="" alt="">'
+    + '<div class="lightbox-caption"></div>'
+    + '<div class="lightbox-counter"></div>'
+    + '<button class="lightbox-nav lightbox-next" onclick="navLB(1)">&#8250;</button>';
+  document.body.appendChild(lb);
+
+  let imgs=[], idx=0, gid='';
+
+  window.openLB = function(galleryId, i){
+    gid = galleryId;
+    const gallery = document.querySelector('[data-gallery="'+galleryId+'"]');
+    imgs = Array.from(gallery.querySelectorAll('.gallery-thumb'));
+    idx = i;
+    showLB();
+    lb.classList.add('open');
+    document.body.style.overflow='hidden';
+  };
+
+  function showLB(){
+    const t = imgs[idx];
+    const src = t.querySelector('img').src;
+    const cap = t.getAttribute('data-caption')||'';
+    lb.querySelector('.lightbox-img').src = src;
+    lb.querySelector('.lightbox-caption').textContent = cap;
+    lb.querySelector('.lightbox-counter').textContent = (idx+1)+' / '+imgs.length;
+  }
+
+  window.closeLB = function(){
+    lb.classList.remove('open');
+    document.body.style.overflow='';
+  };
+
+  window.navLB = function(d){
+    idx = (idx+d+imgs.length)%imgs.length;
+    showLB();
+  };
+
+  lb.addEventListener('click',function(e){
+    if(e.target===lb) closeLB();
+  });
+
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('open')) return;
+    if(e.key==='Escape') closeLB();
+    if(e.key==='ArrowRight') navLB(1);
+    if(e.key==='ArrowLeft') navLB(-1);
+  });
+})();
+</script>
+
+<script>
+// Chart 1: MEA Beat Rate Response
+(function(){
+  new Chart(document.getElementById('meaChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Vehicle', '10nM\nDofetilide', '100nM\nDofetilide', '30nM\nE-4031', 'Isoproterenol'],
+      datasets: [{
+        label: 'Beat Rate (BPM)',
+        data: [68, 54, 42, 48, 92],
+        backgroundColor: [
+          'rgba(192,57,43,0.75)',
+          'rgba(192,57,43,0.85)',
+          'rgba(192,57,43,0.95)',
+          'rgba(192,57,43,0.88)',
+          'rgba(46,134,193,0.75)'
+        ],
+        borderColor: 'rgba(192,57,43,1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11, family: "'IBM Plex Sans'" }, padding: 16 }}},
+      scales: {
+        y: { beginAtZero: true, max: 110, title: { display: true, text: 'Beat Rate (BPM)', font: { size: 11, family: "'IBM Plex Sans'" }}, grid: { color: 'rgba(0,0,0,0.05)' }},
+        x: { grid: { display: false } }
+      }
+    }
+  });
+})();
+
+// Chart 2: Calcium Transient Traces
+(function(){
+  var t=[], vehicle=[], dofet=[], iso=[];
+  for(var i=0; i<=4000; i+=10){
+    t.push((i/1000).toFixed(2));
+    var tSec = i/1000;
+
+    // Vehicle: normal 1 Hz beating, small oscillations
+    var vehicleVal = 0.02 + 0.35*Math.exp(-Math.pow((tSec % 1 - 0.3), 2) / 0.15) + 0.02*Math.sin(tSec*20);
+
+    // Dofetilide: prolonged transients, slower rate (~0.6 Hz), larger baseline
+    var dofetVal = 0.03 + 0.48*Math.exp(-Math.pow((tSec % 1.67 - 0.4), 2) / 0.25) + 0.015*Math.sin(tSec*12);
+
+    // Isoproterenol: faster beats (~1.5 Hz), higher amplitude
+    var isoVal = 0.015 + 0.52*Math.exp(-Math.pow((tSec % 0.67 - 0.25), 2) / 0.12) + 0.025*Math.sin(tSec*28);
+
+    vehicle.push(Math.max(0, vehicleVal));
+    dofet.push(Math.max(0, dofetVal));
+    iso.push(Math.max(0, isoVal));
+  }
+
+  new Chart(document.getElementById('calciumChart'), {
+    type: 'line',
+    data: {
+      labels: t,
+      datasets: [
+        { label: 'Vehicle (normal)', data: vehicle, borderColor: 'rgba(192,57,43,0.9)', pointRadius: 0, borderWidth: 2, tension: 0.3 },
+        { label: 'Dofetilide (prolonged)', data: dofet, borderColor: 'rgba(107,114,128,0.85)', pointRadius: 0, borderWidth: 2, tension: 0.3 },
+        { label: 'Isoproterenol (accelerated)', data: iso, borderColor: 'rgba(46,134,193,0.9)', pointRadius: 0, borderWidth: 2, tension: 0.3 }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 11, family: "'IBM Plex Sans'" }, padding: 16 }}
+      },
+      scales: {
+        y: { title: { display: true, text: 'ΔF/F₀', font: { size: 11, family: "'IBM Plex Sans'" }}, grid: { color: 'rgba(0,0,0,0.05)' }, beginAtZero: true, max: 1.0 },
+        x: { title: { display: true, text: 'Time (seconds)', font: { size: 11, family: "'IBM Plex Sans'" }}, grid: { color: 'rgba(0,0,0,0.03)' }, ticks: { maxTicksLimit: 8 }}
+      }
+    }
+  });
+})();
+
+// Chart 3: FPD Dose Response
+(function(){
+  new Chart(document.getElementById('fpdChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Vehicle', '10nM\nE-4031', '30nM\nE-4031', '100nM\nE-4031'],
+      datasets: [{
+        label: 'FPD (ms)',
+        data: [322, 365, 412, 468],
+        backgroundColor: [
+          'rgba(192,57,43,0.7)',
+          'rgba(192,57,43,0.8)',
+          'rgba(192,57,43,0.9)',
+          'rgba(192,57,43,1)'
+        ],
+        borderColor: 'rgba(192,57,43,1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11, family: "'IBM Plex Sans'" }, padding: 16 }}},
+      scales: {
+        y: { beginAtZero: true, max: 500, title: { display: true, text: 'FPD (ms)', font: { size: 11, family: "'IBM Plex Sans'" }}, grid: { color: 'rgba(0,0,0,0.05)' }},
+        x: { grid: { display: false } }
+      }
+    }
+  });
+})();
+
+// Chart 4: Viability Dose-Response
+(function(){
+  // Log scale dose points: 0.01, 0.1, 1, 10, 100 μM
+  var doxData = [98, 92, 65, 18, 2];
+  var sunitData = [99, 97, 88, 52, 12];
+  var ctrlData = [100, 100, 100, 100, 100];
+
+  new Chart(document.getElementById('viabilityChart'), {
+    type: 'line',
+    data: {
+      labels: ['0.01 μM', '0.1 μM', '1 μM', '10 μM', '100 μM'],
+      datasets: [
+        { label: 'Doxorubicin', data: doxData, borderColor: 'rgba(192,57,43,0.9)', pointBackgroundColor: 'rgba(192,57,43,0.9)', pointRadius: 5, borderWidth: 2.5, tension: 0.3 },
+        { label: 'Sunitinib', data: sunitData, borderColor: 'rgba(107,114,128,0.85)', pointBackgroundColor: 'rgba(107,114,128,0.85)', pointRadius: 5, borderWidth: 2.5, tension: 0.3 },
+        { label: 'Vehicle Control', data: ctrlData, borderColor: 'rgba(46,134,193,0.7)', pointBackgroundColor: 'rgba(46,134,193,0.7)', pointRadius: 5, borderWidth: 2, tension: 0.3, borderDash: [5,3] }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 11, family: "'IBM Plex Sans'" }, padding: 16 }}
+      },
+      scales: {
+        y: { beginAtZero: true, max: 110, title: { display: true, text: '% Viability (ATP)', font: { size: 11, family: "'IBM Plex Sans'" }}, grid: { color: 'rgba(0,0,0,0.05)' }},
+        x: { title: { display: true, text: 'Log Concentration (μM)', font: { size: 11, family: "'IBM Plex Sans'" }}, grid: { display: false } }
+      }
+    }
+  });
+})();
+
+// Chart 5: Impedance Over Time
+(function(){
+  var timepoints = [];
+  var vehicle = [];
+  var lowDose = [];
+  var highDose = [];
+
+  for(var h=0; h<=72; h+=4){
+    timepoints.push(h+'h');
+    // Vehicle: stable
+    vehicle.push(1.0 + 0.02*Math.random());
+    // Low dose: modest decline
+    lowDose.push(1.0 - 0.0025*h + 0.02*Math.random());
+    // High dose: progressive decline
+    highDose.push(1.0 - 0.008*h + 0.01*Math.random());
+  }
+
+  new Chart(document.getElementById('impedanceChart'), {
+    type: 'line',
+    data: {
+      labels: timepoints,
+      datasets: [
+        { label: 'Vehicle', data: vehicle, borderColor: 'rgba(46,134,193,0.9)', pointRadius: 4, borderWidth: 2.5, tension: 0.2 },
+        { label: 'Low Dose', data: lowDose, borderColor: 'rgba(107,114,128,0.85)', pointRadius: 4, borderWidth: 2.5, tension: 0.2 },
+        { label: 'High Dose', data: highDose, borderColor: 'rgba(192,57,43,0.9)', pointRadius: 4, borderWidth: 2.5, tension: 0.2 }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 11, family: "'IBM Plex Sans'" }, padding: 16 }}
+      },
+      scales: {
+        y: { beginAtZero: true, max: 1.3, title: { display: true, text: 'Cell Index', font: { size: 11, family: "'IBM Plex Sans'" }}, grid: { color: 'rgba(0,0,0,0.05)' }},
+        x: { title: { display: true, text: 'Time', font: { size: 11, family: "'IBM Plex Sans'" }}, grid: { display: false } }
+      }
+    }
+  });
+})();
+
+// Chart 6: Sarcomere Organization Score
+(function(){
+  new Chart(document.getElementById('sarcomereChart'), {
+    type: 'bar',
+    data: {
+      labels: ['WT', 'HCM-MYH7', 'DCM-TTN', 'LMNA-R349W'],
+      datasets: [{
+        label: 'Sarcomere Organization Score',
+        data: [82, 48, 35, 42],
+        backgroundColor: [
+          'rgba(46,134,193,0.8)',
+          'rgba(192,57,43,0.8)',
+          'rgba(192,57,43,0.95)',
+          'rgba(192,57,43,0.85)'
+        ],
+        borderColor: 'rgba(0,0,0,0.1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11, family: "'IBM Plex Sans'" }, padding: 16 }}},
+      scales: {
+        y: { beginAtZero: true, max: 100, title: { display: true, text: 'Organization Score (0–100)', font: { size: 11, family: "'IBM Plex Sans'" }}, grid: { color: 'rgba(0,0,0,0.05)' }},
+        x: { grid: { display: false } }
+      }
+    }
+  });
+})();
+</script>
+
+<script>
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -2435,6 +3620,190 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
   document.querySelectorAll('.search-toggle').forEach(function(btn){ btn.addEventListener('click', openSearch); });
 })();
+
+
+(function(){
+  var errorBarPlugin = {
+    id: 'errorBars',
+    afterDatasetsDraw: function(chart) {
+      var ctx = chart.ctx;
+      chart.data.datasets.forEach(function(ds, i) {
+        if (!ds.errorBars) return;
+        var meta = chart.getDatasetMeta(i);
+        meta.data.forEach(function(bar, j) {
+          var err = ds.errorBars[j];
+          if (err === undefined) return;
+          var x = bar.x, y = bar.y;
+          var yScale = chart.scales.y;
+          var yTop = yScale.getPixelForValue(ds.data[j] + err);
+          var yBot = yScale.getPixelForValue(ds.data[j] - err);
+          ctx.save();
+          ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+          ctx.lineWidth = 1.2;
+          ctx.beginPath();
+          ctx.moveTo(x, yTop);
+          ctx.lineTo(x, yBot);
+          ctx.moveTo(x - 4, yTop);
+          ctx.lineTo(x + 4, yTop);
+          ctx.moveTo(x - 4, yBot);
+          ctx.lineTo(x + 4, yBot);
+          ctx.stroke();
+          ctx.restore();
+        });
+      });
+    }
+  };
+  new Chart(document.getElementById('qpcrBarCardio'), {
+    type: 'bar',
+    plugins: [errorBarPlugin],
+    data: {
+      labels: ['TNNT2', 'MYH7', 'NKX2-5', 'GATA4', 'MYL2', 'IRX4', 'HCN4', 'SCN5A'],
+      datasets: [{
+      label: 'iPSC-CM Day 15',
+      data: [12.4, 4.8, 18.6, 14.2, 3.2, 2.8, 8.4, 5.6],
+      errorBars: [1.8, 0.7, 2.4, 1.9, 0.5, 0.4, 1.2, 0.8],
+      backgroundColor: 'rgba(192,57,43,0.75)',
+      borderColor: 'rgba(192,57,43,1)',
+      borderWidth: 1
+    },{
+      label: 'iPSC-CM Day 30',
+      data: [32.6, 18.4, 28.2, 22.8, 14.6, 12.4, 6.2, 16.8],
+      errorBars: [4.2, 2.6, 3.6, 2.8, 2.1, 1.8, 0.9, 2.4],
+      backgroundColor: 'rgba(46,134,193,0.7)',
+      borderColor: 'rgba(46,134,193,1)',
+      borderWidth: 1
+    },{
+      label: 'iPSC-CM Day 60',
+      data: [38.2, 26.4, 24.6, 20.4, 22.8, 18.6, 4.1, 24.2],
+      errorBars: [4.8, 3.4, 3.1, 2.6, 3.0, 2.4, 0.6, 3.2],
+      backgroundColor: 'rgba(107,114,128,0.6)',
+      borderColor: 'rgba(107,114,128,1)',
+      borderWidth: 1
+    }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11, family: "'IBM Plex Sans'" }, padding: 16 } } },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: 'Fold Change (vs Control)', font: { size: 11, family: "'IBM Plex Sans'" } }, grid: { color: 'rgba(0,0,0,0.05)' } },
+        x: { grid: { display: false }, ticks: { font: { size: 11, family: "'IBM Plex Sans'" } } }
+      }
+    }
+  });
+})();
+
+
+(function(){
+  var genes = ['TNNT2','MYH7','NKX2-5','GATA4','MYL2','IRX4','HCN4','SCN5A'];
+  var conds = ['Day 0 (iPSC)','Day 15','Day 30','Day 60','+ Doxorubicin'];
+  var vals = [[0, 0, 0, 0, 0, 0, 0, 0], [3.6, 2.3, 4.2, 3.8, 1.7, 1.5, 3.1, 2.5], [5.0, 4.2, 4.8, 4.5, 3.9, 3.6, 2.6, 4.1], [5.3, 4.7, 4.6, 4.3, 4.5, 4.2, 2.0, 4.6], [3.2, 2.8, 3.4, 3.1, 2.4, 2.2, 1.4, 2.6]];
+  var pts = [];
+  for(var r=0; r<conds.length; r++) {
+    for(var c=0; c<genes.length; c++) {
+      pts.push({x: c, y: r, v: vals[r][c]});
+    }
+  }
+  var maxAbs = 0;
+  pts.forEach(function(p){ if(Math.abs(p.v)>maxAbs) maxAbs=Math.abs(p.v); });
+
+  new Chart(document.getElementById('qpcrHeatCardio'), {
+    type: 'scatter',
+    data: {
+      datasets: [{
+        data: pts.map(function(p){ return {x: p.x, y: p.y}; }),
+        pointRadius: pts.map(function(){ return 18; }),
+        pointStyle: 'rectRounded',
+        backgroundColor: pts.map(function(p){
+          var t = p.v / maxAbs;
+          if(t > 0) return 'rgba(192,57,43,' + (0.15 + 0.85*t).toFixed(2) + ')';
+          else return 'rgba(41,98,163,' + (0.15 + 0.85*Math.abs(t)).toFixed(2) + ')';
+        }),
+        borderWidth: 0
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              var i = ctx.dataIndex;
+              var p = pts[i];
+              return genes[p.x] + ' in ' + conds[p.y] + ': ' + p.v.toFixed(1) + 'x';
+            }
+          }
+        }
+      },
+      scales: {
+        x: { type: 'linear', min: -0.5, max: genes.length - 0.5, ticks: { callback: function(v){ return genes[v]; }, stepSize: 1, font: { size: 10, family: "'IBM Plex Sans'" } }, grid: { display: false } },
+        y: { type: 'linear', min: -0.5, max: conds.length - 0.5, ticks: { callback: function(v){ return conds[v]; }, stepSize: 1, font: { size: 10, family: "'IBM Plex Sans'" } }, grid: { display: false }, reverse: false }
+      }
+    }
+  });
+})();
+
+// ── New keyword section charts ──
+
+new Chart(document.getElementById('contractChart').getContext('2d'), {
+  type: 'line',
+  data: {
+    labels: ['DIV 14', 'DIV 21', 'DIV 28', 'DIV 35', 'DIV 42', 'DIV 56'],
+    datasets: [{
+      label: 'Contraction Amplitude (µm)', data: [2.1, 4.8, 8.2, 12.5, 15.1, 16.8],
+      borderColor: 'rgba(192,57,43,0.8)', backgroundColor: 'rgba(192,57,43,0.1)', fill: true, tension: 0.3, yAxisID: 'y'
+    },{
+      label: 'Velocity (µm/s)', data: [8, 22, 45, 68, 82, 91],
+      borderColor: 'rgba(52,73,94,0.8)', backgroundColor: 'rgba(52,73,94,0.1)', fill: true, tension: 0.3, yAxisID: 'y1'
+    }]
+  },
+  options: { responsive: true, plugins: { legend: { position: 'top' }},
+    scales: {
+      y: { beginAtZero: true, position: 'left', title: { display: true, text: 'Amplitude (µm)' }},
+      y1: { beginAtZero: true, position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: 'Velocity (µm/s)' }}
+    }}
+});
+
+new Chart(document.getElementById('apdChart').getContext('2d'), {
+  type: 'bar',
+  data: {
+    labels: ['Ventricular', 'Atrial', 'Nodal-like'],
+    datasets: [{
+      label: 'APD30 (ms)', data: [85, 42, 55],
+      backgroundColor: 'rgba(192,57,43,0.3)', borderColor: 'rgba(192,57,43,0.6)', borderWidth: 1
+    },{
+      label: 'APD50 (ms)', data: [185, 95, 125],
+      backgroundColor: 'rgba(192,57,43,0.5)', borderColor: 'rgba(192,57,43,0.8)', borderWidth: 1
+    },{
+      label: 'APD90 (ms)', data: [320, 180, 215],
+      backgroundColor: 'rgba(192,57,43,0.75)', borderColor: 'rgba(192,57,43,1)', borderWidth: 1
+    }]
+  },
+  options: { responsive: true, plugins: { legend: { position: 'top' }},
+    scales: { y: { beginAtZero: true, title: { display: true, text: 'Duration (ms)' }}}}
+});
+
+new Chart(document.getElementById('hcsCardioChart').getContext('2d'), {
+  type: 'scatter',
+  data: {
+    datasets: [{
+      label: 'Safe compounds', data: [{x:0.2,y:0.1},{x:-0.3,y:0.4},{x:0.5,y:-0.2},{x:-0.1,y:0.3},{x:0.4,y:0.2},{x:-0.2,y:-0.1},{x:0.1,y:0.5},{x:0.3,y:-0.3}],
+      backgroundColor: 'rgba(39,174,96,0.5)', borderColor: 'rgba(39,174,96,0.8)', pointRadius: 5
+    },{
+      label: 'Cardiotoxic', data: [{x:2.1,y:1.8},{x:1.5,y:2.3},{x:2.8,y:1.2},{x:1.9,y:2.7},{x:3.1,y:2.0}],
+      backgroundColor: 'rgba(192,57,43,0.6)', borderColor: 'rgba(192,57,43,0.9)', pointRadius: 6
+    },{
+      label: 'Structural toxicity', data: [{x:-1.8,y:2.5},{x:-2.2,y:1.9},{x:-1.5,y:3.0}],
+      backgroundColor: 'rgba(243,156,18,0.6)', borderColor: 'rgba(243,156,18,0.9)', pointRadius: 6
+    }]
+  },
+  options: { responsive: true, plugins: { legend: { position: 'top' }},
+    scales: {
+      x: { title: { display: true, text: 'Sarcomere Z-score' }},
+      y: { title: { display: true, text: 'Calcium Z-score' }}
+    }}
+});
 </script>
 
 <!-- GoatCounter tracking (arminbayati.org) -->
@@ -2442,5 +3811,30 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         async src="//gc.zgo.at/count.js"></script>
 <script data-goatcounter="https://arminbayati.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
+
+<script>
+/* Click-to-expand on flow-step cards (added 2026-05) */
+(function(){
+  document.querySelectorAll('.flow-step').forEach(function(card){
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    function toggle(e){
+      e.preventDefault();
+      // close siblings in the same flowchart
+      var track = card.closest('.flow-track');
+      if (track) {
+        track.querySelectorAll('.flow-step.active').forEach(function(other){
+          if (other !== card) other.classList.remove('active');
+        });
+      }
+      card.classList.toggle('active');
+    }
+    card.addEventListener('click', toggle);
+    card.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') toggle(e);
+    });
+  });
+})();
+</script>
+
 </body>
-</html>
