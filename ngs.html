@@ -2737,11 +2737,11 @@ document.addEventListener('click', function(e){
     Bulk and single-cell RNA-seq are central pillars of my work, used in parallel with imaging and biochemistry to define how disease genotypes &mdash; especially <em>PARK2/Parkin</em>, <em>SNCA</em>, and immune-stress states &mdash; reshape cellular programs in iPSC-derived neurons, cardiomyocytes, and other lineages. Below is an integrated end-to-end example drawn from my <a href="https://doi.org/10.64898/2026.04.01.715918" target="_blank" rel="noopener">recent preprint</a> on Parkin and the small-molecule Parkin agonist FB231, illustrating how I combine differential expression, GSEA, transcription-factor inference (DecoupleR), and single-cell clustering to dissect cell-state changes.
   </p>
   <div class="hero-tags">
+    <a class="tag" href="#qc">NPC Phenotyping</a>
     <a class="tag" href="#bulk">Bulk RNA-seq</a>
     <a class="tag" href="#sc">scRNA-seq</a>
-    <a class="tag" href="#gsea">GSEA</a>
-    <a class="tag" href="#tf">DecoupleR / TF</a>
     <a class="tag" href="#invivo">In Vivo Validation</a>
+    <a class="tag" href="#rescue">FB231 Rescue</a>
     <a class="tag" href="ipscs.html">iPSC Models</a>
   </div>
 </div>
@@ -2812,24 +2812,42 @@ document.addEventListener('click', function(e){
   </div>
 </div>
 
-<div class="section reveal" id="bulk">
+<div class="section reveal" id="qc">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">02</div>
+      <div class="section-label">NPC Phenotyping</div>
+    </div>
+    <div class="section-content">
+      <h2>Lineage QC &mdash; PARK2 KO Neural Progenitors</h2>
+      <p>Before any sequencing, isogenic CRISPR <em>PARK2</em> KO and parental neural progenitor cells (NPCs) are validated by FOXA2, GFAP, and RIP immunofluorescence; cell-cycle (BrdU), apoptosis (DMSO/etoposide), aspect ratio, body area, and process length quantification confirm the morphological phenotype that the transcriptomics will then resolve at gene-level resolution.</p>
+
+      <div class="ngs-figure">
+        <img src="images/ngs/figS1-npc-characterization.jpg" alt="Figure S1 - NPC immunofluorescence and morphological quantification">
+        <div class="figcap"><strong>NPC characterization.</strong> FOXA2 (panel a) and apoptosis / proliferation (b&ndash;e) for parental and two <em>PARK2</em> KO clones. GFAP (f) and RIP (i) immunostaining with body-area and process-length quantification (g&ndash;h, j&ndash;k).</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section reveal" id="bulk">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">03</div>
       <div class="section-label">Bulk RNA-seq</div>
     </div>
     <div class="section-content">
-      <h2>Bulk RNA-seq &mdash; Parkin Loss Reshapes the Neural-Progenitor Transcriptome</h2>
-      <p>In iPSC-derived neural progenitor cells (NPCs), CRISPR knockout of <em>PARK2</em> caused widespread transcriptomic remodeling: 657 genes were significantly upregulated and 1,440 downregulated relative to wild-type. Down-regulated genes included regulators of mitochondrial function and neurogenesis (<em>Gja1</em>, <em>Anxa5</em>, <em>Gfap</em>, <em>Osmr</em>). GSEA showed broad suppression of neurogenesis, synaptic-maintenance, and mitophagy programs &mdash; with compensatory up-regulation of adhesion and stem-like programs &mdash; consistent with a shift toward an immature, stress-vulnerable state.</p>
+      <h2>Bulk RNA-seq &mdash; PARK2 KO Reshapes the NPC Transcriptome</h2>
+      <p>In iPSC-derived NPCs, CRISPR knockout of <em>PARK2</em> caused widespread transcriptomic remodeling &mdash; 657 genes up- and 1,440 down-regulated. Down-regulated genes included regulators of mitochondrial function and neurogenesis (<em>Gja1</em>, <em>Anxa5</em>, <em>Gfap</em>, <em>Osmr</em>). GSEA showed broad suppression of neurogenesis, synaptic maintenance, and mitophagy with compensatory up-regulation of adhesion and stem-like programs &mdash; consistent with a shift toward an immature, stress-vulnerable state.</p>
 
       <div class="ngs-figure">
-        <img src="images/ngs/fig1-parkin-ko-rnaseq.jpg" alt="Figure 1 - Parkin inactivation disrupts NPC morphology, mitophagy, and the neuronal transcriptome">
-        <div class="figcap"><strong>Bulk RNA-seq &mdash; PARK2 KO neural progenitors.</strong> CRISPR <em>PARK2</em> knockout reduces TH+ dopaminergic differentiation and mitophagy (mt-Keima), and reshapes the transcriptome: DE-gene heatmap, GSEA dot plot, and leading-edge heatmaps for neuronal-maturation, CNS-development, mitophagy, and Parkinson&rsquo;s-disease pathways.</div>
+        <img src="images/ngs/fig1-parkin-ko-rnaseq.jpg" alt="Figure 1 - Parkin KO NPC characterization, mitophagy, and bulk RNA-seq">
+        <div class="figcap"><strong>Figure 1 &mdash; PARK2 KO NPCs and the bulk transcriptome.</strong> CRISPR knockout (a&ndash;c) decreases proliferation, increases cell death (b, c), reduces TH+ dopaminergic differentiation (d&ndash;f), and impairs mt-Keima mitophagy (g&ndash;k). Differential-expression heatmap (l), GSEA dot plot (m) and leading-edge heatmaps (n) for neuronal differentiation, CNS development, mitophagy, and Parkinson&rsquo;s pathways.</div>
       </div>
 
       <div class="ngs-figure">
-        <img src="images/ngs/figS2-volcano-gsea.jpg" alt="Supplementary Figure 2 - Volcano plot, GSEA heatmaps, transcription-factor activity">
-        <div class="figcap"><strong>Volcano + GSEA + DecoupleR.</strong> Volcano plot of DE genes (KO vs WT), GSEA leading-edge heatmaps (GOBP ribosome assembly, KEGG ribosome, E2F targets), and DecoupleR transcription-factor activity across replicates.</div>
+        <img src="images/ngs/figS2-volcano-gsea.jpg" alt="Supplementary Figure 2 - Volcano plot, GSEA heatmaps, DecoupleR TF activity">
+        <div class="figcap"><strong>Volcano + GSEA + DecoupleR TF activity.</strong> Volcano plot (a) of DE genes (KO vs WT, |log&#8322;FC| &gt; 2, p&#8336;&#8313;&#8312; &lt; 0.05). Leading-edge heatmaps (b&ndash;d) for GOBP ribosome assembly, KEGG ribosome, and E2F targets. DecoupleR transcription-factor activity (e) across replicates highlights elevated <em>Olig1/2</em> and reduced <em>NeuroD2</em>, <em>Foxo3</em>, <em>Tp53</em>, <em>Gata4</em>.</div>
       </div>
     </div>
   </div>
@@ -2838,48 +2856,27 @@ document.addEventListener('click', function(e){
 <div class="section reveal" id="sc">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">03</div>
+      <div class="section-number">04</div>
       <div class="section-label">Single-Cell RNA-seq</div>
     </div>
     <div class="section-content">
-      <h2>scRNA-seq &mdash; Cell-State and Lineage-Specific Defects</h2>
-      <p>Single-cell sequencing of differentiated cultures resolved four major populations &mdash; neurons, astrocytes/undifferentiated cells, oligodendrocytes, and proliferating cells. <em>PARK2</em> KO cultures showed an expansion of oligodendrocyte and proliferating compartments and a relative loss of mature neurons, indicating skewed cell-fate trajectories. DecoupleR analysis of the neuron-like cluster revealed elevated activity of immature/glial transcription factors (<em>Olig1/2</em>) and reduced activity of neuronal regulators (<em>Zeb2</em>, <em>Neurod6</em>).</p>
+      <h2>scRNA-seq &mdash; Cell-State Composition and Cell-Type-Specific Programs</h2>
+      <p>Single-cell sequencing of differentiated cultures resolved four major populations &mdash; neurons, astrocytes/undifferentiated cells, oligodendrocytes, and proliferating cells. <em>PARK2</em> KO cultures showed expansion of the oligodendrocyte and proliferating compartments and relative loss of mature neurons. Cluster-level DecoupleR identified elevated immature/glial TFs (<em>Olig1/2</em>) and reduced neuronal regulators (<em>Zeb2</em>, <em>Neurod6</em>).</p>
 
       <div class="ngs-figure">
-        <img src="images/ngs/fig2-scrna-seq.jpg" alt="Figure 2 - Single-cell RNA-seq, UMAP, transcription factors, and FB231 target engagement">
-        <div class="figcap"><strong>scRNA-seq &mdash; cell-type composition and lineage-specific programs.</strong> UMAP and stacked-bar composition of WT vs <em>PARK2</em> KO cultures, cluster-level DecoupleR TF activity, lineage-specific DE genes, and FB231 PK / Parkin-dependent ubiquitination of cyclin&nbsp;D1 and &alpha;-synuclein.</div>
+        <img src="images/ngs/fig2-scrna-seq.jpg" alt="Figure 2 - scRNA-seq UMAP, composition, DecoupleR TF activity, and FB231 ubiquitination">
+        <div class="figcap"><strong>Figure 2 &mdash; scRNA-seq + FB231 target engagement.</strong> Harmonized UMAP (a) and per-sample composition stacked bar (b). Cluster-level DecoupleR TFs (c) and lineage-specific DE dot plots (d). Functional GSEA (e&ndash;f) including ribosome assembly leading-edge heatmap (f). FB231 chemistry (g), PK profile (h), and Parkin-dependent ubiquitination of cyclin D1 (j) and &alpha;-synuclein (k).</div>
       </div>
 
       <div class="ngs-figure">
-        <img src="images/ngs/figS3-umap-scrna.jpg" alt="Supplementary Figure 3 - UMAP and dot plots of cluster signatures">
-        <div class="figcap"><strong>Cluster identification &mdash; Seurat + Harmony.</strong> Ten harmonized scRNA-seq clusters (n=3 WT, n=2 KO) annotated by AddModuleScore feature plots (astrocyte, neuron, oligodendrocyte, OPC, stem, proliferating). Dot plots summarize cluster-defining genes.</div>
+        <img src="images/ngs/figS3-umap-scrna.jpg" alt="Supplementary Figure 3 - UMAP, feature plots, and lineage-specific DecoupleR heatmaps">
+        <div class="figcap"><strong>Cluster identification &amp; lineage-specific TFs.</strong> Ten Harmony-corrected clusters (a). AddModuleScore feature plots (b) for astrocyte, neuron, oligodendrocyte, OPC, stem, and proliferating signatures. Dot plots (c&ndash;d) summarize cluster-defining genes. DecoupleR TF activity heatmaps split by cell type (e&ndash;i).</div>
       </div>
-    </div>
-  </div>
-</div>
 
-<div class="section reveal" id="gsea">
-  <div class="section-header">
-    <div class="section-index">
-      <div class="section-number">04</div>
-      <div class="section-label">GSEA &amp; Pathway</div>
-    </div>
-    <div class="section-content">
-      <h2>From Genes to Pathways</h2>
-      <p>I run GSEA (fgsea) against MSigDB Hallmark, KEGG, GOBP, and Reactome with 1k&ndash;10k permutations. NES &gt; |1.5| with FDR &lt; 0.05 are reported as significant. Leading-edge genes are visualized as heatmaps to expose the genes driving each enrichment, allowing direct comparison across genotypes (e.g. WT vs PARK2 KO) or treatments (DMSO vs FB231).</p>
-    </div>
-  </div>
-</div>
-
-<div class="section reveal" id="tf">
-  <div class="section-header">
-    <div class="section-index">
-      <div class="section-number">05</div>
-      <div class="section-label">DecoupleR / TF Activity</div>
-    </div>
-    <div class="section-content">
-      <h2>Transcription-Factor Activity Inference</h2>
-      <p>DecoupleR converts a gene-expression matrix into transcription-factor activity scores by combining gene-set methods (ULM, MLM, WSUM) with curated regulons from CollecTRI / DoRothEA. Applied to PARK2 KO neurons, this approach identified increased activity of <em>Olig1/Olig2</em> and reduced activity of neurogenic / pro-survival factors (<em>NeuroD2</em>, <em>Foxo3</em>, <em>Tp53</em>, <em>Gata4</em>), pinpointing the regulatory drivers behind the differentiation defect.</p>
+      <div class="ngs-figure">
+        <img src="images/ngs/figS4-gsea-cell-types.jpg" alt="Supplementary Figure 4 - per-cell-type GSEA and translation/mitophagy module scoring">
+        <div class="figcap"><strong>Per-cell-type GSEA &amp; module scoring.</strong> NES dot plots for astrocyte (a) and oligodendrocyte (b) populations. Ribosomal large-subunit assembly leading-edge heatmap (c). Module scoring across cell types for translation, ribosome assembly, biogenesis, and Prkn-mediated mitophagy (d&ndash;f) confirms heightened ribosome activity and diminished mitophagy in <em>PARK2</em> KO cells.</div>
+      </div>
     </div>
   </div>
 </div>
@@ -2887,24 +2884,49 @@ document.addEventListener('click', function(e){
 <div class="section reveal" id="invivo">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">06</div>
+      <div class="section-number">05</div>
       <div class="section-label">In Vivo Validation</div>
     </div>
     <div class="section-content">
       <h2>From Cells to Animals &mdash; FB231 in a Gut &alpha;-Synuclein Model</h2>
-      <p>Findings from iPSC neurons were validated in a gut &alpha;-synuclein PFF mouse model. FB231 reduced phospho-S129 &alpha;-synuclein accumulation in substantia nigra and cortex, attenuated dopaminergic neurodegeneration, and partially rescued motor deficits in pole and rotarod tests. The animal data closed the loop on the in vitro RNA-seq, single-cell, and biochemistry findings.</p>
+      <p>Findings from iPSC neurons were validated in a gut &alpha;-synuclein PFF mouse model. FB231 reduced phospho-S129 &alpha;-synuclein in substantia nigra and cortex, attenuated dopaminergic neurodegeneration, and partially rescued motor deficits in pole and rotarod tests &mdash; closing the loop on the in vitro RNA-seq and biochemistry findings.</p>
 
       <div class="ngs-figure">
-        <img src="images/ngs/fig3-invivo-gut.jpg" alt="Figure 3 - FB231 attenuates alpha-synuclein pathology in a gut PFF mouse model">
-        <div class="figcap"><strong>In vivo &mdash; FB231 in a gut &alpha;-synuclein PD model.</strong> Brain/plasma PK, study schematic, rotarod and pole-test motor scores, gut and CNS phospho-S129 &alpha;-synuclein IHC, and Parkin western blot.</div>
+        <img src="images/ngs/fig3-invivo-gut.jpg" alt="Figure 3 - FB231 in a gut alpha-synuclein PFF mouse model">
+        <div class="figcap"><strong>Figure 3 &mdash; In vivo FB231 in a gut &alpha;-syn PFF model.</strong> Brain/plasma PK (a), 8-month study schematic (b), rotarod and pole tests (c). Gut &alpha;-syn IHC (d), GI length and faecal-water (d). Ileum and brain Parkin western blots (e, h). Substantia nigra and cortex pSyn IHC and quantification (f&ndash;g). Vagal &alpha;-syn IHC (i) and TH+ neuron counts.</div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="section reveal" id="rescue">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">06</div>
+      <div class="section-label">Therapeutic Rescue</div>
+    </div>
+    <div class="section-content">
+      <h2>FB231 Rescue in Human iPSC Dopaminergic Neurons</h2>
+      <p>In iPSC-derived dopaminergic neurons exposed to &alpha;-synuclein PFFs and IFN&gamma;, the Parkin agonist FB231 restored mitochondrial-lysosomal colocalization, reversed mitochondrial fragmentation, and reduced pSyn / Thioflavin-S aggregates &mdash; supporting the path from PARK2 transcriptional defect to a tractable small-molecule therapeutic target.</p>
 
       <div class="ngs-figure">
-        <img src="images/ngs/fig4-ipsc-da-neurons.jpg" alt="Figure 4 - FB231 is neuroprotective in human iPSC-derived dopaminergic neurons">
-        <div class="figcap"><strong>iPSC dopaminergic neurons &mdash; FB231 rescue.</strong> Mitochondrial &ndash; lysosomal colocalization (Mito/Lyso), mitochondrial morphology, and reduction of phospho-&alpha;-synuclein and Thioflavin-S aggregates following &alpha;-syn PFF + IFN&gamma; challenge.</div>
+        <img src="images/ngs/fig4-ipsc-da-neurons.jpg" alt="Figure 4 - FB231 rescue in human iPSC-derived dopaminergic neurons">
+        <div class="figcap"><strong>Figure 4 &mdash; FB231 rescue in iPSC DA neurons.</strong> Mitochondria/Lyso colocalization (a) and quantification (b) in control vs FB231 vs CCCP. PFF-treated neurons restore colocalization with FB231 (c, d). Triple-channel PFF/Tuj1/composite (e) and quantification of PFF488, pSyn, MitoSOX, and Thioflavin-S fluorescence (f). PFF/ATPB/composite mitochondrial co-localization (g) and PCC quantification (h).</div>
       </div>
+    </div>
+  </div>
+</div>
 
-      <p style="font-size:0.86rem; color: var(--mid); margin-top: 14px;">All figures reproduced from Gong, Bayati, Alban et&nbsp;al. <em>Neural cell state modulation by PARK2 and dopaminergic neuroprotection by small molecule Parkin agonism.</em> bioRxiv (2026), under a CC-BY 4.0 license. <a href="https://doi.org/10.64898/2026.04.01.715918" target="_blank" rel="noopener">doi:10.64898/2026.04.01.715918</a></p>
+<div class="section reveal" id="cite">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">07</div>
+      <div class="section-label">Source &amp; License</div>
+    </div>
+    <div class="section-content">
+      <h2>Reference</h2>
+      <p>All figures on this page are reproduced from Gong, Bayati, Alban et&nbsp;al., <em>Neural cell state modulation by PARK2 and dopaminergic neuroprotection by small molecule Parkin agonism</em>, bioRxiv 2026, under a CC-BY&nbsp;4.0 International license. <a href="https://doi.org/10.64898/2026.04.01.715918" target="_blank" rel="noopener">doi.org/10.64898/2026.04.01.715918</a>.</p>
+      <p style="font-size:0.92rem; color: var(--mid);">A. Bayati is a co-author. Figures are shown here in their original high-resolution form to illustrate the bulk RNA-seq, scRNA-seq, GSEA, and DecoupleR transcription-factor analyses performed in this study and as a portfolio piece for related <a href="ipscs.html">iPSC-based disease modeling</a> work.</p>
     </div>
   </div>
 </div>
