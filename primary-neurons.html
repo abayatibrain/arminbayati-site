@@ -2236,6 +2236,174 @@ pre, code {
   border-top: 1px solid var(--rule);
 }
 
+
+
+
+
+
+/* DARK-MODE PROTECTION INJECTED 2026-05-20 v5 */
+
+/* ── KILL BROWSER-DEFAULT BLUE LINKS ──
+   Every inline link to another page inherits its parent text color
+   instead of rendering as browser-default blue. Underline is preserved
+   (browsers add it by default + the .section-content a rule keeps it).
+   Components that own their own color — tags, buttons, nav items,
+   footer links, tiles — keep their styling because their own selectors
+   are more specific. */
+a { color: inherit; }
+/* Inline-link hover affordance: subtle accent shift on the underline,
+   text color stays inherited. */
+.section-content a:not(.tag):not(.btn-primary):not(.btn-secondary):not(.proj-tile):not(.research-tile):not(.lineage-card):hover {
+  color: var(--accent) !important;
+}
+/* Nav, footer, tag, button, and tile anchors are styled via their own
+   higher-specificity rules elsewhere — those win automatically because
+   each has at least one class selector. No need to restate them here. */
+/* ── LIGHT-THEME CODE BLOCKS (light & dark mode) ──
+   Per user request: code blocks should have a light background so they
+   read like a printed source listing rather than a terminal screen.
+   Overrides the inline `.code-block { background: var(--ink); color: #e6e6e6 }`
+   that ships from the coding.html template. Specificity .code-block
+   matches the template selector, !important wins source-order tie. */
+.code-block {
+  background: #f6f5f0 !important;
+  color: #1a1f24 !important;
+  border: 1px solid #d4d0c8 !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6);
+}
+.code-block .comment { color: #6a737d !important; }
+.code-block .keyword { color: #c0392b !important; }
+.code-block .string  { color: #2c5282 !important; }
+.code-block .func    { color: #6f42c1 !important; }
+.code-block .num     { color: #047857 !important; }
+
+/* In dark mode, keep the code block readable but slightly darker than the
+   page so it reads as a card. Background stays "paper-ish" (warm beige),
+   text stays dark — same as light mode. This is the explicit choice. */
+html.dark .code-block {
+  background: #ece9df !important;
+  color: #1a1f24 !important;
+  border-color: rgba(255,255,255,0.10) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4);
+}
+html.dark .code-block .comment { color: #6a737d !important; }
+html.dark .code-block .keyword { color: #c0392b !important; }
+html.dark .code-block .string  { color: #2c5282 !important; }
+html.dark .code-block .func    { color: #6f42c1 !important; }
+html.dark .code-block .num     { color: #047857 !important; }
+
+html.dark .agent-trace {
+  background: #0f1419 !important;
+  color: #e6e6e6 !important;
+  border: 1px solid rgba(255,255,255,0.06) !important;
+}
+html.dark .agent-trace .ln-user  { color: #9cdcfe !important; }
+html.dark .agent-trace .ln-tool  { color: #ce9178 !important; }
+html.dark .agent-trace .ln-resp  { color: #b5cea8 !important; }
+html.dark .agent-trace .ln-final { color: #f1c40f !important; }
+html.dark .agent-trace .ln-dim   { color: #9ca3af !important; }
+
+html.dark .workflow-strip {
+  background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #0f1419 100%) !important;
+  color: #fff !important;
+}
+html.dark .workflow-inner h3,
+html.dark .workflow-step .step-title,
+html.dark .workflow-step .step-number { color: #fff !important; }
+html.dark .workflow-step .step-detail { color: rgba(255,255,255,0.72) !important; }
+html.dark .workflow-step .step-detail a { color: rgba(255,255,255,0.85) !important; }
+
+/* Demo segmentation canvases must stay black-backed even in dark mode
+   (otherwise the synthetic noise field reads on a near-white inverted bg). */
+html.dark #segInput,
+html.dark #segOut { background: #000 !important; }
+
+/* ── BODY-TEXT CONTRAST FIX (v2) ──
+   Many text classes use hardcoded `color: #444` (a dark gray) which becomes
+   nearly invisible against the dark `--paper` (#111318) in dark mode. Pin
+   them to a high-contrast off-white so they stay readable. */
+html.dark .section-content p,
+html.dark .section-content li,
+html.dark .section-content ul li,
+html.dark .section-content ol li,
+html.dark .inline-list,
+html.dark .inline-list li,
+html.dark .findings,
+html.dark .findings li,
+html.dark .timeline-desc,
+html.dark .subsection p,
+html.dark .subsection li,
+html.dark .section-content > div > p,
+html.dark .protocol-steps p,
+html.dark .protocol-steps li {
+  color: rgba(232,230,225,0.86) !important;
+}
+
+/* Bold / strong text inside body copy should pop a bit more in dark mode. */
+html.dark .section-content p strong,
+html.dark .section-content li strong,
+html.dark .inline-list li strong,
+html.dark .subsection p strong {
+  color: #f4f3ee !important;
+  font-weight: 500;
+}
+
+/* The red-dash bullet color stays accent — no change needed. */
+
+/* ── GITHUB EMBED WIDGETS (used on code-and-ai.html) ── */
+.gh-widget {
+  background: var(--card);
+  border-radius: 10px;
+  padding: 18px 22px 16px;
+  margin: 16px 0;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+.gh-widget-title {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.gh-widget img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+.gh-widget a { display: block; text-decoration: none !important; }
+.gh-widget-note {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--mid);
+  margin-top: 8px;
+  opacity: 0.7;
+}
+.gh-widget-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 16px 0;
+}
+.gh-widget-grid .gh-widget { margin: 0; }
+@media (max-width: 720px) {
+  .gh-widget-grid { grid-template-columns: 1fr; gap: 14px; }
+  .gh-widget { padding: 14px 16px 12px; }
+}
+html.dark .gh-widget {
+  background: var(--card);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.10), 0 4px 12px rgba(0,0,0,0.25);
+}
+/* Stats / top-langs SVGs are rendered with transparent bg — make text readable in dark mode */
+html.dark .gh-widget img { filter: invert(0.92) hue-rotate(180deg); }
+/* But NOT the contribution heatmap — its colored squares should stay as-is. */
+html.dark .gh-widget img[src*="ghchart.rshah.org"] { filter: none; }
+html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
+
+/* END DARK-MODE PROTECTION */
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
@@ -2254,7 +2422,6 @@ pre, code {
     <div class="nav-links">
       <div class="nav-row">
         <a href="index.html">Home</a>
-        <a href="parkinsons-dystonia.html">Parkinson&#39;s</a>
         <div class="nav-dropdown">
           <button class="nav-drop-trigger">iPSC Models</button>
           <div class="nav-drop-panel">
@@ -2276,12 +2443,29 @@ pre, code {
           </div>
         </div>
         <div class="nav-dropdown">
+          <button class="nav-drop-trigger">Code &amp; AI</button>
+          <div class="nav-drop-panel">
+            <a href="code-and-ai.html">Code &amp; AI &mdash; Overview</a>
+            <a href="code-ai-agents.html">Agents &amp; MCP</a>
+            <a href="code-ai-models.html">ML &amp; Foundation Models</a>
+            <a href="code-ai-pipelines.html">Bio Pipelines &amp; Automation</a>
+            <div class="nav-drop-section">Live Demos</div>
+            <a href="code-ai-agents.html#demo-mcp">MCP tool-call simulator</a>
+            <a href="code-ai-models.html#demo-embed">CLIP embedding explorer</a>
+            <a href="code-ai-pipelines.html#demo-evidence">Target-evidence scorer</a>
+            <a href="code-ai-pipelines.html#demo-seg">Segmentation comparator</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
           <button class="nav-drop-trigger">Drug Discovery</button>
           <div class="nav-drop-panel">
             <a href="drug-discovery.html">Drug Discovery &amp; Translation</a>
             <a href="biologics.html">Biologics &amp; Immunotherapy</a>
+            <a href="parkinsons-dystonia.html">Parkinson&#39;s Disease Focus</a>
           </div>
         </div>
+      </div>
+      <div class="nav-row">
         <div class="nav-dropdown">
           <button class="nav-drop-trigger">Immunology</button>
           <div class="nav-drop-panel">
@@ -2290,8 +2474,6 @@ pre, code {
             <a href="flow-cytometry.html">Flow Cytometry</a>
           </div>
         </div>
-      </div>
-      <div class="nav-row">
         <div class="nav-dropdown">
           <button class="nav-drop-trigger">Cellular Assays</button>
           <div class="nav-drop-panel">
@@ -2300,22 +2482,19 @@ pre, code {
             <a href="crispr-screening.html">CRISPR Screening</a>
           </div>
         </div>
-        <div class="nav-dropdown has-active">
-          <button class="nav-drop-trigger">In Vivo &amp; Primary</button>
-          <div class="nav-drop-panel">
-            <a href="in-vivo.html">In Vivo Studies</a>
-            <a href="primary-neurons.html" class="active">Primary Neuronal Culture</a>
-            <a href="primary-cardiomyocytes.html">Primary Cardiomyocyte Culture</a>
-          </div>
-        </div>
         <a href="biomarkers.html">Biomarkers</a>
-        <div class="nav-dropdown">
+        <div class="nav-dropdown has-active">
           <button class="nav-drop-trigger">Technical Skills</button>
           <div class="nav-drop-panel">
+            <a href="technical-skills.html">Technical Skills &mdash; Overview</a>
             <a href="microscopy.html">Microscopy &amp; Imaging</a>
             <a href="proteomics.html">Proteomics &amp; Genomics</a>
             <a href="coding.html">Coding &amp; Automation</a>
             <a href="skills.html">Full Technical Skills</a>
+            <div class="nav-drop-section">In Vivo &amp; Primary</div>
+            <a href="in-vivo.html">In Vivo Studies</a>
+            <a href="primary-neurons.html" class="active">Primary Neuronal Culture</a>
+            <a href="primary-cardiomyocytes.html">Primary Cardiomyocyte Culture</a>
             <div class="nav-drop-section">Protocols</div>
             <a href="protocols.html">Neuron/Cardiac Differentiation</a>
             <a href="endoderm-protocols.html">Endoderm &amp; Ectodermal Protocols</a>

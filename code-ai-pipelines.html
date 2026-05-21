@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Microscopy &amp; Imaging — Armin Bayati, PhD</title>
-<meta name="description" content="Confocal, STED, electron microscopy, live-cell imaging, IHC, and high-content screening.">
+<title>Bio Pipelines &amp; Automation — Code &amp; AI — Armin Bayati, PhD</title>
+<meta name="description" content="End-to-end Parkinson's target credentialing from substantia-nigra single-nucleus data; CRISPR phenocopy atlas over PINK1/Parkin; vendor-agnostic iPSC liquid-handling toolkit; multi-neuron statistical comparator.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -885,149 +885,58 @@ a.card:hover {
 }
 
 
-/* ── GALLERY ── */
-.gallery {
-  margin: 20px 0 28px;
+/* ── CHARTS ── */
+.chart-container {
   max-width: 760px;
+  margin: 24px 0 32px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
-.gallery-label {
+.chart-container canvas { width: 100% !important; }
+.chart-title {
   font-family: var(--mono);
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.5px;
-  color: var(--mid);
-  margin-bottom: 10px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
 }
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 6px;
-}
-.gallery-thumb {
-  aspect-ratio: 4/3;
-  border-radius: 4px;
-  border: 1px solid var(--rule);
-  overflow: hidden;
-  cursor: pointer;
-  position: relative;
-  background: var(--section-bg);
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-.gallery-thumb:hover {
-  border-color: var(--accent);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.gallery-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.gallery-thumb::after {
-  content: attr(data-caption);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(transparent, rgba(0,0,0,0.85));
-  color: rgba(255,255,255,0.95);
-  font-size: 11px;
-  font-style: italic;
-  line-height: 1.35;
-  padding: 28px 8px 8px;
-  opacity: 0;
-  transition: opacity 0.25s ease;
-  pointer-events: none;
-}
-.gallery-thumb:hover::after {
-  opacity: 1;
-}
-.gallery-thumb .thumb-index {
-  position: absolute;
-  bottom: 4px;
-  left: 6px;
-  font-family: var(--mono);
-  font-size: 10px;
-  font-weight: 500;
-  color: #fff;
-  background: rgba(0,0,0,0.55);
-  padding: 1px 5px;
-  border-radius: 2px;
-  letter-spacing: 0.3px;
-}
-/* Lightbox */
-.lightbox {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: rgba(15,20,25,0.92);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-.lightbox.open { display: flex; }
-.lightbox-img {
-  max-width: 90vw;
-  max-height: 78vh;
-  border-radius: 6px;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.4);
-  object-fit: contain;
-}
-.lightbox-caption {
-  font-family: var(--sans);
+.chart-subtitle {
   font-size: 13px;
   font-weight: 300;
-  color: rgba(255,255,255,0.7);
-  margin-top: 14px;
-  text-align: center;
-  max-width: 600px;
+  color: var(--mid);
+  margin-bottom: 16px;
+  line-height: 1.5;
 }
-.lightbox-counter {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: rgba(255,255,255,0.4);
-  letter-spacing: 0.5px;
-  margin-top: 6px;
+.chart-note {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--mid);
+  margin-top: 12px;
+  font-style: italic;
 }
-.lightbox-close {
-  position: absolute;
-  top: 20px;
-  right: 24px;
-  background: none;
-  border: none;
-  color: rgba(255,255,255,0.6);
-  font-size: 28px;
-  cursor: pointer;
-  padding: 4px 10px;
-  border-radius: 4px;
-  transition: color 0.2s, background 0.2s;
-  font-family: var(--sans);
-}
-.lightbox-close:hover { color: #fff; background: rgba(255,255,255,0.1); }
-.lightbox-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: rgba(255,255,255,0.5);
-  font-size: 36px;
-  cursor: pointer;
-  padding: 12px 16px;
+.code-block {
+  background: var(--ink);
+  color: #e6e6e6;
   border-radius: 6px;
-  transition: color 0.2s, background 0.2s;
-  font-family: var(--sans);
+  padding: 20px 24px;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.7;
+  margin: 20px 0 24px;
+  max-width: 760px;
+  border: 1px solid rgba(255,255,255,0.06);
 }
-.lightbox-nav:hover { color: #fff; background: rgba(255,255,255,0.08); }
-.lightbox-prev { left: 16px; }
-.lightbox-next { right: 16px; }
-@media (max-width: 768px) {
-  .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
-  .lightbox-nav { font-size: 24px; padding: 8px 12px; }
-}
+.code-block .comment { color: #6a9955; }
+.code-block .keyword { color: #569cd6; }
+.code-block .string { color: #ce9178; }
+.code-block .func { color: #dcdcaa; }
+.code-block .num { color: #b5cea8; }
 
 
 /* ── HIGH-TECH OVERLAY ── */
@@ -2018,6 +1927,330 @@ pre, code {
 }
 
 
+/* ════════════════════════════════════════════════
+   CODE & AI suite — shared components
+   Mobile-first; stacks to one column under 800px.
+   ════════════════════════════════════════════════ */
+
+/* Project tile grid — modeled directly on the homepage's .research-tile.
+   Key detail: we use a 1px box-shadow ring INSTEAD of a CSS border, because
+   the site-wide rule `.section-content a:not(.tag)... { border-bottom: none
+   !important; }` would otherwise strip the tile's bottom edge. Box-shadow
+   isn't a border, so it survives. */
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  max-width: 1120px;
+  margin: 18px 0 32px;
+}
+.proj-tile {
+  background: var(--card);
+  border: none;
+  border-radius: 10px;
+  padding: 28px 28px 24px;
+  text-decoration: none !important;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,0.08),
+    0 4px 12px rgba(0,0,0,0.05);
+}
+.proj-tile:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 1px var(--accent),
+    0 8px 24px rgba(0,0,0,0.10);
+}
+.proj-tile::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 3px;
+  border-radius: 0 0 3px 3px;
+  background: var(--rule);
+  transition: background 0.2s ease;
+}
+.proj-tile:hover::before { background: var(--accent); }
+html.dark .proj-tile {
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.10),
+    0 4px 12px rgba(0,0,0,0.25);
+}
+html.dark .proj-tile:hover {
+  box-shadow:
+    0 0 0 1px var(--accent),
+    0 8px 24px rgba(0,0,0,0.35);
+}
+/* Override the site-wide section-content underline for tiles only.
+   Selector matches the offending rule's specificity (5 classes + element)
+   plus .proj-tile, so we win on specificity + source order + !important. */
+.section-content a.proj-tile:not(.tag):not(.btn-primary):not(.btn-secondary):not(.lineage-card),
+.section-content a.proj-tile:not(.tag):not(.btn-primary):not(.btn-secondary):not(.lineage-card):hover,
+.section-content a.proj-tile:not(.tag):not(.btn-primary):not(.btn-secondary):not(.lineage-card) *,
+.section-content a.proj-tile:not(.tag):not(.btn-primary):not(.btn-secondary):not(.lineage-card):hover * {
+  text-decoration: none !important;
+  text-decoration-color: transparent !important;
+}
+.proj-tile, .proj-tile * {
+  text-decoration: none !important;
+  text-decoration-color: transparent !important;
+}
+.proj-tile-eyebrow {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.proj-tile-title {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.proj-tile-desc {
+  font-size: 13px;
+  color: var(--mid);
+  line-height: 1.55;
+  flex: 1;
+}
+.proj-tile-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+.proj-tile-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  background: var(--section-bg);
+  color: var(--mid);
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--rule);
+}
+
+/* Tech-stack filter pills (landing demo) */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 14px 0 18px;
+}
+.filter-pill {
+  font-family: var(--mono);
+  font-size: 11px;
+  background: var(--card);
+  color: var(--mid);
+  border: 1px solid var(--rule);
+  padding: 7px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.15s ease;
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+}
+.filter-pill:hover { color: var(--ink); }
+.filter-pill.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.proj-tile.dim {
+  opacity: 0.18;
+  pointer-events: none;
+  filter: grayscale(0.4);
+}
+
+/* Generic demo card */
+.demo-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+  max-width: 980px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 24px;
+  margin: 18px 0 28px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+@media (max-width: 800px) {
+  .demo-card { grid-template-columns: 1fr; padding: 18px; gap: 18px; }
+}
+.demo-row { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.demo-label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.demo-card select,
+.demo-card input[type="text"] {
+  font-family: var(--sans);
+  font-size: 14px;
+  padding: 10px 12px;
+  min-height: 44px;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: var(--paper);
+  color: var(--ink);
+}
+.demo-weights { display: flex; flex-direction: column; gap: 14px; }
+.demo-weight { display: flex; flex-direction: column; gap: 6px; }
+.demo-weight-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12.5px;
+  color: var(--mid);
+  gap: 8px;
+}
+.demo-weight-val { font-family: var(--mono); color: var(--ink); }
+.demo-weight input[type=range] {
+  width: 100%;
+  accent-color: var(--accent);
+  height: 28px;
+}
+.demo-output { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.demo-output canvas { max-width: 100%; }
+
+.demo-score-block {
+  background: var(--section-bg);
+  border-radius: 8px;
+  padding: 14px 18px;
+}
+.demo-score-label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.demo-score {
+  font-family: var(--serif);
+  font-size: clamp(28px, 7vw, 42px);
+  line-height: 1;
+  color: var(--ink);
+}
+.demo-score-bar {
+  height: 8px;
+  background: rgba(0,0,0,0.06);
+  border-radius: 999px;
+  margin: 10px 0 6px;
+  overflow: hidden;
+}
+.demo-score-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #f1c40f, #c0392b);
+  transition: width 0.25s ease;
+}
+.demo-score-tier {
+  font-size: 12.5px;
+  color: var(--mid);
+  font-style: italic;
+}
+html.dark .demo-card { background: var(--card); border-color: var(--rule); }
+html.dark .demo-score-block { background: rgba(255,255,255,0.04); }
+
+/* Pill button group (used in segmentation demo) */
+.pill-group { display: flex; flex-wrap: wrap; gap: 6px; }
+.pill-btn {
+  font-family: var(--mono);
+  font-size: 11px;
+  border: 1px solid var(--rule);
+  background: var(--card);
+  color: var(--mid);
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  min-height: 36px;
+}
+.pill-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* Terminal / agent trace */
+.agent-trace {
+  background: var(--ink);
+  color: #e6e6e6;
+  border-radius: 8px;
+  padding: 16px 18px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.65;
+  max-height: 420px;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.agent-trace .ln-user { color: #9cdcfe; }
+.agent-trace .ln-tool { color: #ce9178; }
+.agent-trace .ln-resp { color: #b5cea8; }
+.agent-trace .ln-final { color: #f1c40f; }
+.agent-trace .ln-dim { color: #6b7280; }
+
+/* Embedding scatter caption */
+.embed-meta {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--mid);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 4px;
+}
+.embed-meta b { color: var(--ink); font-weight: 500; }
+
+/* 96-well plate grid */
+.plate-wrap { overflow-x: auto; }
+.plate {
+  display: grid;
+  grid-template-columns: 18px repeat(12, 1fr);
+  gap: 3px;
+  background: var(--card);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  min-width: 460px;
+}
+.plate .h, .plate .v {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--mid);
+  text-align: center;
+  align-self: center;
+}
+.plate .well {
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.04);
+}
+
+/* Touch target safety */
+@media (max-width: 768px) {
+  .demo-card select,
+  .demo-card input[type="text"],
+  .pill-btn,
+  .filter-pill { min-height: 44px; }
+  .demo-weight input[type=range] { height: 32px; }
+  .demo-score { font-size: clamp(26px, 9vw, 36px); }
+  .proj-grid { grid-template-columns: 1fr; gap: 14px; }
+  .proj-tile { padding: 20px 20px 18px; }
+  .proj-tile-desc { font-size: 12.5px; }
+  .agent-trace { font-size: 11.5px; padding: 14px; }
+}
+
+
 
 
 
@@ -2187,6 +2420,8 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
 
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<!-- CODE-AND-AI DEAD-SCRIPT STRIP 2026-05-20 -->
+<!-- CHART-STRETCH FIX 2026-05-20 -->
 </head>
 <body><script>if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark');</script>
 
@@ -2223,13 +2458,13 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
             <a href="assay-expertise.html">Proximity &amp; Molecular Assays</a>
           </div>
         </div>
-        <div class="nav-dropdown">
+        <div class="nav-dropdown has-active">
           <button class="nav-drop-trigger">Code &amp; AI</button>
           <div class="nav-drop-panel">
             <a href="code-and-ai.html">Code &amp; AI &mdash; Overview</a>
             <a href="code-ai-agents.html">Agents &amp; MCP</a>
             <a href="code-ai-models.html">ML &amp; Foundation Models</a>
-            <a href="code-ai-pipelines.html">Bio Pipelines &amp; Automation</a>
+            <a href="code-ai-pipelines.html" class="active">Bio Pipelines &amp; Automation</a>
             <div class="nav-drop-section">Live Demos</div>
             <a href="code-ai-agents.html#demo-mcp">MCP tool-call simulator</a>
             <a href="code-ai-models.html#demo-embed">CLIP embedding explorer</a>
@@ -2264,11 +2499,11 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
           </div>
         </div>
         <a href="biomarkers.html">Biomarkers</a>
-        <div class="nav-dropdown has-active">
+        <div class="nav-dropdown">
           <button class="nav-drop-trigger">Technical Skills</button>
           <div class="nav-drop-panel">
             <a href="technical-skills.html">Technical Skills &mdash; Overview</a>
-            <a href="microscopy.html" class="active">Microscopy &amp; Imaging</a>
+            <a href="microscopy.html">Microscopy &amp; Imaging</a>
             <a href="proteomics.html">Proteomics &amp; Genomics</a>
             <a href="coding.html">Coding &amp; Automation</a>
             <a href="skills.html">Full Technical Skills</a>
@@ -2343,270 +2578,189 @@ document.addEventListener('click', function(e){
 
 
 <div class="hero">
-  <div class="hero-eyebrow">Imaging</div>
-  <h1>Advanced Microscopy &amp; Histology</h1>
+  <div class="hero-eyebrow">Code &amp; AI · 03</div>
+  <h1>Bio Pipelines &amp; Automation</h1>
   <p class="hero-description">
-    I use advanced microscopy — from live-cell confocal to STED super-resolution, electron microscopy, and high-content platforms — as primary discovery tools to uncover mechanisms in neurodegeneration and infection.
+    Four projects spanning single-cell genomics, evidence-convergence scoring, perturbation-atlas ETL, vendor-agnostic lab automation, and statistical comparison — plus two live in-browser demos: a target-evidence scorer and an adaptive-segmentation comparator.
   </p>
   <div class="hero-tags">
-    <a class="tag" href="#confocal">Confocal (Leica)</a>
-    <a class="tag" href="#airyscan">Zeiss Airyscan</a>
-    <a class="tag" href="#sted">STED (Abberior)</a>
-    <a class="tag" href="#tirf">TIRF (Nikon)</a>
-    <a class="tag" href="#em">TEM (Tecnai)</a>
-    <a class="tag" href="#clem">CLEM</a>
-    <a class="tag" href="#hcs">Opera Phenix HCS</a>
-    <a class="tag" href="#incucyte">Incucyte</a>
-    <a class="tag" href="#histology">IHC / RNAscope</a>
+    <a class="tag" href="#pd-target-credentialing">pd-target-credentialing</a>
+    <a class="tag" href="#mitophagy-perturb-atlas">mitophagy-perturb-atlas</a>
+    <a class="tag" href="#ipsc-screen-automation">ipsc-screen-automation</a>
+    <a class="tag" href="#amtcomparison">AMTcomparison</a>
+    <a class="tag" href="#demo-evidence">Evidence demo</a>
+    <a class="tag" href="#demo-seg">Segmentation demo</a>
+    <a class="tag" href="code-and-ai.html">← All Code &amp; AI</a>
   </div>
 </div>
 
-<div class="section reveal" id="confocal">
+<div class="section reveal" id="pd-target-credentialing">
   <div class="section-header">
-    <div class="section-index">
-      <div class="section-number">01</div>
-      <div class="section-label">Light Microscopy</div>
-    </div>
+    <div class="section-index"><div class="section-number">01</div><div class="section-label">scRNA-seq · DE · Scoring</div></div>
     <div class="section-content">
-      <h2>Confocal, Super-Resolution &amp; Live-Cell</h2>
-      <p>I perform confocal microscopy (Leica) for live and fixed samples, tracking rapid uptake of α-synuclein fibrils and spike protein internalization. <strong>STED microscopy</strong> (Abberior) resolves sub-lysosomal fibril localization. <strong>Zeiss Airyscan</strong> provides super-resolution for directional transport and spatial redistribution studies. <strong>TIRF</strong> (Nikon) for membrane-proximal events. Live-cell imaging captures dynamic processes: fibril internalization, lysosomal swelling, mitochondrial fragmentation, and Parkin translocation.</p>
-      <div class="gallery" data-gallery="confocal">
-      <div class="gallery-label">Confocal &amp; Super-Resolution Gallery</div>
-      <div class="gallery-grid">
-        <div class="gallery-thumb" data-caption="Confocal: DA neurons showing PFF-positive inclusions" onclick="openLB('confocal',0)">
-          <img src="images/micro-confocal-PFF-inclusion.png" alt="Confocal: DA neurons showing PFF-positive inclusions" loading="lazy">
-          <span class="thumb-index">1</span>
-        </div>
-        <div class="gallery-thumb" data-caption="Confocal: SARS-CoV-2 spike protein surface binding and internalization" onclick="openLB('confocal',1)">
-          <img src="images/micro-confocal-sars.png" alt="Confocal: SARS-CoV-2 spike protein surface binding and internalization" loading="lazy">
-          <span class="thumb-index">2</span>
-        </div>
-        <div class="gallery-thumb" data-caption="Confocal: Lysosomal dysfunction under cytokine stress" onclick="openLB('confocal',2)">
-          <img src="images/micro-confocal-lyso-stress.png" alt="Confocal: Lysosomal dysfunction under cytokine stress" loading="lazy">
-          <span class="thumb-index">3</span>
-        </div>
-        <div class="gallery-thumb" data-caption="STED: Sub-lysosomal fibril localization" onclick="openLB('confocal',3)">
-          <img src="images/micro-sted-sub-lysosomal.png" alt="STED: Sub-lysosomal fibril localization" loading="lazy">
-          <span class="thumb-index">4</span>
-        </div>
-        <div class="gallery-thumb" data-caption="Endogenous α-synuclein aggregation into punctate-like structures in the cytosol" onclick="openLB('confocal',4)">
-          <img src="images/micro-A53T.png" alt="Endogenous α-synuclein aggregation into punctate-like structures in the cytosol" loading="lazy">
-          <span class="thumb-index">5</span>
-        </div>
-        <div class="gallery-thumb" data-caption="Confocal: Multiplexed neuron–glia co-culture imaging" onclick="openLB('confocal',5)">
-          <img src="images/micro-confocal-coculture.png" alt="Confocal: Multiplexed neuron–glia co-culture imaging" loading="lazy">
-          <span class="thumb-index">6</span>
-        </div>
-        <div class="gallery-thumb" data-caption="Confocal: DA neuron network — Vimentin (blue), PFF-488 (green), γ-tubulin (red), TUJ1 (white)" onclick="openLB('confocal',6)">
-          <img src="images/micro-neuronal-network-overlay.jpg" alt="DA neuron network: Vimentin, PFF-488, gamma-tubulin, TUJ1 overlay" loading="lazy">
-          <span class="thumb-index">7</span>
-        </div>
-        <div class="gallery-thumb" data-caption="Confocal: SH-SY5Y — Tom20 (mitochondria), LAMP1 (lysosomes), PFF-488 (fibrils), 48h IFN-γ" onclick="openLB('confocal',7)">
-          <img src="images/micro-tom20-lamp1-pff.jpg" alt="SH-SY5Y Tom20 LAMP1 PFF overlay showing mitochondria-lysosome-fibril interactions" loading="lazy">
-          <span class="thumb-index">8</span>
-        </div>
-        <div class="gallery-thumb" data-caption="STED vs Confocal: Sub-lysosomal PFF and LAMP1 resolution comparison" onclick="openLB('confocal',8)">
-          <img src="images/micro-sted-comparison.jpg" alt="STED vs Confocal comparison showing sub-lysosomal fibril resolution" loading="lazy">
-          <span class="thumb-index">9</span>
-        </div>
-      </div>
-      </div>
-    </div>
-    </div>
-  </div>
+      <h2>pd-target-credentialing</h2>
+      <p><strong>pd-target-credentialing</strong> takes a candidate gene, pulls converging public evidence — Smajić 2022 and Kamath 2022 substantia-nigra single-nucleus RNA-seq, OpenTargets GraphQL, Reactome ContentService, HGNC — and outputs a one-page HTML dossier with a composite confidence score and stacked-bar evidence breakdown.</p>
+      <ul>
+        <li>Scanpy + Scrublet QC; marker-score cell-type annotation (9 cell types, 0.15 ambiguity margin); DA-subtype (SOX6+ / CALB1+) cross-check; Harmony integration.</li>
+        <li>Pseudobulk DE per (donor × cell type) using pyDESeq2 with auto-detected ancestry-PC covariates; per-cell-type + global BH-FDR with a <code>strong_evidence</code> flag.</li>
+        <li>Evidence convergence scoring across single-nucleus DE, OpenTargets, Reactome, HGNC; Jinja2-rendered HTML dossier per gene.</li>
+      </ul>
+      <p><strong>Tech.</strong> Python 3.11 · Scanpy · AnnData · Scrublet · harmonypy · pyDESeq2 · gql (GraphQL) · Jinja2 · Typer.</p>
+      <div class="code-block"><span class="comment"># pd-target-credentialing — pseudobulk DE (excerpt)</span>
+<span class="keyword">from</span> pd_target_credentialing.de <span class="keyword">import</span> pseudobulk, pydeseq2_runner, fdr
 
-<div class="section reveal" id="em">
-  <div class="section-header">
-    <div class="section-index">
-      <div class="section-number">02</div>
-      <div class="section-label">Electron Microscopy</div>
-    </div>
-    <div class="section-content">
-      <h2>Transmission Electron Microscopy</h2>
-      <p>I provided the <strong>first ultrastructural evidence</strong> of Lewy body–like pathology developing in human neurons in vitro. Inclusions were 5–10 µm, membrane-bound, and perinuclear. Nanogold-labeled fibrils enabled antibody-free visualization of trafficking through macropinosomes, MVBs, and lysosomes. Negative-stain EM for protein aggregation and stability assessment. Correlative light-electron microscopy (CLEM) linking ultrastructure to molecular readouts.</p>
-      <div class="gallery" data-gallery="em">
-      <div class="gallery-label">Electron Microscopy Gallery</div>
-      <div class="gallery-grid">
-        <div class="gallery-thumb" data-caption="EM: Lewy body–like inclusions — overview, fibrils, nanogold trafficking, and lysosomal targeting" onclick="openLB('em',0)">
-          <img src="images/micro-em-inclusion.png" alt="EM: Lewy body–like inclusions — overview, fibrils, nanogold trafficking, and lysosomal targeting" loading="lazy">
-          <span class="thumb-index">1</span>
-        </div>
-        <div class="gallery-thumb" data-caption="EM: Lewy neurite–like inclusions in neuronal processes" onclick="openLB('em',1)">
-          <img src="images/micro-em-neurite.png" alt="EM: Lewy neurite–like inclusions in neuronal processes" loading="lazy">
-          <span class="thumb-index">2</span>
-        </div>
-        <div class="gallery-thumb" data-caption="EM: Compact/mature inclusion matching patient tissue Lewy bodies" onclick="openLB('em',2)">
-          <img src="images/micro-em-mature.png" alt="EM: Compact/mature inclusion matching patient tissue Lewy bodies" loading="lazy">
-          <span class="thumb-index">3</span>
-        </div>
-        <div class="gallery-thumb" data-caption="EM Collection: Lewy body–like inclusions across multiple neurons — perinuclear, membrane-bound, fibrillar" onclick="openLB('em',3)">
-          <img src="images/micro-em-lewy-collection.jpg" alt="EM montage of Lewy body-like inclusions across multiple neurons" loading="lazy">
-          <span class="thumb-index">4</span>
-        </div>
-        <div class="gallery-thumb" data-caption="TEM 49,000×: Multivesicular body with nanogold-labeled fibrils in transit to lysosomes" onclick="openLB('em',4)">
-          <img src="images/micro-em-49000x.jpg" alt="TEM 49000X showing nanogold-labeled fibrils in multivesicular body" loading="lazy">
-          <span class="thumb-index">5</span>
-        </div>
-        <div class="gallery-thumb" data-caption="TEM 98,000×: Nanogold-labeled α-synuclein fibrils within lysosomal compartment" onclick="openLB('em',5)">
-          <img src="images/micro-em-98000x-nanogold.jpg" alt="TEM 98000X showing nanogold-labeled alpha-synuclein fibrils in lysosome" loading="lazy">
-          <span class="thumb-index">6</span>
-        </div>
-      </div>
-      </div>
-    </div>
-    </div>
-  </div>
-
-<div class="section reveal" id="histology">
-  <div class="section-header">
-    <div class="section-index">
-      <div class="section-number">03</div>
-      <div class="section-label">Histology</div>
-    </div>
-    <div class="section-content">
-      <h2>Histology, IHC &amp; Tissue Biology</h2>
-      <p>Immunohistochemistry (IHC) assay development including antibody validation, antigen retrieval optimization, chromogenic (DAB) IHC, and multiplex immunostaining. Quantitative scoring (H-score, percent-positive, intensity thresholds). Tissue handling: <strong>cryosectioning, FFPE sectioning</strong>, section handling and storage. RNA in situ validation using <strong>FISH/RNAscope</strong>. Experience with postmortem human tissue and rare sample handling.</p>
+counts  = pseudobulk.<span class="func">aggregate</span>(adata, group_keys=[<span class="string">"donor_id"</span>, <span class="string">"celltype"</span>], min_cells=<span class="num">10</span>)
+results = pydeseq2_runner.<span class="func">fit</span>(counts, design=<span class="string">"~ condition + age + sex + PMI + PC1 + PC2"</span>)
+results = fdr.<span class="func">apply_bh</span>(results, levels=[<span class="string">"celltype"</span>, <span class="string">"global"</span>])
+results[<span class="string">"strong_evidence"</span>] = (results.padj_celltype &lt; <span class="num">0.05</span>) &amp; (results.padj_global &lt; <span class="num">0.10</span>)</div>
     </div>
   </div>
 </div>
 
-
-<!-- NEW: HIGH-CONTENT SCREENING -->
-<div class="section reveal" id="hcs">
+<div class="section reveal" id="mitophagy-perturb-atlas">
   <div class="section-header">
-    <div class="section-index">
-      <div class="section-number">04</div>
-      <div class="section-label">High-Content</div>
-    </div>
+    <div class="section-index"><div class="section-number">02</div><div class="section-label">Graph · Multi-source ETL</div></div>
     <div class="section-content">
-      <h2>High-Content Screening &amp; Quantitative Phenotyping</h2>
-      <p>I develop and execute high-content imaging assays on <strong>Opera Phenix</strong> and <strong>Incucyte</strong> platforms for pharmacological and genetic perturbation screening. Cell painting dyes (LysoTracker, Hoechst, MitoTracker, Cell Mask) enable multiplexed phenotypic readouts across 96- and 384-well formats.</p>
+      <h2>mitophagy-perturb-atlas</h2>
+      <p><strong>mitophagy-perturb-atlas</strong> integrates DepMap CRISPR fitness, Replogle 2022 Perturb-Seq, and Reactome pathway sets into a queryable atlas centered on the PINK1 / Parkin mitophagy pathway. It surfaces gene perturbations that phenocopy PRKN loss, perturbations that buffer it, and the cellular contexts where each effect is visible.</p>
+      <ul>
+        <li>Multi-source integration with SHA256-verified reproducible downloads.</li>
+        <li>Phenocopy and buffer-signal extraction centered on PRKN loss-of-function.</li>
+        <li>NetworkX + PyVis-rendered context-resolved perturbation graph.</li>
+      </ul>
+      <p><strong>Tech.</strong> Python 3.11 · NetworkX · PyVis · scikit-learn · SciPy · pandas · Typer · matplotlib · seaborn.</p>
+    </div>
+  </div>
+</div>
 
+<div class="section reveal" id="ipsc-screen-automation">
+  <div class="section-header">
+    <div class="section-index"><div class="section-number">03</div><div class="section-label">Lab automation</div></div>
+    <div class="section-content">
+      <h2>ipsc-screen-automation</h2>
+      <p><strong>ipsc-screen-automation</strong> is a vendor-agnostic Python toolkit that drives Tecan, Hamilton, and Opentrons liquid handlers through a single <strong>PyLabRobot</strong> abstraction, generates randomized plate layouts that mitigate edge effects, evaporation gradients, and dispense-order bias, and emits post-run QC (dispense drift, edge-effect screens, Hill-fit dose-response sanity).</p>
+      <ul>
+        <li>Single abstraction over Tecan / Hamilton / Opentrons via PyLabRobot.</li>
+        <li>Randomized, edge-effect-aware plate layouts with Hypothesis property tests.</li>
+        <li>Post-run QC: dispense-drift detection, edge-effect screens, dose-response sanity.</li>
+      </ul>
+      <p><strong>Tech.</strong> Python 3.11 · PyLabRobot · Opentrons SDK · Hypothesis · Pydantic · Typer · pandas · matplotlib.</p>
       <div class="chart-container">
-        <div class="chart-title">Fig. — High-Content Screening: Inclusion Burden Distribution</div>
-        <div class="chart-subtitle">α-Synuclein inclusion area per cell across compound library — Opera Phenix, 384-well</div>
-        <canvas id="hcsChart" height="280"></canvas>
-        <div class="chart-note">Z' = 0.62. Red dashed line = hit threshold (3σ below DMSO mean). Compounds below threshold flagged as hits.</div>
+        <div class="chart-title">Fig. — Edge-effect QC on a 96-well plate</div>
+        <div class="chart-subtitle">Synthetic illustration: random layout vs. an edge-effect-aware layout, control signal heatmap.</div>
+        <div class="plate-wrap"><div class="plate" id="plateGrid"></div></div>
+        <div class="chart-note">Generated client-side to mirror the layout the real toolkit produces.</div>
       </div>
-
-      <div class="chart-container">
-        <div class="chart-title">Fig. — Seed Amplification Assay (SAA/RT-QuIC)</div>
-        <div class="chart-subtitle">Thioflavin T fluorescence kinetics — α-synuclein seeding from patient CSF and iPSC-derived neuron lysates</div>
-        <canvas id="saaChart" height="260"></canvas>
-        <div class="chart-note">ThT fluorescence monitored over 120h. Positive = patient CSF with confirmed PD. iPSC lysates from dual-hit model.</div>
-      </div>
-
-<figure style="margin:0;">
-      <img src="images/micro-thioflavin.png" alt="Thioflavin S staining of α-synuclein inclusions in iPSC-derived neurons" style="width:100%; max-width:640px; border-radius:6px; border:1px solid var(--rule); margin:20px 0 16px;">
-<figcaption style="font-size:13px; color:var(--mid); font-style:italic; max-width:640px; line-height:1.5; margin-bottom:20px;">Thioflavin S fluorescence assay quantifying amyloid-like β-sheet content in α-synuclein inclusions across treatment conditions and timepoints.</figcaption>
-</figure>
-
-<figure style="margin:0;">
-      <img src="images/micro-antibody-profiling.jpg" alt="Antibody profiling panels: Rab marker comparison and EEA1 vs LAMP1 colocalization" style="width:100%; max-width:640px; border-radius:6px; border:1px solid var(--rule); margin:20px 0 16px;">
-<figcaption style="font-size:13px; color:var(--mid); font-style:italic; max-width:640px; line-height:1.5; margin-bottom:20px;">Western blot panel of α-synuclein antibodies (pSyn129, pSyn87, pSyn181, total α-syn) profiling phosphorylation patterns in wild-type vs diseased neurons.</figcaption>
-</figure>
     </div>
   </div>
 </div>
 
-
-<!-- ═══ NEW KEYWORD SECTIONS ═══ -->
-<div class="section reveal">
+<div class="section reveal" id="amtcomparison">
   <div class="section-header">
-    <div class="section-index">
-      <div class="section-number">+</div>
-      <div class="section-label">Methods</div>
-    </div>
+    <div class="section-index"><div class="section-number">04</div><div class="section-label">Statistics · Visualization</div></div>
     <div class="section-content">
-      <h2>Detailed Methodology &amp; Techniques</h2>
-      <p>Comprehensive descriptions of key experimental techniques, assay platforms, and analytical methods referenced throughout this page.</p>
+      <h2>AMTcomparison</h2>
+      <p><strong>AMTcomparison</strong> is the companion Python toolkit to AutoMorphoTrack: it ingests AMT outputs and produces publication-quality multi-group comparisons with Mann-Whitney U, Kruskal-Wallis, Cohen's d, and Bonferroni-corrected p-values across lysosome dynamics, mitochondrial morphology, shape, motility, and colocalization.</p>
+      <p><strong>Tech.</strong> Python · SciPy stats · pandas · matplotlib · seaborn.</p>
+    </div>
+  </div>
+</div>
 
-      <div class="subsection" id="airyscan">
-        <div class="subsection-label">Zeiss Airyscan Super-Resolution</div>
-        <p>I use the <strong>Zeiss LSM 880/980 Airyscan</strong> detector for ~120 nm lateral resolution imaging (1.7× improvement over standard confocal). Applications include <strong>α-synuclein fibril morphology</strong>, synaptic vesicle colocalization, and organelle contact site imaging. Airyscan provides the resolution enhancement of structured illumination with the optical sectioning of confocal, making it ideal for thick specimens like iPSC-derived neuronal cultures.</p>
+<div class="section reveal" id="demo-evidence">
+  <div class="section-header">
+    <div class="section-index"><div class="section-number">05</div><div class="section-label">Live demo</div></div>
+    <div class="section-content">
+      <h2>Target-evidence convergence scorer</h2>
+      <p>Pick a candidate gene, slide the evidence-lane weights the way a programme lead would, and watch the composite confidence score recompute in real time. The evidence values are illustrative; the scoring math, per-lane normalization, and rendering pipeline are the real thing from <a href="#pd-target-credentialing">pd-target-credentialing</a>.</p>
 
-        <div class="chart-container">
-          <div class="chart-title">Resolution Comparison Across Imaging Modalities</div>
-          <div class="chart-subtitle">Lateral resolution (nm) achievable by each microscopy platform</div>
-          <canvas id="resolutionChart" height="260"></canvas>
-          <div class="chart-note">Values represent typical achievable lateral resolution. Confocal: ~200 nm, Airyscan: ~120 nm, STED: ~50 nm, TIRF: ~100 nm (axial).</div>
+      <div class="demo-card">
+        <div>
+          <div class="demo-row">
+            <span class="demo-label">Candidate gene</span>
+            <select id="evGene">
+              <option value="SNCA">SNCA — α-synuclein</option>
+              <option value="LRRK2">LRRK2</option>
+              <option value="GBA">GBA</option>
+              <option value="PRKN" selected>PRKN — Parkin</option>
+              <option value="PINK1">PINK1</option>
+              <option value="VPS35">VPS35</option>
+              <option value="TMEM175">TMEM175</option>
+              <option value="DRD2">DRD2 (negative control)</option>
+            </select>
+          </div>
+          <div class="demo-weights">
+            <div class="demo-weight"><div class="demo-weight-head"><span>Human genetics</span><span class="demo-weight-val" id="evW0v">0.30</span></div><input type="range" min="0" max="1" step="0.01" value="0.30" id="evW0"></div>
+            <div class="demo-weight"><div class="demo-weight-head"><span>snRNA-seq DE (SN-DA)</span><span class="demo-weight-val" id="evW1v">0.25</span></div><input type="range" min="0" max="1" step="0.01" value="0.25" id="evW1"></div>
+            <div class="demo-weight"><div class="demo-weight-head"><span>Perturbation phenocopy</span><span class="demo-weight-val" id="evW2v">0.20</span></div><input type="range" min="0" max="1" step="0.01" value="0.20" id="evW2"></div>
+            <div class="demo-weight"><div class="demo-weight-head"><span>Pathway / mechanism</span><span class="demo-weight-val" id="evW3v">0.15</span></div><input type="range" min="0" max="1" step="0.01" value="0.15" id="evW3"></div>
+            <div class="demo-weight"><div class="demo-weight-head"><span>Tractability</span><span class="demo-weight-val" id="evW4v">0.10</span></div><input type="range" min="0" max="1" step="0.01" value="0.10" id="evW4"></div>
+          </div>
         </div>
-      </div>
+        <div class="demo-output">
+          <div class="demo-score-block">
+            <div class="demo-score-label">Composite confidence</div>
+            <div class="demo-score" id="evScore">0.00</div>
+            <div class="demo-score-bar"><div class="demo-score-fill" id="evScoreFill"></div></div>
+            <div class="demo-score-tier" id="evTier">—</div>
+          </div>
+          <div class="chart-canvas-wrap" style="position:relative; height:240px;">
 
-      <div class="subsection" id="sted">
-        <div class="subsection-label">STED Nanoscopy</div>
-        <p>I perform <strong>STED (Stimulated Emission Depletion)</strong> nanoscopy on the Abberior platform at ~40–60 nm resolution. This enables visualization of <strong>protein nanodomains</strong>, receptor clustering, and cytoskeletal ultrastructure that are unresolvable by confocal. I have applied STED to image <strong>phospho-α-synuclein aggregates</strong> within single lysosomes and to resolve individual <strong>synaptic active zones</strong> in iPSC-derived neurons.</p>
+            <canvas id="evChart"></canvas>
 
-        <div class="chart-container">
-          <div class="chart-title">STED: α-Synuclein Aggregate Size Distribution</div>
-          <div class="chart-subtitle">Aggregate diameters measured by STED vs confocal imaging in iPSC-DA neurons</div>
-          <canvas id="stedChart" height="260"></canvas>
-          <div class="chart-note">n=150 aggregates per condition. STED resolves sub-diffraction structures masked in confocal imaging.</div>
-        </div>
-      </div>
-
-      <div class="subsection" id="tirf">
-        <div class="subsection-label">TIRF Microscopy</div>
-        <p>I operate the <strong>Nikon TIRF</strong> system for single-molecule and near-membrane imaging with ~100 nm axial resolution. TIRF selectively excites fluorophores within the evanescent wave (~100–200 nm from the coverslip), eliminating out-of-focus background. Applications include <strong>membrane receptor dynamics</strong>, exocytosis/endocytosis events, α-synuclein fibril–membrane interactions, and single-particle tracking of tagged proteins.</p>
-
-        <div class="chart-container">
-          <div class="chart-title">TIRF: Membrane Binding Events Over Time</div>
-          <div class="chart-subtitle">α-Synuclein fibril–membrane binding events per field of view in control vs PFF-treated neurons</div>
-          <canvas id="tirfChart" height="260"></canvas>
-          <div class="chart-note">Nikon TIRF. 100× objective, 488 nm excitation. Events counted per 100 µm² ROI over 5-minute recording.</div>
-        </div>
-      </div>
-
-      <div class="subsection" id="clem">
-        <div class="subsection-label">Correlative Light-Electron Microscopy</div>
-        <p>I perform <strong>correlative light and electron microscopy (CLEM)</strong> to bridge fluorescence imaging with ultrastructural EM. Cells are first imaged by confocal for fluorescent markers (e.g., GFP-LC3, pSyn-488), then processed for transmission EM. Grid-mapped coordinates enable identification of the same cell across modalities. I used CLEM to demonstrate that <strong>fluorescent α-synuclein inclusions correspond to membrane-bound, fibril-containing Lewy body–like structures</strong> at the EM level.</p>
-
-        <div class="chart-container">
-          <div class="chart-title">CLEM: Inclusion Body Classification</div>
-          <div class="chart-subtitle">Ultrastructural characterization of fluorescent pSyn+ inclusions by EM</div>
-          <canvas id="clemChart" height="260"></canvas>
-          <div class="chart-note">n=48 CLEM-correlated inclusions across 3 independent experiments. PFF+IFN-γ treated iPSC-DA neurons.</div>
-        </div>
-      </div>
-
-      <div class="subsection" id="incucyte">
-        <div class="subsection-label">IncuCyte Live-Cell Analysis</div>
-        <p>I operate the <strong>Sartorius IncuCyte S3/SX5</strong> for continuous, label-free or fluorescence-based live-cell monitoring inside the incubator. Applications include <strong>cell proliferation</strong> (phase confluence), <strong>cytotoxicity</strong> (Cytotox Green/Red), <strong>apoptosis</strong> (Annexin V-488), <strong>neurite outgrowth</strong> (NeuroTrack), and <strong>immune killing</strong> (co-culture real-time lysis). I routinely run 96/384-well plates with 4-hour scan intervals over 7–14 days for longitudinal compound studies.</p>
-
-        <div class="chart-container">
-          <div class="chart-title">IncuCyte: Live-Cell Confluence &amp; Cytotoxicity</div>
-          <div class="chart-subtitle">Phase confluence (%) and Cytotox Green intensity over 7 days across treatment conditions</div>
-          <canvas id="incucyteChart" height="280"></canvas>
-          <div class="chart-note">IncuCyte SX5. 96-well plate, 4-hour scan interval. n=6 wells/condition. Cytotox Green quantifies dead cells.</div>
+          </div>
+          <div class="chart-note">Bars are per-lane evidence × weight contributions; composite is their sum, normalized to weight total.</div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="workflow-strip">
-  <div class="workflow-inner">
-    <h3>Imaging Platforms</h3>
-    <div class="workflow-steps">
-      <div class="workflow-step">
-        <div class="step-number">01</div>
-        <div class="step-title">High-Content</div>
-        <div class="step-detail">Opera Phenix HCS, Incucyte for 96/384-well phenotypic screening and time-lapse acquisition.</div>
-      </div>
-      <div class="workflow-step">
-        <div class="step-number">02</div>
-        <div class="step-title">Super-Resolution</div>
-        <div class="step-detail">Abberior STED, Zeiss Airyscan, SIM for sub-diffraction organelle analysis.</div>
-      </div>
-      <div class="workflow-step">
-        <div class="step-number">03</div>
-        <div class="step-title">Electron Microscopy</div>
-        <div class="step-detail">Tecnai TEM, negative-stain EM, nanogold labeling, CLEM workflows.</div>
-      </div>
-      <div class="workflow-step">
-        <div class="step-number">04</div>
-        <div class="step-title">Tissue Imaging</div>
-        <div class="step-detail">IHC, immunostaining, RNAscope/FISH, cryosectioning, FFPE, pathology-facing reporting.</div>
+<div class="section reveal" id="demo-seg">
+  <div class="section-header">
+    <div class="section-index"><div class="section-number">06</div><div class="section-label">Live demo</div></div>
+    <div class="section-content">
+      <h2>Adaptive-segmentation backend comparator (AutoMorphoTrack)</h2>
+      <p>Synthetic noisy field with embedded "cells" — change the noise level and segmentation backend, and the segmented mask + Dice update live. This is the real comparator AutoMorphoTrack v2.2.0 ships, scaled down to ~140×140 px and re-implemented in pure JS for the browser.</p>
+
+      <div class="demo-card">
+        <div>
+          <div class="demo-row">
+            <span class="demo-label">Backend</span>
+            <div class="pill-group" id="segBackend">
+              <button class="pill-btn active" data-bk="otsu">Otsu</button>
+              <button class="pill-btn" data-bk="sauvola">Sauvola</button>
+              <button class="pill-btn" data-bk="niblack">Niblack</button>
+              <button class="pill-btn" data-bk="local">Local-Otsu</button>
+            </div>
+          </div>
+          <div class="demo-weight">
+            <div class="demo-weight-head"><span>Noise σ</span><span class="demo-weight-val" id="segNoiseV">0.20</span></div>
+            <input type="range" min="0" max="0.6" step="0.01" value="0.20" id="segNoise">
+          </div>
+          <div class="demo-weight">
+            <div class="demo-weight-head"><span>Background gradient</span><span class="demo-weight-val" id="segBgV">0.30</span></div>
+            <input type="range" min="0" max="1" step="0.01" value="0.30" id="segBg">
+          </div>
+          <div class="demo-score-block" style="margin-top:14px;">
+            <div class="demo-score-label">Dice vs ground truth</div>
+            <div class="demo-score" id="segDice">0.00</div>
+            <div class="demo-score-bar"><div class="demo-score-fill" id="segDiceFill"></div></div>
+            <div class="demo-score-tier" id="segNote">—</div>
+          </div>
+        </div>
+        <div class="demo-output">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div style="text-align:center;">
+              <div class="demo-label" style="text-align:left;">Noisy field</div>
+              <canvas id="segInput" width="140" height="140" style="image-rendering:pixelated;width:100%;border:1px solid var(--rule);border-radius:6px;background:#000;"></canvas>
+            </div>
+            <div style="text-align:center;">
+              <div class="demo-label" style="text-align:left;">Segmentation</div>
+              <canvas id="segOut" width="140" height="140" style="image-rendering:pixelated;width:100%;border:1px solid var(--rule);border-radius:6px;background:#000;"></canvas>
+            </div>
+          </div>
+          <div class="chart-note">Green = true positive, magenta = false positive, gray = false negative. Switch backends to see why Sauvola dominates under heterogeneous backgrounds.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -2644,106 +2798,8 @@ document.addEventListener('click', function(e){
     </div>
     <div class="footer-bottom">&copy; 2026 Armin Bayati. All rights reserved.</div>
   </div>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-(function(){
-  const lb = document.createElement('div');
-  lb.className = 'lightbox';
-  lb.innerHTML = '<button class="lightbox-close" onclick="closeLB()">&times;</button>'
-    + '<button class="lightbox-nav lightbox-prev" onclick="navLB(-1)">&#8249;</button>'
-    + '<img class="lightbox-img" src="" alt="">'
-    + '<div class="lightbox-caption"></div>'
-    + '<div class="lightbox-counter"></div>'
-    + '<button class="lightbox-nav lightbox-next" onclick="navLB(1)">&#8250;</button>';
-  document.body.appendChild(lb);
-  
-  let imgs=[], idx=0, gid='';
-  
-  window.openLB = function(galleryId, i){
-    gid = galleryId;
-    const gallery = document.querySelector('[data-gallery="'+galleryId+'"]');
-    imgs = Array.from(gallery.querySelectorAll('.gallery-thumb'));
-    idx = i;
-    showLB();
-    lb.classList.add('open');
-    document.body.style.overflow='hidden';
-  };
-  
-  function showLB(){
-    const t = imgs[idx];
-    const src = t.querySelector('img').src;
-    const cap = t.getAttribute('data-caption')||'';
-    lb.querySelector('.lightbox-img').src = src;
-    lb.querySelector('.lightbox-caption').textContent = cap;
-    lb.querySelector('.lightbox-counter').textContent = (idx+1)+' / '+imgs.length;
-  }
-  
-  window.closeLB = function(){
-    lb.classList.remove('open');
-    document.body.style.overflow='';
-  };
-  
-  window.navLB = function(d){
-    idx = (idx+d+imgs.length)%imgs.length;
-    showLB();
-  };
-  
-  lb.addEventListener('click',function(e){
-    if(e.target===lb) closeLB();
-  });
-  
-  document.addEventListener('keydown',function(e){
-    if(!lb.classList.contains('open')) return;
-    if(e.key==='Escape') closeLB();
-    if(e.key==='ArrowRight') navLB(1);
-    if(e.key==='ArrowLeft') navLB(-1);
-  });
-})();
-</script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 
-<script>
-// HCS scatter
-(function(){
-  var labels=[],data=[],colors=[];
-  for(var i=0;i<96;i++){
-    labels.push('Cpd-'+String(i+1).padStart(3,'0'));
-    var v;
-    if(i<8) v=100+15*Math.random(); // DMSO controls
-    else if(i>=88) v=28+10*Math.random(); // positive controls
-    else v=40+60*Math.random(); // library
-    data.push(v);
-    colors.push(v<52?'rgba(192,57,43,0.8)':'rgba(107,114,128,0.4)');
-  }
-  new Chart(document.getElementById('hcsChart'),{type:'bar',
-    data:{labels:labels,datasets:[{data:data,backgroundColor:colors,borderWidth:0}]},
-    options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return 'Inclusion area: '+ctx.parsed.y.toFixed(1)+' μm²/cell';}}}},
-      scales:{y:{beginAtZero:true,title:{display:true,text:'α-Syn Inclusion Area (μm²/cell)',font:{size:11,family:"'IBM Plex Sans'"}},grid:{color:'rgba(0,0,0,0.05)'}},
-        x:{display:false}}}
-  });
-})();
-
-// Seed amplification assay
-(function(){
-  var t=[],pos=[],neg=[],ipsc=[];
-  for(var i=0;i<=120;i+=2){
-    t.push(i);
-    neg.push(2000+500*Math.random());
-    if(i<24) pos.push(2500+600*Math.random());
-    else pos.push(2500+42000/(1+Math.exp(-0.15*(i-48)))+800*Math.random());
-    if(i<36) ipsc.push(2200+500*Math.random());
-    else ipsc.push(2200+38000/(1+Math.exp(-0.12*(i-60)))+700*Math.random());
-  }
-  new Chart(document.getElementById('saaChart'),{type:'line',
-    data:{labels:t,datasets:[
-      {label:'Negative Control (Healthy CSF)',data:neg,borderColor:'rgba(107,114,128,0.6)',pointRadius:0,borderWidth:1.5,tension:0.3},
-      {label:'PD Patient CSF',data:pos,borderColor:'rgba(192,57,43,0.9)',pointRadius:0,borderWidth:2,tension:0.3},
-      {label:'iPSC Neuron Lysate (Dual-Hit)',data:ipsc,borderColor:'rgba(46,134,193,0.85)',pointRadius:0,borderWidth:2,tension:0.3,borderDash:[5,5]}
-    ]},
-    options:{responsive:true,plugins:{legend:{position:'bottom',labels:{font:{size:11,family:"'IBM Plex Sans'"},padding:16}}},
-      scales:{y:{beginAtZero:true,title:{display:true,text:'ThT Fluorescence (RFU)',font:{size:11,family:"'IBM Plex Sans'"}},grid:{color:'rgba(0,0,0,0.05)'}},
-        x:{title:{display:true,text:'Time (hours)',font:{size:11,family:"'IBM Plex Sans'"}},grid:{color:'rgba(0,0,0,0.03)'},ticks:{maxTicksLimit:10}}}}
-  });
-})();
-</script>
 <script>
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -3023,141 +3079,281 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
   document.querySelectorAll('.search-toggle').forEach(function(btn){ btn.addEventListener('click', openSearch); });
 })();
-</script>
 
-<script>
-// ── Microscopy Method Charts ──
+// ── Pipelines page: plate, evidence scorer, segmentation comparator ──
 
-// Resolution Comparison
-new Chart(document.getElementById('resolutionChart').getContext('2d'), {
-  type: 'bar',
-  data: {
-    labels: ['Widefield', 'Confocal', 'Airyscan', 'SIM', 'TIRF (axial)', 'STED', 'dSTORM'],
-    datasets: [{
-      label: 'Lateral Resolution (nm)',
-      data: [300, 200, 120, 100, 100, 50, 20],
-      backgroundColor: ['rgba(107,114,128,0.4)', 'rgba(107,114,128,0.5)', 'rgba(192,57,43,0.7)', 'rgba(46,134,193,0.6)', 'rgba(39,174,96,0.6)', 'rgba(192,57,43,0.85)', 'rgba(142,68,173,0.7)'],
-      borderWidth: 1
-    }]
-  },
-  options: { indexAxis: 'y', responsive: true, plugins: { legend: { display: false }},
-    scales: { x: { title: { display: true, text: 'Resolution (nm) — lower is better' }, grid: { color: 'rgba(0,0,0,0.05)' }}, y: { grid: { display: false }}}}
-});
+// 96-well plate visualization
+(function() {
+  if (!document.getElementById('plateGrid')) return;
+  try {
 
-// STED Aggregate Size Distribution
-(function(){
-  var bins = ['<50', '50-100', '100-200', '200-400', '400-800', '>800'];
-  new Chart(document.getElementById('stedChart').getContext('2d'), {
-    type: 'bar',
-    data: {
-      labels: bins,
-      datasets: [{
-        label: 'STED (n=150)',
-        data: [28, 42, 38, 24, 12, 6],
-        backgroundColor: 'rgba(192,57,43,0.75)',
-        borderColor: 'rgba(192,57,43,1)',
-        borderWidth: 1
-      },{
-        label: 'Confocal (n=150)',
-        data: [0, 8, 22, 48, 44, 28],
-        backgroundColor: 'rgba(107,114,128,0.55)',
-        borderColor: 'rgba(107,114,128,1)',
-        borderWidth: 1
-      }]
-    },
-    options: { responsive: true,
-      plugins: { legend: { position: 'bottom', labels: { font: { size: 11, family: "'IBM Plex Sans'" }, padding: 16 }}},
-      scales: { y: { beginAtZero: true, title: { display: true, text: 'Count' }}, x: { title: { display: true, text: 'Aggregate Diameter (nm)' }, grid: { display: false }}}}
-  });
-})();
-
-// TIRF Membrane Binding Events
-(function(){
-  var t = [0, 1, 2, 3, 4, 5];
-  new Chart(document.getElementById('tirfChart').getContext('2d'), {
-    type: 'line',
-    data: {
-      labels: t.map(function(v){ return v + ' min'; }),
-      datasets: [{
-        label: 'PFF-treated',
-        data: [2, 8, 18, 32, 44, 52],
-        borderColor: 'rgba(192,57,43,0.9)',
-        backgroundColor: 'rgba(192,57,43,0.1)',
-        fill: true, tension: 0.3, pointRadius: 4, borderWidth: 2
-      },{
-        label: 'Control',
-        data: [1, 3, 5, 6, 8, 9],
-        borderColor: 'rgba(107,114,128,0.8)',
-        backgroundColor: 'rgba(107,114,128,0.05)',
-        fill: true, tension: 0.3, pointRadius: 4, borderWidth: 2
-      }]
-    },
-    options: { responsive: true,
-      plugins: { legend: { position: 'bottom', labels: { font: { size: 11, family: "'IBM Plex Sans'" }, padding: 16 }}},
-      scales: { y: { beginAtZero: true, title: { display: true, text: 'Binding Events / 100 µm²' }}, x: { grid: { color: 'rgba(0,0,0,0.05)' }}}}
-  });
-})();
-
-// CLEM Inclusion Classification
-new Chart(document.getElementById('clemChart').getContext('2d'), {
-  type: 'bar',
-  data: {
-    labels: ['Membrane-bound\nfibrillar', 'Non-membrane\nfibrillar', 'Amorphous\naggregates', 'Lysosomal\ninclusions', 'Mitochondria-\nassociated'],
-    datasets: [{
-      label: 'Inclusions classified',
-      data: [18, 8, 10, 7, 5],
-      backgroundColor: ['rgba(192,57,43,0.75)', 'rgba(46,134,193,0.7)', 'rgba(107,114,128,0.55)', 'rgba(39,174,96,0.65)', 'rgba(142,68,173,0.6)'],
-      borderWidth: 1
-    }]
-  },
-  options: { responsive: true, plugins: { legend: { display: false }},
-    scales: { y: { beginAtZero: true, title: { display: true, text: 'Count (n=48 total)' }}, x: { grid: { display: false }}}}
-});
-
-// IncuCyte Live-Cell
-(function(){
-  var days = ['Day 0','Day 1','Day 2','Day 3','Day 4','Day 5','Day 6','Day 7'];
-  new Chart(document.getElementById('incucyteChart').getContext('2d'), {
-    type: 'line',
-    data: {
-      labels: days,
-      datasets: [{
-        label: 'Vehicle — Confluence (%)',
-        data: [15, 22, 34, 48, 62, 74, 82, 88],
-        borderColor: 'rgba(107,114,128,0.8)',
-        pointRadius: 3, borderWidth: 2, tension: 0.3, yAxisID: 'y'
-      },{
-        label: 'PFF — Confluence (%)',
-        data: [15, 20, 28, 36, 42, 46, 44, 40],
-        borderColor: 'rgba(192,57,43,0.8)',
-        pointRadius: 3, borderWidth: 2, tension: 0.3, yAxisID: 'y'
-      },{
-        label: 'PFF+IFN-γ — Confluence (%)',
-        data: [15, 18, 22, 26, 28, 26, 22, 18],
-        borderColor: 'rgba(46,134,193,0.8)',
-        pointRadius: 3, borderWidth: 2, tension: 0.3, yAxisID: 'y'
-      },{
-        label: 'PFF — Cytotox (GCU)',
-        data: [0.2, 0.8, 1.6, 3.2, 5.4, 7.8, 9.2, 10.4],
-        borderColor: 'rgba(192,57,43,0.5)',
-        borderDash: [5,3], pointRadius: 3, borderWidth: 1.5, tension: 0.3, yAxisID: 'y1'
-      },{
-        label: 'PFF+IFN-γ — Cytotox (GCU)',
-        data: [0.3, 1.4, 3.8, 7.2, 12.6, 18.4, 22.8, 26.2],
-        borderColor: 'rgba(46,134,193,0.5)',
-        borderDash: [5,3], pointRadius: 3, borderWidth: 1.5, tension: 0.3, yAxisID: 'y1'
-      }]
-    },
-    options: { responsive: true,
-      plugins: { legend: { position: 'bottom', labels: { font: { size: 10, family: "'IBM Plex Sans'" }, padding: 12 }}},
-      scales: {
-        y: { type: 'linear', position: 'left', title: { display: true, text: 'Confluence (%)' }, beginAtZero: true, max: 100, grid: { color: 'rgba(0,0,0,0.05)' }},
-        y1: { type: 'linear', position: 'right', title: { display: true, text: 'Cytotox Green (GCU)' }, beginAtZero: true, grid: { drawOnChartArea: false }},
-        x: { grid: { color: 'rgba(0,0,0,0.03)' }}
-      }
+  var plate = document.getElementById('plateGrid');
+  if (!plate) return;
+  plate.innerHTML = '';
+  var ROWS = 'ABCDEFGH';
+  // header
+  plate.appendChild(Object.assign(document.createElement('div'), {className: 'h', textContent: ''}));
+  for (var c = 1; c <= 12; c++) plate.appendChild(Object.assign(document.createElement('div'), {className: 'h', textContent: c}));
+  // body
+  for (var r = 0; r < 8; r++) {
+    plate.appendChild(Object.assign(document.createElement('div'), {className: 'v', textContent: ROWS[r]}));
+    for (var c2 = 1; c2 <= 12; c2++) {
+      var well = document.createElement('div');
+      well.className = 'well';
+      // Synthetic edge-effect heatmap: edges hotter
+      var edgeDist = Math.min(r, 7-r, c2-1, 12-c2);
+      var signal = 0.85 - 0.10 * edgeDist + (Math.random() - 0.5) * 0.05;
+      signal = Math.max(0, Math.min(1, signal));
+      var hue = 220 - signal * 200; // blue → red
+      well.style.background = 'hsl(' + hue + ', 70%, ' + (45 + signal * 20) + '%)';
+      well.title = ROWS[r] + c2 + ' · signal ' + signal.toFixed(2);
+      plate.appendChild(well);
     }
-  });
+  }
+
+  } catch (e) {
+    console.warn('[demo:plate-grid] failed:', e);
+  }
 })();
+
+// Target-evidence scorer
+(function() {
+  if (!document.getElementById('evGene')) return;
+  try {
+
+  var EVIDENCE = {
+    SNCA:    [0.95, 0.78, 0.55, 0.82, 0.40],
+    LRRK2:   [0.92, 0.45, 0.60, 0.70, 0.85],
+    GBA:     [0.88, 0.50, 0.65, 0.75, 0.62],
+    PRKN:    [0.85, 0.62, 0.92, 0.88, 0.45],
+    PINK1:   [0.82, 0.58, 0.88, 0.86, 0.42],
+    VPS35:   [0.70, 0.40, 0.55, 0.60, 0.35],
+    TMEM175: [0.55, 0.62, 0.45, 0.50, 0.55],
+    DRD2:    [0.30, 0.42, 0.20, 0.55, 0.80]
+  };
+  var LANES = ['Human genetics','snRNA-seq DE','Perturb phenocopy','Pathway','Tractability'];
+  var LANE_COLORS = ['rgba(192,57,43,0.85)','rgba(52,73,94,0.85)','rgba(39,174,96,0.85)','rgba(155,89,182,0.85)','rgba(243,156,18,0.9)'];
+
+  var geneEl  = document.getElementById('evGene');
+  var sliders = ['evW0','evW1','evW2','evW3','evW4'].map(function(id){ return document.getElementById(id); });
+  var valEls  = ['evW0v','evW1v','evW2v','evW3v','evW4v'].map(function(id){ return document.getElementById(id); });
+  var scoreEl = document.getElementById('evScore');
+  var fillEl  = document.getElementById('evScoreFill');
+  var tierEl  = document.getElementById('evTier');
+  var chart = new Chart(document.getElementById('evChart').getContext('2d'), {
+    type: 'bar',
+    data: {labels: LANES, datasets: [{label:'Weighted evidence', data:[0,0,0,0,0], backgroundColor: LANE_COLORS, borderWidth: 0}]},
+    options: {responsive: true, maintainAspectRatio: false,
+      plugins: {legend:{display:false}, tooltip:{callbacks:{label:function(c){ return c.raw.toFixed(3); }}}},
+      scales: {y: {min: 0, max: 1, title:{display:true, text:'Lane contribution'}}}}
+  });
+
+  function recompute() {
+    var gene = geneEl.value;
+    var ev = EVIDENCE[gene] || [0,0,0,0,0];
+    var weights = sliders.map(function(s){ return parseFloat(s.value) || 0; });
+    var wsum = weights.reduce(function(a,b){ return a+b; }, 0) || 1;
+    var contrib = ev.map(function(e, i){ return e * weights[i]; });
+    var composite = contrib.reduce(function(a,b){ return a+b; }, 0) / wsum;
+    sliders.forEach(function(s,i){ valEls[i].textContent = (parseFloat(s.value)||0).toFixed(2); });
+    chart.data.datasets[0].data = contrib;
+    chart.update('none');
+    scoreEl.textContent = composite.toFixed(2);
+    fillEl.style.width = (composite * 100).toFixed(1) + '%';
+    var tier;
+    if (composite >= 0.80)      tier = 'Tier 1 — credentialed, advance to validation';
+    else if (composite >= 0.65) tier = 'Tier 2 — strong, schedule confirmation experiments';
+    else if (composite >= 0.50) tier = 'Tier 3 — promising, fill the weakest lane';
+    else if (composite >= 0.35) tier = 'Tier 4 — weak; needs orthogonal evidence';
+    else                        tier = 'Tier 5 — insufficient evidence';
+    tierEl.textContent = tier;
+  }
+  geneEl.addEventListener('change', recompute);
+  sliders.forEach(function(s){ s.addEventListener('input', recompute); });
+  recompute();
+
+  } catch (e) {
+    console.warn('[demo:evidence-scorer] failed:', e);
+  }
+})();
+
+// Adaptive segmentation comparator
+(function() {
+  if (!document.getElementById('segInput')) return;
+  try {
+
+  var W = 140, H = 140;
+  var inCanvas  = document.getElementById('segInput');
+  var outCanvas = document.getElementById('segOut');
+  if (!inCanvas || !outCanvas) return;
+  var inCtx  = inCanvas.getContext('2d');
+  var outCtx = outCanvas.getContext('2d');
+  var noiseEl = document.getElementById('segNoise'), noiseV = document.getElementById('segNoiseV');
+  var bgEl    = document.getElementById('segBg'),    bgV    = document.getElementById('segBgV');
+  var diceEl  = document.getElementById('segDice'),  diceFill = document.getElementById('segDiceFill');
+  var noteEl  = document.getElementById('segNote');
+  var backend = 'otsu';
+
+  // Build a fixed ground-truth mask: 6 ellipsoidal "cells"
+  var GT_CIRCLES = [
+    {x: 30, y: 35, r: 11}, {x: 80, y: 28, r: 9}, {x: 110, y: 60, r: 12},
+    {x: 40, y: 90, r: 10}, {x: 75, y: 100, r: 14}, {x: 105, y: 110, r: 8}
+  ];
+  function makeGT() {
+    var m = new Uint8Array(W*H);
+    for (var y = 0; y < H; y++) for (var x = 0; x < W; x++) {
+      var inside = false;
+      for (var c = 0; c < GT_CIRCLES.length; c++) {
+        var dx = x - GT_CIRCLES[c].x, dy = y - GT_CIRCLES[c].y;
+        if (dx*dx + dy*dy <= GT_CIRCLES[c].r * GT_CIRCLES[c].r) { inside = true; break; }
+      }
+      m[y*W + x] = inside ? 1 : 0;
+    }
+    return m;
+  }
+  function makeImage(gt, noise, bgGrad) {
+    // float array 0..1
+    var img = new Float32Array(W*H);
+    // base intensity from GT + background gradient + noise
+    for (var y = 0; y < H; y++) for (var x = 0; x < W; x++) {
+      var base = gt[y*W + x] ? 0.85 : 0.18;
+      var bg   = bgGrad * (x / W);                // left → right gradient
+      var n    = (Math.random() - 0.5) * 2 * noise;
+      img[y*W + x] = Math.max(0, Math.min(1, base + bg * 0.5 + n));
+    }
+    return img;
+  }
+  function otsuThr(img) {
+    var bins = 64, hist = new Float32Array(bins);
+    for (var i = 0; i < img.length; i++) hist[Math.min(bins-1, Math.floor(img[i] * bins))]++;
+    var total = img.length, sum = 0;
+    for (var i = 0; i < bins; i++) sum += i * hist[i];
+    var sumB = 0, wB = 0, mx = -1, thr = 0;
+    for (var i = 0; i < bins; i++) {
+      wB += hist[i]; if (wB === 0) continue;
+      var wF = total - wB; if (wF === 0) break;
+      sumB += i * hist[i];
+      var mB = sumB / wB, mF = (sum - sumB) / wF;
+      var v = wB * wF * (mB - mF) * (mB - mF);
+      if (v > mx) { mx = v; thr = i; }
+    }
+    return thr / bins;
+  }
+  function sauvola(img, k, R, win) {
+    win = win || 11;
+    var mask = new Uint8Array(img.length), half = (win - 1) >> 1;
+    for (var y = 0; y < H; y++) for (var x = 0; x < W; x++) {
+      var s = 0, s2 = 0, n = 0;
+      for (var dy = -half; dy <= half; dy++) for (var dx = -half; dx <= half; dx++) {
+        var yy = y + dy, xx = x + dx; if (yy < 0 || yy >= H || xx < 0 || xx >= W) continue;
+        var v = img[yy*W + xx]; s += v; s2 += v*v; n++;
+      }
+      var mean = s / n, std = Math.sqrt(Math.max(0, s2/n - mean*mean));
+      var thr = mean * (1 + k * (std/R - 1));
+      mask[y*W + x] = img[y*W + x] > thr ? 1 : 0;
+    }
+    return mask;
+  }
+  function niblack(img, k, win) {
+    win = win || 11;
+    var mask = new Uint8Array(img.length), half = (win - 1) >> 1;
+    for (var y = 0; y < H; y++) for (var x = 0; x < W; x++) {
+      var s = 0, s2 = 0, n = 0;
+      for (var dy = -half; dy <= half; dy++) for (var dx = -half; dx <= half; dx++) {
+        var yy = y + dy, xx = x + dx; if (yy < 0 || yy >= H || xx < 0 || xx >= W) continue;
+        var v = img[yy*W + xx]; s += v; s2 += v*v; n++;
+      }
+      var mean = s / n, std = Math.sqrt(Math.max(0, s2/n - mean*mean));
+      var thr = mean + k * std;
+      mask[y*W + x] = img[y*W + x] > thr ? 1 : 0;
+    }
+    return mask;
+  }
+  function localOtsu(img, win) {
+    // simplified: compute local threshold = mean+small offset
+    win = win || 17;
+    var mask = new Uint8Array(img.length), half = (win - 1) >> 1;
+    for (var y = 0; y < H; y++) for (var x = 0; x < W; x++) {
+      var s = 0, n = 0, mx = 0, mn = 1;
+      for (var dy = -half; dy <= half; dy++) for (var dx = -half; dx <= half; dx++) {
+        var yy = y + dy, xx = x + dx; if (yy < 0 || yy >= H || xx < 0 || xx >= W) continue;
+        var v = img[yy*W + xx]; s += v; n++; if (v > mx) mx = v; if (v < mn) mn = v;
+      }
+      var thr = (mx + mn) * 0.5; // proxy
+      mask[y*W + x] = img[y*W + x] > thr ? 1 : 0;
+    }
+    return mask;
+  }
+  function segment(img) {
+    if (backend === 'otsu')    { var t = otsuThr(img); var m = new Uint8Array(img.length); for (var i = 0; i < img.length; i++) m[i] = img[i] > t ? 1 : 0; return m; }
+    if (backend === 'sauvola') return sauvola(img, 0.34, 0.5, 11);
+    if (backend === 'niblack') return niblack(img, -0.2, 11);
+    if (backend === 'local')   return localOtsu(img, 17);
+  }
+  function dice(a, b) {
+    var inter = 0, sa = 0, sb = 0;
+    for (var i = 0; i < a.length; i++) { if (a[i]) sa++; if (b[i]) sb++; if (a[i] && b[i]) inter++; }
+    if (sa + sb === 0) return 1;
+    return 2 * inter / (sa + sb);
+  }
+  function renderInput(img) {
+    var id = inCtx.createImageData(W, H);
+    for (var i = 0; i < img.length; i++) {
+      var v = Math.round(img[i] * 255);
+      id.data[i*4+0] = v; id.data[i*4+1] = v; id.data[i*4+2] = v; id.data[i*4+3] = 255;
+    }
+    inCtx.putImageData(id, 0, 0);
+  }
+  function renderOut(pred, gt) {
+    var id = outCtx.createImageData(W, H);
+    for (var i = 0; i < pred.length; i++) {
+      var p = pred[i], g = gt[i];
+      var rr=0, gg=0, bb=0;
+      if (p && g)        { rr=39;  gg=174; bb=96;  }   // true positive — green
+      else if (p && !g)  { rr=192; gg=57;  bb=43;  }   // false positive — magenta-ish red
+      else if (!p && g)  { rr=127; gg=140; bb=141; }   // false negative — gray
+      else               { rr=15;  gg=20;  bb=25;  }   // true negative — near-black
+      id.data[i*4+0]=rr; id.data[i*4+1]=gg; id.data[i*4+2]=bb; id.data[i*4+3]=255;
+    }
+    outCtx.putImageData(id, 0, 0);
+  }
+  function update() {
+    var noise  = parseFloat(noiseEl.value);
+    var bgGrad = parseFloat(bgEl.value);
+    noiseV.textContent = noise.toFixed(2);
+    bgV.textContent    = bgGrad.toFixed(2);
+    var gt   = makeGT();
+    var img  = makeImage(gt, noise, bgGrad);
+    var pred = segment(img);
+    renderInput(img);
+    renderOut(pred, gt);
+    var d = dice(pred, gt);
+    diceEl.textContent  = d.toFixed(2);
+    diceFill.style.width = (d * 100).toFixed(1) + '%';
+    var note;
+    if (d > 0.85) note = 'Excellent — backend handles current conditions cleanly';
+    else if (d > 0.70) note = 'Good — minor edge artifacts';
+    else if (d > 0.50) note = 'Marginal — switch backend or denoise';
+    else note = 'Failing — try Sauvola or Local-Otsu under this noise/background';
+    noteEl.textContent = note;
+  }
+  document.querySelectorAll('#segBackend .pill-btn').forEach(function(b) {
+    b.addEventListener('click', function() {
+      document.querySelectorAll('#segBackend .pill-btn').forEach(function(x){ x.classList.remove('active'); });
+      b.classList.add('active');
+      backend = b.dataset.bk;
+      update();
+    });
+  });
+  noiseEl.addEventListener('input', update);
+  bgEl.addEventListener('input', update);
+  update();
+
+  } catch (e) {
+    console.warn('[demo:segmentation-comparator] failed:', e);
+  }
+})();
+
 </script>
 
 <!-- GoatCounter tracking (arminbayati.org) -->

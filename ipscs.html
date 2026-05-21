@@ -2064,7 +2064,7 @@ pre, code {
 }
 .lineage-card {
   background: var(--card);
-  border: 1px solid var(--rule);
+  border: none;
   border-radius: 8px;
   padding: 22px 22px 18px;
   text-decoration: none;
@@ -2072,9 +2072,10 @@ pre, code {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
 }
 .lineage-card::before {
   content: "";
@@ -2086,9 +2087,15 @@ pre, code {
 }
 .lineage-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 32px rgba(0,0,0,0.08);
-  border-color: var(--ink);
+  box-shadow: 0 0 0 1px var(--accent), 0 12px 28px rgba(0,0,0,0.10);
 }
+html.dark .lineage-card {
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.10), 0 4px 12px rgba(0,0,0,0.25);
+}
+html.dark .lineage-card:hover {
+  box-shadow: 0 0 0 1px var(--accent), 0 12px 28px rgba(0,0,0,0.35);
+}
+/* LINEAGE-CARD BOX-SHADOW PATCH 2026-05-20 */
 .lineage-card .lineage-icon {
   width: 36px; height: 36px;
   color: var(--accent);
@@ -2637,6 +2644,174 @@ pre, code {
   z-index: 3;
 }
 
+
+
+
+
+
+/* DARK-MODE PROTECTION INJECTED 2026-05-20 v5 */
+
+/* ── KILL BROWSER-DEFAULT BLUE LINKS ──
+   Every inline link to another page inherits its parent text color
+   instead of rendering as browser-default blue. Underline is preserved
+   (browsers add it by default + the .section-content a rule keeps it).
+   Components that own their own color — tags, buttons, nav items,
+   footer links, tiles — keep their styling because their own selectors
+   are more specific. */
+a { color: inherit; }
+/* Inline-link hover affordance: subtle accent shift on the underline,
+   text color stays inherited. */
+.section-content a:not(.tag):not(.btn-primary):not(.btn-secondary):not(.proj-tile):not(.research-tile):not(.lineage-card):hover {
+  color: var(--accent) !important;
+}
+/* Nav, footer, tag, button, and tile anchors are styled via their own
+   higher-specificity rules elsewhere — those win automatically because
+   each has at least one class selector. No need to restate them here. */
+/* ── LIGHT-THEME CODE BLOCKS (light & dark mode) ──
+   Per user request: code blocks should have a light background so they
+   read like a printed source listing rather than a terminal screen.
+   Overrides the inline `.code-block { background: var(--ink); color: #e6e6e6 }`
+   that ships from the coding.html template. Specificity .code-block
+   matches the template selector, !important wins source-order tie. */
+.code-block {
+  background: #f6f5f0 !important;
+  color: #1a1f24 !important;
+  border: 1px solid #d4d0c8 !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6);
+}
+.code-block .comment { color: #6a737d !important; }
+.code-block .keyword { color: #c0392b !important; }
+.code-block .string  { color: #2c5282 !important; }
+.code-block .func    { color: #6f42c1 !important; }
+.code-block .num     { color: #047857 !important; }
+
+/* In dark mode, keep the code block readable but slightly darker than the
+   page so it reads as a card. Background stays "paper-ish" (warm beige),
+   text stays dark — same as light mode. This is the explicit choice. */
+html.dark .code-block {
+  background: #ece9df !important;
+  color: #1a1f24 !important;
+  border-color: rgba(255,255,255,0.10) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4);
+}
+html.dark .code-block .comment { color: #6a737d !important; }
+html.dark .code-block .keyword { color: #c0392b !important; }
+html.dark .code-block .string  { color: #2c5282 !important; }
+html.dark .code-block .func    { color: #6f42c1 !important; }
+html.dark .code-block .num     { color: #047857 !important; }
+
+html.dark .agent-trace {
+  background: #0f1419 !important;
+  color: #e6e6e6 !important;
+  border: 1px solid rgba(255,255,255,0.06) !important;
+}
+html.dark .agent-trace .ln-user  { color: #9cdcfe !important; }
+html.dark .agent-trace .ln-tool  { color: #ce9178 !important; }
+html.dark .agent-trace .ln-resp  { color: #b5cea8 !important; }
+html.dark .agent-trace .ln-final { color: #f1c40f !important; }
+html.dark .agent-trace .ln-dim   { color: #9ca3af !important; }
+
+html.dark .workflow-strip {
+  background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #0f1419 100%) !important;
+  color: #fff !important;
+}
+html.dark .workflow-inner h3,
+html.dark .workflow-step .step-title,
+html.dark .workflow-step .step-number { color: #fff !important; }
+html.dark .workflow-step .step-detail { color: rgba(255,255,255,0.72) !important; }
+html.dark .workflow-step .step-detail a { color: rgba(255,255,255,0.85) !important; }
+
+/* Demo segmentation canvases must stay black-backed even in dark mode
+   (otherwise the synthetic noise field reads on a near-white inverted bg). */
+html.dark #segInput,
+html.dark #segOut { background: #000 !important; }
+
+/* ── BODY-TEXT CONTRAST FIX (v2) ──
+   Many text classes use hardcoded `color: #444` (a dark gray) which becomes
+   nearly invisible against the dark `--paper` (#111318) in dark mode. Pin
+   them to a high-contrast off-white so they stay readable. */
+html.dark .section-content p,
+html.dark .section-content li,
+html.dark .section-content ul li,
+html.dark .section-content ol li,
+html.dark .inline-list,
+html.dark .inline-list li,
+html.dark .findings,
+html.dark .findings li,
+html.dark .timeline-desc,
+html.dark .subsection p,
+html.dark .subsection li,
+html.dark .section-content > div > p,
+html.dark .protocol-steps p,
+html.dark .protocol-steps li {
+  color: rgba(232,230,225,0.86) !important;
+}
+
+/* Bold / strong text inside body copy should pop a bit more in dark mode. */
+html.dark .section-content p strong,
+html.dark .section-content li strong,
+html.dark .inline-list li strong,
+html.dark .subsection p strong {
+  color: #f4f3ee !important;
+  font-weight: 500;
+}
+
+/* The red-dash bullet color stays accent — no change needed. */
+
+/* ── GITHUB EMBED WIDGETS (used on code-and-ai.html) ── */
+.gh-widget {
+  background: var(--card);
+  border-radius: 10px;
+  padding: 18px 22px 16px;
+  margin: 16px 0;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+.gh-widget-title {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.gh-widget img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+.gh-widget a { display: block; text-decoration: none !important; }
+.gh-widget-note {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--mid);
+  margin-top: 8px;
+  opacity: 0.7;
+}
+.gh-widget-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 16px 0;
+}
+.gh-widget-grid .gh-widget { margin: 0; }
+@media (max-width: 720px) {
+  .gh-widget-grid { grid-template-columns: 1fr; gap: 14px; }
+  .gh-widget { padding: 14px 16px 12px; }
+}
+html.dark .gh-widget {
+  background: var(--card);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.10), 0 4px 12px rgba(0,0,0,0.25);
+}
+/* Stats / top-langs SVGs are rendered with transparent bg — make text readable in dark mode */
+html.dark .gh-widget img { filter: invert(0.92) hue-rotate(180deg); }
+/* But NOT the contribution heatmap — its colored squares should stay as-is. */
+html.dark .gh-widget img[src*="ghchart.rshah.org"] { filter: none; }
+html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
+
+/* END DARK-MODE PROTECTION */
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
@@ -2655,7 +2830,6 @@ pre, code {
     <div class="nav-links">
       <div class="nav-row">
         <a href="index.html">Home</a>
-        <a href="parkinsons-dystonia.html">Parkinson&#39;s</a>
         <div class="nav-dropdown has-active">
           <button class="nav-drop-trigger">iPSC Models</button>
           <div class="nav-drop-panel">
@@ -2677,12 +2851,29 @@ pre, code {
           </div>
         </div>
         <div class="nav-dropdown">
+          <button class="nav-drop-trigger">Code &amp; AI</button>
+          <div class="nav-drop-panel">
+            <a href="code-and-ai.html">Code &amp; AI &mdash; Overview</a>
+            <a href="code-ai-agents.html">Agents &amp; MCP</a>
+            <a href="code-ai-models.html">ML &amp; Foundation Models</a>
+            <a href="code-ai-pipelines.html">Bio Pipelines &amp; Automation</a>
+            <div class="nav-drop-section">Live Demos</div>
+            <a href="code-ai-agents.html#demo-mcp">MCP tool-call simulator</a>
+            <a href="code-ai-models.html#demo-embed">CLIP embedding explorer</a>
+            <a href="code-ai-pipelines.html#demo-evidence">Target-evidence scorer</a>
+            <a href="code-ai-pipelines.html#demo-seg">Segmentation comparator</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
           <button class="nav-drop-trigger">Drug Discovery</button>
           <div class="nav-drop-panel">
             <a href="drug-discovery.html">Drug Discovery &amp; Translation</a>
             <a href="biologics.html">Biologics &amp; Immunotherapy</a>
+            <a href="parkinsons-dystonia.html">Parkinson&#39;s Disease Focus</a>
           </div>
         </div>
+      </div>
+      <div class="nav-row">
         <div class="nav-dropdown">
           <button class="nav-drop-trigger">Immunology</button>
           <div class="nav-drop-panel">
@@ -2691,8 +2882,6 @@ pre, code {
             <a href="flow-cytometry.html">Flow Cytometry</a>
           </div>
         </div>
-      </div>
-      <div class="nav-row">
         <div class="nav-dropdown">
           <button class="nav-drop-trigger">Cellular Assays</button>
           <div class="nav-drop-panel">
@@ -2701,22 +2890,19 @@ pre, code {
             <a href="crispr-screening.html">CRISPR Screening</a>
           </div>
         </div>
-        <div class="nav-dropdown">
-          <button class="nav-drop-trigger">In Vivo &amp; Primary</button>
-          <div class="nav-drop-panel">
-            <a href="in-vivo.html">In Vivo Studies</a>
-            <a href="primary-neurons.html">Primary Neuronal Culture</a>
-            <a href="primary-cardiomyocytes.html">Primary Cardiomyocyte Culture</a>
-          </div>
-        </div>
         <a href="biomarkers.html">Biomarkers</a>
         <div class="nav-dropdown">
           <button class="nav-drop-trigger">Technical Skills</button>
           <div class="nav-drop-panel">
+            <a href="technical-skills.html">Technical Skills &mdash; Overview</a>
             <a href="microscopy.html">Microscopy &amp; Imaging</a>
             <a href="proteomics.html">Proteomics &amp; Genomics</a>
             <a href="coding.html">Coding &amp; Automation</a>
             <a href="skills.html">Full Technical Skills</a>
+            <div class="nav-drop-section">In Vivo &amp; Primary</div>
+            <a href="in-vivo.html">In Vivo Studies</a>
+            <a href="primary-neurons.html">Primary Neuronal Culture</a>
+            <a href="primary-cardiomyocytes.html">Primary Cardiomyocyte Culture</a>
             <div class="nav-drop-section">Protocols</div>
             <a href="protocols.html">Neuron/Cardiac Differentiation</a>
             <a href="endoderm-protocols.html">Endoderm &amp; Ectodermal Protocols</a>
@@ -2814,37 +3000,37 @@ document.addEventListener('click', function(e){
 
       <div class="lineage-grid">
         <a class="lineage-card" href="ipsc-neurons.html">
-          <svg class="lineage-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M12 9V4M12 15v5M9 12H4M15 12h5M9.5 9.5L6 6M14.5 9.5L18 6M9.5 14.5L6 18M14.5 14.5L18 18"/></svg>
+          <svg class="lineage-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4.5c-1.6 0-3 1-3.4 2.4-1.6.3-2.6 1.6-2.6 3.1 0 .8.3 1.5.8 2-.5.5-.8 1.2-.8 2 0 1.6 1.3 2.9 2.9 2.9.3 1.5 1.7 2.6 3.3 2.6 1.3 0 2.4-.7 2.9-1.7"/><path d="M15 4.5c1.6 0 3 1 3.4 2.4 1.6.3 2.6 1.6 2.6 3.1 0 .8-.3 1.5-.8 2 .5.5.8 1.2.8 2 0 1.6-1.3 2.9-2.9 2.9-.3 1.5-1.7 2.6-3.3 2.6-1.3 0-2.4-.7-2.9-1.7"/><path d="M12 5v15"/><path d="M8.5 9c.7-.4 1.4-.4 2 0"/><path d="M8 14c.7-.4 1.4-.4 2 0"/><path d="M13.5 9c.7-.4 1.4-.4 2 0"/><path d="M14 14c.7-.4 1.4-.4 2 0"/></svg>
           <h3>iPSC &rarr; Neurons</h3>
           <div class="lineage-blurb">Midbrain dopaminergic, cortical glutamatergic and mDA neurons for Parkinson&rsquo;s, dystonia, and synucleinopathy modeling.</div>
           <div class="lineage-tag">Neurodegeneration &middot; PARK2 &middot; &alpha;-Syn PFFs</div>
         </a>
         <a class="lineage-card" href="ipsc-pancreatic.html">
-          <svg class="lineage-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12c2-5 6-7 10-7s6 3 6 6-2 6-6 7-8 1-10-1c-2-2-1-3 0-5z"/><circle cx="9" cy="11" r="1"/><circle cx="13" cy="13" r="1"/><circle cx="11" cy="9" r="0.8"/></svg>
+          <svg class="lineage-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14c0-2.5 2-4.5 4.5-4.5 1.4 0 2.6.6 3.4 1.6 1.6-2.5 4.4-4.1 7.6-4.1.2 0 .5 0 .7.1.3 0 .5.3.4.6-.1.5-.4.9-.8 1.2-2.4 1.5-4.2 4-5 6.7-.5 1.7-2 2.9-3.8 2.9H8.5C6 18.5 4 16.5 4 14z"/><circle cx="9" cy="14" r=".9" fill="currentColor"/><circle cx="12.5" cy="13.5" r=".7" fill="currentColor"/><circle cx="15.5" cy="11.5" r=".7" fill="currentColor"/></svg>
           <h3>iPSC &rarr; Pancreatic &beta;-Cells</h3>
           <div class="lineage-blurb">SC-islet differentiation for type 1/2 diabetes, MODY, and &beta;-cell replacement &mdash; insulin-secreting clusters with functional GSIS.</div>
           <div class="lineage-tag">Endocrine &middot; PDX1 &middot; NKX6.1 &middot; INS</div>
         </a>
         <a class="lineage-card" href="ipsc-cardiomyocytes.html">
-          <svg class="lineage-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.5-9-10c-1.5-4 1-7 4-7 2 0 3.5 1 5 3 1.5-2 3-3 5-3 3 0 5.5 3 4 7-2 5.5-9 10-9 10z"/></svg>
+          <svg class="lineage-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4c1 0 1.8.5 2.3 1.3 0 0 .5-.4 1.2-.4 1.6 0 2.9 1.3 2.9 2.9v1.6"/><path d="M13 4.5v3"/><path d="M16 8c2.2 0 4 1.8 4 4 0 4.5-3.5 7.5-7 9.5-3.5-2-7-5-7-9.5 0-2.8 2.2-5 5-5 1.2 0 2.3.4 3.2 1.2"/><path d="M9.5 11.5c1 1 2 1 3 0"/><path d="M15 11.5c-.5.5-1.2.5-1.7 0"/></svg>
           <h3>iPSC &rarr; Cardiomyocytes</h3>
           <div class="lineage-blurb">Wnt-modulated GiWi cardiac differentiation for arrhythmias, cardiomyopathies, and hERG/QT cardiotoxicity profiling.</div>
           <div class="lineage-tag">Cardiac &middot; cTnT &middot; MEA &middot; Ca&sup2;&#8314; transients</div>
         </a>
         <a class="lineage-card" href="ipsc-kidney.html">
-          <svg class="lineage-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 4c-3 0-5 3-5 7s2 9 6 9c2 0 3-2 3-4 0-3 1-4 3-4 2 0 3 1 3 3 0 3-2 5-4 5"/><circle cx="9" cy="11" r="1"/></svg>
+          <svg class="lineage-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4c-3 0-5 3-5 7.5S5 19.5 8.5 19.5c2 0 3-1.2 3-2.7 0-1.8 1-2.8 2.5-2.8s2.5 1 2.5 2.5c0 .9-.4 1.8-1 2.3M16 4c3 0 5 3 5 7.5"/><path d="M11.5 12.5c.5-.4 1.2-.4 1.7 0"/><path d="M16 19.5l1.5 2"/></svg>
           <h3>iPSC &rarr; Kidney Organoids</h3>
           <div class="lineage-blurb">Higgins / Takasato / Morizane intermediate-mesoderm protocols for nephron organoids: PKD, AKI, and nephrotoxicity screening.</div>
           <div class="lineage-tag">Renal &middot; SIX2 &middot; LTL &middot; ECAD &middot; PODXL</div>
         </a>
         <a class="lineage-card" href="ipsc-lung.html">
-          <svg class="lineage-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4v8M12 12c-2 4-6 4-8 4l-1 4M12 12c2 4 6 4 8 4l1 4M9 8c-1 0-3 1-3 3M15 8c1 0 3 1 3 3"/></svg>
+          <svg class="lineage-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v9"/><path d="M10 5h4"/><path d="M12 11c-1-1.5-2.5-2-3.5-2-2 0-3 1.5-3.5 3.5C4.5 14.5 4 17 4.5 19c.3 1.2 1.2 2 2.3 2 1.2 0 2.2-.8 2.7-1.8.8-1.5 1.7-3.5 2-5.2"/><path d="M12 11c1-1.5 2.5-2 3.5-2 2 0 3 1.5 3.5 3.5.5 2 1 4.5.5 6.5-.3 1.2-1.2 2-2.3 2-1.2 0-2.2-.8-2.7-1.8-.8-1.5-1.7-3.5-2-5.2"/></svg>
           <h3>iPSC &rarr; Lung Organoids</h3>
           <div class="lineage-blurb">Definitive endoderm &rarr; anterior foregut &rarr; lung progenitors and alveolospheres &mdash; SARS-CoV-2 entry, IPF, and inhaled-drug screening.</div>
           <div class="lineage-tag">Pulmonary &middot; NKX2.1 &middot; SFTPC &middot; ACE2</div>
         </a>
         <a class="lineage-card" href="ipsc-mesenchymal.html">
-          <svg class="lineage-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 6c2-2 5-2 7 0M12 6c2-2 5-2 7 0M5 18c2-2 5-2 7 0M12 18c2-2 5-2 7 0M3 12h18"/><circle cx="8" cy="12" r="1.5"/><circle cx="16" cy="12" r="1.5"/></svg>
+          <svg class="lineage-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 4.5c-1.2 0-2.2.9-2.2 2.1 0 .5.2 1 .5 1.4-.5.4-.8 1-.8 1.6 0 1.2 1 2.1 2.2 2.1.4 0 .8-.1 1.1-.3l6.4 6.4c-.2.3-.3.7-.3 1.1 0 1.2 1 2.1 2.2 2.1.6 0 1.2-.3 1.6-.8.4.3.9.5 1.4.5 1.2 0 2.2-.9 2.2-2.1 0-.5-.2-1-.5-1.4.5-.4.8-1 .8-1.6 0-1.2-1-2.1-2.2-2.1-.4 0-.8.1-1.1.3l-6.4-6.4c.2-.3.3-.7.3-1.1 0-1.2-1-2.1-2.2-2.1-.6 0-1.2.3-1.6.8-.4-.3-.9-.5-1.4-.5z"/><path d="M9 12.5l3 3" stroke-dasharray="1 1.5"/></svg>
           <h3>iPSC &rarr; Mesenchymal Cells</h3>
           <div class="lineage-blurb">SMAD-i &rarr; iMSC differentiation with tri-lineage potential &mdash; immunomodulation, fibrosis, and EMT models.</div>
           <div class="lineage-tag">Stromal &middot; CD73 &middot; CD90 &middot; CD105</div>
