@@ -2673,44 +2673,38 @@ document.addEventListener('click', function(e){
           <span class="proj-tile-desc">Published Python package for organelle morphology, motility, colocalization — shipped with an 11-tool MCP server.</span>
           <span class="proj-tile-tags"><span class="proj-tile-tag">Python</span><span class="proj-tile-tag">FastMCP</span><span class="proj-tile-tag">scikit-image</span><span class="proj-tile-tag">CI matrix</span></span>
         </a>
-        <a class="proj-tile" href="code-ai-agents.html#dossier-agent" data-tags="python langgraph">
-          <span class="proj-tile-eyebrow">03 · Agentic</span>
-          <span class="proj-tile-title">dossier-agent</span>
-          <span class="proj-tile-desc">LangGraph + Anthropic SDK target-dossier generator with calibrated uncertainty and full provenance.</span>
-          <span class="proj-tile-tags"><span class="proj-tile-tag">LangGraph</span><span class="proj-tile-tag">Anthropic SDK</span><span class="proj-tile-tag">Pydantic</span></span>
-        </a>
         <a class="proj-tile" href="code-ai-models.html#morph2expr" data-tags="python pytorch">
-          <span class="proj-tile-eyebrow">04 · PyTorch · CLIP</span>
+          <span class="proj-tile-eyebrow">03 · PyTorch · CLIP</span>
           <span class="proj-tile-title">morph2expr</span>
           <span class="proj-tile-desc">CLIP-style contrastive alignment of Cell Painting morphology with L1000 transcriptomic signatures.</span>
           <span class="proj-tile-tags"><span class="proj-tile-tag">PyTorch</span><span class="proj-tile-tag">Lightning</span><span class="proj-tile-tag">Hydra</span><span class="proj-tile-tag">RDKit</span></span>
         </a>
         <a class="proj-tile" href="code-ai-models.html#scgpt-neurodegen-probe" data-tags="python pytorch scanpy">
-          <span class="proj-tile-eyebrow">05 · Foundation models</span>
+          <span class="proj-tile-eyebrow">04 · Foundation models</span>
           <span class="proj-tile-title">scgpt-neurodegen-probe</span>
           <span class="proj-tile-desc">Zero-shot evaluation of scGPT &amp; Geneformer on neurodegeneration tasks with biologically defensible ground truth.</span>
           <span class="proj-tile-tags"><span class="proj-tile-tag">PyTorch</span><span class="proj-tile-tag">transformers</span><span class="proj-tile-tag">Scanpy</span></span>
         </a>
         <a class="proj-tile" href="code-ai-pipelines.html#pd-target-credentialing" data-tags="python scanpy">
-          <span class="proj-tile-eyebrow">06 · scRNA-seq · DE</span>
+          <span class="proj-tile-eyebrow">05 · scRNA-seq · DE</span>
           <span class="proj-tile-title">pd-target-credentialing</span>
           <span class="proj-tile-desc">End-to-end Parkinson's target credentialing from substantia-nigra single-nucleus data + convergent evidence scoring.</span>
           <span class="proj-tile-tags"><span class="proj-tile-tag">Scanpy</span><span class="proj-tile-tag">pyDESeq2</span><span class="proj-tile-tag">Harmony</span><span class="proj-tile-tag">GraphQL</span></span>
         </a>
         <a class="proj-tile" href="code-ai-pipelines.html#mitophagy-perturb-atlas" data-tags="python">
-          <span class="proj-tile-eyebrow">07 · Graph / ETL</span>
+          <span class="proj-tile-eyebrow">06 · Graph / ETL</span>
           <span class="proj-tile-title">mitophagy-perturb-atlas</span>
           <span class="proj-tile-desc">CRISPR phenocopy atlas over the PINK1/Parkin mitophagy pathway, integrating DepMap + Replogle Perturb-Seq + Reactome.</span>
           <span class="proj-tile-tags"><span class="proj-tile-tag">NetworkX</span><span class="proj-tile-tag">PyVis</span><span class="proj-tile-tag">scikit-learn</span></span>
         </a>
         <a class="proj-tile" href="code-ai-pipelines.html#ipsc-screen-automation" data-tags="python automation">
-          <span class="proj-tile-eyebrow">08 · Lab automation</span>
+          <span class="proj-tile-eyebrow">07 · Lab automation</span>
           <span class="proj-tile-title">ipsc-screen-automation</span>
           <span class="proj-tile-desc">Vendor-agnostic Python toolkit driving Tecan / Hamilton / Opentrons through PyLabRobot with edge-effect-aware plate design.</span>
           <span class="proj-tile-tags"><span class="proj-tile-tag">PyLabRobot</span><span class="proj-tile-tag">Opentrons</span><span class="proj-tile-tag">Hypothesis</span></span>
         </a>
         <a class="proj-tile" href="code-ai-pipelines.html#amtcomparison" data-tags="python">
-          <span class="proj-tile-eyebrow">09 · Statistics</span>
+          <span class="proj-tile-eyebrow">08 · Statistics</span>
           <span class="proj-tile-title">AMTcomparison</span>
           <span class="proj-tile-desc">Multi-neuron statistical comparator across AMT outputs — Mann-Whitney U, Kruskal-Wallis, Cohen's d, Bonferroni.</span>
           <span class="proj-tile-tags"><span class="proj-tile-tag">SciPy</span><span class="proj-tile-tag">pandas</span><span class="proj-tile-tag">matplotlib</span></span>
@@ -2793,7 +2787,7 @@ document.addEventListener('click', function(e){
       <div class="workflow-step"><div class="step-number">01</div><div class="step-title">Wet lab</div><div class="step-detail">ipsc-screen-automation produces randomized, QC-clean plates.</div></div>
       <div class="workflow-step"><div class="step-number">02</div><div class="step-title">Imaging</div><div class="step-detail">AutoMorphoTrack turns multichannel stacks into quantitative tables.</div></div>
       <div class="workflow-step"><div class="step-number">03</div><div class="step-title">Modeling</div><div class="step-detail">morph2expr + scgpt-probe turn features into honestly-evaluated models.</div></div>
-      <div class="workflow-step"><div class="step-number">04</div><div class="step-title">Targets</div><div class="step-detail">pd-target-credentialing + dossier-agent rank candidates with provenance.</div></div>
+      <div class="workflow-step"><div class="step-number">04</div><div class="step-title">Targets</div><div class="step-detail">pd-target-credentialing ranks candidates with full provenance and convergent-evidence scoring.</div></div>
       <div class="workflow-step"><div class="step-number">05</div><div class="step-title">Agentic</div><div class="step-detail">bioscope's MCP server makes everything callable from Claude Code.</div></div>
     </div>
   </div>

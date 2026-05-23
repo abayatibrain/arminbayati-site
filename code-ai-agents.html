@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agents &amp; MCP — Code &amp; AI — Armin Bayati, PhD</title>
-<meta name="description" content="Claude Code, Model Context Protocol, Claude Agent SDK, and LangGraph agentic systems built by Armin Bayati: bioscope, AutoMorphoTrack MCP, dossier-agent.">
+<meta name="description" content="Claude Code, Model Context Protocol, and Claude Agent SDK agentic systems built by Armin Bayati: bioscope and AutoMorphoTrack MCP.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -2581,12 +2581,11 @@ document.addEventListener('click', function(e){
   <div class="hero-eyebrow">Code &amp; AI · 01</div>
   <h1>Agents &amp; MCP</h1>
   <p class="hero-description">
-    Claude Code Model Context Protocol servers, sub-agents, hooks, Claude Agent SDK headless apps, and LangGraph orchestration. Three projects, each exercising a different slice of the agentic stack — plus a live in-browser MCP tool-call simulator below.
+    Claude Code Model Context Protocol servers, sub-agents, hooks, and Claude Agent SDK headless apps. Two projects, each exercising a different slice of the agentic stack — plus a live in-browser MCP tool-call simulator below.
   </p>
   <div class="hero-tags">
     <a class="tag" href="#bioscope">bioscope</a>
     <a class="tag" href="#automorphotrack">AutoMorphoTrack MCP</a>
-    <a class="tag" href="#dossier-agent">dossier-agent</a>
     <a class="tag" href="#demo-mcp">Live demo</a>
     <a class="tag" href="code-and-ai.html">← All Code &amp; AI</a>
   </div>
@@ -2652,26 +2651,9 @@ server.<span class="func">setRequestHandler</span>(ListToolsRequestSchema, <span
   </div>
 </div>
 
-<div class="section reveal" id="dossier-agent">
-  <div class="section-header">
-    <div class="section-index"><div class="section-number">03</div><div class="section-label">Agentic · LangGraph</div></div>
-    <div class="section-content">
-      <h2>dossier-agent — Ranked target dossiers with calibrated uncertainty</h2>
-      <p><strong>dossier-agent</strong> is an agentic LangGraph system, built on the Anthropic SDK, that orchestrates queries across PubMed, OpenTargets, Reactome, DepMap, and clinical-evidence sources to turn "pick a disease" into a ranked therapeutic target dossier. Every claim is auditable to the tool call that produced it; every score reports calibrated uncertainty; the complete reasoning trace is preserved end-to-end.</p>
-      <ul>
-        <li>LangGraph state machine over typed Pydantic schemas; tenacity-backed httpx with respx unit tests.</li>
-        <li>Calibrated uncertainty on every claim; full provenance trace.</li>
-        <li>Anthropic SDK execution layer; Typer CLI; pyarrow-backed results.</li>
-      </ul>
-      <p><strong>Tech.</strong> Python 3.11 · LangGraph · LangChain · Anthropic SDK · Pydantic v2 · Typer · httpx / respx · pyarrow · loguru.</p>
-      <p><em>Note.</em> This repository is under a pre-publication / patent-counsel hold; ADRs marked <code>patent-sensitive: true</code> are intentionally absent from the public docs render.</p>
-    </div>
-  </div>
-</div>
-
 <div class="section reveal" id="demo-mcp">
   <div class="section-header">
-    <div class="section-index"><div class="section-number">04</div><div class="section-label">Live demo</div></div>
+    <div class="section-index"><div class="section-number">03</div><div class="section-label">Live demo</div></div>
     <div class="section-content">
       <h2>MCP tool-call simulator (bioscope)</h2>
       <p>Pick a gene and run the simulator — it animates the same reasoning trace bioscope produces in Claude Code: each MCP tool is invoked, its (illustrative) response streams in, and the final brief is composed. No backend calls; the trace is generated client-side from baked-in fixtures so it's safe to run on any device.</p>
