@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-# Sync the latest bioscope-web source into arminbayati-site/bioscope/.
+# Sync the latest neurodigineration source into arminbayati-site/neurodigineration/.
 #
-# Run this whenever the bioscope-web repo updates and you want the
+# Run this whenever the neurodigineration repo updates and you want the
 # arminbayati.com/bioscope deployment to reflect the new version.
 #
 # Usage (from anywhere):
-#   bash scripts/sync-bioscope.sh
+#   bash scripts/sync-neurodigineration.sh
 #
 # Assumes:
-#   - bioscope-web is cloned at ~/Documents/GitHub/bioscope-web
+#   - neurodigineration is cloned at ~/Documents/GitHub/neurodigineration
 #   - arminbayati-site is this repo (the script lives in arminbayati-site/scripts/)
 #
 # Behavior:
@@ -21,14 +21,14 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SITE_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
-DEST="$SITE_DIR/bioscope"
+DEST="$SITE_DIR/neurodigineration"
 
-# Where to find bioscope-web. Override with BIOSCOPE_SRC env var if it lives elsewhere.
-SRC="${BIOSCOPE_SRC:-$HOME/Documents/GitHub/bioscope-web}"
+# Where to find neurodigineration. Override with ND_SRC env var if it lives elsewhere.
+SRC="${ND_SRC:-$HOME/Documents/GitHub/neurodigineration}"
 
 if [ ! -d "$SRC" ]; then
-  echo "ERROR: bioscope-web source not found at $SRC"
-  echo "       Set BIOSCOPE_SRC=/path/to/bioscope-web if it lives somewhere else."
+  echo "ERROR: neurodigineration source not found at $SRC"
+  echo "       Set ND_SRC=/path/to/neurodigineration if it lives somewhere else."
   exit 1
 fi
 
@@ -56,7 +56,7 @@ echo
 echo "Done. Review the diff in the site repo, then commit + push:"
 echo
 echo "  cd \"$SITE_DIR\""
-echo "  git status bioscope/"
-echo "  git add bioscope/"
-echo "  git commit -m \"sync(bioscope): pull latest bioscope-web\""
+echo "  git status neurodigineration/"
+echo "  git add neurodigineration/"
+echo "  git commit -m \"sync(neurodigineration): pull latest neurodigineration\""
 echo "  git push"

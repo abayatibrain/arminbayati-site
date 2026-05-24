@@ -1,7 +1,7 @@
-// bioscope-web — ask page (GUI 2: end-user neurodegen Q&A).
+// neurodegeneration.ai — ask page (GUI 2: end-user neurodegen Q&A).
 //
 // Reads model state from the SAME localStorage key as the training GUI
-// (`bioscope-train-v1`). That means every rating you make in /train.html
+// (`nd-train-v1`). That means every rating you make in /train.html
 // changes how this page answers questions — same systemPrompt, same
 // fewShotExamples, same avoidPatterns.
 //
@@ -25,9 +25,9 @@ import { BioscopeModel, DEFAULT_SYSTEM_PROMPT } from './model.js';
 import { loadApiKey, looksLikeAnthropicKey, saveApiKey, streamClaude, ANTHROPIC_MODELS } from './anthropic.js';
 
 const TRAINED_MODEL_PATH = './assets/trained-model.json';
-const ASK_HISTORY_KEY = 'bioscope-ask-history-v1';
+const ASK_HISTORY_KEY = 'nd-ask-history-v1';
 
-const NEURODEGEN_SYSTEM_PROMPT = `You are bioscope, a research assistant focused on the molecular biology of neurodegenerative disease.
+const NEURODEGEN_SYSTEM_PROMPT = `You are a neurodegeneration research-brief generator. a research assistant focused on the molecular biology of neurodegenerative disease.
 
 Users ask you questions about specific proteins or genes — most often: "How does PROTEIN_X relate to neurodegeneration?" or follow-ups about mechanism, genetics, clinical relevance, or therapeutic targeting in conditions like Parkinson, Alzheimer, ALS, FTD, Huntington, prion disorders, and lysosomal storage diseases.
 
@@ -342,7 +342,7 @@ function renderConversation() {
     if (turn.modelVersion) meta.appendChild(el('span', { class: 'tag' }, `trained · ${turn.modelVersion}`));
 
     const turnEl = el('div', { class: `turn ${turn.role} ${turn.streaming ? 'streaming' : ''}` },
-      el('div', { class: 'who' }, turn.role === 'user' ? 'You' : 'bioscope'),
+      el('div', { class: 'who' }, turn.role === 'user' ? 'You' : 'neurodegeneration.ai'),
       bubble,
       meta,
     );
@@ -585,13 +585,13 @@ async function boot() {
   $('#export-conv').addEventListener('click', () => {
     if (state.conversation.length === 0) { toast('Nothing to export yet.', 'warn'); return; }
     const md = state.conversation.map((t) => {
-      const h = t.role === 'user' ? '## You\n\n' : '## bioscope\n\n';
+      const h = t.role === 'user' ? '## You\n\n' : '## neurodegeneration.ai\n\n';
       return h + t.content;
     }).join('\n\n---\n\n');
     const blob = new Blob([md], { type: 'text/markdown' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = url; a.download = 'bioscope-conversation.md'; a.click();
+    a.href = url; a.download = 'neurodegeneration.ai-conversation.md'; a.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   });
 
