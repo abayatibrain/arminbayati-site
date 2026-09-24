@@ -2836,9 +2836,9 @@ document.addEventListener('click', function(e){
     <div class="hero-photo">
       <img src="images/headshot.jpg" alt="Armin Bayati, PhD" loading="eager">
     </div>
-    <h1>Drug Discovery, Human Cell Models &amp; Machine Learning for Biology</h1>
+    <h1>Drug Discovery, Target Validation &amp; Machine Learning for Biology</h1>
     <p class="hero-description">
-      Senior Scientist III in Neuroimmunology at <strong>Merck</strong> and AI/ML training fellow at <strong>Aligned Labs</strong>. I build human iPSC systems, from <a class="hero-link" href="ipsc-neurons.html">neurons</a>, microglia, and astrocyte tricultures to <a class="hero-link" href="ipsc-pancreatic.html">pancreatic &beta;-cells</a>, <a class="hero-link" href="ipsc-cardiomyocytes.html">cardiomyocytes</a>, <a class="hero-link" href="ipsc-kidney.html">kidney organoids</a>, and <a class="hero-link" href="ipsc-lung.html">lung organoids</a>, and pair them with bulk and single-cell <a class="hero-link" href="ngs.html">NGS</a>, proteomics, high-content imaging, and <a class="hero-link" href="ai-ml.html">machine learning</a> to pin down mechanism and move compounds through preclinical discovery.
+      Senior Scientist III in Neuroimmunology at <strong>Merck</strong> and AI/ML training fellow at <strong>Aligned Labs</strong>. I build human iPSC <a class="hero-link" href="ipsc-neurons.html">neuron</a>, microglia, and astrocyte tricultures, take compounds through potency, target engagement, and <a class="hero-link" href="ngs.html">multi-omics</a> readouts, and use <a class="hero-link" href="ai-ml.html">machine learning</a> to tie the data back to mechanism. Behind that sit 10+ years of <a class="hero-link" href="drug-discovery.html">drug discovery</a>, <a class="hero-link" href="crispr-screening.html">CRISPR functional genomics</a>, and imaging across neurodegeneration, neuroinflammation, and infectious disease, plus iPSC work in <a class="hero-link" href="ipsc-cardiomyocytes.html">cardiomyocytes</a> and <a class="hero-link" href="ipsc-pancreatic.html">pancreatic &beta;-cells</a>.
     </p>
     <div class="hero-search" id="heroSearch">
       <div class="hero-search-row">
@@ -3020,7 +3020,7 @@ document.addEventListener('click', function(e){
         <div class="timeline-item">
           <div class="timeline-year">2024 – 2026</div>
           <div class="timeline-title">Harvard Medical School &amp; Mass General Brigham · Research Fellow, Department of Neurology</div>
-          <div class="timeline-desc">Led a small-molecule Parkin agonist program from target validation to in vivo proof of concept, integrating single-cell transcriptomics and LC-MS/MS pharmacokinetics. Built and published AutoMorphoTrack, an open-source Python framework for organelle morphology and motility, validated against expert annotation by Dice, IoU, and F1. Ran iPSC-derived neuronal, glial, cardiomyocyte, and renal platforms for disease modeling, designed high-content imaging assays for cytotoxicity, mitophagy, and aggregation, and coordinated biopharma collaborations (Thermo Fisher, Nysnobio) and CRO deliverables (abmgood, Curia/Lake Pharma, Novogene). Mentored junior scientists.</div>
+          <div class="timeline-desc">Led a small-molecule Parkin agonist program from target validation to in vivo proof of concept, integrating single-cell transcriptomics and LC-MS/MS pharmacokinetics. Built and published AutoMorphoTrack, an open-source Python framework for organelle morphology and motility, validated against expert annotation by Dice, IoU, and F1. Ran iPSC-derived neuronal, glial, and cardiomyocyte platforms for disease modeling, designed high-content imaging assays for cytotoxicity, mitophagy, and aggregation, and coordinated biopharma collaborations (Thermo Fisher, Nysnobio) and CRO deliverables (abmgood, Curia/Lake Pharma, Novogene). Mentored junior scientists.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-year">2023 – 2024</div>
@@ -3727,12 +3727,11 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   var heroActiveIdx = -1;
 
   var quickLinks = [
-    {label:'iPSC Models — Hub', href:'ipscs.html', desc:'Five iPSC lineages — neurons, pancreatic β-cells, cardiomyocytes, kidney, lung'},
+    {label:'AI/ML Evaluation & Training', href:'ai-ml.html', desc:'Aligned Labs model evaluation, grading rubrics, and applied ML for drug discovery'},
+    {label:'iPSC Models — Hub', href:'ipscs.html', desc:'Human iPSC models: neurons, glia, cardiomyocytes, pancreatic β-cells'},
     {label:'iPSC → Neurons', href:'ipsc-neurons.html', desc:'Midbrain dopaminergic differentiation, PARK2 KO, α-synuclein PFF modeling'},
     {label:'iPSC → Pancreatic β-Cells', href:'ipsc-pancreatic.html', desc:'Six-stage SC-β / SC-islet differentiation; GSIS for diabetes modeling'},
     {label:'iPSC → Cardiomyocytes', href:'ipsc-cardiomyocytes.html', desc:'Wnt-modulated GiWi cardiac differentiation, MEA, contractility'},
-    {label:'iPSC → Kidney Organoids', href:'ipsc-kidney.html', desc:'Intermediate-mesoderm nephron organoids — PKD, AKI, nephrotoxicity'},
-    {label:'iPSC → Lung Organoids', href:'ipsc-lung.html', desc:'Alveolospheres & airway ALI — SARS-CoV-2, IPF, surfactant biology'},
     {label:'iPSC → Mesenchymal Cells', href:'ipsc-mesenchymal.html', desc:'iMSCs — tri-lineage potential, immunomodulation, fibrosis & EMT'},
     {label:'Genomics & NGS', href:'ngs.html', desc:'Bulk RNA-seq, scRNA-seq, GSEA, DecoupleR transcription-factor inference'},
     {label:'Differentiation Protocols', href:'protocols.html', desc:'Step-by-step neuron, cardiac, endoderm, and pancreatic protocols'},
