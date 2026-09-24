@@ -13,6 +13,17 @@
 // (and surfaces in the metrics dashboard) so the SME sees which dimensions
 // they've effectively prioritised.
 //
+// A fifth, separate store (network knowledge) holds the SME's verdicts
+// on gene-gene edges (network page + train page connection mode). It is
+// aggregated per gene pair into a consensus (see edgeConsensus) and
+// compiled into prompts as its own section, scoped to the genes in play.
+// Before Round 7 those verdicts were pushed into avoidPatterns and
+// fewShotExamples, where a few edge rejections would evict every brief
+// avoid-pattern (cap 8) and one-line edge notes posed as few-shot briefs.
+//
+// compilePrompt() is the single place a request's system prompt and
+// few-shot turns are assembled; the train, ask and network pages all use it.
+//
 // Versioning: the model bumps a semver-ish minor whenever the learning loop
 // fires. Every bump is logged in versionHistory with the change reason and
 // the diff. This is the artifact the SME exports and (eventually) hands to
@@ -26,6 +37,9 @@ const STORAGE_KEY = 'nd-train-v1';
 const MAX_FEW_SHOT = 5;
 const MAX_AVOID = 8;
 const LEARNING_LOOP_EVERY = 3; // fire after every N new ratings
+const SCHEMA_VERSION = 2;
+const MAX_NETWORK_FACTS = 24; // per compiled prompt, confirmed + rejected combined
+const DEFAULT_ANTHROPIC_MODEL = 'claude-opus-5';
 
 const DEFAULT_SYSTEM_PROMPT = `You are neurodigineration, a research-grade cell-biology brief generator.
 
@@ -1168,13 +1182,40 @@ const DEFAULT_GENE_PANEL = [
     expectTokens: ['CHIT1', 'Q13231', 'microglia'] },
   { symbol: 'YWHAE', aliases: ['14-3-3e'], notes: '14-3-3-epsilon adaptor; sequesters phospho-LRRK2 and modulates tau; CSF 14-3-3 supports CJD diagnosis.',
     expectTokens: ['YWHAE', 'P62258', '14-3-3'] },
+  // ===== Round 7: orphan rescue + thin-group expansion (graph + panel sync) =====
+  { symbol: 'PRND', aliases: ['Doppel', 'DPL'], notes: 'Prion-protein paralog Doppel; ectopic brain expression in Prnp-null lines causes ataxia; PrP antagonises its toxicity.',
+    expectTokens: ['PRND', 'Q9UKY0', 'prion'] },
+  { symbol: 'SPRN', aliases: ['Shadoo', 'SHO'], notes: 'Shadoo; PrP-like GPI-anchored CNS protein; depleted early during prion replication.',
+    expectTokens: ['SPRN', 'Q5BIV9', 'prion'] },
+  { symbol: 'GRM5', aliases: ['mGluR5', 'GPRC1E'], notes: 'Metabotropic glutamate receptor 5; couples Abeta-oligomer binding on PrPc to Fyn; prion/AD synaptotoxicity axis.',
+    expectTokens: ['GRM5', 'P41594', 'prion'] },
+  { symbol: 'CP', aliases: ['ceruloplasmin'], notes: 'Ceruloplasmin ferroxidase; aceruloplasminemia is an adult-onset NBIA (iron) with diabetes and retinal degeneration.',
+    expectTokens: ['CP', 'P00450', 'iron'] },
+  { symbol: 'COASY', aliases: ['NBIA6', 'CoPAN'], notes: 'CoA synthase; CoPAN, an NBIA iron disorder at the end of the CoA pathway PANK2 starts.',
+    expectTokens: ['COASY', 'Q13057', 'coenzyme A'] },
+  { symbol: 'FA2H', aliases: ['SPG35', 'FAHN'], notes: 'Fatty-acid 2-hydroxylase; FAHN / SPG35; NBIA iron disorder with spastic paraplegia; myelin galactolipids.',
+    expectTokens: ['FA2H', 'Q7L5A8', 'myelin'] },
+  { symbol: 'ZFYVE26', aliases: ['spastizin', 'SPG15'], notes: 'Spastizin; SPG15 hereditary spastic paraplegia; autophagic lysosome reformation with spatacsin and AP-5.',
+    expectTokens: ['ZFYVE26', 'Q68DK2', 'spastic'] },
+  { symbol: 'AP5Z1', aliases: ['SPG48'], notes: 'AP-5 zeta subunit; SPG48 hereditary spastic paraplegia; scaffolded by spatacsin/spastizin.',
+    expectTokens: ['AP5Z1', 'O43299', 'spastic'] },
+  { symbol: 'PNPLA6', aliases: ['NTE', 'SPG39'], notes: 'Neuropathy target esterase; SPG39 spastic paraplegia, Boucher-Neuhauser and Oliver-McFarlane syndromes.',
+    expectTokens: ['PNPLA6', 'Q8IY17', 'spastic'] },
+  { symbol: 'EGR2', aliases: ['KROX20', 'CMT1D'], notes: 'EGR2/Krox20 Schwann-cell myelination transcription factor; CMT1D Charcot-Marie-Tooth; drives MPZ and PMP22.',
+    expectTokens: ['EGR2', 'P11161', 'myelin'] },
+  { symbol: 'GDAP1', aliases: ['CMT4A'], notes: 'Ganglioside-induced differentiation-associated protein 1; mitochondrial fission; CMT4A / CMT2K Charcot-Marie-Tooth.',
+    expectTokens: ['GDAP1', 'Q8TB36', 'mitochondria'] },
+  { symbol: 'CCS', aliases: ['copper chaperone for SOD1'], notes: 'Copper chaperone that matures SOD1; relevant to SOD1 ALS (amyotrophic lateral sclerosis) misfolding.',
+    expectTokens: ['CCS', 'O14618', 'SOD1'] },
+  { symbol: 'GFAP', aliases: ['ALXDRD'], notes: 'Glial fibrillary acidic protein; Alexander disease; plasma GFAP is an astrocyte-reactivity biomarker in Alzheimer disease.',
+    expectTokens: ['GFAP', 'P14136', 'astrocyte'] },
 ];
 
 /** Default model state — what a fresh install sees. */
 export function defaultModelState() {
   const now = new Date().toISOString();
   return {
-    schemaVersion: 1,
+    schemaVersion: SCHEMA_VERSION,
     version: 'v0.1',
     createdAt: now,
     updatedAt: now,
@@ -1201,7 +1242,7 @@ export function defaultModelState() {
       learningLoopEvery: LEARNING_LOOP_EVERY,
       maxFewShot: MAX_FEW_SHOT,
       maxAvoid: MAX_AVOID,
-      anthropicModel: 'claude-sonnet-4-6',
+      anthropicModel: DEFAULT_ANTHROPIC_MODEL,
       anthropicMaxTokens: 2048,
     },
   };
@@ -1253,6 +1294,68 @@ function distilAvoidPattern(brief, comment, ratings) {
   };
 }
 
+/** Order-insensitive key for a gene pair. Verdicts are pooled per pair,
+ *  not per (direction, kind), so re-labelled edges keep their history. */
+export function pairKey(a, b) {
+  return [String(a).toUpperCase(), String(b).toUpperCase()].sort().join('~');
+}
+
+/** True for few-shot entries that were really edge notes (pre-Round-7). */
+function isLegacyEdgeExample(ex) {
+  return typeof ex?.brief === 'string' && /^\S+ ↔ \S+ \([a-z-]+\):/.test(ex.brief);
+}
+
+/**
+ * Upgrade a stored or imported state object to the current schema. Pure
+ * apart from the console note; used by both _load() and import().
+ */
+function migrateState(parsed) {
+  const fresh = defaultModelState();
+  const merged = { ...fresh, ...parsed };
+  merged.settings = { ...fresh.settings, ...(parsed.settings ?? {}) };
+  merged.rubricWeights = { ...DEFAULT_RUBRIC_WEIGHTS, ...(parsed.rubricWeights ?? {}) };
+  for (const k of ['versionHistory', 'fewShotExamples', 'avoidPatterns', 'ratingsLog',
+    'preferences', 'goldStandards', 'edgeRatings', 'acceptedEdges']) {
+    if (!Array.isArray(merged[k])) merged[k] = [];
+  }
+  if (!Array.isArray(merged.panel) || merged.panel.length === 0) {
+    merged.panel = fresh.panel;
+  } else {
+    // Union the saved panel with the current defaults so genes added in
+    // later rounds exist in the pickers. SME edits to existing entries win.
+    const savedSyms = new Set(merged.panel.map((g) => g.symbol));
+    let added = 0;
+    for (const g of fresh.panel) {
+      if (!savedSyms.has(g.symbol)) { merged.panel.push({ ...g }); added++; }
+    }
+    if (added > 0) console.log(`Panel migration: added ${added} default genes missing from saved panel.`);
+  }
+  // The dated Haiku id was retired from the picker; keep users on the same model.
+  if (merged.settings.anthropicModel === 'claude-haiku-4-5-20251001') {
+    merged.settings.anthropicModel = 'claude-haiku-4-5';
+  }
+  if ((merged.schemaVersion ?? 1) < 2) {
+    // Round 7: network verdicts move out of the brief pools. They are fully
+    // recoverable from edgeRatings, so nothing the SME taught is lost.
+    const avoidBefore = merged.avoidPatterns.length;
+    const exBefore = merged.fewShotExamples.length;
+    merged.avoidPatterns = merged.avoidPatterns.filter((a) => a.sourceDimension !== 'network-edge-validity');
+    merged.fewShotExamples = merged.fewShotExamples.filter((ex) => !isLegacyEdgeExample(ex));
+    const moved = (avoidBefore - merged.avoidPatterns.length) + (exBefore - merged.fewShotExamples.length);
+    if (moved > 0) {
+      merged.versionHistory.push({
+        version: merged.version,
+        at: new Date().toISOString(),
+        change: 'schema-migration',
+        reason: `moved ${moved} network verdict(s) out of the brief example/avoid pools into network knowledge`,
+        delta: { schemaFrom: merged.schemaVersion ?? 1, schemaTo: 2 },
+      });
+    }
+    merged.schemaVersion = 2;
+  }
+  return merged;
+}
+
 /**
  * BioscopeModel — wraps the model state with persistence, mutation methods,
  * and the learning loop.
@@ -1279,39 +1382,7 @@ export class BioscopeModel extends Emitter {
         }
       }
       if (!raw) return defaultModelState();
-      const parsed = JSON.parse(raw);
-      // Light migration / shape check
-      const merged = { ...defaultModelState(), ...parsed };
-      merged.settings = { ...defaultModelState().settings, ...(parsed.settings ?? {}) };
-      merged.rubricWeights = { ...DEFAULT_RUBRIC_WEIGHTS, ...(parsed.rubricWeights ?? {}) };
-      if (!Array.isArray(merged.panel) || merged.panel.length === 0) {
-        merged.panel = defaultModelState().panel;
-      } else {
-        // Round-5 panel migration: union saved panel with current defaults.
-        // Older saved states (created when DEFAULT_GENE_PANEL had 99 entries)
-        // are missing the ~120 genes added since. Without this merge, the
-        // gene pickers / connection pickers would silently fail when the
-        // user picks or randomly lands on a newer gene.
-        // - Preserve the SME's custom edits to existing entries.
-        // - Append any default-panel symbols not in the saved panel.
-        const savedSyms = new Set(merged.panel.map((g) => g.symbol));
-        const fresh = defaultModelState().panel;
-        let added = 0;
-        for (const g of fresh) {
-          if (!savedSyms.has(g.symbol)) {
-            merged.panel.push({ ...g });
-            added++;
-          }
-        }
-        if (added > 0) {
-          console.log(`Round-5 panel migration: added ${added} default genes missing from saved panel.`);
-        }
-      }
-      // Migration for v0.1 → v0.2: edgeRatings array added in this round
-      if (!Array.isArray(merged.edgeRatings)) merged.edgeRatings = [];
-      // Migration for v0.x → Round 5: SME-accepted novel edges array
-      if (!Array.isArray(merged.acceptedEdges)) merged.acceptedEdges = [];
-      return merged;
+      return migrateState(JSON.parse(raw));
     } catch (e) {
       console.warn('BioscopeModel: failed to parse stored state, starting fresh', e);
       return defaultModelState();
@@ -1343,6 +1414,128 @@ export class BioscopeModel extends Emitter {
   get edgeRatings() { return this.state.edgeRatings ?? []; }
   get acceptedEdges() { return this.state.acceptedEdges ?? []; }
   get settings() { return this.state.settings; }
+
+  // ---- Network knowledge (derived from edgeRatings + acceptedEdges) ----
+
+  /** All verdicts for a gene pair, oldest first. */
+  edgeRatingsFor(a, b) {
+    const k = pairKey(a, b);
+    return this.edgeRatings.filter((r) => pairKey(r.from, r.to) === k);
+  }
+
+  /**
+   * Consensus over every verdict on a gene pair.
+   *   status: 'unrated' | 'confirmed' | 'rejected' | 'contested' | 'uncertain'
+   *   pReal:  posterior mean of P(real) under a Beta(1,1) prior, with
+   *           'uncertain' votes counting as half a vote each way.
+   * A pair with only 'yes' votes is confirmed and only 'no' is rejected;
+   * any mix is contested and shown as such rather than silently averaged.
+   */
+  edgeConsensus(a, b) {
+    const rs = this.edgeRatingsFor(a, b);
+    const yes = rs.filter((r) => r.validity === 'yes').length;
+    const no = rs.filter((r) => r.validity === 'no').length;
+    const uncertain = rs.length - yes - no;
+    const pReal = (1 + yes + 0.5 * uncertain) / (2 + rs.length);
+    let status = 'unrated';
+    if (rs.length) {
+      if (yes && !no) status = 'confirmed';
+      else if (no && !yes) status = 'rejected';
+      else if (yes && no) status = 'contested';
+      else status = 'uncertain';
+    }
+    const m = (key) => (rs.length ? mean(rs.map((r) => r[key] || 0)) : null);
+    return {
+      n: rs.length, yes, no, uncertain, pReal, status,
+      meanExplanation: m('explanationQuality'),
+      meanCitation: m('citationQuality'),
+      last: rs.at(-1) ?? null,
+      accepted: this.acceptedEdges.some((e) => pairKey(e.from, e.to) === pairKey(a, b)),
+    };
+  }
+
+  /** Map pairKey → consensus for every rated or accepted pair. */
+  edgeConsensusMap() {
+    const pairs = new Map();
+    for (const r of this.edgeRatings) pairs.set(pairKey(r.from, r.to), [r.from, r.to]);
+    for (const e of this.acceptedEdges) pairs.set(pairKey(e.from, e.to), [e.from, e.to]);
+    const out = new Map();
+    for (const [k, [a, b]] of pairs) out.set(k, { from: a, to: b, ...this.edgeConsensus(a, b) });
+    return out;
+  }
+
+  /**
+   * Network facts relevant to a request. With `genes`, only pairs touching
+   * one of them are returned (most recent first); without, the most recent
+   * across the whole graph. Contested and uncertain pairs are left out of
+   * prompts on purpose: telling the model "the SME is unsure" adds noise.
+   */
+  networkKnowledge({ genes = null, limit = MAX_NETWORK_FACTS } = {}) {
+    const want = genes && genes.length ? new Set(genes.map((g) => String(g).toUpperCase())) : null;
+    const confirmed = [];
+    const rejected = [];
+    const all = [...this.edgeConsensusMap().values()]
+      .filter((c) => !want || want.has(c.from.toUpperCase()) || want.has(c.to.toUpperCase()))
+      .sort((x, y) => String(y.last?.ratedAt ?? '').localeCompare(String(x.last?.ratedAt ?? '')));
+    for (const c of all) {
+      const accepted = c.accepted && c.status !== 'rejected';
+      if (c.status === 'confirmed' || accepted) {
+        const src = c.last ?? this.acceptedEdges.find((e) => pairKey(e.from, e.to) === pairKey(c.from, c.to));
+        confirmed.push({ from: c.from, to: c.to, kind: src?.kind, note: src?.proposedNote ?? src?.note ?? '', feedback: c.last?.feedback || '' });
+      } else if (c.status === 'rejected') {
+        rejected.push({ from: c.from, to: c.to, kind: c.last?.kind, feedback: c.last?.feedback || '' });
+      }
+    }
+    // Split the budget evenly, letting either side use what the other leaves.
+    const nRej = Math.min(rejected.length, Math.max(Math.floor(limit / 2), limit - confirmed.length));
+    const nConf = Math.min(confirmed.length, limit - nRej);
+    return { confirmed: confirmed.slice(0, nConf), rejected: rejected.slice(0, nRej) };
+  }
+
+  /**
+   * Assemble the system prompt and few-shot turns for one request.
+   *
+   * @param {object} [opts]
+   * @param {string} [opts.base]      base system prompt (default: the trained one)
+   * @param {string[]} [opts.genes]   genes in play; scopes network knowledge
+   * @param {boolean} [opts.examples] include brief few-shot turns (default true)
+   * @param {number} [opts.maxExamples] default 3
+   * @param {(gene:string)=>string} [opts.exampleUser] user turn for a few-shot example
+   * @returns {{ system: string, fewShot: Array<{role:string, content:string}> }}
+   */
+  compilePrompt({ base, genes = null, examples = true, maxExamples = 3,
+    exampleUser = (g) => `Produce a neurodigineration brief for the gene ${g}.` } = {}) {
+    let system = base ?? this.state.systemPrompt;
+    const avoid = this.state.avoidPatterns;
+    if (avoid.length) {
+      system += '\n\n## Avoid these failure modes flagged by the SME on past outputs:\n' +
+        avoid.map((a) => `- ${a.pattern}`).join('\n');
+    }
+    const nk = this.networkKnowledge({ genes });
+    if (nk.confirmed.length || nk.rejected.length) {
+      system += '\n\n## SME-validated network knowledge' +
+        (genes && genes.length ? ` (pairs involving ${genes.join(', ')})` : '') +
+        '\nTreat these as expert judgements that override your priors. Do not restate them as your own citations.';
+      if (nk.confirmed.length) {
+        system += '\nConfirmed connections:\n' + nk.confirmed.map((c) =>
+          `- ${c.from} – ${c.to}${c.kind ? ` (${c.kind})` : ''}${c.note ? `: ${c.note.slice(0, 220)}` : ''}` +
+          (c.feedback ? ` [SME: ${c.feedback.slice(0, 160)}]` : '')).join('\n');
+      }
+      if (nk.rejected.length) {
+        system += '\nRejected, do not assert these:\n' + nk.rejected.map((c) =>
+          `- ${c.from} – ${c.to}${c.kind ? ` as ${c.kind}` : ''}` +
+          (c.feedback ? ` [SME: ${c.feedback.slice(0, 160)}]` : '')).join('\n');
+      }
+    }
+    const fewShot = [];
+    if (examples) {
+      for (const ex of this.state.fewShotExamples.filter((x) => !isLegacyEdgeExample(x)).slice(-maxExamples)) {
+        fewShot.push({ role: 'user', content: exampleUser(ex.gene) });
+        fewShot.push({ role: 'assistant', content: ex.brief });
+      }
+    }
+    return { system, fewShot };
+  }
 
   /** Weighted overall score for a rating, 0..5. */
   overall(rating) {
@@ -1465,7 +1658,7 @@ export class BioscopeModel extends Emitter {
    * @param {string} arg.edgeId          stable key, e.g. "PINK1→PRKN"
    * @param {string} arg.from
    * @param {string} arg.to
-   * @param {string} arg.kind            edge category (kinase-substrate, etc.)
+   * @param {string} arg.kind            edge category (kinase-substrate, enzyme-substrate, ...)
    * @param {string} arg.proposedNote    neurodigineration's explanation as shown
    * @param {string[]} arg.proposedPmids citations as shown
    * @param {'yes'|'no'|'uncertain'} arg.validity is the connection real?
@@ -1490,55 +1683,39 @@ export class BioscopeModel extends Emitter {
     };
     this.state.edgeRatings.push(entry);
 
-    // Network-rating learning loop (separate from brief loop):
-    // - validity=no → add concrete avoid pattern citing the wrong link
-    // - validity=yes AND explanationQuality>=4 → save as positive example
+    // Network-rating learning loop (separate from the brief loop). The
+    // verdict itself is the training signal: it feeds edgeConsensus and,
+    // through compilePrompt, every later request that touches these genes.
+    // A version bump marks the verdicts that change the consensus status.
+    const before = this._consensusStatusBefore(from, to, entry.id);
+    const after = this.edgeConsensus(from, to).status;
     if (validity === 'no') {
-      this.state.avoidPatterns.push({
-        pattern: `Do not assert a "${kind}" relationship between ${from} and ${to}` +
-          (feedback ? ` — SME notes: "${feedback}"` : '') +
-          '. The connection was flagged as not real.',
-        sourceDimension: 'network-edge-validity',
-        addedAt: new Date().toISOString(),
-      });
-      if (this.state.avoidPatterns.length > this.state.settings.maxAvoid) {
-        this.state.avoidPatterns.shift();
-      }
       this._appendVersionEntry({
         change: 'network-correction',
         reason: `SME rejected ${from} → ${to} (${kind})`,
-        delta: { rejected: edgeId, feedback: feedback || null },
+        delta: { rejected: edgeId, feedback: feedback || null, consensus: { before, after } },
       });
       this._bumpVersion();
-    } else if (validity === 'yes' && explanationQuality >= 4) {
-      // Promote the explanation as a positive example anchored to the gene
-      this.state.fewShotExamples.push({
-        gene: from,
-        brief: `${from} ↔ ${to} (${kind}): ${proposedNote}` +
-          (proposedPmids.length ? `\n\nCitations: ${proposedPmids.map((p) => `PMID:${p}`).join(', ')}` : ''),
-        rating: {
-          factuality: explanationQuality,
-          completeness: explanationQuality,
-          citation: citationQuality,
-          clarity: explanationQuality,
-        },
-        overall: (explanationQuality * 3 + citationQuality) / 4,
-        savedAt: new Date().toISOString(),
-      });
-      if (this.state.fewShotExamples.length > this.state.settings.maxFewShot) {
-        this.state.fewShotExamples.shift();
-      }
+    } else if (validity === 'yes' && (explanationQuality >= 4 || before !== after)) {
       this._appendVersionEntry({
         change: 'network-confirmation',
         reason: `SME confirmed ${from} → ${to} (${kind}) with quality ${explanationQuality}/5`,
-        delta: { confirmed: edgeId, quality: explanationQuality },
+        delta: { confirmed: edgeId, quality: explanationQuality, consensus: { before, after } },
       });
       this._bumpVersion();
     }
+    entry.consensusAfter = after;
 
     this._save();
     this.emit('edge-rating', entry);
     return entry;
+  }
+
+  /** Consensus status for a pair ignoring one rating (the one just added). */
+  _consensusStatusBefore(a, b, excludeId) {
+    const saved = this.state.edgeRatings;
+    this.state.edgeRatings = saved.filter((r) => r.id !== excludeId);
+    try { return this.edgeConsensus(a, b).status; } finally { this.state.edgeRatings = saved; }
   }
 
   /**
@@ -1714,7 +1891,7 @@ export class BioscopeModel extends Emitter {
     if (!parsed || typeof parsed !== 'object' || !parsed.version || !Array.isArray(parsed.versionHistory)) {
       throw new Error('Imported JSON does not look like a neurodigineration model state');
     }
-    this.state = { ...defaultModelState(), ...parsed };
+    this.state = migrateState(parsed);
     this._save();
     this.emit('imported', this.state);
   }
@@ -1730,4 +1907,4 @@ export function clamp(x, lo, hi) {
   return Math.max(lo, Math.min(hi, x));
 }
 
-export { STORAGE_KEY, DEFAULT_SYSTEM_PROMPT };
+export { STORAGE_KEY, DEFAULT_SYSTEM_PROMPT, DEFAULT_ANTHROPIC_MODEL };
