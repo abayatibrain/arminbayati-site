@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111318" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>@view-transition { navigation: auto; } @media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }</style>
+<script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"selector_matches":"[target=_blank], [download]"}}]},"eagerness":"moderate"}]}</script>
 <title>Biomarker Quantification & Analysis — Armin Bayati, PhD</title>
 <meta name="description" content="Multi-modal biomarker profiling spanning neurodegeneration, immunology, cardiac biology, and oncology with integrated quantification methods.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1891,6 +1896,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
           <button class="nav-drop-trigger">Code &amp; AI</button>
           <div class="nav-drop-panel">
             <a href="code-and-ai.html">Code &amp; AI &mdash; Overview</a>
+            <a href="ai-ml.html">AI/ML Evaluation &amp; Training</a>
             <a href="code-ai-agents.html">Agents &amp; MCP</a>
             <a href="code-ai-models.html">ML &amp; Foundation Models</a>
             <a href="code-ai-pipelines.html">Bio Pipelines &amp; Automation</a>
@@ -2279,7 +2285,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="footer-name">Armin Bayati</div>
-      <div class="footer-role">PhD Neuroscience & Cell Biology<br>Research Fellow, Harvard Medical School</div>
+      <div class="footer-role">PhD Neuroscience & Cell Biology<br>Senior Scientist III, Neuroimmunology &middot; Merck</div>
     </div>
     <div class="footer-links-grid">
       <div class="footer-col">
@@ -2296,6 +2302,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
         <a href="proteomics.html">Proteomics</a>
         <a href="flow-cytometry.html">Flow Cytometry</a>
         <a href="coding.html">Coding</a>
+        <a href="ai-ml.html">AI/ML Work</a>
       </div>
       <div class="footer-col">
         <div class="footer-col-title">Resources</div>
@@ -2312,6 +2319,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>/* skip charts whose canvas isn't on this page instead of throwing */if(window.Chart&&!window.Chart.__lcGuard){window.Chart=new Proxy(window.Chart,{construct:function(T,a,N){return a[0]?Reflect.construct(T,a,N):{destroy:function(){},update:function(){},resize:function(){},data:{labels:[],datasets:[]},options:{}};},get:function(T,k){return k==='__lcGuard'?true:T[k];}});}</script>
 <script>
 // Nav dropdown toggle (mobile)
 document.querySelector('.nav-toggle').addEventListener('click', function(){
@@ -2359,6 +2367,16 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 // SEARCH
 // ════════════════════════════════════════════════
 const searchIndex = [
+  { title: 'AI/ML Evaluation & Training', page: 'ai-ml.html', section: 'AI/ML', keywords: 'ai ml artificial intelligence machine learning aligned labs fellow fellowship model evaluation llm training rubric grading reference responses foundation models scgpt geneformer benchmarking contamination audit dataset labeling cell biology neuroscience pharmacology' },
+  { title: 'Aligned Labs Fellowship', page: 'ai-ml.html#aligned', section: 'AI/ML', keywords: 'aligned labs fellow ai ml training cell biology neuroscience pharmacology model-generated content evaluation primary literature expert reference responses remote' },
+  { title: 'How I Grade Model Output', page: 'ai-ml.html#rubric', section: 'AI/ML', keywords: 'rubric scoring grading accuracy reasoning citation quality calibration completeness hallucination llm evaluation worked example alpha-synuclein lag3' },
+  { title: 'Where Models Go Wrong on Biology', page: 'ai-ml.html#failure-modes', section: 'AI/ML', keywords: 'failure modes hallucinated citations model system drift ipsc ic50 ec50 ki kd gwas causal gene benchmark contamination calibration llm errors' },
+  { title: 'Machine Learning at the Bench', page: 'ai-ml.html#applied', section: 'AI/ML', keywords: 'applied machine learning image segmentation phenotype classification multi-omics target validation mechanism of action automorphotrack high-content screening opera phenix merck' },
+  { title: 'Work Experience & Education', page: 'index.html#experience', section: 'Experience', keywords: 'experience cv resume merck senior scientist iii neuroimmunology aligned labs harvard medical school mass general brigham research fellow montreal neurological institute mcgill phd university of victoria' },
+  { title: 'Code & AI Overview', page: 'code-and-ai.html', section: 'Technical', keywords: 'code ai python typescript github open source mcp claude code langgraph pytorch projects portfolio' },
+  { title: 'Agents & MCP', page: 'code-ai-agents.html', section: 'Code & AI', keywords: 'agents mcp model context protocol claude code agent sdk langgraph bioscope automorphotrack tool calling' },
+  { title: 'ML & Foundation Models', page: 'code-ai-models.html', section: 'Code & AI', keywords: 'machine learning foundation models pytorch clip contrastive morph2expr scgpt geneformer embedding cell painting l1000' },
+  { title: 'Bio Pipelines & Automation', page: 'code-ai-pipelines.html', section: 'Code & AI', keywords: 'bioinformatics pipelines automation scanpy pydeseq2 target credentialing crispr atlas pylabrobot opentrons liquid handling segmentation' },
   { title: 'Home', page: 'index.html', section: 'Home', keywords: 'home page main' },
   { title: 'Biomarker Quantification', page: 'biomarkers.html', section: 'Overview', keywords: 'biomarker quantification analysis disease platforms neurodegeneration immunology cardiac oncology' },
   { title: 'Neurodegeneration Biomarkers', page: 'biomarkers.html', section: 'Section 02', keywords: 'alpha synuclein LAMP1 LAMP2 TFEB HDAC6 autophagy lysosomal' },

@@ -3,11 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111318" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>@view-transition { navigation: auto; } @media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }</style>
+<script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"selector_matches":"[target=_blank], [download]"}}]},"eagerness":"moderate"}]}</script>
 <title>Neuroimmunology &amp; Neuroinflammation — Armin Bayati, PhD</title>
 <meta name="description" content="Neuroimmunology, neuroinflammation, microglial activation, astrocyte biology, cytokine signaling, and neuroprotection in human iPSC-derived models.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<script>/* skip charts whose canvas isn't on this page instead of throwing */if(window.Chart&&!window.Chart.__lcGuard){window.Chart=new Proxy(window.Chart,{construct:function(T,a,N){return a[0]?Reflect.construct(T,a,N):{destroy:function(){},update:function(){},resize:function(){},data:{labels:[],datasets:[]},options:{}};},get:function(T,k){return k==='__lcGuard'?true:T[k];}});}</script>
 <style>
 /* ══════════════════════════════════════════════
    ARMIN BAYATI — DESIGN SYSTEM
@@ -1538,6 +1544,8 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
 /* END DARK-MODE PROTECTION */
 
 </style>
+<link rel="stylesheet" href="gallery.css">
+<style>#gallery { scroll-margin-top: 96px; }</style>
 </head>
 <body>
 
@@ -1577,6 +1585,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
           <button class="nav-drop-trigger">Code &amp; AI</button>
           <div class="nav-drop-panel">
             <a href="code-and-ai.html">Code &amp; AI &mdash; Overview</a>
+            <a href="ai-ml.html">AI/ML Evaluation &amp; Training</a>
             <a href="code-ai-agents.html">Agents &amp; MCP</a>
             <a href="code-ai-models.html">ML &amp; Foundation Models</a>
             <a href="code-ai-pipelines.html">Bio Pipelines &amp; Automation</a>
@@ -1716,10 +1725,73 @@ document.addEventListener('click', function(e){
   </div>
 </div>
 
-<div class="section reveal" id="cytokine">
+<div class="section reveal" id="gallery">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">01</div>
+      <div class="section-label">Gallery</div>
+    </div>
+    <div class="section-content">
+      <h2>Image Gallery</h2>
+      <p>Imaging from each part of the neuroimmunology program, collected in one viewer. Filter by topic, swipe or use the arrow keys, and open any image full screen.</p>
+      <div class="xg" data-xg aria-label="Image gallery, 12 images">
+        <figure class="xg-item" data-group="Cytokine stress">
+          <img src="images/adenovirus-ipsc-endogenous-alphasyn-IFN-treatment.jpg" alt="IFN-γ-treated iPSC-DA neurons" loading="lazy">
+          <figcaption>IFN-γ–treated iPSC-DA neurons showing α-synuclein inclusion formation (green) with nuclear DAPI (blue)</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Cytokine stress">
+          <img src="images/assays-autophagy-IFN-treatment.jpg" alt="IFN-γ-induced autophagy dysregulation" loading="lazy">
+          <figcaption>IFN-γ–induced autophagy dysregulation: LC3B puncta accumulation in dopaminergic neurons</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Cytokine stress">
+          <img src="images/genetics-lyso-em-Ifn-induced-dysfunctional-morphology.jpg" alt="Electron microscopy of lysosomal dysfunction" loading="lazy">
+          <figcaption>Electron microscopy revealing IFN-γ–induced lysosomal morphological dysfunction</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Co-culture">
+          <img src="images/ipscs-coculture-microglia.png" alt="iPSC-derived microglia in co-culture" loading="lazy">
+          <figcaption>iPSC-derived microglia (IBA1+, magenta) interacting with dopaminergic neurons (TH+, green) in co-culture</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Co-culture">
+          <img src="images/ipscs-coculture-astrocyte.png" alt="Astrocyte co-culture with dopaminergic neurons" loading="lazy">
+          <figcaption>Astrocyte co-culture (GFAP+, red) with dopaminergic neurons showing neuroprotective phenotype</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Co-culture">
+          <img src="images/biologics-receptor-quenching-microglia.png" alt="Receptor quenching assay for microglial signaling" loading="lazy">
+          <figcaption>Receptor quenching assay: microglial cytokine receptor engagement and downstream signaling</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Receptors">
+          <img src="images/biomarker-ifngr-confocal.png" alt="IFNGR1 surface expression" loading="lazy">
+          <figcaption>IFNGR1 surface expression (63×)</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Lysosomes">
+          <img src="images/assays-pff-lysosome-wga.jpg" alt="Lysosomal swelling in PFF-treated neurons" loading="lazy">
+          <figcaption>Lysosomal swelling in PFF-treated neurons: LAMP1 (green), WGA membrane (red)</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Lysosomes">
+          <img src="images/genetics-lyso-galectin.png" alt="Galectin-3 puncta indicating lysosomal disruption" loading="lazy">
+          <figcaption>Galectin-3 puncta indicating lysosomal membrane permeabilization in IFN-γ–treated neurons</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Lysosomes">
+          <img src="images/genetics-lyso-em.png" alt="Electron microscopy of multilamellar bodies" loading="lazy">
+          <figcaption>Electron microscopy: multilamellar body accumulation and lysosomal membrane disruption</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Biomarkers">
+          <img src="images/biomarker-psyn-timecourse.png" alt="Phospho-α-synuclein accumulation" loading="lazy">
+          <figcaption>Phospho-α-synuclein (pS129) accumulation time-course following dual PFF + IFN-γ treatment</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Biomarkers">
+          <img src="images/biomarker-western-panel.png" alt="Western blot biomarker panel" loading="lazy">
+          <figcaption>Western blot panel: inflammatory signaling markers across treatment conditions</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section reveal" id="cytokine">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">02</div>
       <div class="section-label">Cytokines</div>
     </div>
     <div class="section-content">
@@ -1758,23 +1830,7 @@ document.addEventListener('click', function(e){
         </div>
       </div>
 
-      <div class="subsection">
-        <div class="subsection-label">Image Gallery</div>
-        <div class="image-gallery" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 24px 0; max-width: 760px;">
-          <figure style="margin: 0;">
-            <img src="images/adenovirus-ipsc-endogenous-alphasyn-IFN-treatment.jpg" alt="IFN-γ-treated iPSC-DA neurons" class="gallery-thumb" style="width: 100%; border-radius: 6px; border: 1px solid var(--rule); cursor: pointer;" loading="lazy">
-            <figcaption style="font-size: 11px; color: var(--mid); margin-top: 6px; line-height: 1.4;">IFN-γ–treated iPSC-DA neurons showing α-synuclein inclusion formation (green) with nuclear DAPI (blue)</figcaption>
-          </figure>
-          <figure style="margin: 0;">
-            <img src="images/assays-autophagy-IFN-treatment.jpg" alt="IFN-γ-induced autophagy dysregulation" class="gallery-thumb" style="width: 100%; border-radius: 6px; border: 1px solid var(--rule); cursor: pointer;" loading="lazy">
-            <figcaption style="font-size: 11px; color: var(--mid); margin-top: 6px; line-height: 1.4;">IFN-γ–induced autophagy dysregulation: LC3B puncta accumulation in dopaminergic neurons</figcaption>
-          </figure>
-          <figure style="margin: 0;">
-            <img src="images/genetics-lyso-em-Ifn-induced-dysfunctional-morphology.jpg" alt="Electron microscopy of lysosomal dysfunction" class="gallery-thumb" style="width: 100%; border-radius: 6px; border: 1px solid var(--rule); cursor: pointer;" loading="lazy">
-            <figcaption style="font-size: 11px; color: var(--mid); margin-top: 6px; line-height: 1.4;">Electron microscopy revealing IFN-γ–induced lysosomal morphological dysfunction</figcaption>
-          </figure>
-        </div>
-      </div>
+      <a class="xg-jump" href="#gallery" data-xg-open="Cytokine stress"><span class="xg-jump-thumbs"><img src="images/adenovirus-ipsc-endogenous-alphasyn-IFN-treatment.jpg" alt="" loading="lazy"><img src="images/assays-autophagy-IFN-treatment.jpg" alt="" loading="lazy"><img src="images/genetics-lyso-em-Ifn-induced-dysfunctional-morphology.jpg" alt="" loading="lazy"></span><span class="xg-jump-text"><strong>3 images</strong> &middot; Cytokine-Driven Neuronal Vulnerability</span><span class="xg-jump-cta">Open in gallery &rarr;</span></a>
     </div>
   </div>
 </div>
@@ -1782,7 +1838,7 @@ document.addEventListener('click', function(e){
 <div class="section reveal" id="coculture">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">02</div>
+      <div class="section-number">03</div>
       <div class="section-label">Co-Culture</div>
     </div>
     <div class="section-content">
@@ -1821,23 +1877,7 @@ document.addEventListener('click', function(e){
         </div>
       </div>
 
-      <div class="subsection">
-        <div class="subsection-label">Image Gallery</div>
-        <div class="image-gallery" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 24px 0; max-width: 760px;">
-          <figure style="margin: 0;">
-            <img src="images/ipscs-coculture-microglia.png" alt="iPSC-derived microglia in co-culture" class="gallery-thumb" style="width: 100%; border-radius: 6px; border: 1px solid var(--rule); cursor: pointer;" loading="lazy">
-            <figcaption style="font-size: 11px; color: var(--mid); margin-top: 6px; line-height: 1.4;">iPSC-derived microglia (IBA1+, magenta) interacting with dopaminergic neurons (TH+, green) in co-culture</figcaption>
-          </figure>
-          <figure style="margin: 0;">
-            <img src="images/ipscs-coculture-astrocyte.png" alt="Astrocyte co-culture with dopaminergic neurons" class="gallery-thumb" style="width: 100%; border-radius: 6px; border: 1px solid var(--rule); cursor: pointer;" loading="lazy">
-            <figcaption style="font-size: 11px; color: var(--mid); margin-top: 6px; line-height: 1.4;">Astrocyte co-culture (GFAP+, red) with dopaminergic neurons showing neuroprotective phenotype</figcaption>
-          </figure>
-          <figure style="margin: 0;">
-            <img src="images/biologics-receptor-quenching-microglia.png" alt="Receptor quenching assay for microglial signaling" class="gallery-thumb" style="width: 100%; border-radius: 6px; border: 1px solid var(--rule); cursor: pointer;" loading="lazy">
-            <figcaption style="font-size: 11px; color: var(--mid); margin-top: 6px; line-height: 1.4;">Receptor quenching assay: microglial cytokine receptor engagement and downstream signaling</figcaption>
-          </figure>
-        </div>
-      </div>
+      <a class="xg-jump" href="#gallery" data-xg-open="Co-culture"><span class="xg-jump-thumbs"><img src="images/ipscs-coculture-microglia.png" alt="" loading="lazy"><img src="images/ipscs-coculture-astrocyte.png" alt="" loading="lazy"><img src="images/biologics-receptor-quenching-microglia.png" alt="" loading="lazy"></span><span class="xg-jump-text"><strong>3 images</strong> &middot; Neuron–Glia Co-Culture Systems</span><span class="xg-jump-cta">Open in gallery &rarr;</span></a>
     </div>
   </div>
 </div>
@@ -1845,7 +1885,7 @@ document.addEventListener('click', function(e){
 <div class="section reveal" id="receptors">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">03</div>
+      <div class="section-number">04</div>
       <div class="section-label">Receptors</div>
     </div>
     <div class="section-content">
@@ -1884,15 +1924,7 @@ document.addEventListener('click', function(e){
         </div>
       </div>
 
-      <div class="subsection">
-        <div class="subsection-label">Image Gallery</div>
-        <div class="image-gallery" style="margin: 24px 0; max-width: 760px;">
-          <figure style="margin: 0; max-width: 200px;">
-            <img src="images/biomarker-ifngr-confocal.png" alt="IFNGR1 surface expression" class="gallery-thumb" style="width: 100%; border-radius: 6px; border: 1px solid var(--rule); cursor: zoom-in;" loading="lazy">
-            <figcaption style="font-size: 10px; color: var(--mid); margin-top: 6px; line-height: 1.4;">IFNGR1 surface expression (63×) <span style="font-family: var(--mono); font-size: 9px; color: var(--accent); cursor: pointer;" onclick="this.closest('figure').querySelector('img').click()">↗ expand</span></figcaption>
-          </figure>
-        </div>
-      </div>
+      <a class="xg-jump" href="#gallery" data-xg-open="Receptors"><span class="xg-jump-thumbs"><img src="images/biomarker-ifngr-confocal.png" alt="" loading="lazy"></span><span class="xg-jump-text"><strong>1 image</strong> &middot; Neuroimmune Receptor Dissection</span><span class="xg-jump-cta">Open in gallery &rarr;</span></a>
     </div>
   </div>
 </div>
@@ -1900,7 +1932,7 @@ document.addEventListener('click', function(e){
 <div class="section reveal" id="lysosome">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">04</div>
+      <div class="section-number">05</div>
       <div class="section-label">Lysosomes</div>
     </div>
     <div class="section-content">
@@ -1939,23 +1971,7 @@ document.addEventListener('click', function(e){
         </div>
       </div>
 
-      <div class="subsection">
-        <div class="subsection-label">Image Gallery</div>
-        <div class="image-gallery" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 24px 0; max-width: 760px;">
-          <figure style="margin: 0;">
-            <img src="images/assays-pff-lysosome-wga.jpg" alt="Lysosomal swelling in PFF-treated neurons" class="gallery-thumb" style="width: 100%; border-radius: 6px; border: 1px solid var(--rule); cursor: pointer;" loading="lazy">
-            <figcaption style="font-size: 11px; color: var(--mid); margin-top: 6px; line-height: 1.4;">Lysosomal swelling in PFF-treated neurons: LAMP1 (green), WGA membrane (red)</figcaption>
-          </figure>
-          <figure style="margin: 0;">
-            <img src="images/genetics-lyso-galectin.png" alt="Galectin-3 puncta indicating lysosomal disruption" class="gallery-thumb" style="width: 100%; border-radius: 6px; border: 1px solid var(--rule); cursor: pointer;" loading="lazy">
-            <figcaption style="font-size: 11px; color: var(--mid); margin-top: 6px; line-height: 1.4;">Galectin-3 puncta indicating lysosomal membrane permeabilization in IFN-γ–treated neurons</figcaption>
-          </figure>
-          <figure style="margin: 0;">
-            <img src="images/genetics-lyso-em.png" alt="Electron microscopy of multilamellar bodies" class="gallery-thumb" style="width: 100%; border-radius: 6px; border: 1px solid var(--rule); cursor: pointer;" loading="lazy">
-            <figcaption style="font-size: 11px; color: var(--mid); margin-top: 6px; line-height: 1.4;">Electron microscopy: multilamellar body accumulation and lysosomal membrane disruption</figcaption>
-          </figure>
-        </div>
-      </div>
+      <a class="xg-jump" href="#gallery" data-xg-open="Lysosomes"><span class="xg-jump-thumbs"><img src="images/assays-pff-lysosome-wga.jpg" alt="" loading="lazy"><img src="images/genetics-lyso-galectin.png" alt="" loading="lazy"><img src="images/genetics-lyso-em.png" alt="" loading="lazy"></span><span class="xg-jump-text"><strong>3 images</strong> &middot; Inflammation-Induced Lysosomal Dysfunction</span><span class="xg-jump-cta">Open in gallery &rarr;</span></a>
     </div>
   </div>
 </div>
@@ -1963,7 +1979,7 @@ document.addEventListener('click', function(e){
 <div class="section reveal" id="biomarkers">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">05</div>
+      <div class="section-number">06</div>
       <div class="section-label">Biomarkers</div>
     </div>
     <div class="section-content">
@@ -2002,19 +2018,7 @@ document.addEventListener('click', function(e){
         </div>
       </div>
 
-      <div class="subsection">
-        <div class="subsection-label">Image Gallery</div>
-        <div class="image-gallery" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 24px 0; max-width: 760px;">
-          <figure style="margin: 0;">
-            <img src="images/biomarker-psyn-timecourse.png" alt="Phospho-α-synuclein accumulation" class="gallery-thumb" style="width: 100%; border-radius: 6px; border: 1px solid var(--rule); cursor: pointer;" loading="lazy">
-            <figcaption style="font-size: 11px; color: var(--mid); margin-top: 6px; line-height: 1.4;">Phospho-α-synuclein (pS129) accumulation time-course following dual PFF + IFN-γ treatment</figcaption>
-          </figure>
-          <figure style="margin: 0;">
-            <img src="images/biomarker-western-panel.png" alt="Western blot biomarker panel" class="gallery-thumb" style="width: 100%; border-radius: 6px; border: 1px solid var(--rule); cursor: pointer;" loading="lazy">
-            <figcaption style="font-size: 11px; color: var(--mid); margin-top: 6px; line-height: 1.4;">Western blot panel: inflammatory signaling markers across treatment conditions</figcaption>
-          </figure>
-        </div>
-      </div>
+      <a class="xg-jump" href="#gallery" data-xg-open="Biomarkers"><span class="xg-jump-thumbs"><img src="images/biomarker-psyn-timecourse.png" alt="" loading="lazy"><img src="images/biomarker-western-panel.png" alt="" loading="lazy"></span><span class="xg-jump-text"><strong>2 images</strong> &middot; Neuroimmune Biomarker Profiling</span><span class="xg-jump-cta">Open in gallery &rarr;</span></a>
     </div>
   </div>
 </div>
@@ -2056,7 +2060,7 @@ document.addEventListener('click', function(e){
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="footer-name">Armin Bayati, PhD</div>
-      <div class="footer-role">Research Fellow · Harvard Medical School &amp; Massachusetts General Hospital</div>
+      <div class="footer-role">Senior Scientist III, Neuroimmunology &middot; Merck<br>AI/ML Training Fellow &middot; Aligned Labs</div>
     </div>
     <div class="footer-links-grid">
       <div class="footer-col">
@@ -2064,6 +2068,7 @@ document.addEventListener('click', function(e){
         <a href="ipscs.html">iPSC Models</a>
         <a href="neuroimmunology.html">Neuroimmunology</a>
         <a href="drug-discovery.html">Drug Discovery</a>
+        <a href="ai-ml.html">AI/ML Work</a>
         <a href="proteomics.html">Proteomics</a>
       </div>
       <div class="footer-col">
@@ -2302,6 +2307,36 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 // Site search functionality
 (function() {
   var searchIndex = [
+    {page:'ai-ml.html', title:'AI/ML Evaluation & Training', category:'Main', section:'',
+     keywords:'ai ml artificial intelligence machine learning aligned labs fellow fellowship model evaluation llm training rubric grading reference responses foundation models scgpt geneformer benchmarking contamination audit dataset labeling cell biology neuroscience pharmacology',
+     description:'AI/ML work: evaluating and training AI for biology at Aligned Labs, plus applied machine learning for drug discovery.'},
+    {page:'ai-ml.html#aligned', title:'Aligned Labs Fellowship', category:'Industry', section:'AI/ML',
+     keywords:'aligned labs fellow ai ml training cell biology neuroscience pharmacology model-generated content evaluation primary literature expert reference responses remote',
+     description:'Fellow, AI/ML Training in Cell Biology & Neuroscience: evaluating model-generated science against primary literature.'},
+    {page:'ai-ml.html#rubric', title:'How I Grade Model Output', category:'Industry', section:'AI/ML',
+     keywords:'rubric scoring grading accuracy reasoning citation quality calibration completeness hallucination llm evaluation worked example alpha-synuclein lag3',
+     description:'Rubric dimensions for grading model-generated science, with a worked example.'},
+    {page:'ai-ml.html#failure-modes', title:'Where Models Go Wrong on Biology', category:'Industry', section:'AI/ML',
+     keywords:'failure modes hallucinated citations model system drift ipsc ic50 ec50 ki kd gwas causal gene benchmark contamination calibration llm errors',
+     description:'Recurring errors in model-generated biology: fake citations, model-system drift, potency confusion, GWAS overreach.'},
+    {page:'ai-ml.html#applied', title:'Machine Learning at the Bench', category:'Technical', section:'AI/ML',
+     keywords:'applied machine learning image segmentation phenotype classification multi-omics target validation mechanism of action automorphotrack high-content screening opera phenix merck',
+     description:'ML on experimental data: multi-omics target validation, AutoMorphoTrack, foundation-model probes, imaging ML.'},
+    {page:'index.html#experience', title:'Work Experience & Education', category:'Main', section:'Experience',
+     keywords:'experience cv resume merck senior scientist iii neuroimmunology aligned labs harvard medical school mass general brigham research fellow montreal neurological institute mcgill phd university of victoria',
+     description:'Merck, Aligned Labs, Harvard Medical School & MGB, Montreal Neurological Institute, McGill, University of Victoria.'},
+    {page:'code-and-ai.html', title:'Code & AI Overview', category:'Technical', section:'',
+     keywords:'code ai python typescript github open source mcp claude code langgraph pytorch projects portfolio',
+     description:'Open-source computational projects: MCP servers, agentic systems, PyTorch models, bio pipelines, lab automation.'},
+    {page:'code-ai-agents.html', title:'Agents & MCP', category:'Technical', section:'Code & AI',
+     keywords:'agents mcp model context protocol claude code agent sdk langgraph bioscope automorphotrack tool calling',
+     description:'MCP servers, Claude Code sub-agents, and LangGraph orchestration over biomedical APIs.'},
+    {page:'code-ai-models.html', title:'ML & Foundation Models', category:'Technical', section:'Code & AI',
+     keywords:'machine learning foundation models pytorch clip contrastive morph2expr scgpt geneformer embedding cell painting l1000',
+     description:'CLIP-style PyTorch alignment of imaging and transcriptomics; zero-shot scGPT and Geneformer evaluation.'},
+    {page:'code-ai-pipelines.html', title:'Bio Pipelines & Automation', category:'Technical', section:'Code & AI',
+     keywords:'bioinformatics pipelines automation scanpy pydeseq2 target credentialing crispr atlas pylabrobot opentrons liquid handling segmentation',
+     description:'Target credentialing from single-nucleus data, CRISPR phenocopy atlas, and iPSC liquid-handling automation.'},
     {page:'neuroimmunology.html', title:'Neuroimmunology &amp; Neuroinflammation', category:'Research', section:'',
      keywords:'neuroimmunology neuroinflammation microglia astrocytes cytokine ifn-gamma tnf-alpha il-1beta parkinson alpha-synuclein neuroprotection',
      description:'Neuroimmunology investigating cytokine-driven neurodegeneration and neuroprotection strategies in iPSC-derived models.'},
@@ -2485,5 +2520,6 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         async src="//gc.zgo.at/count.js"></script>
 <script data-goatcounter="https://arminbayati.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
+<script src="gallery.js" defer></script>
 </body>
 </html>

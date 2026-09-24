@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111318" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>@view-transition { navigation: auto; } @media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }</style>
+<script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"selector_matches":"[target=_blank], [download]"}}]},"eagerness":"moderate"}]}</script>
 <title>Parkinson's Disease & Dystonia — Armin Bayati, PhD</title>
 <meta name="description" content="Dedicated portfolio of Parkinson's disease and dystonia research: iPSC-derived dopaminergic and cortical neuron models, α-synuclein biology, lysosomal dysfunction, CRISPR disease modeling, neuroinflammation, electrophysiology, biomarkers, and drug discovery — applied to movement disorders.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2168,6 +2173,8 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
 
 </style>
 <!-- BIOMARKER FIGURE PATCH 2026-05-20 -->
+<link rel="stylesheet" href="gallery.css">
+<style>#gallery { scroll-margin-top: 96px; }</style>
 </head>
 <body>
 <script>if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark');</script>
@@ -2209,6 +2216,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
           <button class="nav-drop-trigger">Code &amp; AI</button>
           <div class="nav-drop-panel">
             <a href="code-and-ai.html">Code &amp; AI &mdash; Overview</a>
+            <a href="ai-ml.html">AI/ML Evaluation &amp; Training</a>
             <a href="code-ai-agents.html">Agents &amp; MCP</a>
             <a href="code-ai-models.html">ML &amp; Foundation Models</a>
             <a href="code-ai-pipelines.html">Bio Pipelines &amp; Automation</a>
@@ -2607,11 +2615,78 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
   </div>
 </section>
 
+<div class="section reveal" id="gallery">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">03</div>
+      <div class="section-label">Gallery</div>
+    </div>
+    <div class="section-content">
+      <h2>Image Gallery</h2>
+      <p>Figures from across the Parkinson's program in one viewer. Filter by topic, swipe or use the arrow keys, and open any image full screen.</p>
+      <div class="xg" data-xg aria-label="Image gallery, 13 images">
+        <figure class="xg-item" data-group="iPSC neurons">
+          <img src="images/ipscs-mea-raster.png" alt="MEA raster plot with spike waveforms across DA neurons" loading="lazy">
+          <figcaption>MEA raster &amp; waveforms — spontaneous firing across an iPSC-DA network</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="iPSC neurons">
+          <img src="images/ipscs-calcium-imaging.png" alt="Fluo-4 calcium imaging showing spontaneous transients in iPSC DA neurons" loading="lazy">
+          <figcaption>Fluo-4 calcium imaging — spontaneous transients in iPSC-DA neurons</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Lysosomes &amp; GBA">
+          <img src="images/genetics-lyso-nanogold.png" alt="Nanogold-labeled PFFs tracked from cell surface to macropinosomes to lysosomes by EM" loading="lazy">
+          <figcaption>Nanogold-PFF EM — surface → macropinosome → lysosome trafficking</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Lysosomes &amp; GBA">
+          <img src="images/genetics-lyso-galectin.png" alt="Galectin-3 puncta marking ruptured lysosomes after PFF exposure" loading="lazy">
+          <figcaption>Galectin-3 puncta — PFF-induced lysosomal membrane permeabilization</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Lysosomes &amp; GBA">
+          <img src="images/genetics-lyso-em.png" alt="EM of fibrils inside broken lysosomes" loading="lazy">
+          <figcaption>EM — α-synuclein fibrils within ruptured lysosomes</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Lysosomes &amp; GBA">
+          <img src="images/genetics-gba-ko-lamp1-pff.jpg" alt="GBA KO iPSC neurons with enlarged LAMP1+ lysosomes accumulating PFF-488" loading="lazy">
+          <figcaption>GBA KO — enlarged LAMP1+ lysosomes with accumulated PFF-488</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Cytokines &amp; microglia">
+          <img src="images/ipscs-coculture-microglia.png" alt="iPSC-derived microglia (IBA1+) interacting with dopaminergic neurons" loading="lazy">
+          <figcaption>Microglia–DA neuron co-culture (IBA1 / TH)</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Cytokines &amp; microglia">
+          <img src="images/ipscs-coculture-astrocyte.png" alt="Astrocyte co-culture (GFAP+) with dopaminergic neurons showing neuroprotective phenotype" loading="lazy">
+          <figcaption>Astrocyte–DA neuron co-culture (GFAP / TH)</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Cytokines &amp; microglia">
+          <img src="images/assays-autophagy-IFN-treatment.jpg" alt="IFN-γ–induced autophagy dysregulation: LC3B puncta accumulation" loading="lazy">
+          <figcaption>IFN-γ–induced autophagy dysregulation — LC3B accumulation</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Electron microscopy">
+          <img src="images/micro-em-lewy-collection.jpg" alt="EM montage of Lewy-body-like inclusions across iPSC neurons" loading="lazy">
+          <figcaption>EM montage — Lewy-body-like inclusions across iPSC-DA neurons</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Electron microscopy">
+          <img src="images/micro-em-mature.png" alt="EM of compact/mature inclusion matching patient tissue Lewy bodies" loading="lazy">
+          <figcaption>Compact/mature inclusion matching patient tissue morphology</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Electron microscopy">
+          <img src="images/micro-em-98000x-nanogold.jpg" alt="TEM 98000× showing nanogold-labeled α-synuclein fibrils in lysosome" loading="lazy">
+          <figcaption>TEM 98 000× — nanogold-labeled α-synuclein fibrils in a lysosome</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Electron microscopy">
+          <img src="images/micro-thioflavin.png" alt="Thioflavin S staining of α-synuclein inclusions" loading="lazy">
+          <figcaption>Thioflavin-S — amyloid core of mature α-synuclein inclusions</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- SECTION 03: iPSC DA NEURONS -->
 <section class="section">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">03</div>
+      <div class="section-number">04</div>
       <div class="section-label">iPSC-Derived Neurons</div>
     </div>
     <div class="section-content">
@@ -2638,26 +2713,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
         </div>
       </figure>
 
-      <div class="gallery-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:20px; margin:28px 0;">
-        <figure class="figure-frame" style="margin:0;">
-          <img src="images/ipscs-mea-raster.png"
-               alt="MEA raster plot with spike waveforms across DA neurons"
-               style="width:100%; display:block; border-radius:6px 6px 0 0;"
-               loading="lazy">
-          <div class="figure-caption-bar">
-            <span class="fig-label">Fig.</span> MEA raster &amp; waveforms — spontaneous firing across an iPSC-DA network
-          </div>
-        </figure>
-        <figure class="figure-frame" style="margin:0;">
-          <img src="images/ipscs-calcium-imaging.png"
-               alt="Fluo-4 calcium imaging showing spontaneous transients in iPSC DA neurons"
-               style="width:100%; display:block; border-radius:6px 6px 0 0;"
-               loading="lazy">
-          <div class="figure-caption-bar">
-            <span class="fig-label">Fig.</span> Fluo-4 calcium imaging — spontaneous transients in iPSC-DA neurons
-          </div>
-        </figure>
-      </div>
+      <a class="xg-jump" href="#gallery" data-xg-open="iPSC neurons"><span class="xg-jump-thumbs"><img src="images/ipscs-mea-raster.png" alt="" loading="lazy"><img src="images/ipscs-calcium-imaging.png" alt="" loading="lazy"></span><span class="xg-jump-text"><strong>2 images</strong> &middot; Human iPSC Dopaminergic &amp; Cortical Neuron Models</span><span class="xg-jump-cta">Open in gallery &rarr;</span></a>
 
       <h3 style="margin-top:32px;">Relevance to Dystonia</h3>
       <p>The same iPSC differentiation, MEA, and calcium-imaging pipelines are directly applicable to dystonia modeling — circuit-level firing-pattern abnormalities, paroxysmal burst activity, and co-contraction-like synchrony phenotypes are quantifiable on our MEA platform, and patient-derived lines carrying movement-disorder alleles (e.g., TOR1A/DYT1, GNAL, THAP1, KMT2B) can be differentiated into cortical and striatal-adjacent neurons for comparative electrophysiology and morphology. Where direct PD data is shown below, the underlying methodology — from differentiation to high-content imaging to CRISPR perturbation — transfers to dystonia models with minimal adaptation.</p>
@@ -2669,7 +2725,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
 <section class="section">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">04</div>
+      <div class="section-number">05</div>
       <div class="section-label">α-Synuclein Pathology</div>
     </div>
     <div class="section-content">
@@ -2756,51 +2812,14 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
 <section class="section">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">05</div>
+      <div class="section-number">06</div>
       <div class="section-label">Lysosomes &amp; GBA</div>
     </div>
     <div class="section-content">
       <h2>Lysosomal Dysfunction, GBA &amp; Fibril Trafficking</h2>
       <p>Lysosomal biology sits at the center of Parkinson's disease pathogenesis — and is increasingly implicated in movement-disorder biology more broadly. I developed a custom nanogold-PFF conjugation protocol, published in STAR Protocols (first author), that permits direct electron-microscopic visualization of fibril trafficking from the cell surface into lysosomes. Live-cell confocal (LysoTracker / LysoSensor) quantifies lysosomal number and pH; galectin-3 puncta report membrane permeabilization; and GBA-knockout iPSC neurons reveal heightened vulnerability to fibril-induced inclusions.</p>
 
-      <div class="gallery-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:20px; margin:28px 0;">
-        <figure class="figure-frame" style="margin:0;">
-          <img src="images/genetics-lyso-nanogold.png"
-               alt="Nanogold-labeled PFFs tracked from cell surface to macropinosomes to lysosomes by EM"
-               style="width:100%; display:block; border-radius:6px 6px 0 0;"
-               loading="lazy">
-          <div class="figure-caption-bar">
-            <span class="fig-label">Fig.</span> Nanogold-PFF EM — surface → macropinosome → lysosome trafficking
-          </div>
-        </figure>
-        <figure class="figure-frame" style="margin:0;">
-          <img src="images/genetics-lyso-galectin.png"
-               alt="Galectin-3 puncta marking ruptured lysosomes after PFF exposure"
-               style="width:100%; display:block; border-radius:6px 6px 0 0;"
-               loading="lazy">
-          <div class="figure-caption-bar">
-            <span class="fig-label">Fig.</span> Galectin-3 puncta — PFF-induced lysosomal membrane permeabilization
-          </div>
-        </figure>
-        <figure class="figure-frame" style="margin:0;">
-          <img src="images/genetics-lyso-em.png"
-               alt="EM of fibrils inside broken lysosomes"
-               style="width:100%; display:block; border-radius:6px 6px 0 0;"
-               loading="lazy">
-          <div class="figure-caption-bar">
-            <span class="fig-label">Fig.</span> EM — α-synuclein fibrils within ruptured lysosomes
-          </div>
-        </figure>
-        <figure class="figure-frame" style="margin:0;">
-          <img src="images/genetics-gba-ko-lamp1-pff.jpg"
-               alt="GBA KO iPSC neurons with enlarged LAMP1+ lysosomes accumulating PFF-488"
-               style="width:100%; display:block; border-radius:6px 6px 0 0;"
-               loading="lazy">
-          <div class="figure-caption-bar">
-            <span class="fig-label">Fig.</span> GBA KO — enlarged LAMP1+ lysosomes with accumulated PFF-488
-          </div>
-        </figure>
-      </div>
+      <a class="xg-jump" href="#gallery" data-xg-open="Lysosomes &amp; GBA"><span class="xg-jump-thumbs"><img src="images/genetics-lyso-nanogold.png" alt="" loading="lazy"><img src="images/genetics-lyso-galectin.png" alt="" loading="lazy"><img src="images/genetics-lyso-em.png" alt="" loading="lazy"></span><span class="xg-jump-text"><strong>4 images</strong> &middot; Lysosomal Dysfunction, GBA &amp; Fibril Trafficking</span><span class="xg-jump-cta">Open in gallery &rarr;</span></a>
 
       <h3>Western Blot Pharmacodynamic Panel</h3>
       <p>Multi-target Western blot across U2OS, U87, and SH-SY5Y cell lines under control, IFN-γ, PFF, and dual-hit conditions quantifies CHC (clathrin heavy chain), LAMP1, LAMP2, NRF2, TFEB, and α-synuclein in a single readout — capturing endocytic machinery, lysosomal integrity, oxidative stress, and aggregation state.</p>
@@ -2822,7 +2841,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
 <section class="section">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">06</div>
+      <div class="section-number">07</div>
       <div class="section-label">Genetic Models</div>
     </div>
     <div class="section-content">
@@ -2867,7 +2886,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
 <section class="section">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">07</div>
+      <div class="section-number">08</div>
       <div class="section-label">Neuroinflammation</div>
     </div>
     <div class="section-content">
@@ -2889,35 +2908,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
       <h3>Neuron–Glia Co-Culture</h3>
       <p>iPSC-derived microglia (IBA1+) accelerate inclusion formation in DA neurons, while astrocyte co-culture (GFAP+) confers neuroprotection — establishing the cellular circuitry of neurodegeneration and enabling therapeutic screening against individual glial components.</p>
 
-      <div class="gallery-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:20px; margin:28px 0;">
-        <figure class="figure-frame" style="margin:0;">
-          <img src="images/ipscs-coculture-microglia.png"
-               alt="iPSC-derived microglia (IBA1+) interacting with dopaminergic neurons"
-               style="width:100%; display:block; border-radius:6px 6px 0 0;"
-               loading="lazy">
-          <div class="figure-caption-bar">
-            <span class="fig-label">Fig.</span> Microglia–DA neuron co-culture (IBA1 / TH)
-          </div>
-        </figure>
-        <figure class="figure-frame" style="margin:0;">
-          <img src="images/ipscs-coculture-astrocyte.png"
-               alt="Astrocyte co-culture (GFAP+) with dopaminergic neurons showing neuroprotective phenotype"
-               style="width:100%; display:block; border-radius:6px 6px 0 0;"
-               loading="lazy">
-          <div class="figure-caption-bar">
-            <span class="fig-label">Fig.</span> Astrocyte–DA neuron co-culture (GFAP / TH)
-          </div>
-        </figure>
-        <figure class="figure-frame" style="margin:0;">
-          <img src="images/assays-autophagy-IFN-treatment.jpg"
-               alt="IFN-γ–induced autophagy dysregulation: LC3B puncta accumulation"
-               style="width:100%; display:block; border-radius:6px 6px 0 0;"
-               loading="lazy">
-          <div class="figure-caption-bar">
-            <span class="fig-label">Fig.</span> IFN-γ–induced autophagy dysregulation — LC3B accumulation
-          </div>
-        </figure>
-      </div>
+      <a class="xg-jump" href="#gallery" data-xg-open="Cytokines &amp; microglia"><span class="xg-jump-thumbs"><img src="images/ipscs-coculture-microglia.png" alt="" loading="lazy"><img src="images/ipscs-coculture-astrocyte.png" alt="" loading="lazy"><img src="images/assays-autophagy-IFN-treatment.jpg" alt="" loading="lazy"></span><span class="xg-jump-text"><strong>3 images</strong> &middot; Cytokine Signaling, Microglia, &amp; Dopaminergic Vulnerability</span><span class="xg-jump-cta">Open in gallery &rarr;</span></a>
 
       <h3>Anti-Cytokine Biologics Rescue</h3>
       <p>Anti-TNFα, anti-IL-1β, and anti-IL-6 biologics — alone and in combination — rescue TH+ neuron survival under dual-hit conditions, supporting a translational hypothesis for immunomodulatory neuroprotection in Parkinson's disease.</p>
@@ -2935,51 +2926,14 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
 <section class="section">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">08</div>
+      <div class="section-number">09</div>
       <div class="section-label">Ultrastructure</div>
     </div>
     <div class="section-content">
       <h2>Electron Microscopy of Lewy-Like Pathology</h2>
       <p>Transmission electron microscopy (TEM) and super-resolution STED nanoscopy resolve the ultrastructure of α-synuclein inclusions at fibrillar and sub-lysosomal resolution. Collected images document Lewy-body-like inclusions in cell bodies, Lewy-neurite-like aggregates in processes, compact/mature inclusions matching patient tissue morphology, and nanogold-labeled fibrils inside intact and ruptured lysosomes.</p>
 
-      <div class="gallery-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:20px; margin:28px 0;">
-        <figure class="figure-frame" style="margin:0;">
-          <img src="images/micro-em-lewy-collection.jpg"
-               alt="EM montage of Lewy-body-like inclusions across iPSC neurons"
-               style="width:100%; display:block; border-radius:6px 6px 0 0;"
-               loading="lazy">
-          <div class="figure-caption-bar">
-            <span class="fig-label">Fig.</span> EM montage — Lewy-body-like inclusions across iPSC-DA neurons
-          </div>
-        </figure>
-        <figure class="figure-frame" style="margin:0;">
-          <img src="images/micro-em-mature.png"
-               alt="EM of compact/mature inclusion matching patient tissue Lewy bodies"
-               style="width:100%; display:block; border-radius:6px 6px 0 0;"
-               loading="lazy">
-          <div class="figure-caption-bar">
-            <span class="fig-label">Fig.</span> Compact/mature inclusion matching patient tissue morphology
-          </div>
-        </figure>
-        <figure class="figure-frame" style="margin:0;">
-          <img src="images/micro-em-98000x-nanogold.jpg"
-               alt="TEM 98000× showing nanogold-labeled α-synuclein fibrils in lysosome"
-               style="width:100%; display:block; border-radius:6px 6px 0 0;"
-               loading="lazy">
-          <div class="figure-caption-bar">
-            <span class="fig-label">Fig.</span> TEM 98 000× — nanogold-labeled α-synuclein fibrils in a lysosome
-          </div>
-        </figure>
-        <figure class="figure-frame" style="margin:0;">
-          <img src="images/micro-thioflavin.png"
-               alt="Thioflavin S staining of α-synuclein inclusions"
-               style="width:100%; display:block; border-radius:6px 6px 0 0;"
-               loading="lazy">
-          <div class="figure-caption-bar">
-            <span class="fig-label">Fig.</span> Thioflavin-S — amyloid core of mature α-synuclein inclusions
-          </div>
-        </figure>
-      </div>
+      <a class="xg-jump" href="#gallery" data-xg-open="Electron microscopy"><span class="xg-jump-thumbs"><img src="images/micro-em-lewy-collection.jpg" alt="" loading="lazy"><img src="images/micro-em-mature.png" alt="" loading="lazy"><img src="images/micro-em-98000x-nanogold.jpg" alt="" loading="lazy"></span><span class="xg-jump-text"><strong>4 images</strong> &middot; Electron Microscopy of Lewy-Like Pathology</span><span class="xg-jump-cta">Open in gallery &rarr;</span></a>
     </div>
   </div>
 </section>
@@ -2988,7 +2942,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
 <section class="section">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">09</div>
+      <div class="section-number">10</div>
       <div class="section-label">Drug Discovery</div>
     </div>
     <div class="section-content">
@@ -3022,7 +2976,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
 <section class="section">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">10</div>
+      <div class="section-number">11</div>
       <div class="section-label">CRISPR Screens</div>
     </div>
     <div class="section-content">
@@ -3045,7 +2999,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
 <section class="section">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">11</div>
+      <div class="section-number">12</div>
       <div class="section-label">Dystonia Translation</div>
     </div>
     <div class="section-content">
@@ -3083,7 +3037,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
 <section class="section">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">12</div>
+      <div class="section-number">13</div>
       <div class="section-label">Publications</div>
     </div>
     <div class="section-content">
@@ -3150,7 +3104,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="footer-name">Armin Bayati</div>
-      <div class="footer-role">PhD Neuroscience &amp; Cell Biology<br>Research Fellow, Harvard Medical School</div>
+      <div class="footer-role">PhD Neuroscience &amp; Cell Biology<br>Senior Scientist III, Neuroimmunology &middot; Merck</div>
     </div>
     <div class="footer-links-grid">
       <div class="footer-col">
@@ -3168,6 +3122,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
         <a href="proteomics.html">Proteomics</a>
         <a href="flow-cytometry.html">Flow Cytometry</a>
         <a href="coding.html">Coding</a>
+        <a href="ai-ml.html">AI/ML Work</a>
       </div>
       <div class="footer-col">
         <div class="footer-col-title">Resources</div>
@@ -3184,6 +3139,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>/* skip charts whose canvas isn't on this page instead of throwing */if(window.Chart&&!window.Chart.__lcGuard){window.Chart=new Proxy(window.Chart,{construct:function(T,a,N){return a[0]?Reflect.construct(T,a,N):{destroy:function(){},update:function(){},resize:function(){},data:{labels:[],datasets:[]},options:{}};},get:function(T,k){return k==='__lcGuard'?true:T[k];}});}</script>
 <script>
 // Nav dropdown toggle (mobile)
 document.querySelector('.nav-toggle').addEventListener('click', function(){
@@ -3453,5 +3409,108 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 })();
 </script>
+<script>
+// ════════════════════════════════════════════════
+// SEARCH
+// ════════════════════════════════════════════════
+const searchIndex = [
+  { title: "Parkinson's Disease & Dystonia", page: 'parkinsons-dystonia.html', section: 'Drug Discovery', keywords: 'parkinson dystonia basal ganglia dopamine' },
+  { title: 'AI/ML Evaluation & Training', page: 'ai-ml.html', section: 'AI/ML', keywords: 'ai ml artificial intelligence machine learning aligned labs fellow fellowship model evaluation llm training rubric grading reference responses foundation models scgpt geneformer benchmarking contamination audit dataset labeling cell biology neuroscience pharmacology' },
+  { title: 'Aligned Labs Fellowship', page: 'ai-ml.html#aligned', section: 'AI/ML', keywords: 'aligned labs fellow ai ml training cell biology neuroscience pharmacology model-generated content evaluation primary literature expert reference responses remote' },
+  { title: 'How I Grade Model Output', page: 'ai-ml.html#rubric', section: 'AI/ML', keywords: 'rubric scoring grading accuracy reasoning citation quality calibration completeness hallucination llm evaluation worked example alpha-synuclein lag3' },
+  { title: 'Where Models Go Wrong on Biology', page: 'ai-ml.html#failure-modes', section: 'AI/ML', keywords: 'failure modes hallucinated citations model system drift ipsc ic50 ec50 ki kd gwas causal gene benchmark contamination calibration llm errors' },
+  { title: 'Machine Learning at the Bench', page: 'ai-ml.html#applied', section: 'AI/ML', keywords: 'applied machine learning image segmentation phenotype classification multi-omics target validation mechanism of action automorphotrack high-content screening opera phenix merck' },
+  { title: 'Work Experience & Education', page: 'index.html#experience', section: 'Experience', keywords: 'experience cv resume merck senior scientist iii neuroimmunology aligned labs harvard medical school mass general brigham research fellow montreal neurological institute mcgill phd university of victoria' },
+  { title: 'Code & AI Overview', page: 'code-and-ai.html', section: 'Technical', keywords: 'code ai python typescript github open source mcp claude code langgraph pytorch projects portfolio' },
+  { title: 'Agents & MCP', page: 'code-ai-agents.html', section: 'Code & AI', keywords: 'agents mcp model context protocol claude code agent sdk langgraph bioscope automorphotrack tool calling' },
+  { title: 'ML & Foundation Models', page: 'code-ai-models.html', section: 'Code & AI', keywords: 'machine learning foundation models pytorch clip contrastive morph2expr scgpt geneformer embedding cell painting l1000' },
+  { title: 'Bio Pipelines & Automation', page: 'code-ai-pipelines.html', section: 'Code & AI', keywords: 'bioinformatics pipelines automation scanpy pydeseq2 target credentialing crispr atlas pylabrobot opentrons liquid handling segmentation' },
+  { title: 'Home', page: 'index.html', section: 'Home', keywords: 'home page main' },
+  { title: 'Biomarker Quantification', page: 'biomarkers.html', section: 'Overview', keywords: 'biomarker quantification analysis disease platforms neurodegeneration immunology cardiac oncology' },
+  { title: 'Neurodegeneration Biomarkers', page: 'biomarkers.html', section: 'Section 02', keywords: 'alpha synuclein LAMP1 LAMP2 TFEB HDAC6 autophagy lysosomal' },
+  { title: 'Immune & Oncology Biomarkers', page: 'biomarkers.html', section: 'Section 03', keywords: 'PD-1 CTLA-4 cytokine CD4 CD8 immunotherapy checkpoint' },
+  { title: 'Cardiac Biomarkers', page: 'biomarkers.html', section: 'Section 04', keywords: 'cardiomyocyte troponin connexin vimentin' },
+  { title: 'Proteomics & Genomics', page: 'biomarkers.html', section: 'Section 05', keywords: 'TMT mass spectrometry proteomics scRNA-seq transcriptomics' },
+  { title: 'Quantification Methods', page: 'biomarkers.html', section: 'Section 06', keywords: 'western blot flow cytometry immunofluorescence ELISA qPCR' },
+  { title: 'iPSC Models', page: 'ipscs.html', section: 'Research', keywords: 'iPSC induced pluripotent stem cells neurons differentiation' },
+  { title: 'Drug Discovery', page: 'drug-discovery.html', section: 'Research', keywords: 'drug discovery translation therapeutic screening' },
+  { title: 'Cancer Immunology', page: 'cancer-immunology.html', section: 'Research', keywords: 'cancer immunology tumor immune checkpoint' },
+  { title: 'Flow Cytometry', page: 'flow-cytometry.html', section: 'Methods', keywords: 'flow cytometry immunophenotyping FACS' },
+  { title: 'Microscopy & Imaging', page: 'microscopy.html', section: 'Methods', keywords: 'microscopy confocal imaging immunofluorescence' },
+  { title: 'Proteomics', page: 'proteomics.html', section: 'Methods', keywords: 'proteomics mass spectrometry LC-MS genomics' },
+  { title: 'Contact', page: 'contact.html', section: 'Contact', keywords: 'contact email reach out' },
+];
+
+function initSearch() {
+  const overlay = document.getElementById('searchOverlay');
+  const input = document.getElementById('searchInput');
+  const results = document.getElementById('searchResults');
+  const toggle = document.querySelector('.search-toggle');
+  let currentIndex = -1;
+
+  toggle.addEventListener('click', () => {
+    overlay.classList.add('active');
+    setTimeout(() => overlay.classList.add('fade-in'), 10);
+    input.focus();
+  });
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove('fade-in');
+      setTimeout(() => overlay.classList.remove('active'), 200);
+    }
+  });
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      overlay.classList.remove('fade-in');
+      setTimeout(() => overlay.classList.remove('active'), 200);
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const items = results.querySelectorAll('.search-result');
+      currentIndex = Math.min(currentIndex + 1, items.length - 1);
+      items.forEach((item, i) => {
+        item.classList.toggle('active', i === currentIndex);
+      });
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      const items = results.querySelectorAll('.search-result');
+      currentIndex = Math.max(currentIndex - 1, -1);
+      items.forEach((item, i) => {
+        item.classList.toggle('active', i === currentIndex);
+      });
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      const active = results.querySelector('.search-result.active');
+      if (active) active.click();
+    }
+  });
+
+  input.addEventListener('input', () => {
+    const query = input.value.toLowerCase().trim();
+    currentIndex = -1;
+
+    if (!query) {
+      results.innerHTML = '';
+      return;
+    }
+
+    const filtered = searchIndex.filter(item =>
+      item.title.toLowerCase().includes(query) ||
+      item.keywords.includes(query)
+    );
+
+    results.innerHTML = filtered.length
+      ? filtered.map((item, i) => `
+          <a href="${item.page}" class="search-result" data-index="${i}">
+            <div class="search-result-title">${item.title}</div>
+            <div class="search-result-page">${item.section}</div>
+          </a>
+        `).join('')
+      : '<div class="search-empty"><span>🔍</span>No results found</div>';
+  });
+}
+</script>
+<script src="gallery.js" defer></script>
 </body>
 </html>

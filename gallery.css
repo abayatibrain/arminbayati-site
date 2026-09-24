@@ -1,0 +1,150 @@
+/* ══════════════════════════════════════════════
+   Consolidated image gallery (gallery.js)
+   One gallery per page: filter chips, scroll-snap stage,
+   filmstrip, and a fullscreen <dialog> viewer.
+   Uses the page's design tokens (--ink, --rule, --accent, ...).
+   ══════════════════════════════════════════════ */
+
+.xg { max-width: 860px; margin: 28px 0 8px; }
+
+/* No-JS fallback: a plain responsive grid of figures */
+.xg:not(.is-ready) { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+.xg:not(.is-ready) .xg-item { margin: 0; }
+.xg:not(.is-ready) .xg-item img,
+.xg:not(.is-ready) .xg-item video { width: 100%; border-radius: 6px; border: 1px solid var(--rule); display: block; }
+.xg:not(.is-ready) .xg-item figcaption { font-size: 12px; color: var(--mid); margin-top: 6px; line-height: 1.45; }
+
+/* ── Filter chips ── */
+.xg-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.xg-chip {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.4px;
+  padding: 7px 12px; min-height: 34px;
+  border: 1px solid var(--rule); border-radius: 999px;
+  background: var(--card); color: var(--mid); cursor: pointer;
+  transition: border-color .2s, color .2s, background .2s;
+}
+.xg-chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.xg-chip-count { opacity: .7; margin-left: 4px; }
+
+/* ── Stage (light-table look in both themes) ── */
+.xg-stage { position: relative; border-radius: 8px; overflow: hidden; background: #0e1014; border: 1px solid var(--rule); }
+.xg-track {
+  display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+  scroll-behavior: smooth; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  aspect-ratio: 16 / 10; max-height: 70vh;
+}
+.xg-track::-webkit-scrollbar { display: none; }
+.xg-slide {
+  flex: 0 0 100%; scroll-snap-align: center; scroll-snap-stop: always;
+  display: flex; align-items: center; justify-content: center; margin: 0; padding: 14px;
+}
+.xg-slide[hidden] { display: none; }
+.xg-slide img, .xg-slide video {
+  max-width: 100%; max-height: 100%; width: auto; height: auto;
+  object-fit: contain; border-radius: 4px; cursor: zoom-in; display: block;
+}
+.xg-slide figcaption { display: none; }
+
+.xg-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 42px; height: 42px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.18); background: rgba(15,20,25,0.62);
+  color: #fff; font-size: 20px; line-height: 1; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  transition: background .2s, opacity .2s;
+}
+.xg-nav:disabled { opacity: .25; cursor: default; background: rgba(15,20,25,0.62); }
+.xg-prev { left: 12px; } .xg-next { right: 12px; }
+
+.xg-hud {
+  position: absolute; top: 12px; left: 12px; right: 12px;
+  display: flex; justify-content: space-between; align-items: center; pointer-events: none;
+}
+.xg-counter, .xg-expand {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .5px; color: #fff;
+  background: rgba(15,20,25,0.62); border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 999px; padding: 5px 11px;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+.xg-expand { pointer-events: auto; cursor: pointer; }
+
+/* ── Caption under the stage ── */
+.xg-caption { min-height: 3.2em; padding: 12px 2px 4px; font-size: 14px; line-height: 1.55; color: var(--ink); font-weight: 300; }
+.xg-caption-group { display: block; font-family: var(--mono); font-size: 10.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); margin-bottom: 3px; font-weight: 400; }
+
+/* ── Filmstrip ── */
+.xg-strip {
+  display: flex; gap: 8px; overflow-x: auto; padding: 6px 2px 10px;
+  scroll-snap-type: x proximity; scrollbar-width: thin;
+}
+.xg-thumb {
+  flex: 0 0 auto; width: 92px; height: 64px; padding: 0; scroll-snap-align: start;
+  border: 2px solid transparent; border-radius: 5px; overflow: hidden;
+  background: #0e1014; cursor: pointer; opacity: .55; transition: opacity .2s, border-color .2s;
+}
+.xg-thumb[aria-current="true"] { opacity: 1; border-color: var(--accent); }
+.xg-thumb[hidden] { display: none; }
+.xg-thumb img, .xg-thumb video { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+
+/* ── Fullscreen viewer ── */
+.xg-dialog {
+  width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0;
+  border: none; background: rgba(8,10,13,0.96); color: #e8e6e1;
+}
+.xg-dialog::backdrop { background: rgba(8,10,13,0.9); }
+.xg-dialog[open] { display: flex; flex-direction: column; }
+.xg-dialog-media { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 56px 64px 8px; }
+.xg-dialog-media img, .xg-dialog-media video { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 4px; }
+.xg-dialog-caption { padding: 10px 24px 22px; text-align: center; font-size: 14px; line-height: 1.55; font-weight: 300; max-width: 900px; margin: 0 auto; }
+.xg-dialog-caption .xg-caption-group { color: #e57368; }
+.xg-dialog .xg-nav { top: 50%; }
+.xg-close {
+  position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.06);
+  color: #fff; font-size: 20px; cursor: pointer;
+}
+.xg-dialog-counter { position: absolute; top: 22px; left: 22px; font-family: var(--mono); font-size: 12px; color: rgba(255,255,255,0.7); }
+
+/* ── In-section jump links ("View 7 images in the gallery") ── */
+a.xg-jump, a.xg-jump:hover {
+  display: flex; align-items: center; gap: 14px; max-width: 760px; margin: 22px 0;
+  padding: 10px 14px 10px 10px; border: 1px solid var(--rule); border-radius: 8px;
+  background: var(--card); color: var(--ink) !important;
+  text-decoration: none !important; border-bottom: 1px solid var(--rule) !important;
+  transition: border-color .2s, box-shadow .2s;
+}
+a.xg-jump:hover { border-color: var(--accent) !important; box-shadow: 0 4px 14px rgba(0,0,0,0.06); }
+.xg-jump-thumbs { display: flex; flex: 0 0 auto; }
+.xg-jump-thumbs img, .xg-jump-thumbs video {
+  width: 48px; height: 48px; object-fit: cover; border-radius: 5px;
+  border: 2px solid var(--card); background: #0e1014; margin-left: -14px;
+}
+.xg-jump-thumbs > :first-child { margin-left: 0; }
+.xg-jump-text { flex: 1; font-size: 13.5px; line-height: 1.4; color: var(--mid); }
+.xg-jump-text strong { color: var(--ink); font-weight: 600; }
+.xg-jump-cta { font-family: var(--mono); font-size: 11px; letter-spacing: .5px; color: var(--accent); white-space: nowrap; }
+
+/* hover effects only where a real pointer can hover (avoids sticky states on touch) */
+@media (hover: hover) {
+  .xg-chip:hover { border-color: var(--accent); color: var(--ink); }
+  .xg-nav:hover { background: var(--accent); }
+  .xg-expand:hover { background: var(--accent); }
+  .xg-thumb:hover { opacity: .9; }
+  .xg-close:hover { background: var(--accent); }
+}
+
+@media (max-width: 640px) {
+  .xg-track { aspect-ratio: 4 / 3.4; }
+  .xg-slide { padding: 8px; }
+  .xg-nav { width: 36px; height: 36px; font-size: 17px; }
+  .xg-prev { left: 6px; } .xg-next { right: 6px; }
+  .xg-thumb { width: 72px; height: 52px; }
+  .xg-dialog-media { padding: 56px 8px 8px; }
+  .xg-dialog .xg-nav { top: auto; bottom: 18px; transform: none; }
+  .xg-dialog-caption { padding-bottom: 72px; font-size: 13px; }
+  .xg-jump-cta { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .xg-track { scroll-behavior: auto; }
+}

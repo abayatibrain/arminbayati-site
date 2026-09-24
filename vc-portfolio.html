@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111318" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>@view-transition { navigation: auto; } @media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }</style>
+<script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"selector_matches":"[target=_blank], [download]"}}]},"eagerness":"moderate"}]}</script>
 <title>Portfolio & VC — Armin Bayati, PhD</title>
 <meta name="description" content="Translational scientist with drug discovery, biopharma partnership, and scientific portfolio management experience for VC, biotech, and pharmaceutical employers.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -486,36 +491,6 @@ nav {
 }
 
 /* ── WORKFLOW STRIP ── */
-
-<!-- ═══ NEW KEYWORD SECTIONS ═══ -->
-<div class="section reveal">
-  <div class="section-header">
-    <div class="section-index">
-      <div class="section-number">+</div>
-      <div class="section-label">Methods</div>
-    </div>
-    <div class="section-content">
-      <h2>Detailed Methodology &amp; Techniques</h2>
-      <p>Comprehensive descriptions of key experimental techniques, assay platforms, and analytical methods referenced throughout this page.</p>
-
-      <div class="subsection" id="ip-strategy">
-        <div class="subsection-label">IP &amp; Patent Strategy</div>
-        <p>I have contributed to <strong>patent filings</strong> related to small-molecule Parkin agonists (FB231 series) and novel disease modeling methods. My dual-hit Lewy body model represents a <strong>patentable technology platform</strong> for drug screening. I understand the IP landscape around iPSC-derived disease models, compound composition of matter, and method-of-use patents for neurodegeneration therapeutics. My work has generated data packages supporting patent prosecution for biopharma partners.</p>
-        
-        
-        
-      </div>
-
-      <div class="subsection" id="in-vivo">
-        <div class="subsection-label">In Vivo Mouse Models</div>
-        <p>I have experience with <strong>in vivo mouse models</strong> including LRRK2-G2019S knock-in, α-synuclein A53T transgenic, and tumor xenograft models. My <em>in vivo</em> work includes tissue harvesting, immune profiling of spleen/lymph node/brain, behavioral assessments, and stereotaxic injections. I bridge <em>in vitro</em> iPSC findings to <em>in vivo</em> validation, providing translational relevance critical for IND-enabling studies and investor diligence.</p>
-        
-        
-        
-      </div>
-    </div>
-  </div>
-</div>
 
 .workflow-strip {
   background: var(--ink);
@@ -2112,6 +2087,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
           <button class="nav-drop-trigger">Code &amp; AI</button>
           <div class="nav-drop-panel">
             <a href="code-and-ai.html">Code &amp; AI &mdash; Overview</a>
+            <a href="ai-ml.html">AI/ML Evaluation &amp; Training</a>
             <a href="code-ai-agents.html">Agents &amp; MCP</a>
             <a href="code-ai-models.html">ML &amp; Foundation Models</a>
             <a href="code-ai-pipelines.html">Bio Pipelines &amp; Automation</a>
@@ -2482,19 +2458,27 @@ document.addEventListener('click', function(e){
       <div class="section-label">Credentials</div>
     </div>
     <div class="section-content">
-      <h2>Education &amp; Credentials</h2>
+      <h2>Experience, Education &amp; Credentials</h2>
 
       <div style="margin-bottom:20px;">
+        <p style="font-weight:600;">Merck</p>
+        <p style="font-size:14px; color:var(--mid);">Senior Scientist III, Neuroimmunology &middot; 2026&ndash;Present</p>
+      </div>
+      <div style="margin-bottom:20px;">
+        <p style="font-weight:600;">Aligned Labs</p>
+        <p style="font-size:14px; color:var(--mid);">Fellow, AI/ML Training in Cell Biology &amp; Neuroscience &middot; 2026&ndash;Present &middot; <a href="ai-ml.html" style="color:var(--accent);">AI/ML work</a></p>
+      </div>
+      <div style="margin-bottom:20px;">
         <p style="font-weight:600;">Harvard Medical School &amp; Mass General Brigham</p>
-        <p style="font-size:14px; color:var(--mid);">Research Fellow, Department of Neurology &mdash; 2024&ndash;Present</p>
+        <p style="font-size:14px; color:var(--mid);">Research Fellow, Department of Neurology &middot; 2024&ndash;2026</p>
       </div>
       <div style="margin-bottom:20px;">
         <p style="font-weight:600;">McGill University</p>
-        <p style="font-size:14px; color:var(--mid);">PhD in Neuroscience (Specialty in Translational Science) &mdash; 2018&ndash;2023</p>
+        <p style="font-size:14px; color:var(--mid);">PhD in Neuroscience (Specialty in Cell Biology) &middot; 2018&ndash;2023</p>
       </div>
       <div style="margin-bottom:20px;">
         <p style="font-weight:600;">University of Victoria</p>
-        <p style="font-size:14px; color:var(--mid);">BSc in Biology and Psychology (Honours with Distinction) &mdash; 2013&ndash;2018</p>
+        <p style="font-size:14px; color:var(--mid);">BSc in Biology and Psychology (Honours with Distinction) &middot; 2013&ndash;2018</p>
       </div>
       <div style="margin-bottom:20px;">
         <p style="font-weight:600;">Member, Royal Society of Biology (MRSB)</p>
@@ -2505,11 +2489,41 @@ document.addEventListener('click', function(e){
   </div>
 </div>
 
+<!-- ═══ NEW KEYWORD SECTIONS ═══ -->
+<div class="section reveal">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">+</div>
+      <div class="section-label">Methods</div>
+    </div>
+    <div class="section-content">
+      <h2>Detailed Methodology &amp; Techniques</h2>
+      <p>Comprehensive descriptions of key experimental techniques, assay platforms, and analytical methods referenced throughout this page.</p>
+
+      <div class="subsection" id="ip-strategy">
+        <div class="subsection-label">IP &amp; Patent Strategy</div>
+        <p>I have contributed to <strong>patent filings</strong> related to small-molecule Parkin agonists (FB231 series) and novel disease modeling methods. My dual-hit Lewy body model represents a <strong>patentable technology platform</strong> for drug screening. I understand the IP landscape around iPSC-derived disease models, compound composition of matter, and method-of-use patents for neurodegeneration therapeutics. My work has generated data packages supporting patent prosecution for biopharma partners.</p>
+        
+        
+        
+      </div>
+
+      <div class="subsection" id="in-vivo">
+        <div class="subsection-label">In Vivo Mouse Models</div>
+        <p>I have experience with <strong>in vivo mouse models</strong> including LRRK2-G2019S knock-in, α-synuclein A53T transgenic, and tumor xenograft models. My <em>in vivo</em> work includes tissue harvesting, immune profiling of spleen/lymph node/brain, behavioral assessments, and stereotaxic injections. I bridge <em>in vitro</em> iPSC findings to <em>in vivo</em> validation, providing translational relevance critical for IND-enabling studies and investor diligence.</p>
+        
+        
+        
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="page-footer">
     <div class="footer-inner">
       <div class="footer-brand">
         <div class="footer-name">Armin Bayati, PhD</div>
-        <div class="footer-role">Research Fellow · Harvard Medical School &amp; Massachusetts General Hospital</div>
+        <div class="footer-role">Senior Scientist III, Neuroimmunology &middot; Merck<br>AI/ML Training Fellow &middot; Aligned Labs</div>
       </div>
       <div class="footer-links-grid">
         <div class="footer-col">
@@ -2518,6 +2532,7 @@ document.addEventListener('click', function(e){
             <a href="neuroimmunology.html">Neuroimmunology</a>
           <a href="cancer-immunology.html">Cancer Immunology</a>
           <a href="drug-discovery.html">Drug Discovery</a>
+          <a href="ai-ml.html">AI/ML Work</a>
           <a href="proteomics.html">Proteomics</a>
         </div>
         <div class="footer-col">
@@ -2552,6 +2567,36 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 (function() {
   var searchIndex = [
     // Page-level entries
+    {page:'ai-ml.html', title:'AI/ML Evaluation & Training', category:'Main', section:'',
+     keywords:'ai ml artificial intelligence machine learning aligned labs fellow fellowship model evaluation llm training rubric grading reference responses foundation models scgpt geneformer benchmarking contamination audit dataset labeling cell biology neuroscience pharmacology',
+     description:'AI/ML work: evaluating and training AI for biology at Aligned Labs, plus applied machine learning for drug discovery.'},
+    {page:'ai-ml.html#aligned', title:'Aligned Labs Fellowship', category:'Industry', section:'AI/ML',
+     keywords:'aligned labs fellow ai ml training cell biology neuroscience pharmacology model-generated content evaluation primary literature expert reference responses remote',
+     description:'Fellow, AI/ML Training in Cell Biology & Neuroscience: evaluating model-generated science against primary literature.'},
+    {page:'ai-ml.html#rubric', title:'How I Grade Model Output', category:'Industry', section:'AI/ML',
+     keywords:'rubric scoring grading accuracy reasoning citation quality calibration completeness hallucination llm evaluation worked example alpha-synuclein lag3',
+     description:'Rubric dimensions for grading model-generated science, with a worked example.'},
+    {page:'ai-ml.html#failure-modes', title:'Where Models Go Wrong on Biology', category:'Industry', section:'AI/ML',
+     keywords:'failure modes hallucinated citations model system drift ipsc ic50 ec50 ki kd gwas causal gene benchmark contamination calibration llm errors',
+     description:'Recurring errors in model-generated biology: fake citations, model-system drift, potency confusion, GWAS overreach.'},
+    {page:'ai-ml.html#applied', title:'Machine Learning at the Bench', category:'Technical', section:'AI/ML',
+     keywords:'applied machine learning image segmentation phenotype classification multi-omics target validation mechanism of action automorphotrack high-content screening opera phenix merck',
+     description:'ML on experimental data: multi-omics target validation, AutoMorphoTrack, foundation-model probes, imaging ML.'},
+    {page:'index.html#experience', title:'Work Experience & Education', category:'Main', section:'Experience',
+     keywords:'experience cv resume merck senior scientist iii neuroimmunology aligned labs harvard medical school mass general brigham research fellow montreal neurological institute mcgill phd university of victoria',
+     description:'Merck, Aligned Labs, Harvard Medical School & MGB, Montreal Neurological Institute, McGill, University of Victoria.'},
+    {page:'code-and-ai.html', title:'Code & AI Overview', category:'Technical', section:'',
+     keywords:'code ai python typescript github open source mcp claude code langgraph pytorch projects portfolio',
+     description:'Open-source computational projects: MCP servers, agentic systems, PyTorch models, bio pipelines, lab automation.'},
+    {page:'code-ai-agents.html', title:'Agents & MCP', category:'Technical', section:'Code & AI',
+     keywords:'agents mcp model context protocol claude code agent sdk langgraph bioscope automorphotrack tool calling',
+     description:'MCP servers, Claude Code sub-agents, and LangGraph orchestration over biomedical APIs.'},
+    {page:'code-ai-models.html', title:'ML & Foundation Models', category:'Technical', section:'Code & AI',
+     keywords:'machine learning foundation models pytorch clip contrastive morph2expr scgpt geneformer embedding cell painting l1000',
+     description:'CLIP-style PyTorch alignment of imaging and transcriptomics; zero-shot scGPT and Geneformer evaluation.'},
+    {page:'code-ai-pipelines.html', title:'Bio Pipelines & Automation', category:'Technical', section:'Code & AI',
+     keywords:'bioinformatics pipelines automation scanpy pydeseq2 target credentialing crispr atlas pylabrobot opentrons liquid handling segmentation',
+     description:'Target credentialing from single-nucleus data, CRISPR phenocopy atlas, and iPSC liquid-handling automation.'},
     {page:'crispr-screening.html', title:'CRISPR Screening', category:'Research', section:'',
      keywords:'crispr screening functional genomics pooled arrayed knockout mitophagy alpha-synuclein viral entry sars-cov-2 volcano plot heatmap ipsc neurons cardiomyocytes park2 pink1 bnip3l rac1 cltc interactive figures',
      description:'Interactive CRISPR screening outcomes across mitophagy, alpha-synuclein uptake, and viral entry campaigns.'},
@@ -2568,7 +2613,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
      keywords:'cross-screen validation heatmap scrnaseq umap seahorse ocr metabolic profiling transcriptomics integration multi-omics',
      description:'Multi-screen validation heatmap and single-cell transcriptomic analysis of CRISPR-perturbed neurons.'},
     {page:'index.html', title:'Home — Overview', category:'Main', section:'',
-     keywords:'armin bayati phd neuroscience cell biology drug discovery harvard medical school mass general brigham research fellow translational science',
+     keywords:'armin bayati phd neuroscience cell biology drug discovery merck senior scientist neuroimmunology aligned labs ai ml harvard medical school mass general brigham research fellow translational science',
      description:'Overview of research portfolio spanning neurodegeneration, drug discovery, and translational science.'},
     {page:'ipscs.html', title:'iPSC-Derived Neurons', category:'Research', section:'',
      keywords:'ipsc induced pluripotent stem cells dopaminergic neurons cortical neurons differentiation disease modeling parkinson lewy body dual-hit mea calcium imaging electrophysiology co-culture microglia astrocyte',

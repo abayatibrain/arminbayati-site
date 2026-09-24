@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111318" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>@view-transition { navigation: auto; } @media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }</style>
+<script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"selector_matches":"[target=_blank], [download]"}}]},"eagerness":"moderate"}]}</script>
 <title>Primary Neuronal Culture — Armin Bayati, PhD</title>
 <meta name="description" content="Primary rat hippocampal neuronal culture: isolation, maturation, lysosomal trafficking, electrophysiology, and cargo delivery assays.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2406,6 +2411,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
 
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>/* skip charts whose canvas isn't on this page instead of throwing */if(window.Chart&&!window.Chart.__lcGuard){window.Chart=new Proxy(window.Chart,{construct:function(T,a,N){return a[0]?Reflect.construct(T,a,N):{destroy:function(){},update:function(){},resize:function(){},data:{labels:[],datasets:[]},options:{}};},get:function(T,k){return k==='__lcGuard'?true:T[k];}});}</script>
 </head>
 <body><script>if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark');</script>
 
@@ -2446,6 +2452,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
           <button class="nav-drop-trigger">Code &amp; AI</button>
           <div class="nav-drop-panel">
             <a href="code-and-ai.html">Code &amp; AI &mdash; Overview</a>
+            <a href="ai-ml.html">AI/ML Evaluation &amp; Training</a>
             <a href="code-ai-agents.html">Agents &amp; MCP</a>
             <a href="code-ai-models.html">ML &amp; Foundation Models</a>
             <a href="code-ai-pipelines.html">Bio Pipelines &amp; Automation</a>
@@ -2954,7 +2961,7 @@ document.addEventListener('click', function(e){
     <div class="footer-inner">
       <div class="footer-brand">
         <div class="footer-name">Armin Bayati, PhD</div>
-        <div class="footer-role">Research Fellow · Harvard Medical School &amp; Massachusetts General Hospital</div>
+        <div class="footer-role">Senior Scientist III, Neuroimmunology &middot; Merck<br>AI/ML Training Fellow &middot; Aligned Labs</div>
       </div>
       <div class="footer-links-grid">
         <div class="footer-col">
@@ -2963,6 +2970,7 @@ document.addEventListener('click', function(e){
             <a href="neuroimmunology.html">Neuroimmunology</a>
           <a href="cancer-immunology.html">Cancer Immunology</a>
           <a href="drug-discovery.html">Drug Discovery</a>
+          <a href="ai-ml.html">AI/ML Work</a>
           <a href="proteomics.html">Proteomics</a>
         </div>
         <div class="footer-col">
@@ -3067,6 +3075,36 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 (function() {
   var searchIndex = [
     // Page-level entries
+    {page:'ai-ml.html', title:'AI/ML Evaluation & Training', category:'Main', section:'',
+     keywords:'ai ml artificial intelligence machine learning aligned labs fellow fellowship model evaluation llm training rubric grading reference responses foundation models scgpt geneformer benchmarking contamination audit dataset labeling cell biology neuroscience pharmacology',
+     description:'AI/ML work: evaluating and training AI for biology at Aligned Labs, plus applied machine learning for drug discovery.'},
+    {page:'ai-ml.html#aligned', title:'Aligned Labs Fellowship', category:'Industry', section:'AI/ML',
+     keywords:'aligned labs fellow ai ml training cell biology neuroscience pharmacology model-generated content evaluation primary literature expert reference responses remote',
+     description:'Fellow, AI/ML Training in Cell Biology & Neuroscience: evaluating model-generated science against primary literature.'},
+    {page:'ai-ml.html#rubric', title:'How I Grade Model Output', category:'Industry', section:'AI/ML',
+     keywords:'rubric scoring grading accuracy reasoning citation quality calibration completeness hallucination llm evaluation worked example alpha-synuclein lag3',
+     description:'Rubric dimensions for grading model-generated science, with a worked example.'},
+    {page:'ai-ml.html#failure-modes', title:'Where Models Go Wrong on Biology', category:'Industry', section:'AI/ML',
+     keywords:'failure modes hallucinated citations model system drift ipsc ic50 ec50 ki kd gwas causal gene benchmark contamination calibration llm errors',
+     description:'Recurring errors in model-generated biology: fake citations, model-system drift, potency confusion, GWAS overreach.'},
+    {page:'ai-ml.html#applied', title:'Machine Learning at the Bench', category:'Technical', section:'AI/ML',
+     keywords:'applied machine learning image segmentation phenotype classification multi-omics target validation mechanism of action automorphotrack high-content screening opera phenix merck',
+     description:'ML on experimental data: multi-omics target validation, AutoMorphoTrack, foundation-model probes, imaging ML.'},
+    {page:'index.html#experience', title:'Work Experience & Education', category:'Main', section:'Experience',
+     keywords:'experience cv resume merck senior scientist iii neuroimmunology aligned labs harvard medical school mass general brigham research fellow montreal neurological institute mcgill phd university of victoria',
+     description:'Merck, Aligned Labs, Harvard Medical School & MGB, Montreal Neurological Institute, McGill, University of Victoria.'},
+    {page:'code-and-ai.html', title:'Code & AI Overview', category:'Technical', section:'',
+     keywords:'code ai python typescript github open source mcp claude code langgraph pytorch projects portfolio',
+     description:'Open-source computational projects: MCP servers, agentic systems, PyTorch models, bio pipelines, lab automation.'},
+    {page:'code-ai-agents.html', title:'Agents & MCP', category:'Technical', section:'Code & AI',
+     keywords:'agents mcp model context protocol claude code agent sdk langgraph bioscope automorphotrack tool calling',
+     description:'MCP servers, Claude Code sub-agents, and LangGraph orchestration over biomedical APIs.'},
+    {page:'code-ai-models.html', title:'ML & Foundation Models', category:'Technical', section:'Code & AI',
+     keywords:'machine learning foundation models pytorch clip contrastive morph2expr scgpt geneformer embedding cell painting l1000',
+     description:'CLIP-style PyTorch alignment of imaging and transcriptomics; zero-shot scGPT and Geneformer evaluation.'},
+    {page:'code-ai-pipelines.html', title:'Bio Pipelines & Automation', category:'Technical', section:'Code & AI',
+     keywords:'bioinformatics pipelines automation scanpy pydeseq2 target credentialing crispr atlas pylabrobot opentrons liquid handling segmentation',
+     description:'Target credentialing from single-nucleus data, CRISPR phenocopy atlas, and iPSC liquid-handling automation.'},
     {page:'crispr-screening.html', title:'CRISPR Screening', category:'Research', section:'',
      keywords:'crispr screening functional genomics pooled arrayed knockout mitophagy alpha-synuclein viral entry sars-cov-2 volcano plot heatmap ipsc neurons cardiomyocytes park2 pink1 bnip3l rac1 cltc interactive figures',
      description:'Interactive CRISPR screening outcomes across mitophagy, alpha-synuclein uptake, and viral entry campaigns.'},
@@ -3083,7 +3121,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
      keywords:'cross-screen validation heatmap scrnaseq umap seahorse ocr metabolic profiling transcriptomics integration multi-omics',
      description:'Multi-screen validation heatmap and single-cell transcriptomic analysis of CRISPR-perturbed neurons.'},
     {page:'index.html', title:'Home — Overview', category:'Main', section:'',
-     keywords:'armin bayati phd neuroscience cell biology drug discovery harvard medical school mass general brigham research fellow translational science',
+     keywords:'armin bayati phd neuroscience cell biology drug discovery merck senior scientist neuroimmunology aligned labs ai ml harvard medical school mass general brigham research fellow translational science',
      description:'Overview of research portfolio spanning neurodegeneration, drug discovery, and translational science.'},
     {page:'ipscs.html', title:'iPSC-Derived Neurons', category:'Research', section:'',
      keywords:'ipsc induced pluripotent stem cells dopaminergic neurons cortical neurons differentiation disease modeling parkinson lewy body dual-hit mea calcium imaging electrophysiology co-culture microglia astrocyte',
