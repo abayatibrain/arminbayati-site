@@ -2201,6 +2201,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
 
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>/* skip charts whose canvas isn't on this page instead of throwing */if(window.Chart&&!window.Chart.__lcGuard){window.Chart=new Proxy(window.Chart,{construct:function(T,a,N){return a[0]?Reflect.construct(T,a,N):{destroy:function(){},update:function(){},resize:function(){},data:{labels:[],datasets:[]},options:{}};},get:function(T,k){return k==='__lcGuard'?true:T[k];}});}</script>
 </head>
 <body><script>if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark');</script>
 
@@ -3590,7 +3591,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // ── New keyword section charts ──
 
-new Chart(document.getElementById('adccLysisChart').getContext('2d'), {
+new Chart(document.getElementById('adccLysisChart'), {
   type: 'line',
   data: {
     labels: ['1:1', '5:1', '10:1', '25:1', '50:1'],
@@ -3610,7 +3611,7 @@ new Chart(document.getElementById('adccLysisChart').getContext('2d'), {
               x: { title: { display: true, text: 'E:T Ratio' }}}}
 });
 
-new Chart(document.getElementById('cdcPotencyChart').getContext('2d'), {
+new Chart(document.getElementById('cdcPotencyChart'), {
   type: 'bar',
   data: {
     labels: ['Rituximab', 'Ofatumumab', 'IgG2 variant', 'Fc-silent', 'Isotype'],
@@ -3624,7 +3625,7 @@ new Chart(document.getElementById('cdcPotencyChart').getContext('2d'), {
     scales: { y: { beginAtZero: true, max: 100, title: { display: true, text: '% Lysis (PI uptake)' }}}}
 });
 
-new Chart(document.getElementById('nkActivChart').getContext('2d'), {
+new Chart(document.getElementById('nkActivChart'), {
   type: 'bar',
   data: {
     labels: ['CD107a+', 'IFN-γ+', 'TNF+', 'Perforin+', 'Granzyme B+'],
@@ -3643,7 +3644,7 @@ new Chart(document.getElementById('nkActivChart').getContext('2d'), {
     scales: { y: { beginAtZero: true, max: 100, title: { display: true, text: '% Positive NK Cells' }}}}
 });
 
-new Chart(document.getElementById('cocultureKinChart').getContext('2d'), {
+new Chart(document.getElementById('cocultureKinChart'), {
   type: 'line',
   data: {
     labels: ['0h','4h','8h','12h','16h','20h','24h','36h','48h'],

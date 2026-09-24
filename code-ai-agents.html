@@ -2425,6 +2425,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
 
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>/* skip charts whose canvas isn't on this page instead of throwing */if(window.Chart&&!window.Chart.__lcGuard){window.Chart=new Proxy(window.Chart,{construct:function(T,a,N){return a[0]?Reflect.construct(T,a,N):{destroy:function(){},update:function(){},resize:function(){},data:{labels:[],datasets:[]},options:{}};},get:function(T,k){return k==='__lcGuard'?true:T[k];}});}</script>
 <!-- CODE-AND-AI DEAD-SCRIPT STRIP 2026-05-20 -->
 <!-- CHART-STRETCH FIX 2026-05-20 -->
 </head>
@@ -3057,7 +3058,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 // ── Agents page charts + MCP simulator ──
 
 // AMT timing
-new Chart(document.getElementById('amtTimingChart').getContext('2d'), {
+new Chart(document.getElementById('amtTimingChart'), {
   type: 'bar',
   data: {
     labels: ['pip install', 'claude mcp add', 'cold spawn', 'first tool call'],

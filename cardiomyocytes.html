@@ -2360,6 +2360,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
 
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>/* skip charts whose canvas isn't on this page instead of throwing */if(window.Chart&&!window.Chart.__lcGuard){window.Chart=new Proxy(window.Chart,{construct:function(T,a,N){return a[0]?Reflect.construct(T,a,N):{destroy:function(){},update:function(){},resize:function(){},data:{labels:[],datasets:[]},options:{}};},get:function(T,k){return k==='__lcGuard'?true:T[k];}});}</script>
 </head>
 <body><script>if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark');</script>
 
@@ -3631,7 +3632,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // ── New keyword section charts ──
 
-new Chart(document.getElementById('contractChart').getContext('2d'), {
+new Chart(document.getElementById('contractChart'), {
   type: 'line',
   data: {
     labels: ['DIV 14', 'DIV 21', 'DIV 28', 'DIV 35', 'DIV 42', 'DIV 56'],
@@ -3650,7 +3651,7 @@ new Chart(document.getElementById('contractChart').getContext('2d'), {
     }}
 });
 
-new Chart(document.getElementById('apdChart').getContext('2d'), {
+new Chart(document.getElementById('apdChart'), {
   type: 'bar',
   data: {
     labels: ['Ventricular', 'Atrial', 'Nodal-like'],
@@ -3669,7 +3670,7 @@ new Chart(document.getElementById('apdChart').getContext('2d'), {
     scales: { y: { beginAtZero: true, title: { display: true, text: 'Duration (ms)' }}}}
 });
 
-new Chart(document.getElementById('hcsCardioChart').getContext('2d'), {
+new Chart(document.getElementById('hcsCardioChart'), {
   type: 'scatter',
   data: {
     datasets: [{

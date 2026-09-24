@@ -2718,10 +2718,11 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>/* skip charts whose canvas isn't on this page instead of throwing */if(window.Chart&&!window.Chart.__lcGuard){window.Chart=new Proxy(window.Chart,{construct:function(T,a,N){return a[0]?Reflect.construct(T,a,N):{destroy:function(){},update:function(){},resize:function(){},data:{labels:[],datasets:[]},options:{}};},get:function(T,k){return k==='__lcGuard'?true:T[k];}});}</script>
 <script>
 // ── New keyword section charts ──
 
-new Chart(document.getElementById('myeloidChart').getContext('2d'), {
+new Chart(document.getElementById('myeloidChart'), {
   type: 'bar',
   data: {
     labels: ['Classical Mono', 'Intermediate', 'Non-classical', 'DC', 'Macrophage', 'Microglia-like'],
@@ -2737,7 +2738,7 @@ new Chart(document.getElementById('myeloidChart').getContext('2d'), {
     scales: { y: { beginAtZero: true, title: { display: true, text: '% of Myeloid Gate' }}}}
 });
 
-new Chart(document.getElementById('ki67Chart').getContext('2d'), {
+new Chart(document.getElementById('ki67Chart'), {
   type: 'line',
   data: {
     labels: ['D0', 'D1', 'D2', 'D3', 'D5', 'D7', 'D10', 'D14'],
@@ -2754,7 +2755,7 @@ new Chart(document.getElementById('ki67Chart').getContext('2d'), {
               x: { title: { display: true, text: 'Days post-stimulation' }}}}
 });
 
-new Chart(document.getElementById('lnChart').getContext('2d'), {
+new Chart(document.getElementById('lnChart'), {
   type: 'bar',
   data: {
     labels: ['CD4+ T', 'CD8+ T', 'B cells', 'NK cells', 'DC', 'Macrophage', 'GC B'],
@@ -2770,7 +2771,7 @@ new Chart(document.getElementById('lnChart').getContext('2d'), {
     scales: { y: { beginAtZero: true, title: { display: true, text: '% of Live Cells' }}}}
 });
 
-new Chart(document.getElementById('lrrk2Chart').getContext('2d'), {
+new Chart(document.getElementById('lrrk2Chart'), {
   type: 'bar',
   data: {
     labels: ['CD4+ T', 'CD8+ T', 'Treg', 'B cells', 'NK', 'Ly6C-hi Mono', 'DC', 'Macrophage'],

@@ -2192,6 +2192,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
 
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>/* skip charts whose canvas isn't on this page instead of throwing */if(window.Chart&&!window.Chart.__lcGuard){window.Chart=new Proxy(window.Chart,{construct:function(T,a,N){return a[0]?Reflect.construct(T,a,N):{destroy:function(){},update:function(){},resize:function(){},data:{labels:[],datasets:[]},options:{}};},get:function(T,k){return k==='__lcGuard'?true:T[k];}});}</script>
 <link rel="stylesheet" href="gallery.css">
 <style>#gallery { scroll-margin-top: 96px; }</style>
 </head>
@@ -3080,7 +3081,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 // ── Microscopy Method Charts ──
 
 // Resolution Comparison
-new Chart(document.getElementById('resolutionChart').getContext('2d'), {
+new Chart(document.getElementById('resolutionChart'), {
   type: 'bar',
   data: {
     labels: ['Widefield', 'Confocal', 'Airyscan', 'SIM', 'TIRF (axial)', 'STED', 'dSTORM'],
@@ -3098,7 +3099,7 @@ new Chart(document.getElementById('resolutionChart').getContext('2d'), {
 // STED Aggregate Size Distribution
 (function(){
   var bins = ['<50', '50-100', '100-200', '200-400', '400-800', '>800'];
-  new Chart(document.getElementById('stedChart').getContext('2d'), {
+  new Chart(document.getElementById('stedChart'), {
     type: 'bar',
     data: {
       labels: bins,
@@ -3125,7 +3126,7 @@ new Chart(document.getElementById('resolutionChart').getContext('2d'), {
 // TIRF Membrane Binding Events
 (function(){
   var t = [0, 1, 2, 3, 4, 5];
-  new Chart(document.getElementById('tirfChart').getContext('2d'), {
+  new Chart(document.getElementById('tirfChart'), {
     type: 'line',
     data: {
       labels: t.map(function(v){ return v + ' min'; }),
@@ -3150,7 +3151,7 @@ new Chart(document.getElementById('resolutionChart').getContext('2d'), {
 })();
 
 // CLEM Inclusion Classification
-new Chart(document.getElementById('clemChart').getContext('2d'), {
+new Chart(document.getElementById('clemChart'), {
   type: 'bar',
   data: {
     labels: ['Membrane-bound\nfibrillar', 'Non-membrane\nfibrillar', 'Amorphous\naggregates', 'Lysosomal\ninclusions', 'Mitochondria-\nassociated'],
@@ -3168,7 +3169,7 @@ new Chart(document.getElementById('clemChart').getContext('2d'), {
 // IncuCyte Live-Cell
 (function(){
   var days = ['Day 0','Day 1','Day 2','Day 3','Day 4','Day 5','Day 6','Day 7'];
-  new Chart(document.getElementById('incucyteChart').getContext('2d'), {
+  new Chart(document.getElementById('incucyteChart'), {
     type: 'line',
     data: {
       labels: days,

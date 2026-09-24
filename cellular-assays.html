@@ -492,48 +492,6 @@ nav {
 
 /* ── WORKFLOW STRIP ── */
 
-<!-- ═══ NEW KEYWORD SECTIONS ═══ -->
-<div class="section reveal">
-  <div class="section-header">
-    <div class="section-index">
-      <div class="section-number">+</div>
-      <div class="section-label">Methods</div>
-    </div>
-    <div class="section-content">
-      <h2>Detailed Methodology &amp; Techniques</h2>
-      <p>Comprehensive descriptions of key experimental techniques, assay platforms, and analytical methods referenced throughout this page.</p>
-
-      <div class="subsection" id="autophagy">
-        <div class="subsection-label">Autophagy &amp; Mitophagy</div>
-        <p>I measure <strong>autophagic flux</strong> using LC3-II/LC3-I ratio (Western blot), LC3-GFP puncta quantification (high-content imaging), and p62/SQSTM1 degradation kinetics. For mitophagy specifically, I use <strong>PINK1/Parkin-dependent</strong> mitochondrial clearance assays with MitoTracker/LysoTracker colocalization, mt-Keima pH-sensitive reporter imaging, and COXII degradation by Western blot. These assays are central to our Parkinson disease drug discovery program targeting lysosomal-autophagic rescue.</p>
-        
-        
-        <div class="chart-container">
-          <div class="chart-title">Fig. — Autophagic Flux: LC3-II Accumulation</div>
-          <div class="chart-subtitle">LC3-II/LC3-I ratio ± Bafilomycin A1 across treatment conditions</div>
-          <canvas id="autophagyChart" height="260"></canvas>
-          <div class="chart-note">Western blot densitometry. BafA1 (100 nM, 4 hr). n=3 biological replicates.</div>
-        </div>
-        
-      </div>
-
-      <div class="subsection" id="immunocytochemistry">
-        <div class="subsection-label">Immunocytochemistry (ICC)</div>
-        <p>I perform multi-channel <strong>immunocytochemistry (ICC)</strong> with up to 5 fluorescent channels for cell identity, protein localization, and co-expression analysis. Protocols include standard paraformaldehyde fixation, permeabilization (Triton X-100 or saponin for membrane vs intracellular targets), and blocking optimization. I routinely stain for <strong>neuronal markers</strong> (TH, MAP2, NeuN, GFAP), <strong>pluripotency markers</strong> (OCT4, SOX2, NANOG), and <strong>disease markers</strong> (phospho-α-synuclein, ubiquitin, LAMP1/2). Imaging is performed on confocal (Leica SP8) or high-content (Opera Phenix) platforms.</p>
-        
-        
-        <div class="chart-container">
-          <div class="chart-title">Fig. — Multi-Channel ICC Panel Design</div>
-          <div class="chart-subtitle">Signal-to-noise ratio across fluorophore channels in 5-plex ICC panel</div>
-          <canvas id="iccChannelChart" height="260"></canvas>
-          <div class="chart-note">Leica SP8 confocal. Sequential scanning to minimize bleedthrough. n=10 fields.</div>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-</div>
-
 .workflow-strip {
   background: var(--ink);
   color: #fff;
@@ -2289,6 +2247,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
 
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>/* skip charts whose canvas isn't on this page instead of throwing */if(window.Chart&&!window.Chart.__lcGuard){window.Chart=new Proxy(window.Chart,{construct:function(T,a,N){return a[0]?Reflect.construct(T,a,N):{destroy:function(){},update:function(){},resize:function(){},data:{labels:[],datasets:[]},options:{}};},get:function(T,k){return k==='__lcGuard'?true:T[k];}});}</script>
 <link rel="stylesheet" href="gallery.css">
 <style>#gallery { scroll-margin-top: 96px; }</style>
 </head>
@@ -2703,6 +2662,48 @@ document.addEventListener('click', function(e){
         <div class="chart-subtitle">Target cell viability at varying E:T ratios ± anti-PD-1 checkpoint blockade</div>
         <canvas id="killingChart" height="260"></canvas>
         <div class="chart-note">Co-culture 48h. Target viability by CellTiter-Glo. E:T = Effector:Target ratio.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ NEW KEYWORD SECTIONS ═══ -->
+<div class="section reveal">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">+</div>
+      <div class="section-label">Methods</div>
+    </div>
+    <div class="section-content">
+      <h2>Detailed Methodology &amp; Techniques</h2>
+      <p>Comprehensive descriptions of key experimental techniques, assay platforms, and analytical methods referenced throughout this page.</p>
+
+      <div class="subsection" id="autophagy">
+        <div class="subsection-label">Autophagy &amp; Mitophagy</div>
+        <p>I measure <strong>autophagic flux</strong> using LC3-II/LC3-I ratio (Western blot), LC3-GFP puncta quantification (high-content imaging), and p62/SQSTM1 degradation kinetics. For mitophagy specifically, I use <strong>PINK1/Parkin-dependent</strong> mitochondrial clearance assays with MitoTracker/LysoTracker colocalization, mt-Keima pH-sensitive reporter imaging, and COXII degradation by Western blot. These assays are central to our Parkinson disease drug discovery program targeting lysosomal-autophagic rescue.</p>
+        
+        
+        <div class="chart-container">
+          <div class="chart-title">Fig. — Autophagic Flux: LC3-II Accumulation</div>
+          <div class="chart-subtitle">LC3-II/LC3-I ratio ± Bafilomycin A1 across treatment conditions</div>
+          <canvas id="autophagyChart" height="260"></canvas>
+          <div class="chart-note">Western blot densitometry. BafA1 (100 nM, 4 hr). n=3 biological replicates.</div>
+        </div>
+        
+      </div>
+
+      <div class="subsection" id="immunocytochemistry">
+        <div class="subsection-label">Immunocytochemistry (ICC)</div>
+        <p>I perform multi-channel <strong>immunocytochemistry (ICC)</strong> with up to 5 fluorescent channels for cell identity, protein localization, and co-expression analysis. Protocols include standard paraformaldehyde fixation, permeabilization (Triton X-100 or saponin for membrane vs intracellular targets), and blocking optimization. I routinely stain for <strong>neuronal markers</strong> (TH, MAP2, NeuN, GFAP), <strong>pluripotency markers</strong> (OCT4, SOX2, NANOG), and <strong>disease markers</strong> (phospho-α-synuclein, ubiquitin, LAMP1/2). Imaging is performed on confocal (Leica SP8) or high-content (Opera Phenix) platforms.</p>
+        
+        
+        <div class="chart-container">
+          <div class="chart-title">Fig. — Multi-Channel ICC Panel Design</div>
+          <div class="chart-subtitle">Signal-to-noise ratio across fluorophore channels in 5-plex ICC panel</div>
+          <canvas id="iccChannelChart" height="260"></canvas>
+          <div class="chart-note">Leica SP8 confocal. Sequential scanning to minimize bleedthrough. n=10 fields.</div>
+        </div>
+        
       </div>
     </div>
   </div>
@@ -3273,7 +3274,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // ── New keyword section charts ──
 
-new Chart(document.getElementById('autophagyChart').getContext('2d'), {
+new Chart(document.getElementById('autophagyChart'), {
   type: 'bar',
   data: {
     labels: ['Vehicle', 'Rapamycin', 'Torin-1', 'BafA1', 'PFF+IFNγ', 'PFF+IFNγ+BafA1'],
@@ -3287,7 +3288,7 @@ new Chart(document.getElementById('autophagyChart').getContext('2d'), {
     scales: { y: { beginAtZero: true, title: { display: true, text: 'LC3-II/Actin (fold change)' }}}}
 });
 
-new Chart(document.getElementById('iccChannelChart').getContext('2d'), {
+new Chart(document.getElementById('iccChannelChart'), {
   type: 'bar',
   data: {
     labels: ['DAPI (405)', 'AF488 (488)', 'AF555 (561)', 'AF647 (633)', 'AF750 (730)'],

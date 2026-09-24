@@ -1959,6 +1959,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
 
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>/* skip charts whose canvas isn't on this page instead of throwing */if(window.Chart&&!window.Chart.__lcGuard){window.Chart=new Proxy(window.Chart,{construct:function(T,a,N){return a[0]?Reflect.construct(T,a,N):{destroy:function(){},update:function(){},resize:function(){},data:{labels:[],datasets:[]},options:{}};},get:function(T,k){return k==='__lcGuard'?true:T[k];}});}</script>
 </head>
 <body><script>if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark');</script>
 
@@ -3333,7 +3334,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // ── New keyword section charts ──
 
-new Chart(document.getElementById('tmtChart').getContext('2d'), {
+new Chart(document.getElementById('tmtChart'), {
   type: 'bar',
   data: {
     labels: ['No frac.', '8 fractions', '16 fractions', '24 fractions'],
@@ -3349,7 +3350,7 @@ new Chart(document.getElementById('tmtChart').getContext('2d'), {
 (function(){
   var data = [-2.8, -2.4, 2.1, 1.8, 1.6, -1.5, -1.3, -1.2];
   var colors = data.map(function(v){ return v < 0 ? 'rgba(52,73,94,0.7)' : 'rgba(192,57,43,0.7)'; });
-  new Chart(document.getElementById('gseaBarChart').getContext('2d'), {
+  new Chart(document.getElementById('gseaBarChart'), {
     type: 'bar',
     data: {
       labels: ['Lysosome', 'Autophagy', 'IFN-γ response', 'TNF signaling', 'Apoptosis', 'Oxidative phos.', 'Proteasome', 'mTORC1'],
@@ -3366,7 +3367,7 @@ new Chart(document.getElementById('tmtChart').getContext('2d'), {
 })();
 
 // ── LC-MS/MS Coverage Chart ──
-new Chart(document.getElementById('lcmsChart').getContext('2d'), {
+new Chart(document.getElementById('lcmsChart'), {
   type: 'bar',
   data: {
     labels: ['DDA (single-shot)', 'DDA (24 frac.)', 'DIA (single-shot)', 'PRM (targeted)'],
@@ -3382,7 +3383,7 @@ new Chart(document.getElementById('lcmsChart').getContext('2d'), {
 });
 
 // ── Bioinformatics Pipeline Chart ──
-new Chart(document.getElementById('bioinfoChart').getContext('2d'), {
+new Chart(document.getElementById('bioinfoChart'), {
   type: 'bar',
   data: {
     labels: ['Raw reads', 'Aligned', 'Counted features', 'After filtering', 'DE genes (padj<0.05)'],
@@ -3417,7 +3418,7 @@ new Chart(document.getElementById('bioinfoChart').getContext('2d'), {
     return 'rgba(150,150,150,0.3)';
   });
 
-  new Chart(document.getElementById('methodVolcanoChart').getContext('2d'), {
+  new Chart(document.getElementById('methodVolcanoChart'), {
     type: 'scatter',
     data: {
       datasets: [{
@@ -3455,7 +3456,7 @@ new Chart(document.getElementById('bioinfoChart').getContext('2d'), {
       label: cl.name, data: pts, backgroundColor: cl.color, pointRadius: 5, borderWidth: 0
     };
   });
-  new Chart(document.getElementById('methodUmapChart').getContext('2d'), {
+  new Chart(document.getElementById('methodUmapChart'), {
     type: 'scatter',
     data: { datasets: datasets },
     options: {
@@ -3470,7 +3471,7 @@ new Chart(document.getElementById('bioinfoChart').getContext('2d'), {
 })();
 
 // ── Proteome Discoverer Chart ──
-new Chart(document.getElementById('pdChart').getContext('2d'), {
+new Chart(document.getElementById('pdChart'), {
   type: 'bar',
   data: {
     labels: ['Sequest HT', 'MS Amanda', 'Consensus (both)', 'Union (either)'],
@@ -3486,7 +3487,7 @@ new Chart(document.getElementById('pdChart').getContext('2d'), {
 });
 
 // ── MaxQuant Chart ──
-new Chart(document.getElementById('mqChart').getContext('2d'), {
+new Chart(document.getElementById('mqChart'), {
   type: 'bar',
   data: {
     labels: ['Without MBR', 'With MBR', 'After imputation', 'Valid values (70%)'],
