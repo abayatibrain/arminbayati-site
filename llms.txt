@@ -1,0 +1,34 @@
+# Armin Bayati, PhD
+
+> Cellular and molecular biologist. Senior Scientist III in Neuroimmunology at Merck (2026-present) and Fellow in AI/ML Training for Cell Biology and Neuroscience at Aligned Labs (2026-present). Previously Research Fellow at Harvard Medical School and Mass General Brigham, Research Associate at the Montreal Neurological Institute, PhD in Neuroscience from McGill University. 25+ peer-reviewed publications, 1,300+ citations.
+
+This site is a research portfolio: human iPSC disease models, drug discovery, multi-omics, imaging, and machine learning for biology. Pages are static HTML.
+
+## Overview
+- [Home](index.html): background, experience timeline, research highlights, news
+- [AI/ML Evaluation & Training](ai-ml.html): model evaluation work at Aligned Labs, grading rubrics, common model failure modes in biology, applied ML
+- [Publications](publications.html): peer-reviewed papers and preprints
+- [Contact](contact.html)
+
+## Research
+- [Drug Discovery & Translation](drug-discovery.html)
+- [Neuroimmunology](neuroimmunology.html)
+- [iPSC Models](ipscs.html)
+- [iPSC-derived Neurons](ipsc-neurons.html)
+- [CRISPR Screening](crispr-screening.html)
+- [Endocytosis](endocytosis.html)
+- [NGS: Bulk & Single-cell RNA-seq](ngs.html)
+- [Proteomics](proteomics.html)
+- [Biomarkers](biomarkers.html)
+
+## Code & AI
+- [Code & AI Overview](code-and-ai.html)
+- [Agents & MCP](code-ai-agents.html)
+- [ML & Foundation Models](code-ai-models.html)
+- [Bio Pipelines & Automation](code-ai-pipelines.html)
+- [neurodigineration](neurodigineration/): interactive neurodegeneration gene network and AI gene briefs
+
+## Optional
+- [Full Technical Skills](skills.html)
+- [Protocols](protocols.html)
+- [Portfolio & VC](vc-portfolio.html)
