@@ -2723,6 +2723,13 @@ pre, code {
 @media (max-width: 768px) {
   .chart-container canvas { height: 240px !important; }
 }
+/* Sized box for Chart.js canvases with maintainAspectRatio:false. The chart
+   reads its height from this box, and the canvas fills it exactly, so the
+   drawing buffer and the on-screen size always match (no squashed text). */
+.chart-canvas-box { position: relative; width: 100%; height: 300px; }
+.chart-container .chart-canvas-box canvas { width: 100% !important; height: 100% !important; }
+@media (max-width: 768px) { .chart-canvas-box { height: 280px; } }
+
 
 
 
@@ -3180,14 +3187,14 @@ document.addEventListener('click', function(e){
       <div class="chart-container">
         <div class="chart-title">Flow Cytometry &mdash; % Marker-Positive after Lactate Selection</div>
         <div class="chart-subtitle">Mean &plusmn; SEM, n = 3 differentiations</div>
-        <canvas id="chart_flow_ipsc_cardiomyocytes" height="260"></canvas>
+        <div class="chart-canvas-box"><canvas id="chart_flow_ipsc_cardiomyocytes" height="260"></canvas></div>
         <div class="chart-note">Representative values from typical batches.</div>
       </div>
 
       <div class="chart-container">
         <div class="chart-title">RT-qPCR &mdash; iPSC-CM Day 30 vs iPSC (log&#8322; FC)</div>
         <div class="chart-subtitle">&Delta;&Delta;Ct method &middot; housekeeping: GAPDH, ACTB &middot; n = 3</div>
-        <canvas id="chart_qpcr_ipsc_cardiomyocytes" height="260"></canvas>
+        <div class="chart-canvas-box"><canvas id="chart_qpcr_ipsc_cardiomyocytes" height="260"></canvas></div>
         <div class="chart-note">Bars above zero = up-regulated; bars below zero = down-regulated relative to undifferentiated iPSC.</div>
       </div>
 
