@@ -2289,6 +2289,8 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
 
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link rel="stylesheet" href="gallery.css">
+<style>#gallery { scroll-margin-top: 96px; }</style>
 </head>
 <body><script>if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark');</script>
 
@@ -2468,32 +2470,83 @@ document.addEventListener('click', function(e){
   </div>
 </div>
 
-<div class="section reveal" id="live-cell">
+<div class="section reveal" id="gallery">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">01</div>
+      <div class="section-label">Gallery</div>
+    </div>
+    <div class="section-content">
+      <h2>Image Gallery</h2>
+      <p>Live-cell, confocal, and electron microscopy from the assays on this page, in one place. Filter by topic, swipe or use the arrow keys, and open any image full screen.</p>
+      <div class="xg" data-xg aria-label="Image gallery, 13 images">
+        <figure class="xg-item" data-group="Mitophagy">
+          <video src="images/assays-mitophagy-lyso-mito.mp4" muted loop playsinline preload="metadata"></video>
+          <figcaption>Live-cell video: LysoTracker (green) + MitoTracker (red) colocalization</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Mitophagy">
+          <img src="images/assays-mitophagy-lysosensor.png" alt="LysoSensor staining — lysosomal pH across treatment conditions" loading="lazy">
+          <figcaption>LysoSensor staining — lysosomal pH across treatment conditions</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Mitophagy">
+          <img src="images/assays-mitophagy-lysotracker.png" alt="LysoTracker Red puncta reduction under dual-hit conditions" loading="lazy">
+          <figcaption>LysoTracker Red puncta reduction under dual-hit conditions</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Endocytosis">
+          <img src="images/assays-endo-combined.png" alt="EM panels (i–iv): Nanogold-labeled fibrils at plasma membrane, macropinocytosis initiation, macropinosomes, and nascent MVB" loading="lazy">
+          <figcaption>EM panels (i–iv): Nanogold-labeled fibrils at plasma membrane, macropinocytosis initiation, macropinosomes, and nascent MVB</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Endocytosis">
+          <img src="images/assays-endo-confocal-uptake.png" alt="Confocal: Rapid fibril uptake and lysosomal colocalization" loading="lazy">
+          <figcaption>Confocal: Rapid fibril uptake and lysosomal colocalization</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Endocytosis">
+          <img src="images/assays-endo-sars.png" alt="Confocal: SARS-CoV-2 spike protein internalization via clathrin pathway" loading="lazy">
+          <figcaption>Confocal: SARS-CoV-2 spike protein internalization via clathrin pathway</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Endocytosis">
+          <img src="images/assays-ace2-receptor.jpg" alt="ACE2 receptor and spike protein colocalization on epithelial cells" loading="lazy">
+          <figcaption>Confocal: ACE2 receptor (green) and His-tagged spike (red) colocalization on epithelial cell surface</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Endocytosis">
+          <img src="images/assays-calu3-epithelial.jpg" alt="Calu-3 epithelial cells with CK2 marker and spike puncta" loading="lazy">
+          <figcaption>Confocal: Calu-3 epithelial cells — CK2 marker (red), DAPI nuclei (blue), spike puncta (green)</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Endocytosis">
+          <img src="images/assays-spike-uptake.jpg" alt="Spike protein uptake at 15 minutes with DAPI nuclear stain" loading="lazy">
+          <figcaption>Confocal: Spike-555 (red) uptake at 15 min — DAPI nuclear counterstain</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Endocytosis">
+          <img src="images/assays-pff-lysosome-wga.jpg" alt="PFF-488 colocalized with LysoTracker and WGA membrane staining" loading="lazy">
+          <figcaption>Confocal: PFF-488 (red/pink) colocalized with LysoTracker (blue) and WGA membrane (blue) at 2 min post-addition</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Exosomes">
+          <img src="images/assays-exo-gold-em.png" alt="EM: Gold-labeled PFFs associated with exosomes at recipient cell membrane" loading="lazy">
+          <figcaption>EM: Gold-labeled PFFs associated with exosomes at recipient cell membrane</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Exosomes">
+          <img src="images/assays-exo-confocal-transfer.png" alt="Confocal: CD63 and fibril signal transferred to naïve recipient cells" loading="lazy">
+          <figcaption>Confocal: CD63 and fibril signal transferred to naïve recipient cells</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Exosomes">
+          <img src="images/assays-exo-cd63-ruffles.png" alt="CD63-GFP membrane ruffles upon PFF exposure ± Manumycin A inhibition" loading="lazy">
+          <figcaption>CD63-GFP membrane ruffles upon PFF exposure ± Manumycin A inhibition</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section reveal" id="live-cell">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">02</div>
       <div class="section-label">Live-Cell</div>
     </div>
     <div class="section-content">
       <h2>Live-Cell Imaging &amp; Organelle Dynamics</h2>
       <p>I track mitochondrial clearance, Parkin translocation, lysosomal pH, and organelle fusion in real time using live-cell confocal microscopy. Assays include <strong>LysoSensor/LysoTracker</strong> staining for lysosomal integrity, <strong>MitoTracker</strong> for mitochondrial morphology, and calcium imaging for neuronal activity. GBA KO neurons display unique comet-like lysosomal morphology only visible in live recordings.</p>
-      <div class="gallery" data-gallery="mitophagy">
-      <div class="gallery-label">Live-Cell Mitophagy &amp; Lysosomal Dynamics</div>
-      <div class="gallery-grid">
-        <div class="gallery-thumb" data-caption="Live-cell video: LysoTracker (green) + MitoTracker (red) colocalization" onclick="openLB('mitophagy',0)">
-          <video src="images/assays-mitophagy-lyso-mito.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;"></video>
-          <span class="thumb-index">1</span>
-        </div>
-        <div class="gallery-thumb" data-caption="LysoSensor staining — lysosomal pH across treatment conditions" onclick="openLB('mitophagy',1)">
-          <img src="images/assays-mitophagy-lysosensor.png" alt="LysoSensor staining — lysosomal pH across treatment conditions" loading="lazy">
-          <span class="thumb-index">2</span>
-        </div>
-        <div class="gallery-thumb" data-caption="LysoTracker Red puncta reduction under dual-hit conditions" onclick="openLB('mitophagy',2)">
-          <img src="images/assays-mitophagy-lysotracker.png" alt="LysoTracker Red puncta reduction under dual-hit conditions" loading="lazy">
-          <span class="thumb-index">3</span>
-        </div>
-      </div>
-      </div>
+      <a class="xg-jump" href="#gallery" data-xg-open="Mitophagy"><span class="xg-jump-thumbs"><video src="images/assays-mitophagy-lyso-mito.mp4#t=0.5" muted loop playsinline preload="metadata"></video><img src="images/assays-mitophagy-lysosensor.png" alt="" loading="lazy"><img src="images/assays-mitophagy-lysotracker.png" alt="" loading="lazy"></span><span class="xg-jump-text"><strong>3 images</strong> &middot; Live-Cell Mitophagy &amp; Lysosomal Dynamics</span><span class="xg-jump-cta">Open in gallery &rarr;</span></a>
 <figure style="margin:0;">
       <img src="images/assays-autophagy-IFN-treatment.jpg" alt="LC3B and PFF confocal time course (Day 2-21): PFF only vs PFF+IFN-gamma showing progressive autophagy impairment" style="width:100%; max-width:640px; border-radius:6px; border:1px solid var(--rule); margin:20px 0 16px;">
 <figcaption style="font-size:13px; color:var(--mid); font-style:italic; max-width:640px; line-height:1.5; margin-bottom:20px;">Confocal time-course (Day 2–21) of LC3B puncta (autophagy marker) showing progressive impairment under PFF + IFN-γ dual-hit vs PFF-only control.</figcaption>
@@ -2506,7 +2559,7 @@ document.addEventListener('click', function(e){
 <div class="section reveal" id="endocytosis">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">02</div>
+      <div class="section-number">03</div>
       <div class="section-label">Endocytosis</div>
     </div>
     <div class="section-content">
@@ -2518,39 +2571,7 @@ document.addEventListener('click', function(e){
 <figcaption style="font-size:13px; color:var(--mid); font-style:italic; max-width:640px; line-height:1.5; margin-bottom:20px;">Schematic illustrating macropinocytosis of α-synuclein PFFs, multivesicular body (MVB) formation, and exosomal release as a mechanism for disease propagation between neurons.</figcaption>
 </figure>
       <p style="font-size:13px; color:var(--mid); font-style:italic; margin-top:-8px;">Model of prion-like α-synuclein propagation: PFFs enter neurons via macropinocytosis, traffic to lysosomes via the endosomal pathway, and can escape via multivesicular body (MVB) formation and exosomal release — enabling cell-to-cell disease spread. This pathway is a key therapeutic target, as blocking endocytic entry or enhancing lysosomal degradation could halt disease progression. Based on findings from Bayati et al., <em>JBC</em> 2021.</p>
-      <div class="gallery" data-gallery="endocytosis">
-      <div class="gallery-label">Endocytosis &amp; Intracellular Trafficking</div>
-      <div class="gallery-grid">
-        <div class="gallery-thumb" data-caption="EM panels (i–iv): Nanogold-labeled fibrils at plasma membrane, macropinocytosis initiation, macropinosomes, and nascent MVB" onclick="openLB('endocytosis',0)">
-          <img src="images/assays-endo-combined.png" alt="EM panels (i–iv): Nanogold-labeled fibrils at plasma membrane, macropinocytosis initiation, macropinosomes, and nascent MVB" loading="lazy">
-          <span class="thumb-index">1</span>
-        </div>
-        <div class="gallery-thumb" data-caption="Confocal: Rapid fibril uptake and lysosomal colocalization" onclick="openLB('endocytosis',1)">
-          <img src="images/assays-endo-confocal-uptake.png" alt="Confocal: Rapid fibril uptake and lysosomal colocalization" loading="lazy">
-          <span class="thumb-index">2</span>
-        </div>
-        <div class="gallery-thumb" data-caption="Confocal: SARS-CoV-2 spike protein internalization via clathrin pathway" onclick="openLB('endocytosis',2)">
-          <img src="images/assays-endo-sars.png" alt="Confocal: SARS-CoV-2 spike protein internalization via clathrin pathway" loading="lazy">
-          <span class="thumb-index">3</span>
-        </div>
-        <div class="gallery-thumb" data-caption="Confocal: ACE2 receptor (green) and His-tagged spike (red) colocalization on epithelial cell surface" onclick="openLB('endocytosis',3)">
-          <img src="images/assays-ace2-receptor.jpg" alt="ACE2 receptor and spike protein colocalization on epithelial cells" loading="lazy">
-          <span class="thumb-index">4</span>
-        </div>
-        <div class="gallery-thumb" data-caption="Confocal: Calu-3 epithelial cells — CK2 marker (red), DAPI nuclei (blue), spike puncta (green)" onclick="openLB('endocytosis',4)">
-          <img src="images/assays-calu3-epithelial.jpg" alt="Calu-3 epithelial cells with CK2 marker and spike puncta" loading="lazy">
-          <span class="thumb-index">5</span>
-        </div>
-        <div class="gallery-thumb" data-caption="Confocal: Spike-555 (red) uptake at 15 min — DAPI nuclear counterstain" onclick="openLB('endocytosis',5)">
-          <img src="images/assays-spike-uptake.jpg" alt="Spike protein uptake at 15 minutes with DAPI nuclear stain" loading="lazy">
-          <span class="thumb-index">6</span>
-        </div>
-        <div class="gallery-thumb" data-caption="Confocal: PFF-488 (red/pink) colocalized with LysoTracker (blue) and WGA membrane (blue) at 2 min post-addition" onclick="openLB('endocytosis',6)">
-          <img src="images/assays-pff-lysosome-wga.jpg" alt="PFF-488 colocalized with LysoTracker and WGA membrane staining" loading="lazy">
-          <span class="thumb-index">7</span>
-        </div>
-      </div>
-      </div>
+      <a class="xg-jump" href="#gallery" data-xg-open="Endocytosis"><span class="xg-jump-thumbs"><img src="images/assays-endo-combined.png" alt="" loading="lazy"><img src="images/assays-endo-confocal-uptake.png" alt="" loading="lazy"><img src="images/assays-endo-sars.png" alt="" loading="lazy"></span><span class="xg-jump-text"><strong>7 images</strong> &middot; Endocytosis &amp; Intracellular Trafficking</span><span class="xg-jump-cta">Open in gallery &rarr;</span></a>
     </div>
     </div>
   </div>
@@ -2558,7 +2579,7 @@ document.addEventListener('click', function(e){
 <div class="section reveal" id="flow-cytometry">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">03</div>
+      <div class="section-number">04</div>
       <div class="section-label">Flow Cytometry</div>
     </div>
     <div class="section-content">
@@ -2583,7 +2604,7 @@ document.addEventListener('click', function(e){
 <div class="section reveal" id="immune-assays">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">04</div>
+      <div class="section-number">05</div>
       <div class="section-label">Immune Assays</div>
     </div>
     <div class="section-content">
@@ -2596,29 +2617,13 @@ document.addEventListener('click', function(e){
 <div class="section reveal" id="exosomes">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">05</div>
+      <div class="section-number">06</div>
       <div class="section-label">Exosomes</div>
     </div>
     <div class="section-content">
       <h2>Exosome-Mediated Propagation</h2>
       <p>I demonstrated that α-synuclein fibrils are packaged into exosomes and transferred to naïve cells via <strong>CD63/CD9 reporter systems</strong>. Gold-labeled PFF visualization by EM showed exosomes decorated with fibrils contacting recipient cell membranes. Exosome isolation from conditioned media, transfer assays, and characterization by confocal, immunoblotting, and TEM established direct evidence for prion-like propagation through extracellular vesicles.</p>
-      <div class="gallery" data-gallery="exosomes">
-      <div class="gallery-label">Exosome-Mediated Transfer</div>
-      <div class="gallery-grid">
-        <div class="gallery-thumb" data-caption="EM: Gold-labeled PFFs associated with exosomes at recipient cell membrane" onclick="openLB('exosomes',0)">
-          <img src="images/assays-exo-gold-em.png" alt="EM: Gold-labeled PFFs associated with exosomes at recipient cell membrane" loading="lazy">
-          <span class="thumb-index">1</span>
-        </div>
-        <div class="gallery-thumb" data-caption="Confocal: CD63 and fibril signal transferred to naïve recipient cells" onclick="openLB('exosomes',1)">
-          <img src="images/assays-exo-confocal-transfer.png" alt="Confocal: CD63 and fibril signal transferred to naïve recipient cells" loading="lazy">
-          <span class="thumb-index">2</span>
-        </div>
-        <div class="gallery-thumb" data-caption="CD63-GFP membrane ruffles upon PFF exposure ± Manumycin A inhibition" onclick="openLB('exosomes',2)">
-          <img src="images/assays-exo-cd63-ruffles.png" alt="CD63-GFP membrane ruffles upon PFF exposure ± Manumycin A inhibition" loading="lazy">
-          <span class="thumb-index">3</span>
-        </div>
-      </div>
-      </div>
+      <a class="xg-jump" href="#gallery" data-xg-open="Exosomes"><span class="xg-jump-thumbs"><img src="images/assays-exo-gold-em.png" alt="" loading="lazy"><img src="images/assays-exo-confocal-transfer.png" alt="" loading="lazy"><img src="images/assays-exo-cd63-ruffles.png" alt="" loading="lazy"></span><span class="xg-jump-text"><strong>3 images</strong> &middot; Exosome-Mediated Transfer</span><span class="xg-jump-cta">Open in gallery &rarr;</span></a>
     </div>
     </div>
   </div>
@@ -2626,7 +2631,7 @@ document.addEventListener('click', function(e){
 <div class="section reveal" id="plate-based">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">06</div>
+      <div class="section-number">07</div>
       <div class="section-label">Plate Readouts</div>
     </div>
     <div class="section-content">
@@ -2658,7 +2663,7 @@ document.addEventListener('click', function(e){
 <div class="section reveal" id="functional">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">07</div>
+      <div class="section-number">08</div>
       <div class="section-label">Functional</div>
     </div>
     <div class="section-content">
@@ -2686,7 +2691,7 @@ document.addEventListener('click', function(e){
 <div class="section reveal" id="immune-killing">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">08</div>
+      <div class="section-number">09</div>
       <div class="section-label">Immune Co-Culture</div>
     </div>
     <div class="section-content">
@@ -3303,5 +3308,6 @@ new Chart(document.getElementById('iccChannelChart').getContext('2d'), {
         async src="//gc.zgo.at/count.js"></script>
 <script data-goatcounter="https://arminbayati.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
+<script src="gallery.js" defer></script>
 </body>
 </html>

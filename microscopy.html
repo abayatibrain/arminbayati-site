@@ -2192,6 +2192,8 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
 
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link rel="stylesheet" href="gallery.css">
+<style>#gallery { scroll-margin-top: 96px; }</style>
 </head>
 <body><script>if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark');</script>
 
@@ -2372,56 +2374,91 @@ document.addEventListener('click', function(e){
   </div>
 </div>
 
-<div class="section reveal" id="confocal">
+<div class="section reveal" id="gallery">
   <div class="section-header">
     <div class="section-index">
       <div class="section-number">01</div>
+      <div class="section-label">Gallery</div>
+    </div>
+    <div class="section-content">
+      <h2>Image Gallery</h2>
+      <p>Confocal, STED super-resolution, and transmission EM images in one viewer. Filter by modality, swipe or use the arrow keys, and open any image full screen.</p>
+      <div class="xg" data-xg aria-label="Image gallery, 15 images">
+        <figure class="xg-item" data-group="Confocal &amp; STED">
+          <img src="images/micro-confocal-PFF-inclusion.png" alt="Confocal: DA neurons showing PFF-positive inclusions" loading="lazy">
+          <figcaption>Confocal: DA neurons showing PFF-positive inclusions</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Confocal &amp; STED">
+          <img src="images/micro-confocal-sars.png" alt="Confocal: SARS-CoV-2 spike protein surface binding and internalization" loading="lazy">
+          <figcaption>Confocal: SARS-CoV-2 spike protein surface binding and internalization</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Confocal &amp; STED">
+          <img src="images/micro-confocal-lyso-stress.png" alt="Confocal: Lysosomal dysfunction under cytokine stress" loading="lazy">
+          <figcaption>Confocal: Lysosomal dysfunction under cytokine stress</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Confocal &amp; STED">
+          <img src="images/micro-sted-sub-lysosomal.png" alt="STED: Sub-lysosomal fibril localization" loading="lazy">
+          <figcaption>STED: Sub-lysosomal fibril localization</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Confocal &amp; STED">
+          <img src="images/micro-A53T.png" alt="Endogenous α-synuclein aggregation into punctate-like structures in the cytosol" loading="lazy">
+          <figcaption>Endogenous α-synuclein aggregation into punctate-like structures in the cytosol</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Confocal &amp; STED">
+          <img src="images/micro-confocal-coculture.png" alt="Confocal: Multiplexed neuron–glia co-culture imaging" loading="lazy">
+          <figcaption>Confocal: Multiplexed neuron–glia co-culture imaging</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Confocal &amp; STED">
+          <img src="images/micro-neuronal-network-overlay.jpg" alt="DA neuron network: Vimentin, PFF-488, gamma-tubulin, TUJ1 overlay" loading="lazy">
+          <figcaption>Confocal: DA neuron network — Vimentin (blue), PFF-488 (green), γ-tubulin (red), TUJ1 (white)</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Confocal &amp; STED">
+          <img src="images/micro-tom20-lamp1-pff.jpg" alt="SH-SY5Y Tom20 LAMP1 PFF overlay showing mitochondria-lysosome-fibril interactions" loading="lazy">
+          <figcaption>Confocal: SH-SY5Y — Tom20 (mitochondria), LAMP1 (lysosomes), PFF-488 (fibrils), 48h IFN-γ</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Confocal &amp; STED">
+          <img src="images/micro-sted-comparison.jpg" alt="STED vs Confocal comparison showing sub-lysosomal fibril resolution" loading="lazy">
+          <figcaption>STED vs Confocal: Sub-lysosomal PFF and LAMP1 resolution comparison</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Electron microscopy">
+          <img src="images/micro-em-inclusion.png" alt="EM: Lewy body–like inclusions — overview, fibrils, nanogold trafficking, and lysosomal targeting" loading="lazy">
+          <figcaption>EM: Lewy body–like inclusions — overview, fibrils, nanogold trafficking, and lysosomal targeting</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Electron microscopy">
+          <img src="images/micro-em-neurite.png" alt="EM: Lewy neurite–like inclusions in neuronal processes" loading="lazy">
+          <figcaption>EM: Lewy neurite–like inclusions in neuronal processes</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Electron microscopy">
+          <img src="images/micro-em-mature.png" alt="EM: Compact/mature inclusion matching patient tissue Lewy bodies" loading="lazy">
+          <figcaption>EM: Compact/mature inclusion matching patient tissue Lewy bodies</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Electron microscopy">
+          <img src="images/micro-em-lewy-collection.jpg" alt="EM montage of Lewy body-like inclusions across multiple neurons" loading="lazy">
+          <figcaption>EM Collection: Lewy body–like inclusions across multiple neurons — perinuclear, membrane-bound, fibrillar</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Electron microscopy">
+          <img src="images/micro-em-49000x.jpg" alt="TEM 49000X showing nanogold-labeled fibrils in multivesicular body" loading="lazy">
+          <figcaption>TEM 49,000×: Multivesicular body with nanogold-labeled fibrils in transit to lysosomes</figcaption>
+        </figure>
+        <figure class="xg-item" data-group="Electron microscopy">
+          <img src="images/micro-em-98000x-nanogold.jpg" alt="TEM 98000X showing nanogold-labeled alpha-synuclein fibrils in lysosome" loading="lazy">
+          <figcaption>TEM 98,000×: Nanogold-labeled α-synuclein fibrils within lysosomal compartment</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section reveal" id="confocal">
+  <div class="section-header">
+    <div class="section-index">
+      <div class="section-number">02</div>
       <div class="section-label">Light Microscopy</div>
     </div>
     <div class="section-content">
       <h2>Confocal, Super-Resolution &amp; Live-Cell</h2>
       <p>I perform confocal microscopy (Leica) for live and fixed samples, tracking rapid uptake of α-synuclein fibrils and spike protein internalization. <strong>STED microscopy</strong> (Abberior) resolves sub-lysosomal fibril localization. <strong>Zeiss Airyscan</strong> provides super-resolution for directional transport and spatial redistribution studies. <strong>TIRF</strong> (Nikon) for membrane-proximal events. Live-cell imaging captures dynamic processes: fibril internalization, lysosomal swelling, mitochondrial fragmentation, and Parkin translocation.</p>
-      <div class="gallery" data-gallery="confocal">
-      <div class="gallery-label">Confocal &amp; Super-Resolution Gallery</div>
-      <div class="gallery-grid">
-        <div class="gallery-thumb" data-caption="Confocal: DA neurons showing PFF-positive inclusions" onclick="openLB('confocal',0)">
-          <img src="images/micro-confocal-PFF-inclusion.png" alt="Confocal: DA neurons showing PFF-positive inclusions" loading="lazy">
-          <span class="thumb-index">1</span>
-        </div>
-        <div class="gallery-thumb" data-caption="Confocal: SARS-CoV-2 spike protein surface binding and internalization" onclick="openLB('confocal',1)">
-          <img src="images/micro-confocal-sars.png" alt="Confocal: SARS-CoV-2 spike protein surface binding and internalization" loading="lazy">
-          <span class="thumb-index">2</span>
-        </div>
-        <div class="gallery-thumb" data-caption="Confocal: Lysosomal dysfunction under cytokine stress" onclick="openLB('confocal',2)">
-          <img src="images/micro-confocal-lyso-stress.png" alt="Confocal: Lysosomal dysfunction under cytokine stress" loading="lazy">
-          <span class="thumb-index">3</span>
-        </div>
-        <div class="gallery-thumb" data-caption="STED: Sub-lysosomal fibril localization" onclick="openLB('confocal',3)">
-          <img src="images/micro-sted-sub-lysosomal.png" alt="STED: Sub-lysosomal fibril localization" loading="lazy">
-          <span class="thumb-index">4</span>
-        </div>
-        <div class="gallery-thumb" data-caption="Endogenous α-synuclein aggregation into punctate-like structures in the cytosol" onclick="openLB('confocal',4)">
-          <img src="images/micro-A53T.png" alt="Endogenous α-synuclein aggregation into punctate-like structures in the cytosol" loading="lazy">
-          <span class="thumb-index">5</span>
-        </div>
-        <div class="gallery-thumb" data-caption="Confocal: Multiplexed neuron–glia co-culture imaging" onclick="openLB('confocal',5)">
-          <img src="images/micro-confocal-coculture.png" alt="Confocal: Multiplexed neuron–glia co-culture imaging" loading="lazy">
-          <span class="thumb-index">6</span>
-        </div>
-        <div class="gallery-thumb" data-caption="Confocal: DA neuron network — Vimentin (blue), PFF-488 (green), γ-tubulin (red), TUJ1 (white)" onclick="openLB('confocal',6)">
-          <img src="images/micro-neuronal-network-overlay.jpg" alt="DA neuron network: Vimentin, PFF-488, gamma-tubulin, TUJ1 overlay" loading="lazy">
-          <span class="thumb-index">7</span>
-        </div>
-        <div class="gallery-thumb" data-caption="Confocal: SH-SY5Y — Tom20 (mitochondria), LAMP1 (lysosomes), PFF-488 (fibrils), 48h IFN-γ" onclick="openLB('confocal',7)">
-          <img src="images/micro-tom20-lamp1-pff.jpg" alt="SH-SY5Y Tom20 LAMP1 PFF overlay showing mitochondria-lysosome-fibril interactions" loading="lazy">
-          <span class="thumb-index">8</span>
-        </div>
-        <div class="gallery-thumb" data-caption="STED vs Confocal: Sub-lysosomal PFF and LAMP1 resolution comparison" onclick="openLB('confocal',8)">
-          <img src="images/micro-sted-comparison.jpg" alt="STED vs Confocal comparison showing sub-lysosomal fibril resolution" loading="lazy">
-          <span class="thumb-index">9</span>
-        </div>
-      </div>
-      </div>
+      <a class="xg-jump" href="#gallery" data-xg-open="Confocal &amp; STED"><span class="xg-jump-thumbs"><img src="images/micro-confocal-PFF-inclusion.png" alt="" loading="lazy"><img src="images/micro-confocal-sars.png" alt="" loading="lazy"><img src="images/micro-confocal-lyso-stress.png" alt="" loading="lazy"></span><span class="xg-jump-text"><strong>9 images</strong> &middot; Confocal &amp; Super-Resolution Gallery</span><span class="xg-jump-cta">Open in gallery &rarr;</span></a>
     </div>
     </div>
   </div>
@@ -2429,41 +2466,13 @@ document.addEventListener('click', function(e){
 <div class="section reveal" id="em">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">02</div>
+      <div class="section-number">03</div>
       <div class="section-label">Electron Microscopy</div>
     </div>
     <div class="section-content">
       <h2>Transmission Electron Microscopy</h2>
       <p>I provided the <strong>first ultrastructural evidence</strong> of Lewy body–like pathology developing in human neurons in vitro. Inclusions were 5–10 µm, membrane-bound, and perinuclear. Nanogold-labeled fibrils enabled antibody-free visualization of trafficking through macropinosomes, MVBs, and lysosomes. Negative-stain EM for protein aggregation and stability assessment. Correlative light-electron microscopy (CLEM) linking ultrastructure to molecular readouts.</p>
-      <div class="gallery" data-gallery="em">
-      <div class="gallery-label">Electron Microscopy Gallery</div>
-      <div class="gallery-grid">
-        <div class="gallery-thumb" data-caption="EM: Lewy body–like inclusions — overview, fibrils, nanogold trafficking, and lysosomal targeting" onclick="openLB('em',0)">
-          <img src="images/micro-em-inclusion.png" alt="EM: Lewy body–like inclusions — overview, fibrils, nanogold trafficking, and lysosomal targeting" loading="lazy">
-          <span class="thumb-index">1</span>
-        </div>
-        <div class="gallery-thumb" data-caption="EM: Lewy neurite–like inclusions in neuronal processes" onclick="openLB('em',1)">
-          <img src="images/micro-em-neurite.png" alt="EM: Lewy neurite–like inclusions in neuronal processes" loading="lazy">
-          <span class="thumb-index">2</span>
-        </div>
-        <div class="gallery-thumb" data-caption="EM: Compact/mature inclusion matching patient tissue Lewy bodies" onclick="openLB('em',2)">
-          <img src="images/micro-em-mature.png" alt="EM: Compact/mature inclusion matching patient tissue Lewy bodies" loading="lazy">
-          <span class="thumb-index">3</span>
-        </div>
-        <div class="gallery-thumb" data-caption="EM Collection: Lewy body–like inclusions across multiple neurons — perinuclear, membrane-bound, fibrillar" onclick="openLB('em',3)">
-          <img src="images/micro-em-lewy-collection.jpg" alt="EM montage of Lewy body-like inclusions across multiple neurons" loading="lazy">
-          <span class="thumb-index">4</span>
-        </div>
-        <div class="gallery-thumb" data-caption="TEM 49,000×: Multivesicular body with nanogold-labeled fibrils in transit to lysosomes" onclick="openLB('em',4)">
-          <img src="images/micro-em-49000x.jpg" alt="TEM 49000X showing nanogold-labeled fibrils in multivesicular body" loading="lazy">
-          <span class="thumb-index">5</span>
-        </div>
-        <div class="gallery-thumb" data-caption="TEM 98,000×: Nanogold-labeled α-synuclein fibrils within lysosomal compartment" onclick="openLB('em',5)">
-          <img src="images/micro-em-98000x-nanogold.jpg" alt="TEM 98000X showing nanogold-labeled alpha-synuclein fibrils in lysosome" loading="lazy">
-          <span class="thumb-index">6</span>
-        </div>
-      </div>
-      </div>
+      <a class="xg-jump" href="#gallery" data-xg-open="Electron microscopy"><span class="xg-jump-thumbs"><img src="images/micro-em-inclusion.png" alt="" loading="lazy"><img src="images/micro-em-neurite.png" alt="" loading="lazy"><img src="images/micro-em-mature.png" alt="" loading="lazy"></span><span class="xg-jump-text"><strong>6 images</strong> &middot; Electron Microscopy Gallery</span><span class="xg-jump-cta">Open in gallery &rarr;</span></a>
     </div>
     </div>
   </div>
@@ -2471,7 +2480,7 @@ document.addEventListener('click', function(e){
 <div class="section reveal" id="histology">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">03</div>
+      <div class="section-number">04</div>
       <div class="section-label">Histology</div>
     </div>
     <div class="section-content">
@@ -2486,7 +2495,7 @@ document.addEventListener('click', function(e){
 <div class="section reveal" id="hcs">
   <div class="section-header">
     <div class="section-index">
-      <div class="section-number">04</div>
+      <div class="section-number">05</div>
       <div class="section-label">High-Content</div>
     </div>
     <div class="section-content">
@@ -3207,5 +3216,6 @@ new Chart(document.getElementById('clemChart').getContext('2d'), {
         async src="//gc.zgo.at/count.js"></script>
 <script data-goatcounter="https://arminbayati.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
+<script src="gallery.js" defer></script>
 </body>
 </html>
