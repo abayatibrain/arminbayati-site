@@ -1634,6 +1634,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
           <button class="nav-drop-trigger">Code &amp; AI</button>
           <div class="nav-drop-panel">
             <a href="code-and-ai.html">Code &amp; AI &mdash; Overview</a>
+            <a href="ai-ml.html">AI/ML Evaluation &amp; Training</a>
             <a href="code-ai-agents.html">Agents &amp; MCP</a>
             <a href="code-ai-models.html">ML &amp; Foundation Models</a>
             <a href="code-ai-pipelines.html">Bio Pipelines &amp; Automation</a>
@@ -2120,7 +2121,7 @@ document.addEventListener('click', function(e){
     <div class="footer-inner">
       <div class="footer-brand">
         <div class="footer-name">Armin Bayati, PhD</div>
-        <div class="footer-role">Research Fellow · Harvard Medical School &amp; Massachusetts General Hospital</div>
+        <div class="footer-role">Senior Scientist III, Neuroimmunology &middot; Merck<br>AI/ML Training Fellow &middot; Aligned Labs</div>
       </div>
       <div class="footer-links-grid">
         <div class="footer-col">
@@ -2129,6 +2130,7 @@ document.addEventListener('click', function(e){
             <a href="neuroimmunology.html">Neuroimmunology</a>
           <a href="cancer-immunology.html">Cancer Immunology</a>
           <a href="drug-discovery.html">Drug Discovery</a>
+          <a href="ai-ml.html">AI/ML Work</a>
           <a href="proteomics.html">Proteomics</a>
         </div>
         <div class="footer-col">
@@ -2350,6 +2352,16 @@ if (document.readyState === 'loading') {
 <script>
 // ── SEARCH FUNCTIONALITY ──
 var searchData = [
+  { title: 'AI/ML Evaluation & Training', page: 'ai-ml.html', section: 'AI/ML', keywords: 'ai ml artificial intelligence machine learning aligned labs fellow fellowship model evaluation llm training rubric grading reference responses foundation models scgpt geneformer benchmarking contamination audit dataset labeling cell biology neuroscience pharmacology' },
+  { title: 'Aligned Labs Fellowship', page: 'ai-ml.html#aligned', section: 'AI/ML', keywords: 'aligned labs fellow ai ml training cell biology neuroscience pharmacology model-generated content evaluation primary literature expert reference responses remote' },
+  { title: 'How I Grade Model Output', page: 'ai-ml.html#rubric', section: 'AI/ML', keywords: 'rubric scoring grading accuracy reasoning citation quality calibration completeness hallucination llm evaluation worked example alpha-synuclein lag3' },
+  { title: 'Where Models Go Wrong on Biology', page: 'ai-ml.html#failure-modes', section: 'AI/ML', keywords: 'failure modes hallucinated citations model system drift ipsc ic50 ec50 ki kd gwas causal gene benchmark contamination calibration llm errors' },
+  { title: 'Machine Learning at the Bench', page: 'ai-ml.html#applied', section: 'AI/ML', keywords: 'applied machine learning image segmentation phenotype classification multi-omics target validation mechanism of action automorphotrack high-content screening opera phenix merck' },
+  { title: 'Work Experience & Education', page: 'index.html#experience', section: 'Experience', keywords: 'experience cv resume merck senior scientist iii neuroimmunology aligned labs harvard medical school mass general brigham research fellow montreal neurological institute mcgill phd university of victoria' },
+  { title: 'Code & AI Overview', page: 'code-and-ai.html', section: 'Technical', keywords: 'code ai python typescript github open source mcp claude code langgraph pytorch projects portfolio' },
+  { title: 'Agents & MCP', page: 'code-ai-agents.html', section: 'Code & AI', keywords: 'agents mcp model context protocol claude code agent sdk langgraph bioscope automorphotrack tool calling' },
+  { title: 'ML & Foundation Models', page: 'code-ai-models.html', section: 'Code & AI', keywords: 'machine learning foundation models pytorch clip contrastive morph2expr scgpt geneformer embedding cell painting l1000' },
+  { title: 'Bio Pipelines & Automation', page: 'code-ai-pipelines.html', section: 'Code & AI', keywords: 'bioinformatics pipelines automation scanpy pydeseq2 target credentialing crispr atlas pylabrobot opentrons liquid handling segmentation' },
   { title: 'Home', page: 'index.html', section: 'Home', keywords: 'research armin bayati' },
   { title: 'iPSC-Derived Neurons', page: 'ipscs.html', section: 'iPSC Models', keywords: 'neurons differentiation dopaminergic' },
   { title: 'iPSC Cardiomyocytes', page: 'cardiomyocytes.html', section: 'iPSC Models', keywords: 'cardio heart cell' },

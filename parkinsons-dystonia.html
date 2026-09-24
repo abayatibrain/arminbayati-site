@@ -2209,6 +2209,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
           <button class="nav-drop-trigger">Code &amp; AI</button>
           <div class="nav-drop-panel">
             <a href="code-and-ai.html">Code &amp; AI &mdash; Overview</a>
+            <a href="ai-ml.html">AI/ML Evaluation &amp; Training</a>
             <a href="code-ai-agents.html">Agents &amp; MCP</a>
             <a href="code-ai-models.html">ML &amp; Foundation Models</a>
             <a href="code-ai-pipelines.html">Bio Pipelines &amp; Automation</a>
@@ -3150,7 +3151,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="footer-name">Armin Bayati</div>
-      <div class="footer-role">PhD Neuroscience &amp; Cell Biology<br>Research Fellow, Harvard Medical School</div>
+      <div class="footer-role">PhD Neuroscience &amp; Cell Biology<br>Senior Scientist III, Neuroimmunology &middot; Merck</div>
     </div>
     <div class="footer-links-grid">
       <div class="footer-col">
@@ -3168,6 +3169,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
         <a href="proteomics.html">Proteomics</a>
         <a href="flow-cytometry.html">Flow Cytometry</a>
         <a href="coding.html">Coding</a>
+        <a href="ai-ml.html">AI/ML Work</a>
       </div>
       <div class="footer-col">
         <div class="footer-col-title">Resources</div>
@@ -3452,6 +3454,108 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 })();
+</script>
+<script>
+// ════════════════════════════════════════════════
+// SEARCH
+// ════════════════════════════════════════════════
+const searchIndex = [
+  { title: "Parkinson's Disease & Dystonia", page: 'parkinsons-dystonia.html', section: 'Drug Discovery', keywords: 'parkinson dystonia basal ganglia dopamine' },
+  { title: 'AI/ML Evaluation & Training', page: 'ai-ml.html', section: 'AI/ML', keywords: 'ai ml artificial intelligence machine learning aligned labs fellow fellowship model evaluation llm training rubric grading reference responses foundation models scgpt geneformer benchmarking contamination audit dataset labeling cell biology neuroscience pharmacology' },
+  { title: 'Aligned Labs Fellowship', page: 'ai-ml.html#aligned', section: 'AI/ML', keywords: 'aligned labs fellow ai ml training cell biology neuroscience pharmacology model-generated content evaluation primary literature expert reference responses remote' },
+  { title: 'How I Grade Model Output', page: 'ai-ml.html#rubric', section: 'AI/ML', keywords: 'rubric scoring grading accuracy reasoning citation quality calibration completeness hallucination llm evaluation worked example alpha-synuclein lag3' },
+  { title: 'Where Models Go Wrong on Biology', page: 'ai-ml.html#failure-modes', section: 'AI/ML', keywords: 'failure modes hallucinated citations model system drift ipsc ic50 ec50 ki kd gwas causal gene benchmark contamination calibration llm errors' },
+  { title: 'Machine Learning at the Bench', page: 'ai-ml.html#applied', section: 'AI/ML', keywords: 'applied machine learning image segmentation phenotype classification multi-omics target validation mechanism of action automorphotrack high-content screening opera phenix merck' },
+  { title: 'Work Experience & Education', page: 'index.html#experience', section: 'Experience', keywords: 'experience cv resume merck senior scientist iii neuroimmunology aligned labs harvard medical school mass general brigham research fellow montreal neurological institute mcgill phd university of victoria' },
+  { title: 'Code & AI Overview', page: 'code-and-ai.html', section: 'Technical', keywords: 'code ai python typescript github open source mcp claude code langgraph pytorch projects portfolio' },
+  { title: 'Agents & MCP', page: 'code-ai-agents.html', section: 'Code & AI', keywords: 'agents mcp model context protocol claude code agent sdk langgraph bioscope automorphotrack tool calling' },
+  { title: 'ML & Foundation Models', page: 'code-ai-models.html', section: 'Code & AI', keywords: 'machine learning foundation models pytorch clip contrastive morph2expr scgpt geneformer embedding cell painting l1000' },
+  { title: 'Bio Pipelines & Automation', page: 'code-ai-pipelines.html', section: 'Code & AI', keywords: 'bioinformatics pipelines automation scanpy pydeseq2 target credentialing crispr atlas pylabrobot opentrons liquid handling segmentation' },
+  { title: 'Home', page: 'index.html', section: 'Home', keywords: 'home page main' },
+  { title: 'Biomarker Quantification', page: 'biomarkers.html', section: 'Overview', keywords: 'biomarker quantification analysis disease platforms neurodegeneration immunology cardiac oncology' },
+  { title: 'Neurodegeneration Biomarkers', page: 'biomarkers.html', section: 'Section 02', keywords: 'alpha synuclein LAMP1 LAMP2 TFEB HDAC6 autophagy lysosomal' },
+  { title: 'Immune & Oncology Biomarkers', page: 'biomarkers.html', section: 'Section 03', keywords: 'PD-1 CTLA-4 cytokine CD4 CD8 immunotherapy checkpoint' },
+  { title: 'Cardiac Biomarkers', page: 'biomarkers.html', section: 'Section 04', keywords: 'cardiomyocyte troponin connexin vimentin' },
+  { title: 'Proteomics & Genomics', page: 'biomarkers.html', section: 'Section 05', keywords: 'TMT mass spectrometry proteomics scRNA-seq transcriptomics' },
+  { title: 'Quantification Methods', page: 'biomarkers.html', section: 'Section 06', keywords: 'western blot flow cytometry immunofluorescence ELISA qPCR' },
+  { title: 'iPSC Models', page: 'ipscs.html', section: 'Research', keywords: 'iPSC induced pluripotent stem cells neurons differentiation' },
+  { title: 'Drug Discovery', page: 'drug-discovery.html', section: 'Research', keywords: 'drug discovery translation therapeutic screening' },
+  { title: 'Cancer Immunology', page: 'cancer-immunology.html', section: 'Research', keywords: 'cancer immunology tumor immune checkpoint' },
+  { title: 'Flow Cytometry', page: 'flow-cytometry.html', section: 'Methods', keywords: 'flow cytometry immunophenotyping FACS' },
+  { title: 'Microscopy & Imaging', page: 'microscopy.html', section: 'Methods', keywords: 'microscopy confocal imaging immunofluorescence' },
+  { title: 'Proteomics', page: 'proteomics.html', section: 'Methods', keywords: 'proteomics mass spectrometry LC-MS genomics' },
+  { title: 'Contact', page: 'contact.html', section: 'Contact', keywords: 'contact email reach out' },
+];
+
+function initSearch() {
+  const overlay = document.getElementById('searchOverlay');
+  const input = document.getElementById('searchInput');
+  const results = document.getElementById('searchResults');
+  const toggle = document.querySelector('.search-toggle');
+  let currentIndex = -1;
+
+  toggle.addEventListener('click', () => {
+    overlay.classList.add('active');
+    setTimeout(() => overlay.classList.add('fade-in'), 10);
+    input.focus();
+  });
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove('fade-in');
+      setTimeout(() => overlay.classList.remove('active'), 200);
+    }
+  });
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      overlay.classList.remove('fade-in');
+      setTimeout(() => overlay.classList.remove('active'), 200);
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const items = results.querySelectorAll('.search-result');
+      currentIndex = Math.min(currentIndex + 1, items.length - 1);
+      items.forEach((item, i) => {
+        item.classList.toggle('active', i === currentIndex);
+      });
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      const items = results.querySelectorAll('.search-result');
+      currentIndex = Math.max(currentIndex - 1, -1);
+      items.forEach((item, i) => {
+        item.classList.toggle('active', i === currentIndex);
+      });
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      const active = results.querySelector('.search-result.active');
+      if (active) active.click();
+    }
+  });
+
+  input.addEventListener('input', () => {
+    const query = input.value.toLowerCase().trim();
+    currentIndex = -1;
+
+    if (!query) {
+      results.innerHTML = '';
+      return;
+    }
+
+    const filtered = searchIndex.filter(item =>
+      item.title.toLowerCase().includes(query) ||
+      item.keywords.includes(query)
+    );
+
+    results.innerHTML = filtered.length
+      ? filtered.map((item, i) => `
+          <a href="${item.page}" class="search-result" data-index="${i}">
+            <div class="search-result-title">${item.title}</div>
+            <div class="search-result-page">${item.section}</div>
+          </a>
+        `).join('')
+      : '<div class="search-empty"><span>🔍</span>No results found</div>';
+  });
+}
 </script>
 </body>
 </html>

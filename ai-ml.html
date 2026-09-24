@@ -3,8 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Coding, Automation &amp; Data Science — Armin Bayati, PhD</title>
-<meta name="description" content="AutoMorphoTrack, Python pipelines, liquid handling automation, high-throughput workflows, and machine learning.">
+<title>AI/ML Evaluation &amp; Training · Armin Bayati, PhD</title>
+<meta name="description" content="AI/ML work by Armin Bayati, PhD: fellow in AI/ML training for cell biology and neuroscience at Aligned Labs (rubric-based evaluation of model-generated science, expert reference responses, scGPT and Geneformer benchmarking, dataset contamination audits) and applied machine learning for drug discovery.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AI/ML Evaluation &amp; Training · Armin Bayati, PhD">
+<meta property="og:description" content="Evaluating and training AI for biology: rubric-based grading of model-generated science against primary literature, foundation-model benchmarking, and ML at the bench.">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -1927,6 +1931,330 @@ pre, code {
 }
 
 
+/* ════════════════════════════════════════════════
+   CODE & AI suite — shared components
+   Mobile-first; stacks to one column under 800px.
+   ════════════════════════════════════════════════ */
+
+/* Project tile grid — modeled directly on the homepage's .research-tile.
+   Key detail: we use a 1px box-shadow ring INSTEAD of a CSS border, because
+   the site-wide rule `.section-content a:not(.tag)... { border-bottom: none
+   !important; }` would otherwise strip the tile's bottom edge. Box-shadow
+   isn't a border, so it survives. */
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  max-width: 1120px;
+  margin: 18px 0 32px;
+}
+.proj-tile {
+  background: var(--card);
+  border: none;
+  border-radius: 10px;
+  padding: 28px 28px 24px;
+  text-decoration: none !important;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,0.08),
+    0 4px 12px rgba(0,0,0,0.05);
+}
+.proj-tile:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 1px var(--accent),
+    0 8px 24px rgba(0,0,0,0.10);
+}
+.proj-tile::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 3px;
+  border-radius: 0 0 3px 3px;
+  background: var(--rule);
+  transition: background 0.2s ease;
+}
+.proj-tile:hover::before { background: var(--accent); }
+html.dark .proj-tile {
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.10),
+    0 4px 12px rgba(0,0,0,0.25);
+}
+html.dark .proj-tile:hover {
+  box-shadow:
+    0 0 0 1px var(--accent),
+    0 8px 24px rgba(0,0,0,0.35);
+}
+/* Override the site-wide section-content underline for tiles only.
+   Selector matches the offending rule's specificity (5 classes + element)
+   plus .proj-tile, so we win on specificity + source order + !important. */
+.section-content a.proj-tile:not(.tag):not(.btn-primary):not(.btn-secondary):not(.lineage-card),
+.section-content a.proj-tile:not(.tag):not(.btn-primary):not(.btn-secondary):not(.lineage-card):hover,
+.section-content a.proj-tile:not(.tag):not(.btn-primary):not(.btn-secondary):not(.lineage-card) *,
+.section-content a.proj-tile:not(.tag):not(.btn-primary):not(.btn-secondary):not(.lineage-card):hover * {
+  text-decoration: none !important;
+  text-decoration-color: transparent !important;
+}
+.proj-tile, .proj-tile * {
+  text-decoration: none !important;
+  text-decoration-color: transparent !important;
+}
+.proj-tile-eyebrow {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.proj-tile-title {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.proj-tile-desc {
+  font-size: 13px;
+  color: var(--mid);
+  line-height: 1.55;
+  flex: 1;
+}
+.proj-tile-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+.proj-tile-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  background: var(--section-bg);
+  color: var(--mid);
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--rule);
+}
+
+/* Tech-stack filter pills (landing demo) */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 14px 0 18px;
+}
+.filter-pill {
+  font-family: var(--mono);
+  font-size: 11px;
+  background: var(--card);
+  color: var(--mid);
+  border: 1px solid var(--rule);
+  padding: 7px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.15s ease;
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+}
+.filter-pill:hover { color: var(--ink); }
+.filter-pill.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.proj-tile.dim {
+  opacity: 0.18;
+  pointer-events: none;
+  filter: grayscale(0.4);
+}
+
+/* Generic demo card */
+.demo-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+  max-width: 980px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 24px;
+  margin: 18px 0 28px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+@media (max-width: 800px) {
+  .demo-card { grid-template-columns: 1fr; padding: 18px; gap: 18px; }
+}
+.demo-row { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.demo-label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.demo-card select,
+.demo-card input[type="text"] {
+  font-family: var(--sans);
+  font-size: 14px;
+  padding: 10px 12px;
+  min-height: 44px;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: var(--paper);
+  color: var(--ink);
+}
+.demo-weights { display: flex; flex-direction: column; gap: 14px; }
+.demo-weight { display: flex; flex-direction: column; gap: 6px; }
+.demo-weight-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12.5px;
+  color: var(--mid);
+  gap: 8px;
+}
+.demo-weight-val { font-family: var(--mono); color: var(--ink); }
+.demo-weight input[type=range] {
+  width: 100%;
+  accent-color: var(--accent);
+  height: 28px;
+}
+.demo-output { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.demo-output canvas { max-width: 100%; }
+
+.demo-score-block {
+  background: var(--section-bg);
+  border-radius: 8px;
+  padding: 14px 18px;
+}
+.demo-score-label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.demo-score {
+  font-family: var(--serif);
+  font-size: clamp(28px, 7vw, 42px);
+  line-height: 1;
+  color: var(--ink);
+}
+.demo-score-bar {
+  height: 8px;
+  background: rgba(0,0,0,0.06);
+  border-radius: 999px;
+  margin: 10px 0 6px;
+  overflow: hidden;
+}
+.demo-score-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #f1c40f, #c0392b);
+  transition: width 0.25s ease;
+}
+.demo-score-tier {
+  font-size: 12.5px;
+  color: var(--mid);
+  font-style: italic;
+}
+html.dark .demo-card { background: var(--card); border-color: var(--rule); }
+html.dark .demo-score-block { background: rgba(255,255,255,0.04); }
+
+/* Pill button group (used in segmentation demo) */
+.pill-group { display: flex; flex-wrap: wrap; gap: 6px; }
+.pill-btn {
+  font-family: var(--mono);
+  font-size: 11px;
+  border: 1px solid var(--rule);
+  background: var(--card);
+  color: var(--mid);
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  min-height: 36px;
+}
+.pill-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* Terminal / agent trace */
+.agent-trace {
+  background: var(--ink);
+  color: #e6e6e6;
+  border-radius: 8px;
+  padding: 16px 18px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.65;
+  max-height: 420px;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.agent-trace .ln-user { color: #9cdcfe; }
+.agent-trace .ln-tool { color: #ce9178; }
+.agent-trace .ln-resp { color: #b5cea8; }
+.agent-trace .ln-final { color: #f1c40f; }
+.agent-trace .ln-dim { color: #6b7280; }
+
+/* Embedding scatter caption */
+.embed-meta {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--mid);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 4px;
+}
+.embed-meta b { color: var(--ink); font-weight: 500; }
+
+/* 96-well plate grid */
+.plate-wrap { overflow-x: auto; }
+.plate {
+  display: grid;
+  grid-template-columns: 18px repeat(12, 1fr);
+  gap: 3px;
+  background: var(--card);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  min-width: 460px;
+}
+.plate .h, .plate .v {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--mid);
+  text-align: center;
+  align-self: center;
+}
+.plate .well {
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.04);
+}
+
+/* Touch target safety */
+@media (max-width: 768px) {
+  .demo-card select,
+  .demo-card input[type="text"],
+  .pill-btn,
+  .filter-pill { min-height: 44px; }
+  .demo-weight input[type=range] { height: 32px; }
+  .demo-score { font-size: clamp(26px, 9vw, 36px); }
+  .proj-grid { grid-template-columns: 1fr; gap: 14px; }
+  .proj-tile { padding: 20px 20px 18px; }
+  .proj-tile-desc { font-size: 12.5px; }
+  .agent-trace { font-size: 11.5px; padding: 14px; }
+}
+
+
 
 
 
@@ -2094,8 +2422,42 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
 
 /* END DARK-MODE PROTECTION */
 
+
+/* ── AI/ML page components ── */
+a.card:hover { border-color: var(--accent); box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+.rubric-scroll { max-width: 760px; margin: 24px 0 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--rule); border-radius: 6px; background: var(--card); }
+.rubric-table { width: 100%; border-collapse: collapse; font-size: 13.5px; line-height: 1.6; min-width: 560px; }
+.rubric-table th { font-family: var(--mono); font-size: 10.5px; font-weight: 500; letter-spacing: 0.8px; text-transform: uppercase; color: var(--mid); text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--rule); background: var(--section-bg); }
+.rubric-table td { padding: 14px 16px; border-bottom: 1px solid var(--rule); vertical-align: top; color: var(--ink); font-weight: 300; }
+.rubric-table tr:last-child td { border-bottom: none; }
+.rubric-table td:first-child { font-weight: 600; white-space: nowrap; }
+.rubric-table td:last-child { color: var(--mid); }
+.eval-example { max-width: 760px; border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: 6px; background: var(--card); padding: 8px 24px; }
+.eval-row { padding: 16px 0; border-bottom: 1px dashed var(--rule); }
+.eval-row:last-child { border-bottom: none; }
+.eval-row p { margin: 0; }
+.eval-label { display: block; font-family: var(--mono); font-size: 10.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.eval-quote { font-family: var(--serif); font-size: 1.05rem; line-height: 1.6; color: var(--ink); }
+.eval-row .inline-list { margin: 4px 0 0; }
+.toolkit-tags { max-width: 760px; margin-top: 20px; justify-content: flex-start !important; }
+.toolkit-tags .tag { cursor: default; }
+@media (max-width: 768px) {
+  .eval-example { padding: 4px 16px; }
+}
+@media (max-width: 640px) {
+  .rubric-scroll { overflow: visible; }
+  .rubric-table { min-width: 0; font-size: 13px; }
+  .rubric-table thead { display: none; }
+  .rubric-table tr { display: block; padding: 14px 16px; border-bottom: 1px solid var(--rule); }
+  .rubric-table tr:last-child { border-bottom: none; }
+  .rubric-table td { display: block; padding: 0; border: none; white-space: normal !important; }
+  .rubric-table td:first-child { font-family: var(--mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .rubric-table td:last-child { margin-top: 8px; padding-left: 12px; border-left: 2px solid var(--rule); font-size: 12.5px; }
+  .rubric-table td:last-child::before { content: 'Typical failure: '; font-weight: 500; color: var(--ink); }
+}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<!-- CODE-AND-AI DEAD-SCRIPT STRIP 2026-05-20 -->
+<!-- CHART-STRETCH FIX 2026-05-20 -->
 </head>
 <body><script>if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark');</script>
 
@@ -2132,11 +2494,11 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
             <a href="assay-expertise.html">Proximity &amp; Molecular Assays</a>
           </div>
         </div>
-        <div class="nav-dropdown">
+        <div class="nav-dropdown has-active">
           <button class="nav-drop-trigger">Code &amp; AI</button>
           <div class="nav-drop-panel">
             <a href="code-and-ai.html">Code &amp; AI &mdash; Overview</a>
-            <a href="ai-ml.html">AI/ML Evaluation &amp; Training</a>
+            <a href="ai-ml.html" class="active">AI/ML Evaluation &amp; Training</a>
             <a href="code-ai-agents.html">Agents &amp; MCP</a>
             <a href="code-ai-models.html">ML &amp; Foundation Models</a>
             <a href="code-ai-pipelines.html">Bio Pipelines &amp; Automation</a>
@@ -2179,13 +2541,13 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
           </div>
         </div>
         <a href="biomarkers.html">Biomarkers</a>
-        <div class="nav-dropdown has-active">
+        <div class="nav-dropdown">
           <button class="nav-drop-trigger">Technical Skills</button>
           <div class="nav-drop-panel">
             <a href="technical-skills.html">Technical Skills &mdash; Overview</a>
             <a href="microscopy.html">Microscopy &amp; Imaging</a>
             <a href="proteomics.html">Proteomics &amp; Genomics</a>
-            <a href="coding.html" class="active">Coding &amp; Automation</a>
+            <a href="coding.html">Coding &amp; Automation</a>
             <a href="skills.html">Full Technical Skills</a>
             <div class="nav-drop-section">In Vivo &amp; Primary</div>
             <a href="in-vivo.html">In Vivo Studies</a>
@@ -2258,216 +2620,207 @@ document.addEventListener('click', function(e){
 
 
 <div class="hero">
-  <div class="hero-eyebrow">Computational &amp; Automation</div>
-  <h1>Coding, Automation &amp; Data Science</h1>
+  <div class="hero-eyebrow">Code &amp; AI · AI/ML Work</div>
+  <h1>Evaluating &amp; Training AI for Biology</h1>
   <p class="hero-description">
-    I build computational pipelines, automate lab workflows, and integrate advanced microscopy with quantitative analysis to generate reproducible, decision-enabling datasets at scale.
+    My AI/ML work runs on two tracks. At <strong>Aligned Labs</strong> I'm a fellow in AI/ML training for cell biology and neuroscience, grading what models say about biology against what the primary literature actually shows. At the bench, now at <strong>Merck</strong> and before that at Harvard and McGill, I use machine learning where it earns its keep: image segmentation, phenotype classification, and multi-omics integration for target validation. The two feed each other more than I expected.
   </p>
   <div class="hero-tags">
-    <a class="tag" href="#data-science">Python</a>
-    <a class="tag" href="#automorphotrack">AutoMorphoTrack</a>
-    <a class="tag" href="#automation">BRAVO / Tecan / Hamilton</a>
-    <a class="tag" href="#miniaturization">96/384-Well Miniaturization</a>
-    <a class="tag" href="#machine-learning">Machine Learning</a>
-    <a class="tag" href="#automorphotrack">Morphology Classification</a>
-    <a class="tag" href="#organelle-tracking">Organelle Tracking</a>
-    <a class="tag" href="#open-source">Open Source</a>
+    <a class="tag" href="#aligned">Aligned Labs</a>
+    <a class="tag" href="#rubric">How I grade</a>
+    <a class="tag" href="#failure-modes">Failure modes</a>
+    <a class="tag" href="#applied">ML at the bench</a>
+    <a class="tag" href="#toolkit">Toolkit</a>
+    <a class="tag" href="code-and-ai.html">← All Code &amp; AI</a>
   </div>
 </div>
 
-<div class="section reveal" id="automorphotrack">
+<div class="section reveal" id="overview">
   <div class="section-header">
-    <div class="section-index">
-      <div class="section-number">01</div>
-      <div class="section-label">AutoMorphoTrack</div>
-    </div>
+    <div class="section-index"><div class="section-number">01</div><div class="section-label">Overview</div></div>
     <div class="section-content">
-      <h2>AutoMorphoTrack Software</h2>
-      <p><strong>AutoMorphoTrack</strong> is my open-source Python package for automated analysis of mitochondria and lysosomes in multi-channel time-lapse microscopy data. It integrates adaptive segmentation, morphology classification (eccentricity, aspect ratio, area, circularity), frame-by-frame tracking, and colocalization into a single reproducible workflow. Outputs include CSV datasets and publication-ready visualizations (overlays, trajectories, heatmaps).</p>
-      <p><a href="https://github.com/abayatibrain/AutoMorphoTrack-V.3" target="_blank">View on GitHub →</a> · <a href="https://doi.org/10.1101/2025.07.19.665650" target="_blank">bioRxiv Preprint →</a></p>
-<figure style="margin:0;">
-      <img src="images/automorphotrack-interface.jpg" alt="AutoMorphoTrack package interface and overlay panels" style="width:100%; max-width:640px; border-radius:6px; border:1px solid var(--rule); margin:20px 0 24px;">
-<figcaption style="font-size:13px; color:var(--mid); font-style:italic; max-width:640px; line-height:1.5; margin-bottom:20px;">AutoMorphoTrack Python package interface showing automated neurite outgrowth quantification, branch point detection, and morphological feature extraction.</figcaption>
-</figure>
-    </div>
-  </div>
-</div>
-
-<div class="section reveal" id="automation">
-  <div class="section-header">
-    <div class="section-index">
-      <div class="section-number">02</div>
-      <div class="section-label">Automation</div>
-    </div>
-    <div class="section-content">
-      <h2>Laboratory Automation &amp; High-Throughput</h2>
-      <p>I leverage <strong>BRAVO, Tecan Fluent, Hamilton, VIAFLO, and Assist Plus</strong> liquid handling systems for larger-scale cell culture media changes, plate-based assay automation, and workflow standardization. This includes 96- and 384-well assay miniaturization, plate-template standardization, and <strong>KingFisher</strong> for sample-prep automation. I design automation-ready execution and analysis workflows to reduce run-to-run variability and improve throughput.</p>
-
-      <div class="chart-container">
-        <div class="chart-title">Fig. — Automation Throughput: Manual vs BRAVO</div>
-        <div class="chart-subtitle">Comparison of daily plate processing capacity and inter-well CV% with manual pipetting vs BRAVO liquid handling</div>
-        <canvas id="autoChart" height="260"></canvas>
-        <div class="chart-note">96-well media change and treatment workflow. CV% from 6 replicate plates.</div>
-      </div>
-
-      <p>I also develop <strong>multivariate modeling frameworks</strong> using regression analysis, PCA, and structured parameter mapping to evaluate CHO culture performance (growth, viability, productivity) and inform process refinement.</p>
-    </div>
-  </div>
-</div>
-
-<div class="section reveal" id="data-science">
-  <div class="section-header">
-    <div class="section-index">
-      <div class="section-number">03</div>
-      <div class="section-label">Data Science</div>
-    </div>
-    <div class="section-content">
-      <h2>Data Analysis &amp; Machine Learning</h2>
-      <p>I work in <strong>Python</strong> (NumPy, pandas, scikit-learn, Jupyter), with additional proficiency in R, MATLAB, GraphPad Prism, JMP, ImageJ/Fiji, and Imaris. Applications include automated QC and reporting pipelines, batch analysis with outlier triage, phenotypic fingerprinting, imaging feature engineering, and machine learning methods for biomarker identification. I create trend-ready analytics for assay performance trending and stakeholder-ready visualization.</p>
-      <div class="code-block"><span class="comment"># AutoMorphoTrack — Automated Organelle Analysis Pipeline</span>
-<span class="keyword">import</span> automorphotrack <span class="keyword">as</span> amt
-
-<span class="comment"># Load multi-channel time-lapse stack</span>
-stack = amt.<span class="func">load_stack</span>(<span class="string">"neurons_lyso_mito_24h.tif"</span>, channels=[<span class="string">"lyso"</span>, <span class="string">"mito"</span>])
-
-<span class="comment"># Adaptive segmentation + morphology classification</span>
-results = amt.<span class="func">segment_and_classify</span>(
-    stack,
-    channel=<span class="string">"mito"</span>,
-    thresholds={<span class="string">"eccentricity"</span>: <span class="num">0.82</span>, <span class="string">"aspect_ratio"</span>: <span class="num">2.5</span>},
-    min_area=<span class="num">50</span>
-)
-
-<span class="comment"># Frame-by-frame tracking + colocalization</span>
-tracks = amt.<span class="func">track_organelles</span>(results, max_displacement=<span class="num">15</span>)
-coloc  = amt.<span class="func">colocalization</span>(stack, channels=[<span class="string">"lyso"</span>, <span class="string">"mito"</span>], method=<span class="string">"pearson"</span>)
-
-<span class="comment"># Export CSV + overlays</span>
-amt.<span class="func">export_csv</span>(tracks, <span class="string">"tracking_results.csv"</span>)
-amt.<span class="func">export_overlays</span>(stack, tracks, coloc, output_dir=<span class="string">"./overlays"</span>)
-
-<span class="comment"># Output Summary:</span>
-<span class="comment"># Frames analyzed:     240</span>
-<span class="comment"># Organelles tracked:  1,847</span>
-<span class="comment"># Elongated: 62.4%  |  Punctate: 37.6%</span>
-<span class="comment"># Mean displacement:   4.2 um/frame</span>
-<span class="comment"># Pearson coloc (L/M): 0.34 +/- 0.08</span></div>
-
-      <div class="chart-container">
-        <div class="chart-title">Fig. — AutoMorphoTrack: Morphology Classification Over Time</div>
-        <div class="chart-subtitle">Percentage of elongated vs punctate mitochondria across conditions (automated classification)</div>
-        <canvas id="morphChart" height="280"></canvas>
-        <div class="chart-note">Sample output. 240-frame time-lapse. Classification by eccentricity and aspect ratio.</div>
-      </div>
-      <div class="chart-container">
-        <div class="chart-title">Fig. — Colocalization Score: Lysosome-Mitochondria</div>
-        <div class="chart-subtitle">Pearson coefficient per frame — control vs CCCP-treated neurons</div>
-        <canvas id="colocChart" height="240"></canvas>
+      <h2>Where this work sits</h2>
+      <p>Most of the AI-for-biology conversation is about building bigger models. The less glamorous half is checking whether what they produce is right. A model can write a fluent paragraph on lysosomal biology and still cite a paper that doesn't exist, or quote an IC50 from the wrong cell line. Catching that takes someone who has run the assay, knows which results replicated, and knows which ones everybody cites but nobody reproduced.</p>
+      <p>That's the role I play in AI training and evaluation. It's also why I'm picky about ML on my own data: a segmentation model that looks great on a figure and disagrees with an expert on 20% of cells is not a result.</p>
+      <div class="findings">
+        <div class="finding"><div class="finding-value">2026</div><div class="finding-label">Aligned Labs fellowship, since April</div></div>
+        <div class="finding"><div class="finding-value">3</div><div class="finding-label">Domains: cell biology, neuroscience, pharmacology</div></div>
+        <div class="finding"><div class="finding-value">scGPT · Geneformer</div><div class="finding-label">Foundation models benchmarked</div></div>
+        <div class="finding"><div class="finding-value">Dice · IoU · F1</div><div class="finding-label">How my own tools are benchmarked against experts</div></div>
       </div>
     </div>
   </div>
 </div>
 
-
-<!-- ═══ NEW KEYWORD SECTIONS ═══ -->
-<div class="section reveal">
+<div class="section reveal" id="aligned">
   <div class="section-header">
-    <div class="section-index">
-      <div class="section-number">+</div>
-      <div class="section-label">Methods</div>
-    </div>
+    <div class="section-index"><div class="section-number">02</div><div class="section-label">Aligned Labs</div></div>
     <div class="section-content">
-      <h2>Detailed Methodology &amp; Techniques</h2>
-      <p>Comprehensive descriptions of key experimental techniques, assay platforms, and analytical methods referenced throughout this page.</p>
-
-      <div class="subsection" id="miniaturization">
-        <div class="subsection-label">96/384-Well Miniaturization</div>
-        <p>I miniaturize cell-based assays from 6-well to <strong>96- and 384-well formats</strong>, optimizing cell seeding density, reagent volumes, and readout sensitivity for high-throughput screening. Key considerations include edge effects, evaporation correction, Z'-factor validation, and automated liquid handling integration (BRAVO, Tecan). I have miniaturized iPSC-CM beating assays, neuronal viability assays, and immune killing assays to 384-well format with Z' > 0.5.</p>
-        
-        
-        <div class="chart-container">
-          <div class="chart-title">Fig. — Assay Miniaturization: Z' Factor Validation</div>
-          <div class="chart-subtitle">Z' factor across plate formats for iPSC-CM viability assay (positive/negative controls)</div>
-          <canvas id="miniChart" height="260"></canvas>
-          <div class="chart-note">CTG readout. 16 replicates per control per format. Dashed line = Z' = 0.5 threshold.</div>
+      <h2>Fellow, AI/ML Training in Cell Biology &amp; Neuroscience</h2>
+      <p>Remote, since April 2026. Aligned Labs works on the training and evaluation side of AI, and my part is domain expertise: reading model output on cell biology, neuroscience, and pharmacology the way I'd read a manuscript as a reviewer. Specific projects and datasets are confidential, so this page describes the kind of work rather than the particulars.</p>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">Evaluating model-generated science</div>
+          <div class="card-desc">Reading model answers in cell biology, neuroscience, and pharmacology and validating each claim against primary literature, not against review articles or the model's own citations.</div>
         </div>
-        
-      </div>
-
-      <div class="subsection" id="machine-learning">
-        <div class="subsection-label">Machine Learning</div>
-        <p>I apply <strong>machine learning</strong> approaches to microscopy image analysis and multi-parametric data. This includes training random forest and CNN classifiers for <strong>morphology-based phenotype classification</strong>, implementing dimensionality reduction (UMAP, t-SNE, PCA) for high-content screening data, and building predictive models for compound activity. My <strong>AutoMorphoTrack</strong> pipeline integrates ML-based organelle segmentation with tracking algorithms for live-cell dynamics quantification.</p>
-        
-        
-        <div class="chart-container">
-          <div class="chart-title">Fig. — ML Classifier: Morphology Phenotype Accuracy</div>
-          <div class="chart-subtitle">Confusion matrix metrics for CNN-based phenotype classifier across cell states</div>
-          <canvas id="mlChart" height="260"></canvas>
-          <div class="chart-note">Random forest + CNN ensemble. 5-fold cross-validation on 12,000 labeled images.</div>
+        <div class="card">
+          <div class="card-title">Rubric-based scoring</div>
+          <div class="card-desc">Scoring outputs for accuracy, reasoning, and citation quality with structured rubrics, so two graders reading the same answer land in the same place.</div>
         </div>
-        
-      </div>
-
-      <div class="subsection" id="organelle-tracking">
-        <div class="subsection-label">Organelle Tracking</div>
-        <p>I developed automated pipelines for <strong>single-organelle tracking</strong> in live-cell time-lapse microscopy. Using Python (scikit-image, trackpy) and custom algorithms, I quantify lysosome, mitochondria, and endosome dynamics including <strong>speed, directionality, mean squared displacement (MSD)</strong>, and fusion/fission events. These analyses reveal drug-induced changes in organelle transport that precede visible toxicity markers.</p>
-        
-        
-        <div class="chart-container">
-          <div class="chart-title">Fig. — Organelle Tracking: MSD Analysis</div>
-          <div class="chart-subtitle">Mean squared displacement of lysosomes in control vs PFF-treated iPSC-derived neurons</div>
-          <canvas id="trackChart" height="260"></canvas>
-          <div class="chart-note">Confocal time-lapse (0.5 Hz, 5 min). trackpy analysis. n=200 tracks per condition.</div>
+        <div class="card">
+          <div class="card-title">Expert reference responses</div>
+          <div class="card-desc">Writing gold-standard answers to hard questions and grading other experts' references. A reference is only useful if it's the answer you'd defend in front of a thesis committee.</div>
         </div>
-        
+        <a class="card" href="code-ai-models.html#scgpt-neurodegen-probe">
+          <div class="card-title">Foundation-model benchmarking &rarr;</div>
+          <div class="card-desc">Benchmarking biology foundation models such as scGPT and Geneformer on tasks where the ground truth is known biology, always against a simple baseline.</div>
+        </a>
+        <div class="card">
+          <div class="card-title">Dataset auditing</div>
+          <div class="card-desc">Auditing curated datasets for contamination (benchmark items leaking into training data) and for labeling consistency across annotators.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Why a bench scientist</div>
+          <div class="card-desc">Ten-plus years of iPSC models, imaging, omics, and drug discovery means I know where the literature is solid and where it's one lab's result that never replicated.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section reveal" id="rubric">
+  <div class="section-header">
+    <div class="section-index"><div class="section-number">03</div><div class="section-label">How I grade</div></div>
+    <div class="section-content">
+      <h2>What a rubric actually checks</h2>
+      <p>Rubrics look bureaucratic from the outside. In practice they're the only way to make expert judgment reproducible across graders and across weeks. The dimensions below are the general shape of how I read a scientific answer. They're my framing, not any client's rubric.</p>
+      <div class="rubric-scroll">
+        <table class="rubric-table">
+          <thead>
+            <tr><th>Dimension</th><th>What I'm checking</th><th>Typical failure</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Factual accuracy</td><td>Each mechanistic claim traces to a primary source, and numbers match the paper, including the model system they came from.</td><td>Right gene, wrong direction of effect. A biochemical IC50 quoted as cellular potency.</td></tr>
+            <tr><td>Reasoning</td><td>Conclusions follow from the evidence, and alternative explanations get considered.</td><td>Correlation read as causation. A single siRNA knockdown treated as target validation.</td></tr>
+            <tr><td>Citation quality</td><td>The cited paper exists, says what's claimed, and is the right kind of source (primary over review).</td><td>Real authors, real journal, nonexistent paper. A review cited for a primary finding.</td></tr>
+            <tr><td>Calibration</td><td>Claims are sized to the evidence, with model-system caveats and limitations stated.</td><td>A cell-line result generalized to human disease. "Proven" where the data say "suggests."</td></tr>
+            <tr><td>Completeness</td><td>The answer addresses the whole question, including the awkward parts.</td><td>Skipping the contested part of the field, or the negative result.</td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <div class="subsection" id="open-source">
-        <div class="subsection-label">Open Source Contributions</div>
-        <p>I contribute to the scientific open-source ecosystem through <strong>AutoMorphoTrack</strong> (GitHub, 500K+ downloads), a Python package for automated morphology analysis and organelle tracking from microscopy data. I also develop and share <strong>Jupyter notebook analysis pipelines</strong> for flow cytometry gating, proteomics differential expression, and high-content screening data processing. All tools are documented with tutorials and example datasets.</p>
-
-        <div class="gh-widget" style="max-width:760px;">
-          <div class="gh-widget-title">Live GitHub — contribution graph (past 12 months)</div>
-          <a href="https://github.com/abayatibrain" target="_blank" rel="noopener" style="display:block;">
-            <img src="https://ghchart.rshah.org/c0392b/abayatibrain"
-                 alt="GitHub contribution heatmap for abayatibrain"
-                 loading="lazy"
-                 style="width:100%; max-width:100%; display:block; height:auto;">
-          </a>
-          <div class="gh-widget-note">
-            Open repos at <a href="https://github.com/abayatibrain" target="_blank" rel="noopener"><strong>github.com/abayatibrain</strong></a> · richer activity widgets on the <a href="code-and-ai.html#github">Code &amp; AI landing →</a>
+      <div class="subsection">
+        <div class="subsection-label">A worked example, written for this page</div>
+        <div class="eval-example">
+          <div class="eval-row"><span class="eval-label">Prompt</span><p>How do &alpha;-synuclein pre-formed fibrils get into neurons?</p></div>
+          <div class="eval-row"><span class="eval-label">Model answer</span><p class="eval-quote">"&alpha;-Synuclein fibrils enter neurons exclusively through receptor-mediated endocytosis after binding LAG3 (Mao et al., <em>Science</em> 2016)."</p></div>
+          <div class="eval-row"><span class="eval-label">Grading notes</span>
+            <ul class="inline-list">
+              <li><strong>Accuracy: partial.</strong> LAG3 was reported as a fibril-binding receptor, but "exclusively" is wrong. Uptake runs through more than one route, and our own work showed rapid <a href="endocytosis.html#macropinocytosis">macropinocytic delivery to lysosomes</a>.</li>
+              <li><strong>Citation: real paper, overstated.</strong> Mao et al. exists and reports LAG3 binding. It doesn't support "exclusively," and later work questioned whether human neurons express LAG3 at all.</li>
+              <li><strong>Calibration: fails.</strong> A live debate is presented as settled consensus.</li>
+              <li><strong>What a good answer does.</strong> Names the candidate routes, says which are contested and why, and flags that the model system (primary mouse neurons, iPSC neurons, cell lines) changes the answer.</li>
+            </ul>
           </div>
         </div>
-
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="section reveal" id="failure-modes">
+  <div class="section-header">
+    <div class="section-index"><div class="section-number">04</div><div class="section-label">Failure modes</div></div>
+    <div class="section-content">
+      <h2>Where models go wrong on biology</h2>
+      <p>After a few months of this, the errors cluster. None of them are exotic. They're the same mistakes a first-year grad student makes, delivered with more confidence.</p>
+      <ul class="inline-list">
+        <li><strong>Plausible citations that don't exist.</strong> Right authors, right journal, believable title. The only defense is opening the paper.</li>
+        <li><strong>Model-system drift.</strong> A result from HEK293 cells or an overexpression mouse becomes a statement about human neurons. iPSC-derived neurons get described as if they were adult tissue, when transcriptionally they sit closer to fetal.</li>
+        <li><strong>Potency numbers without context.</strong> IC50, EC50, K<sub>i</sub>, and K<sub>d</sub> used interchangeably, or a biochemical IC50 presented as cellular target engagement.</li>
+        <li><strong>Genetics overreach.</strong> The nearest gene to a GWAS hit treated as the causal gene, with no fine-mapping or colocalization behind it.</li>
+        <li><strong>Settled debates that aren't settled.</strong> Contested mechanisms, like receptor-mediated &alpha;-synuclein uptake above, summarized as consensus.</li>
+        <li><strong>Benchmark contamination.</strong> A model that aces a benchmark because the benchmark leaked into its training data. This is why dataset audits matter as much as grading.</li>
+      </ul>
+      <p>The opposite failure matters too. A model that hedges everything is useless as a reference. Good calibration means being confident where the data are strong and saying plainly where they aren't.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section reveal" id="applied">
+  <div class="section-header">
+    <div class="section-index"><div class="section-number">05</div><div class="section-label">Applied ML</div></div>
+    <div class="section-content">
+      <h2>Machine learning at the bench</h2>
+      <p>The other track is ML on my own experimental data, which is where I've learned to be most skeptical of my own results. Everything gets benchmarked against expert annotation or a dumb baseline before I believe it.</p>
+      <div class="proj-grid">
+        <a class="proj-tile" href="index.html#experience">
+          <span class="proj-tile-eyebrow">Merck · 2026 – present</span>
+          <span class="proj-tile-title">Multi-omics for target validation</span>
+          <span class="proj-tile-desc">Transcriptomic, LC-MS/MS proteomic, and high-content imaging readouts from human iPSC triculture assays feed ML-supported bioinformatics for target validation and mechanism of action. Program details stay internal.</span>
+          <span class="proj-tile-tags"><span class="proj-tile-tag">Transcriptomics</span><span class="proj-tile-tag">Proteomics</span><span class="proj-tile-tag">High-content</span></span>
+        </a>
+        <a class="proj-tile" href="code-ai-agents.html#automorphotrack">
+          <span class="proj-tile-eyebrow">Open source · eLife</span>
+          <span class="proj-tile-title">AutoMorphoTrack</span>
+          <span class="proj-tile-desc">Python framework for organelle detection, tracking, and colocalization at single-cell resolution, validated against expert annotation by Dice, IoU, and F1. On PyPI with CLI, napari, and MCP interfaces.</span>
+          <span class="proj-tile-tags"><span class="proj-tile-tag">Python</span><span class="proj-tile-tag">Segmentation</span><span class="proj-tile-tag">MCP</span></span>
+        </a>
+        <a class="proj-tile" href="code-ai-models.html#scgpt-neurodegen-probe">
+          <span class="proj-tile-eyebrow">Foundation models</span>
+          <span class="proj-tile-title">scgpt-neurodegen-probe</span>
+          <span class="proj-tile-desc">Zero-shot evaluation of scGPT and Geneformer on neurodegeneration tasks with biologically defensible ground truth, negative results included.</span>
+          <span class="proj-tile-tags"><span class="proj-tile-tag">PyTorch</span><span class="proj-tile-tag">scGPT</span><span class="proj-tile-tag">Geneformer</span></span>
+        </a>
+        <a class="proj-tile" href="neurodigineration/train.html">
+          <span class="proj-tile-eyebrow">Human in the loop</span>
+          <span class="proj-tile-title">neurodigineration Train mode</span>
+          <span class="proj-tile-desc">A labeling GUI where subject-matter experts review and correct AI-generated gene briefs, the same evaluation loop in a form anyone can try.</span>
+          <span class="proj-tile-tags"><span class="proj-tile-tag">SME labeling</span><span class="proj-tile-tag">LLM</span></span>
+        </a>
+        <a class="proj-tile" href="code-ai-pipelines.html#demo-seg">
+          <span class="proj-tile-eyebrow">Imaging ML</span>
+          <span class="proj-tile-title">Segmentation &amp; phenotype classification</span>
+          <span class="proj-tile-desc">ML segmentation and phenotype calls on high-content screens (Opera Phenix, 96- and 384-well), scored against manual annotation before any hit gets called.</span>
+          <span class="proj-tile-tags"><span class="proj-tile-tag">scikit-learn</span><span class="proj-tile-tag">Opera Phenix</span></span>
+        </a>
+        <a class="proj-tile" href="code-ai-pipelines.html#pd-target-credentialing">
+          <span class="proj-tile-eyebrow">Target evidence</span>
+          <span class="proj-tile-title">pd-target-credentialing</span>
+          <span class="proj-tile-desc">Parkinson's target ranking from single-nucleus data plus convergent evidence scoring, with provenance on every call.</span>
+          <span class="proj-tile-tags"><span class="proj-tile-tag">Scanpy</span><span class="proj-tile-tag">pyDESeq2</span></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section reveal" id="toolkit">
+  <div class="section-header">
+    <div class="section-index"><div class="section-number">06</div><div class="section-label">Toolkit</div></div>
+    <div class="section-content">
+      <h2>Tools I reach for</h2>
+      <p>Nothing exotic. Most of the value is in the evaluation design, not the framework.</p>
+      <div class="hero-tags toolkit-tags">
+        <span class="tag">Python</span><span class="tag">pandas</span><span class="tag">scikit-learn</span><span class="tag">PyTorch</span>
+        <span class="tag">scGPT</span><span class="tag">Geneformer</span><span class="tag">Scanpy</span><span class="tag">Seurat</span>
+        <span class="tag">DESeq2</span><span class="tag">Harmony</span><span class="tag">Databricks</span><span class="tag">Local LLM deployment</span>
+        <span class="tag">MCP servers</span><span class="tag">napari</span><span class="tag">Copilot-assisted development</span><span class="tag">R</span>
+      </div>
+      <p style="margin-top:28px;">Working on evaluation or training data for biology models and want a bench scientist's read? <a href="contact.html">Get in touch</a>.</p>
     </div>
   </div>
 </div>
 
 <div class="workflow-strip">
   <div class="workflow-inner">
-    <h3>Automation Pipeline</h3>
+    <h3>How the bench and the evaluation work feed each other</h3>
     <div class="workflow-steps">
-      <div class="workflow-step">
-        <div class="step-number">01</div>
-        <div class="step-title">Liquid Handling</div>
-        <div class="step-detail">BRAVO, Tecan, Hamilton for media changes, plate loading, and assay execution.</div>
-      </div>
-      <div class="workflow-step">
-        <div class="step-number">02</div>
-        <div class="step-title">Image Acquisition</div>
-        <div class="step-detail">Automated confocal, Opera Phenix HCS, Incucyte for high-volume capture.</div>
-      </div>
-      <div class="workflow-step">
-        <div class="step-number">03</div>
-        <div class="step-title">Analysis</div>
-        <div class="step-detail">AutoMorphoTrack + Python pipelines for segmentation, classification, tracking, QC.</div>
-      </div>
-      <div class="workflow-step">
-        <div class="step-number">04</div>
-        <div class="step-title">Reporting</div>
-        <div class="step-detail">Automated CSV outputs, overlays, heatmaps, and stakeholder-ready visualizations.</div>
-      </div>
+      <div class="workflow-step"><div class="step-number">01</div><div class="step-title">Generate</div><div class="step-detail">iPSC assays, imaging, and omics produce data with known biology behind it.</div></div>
+      <div class="workflow-step"><div class="step-number">02</div><div class="step-title">Model</div><div class="step-detail">ML for segmentation, classification, and multi-omics integration.</div></div>
+      <div class="workflow-step"><div class="step-number">03</div><div class="step-title">Benchmark</div><div class="step-detail">Compare against expert annotation and simple baselines before trusting anything.</div></div>
+      <div class="workflow-step"><div class="step-number">04</div><div class="step-title">Evaluate</div><div class="step-detail">Grade model-generated science against the primary literature.</div></div>
+      <div class="workflow-step"><div class="step-number">05</div><div class="step-title">Feed back</div><div class="step-detail">Errors become rubric items, test cases, and better reference answers.</div></div>
     </div>
   </div>
 </div>
@@ -2505,54 +2858,8 @@ amt.<span class="func">export_overlays</span>(stack, tracks, coloc, output_dir=<
     </div>
     <div class="footer-bottom">&copy; 2026 Armin Bayati. All rights reserved.</div>
   </div>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-(function(){
-  var frames=[],elong_ctrl=[],elong_cccp=[];
-  for(var i=0;i<60;i++){
-    frames.push(i*4);
-    elong_ctrl.push(62+4*Math.sin(i*0.15)+3*Math.random());
-    elong_cccp.push(Math.max(10,62-0.8*i+4*Math.random()));
-  }
-  new Chart(document.getElementById('morphChart'),{
-    type:'line',
-    data:{labels:frames,datasets:[
-      {label:'Control - Elongated %',data:elong_ctrl,borderColor:'rgba(46,134,193,0.85)',pointRadius:0,borderWidth:2,tension:0.3},
-      {label:'CCCP - Elongated %',data:elong_cccp,borderColor:'rgba(192,57,43,0.85)',pointRadius:0,borderWidth:2,tension:0.3}
-    ]},
-    options:{responsive:true,
-      plugins:{legend:{position:'bottom',labels:{font:{size:11,family:"'IBM Plex Sans'"},padding:16}}},
-      scales:{y:{min:0,max:100,title:{display:true,text:'% Elongated Mitochondria',font:{size:11,family:"'IBM Plex Sans'"}},grid:{color:'rgba(0,0,0,0.05)'}},
-        x:{title:{display:true,text:'Frame',font:{size:11,family:"'IBM Plex Sans'"}},grid:{color:'rgba(0,0,0,0.03)'},ticks:{maxTicksLimit:10}}}}
-  });
-  var cf=[],cc=[],ccf=[];
-  for(var i=0;i<60;i++){
-    cf.push(i*4);
-    cc.push(0.32+0.06*Math.sin(i*0.2)+0.04*Math.random());
-    ccf.push(Math.min(0.9,0.32+0.008*i+0.04*Math.random()));
-  }
-  new Chart(document.getElementById('colocChart'),{
-    type:'line',
-    data:{labels:cf,datasets:[
-      {label:'Control',data:cc,borderColor:'rgba(107,114,128,0.7)',pointRadius:0,borderWidth:1.5,tension:0.3},
-      {label:'CCCP-Treated',data:ccf,borderColor:'rgba(192,57,43,0.85)',pointRadius:0,borderWidth:2,tension:0.3}
-    ]},
-    options:{responsive:true,
-      plugins:{legend:{position:'bottom',labels:{font:{size:11,family:"'IBM Plex Sans'"},padding:16}}},
-      scales:{y:{min:0,max:1,title:{display:true,text:'Pearson Coefficient (Lyso/Mito)',font:{size:11,family:"'IBM Plex Sans'"}},grid:{color:'rgba(0,0,0,0.05)'}},
-        x:{title:{display:true,text:'Frame',font:{size:11,family:"'IBM Plex Sans'"}},grid:{color:'rgba(0,0,0,0.03)'},ticks:{maxTicksLimit:10}}}}
-  });
-})();
-</script>
-<script>
-new Chart(document.getElementById('autoChart'),{type:'bar',
-  data:{labels:['Plates/Day','CV% (Cell Count)','CV% (Treatment)','Setup Time (min)'],datasets:[
-    {label:'Manual',data:[6,12.4,8.6,45],backgroundColor:'rgba(107,114,128,0.5)',borderColor:'rgba(107,114,128,0.8)',borderWidth:1},
-    {label:'BRAVO',data:[24,3.8,2.4,8],backgroundColor:'rgba(192,57,43,0.6)',borderColor:'rgba(192,57,43,0.9)',borderWidth:1}
-  ]},
-  options:{responsive:true,plugins:{legend:{position:'bottom',labels:{font:{size:11,family:"'IBM Plex Sans'"},padding:16}}},
-    scales:{y:{beginAtZero:true,title:{display:true,text:'Value',font:{size:11,family:"'IBM Plex Sans'"}},grid:{color:'rgba(0,0,0,0.05)'}},x:{grid:{display:false}}}}
-});
-</script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+
 <script>
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -2863,53 +3170,6 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   document.querySelectorAll('.search-toggle').forEach(function(btn){ btn.addEventListener('click', openSearch); });
 })();
 
-// ── New keyword section charts ──
-
-new Chart(document.getElementById('miniChart').getContext('2d'), {
-  type: 'bar',
-  data: {
-    labels: ['6-well', '24-well', '96-well', '384-well'],
-    datasets: [{
-      label: "Z' Factor", data: [0.82, 0.78, 0.72, 0.58],
-      backgroundColor: ['rgba(39,174,96,0.6)','rgba(39,174,96,0.6)','rgba(39,174,96,0.6)','rgba(243,156,18,0.6)'],
-      borderWidth: 1
-    }]
-  },
-  options: { responsive: true, plugins: { legend: { display: false }, annotation: {}},
-    scales: { y: { beginAtZero: true, max: 1.0, title: { display: true, text: "Z' Factor" }}}}
-});
-
-new Chart(document.getElementById('mlChart').getContext('2d'), {
-  type: 'radar',
-  data: {
-    labels: ['Healthy', 'Apoptotic', 'Necrotic', 'Senescent', 'Mitotic', 'Stressed'],
-    datasets: [{
-      label: 'Precision', data: [0.94, 0.88, 0.91, 0.82, 0.95, 0.79],
-      borderColor: 'rgba(192,57,43,0.8)', backgroundColor: 'rgba(192,57,43,0.1)'
-    },{
-      label: 'Recall', data: [0.92, 0.85, 0.89, 0.78, 0.93, 0.82],
-      borderColor: 'rgba(52,73,94,0.8)', backgroundColor: 'rgba(52,73,94,0.1)'
-    }]
-  },
-  options: { responsive: true, scales: { r: { beginAtZero: true, max: 1.0, ticks: { stepSize: 0.25 }}}}
-});
-
-new Chart(document.getElementById('trackChart').getContext('2d'), {
-  type: 'line',
-  data: {
-    labels: ['0','1','2','3','4','5','6','7','8','9','10'],
-    datasets: [{
-      label: 'Control', data: [0, 0.12, 0.35, 0.62, 0.95, 1.32, 1.78, 2.25, 2.80, 3.42, 4.10],
-      borderColor: 'rgba(52,73,94,0.8)', fill: false, tension: 0.3
-    },{
-      label: 'PFF-treated', data: [0, 0.08, 0.18, 0.28, 0.38, 0.48, 0.55, 0.62, 0.68, 0.72, 0.76],
-      borderColor: 'rgba(192,57,43,0.8)', fill: false, tension: 0.3
-    }]
-  },
-  options: { responsive: true,
-    scales: { y: { beginAtZero: true, title: { display: true, text: 'MSD (µm²)' }},
-              x: { title: { display: true, text: 'Time lag (s)' }}}}
-});
 </script>
 
 <!-- GoatCounter tracking (arminbayati.org) -->

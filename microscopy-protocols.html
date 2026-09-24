@@ -2084,6 +2084,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
           <button class="nav-drop-trigger">Code &amp; AI</button>
           <div class="nav-drop-panel">
             <a href="code-and-ai.html">Code &amp; AI &mdash; Overview</a>
+            <a href="ai-ml.html">AI/ML Evaluation &amp; Training</a>
             <a href="code-ai-agents.html">Agents &amp; MCP</a>
             <a href="code-ai-models.html">ML &amp; Foundation Models</a>
             <a href="code-ai-pipelines.html">Bio Pipelines &amp; Automation</a>
@@ -2912,7 +2913,7 @@ document.addEventListener('click', function(e){
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="footer-name">Armin Bayati, PhD</div>
-      <div class="footer-role">Research Fellow &middot; Harvard Medical School &amp; Massachusetts General Hospital</div>
+      <div class="footer-role">Senior Scientist III, Neuroimmunology &middot; Merck<br>AI/ML Training Fellow &middot; Aligned Labs</div>
     </div>
     <div class="footer-links-grid">
       <div class="footer-col">
@@ -2921,6 +2922,7 @@ document.addEventListener('click', function(e){
         <a href="neuroimmunology.html">Neuroimmunology</a>
         <a href="cancer-immunology.html">Cancer Immunology</a>
         <a href="drug-discovery.html">Drug Discovery</a>
+        <a href="ai-ml.html">AI/ML Work</a>
         <a href="proteomics.html">Proteomics</a>
       </div>
       <div class="footer-col">
@@ -2942,35 +2944,315 @@ document.addEventListener('click', function(e){
 </div>
 
 <script>
-var searchIndex = [
-  {page:'microscopy-protocols.html', title:'Immunofluorescence Protocol', category:'Protocols', section:'IF', keywords:'immunofluorescence confocal pfa dapi fluorescence staining'},
-  {page:'microscopy-protocols.html', title:'IHC Staining Protocol', category:'Protocols', section:'IHC', keywords:'immunohistochemistry paraffin dab antigen retrieval chromogen'},
-  {page:'microscopy-protocols.html', title:'STED Super-Resolution Protocol', category:'Protocols', section:'STED', keywords:'sted super resolution nanoscopy abberior depletion'},
-  {page:'microscopy-protocols.html', title:'In Vitro TEM Protocol', category:'Protocols', section:'TEM-invitro', keywords:'tem electron microscopy glutaraldehyde osmium ultrathin'},
-  {page:'microscopy-protocols.html', title:'In Vivo TEM Protocol', category:'Protocols', section:'TEM-invivo', keywords:'tem perfusion fixation vibratome embedding sectioning'},
-  {page:'ipscs.html', title:'iPSC Models', category:'Research', keywords:'ipsc reprogramming differentiation'},
-  {page:'cancer-immunology.html', title:'Cancer Immunology', category:'Research', keywords:'cancer immunology'},
-  {page:'drug-discovery.html', title:'Drug Discovery', category:'Research', keywords:'drug discovery screening'},
-  {page:'proteomics.html', title:'Proteomics', category:'Research', keywords:'proteomics mass spectrometry protein'},
-  {page:'contact.html', title:'Contact', category:'Connect', keywords:'contact email reach'}
-];
+/* site search (standard) */
+(function() {
+  var searchIndex = [
+    {page:'microscopy-protocols.html', title:'Immunofluorescence Protocol', category:'Protocols', section:'IF',
+     keywords:'immunofluorescence confocal pfa dapi fluorescence staining'},
+    {page:'microscopy-protocols.html#ihc', title:'IHC Staining Protocol', category:'Protocols', section:'IHC',
+     keywords:'immunohistochemistry paraffin dab antigen retrieval chromogen'},
+    {page:'microscopy-protocols.html#sted', title:'STED Super-Resolution Protocol', category:'Protocols', section:'STED',
+     keywords:'sted super resolution nanoscopy abberior depletion'},
+    {page:'microscopy-protocols.html', title:'In Vitro TEM Protocol', category:'Protocols', section:'TEM-invitro',
+     keywords:'tem electron microscopy glutaraldehyde osmium ultrathin'},
+    {page:'microscopy-protocols.html', title:'In Vivo TEM Protocol', category:'Protocols', section:'TEM-invivo',
+     keywords:'tem perfusion fixation vibratome embedding sectioning'},
+    // Page-level entries
+    {page:'ai-ml.html', title:'AI/ML Evaluation & Training', category:'Main', section:'',
+     keywords:'ai ml artificial intelligence machine learning aligned labs fellow fellowship model evaluation llm training rubric grading reference responses foundation models scgpt geneformer benchmarking contamination audit dataset labeling cell biology neuroscience pharmacology',
+     description:'AI/ML work: evaluating and training AI for biology at Aligned Labs, plus applied machine learning for drug discovery.'},
+    {page:'ai-ml.html#aligned', title:'Aligned Labs Fellowship', category:'Industry', section:'AI/ML',
+     keywords:'aligned labs fellow ai ml training cell biology neuroscience pharmacology model-generated content evaluation primary literature expert reference responses remote',
+     description:'Fellow, AI/ML Training in Cell Biology & Neuroscience: evaluating model-generated science against primary literature.'},
+    {page:'ai-ml.html#rubric', title:'How I Grade Model Output', category:'Industry', section:'AI/ML',
+     keywords:'rubric scoring grading accuracy reasoning citation quality calibration completeness hallucination llm evaluation worked example alpha-synuclein lag3',
+     description:'Rubric dimensions for grading model-generated science, with a worked example.'},
+    {page:'ai-ml.html#failure-modes', title:'Where Models Go Wrong on Biology', category:'Industry', section:'AI/ML',
+     keywords:'failure modes hallucinated citations model system drift ipsc ic50 ec50 ki kd gwas causal gene benchmark contamination calibration llm errors',
+     description:'Recurring errors in model-generated biology: fake citations, model-system drift, potency confusion, GWAS overreach.'},
+    {page:'ai-ml.html#applied', title:'Machine Learning at the Bench', category:'Technical', section:'AI/ML',
+     keywords:'applied machine learning image segmentation phenotype classification multi-omics target validation mechanism of action automorphotrack high-content screening opera phenix merck',
+     description:'ML on experimental data: multi-omics target validation, AutoMorphoTrack, foundation-model probes, imaging ML.'},
+    {page:'index.html#experience', title:'Work Experience & Education', category:'Main', section:'Experience',
+     keywords:'experience cv resume merck senior scientist iii neuroimmunology aligned labs harvard medical school mass general brigham research fellow montreal neurological institute mcgill phd university of victoria',
+     description:'Merck, Aligned Labs, Harvard Medical School & MGB, Montreal Neurological Institute, McGill, University of Victoria.'},
+    {page:'code-and-ai.html', title:'Code & AI Overview', category:'Technical', section:'',
+     keywords:'code ai python typescript github open source mcp claude code langgraph pytorch projects portfolio',
+     description:'Open-source computational projects: MCP servers, agentic systems, PyTorch models, bio pipelines, lab automation.'},
+    {page:'code-ai-agents.html', title:'Agents & MCP', category:'Technical', section:'Code & AI',
+     keywords:'agents mcp model context protocol claude code agent sdk langgraph bioscope automorphotrack tool calling',
+     description:'MCP servers, Claude Code sub-agents, and LangGraph orchestration over biomedical APIs.'},
+    {page:'code-ai-models.html', title:'ML & Foundation Models', category:'Technical', section:'Code & AI',
+     keywords:'machine learning foundation models pytorch clip contrastive morph2expr scgpt geneformer embedding cell painting l1000',
+     description:'CLIP-style PyTorch alignment of imaging and transcriptomics; zero-shot scGPT and Geneformer evaluation.'},
+    {page:'code-ai-pipelines.html', title:'Bio Pipelines & Automation', category:'Technical', section:'Code & AI',
+     keywords:'bioinformatics pipelines automation scanpy pydeseq2 target credentialing crispr atlas pylabrobot opentrons liquid handling segmentation',
+     description:'Target credentialing from single-nucleus data, CRISPR phenocopy atlas, and iPSC liquid-handling automation.'},
+    {page:'crispr-screening.html', title:'CRISPR Screening', category:'Research', section:'',
+     keywords:'crispr screening functional genomics pooled arrayed knockout mitophagy alpha-synuclein viral entry sars-cov-2 volcano plot heatmap ipsc neurons cardiomyocytes park2 pink1 bnip3l rac1 cltc interactive figures',
+     description:'Interactive CRISPR screening outcomes across mitophagy, alpha-synuclein uptake, and viral entry campaigns.'},
+    {page:'crispr-screening.html#mitophagy', title:'Mitophagy CRISPR Screen', category:'Research', section:'Mitophagy',
+     keywords:'mitophagy pink1 park2 parkin bnip3l fundc1 optn ndp52 autophagy mitochondria ipsc dopaminergic neuron genome-wide knockout neuroprotection volcano plot',
+     description:'Genome-wide CRISPR KO screen identifying mitophagy regulators in iPSC-derived dopaminergic neurons.'},
+    {page:'crispr-screening.html#synuclein', title:'Alpha-Synuclein Uptake Screen', category:'Research', section:'Synuclein',
+     keywords:'alpha-synuclein pff preformed fibril uptake rac1 macropinocytosis endocytosis rpe1 crispr arrayed knockout internalization waterfall',
+     description:'Arrayed CRISPR screen identifying RAC1-dependent macropinocytosis as major alpha-synuclein entry route.'},
+    {page:'crispr-screening.html#viral', title:'SARS-CoV-2 Entry Screen', category:'Research', section:'Viral Entry',
+     keywords:'sars-cov-2 viral entry clathrin endocytosis sirna pseudovirus spike protein ace2 pitstop dnm2 cltc infection kinetics',
+     description:'siRNA screen defining clathrin-mediated endocytosis as the primary SARS-CoV-2 cellular entry mechanism.'},
+    {page:'crispr-screening.html#validation', title:'Cross-Screen Validation', category:'Research', section:'Validation',
+     keywords:'cross-screen validation heatmap scrnaseq umap seahorse ocr metabolic profiling transcriptomics integration multi-omics',
+     description:'Multi-screen validation heatmap and single-cell transcriptomic analysis of CRISPR-perturbed neurons.'},
+    {page:'index.html', title:'Home — Overview', category:'Main', section:'',
+     keywords:'armin bayati phd neuroscience cell biology drug discovery merck senior scientist neuroimmunology aligned labs ai ml harvard medical school mass general brigham research fellow translational science',
+     description:'Overview of research portfolio spanning neurodegeneration, drug discovery, and translational science.'},
+    {page:'ipscs.html', title:'iPSC-Derived Neurons', category:'Research', section:'',
+     keywords:'ipsc induced pluripotent stem cells dopaminergic neurons cortical neurons differentiation disease modeling parkinson lewy body dual-hit mea calcium imaging electrophysiology co-culture microglia astrocyte',
+     description:'iPSC differentiation protocols for dopaminergic and cortical neurons, disease modeling, and co-culture systems.'},
+    {page:'ipscs.html#differentiation', title:'iPSC Differentiation Protocol', category:'Research', section:'Differentiation',
+     keywords:'differentiation protocol dopaminergic cortical neurons small molecule patterning smadis floor plate midbrain astrocyte microglia',
+     description:'Dual SMAD inhibition to floor-plate patterning for midbrain dopaminergic neuron generation.'},
+    {page:'ipscs.html#electrophysiology', title:'Electrophysiology & Calcium Imaging', category:'Research', section:'Functional',
+     keywords:'mea multielectrode array calcium imaging fluo-4 spontaneous activity spike raster neuronal maturation electrophysiology functional',
+     description:'MEA recordings and calcium imaging confirming functional maturity of iPSC-derived neurons.'},
+    {page:'ipscs.html#disease-modeling', title:'Disease Modeling (Dual-Hit)', category:'Research', section:'Disease Modeling',
+     keywords:'dual-hit model lewy body inclusion pff preformed fibrils ifn-gamma cytokine parkinson synuclein neurodegeneration inflammation neuroinflammation',
+     description:'Sequential PFF + IFN-gamma exposure producing Lewy body-like inclusions in human dopaminergic neurons.'},
+    {page:'ipscs.html#co-culture', title:'Neuron-Glia Co-Culture', category:'Research', section:'Co-Culture',
+     keywords:'co-culture microglia astrocyte neuron-glia neuroinflammation phagocytosis neuroprotection alpha-synuclein inclusion formation',
+     description:'Microglia accelerate inclusion formation while astrocytes provide neuroprotection in co-culture systems.'},
+    {page:'cardiomyocytes.html', title:'iPSC-Derived Cardiomyocytes', category:'Research', section:'',
+     keywords:'cardiomyocyte cardiac ipsc beating heart safety pharmacology calcium transients field potential duration impedance sarcomere contractility cardiotoxicity herg',
+     description:'iPSC-cardiomyocyte assays for cardiac safety pharmacology and cardiotoxicity screening.'},
+    {page:'cancer-immunology.html', title:'Cancer Immunology', category:'Research', section:'',
+     keywords:'t cell killing adcc cdc checkpoint blockade cytokine profiling car-t characterization immune co-culture systems tumor microenvironment immunotherapy pd-1 pd-l1 nk cells antibody dependent cellular cytotoxicity complement dependent cytotoxicity',
+     description:'Immune cell-mediated killing assays, checkpoint blockade, and tumor microenvironment modeling.'},
+    {page:'cellular-assays.html', title:'Cellular & Functional Assays', category:'Research', section:'',
+     keywords:'endocytosis exosomal biology autophagy flow cytometry pbmc immune assays plate-based readouts immunocytochemistry clathrin cd63 cd9 reporter exosome transfer assay mitophagy lysosomal stress viability cytotoxicity celltiter-glo',
+     description:'Endocytosis, exosomal biology, autophagy/mitophagy, and lysosomal stress assay platforms.'},
+    {page:'cellular-assays.html#autophagy', title:'Autophagy & Mitophagy Assays', category:'Research', section:'Autophagy',
+     keywords:'autophagy mitophagy lc3b lysotracker lysosensor lysosomal ph stress dual-hit impairment',
+     description:'LysoSensor, LysoTracker, and LC3B-based assays for autophagy and mitophagy quantification.'},
+    {page:'cellular-assays.html#endocytosis', title:'Endocytosis & Uptake Assays', category:'Research', section:'Endocytosis',
+     keywords:'endocytosis clathrin macropinocytosis fibril uptake sars-cov-2 spike protein ace2 receptor internalization trafficking',
+     description:'Clathrin-mediated endocytosis and macropinocytosis pathways for PFF and SARS-CoV-2 entry.'},
+    {page:'cellular-assays.html#exosome', title:'Exosomal Biology & Transfer', category:'Research', section:'Exosomes',
+     keywords:'exosome cd63 multivesicular body mvb manumycin a gold-labeled transfer naïve recipient disease propagation',
+     description:'Exosome-mediated disease propagation tracked via CD63-GFP and nanogold-labeled fibrils.'},
+    {page:'genetics.html', title:'Genetics & Molecular Biology', category:'Research', section:'',
+     keywords:'crispr cas9 sirna shrna aso antisense oligonucleotide molecular cloning viral constructs protein conjugation lysosomal biology gene editing lentivirus aav adenovirus transfection plasmid dna rna gba knockout snca triplication',
+     description:'CRISPR gene editing, viral vector delivery, and molecular biology for disease modeling.'},
+    {page:'genetics.html#lysosomal', title:'Lysosomal Biology', category:'Research', section:'Lysosomal',
+     keywords:'lysosome lamp1 lamp2 tfeb nrf2 galectin-3 membrane permeabilization rab7 cd63 lyso-ip nanogold fibril trafficking dysfunction',
+     description:'Lysosomal dysfunction, membrane rupture, and fibril trafficking in neurodegeneration.'},
+    {page:'genetics.html#gene-editing', title:'Gene Editing & Viral Delivery', category:'Research', section:'Gene Editing',
+     keywords:'lentivirus adenovirus shrna knockdown overexpression crispr gba lamp2 alpha-synuclein ha western blot fractionation',
+     description:'Lentiviral knockdown, adenoviral overexpression, and CRISPR editing in iPSC neurons.'},
+    {page:'drug-discovery.html', title:'Drug Discovery & Translation', category:'Research', section:'',
+     keywords:'parkin agonist tac lysosomal rescue antivirals biomarker strategy preclinical compound testing small molecule screening sar dose response pseudovirus sars-cov-2 pikfyve csnk2 hplc compound purity analytical characterization dls dynamic light scattering particle size nanoparticle formulation lc-ms pharmacokinetics target engagement pharmacodynamic',
+     description:'Small-molecule drug discovery for Parkinson\'s disease and antiviral target validation.'},
+    {page:'drug-discovery.html#parkin', title:'Parkin Agonism & Neuroprotection', category:'Research', section:'Parkin',
+     keywords:'parkin fb231 agonist alpha-synuclein inclusion reduction western blot tfeb nrf2 hdac6 neuroprotection dopaminergic',
+     description:'Small-molecule Parkin agonist reducing alpha-synuclein inclusions in iPSC dopaminergic neurons.'},
+    {page:'drug-discovery.html#antiviral', title:'Antiviral Drug Discovery', category:'Research', section:'Antiviral',
+     keywords:'csnk2 pikfyve sars-cov-2 beta-coronavirus pseudovirus gfp spike inhibitor entry clathrin endocytosis host-directed antiviral',
+     description:'CSNK2 and PIKfyve inhibitors blocking SARS-CoV-2 entry via host-directed antiviral strategies.'},
+    {page:'microscopy.html', title:'Microscopy & Imaging', category:'Research', section:'',
+     keywords:'confocal sted super-resolution tem transmission electron microscopy live-cell imaging high-content screening ihc histology immunohistochemistry fluorescence opera phenix hcs image analysis',
+     description:'Multi-modal imaging from confocal and STED super-resolution to TEM ultrastructural analysis.'},
+    {page:'microscopy.html#confocal', title:'Confocal Microscopy', category:'Research', section:'Confocal',
+     keywords:'confocal laser scanning multichannel z-stack maximum intensity projection pff inclusion sars spike lysosomal stress co-culture colocalization',
+     description:'High-resolution confocal imaging of protein aggregation, viral entry, and co-culture systems.'},
+    {page:'microscopy.html#em', title:'Electron Microscopy', category:'Research', section:'EM',
+     keywords:'tem transmission electron microscopy nanogold lewy body inclusion ultrastructure multivesicular body neurite 49000x 98000x',
+     description:'TEM ultrastructural analysis of Lewy body-like inclusions and nanogold-labeled fibril trafficking.'},
+    {page:'microscopy.html#sted', title:'STED Super-Resolution', category:'Research', section:'STED',
+     keywords:'sted stimulated emission depletion super-resolution sub-lysosomal fibril localization nanoscale',
+     description:'STED nanoscopy resolving sub-lysosomal fibril localization beyond confocal limits.'},
+    {page:'flow-cytometry.html', title:'Flow Cytometry', category:'Research', section:'',
+     keywords:'flow cytometry multicolor immunophenotyping intracellular staining facs sorting gating strategy surface marker t cell b cell nk cell monocyte macrophage pbmc viability dye compensation tregs ki67 cd4 cd8',
+     description:'Multicolor immunophenotyping, intracellular staining, and FACS sorting for immune cell analysis.'},
+    {page:'proteomics.html', title:'Proteomics & Single-Cell Genomics', category:'Research', section:'',
+     keywords:'tmt quantitative proteomics scrna-seq 10x genomics bulk rna-seq gsea pathway analysis umap deseq2 seurat mass spectrometry protein biomarker volcano plot gene ontology single cell transcriptomics',
+     description:'TMT proteomics, scRNA-seq, and multi-omics data analysis pipelines.'},
+    {page:'coding.html', title:'Coding, Automation & Data', category:'Technical', section:'',
+     keywords:'python automorphotrack pipelines bravo tecan liquid handling 96 384 well miniaturization machine learning automation data analysis github programming r matlab imageJ fiji cellprofiler',
+     description:'Python-based automation, liquid handling, and custom image analysis tools.'},
+    {page:'skills.html', title:'Full Technical Skills', category:'Technical', section:'',
+     keywords:'techniques instruments software capabilities laboratory skills comprehensive listing assays methods platforms tools equipment',
+     description:'Comprehensive listing of laboratory techniques, instruments, and software capabilities.'},
+    {page:'publications.html', title:'Publications', category:'Academic', section:'',
+     keywords:'peer-reviewed papers citations journal articles nature neuroscience lancet science translational medicine acs chemical biology first author corresponding author pubmed google scholar 25 publications 1300 citations',
+     description:'25+ peer-reviewed publications with 1,300+ citations across neuroscience, virology, and cell biology.'},
+    {page:'vc-portfolio.html', title:'Portfolio & VC', category:'Industry', section:'',
+     keywords:'venture capital portfolio management drug discovery translational science biopharma partnerships alliance management funding grants awards ip patent regulatory ind fda biotech startup pharmaceutical scientific evaluation',
+     description:'Translational science leadership, biopharma partnerships, and scientific portfolio management experience.'},
+    {page:'contact.html', title:'Contact', category:'Connect', section:'',
+     keywords:'email linkedin github orcid google scholar contact collaboration',
+     description:'Contact information, LinkedIn, and academic profiles.'},
+    {page:'protocols.html', title:'iPSC Differentiation Protocols', category:'Research', section:'',
+     keywords:'protocols differentiation dopaminergic cortical ngn2 cardiomyocyte ipsc step-by-step methods procedure reagents timeline maturation',
+     description:'Interactive step-by-step protocols for dopaminergic, cortical, NGN2+, and cardiomyocyte iPSC differentiation.'},
+    {page:'biomarkers.html', title:'Biomarker Quantification', category:'Research', section:'',
+     keywords:'biomarker quantification analysis elisa western blot flow cytometry immunofluorescence luminex msd proteomics qpcr pS129 alpha-synuclein cTnT cardiac troponin cytokine checkpoint pd-1 ctla-4 lamp1 lamp2 tfeb hdac6',
+     description:'Multi-modal biomarker profiling across neurodegeneration, immunology, cardiac biology, and oncology.'},
+    {page:'biologics.html', title:'Biologics & Immunotherapy', category:'Research', section:'',
+     keywords:'biologics antibody anti-tnf anti-il1 anti-il6 anti-synuclein neuroprotection immunotherapy cytokine neuroinflammation monoclonal biologic',
+     description:'Biologics for inhibiting proinflammatory cytokine activation in DA neurons.'},
+    {page:'biologics.html#cytokine-inhibition', title:'Cytokine Inhibition in DA Neurons', category:'Research', section:'Cytokines',
+     keywords:'anti-tnf infliximab anakinra tocilizumab neuroinflammation dopaminergic neuroprotection',
+     description:'Anti-cytokine biologics protecting dopaminergic neurons from inflammatory degeneration.'},
+    {page:'biologics.html#anti-synuclein', title:'Anti-Synuclein Antibodies', category:'Research', section:'Anti-Synuclein',
+     keywords:'anti-synuclein antibody prasinezumab cinpanemab immunotherapy aggregation fibril lewy body',
+     description:'Anti-synuclein antibodies preventing intracellular aggregation in iPSC neurons.'}
+  ];
 
-function performSearch() {
-  var q = document.querySelector('.search-input').value.toLowerCase();
-  if (!q) { document.querySelector('.search-results').innerHTML = ''; return; }
-  var results = searchIndex.filter(function(item) {
-    return item.title.toLowerCase().includes(q) || item.keywords.includes(q) || item.section.toLowerCase().includes(q);
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('searchInput');
+  var resultsEl = document.getElementById('searchResults');
+  var activeIdx = -1;
+
+  function openSearch() {
+    overlay.classList.add('active');
+    requestAnimationFrame(function(){ overlay.classList.add('fade-in'); });
+    input.value = '';
+    input.focus();
+    renderResults('');
+    activeIdx = -1;
+  }
+
+  function closeSearch() {
+    overlay.classList.remove('fade-in');
+    setTimeout(function(){ overlay.classList.remove('active'); }, 200);
+  }
+
+  function escapeRegex(s) {
+    return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function highlight(text, terms) {
+    if (!terms.length) return text;
+    var pattern = terms.map(escapeRegex).join('|');
+    var regex = new RegExp('(' + pattern + ')', 'gi');
+    return text.replace(regex, '<mark>$1</mark>');
+  }
+
+  // Fuzzy substring match: returns true if all chars of query appear in order in str
+  function fuzzyMatch(str, query) {
+    var strIdx = 0;
+    for (var i = 0; i < query.length; i++) {
+      var found = false;
+      while (strIdx < str.length) {
+        if (str[strIdx].toLowerCase() === query[i].toLowerCase()) {
+          strIdx++;
+          found = true;
+          break;
+        }
+        strIdx++;
+      }
+      if (!found) return false;
+    }
+    return true;
+  }
+
+  function renderResults(query) {
+    var terms = query.toLowerCase().trim().split(/\s+/).filter(function(t){ return t.length > 1; });
+    var scored = [];
+
+    searchIndex.forEach(function(item) {
+      if (!terms.length) { scored.push({item: item, score: 0}); return; }
+      var score = 0;
+      var titleLow = item.title.toLowerCase();
+      var kwLow = item.keywords;
+      var descLow = (item.description || '').toLowerCase();
+      var sectionLow = (item.section || '').toLowerCase();
+
+      terms.forEach(function(t) {
+        // Exact matches
+        if (titleLow.indexOf(t) !== -1) score += 15;
+        if (sectionLow.indexOf(t) !== -1) score += 8;
+        if (descLow.indexOf(t) !== -1) score += 5;
+        if (kwLow.indexOf(t) !== -1) score += 3;
+        // Fuzzy match on title if no exact match
+        if (score === 0 && t.length > 2 && fuzzyMatch(titleLow, t)) score += 2;
+      });
+
+      // Bonus for matching all terms
+      var allMatch = terms.every(function(t) {
+        return titleLow.indexOf(t) !== -1 || kwLow.indexOf(t) !== -1 || descLow.indexOf(t) !== -1;
+      });
+      if (allMatch && terms.length > 1) score += 10;
+
+      if (score > 0) scored.push({item: item, score: score});
+    });
+
+    scored.sort(function(a, b){ return b.score - a.score; });
+
+    // Deduplicate: if a page-level and section-level entry have similar scores, keep both but cap at 12
+    scored = scored.slice(0, 12);
+
+    if (terms.length && !scored.length) {
+      resultsEl.innerHTML = '<div class="search-empty"><span>&#128269;</span>No results for &ldquo;' + query.replace(/</g, '&lt;') + '&rdquo;<div class="search-suggestion">Try broader terms or check spelling</div></div>';
+      return;
+    }
+
+    var html = '';
+    scored.forEach(function(s, i) {
+      var item = s.item;
+      var title = terms.length ? highlight(item.title, terms) : item.title;
+      var desc = item.description || '';
+      if (terms.length && desc) desc = highlight(desc, terms);
+
+      var sectionBadge = item.section ? '<span class="search-section-badge">' + item.section + '</span>' : '';
+
+      html += '<a class="search-result' + (i === 0 && terms.length ? ' active' : '') + '" href="' + item.page + '">';
+      html += '<div class="search-result-meta"><span class="search-result-page">' + item.category + '</span>' + sectionBadge + '</div>';
+      html += '<div class="search-result-title">' + title + '</div>';
+      html += '<div class="search-result-desc">' + desc + '</div></a>';
+    });
+
+    resultsEl.innerHTML = html;
+    activeIdx = terms.length ? 0 : -1;
+  }
+
+  function setActive(idx) {
+    var items = resultsEl.querySelectorAll('.search-result');
+    if (!items.length) return;
+    items.forEach(function(el){ el.classList.remove('active'); });
+    if (idx < 0) idx = items.length - 1;
+    if (idx >= items.length) idx = 0;
+    activeIdx = idx;
+    items[idx].classList.add('active');
+    items[idx].scrollIntoView({block: 'nearest'});
+  }
+
+  if (input) {
+    input.addEventListener('input', function(){ renderResults(this.value); });
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowDown') { e.preventDefault(); setActive(activeIdx + 1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(activeIdx - 1); }
+      else if (e.key === 'Enter') {
+        e.preventDefault();
+        var active = resultsEl.querySelector('.search-result.active');
+        if (active) window.location.href = active.href;
+      }
+    });
+  }
+
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeSearch();
   });
-  var html = results.length ? results.map(function(r) {
-    return '<div class="search-result"><a href="' + r.page + '#' + r.section.toLowerCase() + '"><strong>' + r.title + '</strong><br><small>' + r.category + ' - ' + r.section + '</small></a></div>';
-  }).join('') : '<div class="search-result">No results found.</div>';
-  document.querySelector('.search-results').innerHTML = html;
-}
 
-document.querySelector('.search-input').addEventListener('input', performSearch);
-document.querySelector('.search-input').addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') { this.value = ''; document.querySelector('.search-results').innerHTML = ''; }
-});
+  document.addEventListener('keydown', function(e) {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
+    if (e.key === 'Escape' && overlay.classList.contains('active')) closeSearch();
+    if (e.key === '/' && !overlay.classList.contains('active') && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+      e.preventDefault(); openSearch();
+    }
+  });
+
+  document.querySelectorAll('.search-toggle').forEach(function(btn){ btn.addEventListener('click', openSearch); });
+})();
 
 (function(){
   var reveals = document.querySelectorAll('.reveal');

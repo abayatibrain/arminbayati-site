@@ -1487,6 +1487,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
           <button class="nav-drop-trigger">Code &amp; AI</button>
           <div class="nav-drop-panel">
             <a href="code-and-ai.html">Code &amp; AI &mdash; Overview</a>
+            <a href="ai-ml.html">AI/ML Evaluation &amp; Training</a>
             <a href="code-ai-agents.html">Agents &amp; MCP</a>
             <a href="code-ai-models.html">ML &amp; Foundation Models</a>
             <a href="code-ai-pipelines.html">Bio Pipelines &amp; Automation</a>
@@ -1890,7 +1891,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="footer-name">Armin Bayati, PhD</div>
-      <div class="footer-role">Research Fellow · Harvard Medical School & Massachusetts General Hospital</div>
+      <div class="footer-role">Senior Scientist III, Neuroimmunology &middot; Merck<br>AI/ML Training Fellow &middot; Aligned Labs</div>
     </div>
     <div class="footer-links-grid">
       <div class="footer-col">
@@ -1900,6 +1901,7 @@ html.dark .gh-widget img[src*="github-readme-activity-graph"] { filter: none; }
         <a href="endoderm-protocols.html">Endoderm Protocols</a>
             <a href="pancreatic-protocols.html">Pancreatic &beta;-Cell Differentiation</a>
         <a href="biologics.html">Biologics</a>
+        <a href="ai-ml.html">AI/ML Work</a>
       </div>
       <div class="footer-col">
         <div class="footer-col-title">Connect</div>
@@ -1959,6 +1961,36 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 // Search functionality
 (function() {
   var searchIndex = [
+    {page:'ai-ml.html', title:'AI/ML Evaluation & Training', category:'Main', section:'',
+     keywords:'ai ml artificial intelligence machine learning aligned labs fellow fellowship model evaluation llm training rubric grading reference responses foundation models scgpt geneformer benchmarking contamination audit dataset labeling cell biology neuroscience pharmacology',
+     description:'AI/ML work: evaluating and training AI for biology at Aligned Labs, plus applied machine learning for drug discovery.'},
+    {page:'ai-ml.html#aligned', title:'Aligned Labs Fellowship', category:'Industry', section:'AI/ML',
+     keywords:'aligned labs fellow ai ml training cell biology neuroscience pharmacology model-generated content evaluation primary literature expert reference responses remote',
+     description:'Fellow, AI/ML Training in Cell Biology & Neuroscience: evaluating model-generated science against primary literature.'},
+    {page:'ai-ml.html#rubric', title:'How I Grade Model Output', category:'Industry', section:'AI/ML',
+     keywords:'rubric scoring grading accuracy reasoning citation quality calibration completeness hallucination llm evaluation worked example alpha-synuclein lag3',
+     description:'Rubric dimensions for grading model-generated science, with a worked example.'},
+    {page:'ai-ml.html#failure-modes', title:'Where Models Go Wrong on Biology', category:'Industry', section:'AI/ML',
+     keywords:'failure modes hallucinated citations model system drift ipsc ic50 ec50 ki kd gwas causal gene benchmark contamination calibration llm errors',
+     description:'Recurring errors in model-generated biology: fake citations, model-system drift, potency confusion, GWAS overreach.'},
+    {page:'ai-ml.html#applied', title:'Machine Learning at the Bench', category:'Technical', section:'AI/ML',
+     keywords:'applied machine learning image segmentation phenotype classification multi-omics target validation mechanism of action automorphotrack high-content screening opera phenix merck',
+     description:'ML on experimental data: multi-omics target validation, AutoMorphoTrack, foundation-model probes, imaging ML.'},
+    {page:'index.html#experience', title:'Work Experience & Education', category:'Main', section:'Experience',
+     keywords:'experience cv resume merck senior scientist iii neuroimmunology aligned labs harvard medical school mass general brigham research fellow montreal neurological institute mcgill phd university of victoria',
+     description:'Merck, Aligned Labs, Harvard Medical School & MGB, Montreal Neurological Institute, McGill, University of Victoria.'},
+    {page:'code-and-ai.html', title:'Code & AI Overview', category:'Technical', section:'',
+     keywords:'code ai python typescript github open source mcp claude code langgraph pytorch projects portfolio',
+     description:'Open-source computational projects: MCP servers, agentic systems, PyTorch models, bio pipelines, lab automation.'},
+    {page:'code-ai-agents.html', title:'Agents & MCP', category:'Technical', section:'Code & AI',
+     keywords:'agents mcp model context protocol claude code agent sdk langgraph bioscope automorphotrack tool calling',
+     description:'MCP servers, Claude Code sub-agents, and LangGraph orchestration over biomedical APIs.'},
+    {page:'code-ai-models.html', title:'ML & Foundation Models', category:'Technical', section:'Code & AI',
+     keywords:'machine learning foundation models pytorch clip contrastive morph2expr scgpt geneformer embedding cell painting l1000',
+     description:'CLIP-style PyTorch alignment of imaging and transcriptomics; zero-shot scGPT and Geneformer evaluation.'},
+    {page:'code-ai-pipelines.html', title:'Bio Pipelines & Automation', category:'Technical', section:'Code & AI',
+     keywords:'bioinformatics pipelines automation scanpy pydeseq2 target credentialing crispr atlas pylabrobot opentrons liquid handling segmentation',
+     description:'Target credentialing from single-nucleus data, CRISPR phenocopy atlas, and iPSC liquid-handling automation.'},
     {page:'endoderm-protocols.html', title:'Endoderm & Ectodermal Protocols', category:'Research', section:'',
      keywords:'endoderm protocols hepatocyte gut epithelium ipsc differentiation cyp3a4 teer',
      description:'Comprehensive protocols for hepatic and intestinal iPSC differentiation with functional validation.'},
